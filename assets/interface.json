@@ -4,7 +4,7 @@
     "title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.1 - MFAA | 测试阶段",
     // "icon": "icon.png",
     "description": "嘟嘟脸小助手",
-    "version": "0.0.1",
+    "version": "v0.0.1",
     // "welcome": "欢迎使用 MDDL!",
     "contact": "QQ群: 926874985",
     "license": "AGPL-3.0",
@@ -21,16 +21,13 @@
     "resource": [
         {
             "name": "B服",
-            "path": ["{PROJECT_DIR}/resource"]
+            "path": ["{PROJECT_DIR}/resource/base"]
         }
     ],
-    // 可选的 agent 示例
-    // "agent": {
-    //     "child_exec": "python",
-    //     "child_args": [
-    //         "{PROJECT_DIR}/agent/main.py"
-    //     ]
-    // },
+    "agent": {
+        "child_exec": "python",
+        "child_args": ["-u", "{PROJECT_DIR}/agent/main.py"]
+    },
     "task": [
         {
             "name": "任务",
