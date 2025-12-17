@@ -1,4 +1,4 @@
-name: Bug 反馈（使用中文）
+name: Bug 反馈
 description: 识别错误、操作异常、连接错误等
 labels: ["bug"]
 body:
@@ -29,9 +29,9 @@ body:
     attributes:
       label: Version
       description: >-
-        请提供 MXX 版本
+        请提供 MDDL 版本
       placeholder: |
-        MXX Version:
+        MDDL Version:
     validations:
       required: true
   - type: textarea
@@ -39,14 +39,9 @@ body:
     attributes:
       label: 日志和配置文件
       description: |
-        **请在关闭 MXX 后，上传以下 3 个文件：**
-          1. `debug` 文件夹中的 `maa.log` `maa.bak.log` 日志文件，并说明问题出现的大致时间点
-          2. `config` 文件夹中的 `maa_pi_config.json`(MaaPiCli) 配置文件
-
-        如果你在使用 MacBook，请点击屏幕左上角的“文件”，点击“打开日志文件夹”
-        **请直接将完整的文件拖拽进来，而非自己裁切或复制的片段；若文件体积过大可压缩后再上传**
+        请在 MDDL 日志面板点击导出按键生成反馈包上传
       placeholder: |
-        请确认上传文件前已关闭 MXX
+        日志包
     validations:
       required: true
   - type: textarea
@@ -54,23 +49,16 @@ body:
     attributes:
       label: 配置信息
       description: |
-        请说明操作系统及版本、模拟器品牌、模拟器分辨率、DPI、帧率；
-        若正在使用 MuMu 12 或雷电 9，请说明截图增强是否开启；
-        最后请说明 GPU 加速推理是否开启，若开启请提供 GPU 型号。
+        请说明操作系统及版本、模拟器品牌、模拟器分辨率、DPI、帧率（模拟器设置界面可查看）；
+        若您并非使用 MuMu 12 模拟器，请尝试使用，其他模拟器的问题不会修复。
     validations:
-      required: true
+      required: false
   - type: textarea
     id: screenshots
     attributes:
       label: 截图或录屏
       description: |
-        `debug` 目录下按功能分类的文件夹内，有一些自动截图的错误图片，若有相关的，请一并打包上传
-
-        可上传屏幕截图或录制以帮助解释你的问题，包括但不限于 MXX 软件截图、游戏画面截图、
-        MXX debug 截图（`debug/vision` 路径图片，在修改 `config/maa_option.json` 中 `save_draw` 为 `true` 后再次运行 MXX 获取）
-        若是**识别相关问题**，请尽可能提供模拟器自带的截图工具截取的无遮挡的**原图**（或通过 adb 截取原图）
-        用其他的工具（如QQ/微信）截取的图片包含窗口边框且长宽比、分辨率不固定，不利于我们排除bug
-        若文件体积过大可压缩后再上传
+        如果能复现问题，请尽可能上传视频
     validations:
       required: false
   - type: textarea
