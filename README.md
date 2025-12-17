@@ -1,117 +1,112 @@
-<!-- markdownlint-disable MD033 MD041 -->
-<p align="center">
-  <img alt="LOGO" src="https://cdn.jsdelivr.net/gh/MaaAssistantArknights/design@main/logo/maa-logo_512x512.png" width="256" height="256" />
-</p>
+<!-- <p align="center">
+  <img alt="LOGO" src="./logo.png" width="256" height="256" />
+</p> -->
 
 <div align="center">
 
-# MaaPracticeBoilerplate
+# MaaDuDuL</br>MDDL - 嘟嘟脸小助手</br>✨ _当前正在绝赞烘焙中，敬请期待_ ✨
+
+**请您不要在任何官方社区/评论区提及 MDDL！**
+
+基于全新架构的 [**嘟嘟脸恶作剧**](https://xytx.firewick.net/home) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！
+
+<p align="center">
+  <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.md" target="_blank"><img alt="pipeline" src="https://img.shields.io/badge/Pipeline-%23876f69?logo=paddypower&logoColor=%23FFFFFF"></a>
+  <a href="https://www.python.org/" target="_blank"><img alt="ts" src="https://img.shields.io/badge/Typescript-8A2BE2?logo=typescript&logoColor=white"></a>
+  <!-- <a href="https://mirrorchyan.com/zh/projects?source=mddl-github-readme" target="_blank"><img alt="mirrorc" src="./public/mirrorc-zh.svg"></a> -->
+  <br/>
+  <a href="https://github.com/kqcoxn/MaaDuDuL/commits/main/" target="_blank"><img alt="committs" src="https://img.shields.io/github/commit-activity/m/kqcoxn/MaaDuDuL?color=%23ff69b4"></a>
+  <a href="https://github.com/kqcoxn/MaaDuDuL/stargazers" target="_blank"><img alt="stars" src="https://img.shields.io/github/stars/kqcoxn/MaaDuDuL?style=social"></a>
+  <!-- <a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank"><img alt="stars" src="https://img.shields.io/github/downloads/kqcoxn/MaaDuDuL/total?style=social"></a> -->
+  <br/>
+  <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank"><img alt="QQ交流群" src="https://img.shields.io/badge/QGroup-926874985-0e80c1?logo=qq&logoColor=white"></a>
+</p>
+
+<!-- <a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank">📥 下载</a> | <a href="https://docs.codax.site/mddl" target="_blank">📖 文档</a> | <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank">💬 讨论</a> | <a href="https://mirrorchyan.com/zh/projects?rid=MDDL&os=windows&arch=x64&channel=stable&source=mddl-github-readme" target="_blank">🚀 镜像</a> -->
 
 </div>
 
-本仓库为 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 所提供的项目模板，开发者可基于此模板直接创建自己的 MaaXXX 项目。
+<!-- ## 功能列表 -->
 
-> **MaaFramework** 是基于图像识别技术、运用 [MAA](https://github.com/MaaAssistantArknights/MaaAssistantArknights) 开发经验去芜存菁、完全重写的新一代自动化黑盒测试框架。
-> 低代码的同时仍拥有高扩展性，旨在打造一款丰富、领先、且实用的开源库，助力开发者轻松编写出更好的黑盒测试程序，并推广普及。
+<!-- ### 活动功能
 
-## 即刻开始
+<details>
+<summary>往期活动</summary>
 
-- [📄 快速开始](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/1.1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B.md)
-- [🎞️ 视频教程](https://www.bilibili.com/video/BV1yr421E7MW)
+#### 
 
-## 如何开发
+> 
 
-0. 使用右上角 `Use this template` - `Create a new repository` 来基于本模板创建您自己的项目。
+- [] 
 
-1. 克隆本项目（地址请修改为您基于本模板创建的新项目地址）。
+</details> -->
 
-    ```bash
-    git clone https://github.com/MaaXYZ/MaaPracticeBoilerplate.git
-    ```
+<!-- ### 常驻功能
 
-2. 下载 MaaFramework 的 [Release 包](https://github.com/MaaXYZ/MaaFramework/releases)，解压到 `deps` 文件夹中。
+- **登录签到**
+  - [x] 启动登录
+  - [x] 每日签到
+  - [x] ~~紧张刺激的~~七日签到
 
-3. 下载 OCR（文字识别）资源文件 [ppocr_v5.zip](https://download.maafw.xyz/MaaCommonAssets/OCR/ppocr_v5/ppocr_v5-zh_cn.zip) 解压到 `assets/resource/model/ocr/` 目录下，确保路径如下：
+具体更新日志可参考[更新记录](/assets/resource/Announcement/3.更新记录.md)
 
-    ```tree
-    assets/resource/model/ocr/
-    ├── det.onnx
-    ├── keys.txt
-    └── rec.onnx
-    ```
+\* 若有其他功能需求请提交 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue) -->
 
-    _请注意，您不需要将 OCR 资源文件上传到您的代码仓库中。`.gitignore` 已经忽略了 `assets/resource/model/ocr/` 目录，且 GitHub workflow 在发布版本时会自动配置这些资源文件。_
+<!-- ## 使用教程
 
-4. 进行开发工作，按您的业务需求修改 `assets` 中的资源文件，请参考 [MaaFramework 相关文档](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/1.1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B.md#%E8%B5%84%E6%BA%90%E5%87%86%E5%A4%87)。
+**每次版本更新后请手动把仅第一次出现的界面过一遍！**
 
-5. 完成开发后，上传您的代码并发布版本。
+- [文图教程](https://docs.codax.site/mddl/guide/users/start.html) -->
 
-    ```bash
-    # 配置 git 信息（仅第一次需要，后续不用再配置）
-    git config user.name "您的 GitHub 昵称"
-    git config user.email "您的 GitHub 邮箱"
-    
-    # 提交修改
-    git add .
-    git commit -m "XX 新功能"
-    git push origin HEAD -u
-    ```
+## 加入我们
 
-6. 发布您的版本
+🐧~~吹水~~交流群：[926874985](https://qm.qq.com/q/6pu9Cf2qJO)
 
-    需要**先**修改仓库设置 `Settings` - `Actions` - `General` - `Read and write permissions` - `Save`
+如果您在使用过程中遇到了问题、有更好的想法、希望参与开发，或是单纯想要聊天吹水，欢迎加入 MDDL 交流群！
 
-    ```bash
-    # CI 检测到 tag 会自动进行发版
-    git tag v1.0.0
-    git push origin v1.0.0
-    ```
+<!-- ## \*Mirror 酱支持
 
-7. 更多操作，请参考 [个性化配置](./docs/zh_cn/个性化配置.md)（可选）
+在 [Mirrorc 官方](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) 的帮助下， MDDL 同样也接入了 Mirror 酱 的国内高速下载与更新服务，详情请见[【Bilibili】震惊！MAA 开启收费功能？！](https://www.bilibili.com/video/BV1cZFreLEja/)
 
-## 生态共建
+您可以通过 [此链接](https://mirrorchyan.com/zh/projects?rid=MDDL&os=windows&arch=x64&channel=stable&source=mddl-github-readme) 获取带有 Mirror 酱服务的 MDDL
 
-MAA 正计划建设为一类项目，而非舟的单一软件。
+简单来说，Mirror 酱（简称 mirrorc）是一个由开源社区维护的有偿分发平台，可以理解为一个中转站，从海外源获取一份最新版存至国内站点，当您需要时直接从国内站点下载。
 
-若您的项目依赖于 MaaFramework，我们欢迎您将它命名为 MaaXXX, MXA, MAX 等等。当然，这是许可而不是限制，您也可以自由选择其他与 MAA 无关的名字，完全取决于您自己的想法！
+由于海内外下载、站点维护等需要，mirrorc 会产生大量开销，因此 mirrorc 的服务是有偿的，但这**并不代表 MDDL 是收费的，您完全可以通过其他方式更新并无限制使用，仅在您需要 mirrorc 时才需要自行向 mirrorc MDDL 社区并不承担此过程中的一切责任，当出现问题时您可以在 mirrorc 客户群联系客服解决。** -->
 
-同时，我们也非常欢迎您提出 PR，在 [社区项目列表](https://github.com/MaaXYZ/MaaFramework#%E7%A4%BE%E5%8C%BA%E9%A1%B9%E7%9B%AE) 中添加上您的项目！
+## 免责声明
 
-## FAQ
+本软件开源、免费，仅供学习交流使用。若您遇到商家使用本软件进行代肝并收费，可能是分发、设备或时间等费用，产生的费用、问题及后果与本软件无关。
 
-### 0. 我是第一次使用 git，这是什么？视频演示中那个黑框框命令行哪来的？
+**MDDL 可能存在任何意想不到的问题，因 MDDL 自身漏洞、文本理解有歧义、异常操作导致的账号问题等开发组不承担任何责任，请在确保在阅读完用户手册、自行尝试运行效果后谨慎使用！**
 
-黑框框是 git bash，几乎任何现代软件的开发都离不开 git，建议先参考 [菜鸟教程](https://www.runoob.com/git/git-install-setup.html) 或搜索一些视频，学习完 git 后再来进行后续开发工作。
+<!-- ## 常见问题
 
-### 1. 我是第一次使用 Python，在命令行输入 `python ./configure.py` 或 `python -m pip install MaaFW` 之后没有反应？没有报错，也没有提示成功，什么都没有
+请确保现有 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue) 中还没有与您遇到的类似的问题
 
-Win10 或者 Win11 系统自带了一份 "Python"，但它其实只是一个安装器，是没法用的。  
-你需要做的是关闭它或者删除它的环境变量，然后自己去 Python 官网下载并安装一份 Python。  
-[参考方法](https://www.bilibili.com/read/cv24692025/)
+- [文档站-用户手册-问题排查](https://docs.codax.site/mddl/guide/users/errors.html)
 
-### 2. 使用 MaaDebugger 或 MaaPicli 时弹窗报错，应用程序错误：应用程序无法正常启动
-
-![缺少运行库](https://github.com/user-attachments/assets/942df84b-f47d-4bb5-98b5-ab5d44bc7c2a)
-
-一般是电脑缺少某些运行库，请安装一下 [vc_redist](https://aka.ms/vs/17/release/vc_redist.x64.exe) 。
-
-### 3. 我在这个仓库里提了 Issue 很久没人回复
-
-这里是《项目模板》仓库，它仅仅是一个模板，一般很少会修改，开发者也较少关注。  
-在此仓库请仅提问模板相关问题，其他问题最好前往对应的仓库提出，如果有 log，最好也带上它（`debug/maa.log` 文件）
-
-- MaaFW 本身及 MaaPiCli 的问题：[MaaFramework/issues](https://github.com/MaaXYZ/MaaFramework/issues)
-- MaaDebugger 的问题：[MaaDebugger/issues](https://github.com/MaaXYZ/MaaDebugger/issues)
-- 不知道算是哪里的、其他疑问等：[讨论区](https://github.com/MaaXYZ/MaaFramework/discussions)
-
-### 4. OCR 文字识别一直没有识别结果，报错 "Failed to load det or rec", "ocrer_ is null"
-
-**请仔细阅读文档**，你无视了前面步骤的报错。我不想解释了，请再把本文档仔细阅读一遍！
+如果有其他问题，欢迎提交 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue)，或在 [交流群](https://qm.qq.com/q/6pu9Cf2qJO) 内提问，您的反馈将使更多受益！ -->
 
 ## 鸣谢
 
-本项目由 **[MaaFramework](https://github.com/MaaXYZ/MaaFramework)** 强力驱动！
+### 贡献者
 
-感谢以下开发者对本项目作出的贡献（下面链接改成你自己的项目地址）:
+感谢以下开发者对本项目作出的贡献:
 
-[![Contributors](https://contrib.rocks/image?repo=MaaXYZ/MaaFramework&max=1000)](https://github.com/MaaXYZ/MaaFramework/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=kqcoxn/MaaDuDuL&max=1000)](https://github.com/kqcoxn/MaaDuDuL/graphs/contributors)
+
+### 依赖与工具
+
+- **本项目由 [MaaXYZ](https://github.com/MaaXYZ)/[MaaFramework](https://github.com/MaaXYZ/MaaFramework) 强力驱动！**
+- 项目模板：[MaaXYZ](https://github.com/MaaXYZ)/[MaaPracticeBoilerplate](https://github.com/MaaXYZ/MaaPracticeBoilerplate)
+- GUI：[SweetSmellFox](https://github.com/SweetSmellFox)/[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
+- Pipeline 编辑器：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
+- 测试：[MaaXYZ](https://github.com/MaaXYZ)/[MaaDebugger](https://github.com/MaaXYZ/MaaDebugger)
+<!-- - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) -->
+
+游戏官网（国服）：[Bilibili-嘟嘟脸恶作剧](https://game.bilibili.com/trickcal/)
+
+## 统计
+
+[![Star History Chart](https://api.star-history.com/svg?repos=kqcoxn/MaaDuDuL&type=Date)](https://www.star-history.com/#kqcoxn/MaaDuDuL&Date)
