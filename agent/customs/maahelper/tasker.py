@@ -4,10 +4,7 @@
 包括节点运行、截图、点击等常用功能。
 """
 
-from maa.custom_action import CustomAction
-from maa.custom_recognition import CustomRecognition, RecognitionResult, RectType
 from maa.context import Context
-from maa.controller import Controller
 import numpy as np
 
 
