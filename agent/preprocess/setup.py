@@ -138,10 +138,12 @@ def _install_requirements(req_file=None, mirrors=None) -> bool:
         try:
             if mirror:
                 print(
-                    f"正在使用镜像源安装或更新环境... ({idx + 1}/{len(mirror_list)}): {mirror}"
+                    f"info:正在使用镜像源安装或更新环境... ({idx + 1}/{len(mirror_list)}): {mirror}"
                 )
             else:
-                print(f"正在使用默认源安装或更新环境... ({idx + 1}/{len(mirror_list)})")
+                print(
+                    f"info:正在使用默认源安装或更新环境... ({idx + 1}/{len(mirror_list)})"
+                )
 
             cmd = [
                 sys.executable,
@@ -159,14 +161,14 @@ def _install_requirements(req_file=None, mirrors=None) -> bool:
             subprocess.check_call(
                 cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )
-            print("安装完成！")
+            print("info:安装完成！")
             return True
         except Exception as e:
             if idx < len(mirror_list) - 1:
-                print(f"当前镜像源失败，尝试下一个...")
+                print(f"info:当前镜像源失败，尝试下一个...")
                 continue
             else:
-                print("环境加载失败，请检查网络与环境后重新尝试！")
+                print("info:环境加载失败，请检查网络与环境后重新尝试！")
                 return False
 
     return False

@@ -37,4 +37,4 @@ def clear():
     try:
         _clear_on_error_images()
     except Exception as e:
-        print(f"预处理时出现问题：\n{e}\n这可能不影响使用，但建议在交流群内反馈！")
+        print(f"info:预处理时出现问题：\n{e}\n这可能不影响使用，但建议在交流群内反馈！")

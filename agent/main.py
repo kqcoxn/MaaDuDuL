@@ -37,7 +37,7 @@ def main():
         AgentServer.shut_down()
 
     except Exception as e:
-        print(f"Agent 启动失败：{e}")
+        print(f"info:Agent 启动失败：{e}")
         sys.exit(1)
 
 
