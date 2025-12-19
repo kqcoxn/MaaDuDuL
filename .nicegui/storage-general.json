@@ -1,0 +1,15 @@
+{
+    "controller_type": "Adb",
+    "adb_path": "E:\\_Games\\MuMu Player 12\\nx_main\\adb.exe",
+    "adb_address": "127.0.0.1:16384",
+    "adb_config": "{}",
+    "hwnd": "",
+    "win32_screencap": 4,
+    "win32_mouse": 1,
+    "win32_keyboard": 1,
+    "window_name": "",
+    "resource_dir": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base",
+    "agent_identifier": "",
+    "task_entry": "连续作战_出发",
+    "task_pipeline_override": "{}"
+}

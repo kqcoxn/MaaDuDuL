@@ -20,9 +20,9 @@ sys.stderr.reconfigure(encoding="gbk")
 
 def main():
     """启动 MaaDuDuL Agent 服务"""
+    from agent.preprocess import clear
     from maa.agent.agent_server import AgentServer
     from maa.toolkit import Toolkit
-    from agent.preprocess import clear
     import customs
 
     try:
