@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1766214617993,
+			"lastSyncTime": 1766236476578,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -1035.0702176584655,
-				"y": 85.93816984724077,
-				"zoom": 1.0000000000000018
+				"x": -1360.4852188256132,
+				"y": 383.7767644066229,
+				"zoom": 1.4358729437462954
 			},
 			"version": "v0.12.0_beta_1"
 		}
@@ -16,8 +16,8 @@
 	"启动游戏_关闭公告": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1128,
-				"y": 375
+				"x": 1124,
+				"y": 417
 			}
 		},
 		"action": {
@@ -35,8 +35,8 @@
 	"启动游戏_关闭面板": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1948,
-				"y": 358
+				"x": 1944,
+				"y": 400
 			}
 		},
 		"action": {
@@ -69,11 +69,11 @@
 		"focus": "\u003e 尝试启动游戏",
 		"next": [
 			"启动游戏_连续识别主界面",
+			"启动游戏_连续识别开始界面",
 			{
 				"jump_back": true,
 				"name": "启动游戏_检测公告界面"
-			},
-			"启动游戏_连续识别开始界面"
+			}
 		],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -140,8 +140,8 @@
 	"启动游戏_检测公告界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 857,
-				"y": 375
+				"x": 853,
+				"y": 417
 			}
 		},
 		"action": {
@@ -163,8 +163,8 @@
 	"启动游戏_点击屏幕继续": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1685,
-				"y": 355
+				"x": 1681,
+				"y": 397
 			}
 		},
 		"action": {
@@ -216,7 +216,7 @@
 		},
 		"recognition": {
 			"param": {
-				"roi": [1095, 621, 170, 84],
+				"roi": [1092, 2, 184, 75],
 				"template": ["main/more.png"]
 			},
 			"type": "TemplateMatch"
@@ -252,6 +252,9 @@
 			"param": {},
 			"type": "DoNothing"
 		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 识别到主界面"
+		},
 		"next": ["启动游戏_结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -274,6 +277,9 @@
 			"param": {},
 			"type": "DoNothing"
 		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 识别到登录界面"
+		},
 		"next": ["启动游戏_捏脸启动"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -288,8 +294,8 @@
 	"启动游戏_领取礼物": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1422,
-				"y": 356
+				"x": 1418,
+				"y": 398
 			}
 		},
 		"action": {

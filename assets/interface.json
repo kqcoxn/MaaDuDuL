@@ -1,70 +1,116 @@
 {
-    "interface_version": 2,
-    "name": "MaaDuDuL",
-    "title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.1 - MFAA | 测试阶段",
-    // "icon": "icon.png",
-    "description": "嘟嘟脸小助手",
-    "version": "v0.0.1",
-    "welcome": "欢迎使用 MDDL!",
-    "contact": "QQ群: 926874985",
-    "license": "AGPL-3.0",
-    "github": "https://github.com/kqcoxn/MaaDuDuL",
-    // "mirrorchyan_rid": "MaaDuDuL",
-    // "mirrorchyan_multiplatform": true,
-    "controller": [
-        {
-            "name": "模拟器",
-            "type": "Adb",
-            "display_short_side": 720
-        }
-    ],
-    "resource": [
-        {
-            "name": "B服",
-            "path": ["{PROJECT_DIR}/resource/base"]
-        }
-    ],
-    "agent": {
-        "child_exec": "python",
-        "child_args": ["-u", "{PROJECT_DIR}/agent/main.py"]
-    },
-    "task": [
-        {
-            "name": "说明",
-            "entry": "连续作战_开始"
-        },
-        {
-            "name": "操作指南",
-            "entry": "连续作战_开始"
-        },
-        {
-            "name": "启动游戏",
-            "entry": "启动游戏_开始"
-        },
-        {
-            "name": "——— 日常任务 ———",
-            "entry": "日常分隔符"
-        },
-        {
-            "name": "——— 活动任务 ———",
-            "entry": "活动分隔符"
-        },
-        {
-            "name": "——— 单次任务 ———",
-            "entry": "单次任务分隔符"
-        },
-        {
-            "name": "——— 开荒功能 ———",
-            "entry": "开荒功能分隔符"
-        },
-        {
-            "name": "连续作战",
-            "entry": "连续作战_开始"
-        },
-        {
-            "name": "——— 新增任务 ———",
-            "entry": "新增任务分隔符"
-        }
-    ],
-    "option": {}
+	"interface_version": 2,
+	"name": "MaaDuDuL",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.1 - MFAA | 测试阶段",
+	// "icon": "icon.png",
+	"description": "嘟嘟脸小助手",
+	"version": "v0.0.1",
+	"welcome": "欢迎使用 MDDL!",
+	"contact": "QQ群: 926874985",
+	"license": "AGPL-3.0",
+	"github": "https://github.com/kqcoxn/MaaDuDuL",
+	// "mirrorchyan_rid": "MaaDuDuL",
+	// "mirrorchyan_multiplatform": true,
+	"controller": [
+		{
+			"name": "模拟器",
+			"type": "Adb",
+			"display_short_side": 720
+		}
+	],
+	"resource": [
+		{
+			"name": "B服",
+			"path": ["{PROJECT_DIR}/resource/base"]
+		}
+	],
+	"agent": {
+		"child_exec": "python",
+		"child_args": ["-u", "{PROJECT_DIR}/agent/main.py"]
+	},
+	"task": [
+		{
+			"name": "说明",
+			"label": "说明",
+			"entry": "连续作战_开始",
+			"description": ""
+		},
+		{
+			"name": "操作指南",
+			"label": "操作指南",
+			"entry": "连续作战_开始",
+			"description": ""
+		},
+		{
+			"name": "启动游戏",
+			"label": "启动游戏",
+			"entry": "启动游戏_开始",
+			"default_check": true,
+			"description": ""
+		},
+		{
+			"name": " ——— 日常任务 ———",
+			"label": "——— 日常任务 ———",
+			"entry": "日常分隔符",
+			"description": ""
+		},
+		{
+			"name": "领取邮件",
+			"label": "领取邮件",
+			"entry": "领取邮件_开始",
+			"default_check": true,
+			"description": "",
+			"option": ["领取邮件-周期检查"]
+		},
+		{
+			"name": " ——— 活动任务 ———",
+			"label": "——— 活动任务 ———",
+			"entry": "活动分隔符",
+			"description": ""
+		},
+		{
+			"name": " ——— 单次任务 ———",
+			"label": "——— 单次任务 ———",
+			"entry": "单次任务分隔符",
+			"description": ""
+		},
+		{
+			"name": " ——— 开荒功能 ———",
+			"label": "——— 开荒功能 ———",
+			"entry": "开荒功能分隔符",
+			"description": ""
+		},
+		{
+			"name": "连续作战",
+			"label": "连续作战",
+			"entry": "连续作战_开始",
+			"description": ""
+		},
+		{
+			"name": " ——— 新增任务 ———",
+			"label": "——— 新增任务 ———",
+			"entry": "新增任务分隔符",
+			"description": ""
+		}
+	],
+	"option": {
+		"领取邮件-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次邮箱",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"领取邮件_周期检查": {
+							"recognition": "DirectHit"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		}
+	}
 }
