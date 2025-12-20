@@ -33,5 +33,5 @@ jobs:
             python -m pip install --upgrade maafw --pre
 
       - name: Check Resource
-        run: |
-            python ./check_resource.py ./assets
+        run: |  
+            python ./check_resource.py ./assets/resource/base
