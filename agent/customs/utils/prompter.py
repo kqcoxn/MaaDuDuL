@@ -34,7 +34,7 @@ class Prompter:
     def error(
         content: str,
         e: Exception = None,
-        reco_detail: str = None,
+        reco_detail=None,
         use_defult_postfix=True,
     ):
         if use_defult_postfix:
