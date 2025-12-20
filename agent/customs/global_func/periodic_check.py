@@ -187,9 +187,6 @@ class PeriodicCheck(CustomRecognition):
             key = args.get(["key", "k"])
             periodic = args.get(["periodic", "p"], "day")
             record_immediately = args.get(["record", "r"], True)
-            # 验证必需参数
-            if not key:
-                return Prompter.error("周期检查", "缺少任务键", reco_detail=True)
 
             # 处理布尔参数
             if record_immediately == "false":

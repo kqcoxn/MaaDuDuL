@@ -97,14 +97,25 @@ class ParamAnalyzer:
         Args:
             key: 参数键名，可以是单个字符串或字符串列表。
                  当传入列表时，按顺序查找，返回第一个命中的值
-            default: 默认值，当 key 不存在时返回
+            default: 默认值，当 key 不存在时返回。
+                     若为 None 且未获取到值，则抛出 KeyError
 
         Returns:
             参数值，若 key 不存在则返回 default
+
+        Raises:
+            KeyError: 当 default 为 None 且无法获取到值时
         """
         if isinstance(key, list):
             for k in key:
                 if k in self.argv:
                     return self.argv[k]
+            if default is None:
+                raise KeyError(f"参数 {key} 不存在且未提供默认值")
             return default
-        return self.argv.get(key, default)
+
+        if key in self.argv:
+            return self.argv[key]
+        if default is None:
+            raise KeyError(f"参数 '{key}' 不存在且未提供默认值")
+        return default
