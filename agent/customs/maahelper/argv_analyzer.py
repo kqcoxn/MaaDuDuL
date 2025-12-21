@@ -65,6 +65,12 @@ class ParamAnalyzer:
         """
         param = param.strip()
 
+        # 去除外层的引号
+        if (param.startswith('"') and param.endswith('"')) or (
+            param.startswith("'") and param.endswith("'")
+        ):
+            param = param[1:-1]
+
         # 尝试 JSON 格式解析
         if param.startswith("{") or param.startswith("["):
             try:
@@ -78,7 +84,10 @@ class ParamAnalyzer:
                 parsed = parse_qs(param, keep_blank_values=True)
                 result = {}
                 for key, value_list in parsed.items():
-                    cleaned_values = [v.strip('"').strip("'") for v in value_list]
+                    # 解码 URL
+                    cleaned_values = [
+                        unquote(v).strip('"').strip("'") for v in value_list
+                    ]
                     result[key] = (
                         cleaned_values[0]
                         if len(cleaned_values) == 1
@@ -102,6 +111,7 @@ class ParamAnalyzer:
 
         Returns:
             参数值，若 key 不存在则返回 default
+            如果值是数字字符串，自动转换为 int 或 float 类型
 
         Raises:
             KeyError: 当 default 为 None 且无法获取到值时
@@ -109,13 +119,40 @@ class ParamAnalyzer:
         if isinstance(key, list):
             for k in key:
                 if k in self.argv:
-                    return self.argv[k]
+                    return self._convert_to_number(self.argv[k])
             if default is None:
                 raise KeyError(f"参数 {key} 不存在且未提供默认值")
             return default
 
         if key in self.argv:
-            return self.argv[key]
+            return self._convert_to_number(self.argv[key])
         if default is None:
             raise KeyError(f"参数 '{key}' 不存在且未提供默认值")
         return default
+
+    def _convert_to_number(self, value):
+        """将字符串值转换为数字类型
+
+        Args:
+            value: 待转换的值
+
+        Returns:
+            如果值是数字字符串，返回 int 或 float；否则返回原值
+        """
+        if not isinstance(value, str):
+            return value
+
+        # 尝试转换为整数
+        try:
+            return int(value)
+        except ValueError:
+            pass
+
+        # 尝试转换为浮点数
+        try:
+            return float(value)
+        except ValueError:
+            pass
+
+        # 无法转换则返回原值
+        return value
