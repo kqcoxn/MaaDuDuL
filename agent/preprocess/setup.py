@@ -14,9 +14,10 @@ from pathlib import Path
 # ====================  路径初始化  ====================
 
 current_file_path = os.path.abspath(__file__)
-current_dir = os.path.dirname(current_file_path)
-parent_dir = os.path.dirname(current_dir)
-os.chdir(parent_dir)
+current_dir = os.path.dirname(current_file_path)  # agent/preprocess
+agent_dir = os.path.dirname(current_dir)  # agent
+project_root = os.path.dirname(agent_dir)  # 项目根目录
+os.chdir(project_root)  # 切换到项目根目录
 
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)

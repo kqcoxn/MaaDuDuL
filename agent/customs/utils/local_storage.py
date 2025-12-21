@@ -15,8 +15,10 @@ class LocalStorage:
     """
 
     # 存储文件路径配置
-    agent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    config_dir = os.path.join(agent_dir, "..", "config", "mddl")
+    customs_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    agent_dir = os.path.dirname(customs_dir)
+    project_root = os.path.dirname(agent_dir)
+    config_dir = os.path.join(project_root, "config", "mddl")
     storage_path = os.path.join(config_dir, "local_storage.json")
 
     @classmethod
