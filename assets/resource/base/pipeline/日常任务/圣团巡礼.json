@@ -3,12 +3,13 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1766326917377,
+			"isModifiedExternally": true,
+			"lastSyncTime": 1766328156934,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -8055.700774984272,
-				"y": -942.0696705492778,
-				"zoom": 0.918958683997629
+				"x": -9627.425827657224,
+				"y": -1766.264056368534,
+				"zoom": 1.3195079107728982
 			},
 			"version": "v0.13.0_beta_0"
 		}
@@ -618,7 +619,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 进入冒险协会"
+			"Node.Recognition.Succeeded": "\u003e 进入冒险协会"
 		},
 		"next": ["圣团巡礼_进入协会内部"],
 		"recognition": {
