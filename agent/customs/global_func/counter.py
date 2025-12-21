@@ -109,8 +109,8 @@ class CheckCounter(CustomRecognition):
         try:
             args = ParamAnalyzer(argv)
             key = args.get(["key", "k"], "default")
-            # 检查计数器当前值是否小于 0
-            if CounterManager.get(key).cur_count < 0:
+            # 检查计数
+            if CounterManager.get(key).is_max:
                 return RecoHelper.rt()
             return RecoHelper.NoResult
         except Exception as e:

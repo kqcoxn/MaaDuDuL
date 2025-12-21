@@ -83,7 +83,7 @@ class StableReco(CustomRecognition):
 
             if all_recognized:
                 # 所有节点都识别成功，累加计数
-                if counter.count() <= max_count:
+                if counter.count() < max_count:
                     # 未达到阈值，继续等待
                     return RecoHelper.NoResult
                 # 达到阈值，返回识别结果
