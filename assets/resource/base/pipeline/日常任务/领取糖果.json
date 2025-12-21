@@ -3,14 +3,108 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取糖果.json",
 			"filename": "领取糖果",
-			"lastSyncTime": 1766301387365,
+			"lastSyncTime": 1766336024031,
 			"prefix": "领取糖果",
 			"savedViewport": {
-				"x": -5152.516234238559,
-				"y": 286.5398945002036,
-				"zoom": 1.5157165665104015
+				"x": -6363.26553624931,
+				"y": 114.53301588689936,
+				"zoom": 1.6493848884661197
 			},
 			"version": "v0.13.0_beta_0"
+		}
+	},
+	"$__mpe_external_返回主界面_领取糖果": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5033,
+				"y": -20
+			}
+		}
+	},
+	"领取糖果_周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4427,
+				"y": 998
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": "\u003e 今日已领取早饭糖果",
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4141,
+				"y": 520
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=早饭糖果"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取糖果_点击领取", "领取糖果_已领取"],
+		"on_error": ["领取糖果_周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4962,
+				"y": 520
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k="
+			},
+			"type": "Custom"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_已领取": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4428,
+				"y": 731
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 糖果已领取"
+		},
+		"next": ["领取糖果_周期记录"],
+		"recognition": {
+			"param": {
+				"roi": [590, 479, 108, 96],
+				"template": ["activity/candy/received.png"]
+			},
+			"type": "TemplateMatch"
 		}
 	},
 	"领取糖果_开始": {
@@ -35,10 +129,30 @@
 		},
 		"timeout": 0
 	},
-	"领取糖果_进入活动界面": {
+	"领取糖果_点击领取": {
 		"$__mpe_code": {
 			"position": {
-				"x": 3973,
+				"x": 4428,
+				"y": 518
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["领取糖果_确定领取"],
+		"recognition": {
+			"param": {
+				"expected": ["领取"],
+				"roi": [867, 469, 187, 110]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取糖果_确保进入活动界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4237,
 				"y": -20
 			}
 		},
@@ -46,12 +160,133 @@
 			"param": {},
 			"type": "DoNothing"
 		},
+		"next": ["领取糖果_领取早饭糖果"],
 		"recognition": {
 			"param": {
-				"custom_recognition": "enter_activity",
-				"custom_recognition_param": "t=每日糖果礼物"
+				"expected": ["领取"],
+				"roi": [609, 499, 385, 44]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取糖果_确保进入活动界面2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4237,
+				"y": 199
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["领取糖果_领取早饭糖果"],
+		"recognition": {
+			"param": {
+				"roi": [569, 469, 474, 114],
+				"template": ["activity/candy/received.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"领取糖果_确定领取": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4691,
+				"y": 518
+			}
+		},
+		"action": {
+			"param": {
+				"target": [643, 642, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["领取糖果_周期记录"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取糖果_进入活动界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3972,
+				"y": -19
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "enter_activity",
+				"custom_action_param": "t=每日糖果礼物"
 			},
 			"type": "Custom"
+		},
+		"next": ["领取糖果_确保进入活动界面", "领取糖果_确保进入活动界面2"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_领取早饭糖果": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4506,
+				"y": -19
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "claim_candy",
+				"custom_action_param": "t=早饭"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取糖果_领取晚饭糖果"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_领取晚饭糖果": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4773,
+				"y": -20
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "claim_candy",
+				"custom_action_param": "t=晚饭"
+			},
+			"type": "Custom"
+		},
+		"next": ["返回主界面"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_领取糖果开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3865,
+				"y": 519
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["领取糖果_周期检查"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
 		}
 	}
 }
