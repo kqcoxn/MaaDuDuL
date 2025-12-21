@@ -89,6 +89,7 @@ class RecoHelper:
             node_name, image, {node_name: override_key_value}
         )
         if self.hit:
+            self.filtered_results = self.reco_detail.filtered_results
             self.best_result = self.reco_detail.best_result
         return self
 
@@ -229,14 +230,25 @@ class RecoHelper:
         return sorted(results, key=lambda r: r.score, reverse=True)
 
     @staticmethod
-    def rt(box: RectType = (0, 0, 0, 0), text: str = ""):
+    def rt(
+        result: RecognitionResult = None,
+        box: RectType = (0, 0, 0, 0),
+        text: str = "",
+    ):
         """构造识别结果对象。
 
+        支持两种构造方式：
+        1. 通过已有的 RecognitionResult 对象创建（优先）
+        2. 通过手动指定 box 和 text 参数创建
+
         Args:
-            box: 识别区域矩形 (x, y, w, h)，默认为 (0, 0, 0, 0)
-            text: 识别文本内容，默认为空字符串
+            result: 已有的识别结果对象，如果提供则直接使用其 box 和 text 属性
+            box: 识别区域矩形 (x, y, w, h)，默认为 (0, 0, 0, 0)，仅在 result 为 None 时使用
+            text: 识别文本内容，默认为空字符串，仅在 result 为 None 时使用
 
         Returns:
-            CustomRecognition.AnalyzeResult: 识别结果对象
+            CustomRecognition.AnalyzeResult: 自定义识别结果对象
         """
+        if result:
+            return CustomRecognition.AnalyzeResult(result.box, result.text)
         return CustomRecognition.AnalyzeResult(box, text)
