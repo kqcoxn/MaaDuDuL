@@ -67,8 +67,8 @@
 			"label": "领取每日糖果",
 			"entry": "领取糖果_开始",
 			"default_check": true,
-			"description": ""
-			// "option": ["领取邮件-周期检查"]
+			"description": "",
+			"option": ["领取邮件-周期检查"]
 		},
 		{
 			"name": "每日采购",
@@ -93,6 +93,14 @@
 			"default_check": true,
 			"description": "",
 			"option": ["清紫糖-克隆工厂", "清紫糖-副本"]
+		},
+		{
+			"name": "巅峰对决",
+			"label": "巅峰对决",
+			"entry": "巅峰对决_开始",
+			"default_check": true,
+			"description": "",
+			"option": ["巅峰对决-领取战斗宝石", "巅峰对决-竞技场对战"]
 		},
 		{
 			"name": " ——— 活动任务 ———",
@@ -136,7 +144,7 @@
 					"name": "No",
 					"pipeline_override": {
 						"领取邮件_周期检查": {
-							"recognition": "DirectHit"
+							"action": "DoNothing"
 						}
 					}
 				},
@@ -427,6 +435,83 @@
 					"custom_action_param": "l={关卡}"
 				}
 			}
+		},
+		// ========== 清紫糖 ==========
+		// ========== 巅峰对决 ==========
+		"巅峰对决-领取战斗宝石": {
+			"type": "switch",
+			"label": "领取战斗宝石",
+			"description": "",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": ["巅峰对决-领取战斗宝石-周期检查"]
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"巅峰对决_领取战斗宝石开始": {
+							"next": "巅峰对决_领取战斗宝石结束"
+						}
+					}
+				}
+			]
+		},
+		"巅峰对决-领取战斗宝石-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"巅峰对决_战斗宝石周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"巅峰对决-竞技场对战": {
+			"type": "switch",
+			"label": "领取战斗宝石",
+			"description": "",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": ["巅峰对决-竞技场对战-周期检查"]
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"巅峰对决_对战开始": {
+							"next": "巅峰对决_对战结束"
+						}
+					}
+				}
+			]
+		},
+		"巅峰对决-竞技场对战-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"巅峰对决_对战周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
 		}
+		// ========== 巅峰对决 ==========
 	}
 }
