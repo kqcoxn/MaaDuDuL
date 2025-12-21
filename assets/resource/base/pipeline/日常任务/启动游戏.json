@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1766301583143,
+			"lastSyncTime": 1766338667970,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -979.4286127344476,
-				"y": 203.1664398710521,
-				"zoom": 1.1486983549970382
+				"x": -499.65583591704353,
+				"y": 130.22354023230443,
+				"zoom": 1.4358729437462974
 			},
 			"version": "v0.13.0_beta_0"
 		}
@@ -64,7 +64,7 @@
 			},
 			"type": "StartApp"
 		},
-		"focus": "\u003e 尝试启动游戏",
+		"focus": "\u003e 启动游戏",
 		"next": [
 			"启动游戏_连续识别主界面",
 			"启动游戏_连续识别开始界面",
