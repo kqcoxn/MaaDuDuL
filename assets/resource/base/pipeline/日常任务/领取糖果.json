@@ -1,0 +1,59 @@
+{
+  "$__mpe_config_领取糖果": {
+    "$__mpe_code": {
+      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取糖果.json",
+      "filename": "领取糖果",
+      "lastSyncTime": 1766301387365,
+      "prefix": "领取糖果",
+      "savedViewport": {
+        "x": -5152.516234238559,
+        "y": 286.5398945002036,
+        "zoom": 1.5157165665104015
+      },
+      "version": "v0.13.0_beta_0"
+    }
+  },
+  "领取糖果_开始": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3707,
+        "y": -20
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "on_task_start"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "领取糖果_进入活动界面"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    },
+    "timeout": 0
+  },
+  "领取糖果_进入活动界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3973,
+        "y": -20
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "recognition": {
+      "param": {
+        "custom_recognition": "enter_activity",
+        "custom_recognition_param": "t=每日糖果礼物"
+      },
+      "type": "Custom"
+    }
+  }
+}

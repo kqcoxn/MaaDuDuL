@@ -3,30 +3,29 @@
     "$__mpe_code": {
       "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取邮件.json",
       "filename": "领取邮件",
-      "isModifiedExternally": true,
-      "lastSyncTime": 1766243699602,
+      "lastSyncTime": 1766305423725,
       "prefix": "领取邮件",
       "savedViewport": {
-        "x": -2252.29375939104,
-        "y": 220.33401221866387,
-        "zoom": 1.250000000000001
+        "x": -477.0689813354579,
+        "y": 276.65365142317785,
+        "zoom": 0.8705505632961267
       },
-      "version": "v0.12.0_beta_1"
+      "version": "v0.13.0_beta_0"
     }
   },
-  "$__mpe_external_返回主界面_开始_领取邮件": {
+  "$__mpe_external_返回主界面_领取邮件": {
     "$__mpe_code": {
       "position": {
-        "x": 3092,
-        "y": -76
+        "x": 3367,
+        "y": -74
       }
     }
   },
   "领取邮件_周期提醒": {
     "$__mpe_code": {
       "position": {
-        "x": 2048,
-        "y": 227
+        "x": 2036,
+        "y": 196
       }
     },
     "action": {
@@ -44,32 +43,57 @@
   "领取邮件_周期检查": {
     "$__mpe_code": {
       "position": {
-        "x": 2048,
-        "y": -77
+        "x": 1779,
+        "y": -78
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "periodic_check",
+        "custom_action_param": "k=领取邮件"
+      },
+      "type": "Custom"
     },
     "next": [
       "领取邮件_点击邮件面板"
     ],
+    "on_error": [
+      "领取邮件_周期提醒"
+    ],
     "post_delay": 0,
     "pre_delay": 0,
     "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "领取邮件_周期记录": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3107,
+        "y": -74
+      }
+    },
+    "action": {
       "param": {
-        "custom_recognition": "periodic_check",
-        "custom_recognition_param": "k=领取邮件"
+        "custom_action": "record_period",
+        "custom_action_param": "k=领取邮件"
       },
       "type": "Custom"
+    },
+    "next": [
+      "返回主界面"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
     }
   },
   "领取邮件_开始": {
     "$__mpe_code": {
       "position": {
-        "x": 1774,
-        "y": -77
+        "x": 1505,
+        "y": -78
       }
     },
     "action": {
@@ -78,20 +102,15 @@
       },
       "type": "Custom"
     },
-    "focus": {
-      "Node.Action.Starting": "【领取每日邮件】"
-    },
     "next": [
-      "领取邮件_周期检查",
-      "领取邮件_周期提醒"
+      "领取邮件_周期检查"
     ],
     "post_delay": 0,
     "pre_delay": 0,
     "recognition": {
       "param": {},
       "type": "DirectHit"
-    },
-    "timeout": 0
+    }
   },
   "领取邮件_没有邮件": {
     "$__mpe_code": {
@@ -108,7 +127,7 @@
       "Node.Recognition.Succeeded": "\u003e 没有可领取的邮件"
     },
     "next": [
-      "返回主界面_开始"
+      "领取邮件_周期记录"
     ],
     "recognition": {
       "param": {
@@ -122,8 +141,8 @@
   "领取邮件_点击邮件面板": {
     "$__mpe_code": {
       "position": {
-        "x": 2312,
-        "y": -76
+        "x": 2043,
+        "y": -77
       }
     },
     "action": {
@@ -134,7 +153,7 @@
       "Node.Recognition.Succeeded": "\u003e 进入邮件面板"
     },
     "next": [
-      "领取邮件_领取奖励"
+      "领取邮件_确保进入邮件面板"
     ],
     "recognition": {
       "param": {
@@ -149,6 +168,35 @@
         ]
       },
       "type": "TemplateMatch"
+    }
+  },
+  "领取邮件_确保进入邮件面板": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2308,
+        "y": -78
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "领取邮件_领取奖励"
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "邮箱"
+        ],
+        "roi": [
+          581,
+          51,
+          121,
+          69
+        ]
+      },
+      "type": "OCR"
     }
   },
   "领取邮件_确认领取": {
@@ -173,7 +221,7 @@
       "Node.Recognition.Succeeded": "\u003e 领取邮件奖励"
     },
     "next": [
-      "返回主界面_开始"
+      "领取邮件_周期记录"
     ],
     "recognition": {
       "param": {
@@ -199,16 +247,19 @@
       "领取邮件_确认领取",
       "领取邮件_没有邮件"
     ],
+    "on_error": [
+      "领取邮件_周期记录"
+    ],
     "recognition": {
       "param": {
         "expected": [
           "键领取"
         ],
         "roi": [
-          858,
-          577,
-          222,
-          80
+          881,
+          599,
+          173,
+          39
         ]
       },
       "type": "OCR"

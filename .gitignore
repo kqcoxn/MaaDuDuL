@@ -451,5 +451,5 @@ install
 # Tools
 tools/ImageCropper/**/*.png
 
-config
 debug
+agent/config

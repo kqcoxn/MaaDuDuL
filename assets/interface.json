@@ -63,6 +63,22 @@
 			"option": ["领取邮件-周期检查"]
 		},
 		{
+			"name": "领取糖果",
+			"label": "领取每日糖果",
+			"entry": "领取糖果_开始",
+			"default_check": true,
+			"description": ""
+			// "option": ["领取邮件-周期检查"]
+		},
+		{
+			"name": "每日采购",
+			"label": "每日采购",
+			"entry": "每日采购_开始",
+			"default_check": true,
+			"description": "",
+			"option": ["每日采购-周期检查", "每日采购-每日免费礼包", "每日采购-商店采购"]
+		},
+		{
 			"name": " ——— 活动任务 ———",
 			"label": "——— 活动任务 ———",
 			"entry": "活动分隔符",
@@ -104,6 +120,134 @@
 					"pipeline_override": {
 						"领取邮件_周期检查": {
 							"recognition": "DirectHit"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次采购",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_周期检查": {
+							"recognition": "DirectHit"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-每日免费礼包": {
+			"type": "switch",
+			"label": "采购每日免费礼包",
+			"description": "",
+			"cases": [
+				{
+					"name": "Yes"
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_每日免费礼包开始": {
+							"next": "每日采购_每日免费礼包结束"
+						}
+					}
+				}
+			]
+		},
+		"每日采购-商店采购": {
+			"type": "switch",
+			"label": "采购普通商店",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_普通商店开始": {
+							"next": "每日采购_普通商店结束"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["每日采购-日常商店"]
+				}
+			]
+		},
+		"每日采购-日常商店": {
+			"type": "switch",
+			"label": "日常商店",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_日常商店开始": {
+							"next": "每日采购_日常商店结束"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["每日采购-日常商店-朱珠糖", "每日采购-日常商店-星星糖", "每日采购-日常商店-锻造书"]
+				}
+			]
+		},
+		"每日采购-日常商店-朱珠糖": {
+			"type": "switch",
+			"label": "朱珠糖",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常朱珠糖": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-星星糖": {
+			"type": "switch",
+			"label": "星星糖",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常星星糖": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-锻造书": {
+			"type": "switch",
+			"label": "锻造书",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常锻造书": {
+							"action": "DoNothing"
 						}
 					}
 				},
