@@ -20,28 +20,29 @@ install_path = working_dir / Path("install")
 version = len(sys.argv) > 1 and sys.argv[1] or "v0.0.1"
 
 
-def install_deps():
-    if not (working_dir / "deps" / "bin").exists():
-        print("Please download the MaaFramework to \"deps\" first.")
-        print("请先下载 MaaFramework 到 \"deps\"。")
-        sys.exit(1)
+# # 下载 MaaFramework
+# def install_deps():
+#     if not (working_dir / "deps" / "bin").exists():
+#         print("Please download the MaaFramework to \"deps\" first.")
+#         print("请先下载 MaaFramework 到 \"deps\"。")
+#         sys.exit(1)
 
-    shutil.copytree(
-        working_dir / "deps" / "bin",
-        install_path,
-        ignore=shutil.ignore_patterns(
-            "*MaaDbgControlUnit*",
-            "*MaaThriftControlUnit*",
-            "*MaaRpc*",
-            "*MaaHttp*",
-        ),
-        dirs_exist_ok=True,
-    )
-    shutil.copytree(
-        working_dir / "deps" / "share" / "MaaAgentBinary",
-        install_path / "MaaAgentBinary",
-        dirs_exist_ok=True,
-    )
+#     shutil.copytree(
+#         working_dir / "deps" / "bin",
+#         install_path,
+#         ignore=shutil.ignore_patterns(
+#             "*MaaDbgControlUnit*",
+#             "*MaaThriftControlUnit*",
+#             "*MaaRpc*",
+#             "*MaaHttp*",
+#         ),
+#         dirs_exist_ok=True,
+#     )
+#     shutil.copytree(
+#         working_dir / "deps" / "share" / "MaaAgentBinary",
+#         install_path / "MaaAgentBinary",
+#         dirs_exist_ok=True,
+#     )
 
 
 def install_resource():
@@ -77,6 +78,29 @@ def install_chores():
         install_path,
     )
 
+
+def install_config():
+    """安装config和descs配置文件夹"""
+    # 创建install目录（如果不存在）
+    install_path.mkdir(parents=True, exist_ok=True)
+
+    # 复制config文件夹
+    if (working_dir / "config").exists():
+        shutil.copytree(
+            working_dir / "config",
+            install_path / "config",
+            dirs_exist_ok=True,
+        )
+
+    # 复制descs文件夹
+    if (working_dir / "descs").exists():
+        shutil.copytree(
+            working_dir / "descs",
+            install_path / "descs",
+            dirs_exist_ok=True,
+        )
+
+
 def install_agent():
     shutil.copytree(
         working_dir / "agent",
@@ -84,10 +108,12 @@ def install_agent():
         dirs_exist_ok=True,
     )
 
+
 if __name__ == "__main__":
-    install_deps()
+    # install_deps()
     install_resource()
     install_chores()
     install_agent()
+    install_config()
 
     print(f"Install to {install_path} successfully.")

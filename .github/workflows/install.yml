@@ -90,15 +90,15 @@ jobs:
         with:
           submodules: true  # 同时检出子模块
 
-      # 下载MaaFramework框架文件
-      - name: Download MaaFramework
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: MaaXYZ/MaaFramework
-          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"  # 匹配对应平台的文件
-          tag: v5.2.4  # 锁定版本
-          out-file-path: "deps"  # 输出到deps目录
-          extract: true  # 自动解压
+      # MaaFramework下载
+      # - name: Download MaaFramework
+      #   uses: robinraju/release-downloader@v1
+      #   with:
+      #     repository: MaaXYZ/MaaFramework
+      #     fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"  # 匹配对应平台的文件
+      #     tag: v5.2.4  # 锁定版本
+      #     out-file-path: "deps"  # 输出到deps目录
+      #     extract: true  # 自动解压
 
       # 设置嵌入式Python环境（仅Windows x64）
       - name: Setup Embed Python
@@ -164,7 +164,7 @@ jobs:
       - name: Install MFAAvalonia
         shell: bash
         run: |
-          rm -rf MFA/resource/base/model  # 删除MFA自带的model目录
+          rm -rf MFA/resource/base/model/ocr  # 删除MFA自带的 OCR model目录
           mkdir -p install  # 创建安装目录
           cp -r MFA/* install/  # 复制所有MFA文件
           rm -f install/MFAAvalonia-*.zip  # 清理下载的压缩包
@@ -193,7 +193,6 @@ jobs:
         shell: bash
         run: |
           cp launcher/dist/MaaDuDuL.exe install/MaaDuDuL.exe  # 复制启动器
-          cp -v "tools/DependencySetup_依赖库安装.bat" install/  # 复制依赖安装脚本
 
       # 上传构建产物
       - uses: actions/upload-artifact@v4

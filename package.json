@@ -4,10 +4,9 @@
 		"mpe": "mpelb --root assets/resource",
 		"agent": "python dev/run_agent.py",
 		"debug": "python -m MaaDebugger",
-		"release": "cross-var git tag -a v$npm_config_version -m \"release v$npm_config_version\" && git push origin v$npm_config_version"
+		"release": "git tag -a v0.0.1-alpha.1 -m \"release v0.0.1-alpha.1\" && git push origin v0.0.1-alpha.1"
 	},
 	"devDependencies": {
-		"cross-var": "^1.1.0",
 		"prettier-plugin-multiline-arrays": "^3.0.6"
 	}
 }
