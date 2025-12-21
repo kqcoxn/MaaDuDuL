@@ -1,374 +1,314 @@
 {
-  "$__mpe_config_启动游戏": {
-    "$__mpe_code": {
-      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
-      "filename": "启动游戏",
-      "lastSyncTime": 1766301583143,
-      "prefix": "启动游戏",
-      "savedViewport": {
-        "x": -979.4286127344476,
-        "y": 203.1664398710521,
-        "zoom": 1.1486983549970382
-      },
-      "version": "v0.13.0_beta_0"
-    }
-  },
-  "启动游戏_关闭公告": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1124,
-        "y": 417
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "post_delay": 2000,
-    "recognition": {
-      "param": {
-        "roi": [
-          1081,
-          52,
-          98,
-          90
-        ],
-        "template": [
-          "main/close-anno.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "启动游戏_关闭面板": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1944,
-        "y": 400
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "recognition": {
-      "param": {
-        "template": [
-          "main/close-black.png",
-          "main/close-yellow.png",
-          "main/close-brown.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "启动游戏_启动游戏": {
-    "$__mpe_code": {
-      "position": {
-        "x": 586,
-        "y": 62
-      }
-    },
-    "action": {
-      "param": {
-        "package": "com.bilibili.trickcalcn"
-      },
-      "type": "StartApp"
-    },
-    "focus": "\u003e 尝试启动游戏",
-    "next": [
-      "启动游戏_连续识别主界面",
-      "启动游戏_连续识别开始界面",
-      {
-        "jump_back": true,
-        "name": "启动游戏_检测公告界面"
-      }
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    },
-    "timeout": 60000
-  },
-  "启动游戏_开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 314,
-        "y": 62
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "on_task_start"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "启动游戏_启动游戏"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "启动游戏_捏脸启动": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1130,
-        "y": 67
-      }
-    },
-    "action": {
-      "param": {
-        "begin": [
-          738,
-          339
-        ],
-        "end": [
-          [
-            593,
-            446
-          ]
-        ]
-      },
-      "type": "Swipe"
-    },
-    "focus": {
-      "Node.Recognition.Starting": "\u003e 启动！"
-    },
-    "next": [
-      "启动游戏_连续识别主界面",
-      {
-        "jump_back": true,
-        "name": "启动游戏_领取礼物"
-      },
-      {
-        "jump_back": true,
-        "name": "启动游戏_点击屏幕继续"
-      }
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "启动游戏_检测公告界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 853,
-        "y": 417
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "\u003e 关闭公告界面"
-    },
-    "next": [
-      "启动游戏_关闭公告"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "系统公告"
-        ],
-        "roi": [
-          136,
-          136,
-          730,
-          87
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "启动游戏_点击屏幕继续": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1681,
-        "y": 397
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          640,
-          679
-        ]
-      },
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "\u003e 获取奖励"
-    },
-    "next": [
-      "启动游戏_关闭面板"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "点击屏幕继续"
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "启动游戏_结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1696,
-        "y": 64
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": "\u003e 已进入主界面",
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "启动游戏_识别主界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1420,
-        "y": -155
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {
-        "roi": [
-          1092,
-          2,
-          184,
-          75
-        ],
-        "template": [
-          "main/more.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "启动游戏_识别开始界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 857,
-        "y": -151
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {
-        "expected": [
-          "拉动脸颊开始游戏"
-        ],
-        "roi": [
-          331,
-          603,
-          580,
-          115
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "启动游戏_连续识别主界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1420,
-        "y": 64
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "\u003e 识别到主界面"
-    },
-    "next": [
-      "启动游戏_结束"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {
-        "custom_recognition": "stable_reco",
-        "custom_recognition_param": "m=5\u0026n=启动游戏_识别主界面"
-      },
-      "type": "Custom"
-    }
-  },
-  "启动游戏_连续识别开始界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 855,
-        "y": 65
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "\u003e 识别到登录界面"
-    },
-    "next": [
-      "启动游戏_捏脸启动"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {
-        "custom_recognition": "stable_reco",
-        "custom_recognition_param": "m=3\u0026n=启动游戏_识别开始界面"
-      },
-      "type": "Custom"
-    }
-  },
-  "启动游戏_领取礼物": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1418,
-        "y": 398
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "\u003e 检测到可领取奖励"
-    },
-    "next": [
-      "启动游戏_点击屏幕继续"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "领取礼物",
-          "键领取"
-        ]
-      },
-      "type": "OCR"
-    }
-  }
+	"$__mpe_config_启动游戏": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
+			"filename": "启动游戏",
+			"lastSyncTime": 1766301583143,
+			"prefix": "启动游戏",
+			"savedViewport": {
+				"x": -979.4286127344476,
+				"y": 203.1664398710521,
+				"zoom": 1.1486983549970382
+			},
+			"version": "v0.13.0_beta_0"
+		}
+	},
+	"启动游戏_关闭公告": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1124,
+				"y": 417
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"post_delay": 2000,
+		"recognition": {
+			"param": {
+				"roi": [1081, 52, 98, 90],
+				"template": ["main/close-anno.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"启动游戏_关闭面板": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1944,
+				"y": 400
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"template": ["main/close-black.png", "main/close-yellow.png", "main/close-brown.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"启动游戏_启动游戏": {
+		"$__mpe_code": {
+			"position": {
+				"x": 586,
+				"y": 62
+			}
+		},
+		"action": {
+			"param": {
+				"package": "com.bilibili.trickcalcn"
+			},
+			"type": "StartApp"
+		},
+		"focus": "\u003e 尝试启动游戏",
+		"next": [
+			"启动游戏_连续识别主界面",
+			"启动游戏_连续识别开始界面",
+			{
+				"jump_back": true,
+				"name": "启动游戏_检测公告界面"
+			}
+		],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 60000
+	},
+	"启动游戏_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 314,
+				"y": 62
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"next": ["启动游戏_启动游戏"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"启动游戏_捏脸启动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1130,
+				"y": 67
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [738, 339],
+				"end": [[593, 446]]
+			},
+			"type": "Swipe"
+		},
+		"focus": {
+			"Node.Recognition.Starting": "\u003e 启动！"
+		},
+		"next": [
+			"启动游戏_连续识别主界面",
+			{
+				"jump_back": true,
+				"name": "启动游戏_领取礼物"
+			},
+			{
+				"jump_back": true,
+				"name": "启动游戏_点击屏幕继续"
+			}
+		],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"启动游戏_检测公告界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 853,
+				"y": 417
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 关闭公告界面"
+		},
+		"next": ["启动游戏_关闭公告"],
+		"recognition": {
+			"param": {
+				"expected": ["系统公告"],
+				"roi": [136, 136, 730, 87]
+			},
+			"type": "OCR"
+		}
+	},
+	"启动游戏_点击屏幕继续": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1681,
+				"y": 397
+			}
+		},
+		"action": {
+			"param": {
+				"target": [640, 679]
+			},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 获取奖励"
+		},
+		"next": ["启动游戏_关闭面板"],
+		"recognition": {
+			"param": {
+				"expected": ["点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"启动游戏_结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1696,
+				"y": 64
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": "\u003e 已进入主界面",
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"启动游戏_识别主界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1420,
+				"y": -155
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"recognition": {
+			"param": {
+				"roi": [1092, 2, 184, 75],
+				"template": ["main/more.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"启动游戏_识别开始界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 857,
+				"y": -151
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["拉动脸颊开始游戏"],
+				"roi": [331, 603, 580, 115]
+			},
+			"type": "OCR"
+		}
+	},
+	"启动游戏_连续识别主界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1420,
+				"y": 64
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 识别到主界面"
+		},
+		"next": ["启动游戏_结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "stable_reco",
+				"custom_recognition_param": "m=5\u0026n=启动游戏_识别主界面"
+			},
+			"type": "Custom"
+		}
+	},
+	"启动游戏_连续识别开始界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 855,
+				"y": 65
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 识别到登录界面"
+		},
+		"next": ["启动游戏_捏脸启动"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "stable_reco",
+				"custom_recognition_param": "m=3\u0026n=启动游戏_识别开始界面"
+			},
+			"type": "Custom"
+		}
+	},
+	"启动游戏_领取礼物": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1418,
+				"y": 398
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 检测到可领取奖励"
+		},
+		"next": ["启动游戏_点击屏幕继续"],
+		"recognition": {
+			"param": {
+				"expected": ["领取礼物", "键领取"]
+			},
+			"type": "OCR"
+		}
+	}
 }
