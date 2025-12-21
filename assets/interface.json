@@ -32,13 +32,13 @@
 		{
 			"name": "说明",
 			"label": "说明",
-			"entry": "连续作战_开始",
+			"entry": "说明",
 			"description": ""
 		},
 		{
 			"name": "操作指南",
 			"label": "操作指南",
-			"entry": "连续作战_开始",
+			"entry": "操作指南",
 			"description": ""
 		},
 		{
@@ -101,6 +101,14 @@
 			"default_check": true,
 			"description": "",
 			"option": ["巅峰对决-领取战斗宝石", "巅峰对决-竞技场对战"]
+		},
+		{
+			"name": "领取奖励",
+			"label": "领取奖励",
+			"entry": "领取奖励_开始",
+			"default_check": true,
+			"description": ""
+			// "option": [""]
 		},
 		{
 			"name": " ——— 活动任务 ———",

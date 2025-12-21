@@ -1,0 +1,300 @@
+{
+	"$__mpe_config_领取奖励": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取奖励.json",
+			"filename": "领取奖励",
+			"lastSyncTime": 1766337295953,
+			"prefix": "领取奖励",
+			"savedViewport": {
+				"x": -1499.2156718570282,
+				"y": 291.3212892894763,
+				"zoom": 0.5440941020600788
+			},
+			"version": "v0.13.0_beta_0"
+		}
+	},
+	"领取奖励_从任务奖励返回主界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4474,
+				"y": -21
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "run",
+				"custom_action_param": "t=回到主界面"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取奖励_任务结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_任务奖励已领取": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5903,
+				"y": 202
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 奖励已领取"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["没有可领取"]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取奖励_任务开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3390,
+				"y": -19
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": "\u003e 进入任务界面",
+		"next": ["领取奖励_进入任务界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_任务结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4746,
+				"y": -17
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": "\u003e 进入任务界面",
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_全部领取任务奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5642,
+				"y": -14
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["领取奖励_确认领取任务奖励", "领取奖励_任务奖励已领取"],
+		"recognition": {
+			"param": {
+				"expected": ["全部领取"],
+				"roi": [1035, 633, 163, 73]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取奖励_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3121,
+				"y": -22
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取奖励_任务开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_确认领取任务奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5903,
+				"y": -13
+			}
+		},
+		"action": {
+			"param": {
+				"target": [643, 642, 0, 0]
+			},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取奖励_进入任务界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3666,
+				"y": -20
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["领取奖励_领取日任务奖励"],
+		"recognition": {
+			"param": {
+				"roi": [1022, 66, 254, 236],
+				"template": ["main/task.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"领取奖励_进入具体任务面板": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5382,
+				"y": -14
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["领取奖励_全部领取任务奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["天"],
+				"roi": [3, 4, 232, 372]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取奖励_进入通行证界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3681,
+				"y": 361
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"roi": [1022, 66, 254, 236],
+				"template": ["main/task.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"领取奖励_通行证开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3387,
+				"y": 359
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": "\u003e 进入任务界面",
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_领取任务奖励开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5115,
+				"y": -13
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["领取奖励_进入具体任务面板"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_领取周任务奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4199,
+				"y": -18
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "receive_task_reward",
+				"custom_action_param": "c=周"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取奖励_从任务奖励返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_领取日任务奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3926,
+				"y": -20
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "receive_task_reward",
+				"custom_action_param": "c=日"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取奖励_领取周任务奖励"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	}
+}
