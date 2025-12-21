@@ -6,8 +6,10 @@
 
 from maa.context import Context
 from maa.define import TaskDetail
+from maa.tasker import Controller
 
 import numpy as np
+import time
 
 
 class Tasker:
@@ -27,7 +29,8 @@ class Tasker:
         """
         self.context = context
 
-    def _ctrler(self):
+    @property
+    def ctl(self) -> Controller:
         """获取控制器实例。
 
         Returns:
@@ -68,7 +71,7 @@ class Tasker:
         Returns:
             np.ndarray: 截图结果，为 NumPy 数组。
         """
-        return self._ctrler().post_screencap().wait().get()
+        return self.ctl.post_screencap().wait().get()
 
     def click(self, x: int, y: int):
         """执行点击操作。
@@ -82,7 +85,39 @@ class Tasker:
         Returns:
             Tasker: 返回自身，支持链式调用。
         """
-        self._ctrler().post_click(x, y).wait()
+        self.ctl.post_click(x, y).wait()
+        return self
+
+    def swipe(self, x1: int, y1: int, x2: int, y2: int, duration=200):
+        """执行滑动操作。
+
+        在屏幕上从起始坐标滑动到目标坐标。
+
+        Args:
+            x1: 起始位置的 X 坐标（像素）。
+            y1: 起始位置的 Y 坐标（像素）。
+            x2: 目标位置的 X 坐标（像素）。
+            y2: 目标位置的 Y 坐标（像素）。
+            duration: 滑动持续时间（毫秒），默认为 200。
+
+        Returns:
+            Tasker: 返回自身，支持链式调用。
+        """
+        self.ctl.post_swipe(x1, y1, x2, y2, duration).wait()
+        return self
+
+    def wait(self, minutes: float = 0.5):
+        """执行等待操作。
+
+        暂停当前任务执行指定的时间，用于在任务流程中插入延迟。
+
+        Args:
+            minutes: 等待时长（分钟），默认为 0.5 分钟。
+
+        Returns:
+            Tasker: 返回自身，支持链式调用。
+        """
+        time.sleep(minutes * 60)
         return self
 
     @staticmethod
