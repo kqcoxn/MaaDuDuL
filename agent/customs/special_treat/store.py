@@ -23,4 +23,4 @@ class Buy(CustomAction):
 
             return True
         except Exception as e:
-            return Prompter.error("进入指定活动", e)
+            return Prompter.error("购买指定商品", e)
