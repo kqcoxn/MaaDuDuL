@@ -8,7 +8,7 @@ class Counter:
         _max: 最大计数限制，-1 表示无限制。
     """
 
-    def __init__(self, initial_count=0, max=-1):
+    def __init__(self, initial_count=0, max_count=-1):
         """初始化计数器。
 
         Args:
@@ -16,7 +16,7 @@ class Counter:
             max: 最大计数限制，默认为 -1（无限制）。
         """
         self._count = initial_count
-        self._max = max
+        self._max = max_count
 
     def count(self):
         """执行计数操作。
@@ -31,13 +31,34 @@ class Counter:
             return -1
         return self._count
 
-    def get_count(self):
+    @property
+    def cur_count(self):
         """获取当前计数值。
 
         Returns:
             int: 当前计数值。
         """
         return self._count
+
+    @property
+    def max_count(self):
+        """获取最大计数值。
+
+        Returns:
+            int: 最大计数值。
+        """
+        return self._max
+
+    @property
+    def is_max(self):
+        """判断是否达到最大计数值。
+
+        Returns:
+            bool: 如果达到最大计数值则返回 True，否则返回 False。
+        """
+        if self._max < 0:
+            return False
+        return self._count >= self._max
 
     def reset(self):
         """重置计数器。
@@ -64,7 +85,9 @@ class CounterManager:
     counters = {}
 
     @classmethod
-    def get(cls, key: str = "default", initial_count=0, max=-1) -> Counter:
+    def get(
+        cls, key: str = "default", initial_count=0, max_count=-1, strict=False
+    ) -> Counter:
         """获取或创建计数器实例。
 
         如果指定键名的计数器不存在，则创建新的计数器实例；
@@ -74,12 +97,18 @@ class CounterManager:
             key: 计数器的唯一标识键名，默认为 "default"。
             initial_count: 初始计数值，默认为 0。仅在创建新计数器时使用。
             max: 最大计数限制，默认为 -1（无限制）。仅在创建新计数器时使用。
+            strict: 严格模式，默认为 False。为 True 时若计数器不存在则抛出 KeyError。
 
         Returns:
             Counter: 指定键名对应的计数器实例。
+
+        Raises:
+            KeyError: 当 strict=True 且指定键名的计数器不存在时抛出。
         """
         if key not in cls.counters:
-            cls.counters[key] = Counter(initial_count, max)
+            if strict:
+                raise KeyError(f"Counter with key '{key}' does not exist")
+            cls.counters[key] = Counter(initial_count, max_count)
         return cls.counters[key]
 
     @classmethod
