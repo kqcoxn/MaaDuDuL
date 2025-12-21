@@ -1,57 +1,72 @@
+# 自动化构建与发布工作流
+# 负责跨平台编译、打包和发布MaaDuDuL项目
 name: install
 
+# 触发条件
 on:
   push:
     tags:
-      - "v*"
+      - "v*"  # 仅在推送v开头的标签时触发（如v1.0.0）
+    # 注释掉分支和路径触发，避免频繁构建
+    # branches:
+    #   - "**"
+    # paths:
+    #   - ".github/workflows/install.yml"
+    #   - "assets/**"
+    #   - "**.py"
+  pull_request:  # PR触发条件
     branches:
-      - "**"
-    paths:
+      - "**"  # 所有分支的PR
+    paths:  # 仅当以下文件变更时触发
       - ".github/workflows/install.yml"
       - "assets/**"
       - "**.py"
-  pull_request:
-    branches:
-      - "**"
-    paths:
-      - ".github/workflows/install.yml"
-      - "assets/**"
-      - "**.py"
-  workflow_dispatch:
+  workflow_dispatch:  # 允许手动触发
 
 jobs:
+  # 任务1: 生成版本元数据
   meta:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # 获取完整的git历史，用于版本号生成
+      
       - id: set_tag
+        name: 设置版本标签
         run: |
-          # 检查标签格式
+          # 检查是否为正式发布（基于v*标签）
           is_release=${{ startsWith(github.ref, 'refs/tags/v') }}
+                    
+          # 尝试从git获取标签
           tag=$(git describe --tags --match "v*" ${{ github.ref }} || true)
+                    
+          # 如果没有找到v*标签，则从GitHub API获取最新发布版本
           if [[ $tag != v* ]]; then
-            tag=$(curl -sX GET "https://api.github.com/repos/${{ github.repository }}/releases/latest" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | awk '/tag_name/{print $4}' FS='["]')
+            tag=$(curl -sX GET "https://api.github.com/repos/${{ github.repository }}/releases/latest" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | awk '/tag_name/{print $4}' FS='["!]')
+            # 如果仍然没有找到，使用默认版本v0.0.0
             if [[ $tag != v* ]]; then
               tag="v0.0.0"
             fi
+            # 为CI构建添加日期和commit hash
             tag=$(date "+$tag-%y%m%d-$(git rev-parse --short HEAD)")
           fi
-
+          
+          # 非正式发布版本添加ci标记
           if ! $($is_release) ; then
             prefix=${tag%-*-*}
             suffix=${tag#$prefix-}
             tag="$prefix-ci.$suffix"
           fi
 
-          # 检查是否为预发布版本
+          # 检查是否为预发布版本（包含alpha/beta/rc/dev/ci关键字）
           is_prerelease=false
           if [[ $tag =~ .*alpha.* || $tag =~ .*beta.* || $tag =~ .*rc.* || $tag =~ .*dev.* || $tag =~ .*-ci.* ]]; then
             is_prerelease=true
             echo "This is a pre-release version"
           fi
 
+          # 输出版本信息供后续任务使用
           echo tag=$tag | tee -a $GITHUB_OUTPUT
           echo is_release=$is_release | tee -a $GITHUB_OUTPUT
           echo is_prerelease=$is_prerelease | tee -a $GITHUB_OUTPUT
@@ -60,83 +75,133 @@ jobs:
       is_release: ${{ steps.set_tag.outputs.is_release }}
       is_prerelease: ${{ steps.set_tag.outputs.is_prerelease }}
 
+  # 任务2: 多平台构建与打包
   install:
-    needs: meta
-    runs-on: ubuntu-latest
+    needs: meta  # 依赖meta任务完成
+    runs-on: windows-latest  # 使用Windows环境（需要PowerShell支持）
     strategy:
       matrix:
-        os: [win, macos, linux, android]
-        arch: [aarch64, x86_64]
-      fail-fast: false
+        os: [win, macos, linux]  # 支持的操作系统
+        arch: [x86_64, aarch64]  # 支持的架构
+      fail-fast: true  # 某个构建失败停止其他构建
 
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: true  # 同时检出子模块
 
+      # 下载MaaFramework框架文件
       - name: Download MaaFramework
         uses: robinraju/release-downloader@v1
         with:
           repository: MaaXYZ/MaaFramework
-          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
-          latest: true
-          out-file-path: "deps"
-          extract: true
+          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"  # 匹配对应平台的文件
+          tag: v5.2.4  # 锁定版本
+          out-file-path: "deps"  # 输出到deps目录
+          extract: true  # 自动解压
 
-      - name: Remove built-in runtime in MFA
-        if: matrix.os != 'android'
+      # 设置嵌入式Python环境（仅Windows x64）
+      - name: Setup Embed Python
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: powershell
+        run: |
+          ./ci/setup_embed_python.ps1
+
+      # 合并Pipeline配置文件
+      - name: Merge Pipeline
         shell: bash
         run: |
-          rm -rf MFA/runtimes
+          python -u ./ci/merge_pipeline.py  # -u参数确保实时输出
 
+      # 安装项目资源文件
+      - name: Install Resource
+        shell: bash
+        run: |
+          cd tools/
+          python -m pip install -r ./requirements.txt  # 安装依赖
+          python ./install.py ${{ needs.meta.outputs.tag }}  # 执行安装脚本
+          cd ..
+
+      # 映射MFAAvalonia的平台和架构命名
+      # MFA使用不同的命名规则：macos→osx, x86_64→x64, aarch64→arm64
+      - name: Set up MFAAvalonia naming
+        id: mfa_naming
+        shell: bash
+        run: |
+          # 平台命名映射
+          if [ "${{ matrix.os }}" = "win" ]; then
+            echo "mfa_os=win" >> $GITHUB_OUTPUT
+          elif [ "${{ matrix.os }}" = "macos" ]; then
+            echo "mfa_os=osx" >> $GITHUB_OUTPUT  # macOS在MFA中称为osx
+          elif [ "${{ matrix.os }}" = "linux" ]; then
+            echo "mfa_os=linux" >> $GITHUB_OUTPUT
+          else
+            echo "mfa_os=unknown" >> $GITHUB_OUTPUT
+          fi
+
+          # 架构命名映射
+          if [ "${{ matrix.arch }}" = "x86_64" ]; then
+            echo "mfa_arch=x64" >> $GITHUB_OUTPUT
+          elif [ "${{ matrix.arch }}" = "aarch64" ]; then
+            echo "mfa_arch=arm64" >> $GITHUB_OUTPUT
+          else
+            echo "mfa_arch=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      # 下载MFAAvalonia GUI程序
       - name: Download MFAAvalonia
-        if: matrix.os != 'android'
+        if: steps.mfa_naming.outputs.mfa_os != 'unknown' && steps.mfa_naming.outputs.mfa_arch != 'unknown'
         id: download_mfa
         uses: robinraju/release-downloader@v1
         with:
           repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
-          latest: true
+          fileName: "MFAAvalonia-*-${{ steps.mfa_naming.outputs.mfa_os }}-${{ steps.mfa_naming.outputs.mfa_arch }}*"
+          tag: v2.2.2  # 锁定版本
           out-file-path: "MFA"
           extract: true
 
-      - name: Clean up MFAAvalonia archive
-        if: matrix.os != 'android'
+      # 安装MFAAvalonia到install目录
+      - name: Install MFAAvalonia
         shell: bash
         run: |
-          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
-          rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia."
+          rm -rf MFA/resource/base/model  # 删除MFA自带的model目录
+          mkdir -p install  # 创建安装目录
+          cp -r MFA/* install/  # 复制所有MFA文件
+          rm -f install/MFAAvalonia-*.zip  # 清理下载的压缩包
 
-      - name: Install
+      # 替换应用图标
+      - name: Replace Icon
         shell: bash
         run: |
-          cd tools/
-          python -m pip install -r ./requirements.txt
-          python ./install.py ${{ needs.meta.outputs.tag }}
-          cd ..
-
-          if [[ "${{ matrix.os }}" != "android" ]]; then
-            if [ -d "MFA" ]; then
-              echo "Copying MFA files to install directory..."
-              mkdir -p install
-              rsync -av --ignore-existing MFA/ install/
-            else
-              echo "MFA directory not found, skipping copy."
-            fi
-            if [[ "${{ matrix.os }}" == "win" ]]; then
-              mkdir -p install
-              cp -v "tools/DependencySetup_依赖库安装.bat" install/
-            fi
-          else
-            echo "Skipping copy MFA for Android."
+          if [ -f "public/logo.ico" ]; then
+            cp public/logo.ico install/Assets/logo.ico
           fi
 
+      # 打包启动器（仅Windows平台）
+      - name: Packing Launcher
+        if: matrix.os == 'win'
+        working-directory: launcher
+        shell: bash
+        run: |
+          python -m pip install pyinstaller
+          # 打包为单文件exe，带图标，无控制台窗口
+          pyinstaller --onefile --icon=../public/logo.ico --windowed MaaDuDuL.py
+
+      # 安装打包好的工具（仅Windows平台）
+      - name: Install Tools
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          cp launcher/dist/MaaDuDuL.exe install/MaaDuDuL.exe  # 复制启动器
+          cp -v "tools/DependencySetup_依赖库安装.bat" install/  # 复制依赖安装脚本
+
+      # 上传构建产物
       - uses: actions/upload-artifact@v4
         with:
-          name: MaaXXX-${{ matrix.os }}-${{ matrix.arch }}
-          path: "install"
+          name: MaaDuDuL-${{ matrix.os }}-${{ matrix.arch }}  # 以平台-架构命名
+          path: "install"  # 上传install目录
 
+  # 任务3: 生成更新日志
   changelog:
     name: Generate changelog
     runs-on: ubuntu-latest
@@ -146,40 +211,46 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # 需要完整历史以生成changelog
 
+      # 使用git-cliff生成更新日志
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
         id: git-cliff
         with:
-          config: .github/cliff.toml
-          args: -vv --latest --strip header
+          config: .github/cliff.toml  # changelog配置文件
+          args: -vv --latest --strip header  # 仅生成最新版本，去除头部
         env:
           OUTPUT: CHANGES.md
           GITHUB_REPO: ${{ github.repository }}
 
+  # 任务4: 发布到GitHub Releases（仅正式版本）
   release:
-    if: ${{ needs.meta.outputs.is_release == 'true' }}
-    needs: [meta, install, changelog]
+    if: ${{ needs.meta.outputs.is_release == 'true' }}  # 仅在正式发布时执行
+    needs: [meta, install, changelog]  # 依赖前三个任务
     runs-on: ubuntu-latest
     steps:
+      # 下载所有构建产物
       - uses: actions/download-artifact@v4
         with:
           path: assets
 
-      - run: |
+      # 打包所有产物为zip文件
+      - name: 打包发布文件
+        run: |
           cd assets
           for f in *; do
             (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
           done
           
+      # 创建GitHub Release
       - uses: softprops/action-gh-release@v2
         with:
-          files: assets/*
-          tag_name: ${{ needs.meta.outputs.tag }}
-          body: ${{ needs.changelog.outputs.release_body }}
-          draft: false
-          prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
+          files: assets/*  # 上传所有打包文件
+          tag_name: ${{ needs.meta.outputs.tag }}  # 使用版本标签
+          body: ${{ needs.changelog.outputs.release_body }}  # 使用生成的changelog
+          draft: false  # 不设为草稿
+          prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}  # 标记预发布
 
         # Mirror酱为第三方分发服务，新项目默认关闭
         # 若有需要请联系 Mirror酱 开通，直接自行开启是无法使用的
