@@ -81,10 +81,10 @@ jobs:
     runs-on: windows-latest  # 使用Windows环境（需要PowerShell支持）
     strategy:
       matrix:
-        # os: [win, macos, linux]  # 支持的操作系统
-        # arch: [x86_64, aarch64]  # 支持的架构
-        os: [win]  # 调试系统
-        arch: [x86_64]  # 调试架构
+        os: [win, macos, linux]  # 支持的操作系统
+        arch: [x86_64, aarch64]  # 支持的架构
+        # os: [win]  # 调试系统
+        # arch: [x86_64]  # 调试架构
       fail-fast: true  # 某个构建失败停止其他构建
 
     steps:

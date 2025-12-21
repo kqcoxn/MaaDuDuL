@@ -39,10 +39,10 @@ def _get_python_executable() -> str:
     embedded_python = Path("./python/python.exe")
 
     if embedded_python.exists():
-        print(f"info:检测到嵌入式Python环境: {embedded_python.resolve()}")
+        print(f"info:检测到内置 Agent 环境")
         return str(embedded_python.resolve())
     else:
-        print(f"info:使用系统Python环境: {sys.executable}")
+        print(f"info:使用系统 Python 环境")
         return sys.executable
 
 
@@ -164,16 +164,12 @@ def _install_requirements(req_file=None, mirrors=None) -> bool:
     for idx, mirror in enumerate(mirror_list):
         try:
             if mirror:
-                print(
-                    f"info:正在使用镜像源安装或更新环境... ({idx + 1}/{len(mirror_list)}): {mirror}"
-                )
+                print(f"info:正在使用镜像源更新依赖环境...")
             else:
-                print(
-                    f"info:正在使用默认源安装或更新环境... ({idx + 1}/{len(mirror_list)})"
-                )
+                print(f"info:正在使用默认源更新依赖环境...")
 
             cmd = [
-                python_exe,  # 使用检测到的Python环境
+                python_exe,
                 "-m",
                 "pip",
                 "install",
@@ -188,7 +184,7 @@ def _install_requirements(req_file=None, mirrors=None) -> bool:
             subprocess.check_call(
                 cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )
-            print("info:安装完成！")
+            print("info:环境更新成功！")
             return True
         except Exception as e:
             if idx < len(mirror_list) - 1:
