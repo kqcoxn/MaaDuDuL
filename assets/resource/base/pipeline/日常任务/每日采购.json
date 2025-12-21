@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
 			"filename": "每日采购",
-			"lastSyncTime": 1766313793499,
+			"lastSyncTime": 1766333700940,
 			"prefix": "每日采购",
 			"savedViewport": {
-				"x": -6886.709098913155,
-				"y": -483.77793803185955,
-				"zoom": 1.1486983549970409
+				"x": -7151.099742059318,
+				"y": 209.10550235497834,
+				"zoom": 1.0881882041201567
 			},
 			"version": "v0.13.0_beta_0"
 		}
@@ -118,19 +118,19 @@
 			}
 		},
 		"action": {
-			"param": {},
-			"type": "DoNothing"
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每日采购"
+			},
+			"type": "Custom"
 		},
 		"next": ["每日采购_每日免费礼包开始"],
 		"on_error": ["每日采购_周期提醒"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
-			"param": {
-				"custom_recognition": "periodic_check",
-				"custom_recognition_param": "k=每日采购"
-			},
-			"type": "Custom"
+			"param": {},
+			"type": "DirectHit"
 		}
 	},
 	"每日采购_商品已被购买": {
@@ -267,7 +267,7 @@
 			},
 			"type": "OCR"
 		},
-		"timeout": 3000
+		"timeout": 2000
 	},
 	"每日采购_每日免费礼包开始": {
 		"$__mpe_code": {
