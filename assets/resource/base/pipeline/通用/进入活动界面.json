@@ -1,258 +1,233 @@
 {
-  "$__mpe_config_进入活动界面": {
-    "$__mpe_code": {
-      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\进入活动界面.json",
-      "filename": "进入活动界面",
-      "lastSyncTime": 1766256794142,
-      "prefix": "进入活动界面",
-      "savedViewport": {
-        "x": -7456.025362881777,
-        "y": -238.90003584711917,
-        "zoom": 1.5157165665103984
-      },
-      "version": "v0.12.0_beta_1"
-    }
-  },
-  "进入活动界面_下滑面板": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5361,
-        "y": 412
-      }
-    },
-    "action": {
-      "param": {
-        "begin": [
-          170,
-          587,
-          0,
-          0
-        ],
-        "duration": [
-          400
-        ],
-        "end": [
-          [
-            170,
-            176,
-            0,
-            0
-          ]
-        ],
-        "end_hold": [
-          500
-        ]
-      },
-      "type": "Swipe"
-    },
-    "next": [
-      "进入活动界面_计数"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "进入活动界面_初始化计数器": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5084,
-        "y": -70
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "init_counter",
-        "custom_action_param": "k=识别活动\u0026mc=5"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "进入活动界面_识别活动",
-      "进入活动界面_检查计数",
-      {
-        "jump_back": true,
-        "name": "进入活动界面_下滑面板"
-      }
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "进入活动界面_开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4290,
-        "y": -67
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "on_task_start"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "进入活动界面_进入活动界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "进入活动界面_未找到指定活动": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5622,
-        "y": 139
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": "\u003e 未找到指定活动",
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "进入活动界面_检查计数": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5362,
-        "y": 139
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "进入活动界面_未找到指定活动"
-    ],
-    "recognition": {
-      "param": {
-        "custom_recognition": "check_counter",
-        "custom_recognition_param": "k=识别活动"
-      },
-      "type": "Custom"
-    }
-  },
-  "进入活动界面_确认进入活动面板": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4816,
-        "y": -70
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "\u003e 查找指定活动"
-    },
-    "next": [
-      "进入活动界面_初始化计数器"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "活动"
-        ],
-        "roi": [
-          576,
-          51,
-          130,
-          59
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "进入活动界面_计数": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5621,
-        "y": 412
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "count",
-        "custom_action_param": "k=识别活动"
-      },
-      "type": "Custom"
-    },
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "进入活动界面_识别活动": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5361,
-        "y": -69
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "recognition": {
-      "param": {
-        "expected": [
-          "活动名称"
-        ],
-        "roi": [
-          28,
-          96,
-          291,
-          576
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "进入活动界面_进入活动界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4556,
-        "y": -67
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "\u003e 进入活动面板"
-    },
-    "next": [
-      "进入活动界面_确认进入活动面板"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          765,
-          66,
-          512,
-          244
-        ],
-        "template": [
-          "main/activity.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  }
+	"$__mpe_config_进入活动界面": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\进入活动界面.json",
+			"filename": "进入活动界面",
+			"lastSyncTime": 1766334504208,
+			"prefix": "进入活动界面",
+			"savedViewport": {
+				"x": -4023.5084389023896,
+				"y": 257.80333082467484,
+				"zoom": 0.9006861597485931
+			},
+			"version": "v0.13.0_beta_0"
+		}
+	},
+	"进入活动界面_下滑面板": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5361,
+				"y": 412
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [170, 587, 0, 0],
+				"duration": [400],
+				"end": [[170, 176, 0, 0]],
+				"end_hold": [500]
+			},
+			"type": "Swipe"
+		},
+		"next": ["进入活动界面_计数"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"进入活动界面_划至最顶部": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4816,
+				"y": -70
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [170, 176, 0, 0],
+				"duration": [100],
+				"end": [[170, 587, 0, 0]]
+			},
+			"type": "Swipe"
+		},
+		"next": ["进入活动界面_初始化计数器"],
+		"post_delay": 1000,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"进入活动界面_初始化计数器": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5084,
+				"y": -70
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "init_counter",
+				"custom_action_param": "k=识别活动\u0026mc=5"
+			},
+			"type": "Custom"
+		},
+		"next": [
+			"进入活动界面_识别活动",
+			"进入活动界面_检查计数",
+			{
+				"jump_back": true,
+				"name": "进入活动界面_下滑面板"
+			}
+		],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"进入活动界面_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4019,
+				"y": -67
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"next": ["进入活动界面_进入活动界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"进入活动界面_未找到指定活动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5622,
+				"y": 139
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": "\u003e 未找到指定活动",
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"进入活动界面_检查计数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5362,
+				"y": 139
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["进入活动界面_未找到指定活动"],
+		"recognition": {
+			"param": {
+				"custom_recognition": "check_counter",
+				"custom_recognition_param": "k=识别活动"
+			},
+			"type": "Custom"
+		}
+	},
+	"进入活动界面_确认进入活动面板": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4545,
+				"y": -70
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 查找指定活动"
+		},
+		"next": ["进入活动界面_划至最顶部"],
+		"recognition": {
+			"param": {
+				"expected": ["活动"],
+				"roi": [576, 51, 130, 59]
+			},
+			"type": "OCR"
+		}
+	},
+	"进入活动界面_计数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5621,
+				"y": 412
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "count",
+				"custom_action_param": "k=识别活动"
+			},
+			"type": "Custom"
+		},
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"进入活动界面_识别活动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5361,
+				"y": -69
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["活动名称"],
+				"roi": [28, 96, 291, 576]
+			},
+			"type": "OCR"
+		}
+	},
+	"进入活动界面_进入活动界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4285,
+				"y": -67
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 进入活动面板"
+		},
+		"next": ["进入活动界面_确认进入活动面板"],
+		"recognition": {
+			"param": {
+				"roi": [765, 66, 512, 244],
+				"template": ["main/activity.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	}
 }
