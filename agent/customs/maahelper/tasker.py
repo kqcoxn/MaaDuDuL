@@ -5,6 +5,8 @@
 """
 
 from maa.context import Context
+from maa.define import TaskDetail
+
 import numpy as np
 
 
@@ -82,3 +84,9 @@ class Tasker:
         """
         self._ctrler().post_click(x, y).wait()
         return self
+
+    @staticmethod
+    def get_last_node_name(task_detail: TaskDetail) -> str:
+        if task_detail and task_detail.nodes and len(task_detail.nodes) > 0:
+            return task_detail.nodes[-1].name
+        return ""
