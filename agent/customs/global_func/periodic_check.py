@@ -147,9 +147,9 @@ class Inspector:
 # ====================  custom  ====================
 
 
-@AgentServer.custom_recognition("periodic_check")
-class PeriodicCheck(CustomRecognition):
-    """周期性任务检查识别器。
+@AgentServer.custom_action("periodic_check")
+class PeriodicCheck(CustomAction):
+    """周期性任务检查动作。
 
     用于 Pipeline 中判断周期性任务是否需要执行。
     支持按天（day/d）和按周（week/w）两种周期模式。
@@ -166,27 +166,25 @@ class PeriodicCheck(CustomRecognition):
         custom_param: "k=daily_task;p=day;r=true"
     """
 
-    def analyze(
+    def run(
         self,
         context: Context,
-        argv: CustomRecognition.AnalyzeArg,
-    ) -> CustomRecognition.AnalyzeResult:
-        """分析周期性任务状态。
+        argv: CustomAction.RunArg,
+    ) -> bool:
+        """执行周期性任务检查。
 
         Args:
             context: MAA 上下文对象。
-            argv: 识别参数，包含自定义参数。
+            argv: 动作参数，包含自定义参数。
 
         Returns:
-            CustomRecognition.AnalyzeResult:
-                True 表示任务未完成需要执行，
-                False 表示任务已完成无需执行。
+            bool: True 表示任务未完成需要执行，False 表示任务已完成无需执行。
         """
         try:
             args = ParamAnalyzer(argv)
             key = args.get(["key", "k"])
             periodic = args.get(["periodic", "p"], "day")
-            record_immediately = args.get(["record", "r"], True)
+            record_immediately = args.get(["record", "r"], False)
 
             # 处理布尔参数
             if record_immediately == "false":
@@ -208,7 +206,7 @@ class PeriodicCheck(CustomRecognition):
             # 返回是否需要执行
             return not is_done
         except Exception as e:
-            return Prompter.error("检查周期任务", e, reco_detail=True)
+            return Prompter.error("检查周期任务", e)
 
 
 @AgentServer.custom_action("record_period")
