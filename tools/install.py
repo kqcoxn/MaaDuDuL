@@ -77,6 +77,12 @@ def install_chores():
         working_dir / "LICENSE",
         install_path,
     )
+    # 复制requirements.txt供用户手动更新依赖
+    if (working_dir / "requirements.txt").exists():
+        shutil.copy2(
+            working_dir / "requirements.txt",
+            install_path,
+        )
 
 
 def install_config():
@@ -102,9 +108,11 @@ def install_config():
 
 
 def install_agent():
+    """安装agent代码，但排除config目录（已在install_config中处理）"""
     shutil.copytree(
         working_dir / "agent",
         install_path / "agent",
+        ignore=shutil.ignore_patterns("config"),  # 排除agent/config，使用根目录的config
         dirs_exist_ok=True,
     )
 

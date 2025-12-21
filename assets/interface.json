@@ -1,10 +1,10 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.1-alpha.1 - MFAA | 测试阶段",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.1-alpha.3 - MFAA | 测试阶段",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
-	"version": "v0.0.1-alpha.1",
+	"version": "v0.0.1-alpha.3",
 	"welcome": "欢迎使用 MDDL!",
 	"contact": "QQ群: 926874985",
 	"license": "LICENSE",
@@ -120,7 +120,7 @@
 			"name": " ——— 独立任务 ———",
 			"label": "——— 独立任务 ———",
 			"entry": "独立任务分隔符",
-			"description": "descs/daily/independent_task.md"
+			"description": "descs/others/independent_task.md"
 		},
 		{
 			"name": "连续作战",
@@ -132,7 +132,7 @@
 			"name": " ——— 新增任务 ———",
 			"label": "——— 新增任务 ———",
 			"entry": "新增任务分隔符",
-			"description": "descs/daily/new_task.md"
+			"description": "descs/others/new_task.md"
 		}
 	],
 	"option": {

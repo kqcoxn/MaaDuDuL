@@ -22,6 +22,29 @@ if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
 
+# ====================  Python环境检测  ====================
+
+
+def _get_python_executable() -> str:
+    """获取正确的Python可执行文件路径。
+
+    优先使用打包环境的嵌入式Python（python/python.exe），
+    如果不存在则使用当前运行的Python（sys.executable）。
+
+    Returns：
+        Python可执行文件的绝对路径
+    """
+    # 检测嵌入式Python路径（相对于项目根目录）
+    embedded_python = Path("./python/python.exe")
+
+    if embedded_python.exists():
+        print(f"info:检测到嵌入式Python环境: {embedded_python.resolve()}")
+        return str(embedded_python.resolve())
+    else:
+        print(f"info:使用系统Python环境: {sys.executable}")
+        return sys.executable
+
+
 # ====================  全局路径常量  ====================
 
 PIP_CONFIG_PATH = Path("./config/mddl/pip_config.json")
@@ -122,6 +145,9 @@ def _install_requirements(req_file=None, mirrors=None) -> bool:
     if not req_path.exists():
         return False
 
+    # 获取正确的Python可执行文件
+    python_exe = _get_python_executable()
+
     # 准备镜像源列表，最后添加默认源作为兜底
     mirror_list = []
     if mirrors:
@@ -146,7 +172,7 @@ def _install_requirements(req_file=None, mirrors=None) -> bool:
                 )
 
             cmd = [
-                sys.executable,
+                python_exe,  # 使用检测到的Python环境
                 "-m",
                 "pip",
                 "install",
