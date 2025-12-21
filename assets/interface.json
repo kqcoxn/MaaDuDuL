@@ -87,6 +87,14 @@
 			"option": ["圣团巡礼-收获世界树", "圣团巡礼-每日冒险"]
 		},
 		{
+			"name": "清紫糖",
+			"label": "清紫糖",
+			"entry": "清紫糖_开始",
+			"default_check": true,
+			"description": "",
+			"option": ["清紫糖-克隆工厂", "清紫糖-副本"]
+		},
+		{
 			"name": " ——— 活动任务 ———",
 			"label": "——— 活动任务 ———",
 			"entry": "活动分隔符",
@@ -323,7 +331,102 @@
 					"name": "Yes"
 				}
 			]
-		}
+		},
 		// ========== 圣团巡礼 ==========
+		// ========== 清紫糖 ==========
+		"清紫糖-克隆工厂": {
+			"type": "switch",
+			"label": "克隆工厂作战",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"清紫糖_克隆工厂开始": {
+							"next": "清紫糖_克隆工厂结束"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["清紫糖-克隆工厂-选择关卡"]
+				}
+			]
+		},
+		"清紫糖-克隆工厂-选择关卡": {
+			"type": "input",
+			"label": "克隆工厂关卡",
+			"description": "",
+			"inputs": [
+				{
+					"name": "关卡",
+					"label": "克隆工厂关卡",
+					"description": "",
+					"default": "1",
+					"pipeline_type": "int",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_选择克隆工厂关卡": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		},
+		"清紫糖-副本": {
+			"type": "switch",
+			"label": "副本作战",
+			"description": "",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"清紫糖_副本开始": {
+							"next": "清紫糖_副本结束"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["清紫糖-副本-选择副本"]
+				}
+			]
+		},
+		"清紫糖-副本-选择副本": {
+			"type": "select",
+			"label": "选择副本",
+			"description": "",
+			"cases": [
+				{
+					"name": "到手蜡（蜡笔）",
+					"pipeline_override": {
+						"清紫糖_副本开始": {
+							"next": "清紫糖_油画棒"
+						}
+					},
+					"option": ["清紫糖-副本-选择副本-到手蜡关卡"]
+				}
+			]
+		},
+		"清紫糖-副本-选择副本-到手蜡关卡": {
+			"type": "input",
+			"label": "到手蜡关卡",
+			"description": "",
+			"inputs": [
+				{
+					"name": "关卡",
+					"label": "到手蜡关卡",
+					"description": "",
+					"default": "1",
+					"pipeline_type": "int",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_选择到手蜡关卡": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		}
 	}
 }
