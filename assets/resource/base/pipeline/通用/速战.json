@@ -1,0 +1,209 @@
+{
+	"$__mpe_config_速战": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\速战.json",
+			"filename": "速战",
+			"lastSyncTime": 1766326040022,
+			"prefix": "速战",
+			"savedViewport": {
+				"x": -9311.249753745155,
+				"y": -829.0472771776983,
+				"zoom": 1.1486983549970382
+			},
+			"version": "v0.13.0_beta_0"
+		}
+	},
+	"速战_不购买": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8733,
+				"y": 1180
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["取消"],
+				"roi": [459, 532, 107, 56]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_体力不足": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8468,
+				"y": 1180
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 体力不足"
+		},
+		"next": ["速战_不购买"],
+		"recognition": {
+			"param": {
+				"expected": ["是否购买"]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7943,
+				"y": 704
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"next": ["速战_打开速战面板"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"速战_打开速战面板": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8214,
+				"y": 704
+			}
+		},
+		"action": {
+			"param": {
+				"target": [883, 615, 0, 0]
+			},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Starting": "\u003e 准备速战"
+		},
+		"next": ["速战_最大倍率", "速战_无法速战", "速战_体力不足"],
+		"recognition": {
+			"param": {
+				"expected": ["速战"],
+				"roi": [726, 527, 258, 139]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_无法速战": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8473,
+				"y": 933
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 关卡不可用"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["入场次数已用完", "后可使用", "入场次数已用完"]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_最大倍率": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8474,
+				"y": 704
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["速战_速战"],
+		"recognition": {
+			"param": {
+				"expected": ["最大"],
+				"roi": [824, 468, 64, 37]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_确认奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9262,
+				"y": 703
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 领取战斗奖励"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["确定"],
+				"roi": [989, 596, 88, 49]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_跳过动画": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8994,
+				"y": 704
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["速战_确认奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["跳过"],
+				"roi": [989, 596, 88, 49]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_速战": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8734,
+				"y": 704
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 开始战斗"
+		},
+		"next": ["速战_跳过动画", "速战_确认奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["速战"],
+				"roi": [721, 558, 90, 52]
+			},
+			"type": "OCR"
+		}
+	}
+}
