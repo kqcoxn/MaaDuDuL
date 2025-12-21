@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1766318035330,
+			"lastSyncTime": 1766326917377,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -4524.116951019551,
-				"y": -404.8917490648778,
-				"zoom": 0.6964404506369007
+				"x": -8055.700774984272,
+				"y": -942.0696705492778,
+				"zoom": 0.918958683997629
 			},
 			"version": "v0.13.0_beta_0"
 		}
@@ -16,8 +16,8 @@
 	"$__mpe_external_返回主界面_圣团巡礼": {
 		"$__mpe_code": {
 			"position": {
-				"x": 10526,
-				"y": 1492
+				"x": 10259,
+				"y": 1486
 			}
 		}
 	},
@@ -40,36 +40,19 @@
 			"type": "DirectHit"
 		}
 	},
-	"圣团巡礼_从协会返回": {
-		"$__mpe_code": {
-			"position": {
-				"x": 9991,
-				"y": 1490
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"next": ["圣团巡礼_冒险结束"],
-		"recognition": {
-			"param": {
-				"roi": [4, 3, 84, 85],
-				"template": ["global/back.png"]
-			},
-			"type": "TemplateMatch"
-		}
-	},
 	"圣团巡礼_休息中": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8404,
-				"y": 2715
+				"x": 7924,
+				"y": 2757
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 当前角色休息中"
 		},
 		"recognition": {
 			"param": {
@@ -81,13 +64,16 @@
 	"圣团巡礼_兼职结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9713,
+				"x": 9238,
 				"y": 2484
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 领取冒险奖励"
 		},
 		"next": ["圣团巡礼_单次冒险结束"],
 		"recognition": {
@@ -111,6 +97,9 @@
 				"custom_action_param": "t=圣团巡礼_单次冒险开始"
 			},
 			"type": "Custom"
+		},
+		"focus": {
+			"Node.Action.Starting": "\u003e 角色1冒险"
 		},
 		"next": ["圣团巡礼_切换冒险2"],
 		"post_delay": 0,
@@ -167,8 +156,8 @@
 	"圣团巡礼_冒险周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7806,
-				"y": 1723
+				"x": 7807,
+				"y": 1760
 			}
 		},
 		"action": {
@@ -217,11 +206,11 @@
 		"action": {
 			"param": {
 				"custom_action": "record_period",
-				"custom_action_param": "k=领取邮件"
+				"custom_action_param": "k=冒险"
 			},
 			"type": "Custom"
 		},
-		"next": ["圣团巡礼_从协会返回"],
+		"next": ["圣团巡礼_冒险结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -251,8 +240,8 @@
 	"圣团巡礼_冒险结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 10266,
-				"y": 1492
+				"x": 9999,
+				"y": 1486
 			}
 		},
 		"action": {
@@ -280,6 +269,9 @@
 			},
 			"type": "Click"
 		},
+		"focus": {
+			"Node.Action.Starting": "\u003e 角色2冒险"
+		},
 		"next": ["圣团巡礼_冒险2"],
 		"recognition": {
 			"param": {},
@@ -299,6 +291,9 @@
 			},
 			"type": "Click"
 		},
+		"focus": {
+			"Node.Action.Starting": "\u003e 角色3冒险"
+		},
 		"next": ["圣团巡礼_冒险3"],
 		"recognition": {
 			"param": {},
@@ -308,7 +303,7 @@
 	"圣团巡礼_单次冒险开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7868,
+				"x": 7393,
 				"y": 2486
 			}
 		},
@@ -327,7 +322,7 @@
 	"圣团巡礼_单次冒险结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9973,
+				"x": 9498,
 				"y": 2484
 			}
 		},
@@ -385,13 +380,16 @@
 	"圣团巡礼_开始冒险": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9453,
+				"x": 8978,
 				"y": 2484
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 开始冒险"
 		},
 		"next": ["圣团巡礼_兼职结束"],
 		"recognition": {
@@ -472,6 +470,9 @@
 			},
 			"type": "Click"
 		},
+		"focus": {
+			"Node.Action.Starting": "\u003e 收获世界树"
+		},
 		"next": ["圣团巡礼_获取世界树"],
 		"recognition": {
 			"param": {},
@@ -481,7 +482,7 @@
 	"圣团巡礼_申请冒险": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8141,
+				"x": 7666,
 				"y": 2482
 			}
 		},
@@ -501,13 +502,16 @@
 	"圣团巡礼_确保不在休息": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8141,
-				"y": 2255
+				"x": 7665,
+				"y": 2210
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 当前角色休息中"
 		},
 		"recognition": {
 			"param": {
@@ -540,13 +544,16 @@
 	"圣团巡礼_确保进入日程界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8401,
+				"x": 7926,
 				"y": 2482
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": "\u003e 申请冒险"
 		},
 		"next": ["圣团巡礼_选择日程1"],
 		"recognition": {
@@ -610,6 +617,9 @@
 			"param": {},
 			"type": "Click"
 		},
+		"focus": {
+			"Node.Recognition.Starting": "\u003e 进入冒险协会"
+		},
 		"next": ["圣团巡礼_进入协会内部"],
 		"recognition": {
 			"param": {
@@ -649,6 +659,9 @@
 			"param": {},
 			"type": "Click"
 		},
+		"focus": {
+			"Node.Recognition.Starting": "\u003e 进入圣团"
+		},
 		"next": ["圣团巡礼_确保进入圣团"],
 		"recognition": {
 			"param": {
@@ -681,7 +694,7 @@
 	"圣团巡礼_选择日程1": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8661,
+				"x": 8186,
 				"y": 2482
 			}
 		},
@@ -690,6 +703,9 @@
 				"target": [212, 250, 0, 0]
 			},
 			"type": "Click"
+		},
+		"focus": {
+			"Node.Action.Starting": "\u003e 选择日程"
 		},
 		"next": ["圣团巡礼_选择日程2"],
 		"recognition": {
@@ -700,7 +716,7 @@
 	"圣团巡礼_选择日程2": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8919,
+				"x": 8444,
 				"y": 2481
 			}
 		},
@@ -720,7 +736,7 @@
 	"圣团巡礼_选择日程3": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9182,
+				"x": 8707,
 				"y": 2480
 			}
 		},
