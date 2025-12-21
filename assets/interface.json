@@ -2,12 +2,12 @@
 	"interface_version": 2,
 	"name": "MaaDuDuL",
 	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.1 - MFAA | 测试阶段",
-	// "icon": "icon.png",
+	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
 	"version": "v0.0.1",
 	"welcome": "欢迎使用 MDDL!",
 	"contact": "QQ群: 926874985",
-	"license": "AGPL-3.0",
+	"license": "LICENSE",
 	"github": "https://github.com/kqcoxn/MaaDuDuL",
 	// "mirrorchyan_rid": "MaaDuDuL",
 	// "mirrorchyan_multiplatform": true,
@@ -33,33 +33,33 @@
 			"name": "说明",
 			"label": "说明",
 			"entry": "说明",
-			"description": ""
+			"description": "descs/others/illustrate.md"
 		},
 		{
 			"name": "操作指南",
 			"label": "操作指南",
 			"entry": "操作指南",
-			"description": ""
+			"description": "descs/others/guide.md"
+		},
+		{
+			"name": " ——— 可连续任务 ———",
+			"label": "——— 可连续任务 ———",
+			"entry": "可连续任务分隔符",
+			"description": "descs/others/continuous_task.md"
 		},
 		{
 			"name": "启动游戏",
 			"label": "启动游戏",
 			"entry": "启动游戏_开始",
 			"default_check": true,
-			"description": ""
-		},
-		{
-			"name": " ——— 日常任务 ———",
-			"label": "——— 日常任务 ———",
-			"entry": "日常分隔符",
-			"description": ""
+			"description": "descs/daily/start_game.md"
 		},
 		{
 			"name": "领取邮件",
 			"label": "领取邮件",
 			"entry": "领取邮件_开始",
 			"default_check": true,
-			"description": "",
+			"description": "descs/daily/claim_mail.md",
 			"option": ["领取邮件-周期检查"]
 		},
 		{
@@ -67,7 +67,7 @@
 			"label": "领取每日糖果",
 			"entry": "领取糖果_开始",
 			"default_check": true,
-			"description": "",
+			"description": "descs/daily/claim_candy.md",
 			"option": ["领取糖果-周期检查"]
 		},
 		{
@@ -75,7 +75,7 @@
 			"label": "每日采购",
 			"entry": "每日采购_开始",
 			"default_check": true,
-			"description": "",
+			"description": "descs/daily/purchase.md",
 			"option": ["每日采购-周期检查", "每日采购-每日免费礼包", "每日采购-商店采购"]
 		},
 		{
@@ -83,7 +83,7 @@
 			"label": "圣团巡礼",
 			"entry": "圣团巡礼_开始",
 			"default_check": true,
-			"description": "",
+			"description": "descs/daily/saint_tour.md",
 			"option": ["圣团巡礼-收获世界树", "圣团巡礼-每日冒险"]
 		},
 		{
@@ -91,7 +91,7 @@
 			"label": "清紫糖",
 			"entry": "清紫糖_开始",
 			"default_check": true,
-			"description": "",
+			"description": "descs/daily/clear_purple_candy.md",
 			"option": ["清紫糖-克隆工厂", "清紫糖-副本"]
 		},
 		{
@@ -99,7 +99,7 @@
 			"label": "巅峰对决",
 			"entry": "巅峰对决_开始",
 			"default_check": true,
-			"description": "",
+			"description": "descs/daily/peak_battle.md",
 			"option": ["巅峰对决-领取战斗宝石", "巅峰对决-竞技场对战"]
 		},
 		{
@@ -107,38 +107,32 @@
 			"label": "领取奖励",
 			"entry": "领取奖励_开始",
 			"default_check": true,
-			"description": ""
+			"description": "descs/daily/claim_reward.md"
 			// "option": [""]
 		},
 		{
-			"name": " ——— 活动任务 ———",
-			"label": "——— 活动任务 ———",
-			"entry": "活动分隔符",
-			"description": ""
+			"name": "关闭游戏",
+			"label": "关闭游戏",
+			"entry": "关闭游戏_开始",
+			"description": "descs/daily/close_game.md"
 		},
 		{
-			"name": " ——— 单次任务 ———",
-			"label": "——— 单次任务 ———",
-			"entry": "单次任务分隔符",
-			"description": ""
-		},
-		{
-			"name": " ——— 开荒功能 ———",
-			"label": "——— 开荒功能 ———",
-			"entry": "开荒功能分隔符",
-			"description": ""
+			"name": " ——— 独立任务 ———",
+			"label": "——— 独立任务 ———",
+			"entry": "独立任务分隔符",
+			"description": "descs/daily/independent_task.md"
 		},
 		{
 			"name": "连续作战",
 			"label": "连续作战",
 			"entry": "连续作战_开始",
-			"description": ""
+			"description": "descs/daily/continuous_battle.md"
 		},
 		{
 			"name": " ——— 新增任务 ———",
 			"label": "——— 新增任务 ———",
 			"entry": "新增任务分隔符",
-			"description": ""
+			"description": "descs/daily/new_task.md"
 		}
 	],
 	"option": {
@@ -146,7 +140,6 @@
 		"领取邮件-周期检查": {
 			"type": "switch",
 			"label": "每日仅检查一次邮箱",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -166,7 +159,6 @@
 		"领取糖果-周期检查": {
 			"type": "switch",
 			"label": "每日仅检查一次糖果",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -186,7 +178,6 @@
 		"每日采购-周期检查": {
 			"type": "switch",
 			"label": "每日仅检查一次采购",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -204,7 +195,6 @@
 		"每日采购-每日免费礼包": {
 			"type": "switch",
 			"label": "采购每日免费礼包",
-			"description": "",
 			"cases": [
 				{
 					"name": "Yes"
@@ -222,7 +212,6 @@
 		"每日采购-商店采购": {
 			"type": "switch",
 			"label": "采购普通商店",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -241,7 +230,6 @@
 		"每日采购-日常商店": {
 			"type": "switch",
 			"label": "日常商店",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -260,7 +248,6 @@
 		"每日采购-日常商店-朱珠糖": {
 			"type": "switch",
 			"label": "朱珠糖",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -278,7 +265,6 @@
 		"每日采购-日常商店-星星糖": {
 			"type": "switch",
 			"label": "星星糖",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -296,7 +282,6 @@
 		"每日采购-日常商店-锻造书": {
 			"type": "switch",
 			"label": "锻造书",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -316,7 +301,6 @@
 		"圣团巡礼-收获世界树": {
 			"type": "switch",
 			"label": "收获世界树",
-			"description": "",
 			"cases": [
 				{
 					"name": "Yes"
@@ -334,7 +318,7 @@
 		"圣团巡礼-每日冒险": {
 			"type": "switch",
 			"label": "每日冒险",
-			"description": "",
+			"description": "将选择最靠前的3个嘟嘟脸",
 			"cases": [
 				{
 					"name": "Yes",
@@ -353,7 +337,6 @@
 		"圣团巡礼-每日冒险-每日仅检查一次": {
 			"type": "switch",
 			"label": "每日仅检查冒险一次",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -373,7 +356,6 @@
 		"清紫糖-克隆工厂": {
 			"type": "switch",
 			"label": "克隆工厂作战",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -392,7 +374,7 @@
 		"清紫糖-克隆工厂-选择关卡": {
 			"type": "input",
 			"label": "克隆工厂关卡",
-			"description": "",
+			"description": "请选择可速刷的关卡",
 			"inputs": [
 				{
 					"name": "关卡",
@@ -412,7 +394,6 @@
 		"清紫糖-副本": {
 			"type": "switch",
 			"label": "副本作战",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -431,7 +412,6 @@
 		"清紫糖-副本-选择副本": {
 			"type": "select",
 			"label": "选择副本",
-			"description": "",
 			"cases": [
 				{
 					"name": "到手蜡（蜡笔）",
@@ -447,7 +427,7 @@
 		"清紫糖-副本-选择副本-到手蜡关卡": {
 			"type": "input",
 			"label": "到手蜡关卡",
-			"description": "",
+			"description": "请选择可速刷的关卡",
 			"inputs": [
 				{
 					"name": "关卡",
@@ -469,7 +449,6 @@
 		"巅峰对决-领取战斗宝石": {
 			"type": "switch",
 			"label": "领取战斗宝石",
-			"description": "",
 			"cases": [
 				{
 					"name": "Yes",
@@ -488,7 +467,6 @@
 		"巅峰对决-领取战斗宝石-周期检查": {
 			"type": "switch",
 			"label": "每日仅检查一次",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",
@@ -506,7 +484,6 @@
 		"巅峰对决-竞技场对战": {
 			"type": "switch",
 			"label": "领取战斗宝石",
-			"description": "",
 			"cases": [
 				{
 					"name": "Yes",
@@ -525,7 +502,6 @@
 		"巅峰对决-竞技场对战-周期检查": {
 			"type": "switch",
 			"label": "每日仅检查一次",
-			"description": "",
 			"cases": [
 				{
 					"name": "No",

@@ -43,6 +43,10 @@ def copy_files():
         if os.path.exists("MFAAvalonia/agent"):
             shutil.rmtree("MFAAvalonia/agent")
 
+        # 删除descs目录
+        if os.path.exists("MFAAvalonia/descs"):
+            shutil.rmtree("MFAAvalonia/descs")
+
         # 复制interface.json
         if os.path.exists("assets/interface.json"):
             shutil.copy2("assets/interface.json", "MFAAvalonia/")
@@ -78,6 +82,12 @@ def copy_files():
                     f.write(content)
         else:
             print("警告: agent 文件夹不存在")
+
+        # 复制descs文件夹
+        if os.path.exists("descs"):
+            shutil.copytree("descs", "MFAAvalonia/descs", dirs_exist_ok=True)
+        else:
+            print("警告: descs 文件夹不存在")
 
         # 打开MFAAvalonia.exe
         exe_path = "MFAAvalonia/MFAAvalonia.exe"
