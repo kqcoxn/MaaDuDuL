@@ -1,0 +1,740 @@
+{
+	"$__mpe_config_圣团巡礼": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
+			"filename": "圣团巡礼",
+			"lastSyncTime": 1766318035330,
+			"prefix": "圣团巡礼",
+			"savedViewport": {
+				"x": -4524.116951019551,
+				"y": -404.8917490648778,
+				"zoom": 0.6964404506369007
+			},
+			"version": "v0.13.0_beta_0"
+		}
+	},
+	"$__mpe_external_返回主界面_圣团巡礼": {
+		"$__mpe_code": {
+			"position": {
+				"x": 10526,
+				"y": 1492
+			}
+		}
+	},
+	"圣团巡礼_从世界树返回": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8336,
+				"y": 705
+			}
+		},
+		"action": {
+			"param": {
+				"target": [44, 40, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_收获世界树结束"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_从协会返回": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9991,
+				"y": 1490
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_冒险结束"],
+		"recognition": {
+			"param": {
+				"roi": [4, 3, 84, 85],
+				"template": ["global/back.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"圣团巡礼_休息中": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8404,
+				"y": 2715
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["我要休息了"]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_兼职结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9713,
+				"y": 2484
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_单次冒险结束"],
+		"recognition": {
+			"param": {
+				"expected": ["兼职结束"],
+				"roi": [1012, 533, 143, 63]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_冒险1": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8329,
+				"y": 1488
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "run",
+				"custom_action_param": "t=圣团巡礼_单次冒险开始"
+			},
+			"type": "Custom"
+		},
+		"next": ["圣团巡礼_切换冒险2"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_冒险2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8872,
+				"y": 1489
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "run",
+				"custom_action_param": "t=圣团巡礼_单次冒险开始"
+			},
+			"type": "Custom"
+		},
+		"next": ["圣团巡礼_切换冒险3"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_冒险3": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9432,
+				"y": 1491
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "run",
+				"custom_action_param": "t=圣团巡礼_单次冒险开始"
+			},
+			"type": "Custom"
+		},
+		"next": ["圣团巡礼_冒险周期记录"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_冒险周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7806,
+				"y": 1723
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": "\u003e 今日已冒险",
+		"next": ["圣团巡礼_冒险结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_冒险周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7525,
+				"y": 1482
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=冒险"
+			},
+			"type": "Custom"
+		},
+		"next": ["圣团巡礼_进入冒险协会"],
+		"on_error": ["圣团巡礼_冒险周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_冒险周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9713,
+				"y": 1487
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=领取邮件"
+			},
+			"type": "Custom"
+		},
+		"next": ["圣团巡礼_从协会返回"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_冒险开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7253,
+				"y": 1481
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["圣团巡礼_冒险周期检查"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_冒险结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 10266,
+				"y": 1492
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_切换冒险2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8597,
+				"y": 1490
+			}
+		},
+		"action": {
+			"param": {
+				"target": [1043, 222, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_冒险2"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_切换冒险3": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9156,
+				"y": 1493
+			}
+		},
+		"action": {
+			"param": {
+				"target": [1196, 227, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_冒险3"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_单次冒险开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7868,
+				"y": 2486
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["圣团巡礼_确保不在休息", "圣团巡礼_申请冒险"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_单次冒险结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9973,
+				"y": 2484
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_参观开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7245,
+				"y": 1103
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["圣团巡礼_进入总部"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6457,
+				"y": 705
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"next": ["圣团巡礼_进入圣团"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_开始冒险": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9453,
+				"y": 2484
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_兼职结束"],
+		"recognition": {
+			"param": {
+				"expected": ["开始"],
+				"roi": [989, 630, 98, 46]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_打开参观列表": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7804,
+				"y": 1106
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["参观"],
+				"roi": [1134, 596, 138, 117]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_收获世界树开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7247,
+				"y": 709
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["圣团巡礼_查看世界树"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_收获世界树结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8596,
+				"y": 705
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["圣团巡礼_冒险开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_查看世界树": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7520,
+				"y": 708
+			}
+		},
+		"action": {
+			"param": {
+				"target": [208, 509, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_获取世界树"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_申请冒险": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8141,
+				"y": 2482
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_确保进入日程界面", "圣团巡礼_休息中"],
+		"recognition": {
+			"param": {
+				"expected": ["申请"],
+				"roi": [1004, 612, 84, 44]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_确保不在休息": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8141,
+				"y": 2255
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["休息中"],
+				"roi": [1082, 584, 104, 47]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_确保进入圣团": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6987,
+				"y": 709
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["圣团巡礼_收获世界树开始"],
+		"recognition": {
+			"param": {
+				"roi": [147, 592, 380, 122],
+				"template": ["holy/headquarters.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"圣团巡礼_确保进入日程界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8401,
+				"y": 2482
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["圣团巡礼_选择日程1"],
+		"recognition": {
+			"param": {
+				"expected": ["选择日程"],
+				"roi": [49, 5, 224, 79]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_确认世界树奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8076,
+				"y": 705
+			}
+		},
+		"action": {
+			"param": {
+				"target": [643, 642, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_从世界树返回"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_获取世界树": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7797,
+				"y": 706
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_确认世界树奖励"],
+		"pre_delay": 1000,
+		"recognition": {
+			"param": {
+				"expected": ["获取"],
+				"roi": [1073, 607, 83, 46]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_进入冒险协会": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7806,
+				"y": 1486
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_进入协会内部"],
+		"recognition": {
+			"param": {
+				"roi": [276, 589, 388, 121],
+				"template": ["holy/association.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"圣团巡礼_进入协会内部": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8066,
+				"y": 1486
+			}
+		},
+		"action": {
+			"param": {
+				"target": "圣团巡礼_进入冒险协会"
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_冒险1"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_进入圣团": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6723,
+				"y": 708
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_确保进入圣团"],
+		"recognition": {
+			"param": {
+				"roi": [782, 595, 384, 119],
+				"template": ["main/holy.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"圣团巡礼_进入总部": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7528,
+				"y": 1106
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_打开参观列表"],
+		"recognition": {
+			"param": {
+				"roi": [147, 592, 380, 122],
+				"template": ["holy/headquarters.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"圣团巡礼_选择日程1": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8661,
+				"y": 2482
+			}
+		},
+		"action": {
+			"param": {
+				"target": [212, 250, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_选择日程2"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_选择日程2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8919,
+				"y": 2481
+			}
+		},
+		"action": {
+			"param": {
+				"target": [579, 269, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_选择日程3"],
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"圣团巡礼_选择日程3": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9182,
+				"y": 2480
+			}
+		},
+		"action": {
+			"param": {
+				"target": [931, 274, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_开始冒险"],
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	}
+}
