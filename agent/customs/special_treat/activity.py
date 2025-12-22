@@ -80,7 +80,7 @@ class ClaimCandy(CustomAction):
             args = ParamAnalyzer(argv)
             time = args.get(["time", "t"])
 
-            roi = [590, 479, 108, 96] if time == "早饭" else [867, 469, 187, 110]
+            roi = [509, 465, 278, 105] if time == "早饭" else [[821, 464, 281, 108]]
             periodic_key = f"{time}糖果"
             Prompter.log(f"领取{time}糖果")
 
@@ -91,6 +91,7 @@ class ClaimCandy(CustomAction):
                     "领取糖果_周期检查": {"custom_action_param": f"k={periodic_key}"},
                     "领取糖果_点击领取": {"roi": roi},
                     "领取糖果_已领取": {"roi": roi},
+                    "领取糖果_已领取2": {"roi": roi},
                     "领取糖果_周期记录": {"custom_action_param": f"k={periodic_key}"},
                 },
             )

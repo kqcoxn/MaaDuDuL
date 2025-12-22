@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取糖果.json",
 			"filename": "领取糖果",
-			"lastSyncTime": 1766336024031,
+			"lastSyncTime": 1766390219588,
 			"prefix": "领取糖果",
 			"savedViewport": {
-				"x": -6363.26553624931,
-				"y": 114.53301588689936,
-				"zoom": 1.6493848884661197
+				"x": -7907.67486522131,
+				"y": -1842.745923958069,
+				"zoom": 1.894645708138
 			},
 			"version": "v0.13.0_beta_0"
 		}
@@ -24,8 +24,8 @@
 	"领取糖果_周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 4427,
-				"y": 998
+				"x": 4419,
+				"y": 1272
 			}
 		},
 		"action": {
@@ -54,7 +54,7 @@
 			},
 			"type": "Custom"
 		},
-		"next": ["领取糖果_点击领取", "领取糖果_已领取"],
+		"next": ["领取糖果_点击领取", "领取糖果_已领取", "领取糖果_已领取2"],
 		"on_error": ["领取糖果_周期提醒"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -73,7 +73,7 @@
 		"action": {
 			"param": {
 				"custom_action": "record_period",
-				"custom_action_param": "k="
+				"custom_action_param": "k=早饭糖果"
 			},
 			"type": "Custom"
 		},
@@ -101,10 +101,32 @@
 		"next": ["领取糖果_周期记录"],
 		"recognition": {
 			"param": {
-				"roi": [590, 479, 108, 96],
+				"roi": [820, 469, 280, 100],
 				"template": ["activity/candy/received.png"]
 			},
 			"type": "TemplateMatch"
+		}
+	},
+	"领取糖果_已领取2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4428,
+				"y": 995
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Action.Starting": "\u003e 领取时间未到"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["后获得"],
+				"roi": [821, 464, 281, 108]
+			},
+			"type": "OCR"
 		}
 	},
 	"领取糖果_开始": {
