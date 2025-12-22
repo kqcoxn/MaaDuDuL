@@ -87,7 +87,7 @@ class StableReco(CustomRecognition):
                     # 未达到阈值，继续等待
                     return RecoHelper.NoResult
                 # 达到阈值，返回识别结果
-                return best_result
+                return RecoHelper.rt(best_result)
             # 识别失败，重置计数器
             counter.reset()
             return RecoHelper.NoResult
