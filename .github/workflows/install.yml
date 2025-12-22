@@ -78,13 +78,31 @@ jobs:
   # 任务2: 多平台构建与打包
   install:
     needs: meta  # 依赖meta任务完成
-    runs-on: windows-latest  # 使用Windows环境（需要PowerShell支持）
+    runs-on: ${{ matrix.runs-on }}  # 根据目标平台选择运行环境
     strategy:
       matrix:
-        os: [win, macos, linux]  # 支持的操作系统
-        arch: [x86_64, aarch64]  # 支持的架构
-        # os: [win]  # 调试系统
-        # arch: [x86_64]  # 调试架构
+        include:
+          # Windows 构建
+          - os: win
+            arch: x86_64
+            runs-on: windows-latest
+          - os: win
+            arch: aarch64
+            runs-on: windows-latest
+          # macOS 构建
+          - os: macos
+            arch: x86_64
+            runs-on: macos-13  # Intel Mac
+          - os: macos
+            arch: aarch64
+            runs-on: macos-latest  # Apple Silicon Mac
+          # Linux 构建
+          - os: linux
+            arch: x86_64
+            runs-on: ubuntu-latest
+          - os: linux
+            arch: aarch64
+            runs-on: ubuntu-latest
       fail-fast: true  # 某个构建失败停止其他构建
 
     steps:
@@ -101,6 +119,12 @@ jobs:
       #     tag: v5.2.4  # 锁定版本
       #     out-file-path: "deps"  # 输出到deps目录
       #     extract: true  # 自动解压
+
+      # 设置Python环境
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
       # 设置嵌入式Python环境（仅Windows x64）
       - name: Setup Embed Python
@@ -158,7 +182,7 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-${{ steps.mfa_naming.outputs.mfa_os }}-${{ steps.mfa_naming.outputs.mfa_arch }}*"
-          tag: v2.2.2  # 锁定版本
+          tag: v2.2.3  # 锁定版本
           out-file-path: "MFA"
           extract: true
 
@@ -179,8 +203,8 @@ jobs:
             cp public/logo.ico install/Assets/logo.ico
           fi
 
-      # 打包启动器（仅Windows平台）
-      - name: Packing Launcher
+      # 打包启动器（Windows平台）
+      - name: Packing Launcher (Windows)
         if: matrix.os == 'win'
         working-directory: launcher
         shell: bash
@@ -188,13 +212,31 @@ jobs:
           python -m pip install pyinstaller
           # 打包为单文件exe，带图标，无控制台窗口
           pyinstaller --onefile --icon=../public/logo.ico --windowed MaaDuDuL.py
+          cp dist/MaaDuDuL.exe ../install/MaaDuDuL.exe
 
-      # 安装打包好的工具（仅Windows平台）
-      - name: Install Tools
-        if: matrix.os == 'win'
+      # 打包启动器（macOS平台）
+      - name: Packing Launcher (macOS)
+        if: matrix.os == 'macos'
+        working-directory: launcher
         shell: bash
         run: |
-          cp launcher/dist/MaaDuDuL.exe install/MaaDuDuL.exe  # 复制启动器
+          python -m pip install pyinstaller
+          # macOS不使用图标和windowed参数，打包为单文件
+          pyinstaller --onefile MaaDuDuL.py
+          cp dist/MaaDuDuL ../install/MaaDuDuL
+          chmod +x ../install/MaaDuDuL  # 添加执行权限
+
+      # 打包启动器（Linux平台）
+      - name: Packing Launcher (Linux)
+        if: matrix.os == 'linux'
+        working-directory: launcher
+        shell: bash
+        run: |
+          python -m pip install pyinstaller
+          # Linux打包为单文件
+          pyinstaller --onefile MaaDuDuL.py
+          cp dist/MaaDuDuL ../install/MaaDuDuL
+          chmod +x ../install/MaaDuDuL  # 添加执行权限
 
       # 上传构建产物
       - uses: actions/upload-artifact@v4
