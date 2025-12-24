@@ -23,7 +23,7 @@ class Prompter:
         use_post_devider=False,
     ):
         if use_default_prefix and not (use_pre_devider or use_post_devider):
-            content = f"> {content}"
+            content = f" > {content}"
         if use_pre_devider:
             cprint("——" * 5)
         cprint(content) if is_continuous else print("info:" + content)
