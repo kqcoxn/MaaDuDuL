@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1766338667970,
+			"lastSyncTime": 1766581000408,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -499.65583591704353,
-				"y": 130.22354023230443,
-				"zoom": 1.4358729437462974
+				"x": -302,
+				"y": 65,
+				"zoom": 0.87
 			},
-			"version": "v0.13.0_beta_0"
+			"version": "v0.13.0"
 		}
 	},
 	"启动游戏_关闭公告": {
@@ -64,7 +64,10 @@
 			},
 			"type": "StartApp"
 		},
-		"focus": "\u003e 启动游戏",
+		"focus": {
+			"Node.Action.Succeeded": "\u003e 尝试识别游戏界面",
+			"Node.Recognition.Starting": "\u003e 启动游戏"
+		},
 		"next": [
 			"启动游戏_连续识别主界面",
 			"启动游戏_连续识别开始界面",
@@ -84,8 +87,8 @@
 	"启动游戏_开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 314,
-				"y": 62
+				"x": 324,
+				"y": 60
 			}
 		},
 		"action": {
@@ -117,7 +120,8 @@
 			"type": "Swipe"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 启动！"
+			"Node.Action.Starting": "\u003e 启动！",
+			"Node.Action.Succeeded": "\u003e 尝试识别主界面"
 		},
 		"next": [
 			"启动游戏_连续识别主界面",
@@ -193,7 +197,9 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 已进入主界面",
+		"focus": {
+			"Node.Action.Succeeded": "\u003e 已进入主界面"
+		},
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
