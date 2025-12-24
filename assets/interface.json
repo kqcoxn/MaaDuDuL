@@ -223,7 +223,7 @@
 				},
 				{
 					"name": "Yes",
-					"option": ["每日采购-日常商店"]
+					"option": ["每日采购-日常商店", "每日采购-战斗宝石商店"]
 				}
 			]
 		},
@@ -241,7 +241,17 @@
 				},
 				{
 					"name": "Yes",
-					"option": ["每日采购-日常商店-朱珠糖", "每日采购-日常商店-星星糖", "每日采购-日常商店-锻造书"]
+					"option": [
+						"每日采购-日常商店-朱珠糖",
+						"每日采购-日常商店-星星糖",
+						"每日采购-日常商店-锻造书",
+						"每日采购-日常商店-魔卡龙",
+						"每日采购-日常商店-初棉",
+						"每日采购-日常商店-中棉",
+						"每日采购-日常商店-成长材料",
+						"每日采购-日常商店-房间装扮",
+						"每日采购-日常商店-料理"
+					]
 				}
 			]
 		},
@@ -287,6 +297,177 @@
 					"name": "No",
 					"pipeline_override": {
 						"每日采购_购买日常锻造书": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-魔卡龙": {
+			"type": "switch",
+			"label": "魔卡龙",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常魔卡龙": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-初棉": {
+			"type": "switch",
+			"label": "初级棉花糖自选宝箱",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常初棉": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-中棉": {
+			"type": "switch",
+			"label": "中级棉花糖自选宝箱",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常中棉": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-成长材料": {
+			"type": "switch",
+			"label": "圣团成长材料宝箱",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常成长材料": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-房间装扮": {
+			"type": "switch",
+			"label": "圣团长的房间装扮材料宝箱",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常房间装扮": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-日常商店-料理": {
+			"type": "switch",
+			"label": "圣团料理宝箱",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买日常料理": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-战斗宝石商店": {
+			"type": "switch",
+			"label": "战斗宝石商店",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_战斗宝石商店开始": {
+							"next": "每日采购_战斗宝石商店结束"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["每日采购-战宝商店-锻造书", "每日采购-战宝商店-圣团证书", "每日采购-战宝商店-消化药"]
+				}
+			]
+		},
+		"每日采购-战宝商店-锻造书": {
+			"type": "switch",
+			"label": "锻造书",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买战宝锻造书": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-战宝商店-圣团证书": {
+			"type": "switch",
+			"label": "圣团证书",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买战宝圣团证书": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-战宝商店-消化药": {
+			"type": "switch",
+			"label": "消化药",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买战宝消化药": {
 							"action": "DoNothing"
 						}
 					}

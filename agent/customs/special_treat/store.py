@@ -11,13 +11,21 @@ class Buy(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         try:
             args = ParamAnalyzer(argv)
-            commodity = args.get(["commodity", "c", "goods", "g"])
+            goods = args.get(
+                [
+                    "goods",
+                    "g",
+                    "commodity",
+                    "c",
+                ]
+            )
+
+            Prompter.log(f"购买{goods}")
 
             context.run_task(
                 "每日采购_购买商品",
                 {
-                    "每日采购_购买商品": {"focus": f"> 购买{commodity}"},
-                    "每日采购_查看商品详情": {"expected": commodity},
+                    "每日采购_查看商品详情": {"expected": goods},
                 },
             )
 
