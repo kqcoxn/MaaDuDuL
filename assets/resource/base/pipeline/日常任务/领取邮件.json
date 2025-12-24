@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取邮件.json",
 			"filename": "领取邮件",
-			"lastSyncTime": 1766305423725,
+			"lastSyncTime": 1766583869705,
 			"prefix": "领取邮件",
 			"savedViewport": {
-				"x": -477.0689813354579,
-				"y": 276.65365142317785,
-				"zoom": 0.8705505632961267
+				"x": -2152,
+				"y": 348,
+				"zoom": 1
 			},
-			"version": "v0.13.0_beta_0"
+			"version": "v0.13.0"
 		}
 	},
 	"$__mpe_external_返回主界面_领取邮件": {
@@ -24,15 +24,17 @@
 	"领取邮件_周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 2036,
-				"y": 196
+				"x": 1783,
+				"y": 184
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 今日已领取邮件",
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已领取邮件"
+		},
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -43,8 +45,8 @@
 	"领取邮件_周期检查": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1779,
-				"y": -78
+				"x": 1513,
+				"y": -74
 			}
 		},
 		"action": {
@@ -54,7 +56,7 @@
 			},
 			"type": "Custom"
 		},
-		"next": ["领取邮件_点击邮件面板"],
+		"next": ["领取邮件_进入邮件面板"],
 		"on_error": ["领取邮件_周期提醒"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -86,8 +88,8 @@
 	"领取邮件_开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1505,
-				"y": -78
+				"x": 1239,
+				"y": -74
 			}
 		},
 		"action": {
@@ -116,7 +118,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 没有可领取的邮件"
+			"Node.Recognition.Succeeded": " \u003e 没有可领取的邮件"
 		},
 		"next": ["领取邮件_周期记录"],
 		"recognition": {
@@ -136,9 +138,6 @@
 		"action": {
 			"param": {},
 			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " > 进入邮件面板"
 		},
 		"next": ["领取邮件_确保进入邮件面板"],
 		"recognition": {
@@ -183,7 +182,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 领取邮件奖励"
+			"Node.Recognition.Succeeded": " \u003e 领取邮件奖励"
 		},
 		"next": ["领取邮件_周期记录"],
 		"recognition": {
@@ -191,6 +190,28 @@
 				"expected": ["请点击屏幕继续"]
 			},
 			"type": "OCR"
+		}
+	},
+	"领取邮件_进入邮件面板": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1780,
+				"y": -73
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 进入邮件面板"
+		},
+		"next": ["领取邮件_点击邮件面板"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
 		}
 	},
 	"领取邮件_领取奖励": {

@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1766583585537,
+			"lastSyncTime": 1766583628963,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -322,
-				"y": 90,
-				"zoom": 1
+				"x": -113,
+				"y": 260,
+				"zoom": 0.76
 			},
 			"version": "v0.13.0"
 		}
@@ -196,9 +196,6 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": {
-			"Node.Action.Succeeded": " \u003e 已进入主界面"
-		},
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -256,7 +253,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 识别到主界面"
+			"Node.Recognition.Succeeded": " \u003e 已进入主界面"
 		},
 		"next": ["启动游戏_结束"],
 		"post_delay": 0,
