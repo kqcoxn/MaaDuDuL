@@ -32,7 +32,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 今日已领取早饭糖果",
+		"focus": " > 今日已领取早饭糖果",
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -96,7 +96,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 糖果已领取"
+			"Node.Recognition.Succeeded": " > 糖果已领取"
 		},
 		"next": ["领取糖果_周期记录"],
 		"recognition": {
@@ -119,7 +119,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Action.Starting": "\u003e 领取时间未到"
+			"Node.Action.Starting": " > 领取时间未到"
 		},
 		"recognition": {
 			"param": {

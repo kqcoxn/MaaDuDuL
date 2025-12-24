@@ -24,7 +24,7 @@
             "param": {},
             "type": "Click"
         },
-        "focus": "\u003e 下一关",
+        "focus": " > 下一关",
         "next": ["连续作战_出发"],
         "recognition": {
             "param": {
@@ -45,7 +45,7 @@
             "param": {},
             "type": "Click"
         },
-        "focus": "\u003e 出发",
+        "focus": " > 出发",
         "next": ["连续作战_下一关", "连续作战_失败"],
         "rate_limit": 3000,
         "recognition": {
@@ -68,7 +68,7 @@
             "param": {},
             "type": "DoNothing"
         },
-        "focus": "\u003e 挑战失败",
+        "focus": " > 挑战失败",
         "recognition": {
             "param": {
                 "expected": ["再次挑战"]
@@ -104,7 +104,7 @@
             "param": {},
             "type": "Click"
         },
-        "focus": "\u003e 选择卡组",
+        "focus": " > 选择卡组",
         "next": ["连续作战_出发"],
         "recognition": {
             "param": {

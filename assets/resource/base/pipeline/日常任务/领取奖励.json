@@ -47,7 +47,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 奖励已领取"
+			"Node.Recognition.Succeeded": " > 奖励已领取"
 		},
 		"recognition": {
 			"param": {
@@ -67,7 +67,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 进入任务界面",
+		"focus": " > 进入任务界面",
 		"next": ["领取奖励_进入任务界面"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -87,7 +87,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 进入任务界面",
+		"focus": " > 进入任务界面",
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -226,7 +226,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 进入任务界面",
+		"focus": " > 进入任务界面",
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {

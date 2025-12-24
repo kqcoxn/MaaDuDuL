@@ -44,7 +44,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 体力不足"
+			"Node.Recognition.Succeeded": " > 体力不足"
 		},
 		"next": ["速战_不购买"],
 		"recognition": {
@@ -89,7 +89,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 准备速战"
+			"Node.Recognition.Starting": " > 准备速战"
 		},
 		"next": ["速战_最大倍率", "速战_无法速战", "速战_体力不足"],
 		"recognition": {
@@ -112,7 +112,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 关卡不可用"
+			"Node.Recognition.Succeeded": " > 关卡不可用"
 		},
 		"recognition": {
 			"param": {
@@ -153,7 +153,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 领取战斗奖励"
+			"Node.Recognition.Succeeded": " > 领取战斗奖励"
 		},
 		"recognition": {
 			"param": {
@@ -195,7 +195,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 开始战斗"
+			"Node.Recognition.Succeeded": " > 开始战斗"
 		},
 		"next": ["速战_跳过动画", "速战_确认奖励"],
 		"recognition": {

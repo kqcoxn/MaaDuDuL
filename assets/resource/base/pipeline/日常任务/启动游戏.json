@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1766581000408,
+			"lastSyncTime": 1766583585537,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -302,
-				"y": 65,
-				"zoom": 0.87
+				"x": -322,
+				"y": 90,
+				"zoom": 1
 			},
 			"version": "v0.13.0"
 		}
@@ -65,8 +65,7 @@
 			"type": "StartApp"
 		},
 		"focus": {
-			"Node.Action.Succeeded": "\u003e 尝试识别游戏界面",
-			"Node.Recognition.Starting": "\u003e 启动游戏"
+			"Node.Action.Succeeded": " \u003e 尝试识别关键界面"
 		},
 		"next": [
 			"启动游戏_连续识别主界面",
@@ -120,8 +119,8 @@
 			"type": "Swipe"
 		},
 		"focus": {
-			"Node.Action.Starting": "\u003e 启动！",
-			"Node.Action.Succeeded": "\u003e 尝试识别主界面"
+			"Node.Action.Starting": " \u003e 启动！",
+			"Node.Action.Succeeded": " \u003e 尝试识别主界面"
 		},
 		"next": [
 			"启动游戏_连续识别主界面",
@@ -151,7 +150,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 关闭公告界面"
+			"Node.Recognition.Succeeded": " \u003e 关闭公告界面"
 		},
 		"next": ["启动游戏_关闭公告"],
 		"recognition": {
@@ -176,7 +175,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 获取奖励"
+			"Node.Recognition.Succeeded": " \u003e 获取奖励"
 		},
 		"next": ["启动游戏_关闭面板"],
 		"recognition": {
@@ -198,7 +197,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Action.Succeeded": "\u003e 已进入主界面"
+			"Node.Action.Succeeded": " \u003e 已进入主界面"
 		},
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -257,7 +256,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 识别到主界面"
+			"Node.Recognition.Succeeded": " \u003e 识别到主界面"
 		},
 		"next": ["启动游戏_结束"],
 		"post_delay": 0,
@@ -282,7 +281,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 识别到登录界面"
+			"Node.Recognition.Succeeded": " \u003e 识别到登录界面"
 		},
 		"next": ["启动游戏_捏脸启动"],
 		"post_delay": 0,
@@ -307,7 +306,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 检测到可领取奖励"
+			"Node.Recognition.Succeeded": " \u003e 检测到可领取奖励"
 		},
 		"next": ["启动游戏_点击屏幕继续"],
 		"recognition": {

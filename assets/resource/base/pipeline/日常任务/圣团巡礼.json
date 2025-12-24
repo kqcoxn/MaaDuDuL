@@ -53,7 +53,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 当前角色休息中"
+			"Node.Recognition.Succeeded": " > 当前角色休息中"
 		},
 		"recognition": {
 			"param": {
@@ -74,7 +74,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 领取冒险奖励"
+			"Node.Recognition.Succeeded": " > 领取冒险奖励"
 		},
 		"next": ["圣团巡礼_单次冒险结束"],
 		"recognition": {
@@ -100,7 +100,7 @@
 			"type": "Custom"
 		},
 		"focus": {
-			"Node.Action.Starting": "\u003e 角色1冒险"
+			"Node.Action.Starting": " > 角色1冒险"
 		},
 		"next": ["圣团巡礼_切换冒险2"],
 		"post_delay": 0,
@@ -165,7 +165,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 今日已冒险",
+		"focus": " > 今日已冒险",
 		"next": ["圣团巡礼_冒险结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -271,7 +271,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Action.Starting": "\u003e 角色2冒险"
+			"Node.Action.Starting": " > 角色2冒险"
 		},
 		"next": ["圣团巡礼_冒险2"],
 		"recognition": {
@@ -293,7 +293,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Action.Starting": "\u003e 角色3冒险"
+			"Node.Action.Starting": " > 角色3冒险"
 		},
 		"next": ["圣团巡礼_冒险3"],
 		"recognition": {
@@ -390,7 +390,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 开始冒险"
+			"Node.Recognition.Succeeded": " > 开始冒险"
 		},
 		"next": ["圣团巡礼_兼职结束"],
 		"recognition": {
@@ -472,7 +472,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Action.Starting": "\u003e 收获世界树"
+			"Node.Action.Starting": " > 收获世界树"
 		},
 		"next": ["圣团巡礼_获取世界树"],
 		"recognition": {
@@ -512,7 +512,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 当前角色休息中"
+			"Node.Recognition.Succeeded": " > 当前角色休息中"
 		},
 		"recognition": {
 			"param": {
@@ -554,7 +554,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 申请冒险"
+			"Node.Recognition.Starting": " > 申请冒险"
 		},
 		"next": ["圣团巡礼_选择日程1"],
 		"recognition": {
@@ -619,7 +619,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 进入冒险协会"
+			"Node.Recognition.Succeeded": " > 进入冒险协会"
 		},
 		"next": ["圣团巡礼_进入协会内部"],
 		"recognition": {
@@ -661,7 +661,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 进入圣团"
+			"Node.Recognition.Starting": " > 进入圣团"
 		},
 		"next": ["圣团巡礼_确保进入圣团"],
 		"recognition": {
@@ -706,7 +706,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Action.Starting": "\u003e 选择日程"
+			"Node.Action.Starting": " > 选择日程"
 		},
 		"next": ["圣团巡礼_选择日程2"],
 		"recognition": {

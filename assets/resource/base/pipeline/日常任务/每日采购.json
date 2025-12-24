@@ -33,7 +33,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 今日免费礼包已购买"
+			"Node.Recognition.Succeeded": " > 今日免费礼包已购买"
 		},
 		"next": ["每日采购_从至尊商店返回主界面"],
 		"post_delay": 0,
@@ -80,7 +80,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 确定购买"
+			"Node.Recognition.Succeeded": " > 确定购买"
 		},
 		"next": ["每日采购_领取商品"],
 		"recognition": {
@@ -102,7 +102,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 今日已采购",
+		"focus": " > 今日已采购",
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -144,7 +144,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 本期已购买",
+		"focus": " > 本期已购买",
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
@@ -318,7 +318,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 购买商品",
+		"focus": " > 购买商品",
 		"next": ["每日采购_查看商品详情"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -405,7 +405,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 购买每日免费礼包"
+			"Node.Recognition.Succeeded": " > 购买每日免费礼包"
 		},
 		"next": ["每日采购_领取每日免费礼包奖励"],
 		"recognition": {
@@ -428,7 +428,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 进入尊享商店"
+			"Node.Recognition.Starting": " > 进入尊享商店"
 		},
 		"next": ["每日采购_进入水晶叶商店"],
 		"recognition": {
@@ -471,7 +471,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 进入普通商店"
+			"Node.Recognition.Starting": " > 进入普通商店"
 		},
 		"next": ["每日采购_日常商店开始"],
 		"recognition": {
@@ -495,7 +495,7 @@
 			},
 			"type": "Click"
 		},
-		"focus": "\u003e 进入水晶叶商店",
+		"focus": " > 进入水晶叶商店",
 		"next": ["每日采购_选中每日免费礼包"],
 		"recognition": {
 			"param": {

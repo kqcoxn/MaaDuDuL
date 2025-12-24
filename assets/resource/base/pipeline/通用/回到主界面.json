@@ -84,7 +84,7 @@
 			},
 			"type": "Custom"
 		},
-		"focus": "\u003e 返回主界面",
+		"focus": " > 返回主界面",
 		"next": [
 			"返回主界面_检测主界面",
 			{
@@ -115,7 +115,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 已回到主界面"
+			"Node.Recognition.Succeeded": " > 已回到主界面"
 		},
 		"post_delay": 0,
 		"pre_delay": 0,

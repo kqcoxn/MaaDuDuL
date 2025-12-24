@@ -32,7 +32,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 今日已领取邮件",
+		"focus": " > 今日已领取邮件",
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -116,7 +116,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 没有可领取的邮件"
+			"Node.Recognition.Succeeded": " > 没有可领取的邮件"
 		},
 		"next": ["领取邮件_周期记录"],
 		"recognition": {
@@ -138,7 +138,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 进入邮件面板"
+			"Node.Recognition.Succeeded": " > 进入邮件面板"
 		},
 		"next": ["领取邮件_确保进入邮件面板"],
 		"recognition": {
@@ -183,7 +183,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 领取邮件奖励"
+			"Node.Recognition.Succeeded": " > 领取邮件奖励"
 		},
 		"next": ["领取邮件_周期记录"],
 		"recognition": {

@@ -32,7 +32,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 今日宝石已领取",
+		"focus": " > 今日宝石已领取",
 		"next": ["巅峰对决_领取战斗宝石结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -52,7 +52,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 今日已对战",
+		"focus": " > 今日已对战",
 		"next": ["巅峰对决_对战结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -118,7 +118,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 作战完成"
+			"Node.Recognition.Succeeded": " > 作战完成"
 		},
 		"next": ["巅峰对决_对战循环"],
 		"recognition": {
@@ -178,7 +178,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": "\u003e 开始对战",
+		"focus": " > 开始对战",
 		"next": ["巅峰对决_对战循环"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -199,7 +199,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 挑战完成"
+			"Node.Recognition.Succeeded": " > 挑战完成"
 		},
 		"next": ["巅峰对决_对战周期记录"],
 		"recognition": {
@@ -262,7 +262,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 再无话说，请速速动手！"
+			"Node.Recognition.Succeeded": " > 再无话说，请速速动手！"
 		},
 		"next": ["巅峰对决_对战完成"],
 		"rate_limit": 3000,
@@ -332,7 +332,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 今日宝石已领取"
+			"Node.Recognition.Succeeded": " > 今日宝石已领取"
 		},
 		"next": ["巅峰对决_战斗宝石周期记录"],
 		"post_delay": 0,
@@ -416,7 +416,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 进入巅峰对决竞技场"
+			"Node.Recognition.Succeeded": " > 进入巅峰对决竞技场"
 		},
 		"next": ["巅峰对决_进入巅峰对决"],
 		"recognition": {
@@ -479,7 +479,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 选择对手"
+			"Node.Recognition.Starting": " > 选择对手"
 		},
 		"next": ["巅峰对决_开始对战", "巅峰对决_对战次数耗尽"],
 		"recognition": {
@@ -501,7 +501,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 领取战斗宝石"
+			"Node.Recognition.Succeeded": " > 领取战斗宝石"
 		},
 		"next": ["巅峰对决_获取战斗宝石奖励", "巅峰对决_无可领取的战斗宝石"],
 		"recognition": {
