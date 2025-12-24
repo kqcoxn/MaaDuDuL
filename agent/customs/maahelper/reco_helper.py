@@ -250,5 +250,6 @@ class RecoHelper:
             CustomRecognition.AnalyzeResult: 自定义识别结果对象
         """
         if result:
-            return CustomRecognition.AnalyzeResult(result.box, result.text)
+            box = result.box if hasattr(result, "box") else box
+            text = result.text if hasattr(result, "text") else text
         return CustomRecognition.AnalyzeResult(box, text)
