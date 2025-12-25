@@ -206,7 +206,7 @@ jobs:
           rm -rf MFA/resource/base/model/ocr  # 删除MFA自带的 OCR model目录
           mkdir -p install  # 创建安装目录
           cp -r MFA/* install/  # 复制所有MFA文件
-          rm -f install/MFAAvalonia-*.zip  # 清理下载的压缩包
+          rm -f install/MFAAvalonia-*.zip install/MFAAvalonia-*.tar.gz  # 清理下载的压缩包
 
       # 配置 descs 说明文件
       - name: Install descs to Resource
