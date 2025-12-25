@@ -92,7 +92,7 @@ jobs:
           # macOS 构建
           - os: macos
             arch: x86_64
-            runs-on: macos-13  # Intel Mac
+            runs-on: macos-15-large  # Intel Mac
           - os: macos
             arch: aarch64
             runs-on: macos-latest  # Apple Silicon Mac
