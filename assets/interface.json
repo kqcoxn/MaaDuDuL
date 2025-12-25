@@ -90,7 +90,6 @@
 			"name": "清紫糖",
 			"label": "清紫糖",
 			"entry": "清紫糖_开始",
-			"default_check": true,
 			"description": "descs/daily/clear_purple_candy.md",
 			"option": ["清紫糖-克隆工厂", "清紫糖-副本"]
 		},

@@ -3,29 +3,49 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
 			"filename": "清紫糖",
-			"lastSyncTime": 1766326198924,
+			"lastSyncTime": 1766668947794,
 			"prefix": "清紫糖",
 			"savedViewport": {
-				"x": -4487.004534222083,
-				"y": -207.67802627505318,
-				"zoom": 0.659753955386449
+				"x": -8765,
+				"y": -295,
+				"zoom": 1.06
 			},
-			"version": "v0.13.0_beta_0"
+			"version": "v0.13.0"
 		}
 	},
 	"$__mpe_external_返回主界面_清紫糖": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8751,
-				"y": 1069
+				"x": 8753,
+				"y": 1217
 			}
 		}
 	},
 	"清紫糖_从克隆工厂返回": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8390,
-				"y": 656
+				"x": 8684,
+				"y": 635
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["清紫糖_确保回到克隆工厂"],
+		"recognition": {
+			"param": {
+				"roi": [4, 3, 84, 85],
+				"template": ["global/back.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"清紫糖_从克隆工厂返回2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9227,
+				"y": 638
 			}
 		},
 		"action": {
@@ -63,8 +83,8 @@
 	"清紫糖_克隆工厂结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8657,
-				"y": 658
+				"x": 9491,
+				"y": 636
 			}
 		},
 		"action": {
@@ -82,8 +102,8 @@
 	"清紫糖_副本开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6800,
-				"y": 1063
+				"x": 6802,
+				"y": 1211
 			}
 		},
 		"action": {
@@ -101,8 +121,8 @@
 	"清紫糖_副本结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8436,
-				"y": 1065
+				"x": 8438,
+				"y": 1213
 			}
 		},
 		"action": {
@@ -138,11 +158,30 @@
 			"type": "DirectHit"
 		}
 	},
+	"清紫糖_无法克隆工厂": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8401,
+				"y": 790
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["清紫糖_从克隆工厂返回"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"清紫糖_油画棒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7074,
-				"y": 1064
+				"x": 7076,
+				"y": 1212
 			}
 		},
 		"action": {
@@ -150,7 +189,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 进入到手蜡"
+			"Node.Recognition.Succeeded": " \u003e 进入到手蜡"
 		},
 		"next": ["清紫糖_盖章"],
 		"recognition": {
@@ -164,8 +203,8 @@
 	"清紫糖_盖章": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7349,
-				"y": 1065
+				"x": 7351,
+				"y": 1213
 			}
 		},
 		"action": {
@@ -183,11 +222,31 @@
 			"type": "OCR"
 		}
 	},
+	"清紫糖_确保回到克隆工厂": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8957,
+				"y": 637
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["清紫糖_从克隆工厂返回2"],
+		"recognition": {
+			"param": {
+				"expected": ["每日入场次数"],
+				"roi": [718, 164, 547, 323]
+			},
+			"type": "OCR"
+		}
+	},
 	"清紫糖_确保盖章": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7609,
-				"y": 1065
+				"x": 7611,
+				"y": 1213
 			}
 		},
 		"action": {
@@ -254,7 +313,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 进入克隆工厂"
+			"Node.Recognition.Succeeded": " \u003e 进入克隆工厂"
 		},
 		"next": ["清紫糖_确保进入克隆工厂"],
 		"recognition": {
@@ -298,7 +357,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Action.Starting": " > 进入副本界面"
+			"Node.Action.Starting": " \u003e 进入副本界面"
 		},
 		"next": ["清紫糖_进入副本界面"],
 		"recognition": {
@@ -353,8 +412,8 @@
 	"清紫糖_选择到手蜡关卡": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7878,
-				"y": 1064
+				"x": 7880,
+				"y": 1212
 			}
 		},
 		"action": {
@@ -377,8 +436,8 @@
 	"清紫糖_速战克隆到手蜡": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8151,
-				"y": 1066
+				"x": 8153,
+				"y": 1214
 			}
 		},
 		"action": {
@@ -411,7 +470,7 @@
 			"type": "Custom"
 		},
 		"next": ["清紫糖_从克隆工厂返回"],
-		"on_error": ["返回主界面"],
+		"on_error": ["清紫糖_无法克隆工厂"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {

@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1766667784774,
+			"lastSyncTime": 1766668189894,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -8625,
-				"y": -770,
-				"zoom": 1.06
+				"x": -6846,
+				"y": -768,
+				"zoom": 0.92
 			},
 			"version": "v0.13.0"
 		}
@@ -227,7 +227,9 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " \u003e 今日已冒险",
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已冒险"
+		},
 		"next": ["圣团巡礼_冒险结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -414,7 +416,9 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " \u003e 今日已参观",
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已参观"
+		},
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
