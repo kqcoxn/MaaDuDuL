@@ -43,9 +43,9 @@ def copy_files():
         if os.path.exists("MFAAvalonia/agent"):
             shutil.rmtree("MFAAvalonia/agent")
 
-        # 删除descs目录
-        if os.path.exists("MFAAvalonia/descs"):
-            shutil.rmtree("MFAAvalonia/descs")
+        # 删除Resource中的descs目录
+        if os.path.exists("MFAAvalonia/Resource/descs"):
+            shutil.rmtree("MFAAvalonia/Resource/descs")
 
         # 复制interface.json
         if os.path.exists("assets/interface.json"):
@@ -83,9 +83,9 @@ def copy_files():
         else:
             print("警告: agent 文件夹不存在")
 
-        # 复制descs文件夹
+        # 复制descs文件夹到Resource目录下
         if os.path.exists("descs"):
-            shutil.copytree("descs", "MFAAvalonia/descs", dirs_exist_ok=True)
+            shutil.copytree("descs", "MFAAvalonia/Resource/descs", dirs_exist_ok=True)
         else:
             print("警告: descs 文件夹不存在")
 

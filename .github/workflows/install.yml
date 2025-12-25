@@ -110,13 +110,26 @@ jobs:
         with:
           submodules: true  # 同时检出子模块
 
+      # 读取版本配置文件
+      - name: 读取依赖版本配置
+        id: versions
+        shell: bash
+        run: |
+          # 读取versions.json并设置为环境变量
+          MAA_FRAMEWORK_VERSION=$(jq -r '.MaaFramework' .github/versions.json)
+          MFAA_VERSION=$(jq -r '.MFAAvalonia' .github/versions.json)
+          echo "MAA_FRAMEWORK_VERSION=$MAA_FRAMEWORK_VERSION" >> $GITHUB_OUTPUT
+          echo "MFAA_VERSION=$MFAA_VERSION" >> $GITHUB_OUTPUT
+          echo "MaaFramework版本: $MAA_FRAMEWORK_VERSION"
+          echo "MFAAvalonia版本: $MFAA_VERSION"
+
       # MaaFramework下载
       # - name: Download MaaFramework
       #   uses: robinraju/release-downloader@v1
       #   with:
       #     repository: MaaXYZ/MaaFramework
       #     fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"  # 匹配对应平台的文件
-      #     tag: v5.2.4  # 锁定版本
+      #     tag: ${{ steps.versions.outputs.MAA_FRAMEWORK_VERSION }}  # 从versions.json读取版本
       #     out-file-path: "deps"  # 输出到deps目录
       #     extract: true  # 自动解压
 
@@ -182,7 +195,7 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-${{ steps.mfa_naming.outputs.mfa_os }}-${{ steps.mfa_naming.outputs.mfa_arch }}*"
-          tag: v2.2.3  # 锁定版本
+          tag: ${{ steps.versions.outputs.MFAA_VERSION }}  # 从versions.json读取版本
           out-file-path: "MFA"
           extract: true
 
@@ -194,6 +207,17 @@ jobs:
           mkdir -p install  # 创建安装目录
           cp -r MFA/* install/  # 复制所有MFA文件
           rm -f install/MFAAvalonia-*.zip  # 清理下载的压缩包
+
+      # 配置 descs 说明文件
+      - name: Install descs to Resource
+        shell: bash
+        run: |
+          if [ -d "descs" ]; then
+            mkdir -p install/Resource  # 确保Resource目录存在
+            cp -r descs install/Resource/  # 复制descs到Resource下
+          else
+            echo "Warning: descs folder not found"
+          fi
 
       # 替换应用图标
       - name: Replace Icon

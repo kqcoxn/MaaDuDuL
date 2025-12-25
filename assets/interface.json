@@ -33,33 +33,33 @@
 			"name": "说明",
 			"label": "说明",
 			"entry": "说明",
-			"description": "descs/others/illustrate.md"
+			"description": "Resource/descs/others/illustrate.md"
 		},
 		{
 			"name": "操作指南",
 			"label": "操作指南",
 			"entry": "操作指南",
-			"description": "descs/others/guide.md"
+			"description": "Resource/descs/others/guide.md"
 		},
 		{
 			"name": " ——— 可连续任务 ———",
 			"label": "——— 可连续任务 ———",
 			"entry": "可连续任务分隔符",
-			"description": "descs/others/continuous_task.md"
+			"description": "Resource/descs/others/continuous_task.md"
 		},
 		{
 			"name": "启动游戏",
 			"label": "启动游戏",
 			"entry": "启动游戏_开始",
 			"default_check": true,
-			"description": "descs/daily/start_game.md"
+			"description": "Resource/descs/daily/start_game.md"
 		},
 		{
 			"name": "领取邮件",
 			"label": "领取邮件",
 			"entry": "领取邮件_开始",
 			"default_check": true,
-			"description": "descs/daily/claim_mail.md",
+			"description": "Resource/descs/daily/claim_mail.md",
 			"option": ["领取邮件-周期检查"]
 		},
 		{
@@ -67,14 +67,14 @@
 			"label": "好友叶子互换",
 			"entry": "叶子互换_开始",
 			"default_check": true,
-			"description": "descs/daily/claim_mail.md"
+			"description": "Resource/descs/daily/claim_mail.md"
 		},
 		{
 			"name": "领取糖果",
 			"label": "领取每日糖果",
 			"entry": "领取糖果_开始",
 			"default_check": true,
-			"description": "descs/daily/claim_candy.md",
+			"description": "Resource/descs/daily/claim_candy.md",
 			"option": ["领取糖果-周期检查"]
 		},
 		{
@@ -82,7 +82,7 @@
 			"label": "每日采购",
 			"entry": "每日采购_开始",
 			"default_check": true,
-			"description": "descs/daily/purchase.md",
+			"description": "Resource/descs/daily/purchase.md",
 			"option": ["每日采购-周期检查", "每日采购-每日免费礼包", "每日采购-商店采购"]
 		},
 		{
@@ -90,14 +90,14 @@
 			"label": "圣团巡礼",
 			"entry": "圣团巡礼_开始",
 			"default_check": true,
-			"description": "descs/daily/saint_tour.md",
+			"description": "Resource/descs/daily/saint_tour.md",
 			"option": ["圣团巡礼-收获世界树", "圣团巡礼-参观并打扫房间", "圣团巡礼-每日冒险"]
 		},
 		{
 			"name": "清紫糖",
 			"label": "清紫糖",
 			"entry": "清紫糖_开始",
-			"description": "descs/daily/clear_purple_candy.md",
+			"description": "Resource/descs/daily/clear_purple_candy.md",
 			"option": ["清紫糖-克隆工厂", "清紫糖-副本"]
 		},
 		{
@@ -105,7 +105,7 @@
 			"label": "巅峰对决",
 			"entry": "巅峰对决_开始",
 			"default_check": true,
-			"description": "descs/daily/peak_battle.md",
+			"description": "Resource/descs/daily/peak_battle.md",
 			"option": ["巅峰对决-领取战斗宝石", "巅峰对决-竞技场对战"]
 		},
 		{
@@ -113,32 +113,32 @@
 			"label": "领取奖励",
 			"entry": "领取奖励_开始",
 			"default_check": true,
-			"description": "descs/daily/claim_reward.md",
+			"description": "Resource/descs/daily/claim_reward.md",
 			"option": ["领取奖励-任务奖励", "领取奖励-通行证奖励"]
 		},
 		{
 			"name": "关闭游戏",
 			"label": "关闭游戏",
 			"entry": "关闭游戏_开始",
-			"description": "descs/daily/close_game.md"
+			"description": "Resource/descs/daily/close_game.md"
 		},
 		{
 			"name": " ——— 独立任务 ———",
 			"label": "——— 独立任务 ———",
 			"entry": "独立任务分隔符",
-			"description": "descs/others/independent_task.md"
+			"description": "Resource/descs/others/independent_task.md"
 		},
 		{
 			"name": "连续作战",
 			"label": "连续作战",
 			"entry": "连续作战_开始",
-			"description": "descs/daily/continuous_battle.md"
+			"description": "Resource/descs/single/continuous_battle.md"
 		},
 		{
 			"name": " ——— 新增任务 ———",
 			"label": "——— 新增任务 ———",
 			"entry": "新增任务分隔符",
-			"description": "descs/others/new_task.md"
+			"description": "Resource/descs/others/new_task.md"
 		}
 	],
 	"option": {
