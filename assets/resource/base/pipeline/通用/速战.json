@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\速战.json",
 			"filename": "速战",
-			"lastSyncTime": 1766326040022,
+			"lastSyncTime": 1766672014262,
 			"prefix": "速战",
 			"savedViewport": {
-				"x": -9311.249753745155,
-				"y": -829.0472771776983,
-				"zoom": 1.1486983549970382
+				"x": -9409,
+				"y": -667,
+				"zoom": 1.21
 			},
-			"version": "v0.13.0_beta_0"
+			"version": "v0.13.0"
 		}
 	},
 	"速战_不购买": {
@@ -44,7 +44,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 体力不足"
+			"Node.Recognition.Succeeded": " \u003e 体力不足"
 		},
 		"next": ["速战_不购买"],
 		"recognition": {
@@ -83,19 +83,17 @@
 			}
 		},
 		"action": {
-			"param": {
-				"target": [883, 615, 0, 0]
-			},
+			"param": {},
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": " > 准备速战"
+			"Node.Recognition.Starting": " \u003e 准备速战"
 		},
 		"next": ["速战_最大倍率", "速战_无法速战", "速战_体力不足"],
 		"recognition": {
 			"param": {
 				"expected": ["速战"],
-				"roi": [726, 527, 258, 139]
+				"roi": [709, 511, 527, 203]
 			},
 			"type": "OCR"
 		}
@@ -112,7 +110,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 关卡不可用"
+			"Node.Recognition.Succeeded": " \u003e 关卡不可用"
 		},
 		"recognition": {
 			"param": {
@@ -153,7 +151,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 领取战斗奖励"
+			"Node.Recognition.Succeeded": " \u003e 领取战斗奖励"
 		},
 		"recognition": {
 			"param": {
@@ -195,7 +193,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 开始战斗"
+			"Node.Recognition.Succeeded": " \u003e 开始战斗"
 		},
 		"next": ["速战_跳过动画", "速战_确认奖励"],
 		"recognition": {

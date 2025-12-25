@@ -118,3 +118,26 @@ class SelectCrayonLevel(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("选择到手蜡关卡", e)
+
+
+@AgentServer.custom_action("select_duplicate_level")
+class SelectDuplicateLevel(CustomAction):
+    """"""
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """"""
+        try:
+            args = ParamAnalyzer(argv)
+            level: int = args.get(["level", "l"])
+
+            Prompter.log(f"选择关卡：{level}")
+            if type(level) is int and level < 10:
+                level = f"0{level}"
+
+            context.run_task(
+                "清紫糖_查找关卡开始", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
+            )
+
+            return True
+        except Exception as e:
+            return Prompter.error("选择副本关卡", e)

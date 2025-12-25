@@ -635,11 +635,29 @@
 							"next": "清紫糖_油画棒"
 						}
 					},
-					"option": ["清紫糖-副本-选择副本-到手蜡关卡"]
+					"option": ["清紫糖-副本-到手蜡关卡"]
+				},
+				{
+					"name": "糖果自由（棉花糖）",
+					"pipeline_override": {
+						"清紫糖_副本开始": {
+							"next": "清紫糖_糖果自由"
+						}
+					},
+					"option": ["清紫糖-副本-糖果类型"]
+				},
+				{
+					"name": "神秘面包房（魔卡龙）",
+					"pipeline_override": {
+						"清紫糖_副本开始": {
+							"next": "清紫糖_魔卡龙"
+						}
+					},
+					"option": ["清紫糖-副本-面包房关卡"]
 				}
 			]
 		},
-		"清紫糖-副本-选择副本-到手蜡关卡": {
+		"清紫糖-副本-到手蜡关卡": {
 			"type": "input",
 			"label": "到手蜡关卡",
 			"description": "请选择可速刷的关卡",
@@ -647,7 +665,6 @@
 				{
 					"name": "关卡",
 					"label": "到手蜡关卡",
-					"description": "",
 					"default": "1",
 					"pipeline_type": "int",
 					"verify": "^\\d+$"
@@ -655,6 +672,115 @@
 			],
 			"pipeline_override": {
 				"清紫糖_选择到手蜡关卡": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		},
+		"清紫糖-副本-糖果类型": {
+			"type": "select",
+			"label": "棉花糖类型",
+			"cases": [
+				{
+					"name": "输出/辅助",
+					"pipeline_override": {
+						"清紫糖_选择糖果类型": {
+							"expected": "防御"
+						}
+					},
+					"option": ["清紫糖-副本-非防御糖果关卡"]
+				},
+				{
+					"name": "防御/辅助",
+					"pipeline_override": {
+						"清紫糖_选择糖果类型": {
+							"expected": "输出"
+						}
+					},
+					"option": ["清紫糖-副本-非输出糖果关卡"]
+				},
+				{
+					"name": "防御/输出",
+					"pipeline_override": {
+						"清紫糖_选择糖果类型": {
+							"expected": "辅助"
+						}
+					},
+					"option": ["清紫糖-副本-非辅助糖果关卡"]
+				}
+			]
+		},
+		"清紫糖-副本-非输出糖果关卡": {
+			"type": "input",
+			"label": "输出/辅助关卡",
+			"description": "请选择可速刷的关卡",
+			"inputs": [
+				{
+					"name": "关卡",
+					"label": "输出/辅助关卡",
+					"default": "1",
+					"pipeline_type": "int",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_糖果行动": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		},
+		"清紫糖-副本-非防御糖果关卡": {
+			"type": "input",
+			"label": "防御/辅助关卡",
+			"description": "请选择可速刷的关卡",
+			"inputs": [
+				{
+					"name": "关卡",
+					"label": "防御/辅助关卡",
+					"default": "1",
+					"pipeline_type": "int",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_糖果行动": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		},
+		"清紫糖-副本-非辅助糖果关卡": {
+			"type": "input",
+			"label": "防御/输出关卡",
+			"description": "请选择可速刷的关卡",
+			"inputs": [
+				{
+					"name": "关卡",
+					"label": "防御/输出关卡",
+					"default": "1",
+					"pipeline_type": "int",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_糖果行动": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		},
+		"清紫糖-副本-面包房关卡": {
+			"type": "input",
+			"label": "面包房关卡",
+			"description": "请选择可速刷的关卡",
+			"inputs": [
+				{
+					"name": "关卡",
+					"label": "面包房关卡",
+					"default": "1",
+					"pipeline_type": "int",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_面包房行动": {
 					"custom_action_param": "l={关卡}"
 				}
 			}

@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
 			"filename": "清紫糖",
-			"lastSyncTime": 1766668947794,
+			"lastSyncTime": 1766672084338,
 			"prefix": "清紫糖",
 			"savedViewport": {
-				"x": -8765,
-				"y": -295,
-				"zoom": 1.06
+				"x": -8499,
+				"y": -1756,
+				"zoom": 1.21
 			},
 			"version": "v0.13.0"
 		}
@@ -16,16 +16,16 @@
 	"$__mpe_external_返回主界面_清紫糖": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8753,
-				"y": 1217
+				"x": 8756,
+				"y": 1093
 			}
 		}
 	},
 	"清紫糖_从克隆工厂返回": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8684,
-				"y": 635
+				"x": 8387,
+				"y": 653
 			}
 		},
 		"action": {
@@ -44,8 +44,8 @@
 	"清紫糖_从克隆工厂返回2": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9227,
-				"y": 638
+				"x": 8930,
+				"y": 656
 			}
 		},
 		"action": {
@@ -83,8 +83,8 @@
 	"清紫糖_克隆工厂结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9491,
-				"y": 636
+				"x": 9194,
+				"y": 654
 			}
 		},
 		"action": {
@@ -99,11 +99,40 @@
 			"type": "DirectHit"
 		}
 	},
+	"清紫糖_初始化副本计数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7858,
+				"y": -317
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "init_counter",
+				"custom_action_param": "k=副本\u0026mc=5"
+			},
+			"type": "Custom"
+		},
+		"next": [
+			"清紫糖_查找指定关卡",
+			"清紫糖_检查副本计数",
+			{
+				"jump_back": true,
+				"name": "清紫糖_向上滑动副本"
+			}
+		],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"清紫糖_副本开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6802,
-				"y": 1211
+				"x": 6805,
+				"y": 1087
 			}
 		},
 		"action": {
@@ -121,8 +150,8 @@
 	"清紫糖_副本结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8438,
-				"y": 1213
+				"x": 8441,
+				"y": 1089
 			}
 		},
 		"action": {
@@ -132,6 +161,48 @@
 		"next": ["返回主界面"],
 		"post_delay": 0,
 		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"清紫糖_副本计数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8393,
+				"y": 204
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "count",
+				"custom_action_param": "k=副本"
+			},
+			"type": "Custom"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"清紫糖_向上滑动副本": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8130,
+				"y": 205
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [497, 208, 0, 0],
+				"end": [[510, 677, 0, 0]],
+				"end_hold": [500]
+			},
+			"type": "Swipe"
+		},
+		"next": ["清紫糖_副本计数"],
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
@@ -158,18 +229,18 @@
 			"type": "DirectHit"
 		}
 	},
-	"清紫糖_无法克隆工厂": {
+	"清紫糖_查找关卡开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8401,
-				"y": 790
+				"x": 7322,
+				"y": -320
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
-		"next": ["清紫糖_从克隆工厂返回"],
+		"next": ["清紫糖_滑至最底部"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -177,11 +248,54 @@
 			"type": "DirectHit"
 		}
 	},
+	"清紫糖_查找指定关卡": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8128,
+				"y": -315
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["清紫糖_速战副本"],
+		"recognition": {
+			"param": {
+				"expected": ["01"]
+			},
+			"type": "OCR"
+		}
+	},
+	"清紫糖_检查副本计数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8128,
+				"y": -138
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": "\u003e 未找到指定关卡"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "check_counter",
+				"custom_recognition_param": "k=副本"
+			},
+			"type": "Custom"
+		}
+	},
 	"清紫糖_油画棒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7076,
-				"y": 1212
+				"x": 7079,
+				"y": 1088
 			}
 		},
 		"action": {
@@ -200,11 +314,36 @@
 			"type": "OCR"
 		}
 	},
+	"清紫糖_滑至最底部": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7590,
+				"y": -316
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [469, 658, 0, 0],
+				"duration": [100],
+				"end": [[467, 171, 0, 0]]
+			},
+			"type": "Swipe"
+		},
+		"focus": {
+			"Node.Recognition.Starting": "\u003e 查找指定关卡"
+		},
+		"next": ["清紫糖_初始化副本计数"],
+		"post_delay": 1000,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"清紫糖_盖章": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7351,
-				"y": 1213
+				"x": 7354,
+				"y": 1089
 			}
 		},
 		"action": {
@@ -225,8 +364,8 @@
 	"清紫糖_确保回到克隆工厂": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8957,
-				"y": 637
+				"x": 8660,
+				"y": 655
 			}
 		},
 		"action": {
@@ -245,8 +384,8 @@
 	"清紫糖_确保盖章": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7611,
-				"y": 1213
+				"x": 7614,
+				"y": 1089
 			}
 		},
 		"action": {
@@ -299,6 +438,91 @@
 				"roi": [11, 7, 210, 79]
 			},
 			"type": "OCR"
+		}
+	},
+	"清紫糖_确保进入糖果类型": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7622,
+				"y": 1835
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["清紫糖_糖果行动"],
+		"recognition": {
+			"param": {
+				"expected": ["波次"],
+				"roi": [796, 98, 405, 207]
+			},
+			"type": "OCR"
+		}
+	},
+	"清紫糖_确保进入面包房": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7625,
+				"y": 1500
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["清紫糖_面包房行动"],
+		"recognition": {
+			"param": {
+				"expected": ["魔卡龙区域"],
+				"roi": [171, 52, 416, 120]
+			},
+			"type": "OCR"
+		}
+	},
+	"清紫糖_糖果自由": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7082,
+				"y": 1835
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 进入糖果自由"
+		},
+		"next": ["清紫糖_选择糖果类型"],
+		"recognition": {
+			"param": {
+				"expected": ["糖果自由"],
+				"roi": [473, 269, 337, 145]
+			},
+			"type": "OCR"
+		}
+	},
+	"清紫糖_糖果行动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7896,
+				"y": 1833
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "select_duplicate_level",
+				"custom_action_param": "l=01"
+			},
+			"type": "Custom"
+		},
+		"next": ["清紫糖_副本结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
 		}
 	},
 	"清紫糖_进入克隆工厂": {
@@ -385,6 +609,28 @@
 			"type": "OCR"
 		}
 	},
+	"清紫糖_进入面包房": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7353,
+				"y": 1502
+			}
+		},
+		"action": {
+			"param": {
+				"target": [998, 493, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["清紫糖_确保进入面包房"],
+		"recognition": {
+			"param": {
+				"expected": ["区域"],
+				"roi": [764, 65, 497, 301]
+			},
+			"type": "OCR"
+		}
+	},
 	"清紫糖_选择克隆工厂关卡": {
 		"$__mpe_code": {
 			"position": {
@@ -412,8 +658,8 @@
 	"清紫糖_选择到手蜡关卡": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7880,
-				"y": 1212
+				"x": 7883,
+				"y": 1088
 			}
 		},
 		"action": {
@@ -433,17 +679,37 @@
 			"type": "OCR"
 		}
 	},
+	"清紫糖_选择糖果类型": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7350,
+				"y": 1837
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["清紫糖_确保进入糖果类型"],
+		"recognition": {
+			"param": {
+				"expected": ["防御"],
+				"roi": [176, 72, 987, 160]
+			},
+			"type": "OCR"
+		}
+	},
 	"清紫糖_速战克隆到手蜡": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8153,
-				"y": 1214
+				"x": 8156,
+				"y": 1090
 			}
 		},
 		"action": {
 			"param": {
 				"custom_action": "run",
-				"custom_action_param": "t=速战\u0026e=速战_确认奖励"
+				"custom_action_param": "t=速战"
 			},
 			"type": "Custom"
 		},
@@ -465,17 +731,82 @@
 		"action": {
 			"param": {
 				"custom_action": "run",
-				"custom_action_param": "t=速战\u0026e=速战_确认奖励"
+				"custom_action_param": "t=速战"
 			},
 			"type": "Custom"
 		},
 		"next": ["清紫糖_从克隆工厂返回"],
-		"on_error": ["清紫糖_无法克隆工厂"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
+		}
+	},
+	"清紫糖_速战副本": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8402,
+				"y": -317
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "run",
+				"custom_action_param": "t=速战\u0026e=速战_确认奖励"
+			},
+			"type": "Custom"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"清紫糖_面包房行动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7899,
+				"y": 1497
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "select_duplicate_level",
+				"custom_action_param": "l=01"
+			},
+			"type": "Custom"
+		},
+		"next": ["清紫糖_副本结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"清紫糖_魔卡龙": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7080,
+				"y": 1504
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 进入面包房"
+		},
+		"next": ["清紫糖_进入面包房"],
+		"recognition": {
+			"param": {
+				"expected": ["神秘面包房"],
+				"roi": [54, 236, 336, 195]
+			},
+			"type": "OCR"
 		}
 	}
 }

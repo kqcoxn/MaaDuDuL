@@ -42,7 +42,7 @@ class InitCounter(CustomAction):
             args = ParamAnalyzer(argv)
             key = args.get(["key", "k"], "default")
             initial_count = args.get(["initial_count", "ic"], 1)
-            max_count = args.get(["max_count", "mc"], 1)
+            max_count = args.get(["max_count", "mc", "m"], 1)
             CounterManager.get(key, initial_count, max_count).reset()
             return True
         except Exception as e:
