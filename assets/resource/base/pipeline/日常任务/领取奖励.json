@@ -3,14 +3,22 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取奖励.json",
 			"filename": "领取奖励",
-			"lastSyncTime": 1766337295953,
+			"lastSyncTime": 1766676740774,
 			"prefix": "领取奖励",
 			"savedViewport": {
-				"x": -1499.2156718570282,
-				"y": 291.3212892894763,
-				"zoom": 0.5440941020600788
+				"x": -4603,
+				"y": -593,
+				"zoom": 1.21
 			},
-			"version": "v0.13.0_beta_0"
+			"version": "v0.13.0"
+		}
+	},
+	"$__mpe_external_返回主界面_领取奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4746,
+				"y": 361
+			}
 		}
 	},
 	"领取奖励_从任务奖励返回主界面": {
@@ -23,7 +31,7 @@
 		"action": {
 			"param": {
 				"custom_action": "run",
-				"custom_action_param": "t=回到主界面"
+				"custom_action_param": "t=返回主界面"
 			},
 			"type": "Custom"
 		},
@@ -35,11 +43,29 @@
 			"type": "DirectHit"
 		}
 	},
-	"领取奖励_任务奖励已领取": {
+	"领取奖励_从通行证返回": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5903,
-				"y": 202
+				"x": 4542,
+				"y": 745
+			}
+		},
+		"action": {
+			"param": {
+				"target": [1236, 38, 0, 0]
+			},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_任务奖励不可领取": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4047,
+				"y": -369
 			}
 		},
 		"action": {
@@ -47,27 +73,29 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 奖励已领取"
+			"Node.Recognition.Succeeded": " \u003e 不可领取"
 		},
+		"next": ["领取奖励_领取任务满进度奖励"],
+		"on_error": ["领取奖励_无满任务奖励"],
 		"recognition": {
 			"param": {
 				"expected": ["没有可领取"]
 			},
 			"type": "OCR"
-		}
+		},
+		"timeout": 2000
 	},
 	"领取奖励_任务开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 3390,
-				"y": -19
+				"x": 3111,
+				"y": -20
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 进入任务界面",
 		"next": ["领取奖励_进入任务界面"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -87,7 +115,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 进入任务界面",
+		"next": ["领取奖励_通行证开始"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -98,15 +126,15 @@
 	"领取奖励_全部领取任务奖励": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5642,
-				"y": -14
+				"x": 3773,
+				"y": -643
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "Click"
 		},
-		"next": ["领取奖励_确认领取任务奖励", "领取奖励_任务奖励已领取"],
+		"next": ["领取奖励_确认领取任务奖励", "领取奖励_任务奖励不可领取"],
 		"recognition": {
 			"param": {
 				"expected": ["全部领取"],
@@ -118,8 +146,8 @@
 	"领取奖励_开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 3121,
-				"y": -22
+				"x": 2842,
+				"y": -23
 			}
 		},
 		"action": {
@@ -136,11 +164,94 @@
 			"type": "DirectHit"
 		}
 	},
+	"领取奖励_无满任务奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4334,
+				"y": -368
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_满任务奖励不可领取": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4613,
+				"y": -417
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 不可领取"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["没有可领取"]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取奖励_确保进入任务界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3665,
+				"y": -18
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["领取奖励_领取日任务奖励"],
+		"post_delay": 1000,
+		"recognition": {
+			"param": {
+				"expected": ["任务"],
+				"roi": [6, 4, 245, 77]
+			},
+			"type": "OCR"
+		}
+	},
 	"领取奖励_确认领取任务奖励": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5903,
-				"y": -13
+				"x": 4047,
+				"y": -642
+			}
+		},
+		"action": {
+			"param": {
+				"target": [643, 642, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["领取奖励_领取任务满进度奖励"],
+		"on_error": ["领取奖励_无满任务奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		},
+		"timeout": 2000
+	},
+	"领取奖励_确认领取任务满进度奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4613,
+				"y": -646
 			}
 		},
 		"action": {
@@ -156,18 +267,42 @@
 			"type": "OCR"
 		}
 	},
+	"领取奖励_确认领取通行证奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4268,
+				"y": 743
+			}
+		},
+		"action": {
+			"param": {
+				"target": [643, 642, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["领取奖励_从通行证返回"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
 	"领取奖励_进入任务界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 3666,
-				"y": -20
+				"x": 3387,
+				"y": -21
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "Click"
 		},
-		"next": ["领取奖励_领取日任务奖励"],
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 进入任务界面"
+		},
+		"next": ["领取奖励_确保进入任务界面"],
 		"recognition": {
 			"param": {
 				"roi": [1022, 66, 254, 236],
@@ -179,8 +314,8 @@
 	"领取奖励_进入具体任务面板": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5382,
-				"y": -14
+				"x": 3500,
+				"y": -643
 			}
 		},
 		"action": {
@@ -199,20 +334,43 @@
 	"领取奖励_进入通行证界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 3681,
-				"y": 361
+				"x": 3737,
+				"y": 744
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "Click"
 		},
+		"next": ["领取奖励_领取通行证奖励"],
 		"recognition": {
 			"param": {
-				"roi": [1022, 66, 254, 236],
-				"template": ["main/task.png"]
+				"roi": [9, 109, 419, 323],
+				"template": ["main/adv_pass.png"]
 			},
 			"type": "TemplateMatch"
+		}
+	},
+	"领取奖励_通行证奖励已领取": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4268,
+				"y": 958
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 奖励已领取"
+		},
+		"next": ["领取奖励_从通行证返回"],
+		"recognition": {
+			"param": {
+				"expected": ["没有可领取"]
+			},
+			"type": "OCR"
 		}
 	},
 	"领取奖励_通行证开始": {
@@ -226,7 +384,26 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 进入任务界面",
+		"next": ["领取奖励_领取等级通行证"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_通行证结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4486,
+				"y": 361
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["返回主界面"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -237,8 +414,8 @@
 	"领取奖励_领取任务奖励开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5115,
-				"y": -13
+				"x": 3220,
+				"y": -642
 			}
 		},
 		"action": {
@@ -246,6 +423,71 @@
 			"type": "DoNothing"
 		},
 		"next": ["领取奖励_进入具体任务面板"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_领取任务满进度奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4329,
+				"y": -647
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["领取奖励_确认领取任务满进度奖励", "领取奖励_满任务奖励不可领取"],
+		"recognition": {
+			"param": {
+				"expected": ["领取"],
+				"roi": [13, 420, 233, 291]
+			},
+			"type": "OCR"
+		},
+		"timeout": 2000
+	},
+	"领取奖励_领取便装通行证": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3936,
+				"y": 358
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "receive_pass_reward",
+				"custom_action_param": "c=便装"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取奖励_领取冒险通行证"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_领取冒险通行证": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4206,
+				"y": 357
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "receive_pass_reward",
+				"custom_action_param": "c=冒险"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取奖励_通行证结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -290,6 +532,69 @@
 			"type": "Custom"
 		},
 		"next": ["领取奖励_领取周任务奖励"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_领取等级通行证": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3666,
+				"y": 359
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "receive_pass_reward",
+				"custom_action_param": "c=等级"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取奖励_领取便装通行证"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_领取通行证奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3997,
+				"y": 744
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["领取奖励_确认领取通行证奖励", "领取奖励_通行证奖励已领取"],
+		"on_error": ["领取奖励_从通行证返回"],
+		"recognition": {
+			"param": {
+				"expected": ["键领取"],
+				"roi": [1042, 635, 201, 66]
+			},
+			"type": "OCR"
+		},
+		"timeout": 5000
+	},
+	"领取奖励_领取通行证奖励开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3468,
+				"y": 744
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["领取奖励_进入通行证界面"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {

@@ -3,36 +3,38 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\巅峰对决.json",
 			"filename": "巅峰对决",
-			"lastSyncTime": 1766333436915,
+			"lastSyncTime": 1766672954631,
 			"prefix": "巅峰对决",
 			"savedViewport": {
-				"x": -2014.99708457217,
-				"y": -110.11326922692967,
-				"zoom": 0.3589682359365738
+				"x": -9890,
+				"y": -1749,
+				"zoom": 1.21
 			},
-			"version": "v0.13.0_beta_0"
+			"version": "v0.13.0"
 		}
 	},
 	"$__mpe_external_返回主界面_巅峰对决": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9449,
-				"y": 1794
+				"x": 9554,
+				"y": 1851
 			}
 		}
 	},
 	"巅峰对决_宝石领取周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7866,
-				"y": 1274
+				"x": 7896,
+				"y": 1305
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 今日宝石已领取",
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日宝石已领取"
+		},
 		"next": ["巅峰对决_领取战斗宝石结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -44,15 +46,17 @@
 	"巅峰对决_对战周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7846,
-				"y": 2068
+				"x": 7875,
+				"y": 2139
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 今日已对战",
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已对战"
+		},
 		"next": ["巅峰对决_对战结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -64,8 +68,8 @@
 	"巅峰对决_对战周期检查": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7568,
-				"y": 1801
+				"x": 7584,
+				"y": 1858
 			}
 		},
 		"action": {
@@ -87,8 +91,8 @@
 	"巅峰对决_对战周期记录": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8908,
-				"y": 1791
+				"x": 8987,
+				"y": 1848
 			}
 		},
 		"action": {
@@ -109,8 +113,8 @@
 	"巅峰对决_对战完成": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8915,
-				"y": 1514
+				"x": 8994,
+				"y": 1557
 			}
 		},
 		"action": {
@@ -118,7 +122,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 作战完成"
+			"Node.Recognition.Succeeded": " \u003e 作战完成"
 		},
 		"next": ["巅峰对决_对战循环"],
 		"recognition": {
@@ -132,8 +136,8 @@
 	"巅峰对决_对战开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7300,
-				"y": 1803
+				"x": 7303,
+				"y": 1860
 			}
 		},
 		"action": {
@@ -151,8 +155,8 @@
 	"巅峰对决_对战循环": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8113,
-				"y": 1801
+				"x": 8155,
+				"y": 1858
 			}
 		},
 		"action": {
@@ -170,15 +174,17 @@
 	"巅峰对决_对战提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7851,
-				"y": 1798
+				"x": 7880,
+				"y": 1855
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 开始对战",
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 开始对战"
+		},
 		"next": ["巅峰对决_对战循环"],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -190,8 +196,8 @@
 	"巅峰对决_对战次数耗尽": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8652,
-				"y": 1788
+				"x": 8719,
+				"y": 1845
 			}
 		},
 		"action": {
@@ -199,7 +205,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 挑战完成"
+			"Node.Recognition.Succeeded": " \u003e 挑战完成"
 		},
 		"next": ["巅峰对决_对战周期记录"],
 		"recognition": {
@@ -213,8 +219,8 @@
 	"巅峰对决_对战结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9173,
-				"y": 1792
+				"x": 9265,
+				"y": 1849
 			}
 		},
 		"action": {
@@ -253,8 +259,8 @@
 	"巅峰对决_开始对战": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8651,
-				"y": 1454
+				"x": 8718,
+				"y": 1494
 			}
 		},
 		"action": {
@@ -262,7 +268,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 再无话说，请速速动手！"
+			"Node.Recognition.Succeeded": " \u003e 再无话说，请速速动手！"
 		},
 		"next": ["巅峰对决_对战完成"],
 		"rate_limit": 3000,
@@ -278,8 +284,8 @@
 	"巅峰对决_战斗宝石周期检查": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7591,
-				"y": 1013
+				"x": 7608,
+				"y": 1031
 			}
 		},
 		"action": {
@@ -301,8 +307,8 @@
 	"巅峰对决_战斗宝石周期记录": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8403,
-				"y": 1004
+				"x": 8458,
+				"y": 1022
 			}
 		},
 		"action": {
@@ -323,8 +329,8 @@
 	"巅峰对决_无可领取的战斗宝石": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8128,
-				"y": 1217
+				"x": 8170,
+				"y": 1245
 			}
 		},
 		"action": {
@@ -332,7 +338,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 今日宝石已领取"
+			"Node.Recognition.Succeeded": " \u003e 今日宝石已领取"
 		},
 		"next": ["巅峰对决_战斗宝石周期记录"],
 		"post_delay": 0,
@@ -347,7 +353,7 @@
 	"巅峰对决_确保进入巅峰对决": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8015,
+				"x": 8052,
 				"y": 655
 			}
 		},
@@ -367,8 +373,8 @@
 	"巅峰对决_获取战斗宝石奖励": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8126,
-				"y": 1002
+				"x": 8168,
+				"y": 1019
 			}
 		},
 		"action": {
@@ -388,8 +394,8 @@
 	"巅峰对决_识别战斗力": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8114,
-				"y": 1567
+				"x": 8156,
+				"y": 1613
 			}
 		},
 		"action": {
@@ -407,7 +413,7 @@
 	"巅峰对决_进入冒险": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7497,
+				"x": 7509,
 				"y": 656
 			}
 		},
@@ -416,7 +422,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 进入巅峰对决竞技场"
+			"Node.Recognition.Succeeded": " \u003e 进入巅峰对决竞技场"
 		},
 		"next": ["巅峰对决_进入巅峰对决"],
 		"recognition": {
@@ -430,7 +436,7 @@
 	"巅峰对决_进入巅峰对决": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7757,
+				"x": 7782,
 				"y": 656
 			}
 		},
@@ -450,7 +456,7 @@
 	"巅峰对决_进入竞技场": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8289,
+				"x": 8339,
 				"y": 654
 			}
 		},
@@ -470,8 +476,8 @@
 	"巅峰对决_选择对手": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8379,
-				"y": 1792
+				"x": 8433,
+				"y": 1849
 			}
 		},
 		"action": {
@@ -479,7 +485,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Starting": " > 选择对手"
+			"Node.Recognition.Starting": " \u003e 选择对手"
 		},
 		"next": ["巅峰对决_开始对战", "巅峰对决_对战次数耗尽"],
 		"recognition": {
@@ -492,8 +498,8 @@
 	"巅峰对决_领取战斗宝石": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7866,
-				"y": 1005
+				"x": 7896,
+				"y": 1023
 			}
 		},
 		"action": {
@@ -501,7 +507,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 领取战斗宝石"
+			"Node.Recognition.Succeeded": " \u003e 领取战斗宝石"
 		},
 		"next": ["巅峰对决_获取战斗宝石奖励", "巅峰对决_无可领取的战斗宝石"],
 		"recognition": {
@@ -515,8 +521,8 @@
 	"巅峰对决_领取战斗宝石开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7323,
-				"y": 1014
+				"x": 7327,
+				"y": 1032
 			}
 		},
 		"action": {
@@ -534,8 +540,8 @@
 	"巅峰对决_领取战斗宝石结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8685,
-				"y": 1003
+				"x": 8754,
+				"y": 1020
 			}
 		},
 		"action": {
