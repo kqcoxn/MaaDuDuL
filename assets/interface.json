@@ -1,10 +1,10 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.1 - MFAA | 测试阶段",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.2 - MFAA | 测试阶段",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
-	"version": "v0.0.1",
+	"version": "v0.0.2",
 	"welcome": "欢迎使用 MDDL!",
 	"contact": "QQ群: 926874985",
 	"license": "LICENSE",
@@ -21,12 +21,12 @@
 	"resource": [
 		{
 			"name": "B服",
-			"path": ["{PROJECT_DIR}/resource/base"]
+			"path": ["./resource/base"]
 		}
 	],
 	"agent": {
 		"child_exec": "python",
-		"child_args": ["-u", "{PROJECT_DIR}/agent/main.py"]
+		"child_args": ["-u", "./agent/main.py"]
 	},
 	"task": [
 		{
@@ -61,6 +61,13 @@
 			"default_check": true,
 			"description": "descs/daily/claim_mail.md",
 			"option": ["领取邮件-周期检查"]
+		},
+		{
+			"name": "叶子互换",
+			"label": "好友叶子互换",
+			"entry": "叶子互换_开始",
+			"default_check": true,
+			"description": "descs/daily/claim_mail.md"
 		},
 		{
 			"name": "领取糖果",

@@ -1,0 +1,157 @@
+{
+	"$__mpe_config_叶子互换": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务/叶子互换.json",
+			"filename": "叶子互换",
+			"lastSyncTime": 1766677807506,
+			"prefix": "叶子互换",
+			"savedViewport": {
+				"x": -7244,
+				"y": 477,
+				"zoom": 1.6
+			},
+			"version": "v0.13.0"
+		}
+	},
+	"$__mpe_external_返回主界面_叶子互换": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5392,
+				"y": -237
+			}
+		}
+	},
+	"叶子互换_一键发送": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5132,
+				"y": -237
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 发送叶子点数"
+		},
+		"next": ["返回主界面"],
+		"recognition": {
+			"param": {
+				"expected": ["键发送"],
+				"roi": [800, 615, 463, 102]
+			},
+			"type": "OCR"
+		}
+	},
+	"叶子互换_一键领取": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4612,
+				"y": -237
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["叶子互换_确认叶子点数", "叶子互换_没有可领取的叶子点数"],
+		"on_error": ["叶子互换_一键发送"],
+		"recognition": {
+			"param": {
+				"expected": ["键领取"],
+				"roi": [800, 615, 463, 102]
+			},
+			"type": "OCR"
+		},
+		"timeout": 5000
+	},
+	"叶子互换_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4091,
+				"y": -240
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Action.Succeeded": " \u003e 进入好友面板"
+		},
+		"next": ["叶子互换_进入好友面板"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"叶子互换_没有可领取的叶子点数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4873,
+				"y": -30
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 没有可领取的叶子"
+		},
+		"next": ["叶子互换_一键发送"],
+		"recognition": {
+			"param": {
+				"expected": ["没有可领取的"]
+			},
+			"type": "OCR"
+		}
+	},
+	"叶子互换_确认叶子点数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4872,
+				"y": -237
+			}
+		},
+		"action": {
+			"param": {
+				"target": [662, 632, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["叶子互换_一键发送"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"叶子互换_进入好友面板": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4350,
+				"y": -241
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Action.Succeeded": " \u003e 领取叶子点数"
+		},
+		"next": ["叶子互换_一键领取"],
+		"recognition": {
+			"param": {
+				"roi": [865, 68, 413, 256],
+				"template": ["main/friends.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	}
+}

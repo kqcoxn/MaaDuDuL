@@ -279,7 +279,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": "\u003e 未找到指定关卡"
+			"Node.Recognition.Succeeded": " \u003e 未找到指定关卡"
 		},
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -330,7 +330,7 @@
 			"type": "Swipe"
 		},
 		"focus": {
-			"Node.Recognition.Starting": "\u003e 查找指定关卡"
+			"Node.Recognition.Starting": " \u003e 查找指定关卡"
 		},
 		"next": ["清紫糖_初始化副本计数"],
 		"post_delay": 1000,
