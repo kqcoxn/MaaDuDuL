@@ -280,13 +280,28 @@ jobs:
         with:
           fetch-depth: 0  # 需要完整历史以生成changelog
 
+      # 获取上一个成功发布的正式版本tag（排除beta等预发布版本和未发布的tag）
+      - name: Get previous release tag
+        id: prev_tag
+        run: |
+          # 获取所有已发布的release的tag，过滤掉预发布版本（包含beta、alpha、rc等）
+          PREV_TAG=$(gh release list --limit 100 --json tagName,isPrerelease --jq '.[] | select(.isPrerelease == false) | .tagName' | sed -n '2p')
+          if [ -z "$PREV_TAG" ]; then
+            echo "range=" >> $GITHUB_OUTPUT
+          else
+            echo "range=$PREV_TAG..HEAD" >> $GITHUB_OUTPUT
+          fi
+          echo "Previous release tag: $PREV_TAG"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # 使用git-cliff生成更新日志
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
         id: git-cliff
         with:
           config: .github/cliff.toml  # changelog配置文件
-          args: -vv --latest --strip header  # 仅生成最新版本，去除头部
+          args: -vv ${{ steps.prev_tag.outputs.range }} --strip header  # 对比上一个正式版本，去除头部
         env:
           OUTPUT: CHANGES.md
           GITHUB_REPO: ${{ github.repository }}
