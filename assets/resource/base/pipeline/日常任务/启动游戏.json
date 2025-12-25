@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1766583628963,
+			"lastSyncTime": 1766666091771,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -113,
-				"y": 260,
-				"zoom": 0.76
+				"x": -1520,
+				"y": -197,
+				"zoom": 1.52
 			},
 			"version": "v0.13.0"
 		}
@@ -173,9 +173,6 @@
 				"target": [640, 679]
 			},
 			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 获取奖励"
 		},
 		"next": ["启动游戏_关闭面板"],
 		"recognition": {

@@ -84,7 +84,7 @@
 			"entry": "圣团巡礼_开始",
 			"default_check": true,
 			"description": "descs/daily/saint_tour.md",
-			"option": ["圣团巡礼-收获世界树", "圣团巡礼-每日冒险"]
+			"option": ["圣团巡礼-收获世界树", "圣团巡礼-参观并打扫房间", "圣团巡礼-每日冒险"]
 		},
 		{
 			"name": "清紫糖",
@@ -493,6 +493,41 @@
 							"next": "圣团巡礼_收获世界树结束"
 						}
 					}
+				}
+			]
+		},
+		"圣团巡礼-参观并打扫房间": {
+			"type": "switch",
+			"label": "每日参观与打扫房间",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": ["圣团巡礼-参观并打扫房间-每日仅检查一次"]
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"圣团巡礼_参观开始": {
+							"next": "圣团巡礼_参观结束"
+						}
+					}
+				}
+			]
+		},
+		"圣团巡礼-参观并打扫房间-每日仅检查一次": {
+			"type": "switch",
+			"label": "每日仅检查参观一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"圣团巡礼_参观周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
 				}
 			]
 		},

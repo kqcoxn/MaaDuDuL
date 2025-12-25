@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
 			"filename": "每日采购",
-			"lastSyncTime": 1766592139313,
+			"lastSyncTime": 1766593680451,
 			"prefix": "每日采购",
 			"savedViewport": {
-				"x": -7870,
-				"y": -2192,
-				"zoom": 1.39
+				"x": -7127,
+				"y": 99,
+				"zoom": 1.52
 			},
 			"version": "v0.13.0"
 		}
@@ -664,6 +664,7 @@
 			"type": "Click"
 		},
 		"focus": {
+			"Node.Action.Succeeded": " \u003e 进入水晶叶商店",
 			"Node.Recognition.Starting": " \u003e 进入尊享商店"
 		},
 		"next": ["每日采购_进入水晶叶商店"],
@@ -750,9 +751,6 @@
 				"target": [215, 434, 0, 0]
 			},
 			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Starting": " \u003e 进入水晶叶商店"
 		},
 		"next": ["每日采购_选中每日免费礼包"],
 		"recognition": {
