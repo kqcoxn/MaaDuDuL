@@ -1,10 +1,10 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.4 - MFAA | 测试阶段",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.0.5 - MFAA | 测试阶段",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
-	"version": "v0.0.4",
+	"version": "v0.0.5",
 	"welcome": "欢迎使用 MDDL!",
 	"contact": "QQ群: 926874985",
 	"license": "LICENSE",

@@ -90,9 +90,9 @@ jobs:
             arch: aarch64
             runs-on: windows-latest
           # macOS 构建
-          - os: macos
-            arch: x86_64
-            runs-on: macos-12  # Intel Mac
+          # - os: macos
+          #   arch: x86_64
+          #   runs-on: macos-12  # Intel Mac
           - os: macos
             arch: aarch64
             runs-on: macos-latest  # Apple Silicon Mac
