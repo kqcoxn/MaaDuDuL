@@ -2,6 +2,7 @@ import os
 import sys
 import subprocess
 import shutil
+import jsonc
 
 current_file_path = os.path.abspath(__file__)
 current_dir = os.path.dirname(current_file_path)
@@ -47,9 +48,17 @@ def copy_files():
         if os.path.exists("MFAAvalonia/Resource/descs"):
             shutil.rmtree("MFAAvalonia/Resource/descs")
 
-        # 复制interface.json
+        # 复制interface.json并修改为使用系统Python
         if os.path.exists("assets/interface.json"):
-            shutil.copy2("assets/interface.json", "MFAAvalonia/")
+            with open("assets/interface.json", "r", encoding="utf-8") as f:
+                interface_data = jsonc.load(f)
+
+            # 修改agent配置，使用系统Python（python命令）
+            if "agent" in interface_data:
+                interface_data["agent"]["child_exec"] = "python"
+
+            with open("MFAAvalonia/interface.json", "w", encoding="utf-8") as f:
+                jsonc.dump(interface_data, f, ensure_ascii=False, indent=4)
         else:
             print("警告: assets/interface.json 不存在")
 
@@ -69,14 +78,17 @@ def copy_files():
         if os.path.exists("agent"):
             shutil.copytree("agent", "MFAAvalonia/agent", dirs_exist_ok=True)
 
-            # 修改main.py文件
+            # 修改main.py文件，设置为开发模式
             main_py_path = "MFAAvalonia/agent/main.py"
             if os.path.exists(main_py_path):
                 with open(main_py_path, "r", encoding="utf-8") as f:
                     content = f.read()
 
-                # 删除check_and_install_dependencies()调用
-                content = content.replace("check_and_install_dependencies()", "pass")
+                # 替换环境变量检查为直接跳过依赖安装
+                content = content.replace(
+                    'if __name__ == "__main__":\n    if not os.getenv("MDDL_DEV_MODE"):\n        check_and_install_dependencies()\n    main()',
+                    'if __name__ == "__main__":\n    # 开发模式：跳过依赖检查，使用本地Python环境\n    main()',
+                )
 
                 with open(main_py_path, "w", encoding="utf-8") as f:
                     f.write(content)
@@ -93,7 +105,7 @@ def copy_files():
         exe_path = "MFAAvalonia/MFAAvalonia.exe"
         if os.path.exists(exe_path):
             subprocess.Popen(exe_path)
-            print("MFAAvalonia 程序构建成功！")
+            print("MFAAvalonia 程序构建成功！（开发模式）")
         else:
             print(f"错误: {exe_path} 不存在")
 
