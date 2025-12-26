@@ -135,6 +135,14 @@ jobs:
           out-file-path: "mfw_temp" # 临时输出目录
           extract: true # 自动解压
 
+      # 清理MaaFramework压缩包
+      - name: Clean MaaFramework archives
+        shell: bash
+        run: |
+          echo "清理MaaFramework压缩包文件..."
+          rm -f mfw_temp/MAA-*.zip mfw_temp/MAA-*.tar.gz mfw_temp/MAA-*.7z
+          echo "压缩包清理完成"
+
       # 设置Python环境
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -296,43 +304,25 @@ jobs:
           name: MaaDuDuL-${{ matrix.os }}-${{ matrix.arch }} # 以平台-架构命名
           path: "install" # 上传install目录
 
-  # 任务3: 生成更新日志
+  # 任务3: 读取更新日志
   changelog:
-    name: Generate changelog
+    name: Read changelog
     runs-on: ubuntu-latest
     outputs:
-      release_body: ${{ steps.git-cliff.outputs.content }}
+      release_body: ${{ steps.read_changelog.outputs.content }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # 需要完整历史以生成changelog
 
-      # 获取上一个成功发布的正式版本tag（排除beta等预发布版本和未发布的tag）
-      - name: Get previous release tag
-        id: prev_tag
+      # 直接读取Changelog.md文件内容
+      - name: Read Changelog.md
+        id: read_changelog
         run: |
-          # 获取所有已发布的release的tag，过滤掉预发布版本（包含beta、alpha、rc等）
-          PREV_TAG=$(gh release list --limit 100 --json tagName,isPrerelease --jq '.[] | select(.isPrerelease == false) | .tagName' | sed -n '2p')
-          if [ -z "$PREV_TAG" ]; then
-            echo "range=" >> $GITHUB_OUTPUT
-          else
-            echo "range=$PREV_TAG..HEAD" >> $GITHUB_OUTPUT
-          fi
-          echo "Previous release tag: $PREV_TAG"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # 使用git-cliff生成更新日志
-      - name: Generate a changelog
-        uses: orhun/git-cliff-action@v4
-        id: git-cliff
-        with:
-          config: .github/cliff.toml # changelog配置文件
-          args: -vv ${{ steps.prev_tag.outputs.range }} --strip header # 对比上一个正式版本，去除头部
-        env:
-          OUTPUT: CHANGES.md
-          GITHUB_REPO: ${{ github.repository }}
+          # 读取Changelog.md，跳过前4行，然后设置为output
+          CHANGELOG_CONTENT=$(tail -n +5 assets/resource/Changelog.md)
+          echo "content<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
   # 任务4: 发布到GitHub Releases（仅正式版本）
   release:
