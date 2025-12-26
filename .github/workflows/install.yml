@@ -6,7 +6,7 @@ name: install
 on:
   push:
     tags:
-      - "v*"  # 仅在推送v开头的标签时触发（如v1.0.0）
+      - "v*" # 仅在推送v开头的标签时触发（如v1.0.0）
     # 注释掉分支和路径触发，避免频繁构建
     # branches:
     #   - "**"
@@ -14,14 +14,14 @@ on:
     #   - ".github/workflows/install.yml"
     #   - "assets/**"
     #   - "**.py"
-  pull_request:  # PR触发条件
+  pull_request: # PR触发条件
     branches:
-      - "**"  # 所有分支的PR
-    paths:  # 仅当以下文件变更时触发
+      - "**" # 所有分支的PR
+    paths: # 仅当以下文件变更时触发
       - ".github/workflows/install.yml"
       - "assets/**"
       - "**.py"
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch: # 允许手动触发
 
 jobs:
   # 任务1: 生成版本元数据
@@ -30,8 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取完整的git历史，用于版本号生成
-      
+          fetch-depth: 0 # 获取完整的git历史，用于版本号生成
+
       - id: set_tag
         name: 设置版本标签
         run: |
@@ -51,7 +51,7 @@ jobs:
             # 为CI构建添加日期和commit hash
             tag=$(date "+$tag-%y%m%d-$(git rev-parse --short HEAD)")
           fi
-          
+
           # 非正式发布版本添加ci标记
           if ! $($is_release) ; then
             prefix=${tag%-*-*}
@@ -77,8 +77,8 @@ jobs:
 
   # 任务2: 多平台构建与打包
   install:
-    needs: meta  # 依赖meta任务完成
-    runs-on: ${{ matrix.runs-on }}  # 根据目标平台选择运行环境
+    needs: meta # 依赖meta任务完成
+    runs-on: ${{ matrix.runs-on }} # 根据目标平台选择运行环境
     strategy:
       matrix:
         include:
@@ -90,12 +90,14 @@ jobs:
             arch: aarch64
             runs-on: windows-latest
           # macOS 构建
-          # - os: macos
-          #   arch: x86_64
-          #   runs-on: macos-12  # Intel Mac
+          - os: macos
+            arch: x86_64
+            runs-on: macos-latest
+            is_macos: true
           - os: macos
             arch: aarch64
-            runs-on: macos-latest  # Apple Silicon Mac
+            runs-on: macos-latest
+            is_macos: true
           # Linux 构建
           - os: linux
             arch: x86_64
@@ -103,12 +105,12 @@ jobs:
           - os: linux
             arch: aarch64
             runs-on: ubuntu-latest
-      fail-fast: true  # 某个构建失败停止其他构建
+      fail-fast: false # 允许部分构建失败时继续其他构建
 
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true  # 同时检出子模块
+          submodules: true # 同时检出子模块
 
       # 读取版本配置文件
       - name: 读取依赖版本配置
@@ -137,7 +139,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       # 设置嵌入式Python环境（仅Windows x64）
       - name: Setup Embed Python
@@ -195,7 +197,7 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-${{ steps.mfa_naming.outputs.mfa_os }}-${{ steps.mfa_naming.outputs.mfa_arch }}*"
-          tag: ${{ steps.versions.outputs.MFAA_VERSION }}  # 从versions.json读取版本
+          tag: ${{ steps.versions.outputs.MFAA_VERSION }} # 从versions.json读取版本
           out-file-path: "MFA"
           extract: true
 
@@ -265,8 +267,8 @@ jobs:
       # 上传构建产物
       - uses: actions/upload-artifact@v4
         with:
-          name: MaaDuDuL-${{ matrix.os }}-${{ matrix.arch }}  # 以平台-架构命名
-          path: "install"  # 上传install目录
+          name: MaaDuDuL-${{ matrix.os }}-${{ matrix.arch }} # 以平台-架构命名
+          path: "install" # 上传install目录
 
   # 任务3: 生成更新日志
   changelog:
@@ -278,7 +280,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 需要完整历史以生成changelog
+          fetch-depth: 0 # 需要完整历史以生成changelog
 
       # 获取上一个成功发布的正式版本tag（排除beta等预发布版本和未发布的tag）
       - name: Get previous release tag
@@ -300,16 +302,16 @@ jobs:
         uses: orhun/git-cliff-action@v4
         id: git-cliff
         with:
-          config: .github/cliff.toml  # changelog配置文件
-          args: -vv ${{ steps.prev_tag.outputs.range }} --strip header  # 对比上一个正式版本，去除头部
+          config: .github/cliff.toml # changelog配置文件
+          args: -vv ${{ steps.prev_tag.outputs.range }} --strip header # 对比上一个正式版本，去除头部
         env:
           OUTPUT: CHANGES.md
           GITHUB_REPO: ${{ github.repository }}
 
   # 任务4: 发布到GitHub Releases（仅正式版本）
   release:
-    if: ${{ needs.meta.outputs.is_release == 'true' }}  # 仅在正式发布时执行
-    needs: [meta, install, changelog]  # 依赖前三个任务
+    if: ${{ needs.meta.outputs.is_release == 'true' }} # 仅在正式发布时执行
+    needs: [meta, install, changelog] # 依赖前三个任务
     runs-on: ubuntu-latest
     steps:
       # 下载所有构建产物
@@ -324,15 +326,15 @@ jobs:
           for f in *; do
             (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
           done
-          
+
       # 创建GitHub Release
       - uses: softprops/action-gh-release@v2
         with:
-          files: assets/*  # 上传所有打包文件
-          tag_name: ${{ needs.meta.outputs.tag }}  # 使用版本标签
-          body: ${{ needs.changelog.outputs.release_body }}  # 使用生成的changelog
-          draft: false  # 不设为草稿
-          prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}  # 标记预发布
+          files: assets/* # 上传所有打包文件
+          tag_name: ${{ needs.meta.outputs.tag }} # 使用版本标签
+          body: ${{ needs.changelog.outputs.release_body }} # 使用生成的changelog
+          draft: false # 不设为草稿
+          prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }} # 标记预发布
 
         # Mirror酱为第三方分发服务，新项目默认关闭
         # 若有需要请联系 Mirror酱 开通，直接自行开启是无法使用的
