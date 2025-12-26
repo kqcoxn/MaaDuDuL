@@ -126,14 +126,14 @@ jobs:
           echo "MFAAvalonia版本: $MFAA_VERSION"
 
       # MaaFramework下载
-      # - name: Download MaaFramework
-      #   uses: robinraju/release-downloader@v1
-      #   with:
-      #     repository: MaaXYZ/MaaFramework
-      #     fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"  # 匹配对应平台的文件
-      #     tag: ${{ steps.versions.outputs.MAA_FRAMEWORK_VERSION }}  # 从versions.json读取版本
-      #     out-file-path: "deps"  # 输出到deps目录
-      #     extract: true  # 自动解压
+      - name: Download MaaFramework
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*" # 匹配对应平台的文件
+          tag: ${{ steps.versions.outputs.MAA_FRAMEWORK_VERSION }} # 从versions.json读取版本
+          out-file-path: "mfw_temp" # 临时输出目录
+          extract: true # 自动解压
 
       # 设置Python环境
       - name: Setup Python
@@ -210,7 +210,33 @@ jobs:
           cp -r MFA/* install/  # 复制所有MFA文件
           rm -f install/MFAAvalonia-*.zip install/MFAAvalonia-*.tar.gz  # 清理下载的压缩包
 
-      # 配置 descs 说明文件
+          # 清理MFAA自带的deps文件夹内容
+          if [ -d "install/deps" ]; then
+            echo "清理MFAA自带的deps目录..."
+            rm -rf install/deps/*
+          else
+            echo "创建deps目录..."
+            mkdir -p install/deps
+          fi
+
+      # 部署MaaFramework到deps目录
+      - name: Deploy MaaFramework to deps
+        shell: bash
+        run: |
+          # 将下载的MaaFramework移动到deps目录
+          if [ -d "mfw_temp" ]; then
+            echo "将MaaFramework部署到install/deps/目录..."
+            cp -r mfw_temp/* install/deps/
+            echo "MaaFramework部署完成，文件列表："
+            ls -la install/deps/
+            rm -rf mfw_temp  # 清理临时目录
+            echo "临时目录已清理"
+          else
+            echo "错误: MaaFramework临时目录(mfw_temp)不存在"
+            exit 1
+          fi
+
+      # 配置descs说明文件
       - name: Install descs to Resource
         shell: bash
         run: |
