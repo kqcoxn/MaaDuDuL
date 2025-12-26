@@ -23,7 +23,7 @@ def main():
     from agent.preprocess import clear
     from maa.agent.agent_server import AgentServer
     from maa.toolkit import Toolkit
-    import customs
+    from agent import customs
 
     try:
         # 清理调试文件
