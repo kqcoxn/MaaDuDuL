@@ -22,7 +22,7 @@ def punch_in():
         # 发送 POST 请求到统计服务器
         response = requests.post(
             "http://ts.codax.site/repo",
-            json={"from": "mddl", "version": "v0.0.7"},
+            json={"from": "mddl", "version": "v0.0.8"},
             headers={"Content-Type": "application/json"},
             timeout=3,
         )

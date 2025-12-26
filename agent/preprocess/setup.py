@@ -167,6 +167,7 @@ def _install_requirements(req_file=None, mirrors=None) -> bool:
                 print(f"info:正在使用镜像源更新依赖环境...")
             else:
                 print(f"info:正在使用默认源更新依赖环境...")
+            print(f"info:（可能需要至多5分钟，请耐心等待）")
 
             cmd = [
                 python_exe,

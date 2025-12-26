@@ -11,7 +11,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from agent.preprocess import check_and_install_dependencies
+from agent.preprocess import check_and_install_dependencies, clear
 
 # 设置控制台编码
 sys.stdout.reconfigure(encoding="gbk")
@@ -20,10 +20,10 @@ sys.stderr.reconfigure(encoding="gbk")
 
 def main():
     """启动 MaaDuDuL Agent 服务"""
-    from agent.preprocess import clear
     from maa.agent.agent_server import AgentServer
     from maa.toolkit import Toolkit
     from agent import customs
+    from agent.devops import punch_in
 
     try:
         # 清理调试文件
@@ -33,6 +33,9 @@ def main():
         # 获取 socket ID 并启动服务
         socket_id = sys.argv[-1]
         AgentServer.start_up(socket_id)
+        # devops
+        punch_in()
+        # 等待服务结束
         AgentServer.join()
         AgentServer.shut_down()
 
