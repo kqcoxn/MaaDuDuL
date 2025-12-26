@@ -76,13 +76,14 @@ if [ "$USE_TAR" = true ]; then
     echo -e "\033[32mPython已解压到 $DEST_DIR\033[0m"
 fi
 
-# 确保Python可执行
+# 确保Python可执行（使用绝对路径避免cd后路径失效）
+BASE_DIR=$(pwd)
 if [ -f "$DEST_DIR/bin/python3" ]; then
     chmod +x "$DEST_DIR/bin/python3"
-    PYTHON_BIN="$DEST_DIR/bin/python3"
+    PYTHON_BIN="$BASE_DIR/$DEST_DIR/bin/python3"
 elif [ -f "$DEST_DIR/bin/python" ]; then
     chmod +x "$DEST_DIR/bin/python"
-    PYTHON_BIN="$DEST_DIR/bin/python"
+    PYTHON_BIN="$BASE_DIR/$DEST_DIR/bin/python"
 else
     echo -e "\033[31m错误: 未找到Python可执行文件\033[0m"
     exit 1
