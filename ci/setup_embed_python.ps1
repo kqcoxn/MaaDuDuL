@@ -1,7 +1,7 @@
 # 嵌入式Python安装脚本
 
 # 基本变量
-$PythonVersion = "3.12.9"
+$PythonVersion = "3.12.7"
 $DestDir = "install/python"
 $ScriptsDir = "ci"  # 存放准备好的文件的目录
 

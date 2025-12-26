@@ -4,7 +4,7 @@
 set -e  # 遇到错误立即退出
 
 # 基本变量
-PYTHON_VERSION="3.12.9"
+PYTHON_VERSION="3.12.7"
 DEST_DIR="install/python"
 SCRIPTS_DIR="ci"
 
