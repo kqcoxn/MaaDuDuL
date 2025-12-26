@@ -2,9 +2,31 @@
 
 # 基本变量
 $PythonVersion = "3.12.9"
-$Architecture = "amd64" # 可选 "win32"
 $DestDir = "install/python"
 $ScriptsDir = "ci"  # 存放准备好的文件的目录
+
+# 检测系统架构
+$ProcessorArch = $env:PROCESSOR_ARCHITECTURE
+Write-Host "检测到处理器架构: $ProcessorArch" -ForegroundColor Cyan
+
+# 映射到Python嵌入式包架构命名
+switch ($ProcessorArch) {
+    "AMD64" {
+        $Architecture = "amd64"
+    }
+    "ARM64" {
+        $Architecture = "arm64"
+    }
+    "x86" {
+        $Architecture = "win32"
+    }
+    default {
+        Write-Host "错误: 不支持的架构 $ProcessorArch" -ForegroundColor Red
+        exit 1
+    }
+}
+
+Write-Host "Python嵌入式包架构: $Architecture" -ForegroundColor Cyan
 
 # 创建目标目录
 if (-not (Test-Path $DestDir)) {

@@ -32,19 +32,18 @@ esac
 # 根据操作系统设置下载URL
 case "$OS_TYPE" in
     Darwin)
-        # macOS平台
+        # macOS平台使用python-build-standalone
         if [ "$ARCH" = "x86_64" ]; then
-            PYTHON_URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-macos11.pkg"
-            USE_PKG=true
+            PYTHON_URL="https://github.com/indygreg/python-build-standalone/releases/download/20241016/cpython-${PYTHON_VERSION}+20241016-x86_64-apple-darwin-install_only.tar.gz"
         else
-            PYTHON_URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-macos11.pkg"
-            USE_PKG=true
+            PYTHON_URL="https://github.com/indygreg/python-build-standalone/releases/download/20241016/cpython-${PYTHON_VERSION}+20241016-aarch64-apple-darwin-install_only.tar.gz"
         fi
+        USE_TAR=true
         ;;
     Linux)
         # Linux平台使用预编译的Python独立构建
         PYTHON_URL="https://github.com/indygreg/python-build-standalone/releases/download/20241016/cpython-${PYTHON_VERSION}+20241016-${ARCH}-unknown-linux-gnu-install_only.tar.gz"
-        USE_PKG=false
+        USE_TAR=true
         ;;
     *)
         echo -e "\033[31m错误: 不支持的操作系统 $OS_TYPE\033[0m"
@@ -64,46 +63,8 @@ if [ -f "$PYTHON_BIN" ]; then
 fi
 
 # 下载并安装Python
-if [ "$USE_PKG" = true ]; then
-    # macOS pkg安装方式
-    PYTHON_PKG="python-installer.pkg"
-    echo -e "\033[36m下载Python pkg: $PYTHON_URL\033[0m"
-    curl -L -o "$PYTHON_PKG" "$PYTHON_URL"
-    
-    # 提取pkg内容到临时目录
-    TEMP_DIR=$(mktemp -d)
-    echo -e "\033[36m提取pkg到临时目录...\033[0m"
-    
-    # macOS上，从官方pkg提取Python框架
-    # 使用pkgutil展开pkg
-    pkgutil --expand "$PYTHON_PKG" "$TEMP_DIR/expanded"
-    
-    # 查找Python框架的Payload并提取
-    FRAMEWORK_PAYLOAD=$(find "$TEMP_DIR/expanded" -name "Payload" -path "*/Python.framework/*" | head -n 1)
-    if [ -n "$FRAMEWORK_PAYLOAD" ]; then
-        cd "$TEMP_DIR"
-        cat "$FRAMEWORK_PAYLOAD" | gunzip -dc | cpio -i
-        
-        # 查找实际的Python安装位置
-        PYTHON_FW_PATH=$(find "$TEMP_DIR" -type d -name "Python.framework" | head -n 1)
-        if [ -n "$PYTHON_FW_PATH" ]; then
-            # 获取版本号（主版本.次版本）
-            PYTHON_VER_SHORT=$(echo "$PYTHON_VERSION" | cut -d. -f1,2)
-            PYTHON_INSTALL_PATH="$PYTHON_FW_PATH/Versions/$PYTHON_VER_SHORT"
-            
-            if [ -d "$PYTHON_INSTALL_PATH" ]; then
-                # 复制到目标目录
-                cp -r "$PYTHON_INSTALL_PATH/"* "$DEST_DIR/"
-                echo -e "\033[32mPython框架已提取到 $DEST_DIR\033[0m"
-            fi
-        fi
-        cd - > /dev/null
-    fi
-    
-    # 清理
-    rm -rf "$TEMP_DIR" "$PYTHON_PKG"
-else
-    # Linux tar.gz安装方式
+if [ "$USE_TAR" = true ]; then
+    # tar.gz安装方式（适用于macOS和Linux）
     PYTHON_TAR="python-embedded.tar.gz"
     echo -e "\033[36m下载Python: $PYTHON_URL\033[0m"
     curl -L -o "$PYTHON_TAR" "$PYTHON_URL"
@@ -112,6 +73,7 @@ else
     echo -e "\033[36m解压Python到: $DEST_DIR\033[0m"
     tar -xzf "$PYTHON_TAR" -C "$DEST_DIR" --strip-components=1
     rm "$PYTHON_TAR"
+    echo -e "\033[32mPython已解压到 $DEST_DIR\033[0m"
 fi
 
 # 确保Python可执行

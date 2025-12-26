@@ -149,16 +149,16 @@ jobs:
         with:
           python-version: "3.12"
 
-      # 设置嵌入式Python环境（Windows x64）
+      # 设置嵌入式Python环境（Windows）
       - name: Setup Embed Python (Windows)
-        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        if: matrix.os == 'win'
         shell: powershell
         run: |
           ./ci/setup_embed_python.ps1
 
       # 设置嵌入式Python环境（macOS）
       - name: Setup Embed Python (macOS)
-        if: matrix.os == 'macos' && matrix.arch == 'x86_64'
+        if: matrix.os == 'macos'
         shell: bash
         run: |
           chmod +x ./ci/setup_embed_python.sh
@@ -166,7 +166,7 @@ jobs:
 
       # 设置嵌入式Python环境（Linux）
       - name: Setup Embed Python (Linux)
-        if: matrix.os == 'linux' && matrix.arch == 'x86_64'
+        if: matrix.os == 'linux'
         shell: bash
         run: |
           chmod +x ./ci/setup_embed_python.sh
