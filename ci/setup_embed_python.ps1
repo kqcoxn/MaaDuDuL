@@ -118,4 +118,18 @@ try {
     Set-Location $CurrentLocation
 }
 
+# 清理临时文件
+Write-Host "清理临时文件..." -ForegroundColor Cyan
+$SetupPipInDest = Join-Path $DestDir "setup_pip.py"
+if (Test-Path $SetupPipInDest) {
+    Remove-Item $SetupPipInDest -Force
+    Write-Host "已清理 setup_pip.py" -ForegroundColor Green
+}
+
+# 确保压缩包已清理
+if (Test-Path "python-embedded.zip") {
+    Remove-Item "python-embedded.zip" -Force
+    Write-Host "已清理 Python 压缩包" -ForegroundColor Green
+}
+
 Write-Host "all done" -ForegroundColor Green

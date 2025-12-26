@@ -115,4 +115,17 @@ fi
 
 cd - > /dev/null
 
+# 清理临时文件
+echo -e "\033[36m清理临时文件...\033[0m"
+if [ -f "$DEST_DIR/setup_pip.py" ]; then
+    rm "$DEST_DIR/setup_pip.py"
+    echo -e "\033[32m已清理 setup_pip.py\033[0m"
+fi
+
+# 确保压缩包已清理
+if [ -f "python-embedded.tar.gz" ]; then
+    rm "python-embedded.tar.gz"
+    echo -e "\033[32m已清理 Python 压缩包\033[0m"
+fi
+
 echo -e "\033[32m全部完成\033[0m"
