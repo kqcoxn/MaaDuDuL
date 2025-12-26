@@ -91,9 +91,9 @@ def install_config():
     install_path.mkdir(parents=True, exist_ok=True)
 
     # 复制config文件夹
-    if (working_dir / "config").exists():
+    if (working_dir / "ci" / "config").exists():
         shutil.copytree(
-            working_dir / "config",
+            working_dir / "ci" / "config",
             install_path / "config",
             dirs_exist_ok=True,
         )

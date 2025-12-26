@@ -149,12 +149,28 @@ jobs:
         with:
           python-version: "3.12"
 
-      # 设置嵌入式Python环境（仅Windows x64）
-      - name: Setup Embed Python
+      # 设置嵌入式Python环境（Windows x64）
+      - name: Setup Embed Python (Windows)
         if: matrix.os == 'win' && matrix.arch == 'x86_64'
         shell: powershell
         run: |
           ./ci/setup_embed_python.ps1
+
+      # 设置嵌入式Python环境（macOS）
+      - name: Setup Embed Python (macOS)
+        if: matrix.os == 'macos' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          chmod +x ./ci/setup_embed_python.sh
+          ./ci/setup_embed_python.sh
+
+      # 设置嵌入式Python环境（Linux）
+      - name: Setup Embed Python (Linux)
+        if: matrix.os == 'linux' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          chmod +x ./ci/setup_embed_python.sh
+          ./ci/setup_embed_python.sh
 
       # 合并Pipeline配置文件
       - name: Merge Pipeline
