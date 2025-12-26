@@ -98,14 +98,6 @@ def install_config():
             dirs_exist_ok=True,
         )
 
-    # 复制descs文件夹
-    if (working_dir / "descs").exists():
-        shutil.copytree(
-            working_dir / "descs",
-            install_path / "descs",
-            dirs_exist_ok=True,
-        )
-
 
 def install_agent():
     """安装agent代码，但排除config目录（已在install_config中处理）"""

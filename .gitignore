@@ -1,6 +1,7 @@
 # dev
 MFAAvalonia/*
 .nicegui/
+/config
 
 # docs
 docs/node_modules
