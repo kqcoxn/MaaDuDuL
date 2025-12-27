@@ -1,0 +1,59 @@
+{
+  "$__mpe_config_YOLO": {
+    "$__mpe_code": {
+      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\YOLO.json",
+      "filename": "YOLO",
+      "lastSyncTime": 1766849694826,
+      "prefix": "YOLO",
+      "savedViewport": {
+        "x": -6909,
+        "y": 603,
+        "zoom": 1.74
+      },
+      "version": "v0.13.0"
+    }
+  },
+  "YOLO_捏脸": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4301,
+        "y": -287
+      }
+    },
+    "action": {
+      "param": {
+        "duration": [
+          200
+        ],
+        "end_hold": [
+          400
+        ],
+        "end_offset": [
+          [
+            -100,
+            100,
+            0,
+            0
+          ]
+        ]
+      },
+      "type": "Swipe"
+    },
+    "recognition": {
+      "param": {
+        "expected": [
+          0
+        ],
+        "labels": [
+          "face"
+        ],
+        "model": "face.onnx",
+        "order_by": "Random",
+        "threshold": [
+          0.572
+        ]
+      },
+      "type": "NeuralNetworkDetect"
+    }
+  }
+}

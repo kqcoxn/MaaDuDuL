@@ -139,6 +139,11 @@
 			"label": "——— 新增任务 ———",
 			"entry": "新增任务分隔符",
 			"description": "Resource/descs/others/new_task.md"
+		},
+		{
+			"name": "测试",
+			"label": "测试",
+			"entry": "捏脸"
 		}
 	],
 	"option": {
