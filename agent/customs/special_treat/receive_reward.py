@@ -21,7 +21,7 @@ class ReceiveTaskReward(CustomAction):
             if category == "日":
                 category = "天"
 
-            context.run_task(
+            Tasker(context).run(
                 "领取奖励_领取任务奖励开始",
                 {
                     "领取奖励_进入具体任务面板": {"expected": f"{category}"},
@@ -52,7 +52,7 @@ class ReceivePassReward(CustomAction):
             elif category == "冒险":
                 category = "adv_pass"
 
-            context.run_task(
+            Tasker(context).run(
                 "领取奖励_领取通行证奖励开始",
                 {
                     "领取奖励_进入通行证界面": {"template": f"main/{category}.png"},

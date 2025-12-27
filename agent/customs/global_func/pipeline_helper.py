@@ -11,10 +11,10 @@ class Run(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         try:
             args = ParamAnalyzer(argv)
-            task = args.get(["task", "t"])
+            entry = args.get(["task", "t", "node", "n", "entry"])
             expected_end = args.get(["expected_end", "ee", "e"], "")
 
-            task_detail = context.run_task(task)
+            task_detail = Tasker(context).run(entry)
 
             if expected_end:
                 if Tasker.get_last_node_name(task_detail) != expected_end:

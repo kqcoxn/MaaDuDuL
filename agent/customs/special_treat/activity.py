@@ -38,7 +38,7 @@ class EnterActivity(CustomAction):
             title = args.get(["title", "t"])
 
             # 运行进入活动界面的 Pipeline 任务
-            task_detail = context.run_task(
+            task_detail = Tasker(context).run(
                 "进入活动界面_开始",
                 {
                     "进入活动界面_识别活动": {"expected": title},
@@ -85,7 +85,7 @@ class ClaimCandy(CustomAction):
             Prompter.log(f"领取{time}糖果")
 
             # 运行领取糖果的 Pipeline 任务
-            context.run_task(
+            Tasker(context).run(
                 "领取糖果_领取糖果开始",
                 {
                     "领取糖果_周期检查": {"custom_action_param": f"k={periodic_key}"},

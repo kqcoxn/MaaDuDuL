@@ -134,7 +134,7 @@ class SelectDuplicateLevel(CustomAction):
             if type(level) is int and level < 10:
                 level = f"0{level}"
 
-            context.run_task(
+            Tasker(context).run(
                 "清紫糖_查找关卡开始", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
             )
 

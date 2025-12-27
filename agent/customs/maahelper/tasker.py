@@ -8,6 +8,7 @@ from maa.context import Context
 from maa.define import TaskDetail
 from maa.tasker import Controller
 
+from typing import Dict
 import numpy as np
 import time
 
@@ -47,21 +48,55 @@ class Tasker:
         """
         return self.context.tasker.stopping
 
-    def run_node(self, node: str):
-        """运行单个任务节点。
+    def run(self, entry: str, pipeline_override: Dict = {}):
+        """运行指定的任务节点。
 
-        执行指定的任务节点，不设置后续节点、中断节点或错误处理节点。
+        执行 MaaFramework 任务，会自动为所有节点注入运行监测器，
+        确保任务执行过程可被监控。
 
         Args:
-            node: 要执行的任务节点名称。
+            entry: 任务入口节点名称，即任务流程的起始节点。
+            pipeline_override: 任务管道覆盖配置，用于动态修改节点行为，默认为空字典。
 
         Returns:
-            Tasker: 返回自身，支持链式调用。
+            任务执行结果对象。
         """
-        self.context.run_task(
-            node, {node: {"next": [], "interrupt": [], "on_error": []}}
-        )
-        return self
+        # 构造默认 next_override
+        node_list = self.context.tasker.resource.node_list
+        for node_name in node_list:
+            # 跳过监测器节点本身
+            if node_name == "_run_task_monitor_inject":
+                continue
+
+            # 初始化 next
+            node_data = self.context.tasker.resource.get_node_data(node_name)
+            current_next = []
+            exist_node_override = node_name in pipeline_override
+            if exist_node_override:
+                if "next" in pipeline_override[node_name]:
+                    current_next = pipeline_override[node_name]["next"]
+            elif node_data and "next" in node_data:
+                current_next = node_data["next"]
+
+            # 注入监测器
+            if isinstance(current_next, str):
+                current_next = [current_next] if current_next else []
+            elif not isinstance(current_next, list):
+                current_next = []
+
+            # 检查是否已经注入过监测器，避免嵌套调用时重复注入
+            if current_next and current_next[0] == "_run_task_monitor_inject":
+                continue
+
+            new_next = ["_run_task_monitor_inject"] + current_next
+
+            # 合成 override
+            if exist_node_override:
+                pipeline_override[node_name]["next"] = new_next
+            else:
+                pipeline_override[node_name] = {"next": new_next}
+
+        return self.Tasker(context).run(entry, pipeline_override)
 
     def screenshot(self) -> np.ndarray:
         """执行截图操作。

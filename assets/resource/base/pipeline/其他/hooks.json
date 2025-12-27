@@ -1,0 +1,8 @@
+{
+	"_run_task_monitor_inject": {
+		"recognition": "Custom",
+		"custom_recognition": "check_stopping",
+		"pre_delay": 0,
+		"post_delay": 0
+	}
+}

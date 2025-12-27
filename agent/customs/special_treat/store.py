@@ -22,7 +22,7 @@ class Buy(CustomAction):
 
             Prompter.log(f"购买{goods}")
 
-            context.run_task(
+            Tasker(context).run(
                 "每日采购_购买商品",
                 {
                     "每日采购_查看商品详情": {"expected": goods},

@@ -31,7 +31,7 @@ class RecoHelper:
         best_result: 最佳匹配的识别结果
     """
 
-    NoResult = CustomRecognition.AnalyzeResult(box=None, detail={})
+    NoResult = CustomRecognition.AnalyzeResult(box=None, detail={"hit": False})
 
     def __init__(self, context: Context, argv: CustomRecognition.AnalyzeArg = None):
         """初始化识别辅助器。
@@ -252,4 +252,4 @@ class RecoHelper:
         if result:
             box = result.box if hasattr(result, "box") else box
             text = result.text if hasattr(result, "text") else text
-        return CustomRecognition.AnalyzeResult(box, text)
+        return CustomRecognition.AnalyzeResult(box, {"text": text, "hit": True})
