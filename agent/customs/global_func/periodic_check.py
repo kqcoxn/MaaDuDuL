@@ -182,7 +182,7 @@ class PeriodicCheck(CustomAction):
         """
         try:
             args = ParamAnalyzer(argv)
-            key = args.get(["key", "k"])
+            key = args.get(["key", "k", "task", "t"])
             periodic = args.get(["periodic", "p"], "day")
             record_immediately = args.get(["record", "r"], False)
 
@@ -235,7 +235,7 @@ class SetLastPeriodicCheck(CustomAction):
         """
         try:
             args = ParamAnalyzer(argv)
-            key = args.get(["key", "k"])
+            key = args.get(["key", "k", "task", "t"])
             Inspector.record(key)
             return True
         except Exception as e:

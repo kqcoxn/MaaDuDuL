@@ -3,21 +3,21 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\速战.json",
 			"filename": "速战",
-			"lastSyncTime": 1766672014262,
+			"lastSyncTime": 1767030011460,
 			"prefix": "速战",
 			"savedViewport": {
-				"x": -9409,
-				"y": -667,
-				"zoom": 1.21
+				"x": -7916,
+				"y": -364,
+				"zoom": 0.92
 			},
-			"version": "v0.13.0"
+			"version": "v0.13.1"
 		}
 	},
 	"速战_不购买": {
 		"$__mpe_code": {
 			"position": {
 				"x": 8733,
-				"y": 1180
+				"y": 1160
 			}
 		},
 		"action": {
@@ -36,7 +36,7 @@
 		"$__mpe_code": {
 			"position": {
 				"x": 8468,
-				"y": 1180
+				"y": 1160
 			}
 		},
 		"action": {
@@ -89,7 +89,7 @@
 		"focus": {
 			"Node.Recognition.Starting": " \u003e 准备速战"
 		},
-		"next": ["速战_最大倍率", "速战_无法速战", "速战_体力不足"],
+		"next": ["速战_确保可战斗", "速战_无法速战", "速战_体力不足"],
 		"recognition": {
 			"param": {
 				"expected": ["速战"],
@@ -98,11 +98,30 @@
 			"type": "OCR"
 		}
 	},
+	"速战_指定作战次数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8221,
+				"y": 519
+			}
+		},
+		"action": {
+			"param": {
+				"target": [640, 484, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["速战_输入作战次数"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"速战_无法速战": {
 		"$__mpe_code": {
 			"position": {
 				"x": 8473,
-				"y": 933
+				"y": 913
 			}
 		},
 		"action": {
@@ -122,8 +141,8 @@
 	"速战_最大倍率": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8474,
-				"y": 704
+				"x": 8739,
+				"y": 703
 			}
 		},
 		"action": {
@@ -139,11 +158,50 @@
 			"type": "OCR"
 		}
 	},
+	"速战_确保可战斗": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8474,
+				"y": 704
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["速战_最大倍率"],
+		"recognition": {
+			"param": {
+				"expected": ["最大"],
+				"roi": [824, 468, 64, 37]
+			},
+			"type": "OCR"
+		}
+	},
+	"速战_确定作战次数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8737,
+				"y": 516
+			}
+		},
+		"action": {
+			"param": {
+				"target": [634, 353, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["速战_速战"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"速战_确认奖励": {
 		"$__mpe_code": {
 			"position": {
-				"x": 9262,
-				"y": 703
+				"x": 9541,
+				"y": 697
 			}
 		},
 		"action": {
@@ -161,18 +219,40 @@
 			"type": "OCR"
 		}
 	},
+	"速战_等级提升": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9540,
+				"y": 505
+			}
+		},
+		"action": {
+			"param": {
+				"target": [634, 615, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["速战_确认奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
 	"速战_跳过动画": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8994,
-				"y": 704
+				"x": 9273,
+				"y": 700
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "Click"
 		},
-		"next": ["速战_确认奖励"],
+		"next": ["速战_确认奖励", "速战_等级提升"],
+		"pre_delay": 200,
 		"recognition": {
 			"param": {
 				"expected": ["跳过"],
@@ -181,11 +261,30 @@
 			"type": "OCR"
 		}
 	},
+	"速战_输入作战次数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8473,
+				"y": 517
+			}
+		},
+		"action": {
+			"param": {
+				"input_text": "1"
+			},
+			"type": "InputText"
+		},
+		"next": ["速战_确定作战次数"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"速战_速战": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8734,
-				"y": 704
+				"x": 9013,
+				"y": 700
 			}
 		},
 		"action": {
@@ -195,7 +294,7 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 开始战斗"
 		},
-		"next": ["速战_跳过动画", "速战_确认奖励"],
+		"next": ["速战_跳过动画", "速战_确认奖励", "速战_等级提升"],
 		"recognition": {
 			"param": {
 				"expected": ["速战"],

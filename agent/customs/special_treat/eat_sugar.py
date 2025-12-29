@@ -18,6 +18,50 @@ from agent.customs.utils import Prompter, MatrixOperator
 from agent.customs.maahelper import ParamAnalyzer, Tasker
 
 
+@AgentServer.custom_action("quick_fight")
+class QuickFight(CustomAction):
+    """快速战斗的自定义动作
+
+    直接启动速战流程，支持指定作战次数。
+    当指定次数时，会覆盖速战流程中的相关配置。
+
+    参数格式：
+        - times 或 t：作战次数（可选，默认为 -1 表示不限次数）
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行快速战斗操作
+
+        参数：
+            context：MaaFramework 上下文对象
+            argv：自定义动作参数，包含作战次数
+
+        返回：
+            bool：操作成功返回 True，失败返回 False
+
+        异常：
+            捕获所有异常并通过 Prompter.error 输出错误信息
+        """
+        try:
+            # 解析参数获取关卡编号
+            args = ParamAnalyzer(argv)
+            times: int = args.get(["times", "t"], -1)
+
+            pipeline_override = {}
+            if times > 0:
+                Prompter.log(f"指定作战次数：{times} 次")
+                pipeline_override = {
+                    "速战_确保可战斗": {"next": "速战_指定作战次数"},
+                    "速战_输入作战次数": {"input_text": str(times)},
+                }
+
+            Tasker(context).run("速战_开始", pipeline_override)
+
+            return True
+        except Exception as e:
+            return Prompter.error("速战", e)
+
+
 @AgentServer.custom_action("select_clone_level")
 class SelectCloneLevel(CustomAction):
     """选择克隆工厂关卡的自定义动作
@@ -122,10 +166,28 @@ class SelectCrayonLevel(CustomAction):
 
 @AgentServer.custom_action("select_duplicate_level")
 class SelectDuplicateLevel(CustomAction):
-    """"""
+    """选择副本关卡的自定义动作
+
+    根据传入的关卡编号，通过 Pipeline 查找并选择对应的副本关卡。
+    自动将小于 10 的关卡编号格式化为两位数字（如 1 转换为 "01"）。
+
+    参数格式：
+        - level 或 l：关卡编号（整数型）
+    """
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        """"""
+        """执行副本关卡选择操作
+
+        参数：
+            context：MaaFramework 上下文对象
+            argv：自定义动作参数，包含关卡编号
+
+        返回：
+            bool：操作成功返回 True，失败返回 False
+
+        异常：
+            捕获所有异常并通过 Prompter.error 输出错误信息
+        """
         try:
             args = ParamAnalyzer(argv)
             level: int = args.get(["level", "l"])
