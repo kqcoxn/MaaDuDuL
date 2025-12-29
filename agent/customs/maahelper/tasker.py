@@ -96,7 +96,7 @@ class Tasker:
             else:
                 pipeline_override[node_name] = {"next": new_next}
 
-        return self.Tasker(context).run(entry, pipeline_override)
+        return self.context.run_task(entry, pipeline_override)
 
     def screenshot(self) -> np.ndarray:
         """执行截图操作。
