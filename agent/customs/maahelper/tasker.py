@@ -68,33 +68,51 @@ class Tasker:
             if node_name == "_run_task_monitor_inject":
                 continue
 
-            # 初始化 next
+            # 获取节点数据和 override 状态
             node_data = self.context.tasker.resource.get_node_data(node_name)
-            current_next = []
             exist_node_override = node_name in pipeline_override
-            if exist_node_override:
-                if "next" in pipeline_override[node_name]:
-                    current_next = pipeline_override[node_name]["next"]
+
+            # 处理 next 字段注入
+            current_next = []
+            if exist_node_override and "next" in pipeline_override[node_name]:
+                current_next = pipeline_override[node_name]["next"]
             elif node_data and "next" in node_data:
                 current_next = node_data["next"]
 
-            # 注入监测器
+            # 标准化 next 为列表
             if isinstance(current_next, str):
                 current_next = [current_next] if current_next else []
             elif not isinstance(current_next, list):
                 current_next = []
 
-            # 检查是否已经注入过监测器，避免嵌套调用时重复注入
-            if current_next and current_next[0] == "_run_task_monitor_inject":
-                continue
+            # 如果有 next 且未注入过监测器，则注入
+            if current_next and current_next[0] != "_run_task_monitor_inject":
+                new_next = ["_run_task_monitor_inject"] + current_next
+                if exist_node_override:
+                    pipeline_override[node_name]["next"] = new_next
+                else:
+                    pipeline_override[node_name] = {"next": new_next}
 
-            new_next = ["_run_task_monitor_inject"] + current_next
+            # 处理 on_error 字段注入
+            current_on_error = []
+            if exist_node_override and "on_error" in pipeline_override[node_name]:
+                current_on_error = pipeline_override[node_name]["on_error"]
+            elif node_data and "on_error" in node_data:
+                current_on_error = node_data["on_error"]
 
-            # 合成 override
-            if exist_node_override:
-                pipeline_override[node_name]["next"] = new_next
-            else:
-                pipeline_override[node_name] = {"next": new_next}
+            # 标准化 on_error 为列表
+            if isinstance(current_on_error, str):
+                current_on_error = [current_on_error] if current_on_error else []
+            elif not isinstance(current_on_error, list):
+                current_on_error = []
+
+            # 如果有 on_error 且未注入过监测器，则注入
+            if current_on_error and current_on_error[0] != "_run_task_monitor_inject":
+                new_on_error = ["_run_task_monitor_inject"] + current_on_error
+                if exist_node_override:
+                    pipeline_override[node_name]["on_error"] = new_on_error
+                else:
+                    pipeline_override[node_name] = {"on_error": new_on_error}
 
         return self.context.run_task(entry, pipeline_override)
 
