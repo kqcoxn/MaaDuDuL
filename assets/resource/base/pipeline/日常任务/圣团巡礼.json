@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1766668189894,
+			"lastSyncTime": 1767030626405,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -6846,
-				"y": -768,
+				"x": -7012,
+				"y": -735,
 				"zoom": 0.92
 			},
-			"version": "v0.13.0"
+			"version": "v0.13.1"
 		}
 	},
 	"$__mpe_external_返回主界面_圣团巡礼": {
@@ -512,6 +512,26 @@
 			"type": "DirectHit"
 		}
 	},
+	"圣团巡礼_大扫除": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8066,
+				"y": 1314
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_获取大扫除奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["大扫除"],
+				"roi": [1001, 594, 275, 124]
+			},
+			"type": "OCR"
+		}
+	},
 	"圣团巡礼_开始": {
 		"$__mpe_code": {
 			"position": {
@@ -571,7 +591,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["参观"],
-				"roi": [1134, 596, 138, 117]
+				"roi": [1001, 594, 275, 124]
 			},
 			"type": "OCR"
 		}
@@ -788,6 +808,25 @@
 			"type": "OCR"
 		}
 	},
+	"圣团巡礼_获取大扫除奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8333,
+				"y": 1348
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["圣团巡礼_参观周期记录"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
 	"圣团巡礼_获取打扫奖励": {
 		"$__mpe_code": {
 			"position": {
@@ -879,7 +918,7 @@
 			"param": {},
 			"type": "Click"
 		},
-		"next": ["圣团巡礼_打开参观列表"],
+		"next": ["圣团巡礼_打开参观列表", "圣团巡礼_大扫除"],
 		"recognition": {
 			"param": {
 				"roi": [147, 592, 380, 122],
@@ -898,6 +937,9 @@
 		"action": {
 			"param": {},
 			"type": "Click"
+		},
+		"focus": {
+			"Node.Action.Failed": " \u003e 打扫结束"
 		},
 		"next": ["圣团巡礼_打扫房间"],
 		"on_error": ["圣团巡礼_参观周期记录"],
