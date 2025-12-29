@@ -841,7 +841,7 @@
 			"cases": [
 				{
 					"name": "Yes",
-					"option": ["巅峰对决-竞技场对战-周期检查"]
+					"option": ["巅峰对决-竞技场对战-周期检查", "巅峰对决-竞技场对战-对手选择策略"]
 				},
 				{
 					"name": "No",
@@ -867,6 +867,23 @@
 				},
 				{
 					"name": "Yes"
+				}
+			]
+		},
+		"巅峰对决-竞技场对战-对手选择策略": {
+			"type": "switch",
+			"label": "对手选择策略",
+			"cases": [
+				{
+					"name": "最低战力"
+				},
+				{
+					"name": "最高排名",
+					"pipeline_override": {
+						"巅峰对决_选择对手": {
+							"custom_recognition_param": "s=max_rank"
+						}
+					}
 				}
 			]
 		},

@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\巅峰对决.json",
 			"filename": "巅峰对决",
-			"lastSyncTime": 1766672954631,
+			"lastSyncTime": 1767031620289,
 			"prefix": "巅峰对决",
 			"savedViewport": {
-				"x": -9890,
-				"y": -1749,
-				"zoom": 1.21
+				"x": -8252,
+				"y": -1576,
+				"zoom": 1.06
 			},
-			"version": "v0.13.0"
+			"version": "v0.13.1"
 		}
 	},
 	"$__mpe_external_返回主界面_巅峰对决": {
@@ -24,8 +24,8 @@
 	"巅峰对决_宝石领取周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7896,
-				"y": 1305
+				"x": 7895,
+				"y": 1318
 			}
 		},
 		"action": {
@@ -167,8 +167,11 @@
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
-			"param": {},
-			"type": "DirectHit"
+			"param": {
+				"expected": ["请选择对手"],
+				"roi": [544, 69, 195, 69]
+			},
+			"type": "OCR"
 		}
 	},
 	"巅峰对决_对战提醒": {
@@ -394,8 +397,8 @@
 	"巅峰对决_识别战斗力": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8156,
-				"y": 1613
+				"x": 8159,
+				"y": 1636
 			}
 		},
 		"action": {
@@ -510,13 +513,15 @@
 			"Node.Recognition.Succeeded": " \u003e 领取战斗宝石"
 		},
 		"next": ["巅峰对决_获取战斗宝石奖励", "巅峰对决_无可领取的战斗宝石"],
+		"on_error": ["巅峰对决_战斗宝石周期记录"],
 		"recognition": {
 			"param": {
 				"expected": ["领取奖励"],
 				"roi": [5, 220, 264, 286]
 			},
 			"type": "OCR"
-		}
+		},
+		"timeout": 3000
 	},
 	"巅峰对决_领取战斗宝石开始": {
 		"$__mpe_code": {

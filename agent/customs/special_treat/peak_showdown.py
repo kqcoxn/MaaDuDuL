@@ -7,8 +7,8 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 
-from agent.customs.utils import Prompter, CounterManager
-from agent.customs.maahelper import RecoHelper, ParamAnalyzer
+from agent.customs.utils import Prompter
+from agent.customs.maahelper import RecoHelper, ParamAnalyzer, Tasker
 
 
 # ====================  辅助函数  ====================
@@ -73,13 +73,22 @@ class PickOpponent(CustomRecognition):
             战斗力最低对手的识别结果，包含位置信息
         """
         try:
-            # 识别所有对手的战斗力文本
-            rh = RecoHelper(context, argv).recognize("巅峰对决_识别战斗力")
-            if rh.hit:
-                results = rh.filtered_results
-                # 选择战斗力最低的对手
-                min_result = min(results, key=lambda res: parse_power(res.text))
-                return RecoHelper.rt(min_result)
+            # 解析参数
+            args = ParamAnalyzer(argv)
+            strategy = args.get(["strategy", "s"], "min_power")  # min_power, max_rank
+
+            if strategy == "min_power":
+                # 最低战力
+                # 识别所有对手的战斗力文本
+                rh = RecoHelper(context, argv).recognize("巅峰对决_识别战斗力")
+                if rh.hit:
+                    results = rh.filtered_results
+                    # 选择战斗力最低的对手
+                    min_result = min(results, key=lambda res: parse_power(res.text))
+                    return RecoHelper.rt(min_result)
+            elif strategy == "max_rank":
+                # 最高排名
+                return RecoHelper.rt(box=(695, 234, 0, 0))
 
             return RecoHelper.NoResult
         except Exception as e:
