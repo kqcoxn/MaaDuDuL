@@ -1,1011 +1,1345 @@
 {
-  "$__mpe_config_每日采购": {
-    "$__mpe_code": {
-      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
-      "filename": "每日采购",
-      "lastSyncTime": 1767025366824,
-      "prefix": "每日采购",
-      "savedViewport": {
-        "x": -4077,
-        "y": -196,
-        "zoom": 0.92
-      },
-      "version": "v0.13.1"
-    }
-  },
-  "$__mpe_external_返回主界面_每日采购": {
-    "$__mpe_code": {
-      "position": {
-        "x": 7037,
-        "y": 2080
-      }
-    }
-  },
-  "每日采购_今日礼包已购买": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5662,
-        "y": 286
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 今日免费礼包已购买"
-    },
-    "next": [
-      "每日采购_从至尊商店返回主界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {
-        "expected": [
-          "取消"
-        ],
-        "roi": [
-          592,
-          599,
-          95,
-          49
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_从至尊商店返回主界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6182,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "run",
-        "custom_action_param": "t=返回主界面"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_每日免费礼包结束"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_可购买": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5469,
-        "y": -566
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_领取商品"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "购买"
-        ],
-        "roi": [
-          722,
-          559,
-          91,
-          49
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_周期提醒": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4614,
-        "y": 254
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Starting": " \u003e 今日已采购"
-    },
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_周期检查": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4352,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "periodic_check",
-        "custom_action_param": "k=每日采购"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_每日免费礼包开始"
-    ],
-    "on_error": [
-      "每日采购_周期提醒"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_商品已被购买": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5468,
-        "y": -352
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Starting": " \u003e 本期已购买"
-    },
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4087,
-        "y": 12
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "on_task_start"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_周期检查"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_战斗宝石商店开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5136,
-        "y": 1693
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_进入战斗宝石商店"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_战斗宝石商店结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6475,
-        "y": 1695
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_普通商店结束"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_日常商店开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5133,
-        "y": 670
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_进入日常商店"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_日常商店结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6480,
-        "y": 1325
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_战斗宝石商店开始"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_普通商店开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4336,
-        "y": 670
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_普通商店提醒"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_普通商店提醒": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4603,
-        "y": 672
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Starting": " \u003e 进入普通商店"
-    },
-    "next": [
-      "每日采购_进入普通商店"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_普通商店结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6777,
-        "y": 2080
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "返回主界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_查看商品详情": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5200,
-        "y": -562
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_可购买"
-    ],
-    "on_error": [
-      "每日采购_商品已被购买"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "朱珠糖"
-        ],
-        "roi": [
-          545,
-          131,
-          682,
-          500
-        ]
-      },
-      "type": "OCR"
-    },
-    "timeout": 2000
-  },
-  "每日采购_每日免费礼包开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4619,
-        "y": 12
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_进入尊享商店"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_每日免费礼包结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6442,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_普通商店开始"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买商品": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4929,
-        "y": -563
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "每日采购_查看商品详情"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买战宝圣团证书": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5938,
-        "y": 1693
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=圣团证书"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买战宝消化药"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买战宝消化药": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6207,
-        "y": 1694
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=消化药"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_战斗宝石商店结束"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买战宝锻造书": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5671,
-        "y": 1691
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=锻造书"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买战宝圣团证书"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常中棉": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6206,
-        "y": 1010
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=中级棉花糖"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常成长材料"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常初棉": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5936,
-        "y": 1009
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=初级棉花糖"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常中棉"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常成长材料": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5675,
-        "y": 1330
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=成长材料"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常房间装扮"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常房间装扮": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5936,
-        "y": 1327
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=房间装扮"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常料理"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常料理": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6210,
-        "y": 1323
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=料理宝箱"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_日常商店结束"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常星星糖": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5938,
-        "y": 671
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=星星糖"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常锻造书"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常朱珠糖": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5671,
-        "y": 669
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=朱珠糖"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常星星糖"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常锻造书": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6207,
-        "y": 672
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=锻造书"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常魔卡龙"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买日常魔卡龙": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5676,
-        "y": 1008
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "buy",
-        "custom_action_param": "g=魔卡龙"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日采购_购买日常初棉"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "每日采购_购买每日免费礼包": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5662,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 购买每日免费礼包"
-    },
-    "next": [
-      "每日采购_领取每日免费礼包奖励"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "购买"
-        ],
-        "roi": [
-          709,
-          602,
-          113,
-          43
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_进入尊享商店": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4878,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Action.Succeeded": " \u003e 进入水晶叶商店",
-      "Node.Recognition.Starting": " \u003e 进入尊享商店"
-    },
-    "next": [
-      "每日采购_进入水晶叶商店"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          13,
-          582,
-          396,
-          131
-        ],
-        "template": [
-          "main/vip-store.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "每日采购_进入战斗宝石商店": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5403,
-        "y": 1692
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_购买战宝锻造书"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "战斗宝石商店"
-        ],
-        "roi": [
-          14,
-          95,
-          233,
-          425
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_进入日常商店": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5401,
-        "y": 668
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_购买日常朱珠糖"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "日常商店"
-        ],
-        "roi": [
-          14,
-          95,
-          233,
-          425
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_进入普通商店": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4873,
-        "y": 670
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_日常商店开始"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          140,
-          591,
-          398,
-          125
-        ],
-        "template": [
-          "main/store.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "每日采购_进入水晶叶商店": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5142,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          215,
-          434,
-          0,
-          0
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_选中每日免费礼包"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "尊享商店"
-        ],
-        "roi": [
-          6,
-          5,
-          320,
-          78
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_选中每日免费礼包": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5402,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_购买每日免费礼包",
-      "每日采购_今日礼包已购买"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "每日免费礼包"
-        ],
-        "roi": [
-          574,
-          95,
-          681,
-          271
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_领取商品": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5729,
-        "y": -566
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          640,
-          642,
-          0,
-          0
-        ]
-      },
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 购买成功！"
-    },
-    "recognition": {
-      "param": {
-        "expected": [
-          "请点击屏幕继续"
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日采购_领取每日免费礼包奖励": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5922,
-        "y": 13
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          638,
-          672,
-          0,
-          0
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      "每日采购_从至尊商店返回主界面"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "请点击屏幕继续"
-        ]
-      },
-      "type": "OCR"
-    }
-  }
+	"$__mpe_config_每日采购": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
+			"filename": "每日采购",
+			"lastSyncTime": 1767274689613,
+			"prefix": "每日采购",
+			"savedViewport": {
+				"x": -6072,
+				"y": 1469,
+				"zoom": 1.39
+			},
+			"version": "v0.14.1"
+		}
+	},
+	"$__mpe_external_返回主界面_每日采购": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7037,
+				"y": 2080
+			}
+		}
+	},
+	"每日采购_从至尊商店返回主界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6728,
+				"y": 187
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "run",
+				"custom_action_param": "t=返回主界面"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_至尊商店结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_可购买": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8304,
+				"y": 402
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日采购_领取商品"],
+		"recognition": {
+			"param": {
+				"expected": ["购买"],
+				"roi": [722, 559, 91, 49]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_周期组合检查-每周礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4870,
+				"y": -1031
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每周礼包\u0026p=w"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_进入尊享商店"],
+		"on_error": ["每日采购_周期组合检查-每月礼包"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_周期组合检查-每日礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4609,
+				"y": -1029
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每日礼包\u0026p=d"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_进入尊享商店"],
+		"on_error": ["每日采购_周期组合检查-每周礼包"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_周期组合检查-每月礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5138,
+				"y": -1032
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每月礼包\u0026p=m"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_进入尊享商店"],
+		"on_error": ["每日采购_组合周期提醒-礼包"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_商品已被购买": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8303,
+				"y": 616
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 本期已购买"
+		},
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_尊享商店开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4340,
+				"y": -715
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_周期组合检查-每日礼包"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4072,
+				"y": -718
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_尊享商店开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_战斗宝石商店开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5136,
+				"y": 1693
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_进入战斗宝石商店"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_战斗宝石商店结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6475,
+				"y": 1695
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_普通商店结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_日常商店开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5133,
+				"y": 670
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_进入日常商店"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_日常商店结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6480,
+				"y": 1325
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_战斗宝石商店开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_普通商店开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4336,
+				"y": 670
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_普通商店提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_普通商店提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4603,
+				"y": 672
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 进入普通商店"
+		},
+		"next": ["每日采购_进入普通商店"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_普通商店结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6777,
+				"y": 2080
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_查看商品详情": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8035,
+				"y": 406
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日采购_可购买"],
+		"on_error": ["每日采购_商品已被购买"],
+		"recognition": {
+			"param": {
+				"expected": ["朱珠糖"],
+				"roi": [545, 131, 682, 500]
+			},
+			"type": "OCR"
+		},
+		"timeout": 2000
+	},
+	"每日采购_每周免费礼包结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6463,
+				"y": -263
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_每月礼包开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每周礼包周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5670,
+				"y": -102
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已检查每周礼包"
+		},
+		"next": ["每日采购_每周免费礼包结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每周礼包周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5404,
+				"y": -264
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每周礼包\u0026p=w"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_进入每周礼包商店"],
+		"on_error": ["每日采购_每周礼包周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每周礼包周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6201,
+				"y": -262
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=每周礼包"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_每周免费礼包结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每周礼包开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5136,
+				"y": -264
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_每周礼包周期检查"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每日免费礼包结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6456,
+				"y": -714
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_每周礼包开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每日礼包周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5673,
+				"y": -546
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已检查每日礼包"
+		},
+		"next": ["每日采购_每日免费礼包结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每日礼包周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5404,
+				"y": -721
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每日礼包\u0026p=d"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_进入水晶叶商店"],
+		"on_error": ["每日采购_每日礼包周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每日礼包周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6202,
+				"y": -714
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=每日礼包"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_每日免费礼包结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每日礼包开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5137,
+				"y": -717
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_每日礼包周期检查"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每月免费礼包结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6461,
+				"y": 186
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_从至尊商店返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每月礼包周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5668,
+				"y": 363
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已检查每月礼包"
+		},
+		"next": ["每日采购_每月免费礼包结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每月礼包周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5402,
+				"y": 185
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每月礼包\u0026p=m"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_进入每月礼包商店"],
+		"on_error": ["每日采购_每月礼包周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每月礼包周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6199,
+				"y": 187
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=每月礼包"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_每月免费礼包结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_每月礼包开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5134,
+				"y": 185
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_每月礼包周期检查"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_确保进入水晶叶商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4871,
+				"y": -718
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_每日礼包开始"],
+		"recognition": {
+			"param": {
+				"expected": ["尊享商店"],
+				"roi": [6, 5, 320, 78]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_礼包已购买": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8303,
+				"y": 9
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 今日免费礼包已购买"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"expected": ["取消"],
+				"roi": [592, 599, 95, 49]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_组合周期提醒-礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5403,
+				"y": -1035
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已检查所有礼包"
+		},
+		"next": ["每日采购_至尊商店结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_至尊商店结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6990,
+				"y": 187
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_普通商店开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买商品": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7764,
+				"y": 405
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_查看商品详情"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买战宝圣团证书": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5938,
+				"y": 1693
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=圣团证书"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买战宝消化药"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买战宝消化药": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6207,
+				"y": 1694
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=消化药"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_战斗宝石商店结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买战宝锻造书": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5671,
+				"y": 1691
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=锻造书"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买战宝圣团证书"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常中棉": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6206,
+				"y": 1010
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=中级棉花糖"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常成长材料"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常初棉": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5936,
+				"y": 1009
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=初级棉花糖"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常中棉"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常成长材料": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5675,
+				"y": 1330
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=成长材料"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常房间装扮"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常房间装扮": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5936,
+				"y": 1327
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=房间装扮"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常料理"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常料理": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6210,
+				"y": 1323
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=料理宝箱"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_日常商店结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常星星糖": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5938,
+				"y": 671
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=星星糖"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常锻造书"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常朱珠糖": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5671,
+				"y": 669
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=朱珠糖"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常星星糖"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常锻造书": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6207,
+				"y": 672
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=锻造书"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常魔卡龙"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买日常魔卡龙": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5676,
+				"y": 1008
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "buy",
+				"custom_action_param": "g=魔卡龙"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_购买日常初棉"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_购买礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8302,
+				"y": -248
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 购买礼包"
+		},
+		"next": ["每日采购_领取礼包奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["购买"],
+				"roi": [709, 602, 113, 43]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_购买礼包开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7783,
+				"y": -249
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_选中礼包"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_进入尊享商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4605,
+				"y": -716
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Action.Succeeded": " \u003e 进入水晶叶商店",
+			"Node.Recognition.Starting": " \u003e 进入尊享商店"
+		},
+		"next": ["每日采购_确保进入水晶叶商店"],
+		"recognition": {
+			"param": {
+				"roi": [13, 582, 396, 131],
+				"template": ["main/vip-store.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"每日采购_进入战斗宝石商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5403,
+				"y": 1692
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日采购_购买战宝锻造书"],
+		"recognition": {
+			"param": {
+				"expected": ["战斗宝石商店"],
+				"roi": [14, 95, 233, 425]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_进入日常商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5401,
+				"y": 668
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日采购_购买日常朱珠糖"],
+		"recognition": {
+			"param": {
+				"expected": ["日常商店"],
+				"roi": [14, 95, 233, 425]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_进入普通商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4873,
+				"y": 670
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日采购_日常商店开始"],
+		"recognition": {
+			"param": {
+				"roi": [140, 591, 398, 125],
+				"template": ["main/store.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"每日采购_进入每周礼包商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5670,
+				"y": -264
+			}
+		},
+		"action": {
+			"param": {
+				"target": [207, 566, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["每日采购_领取每周礼包"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_进入每月礼包商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5668,
+				"y": 185
+			}
+		},
+		"action": {
+			"param": {
+				"target": [347, 567, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["每日采购_领取每月礼包"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_进入水晶叶商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5671,
+				"y": -716
+			}
+		},
+		"action": {
+			"param": {
+				"target": [215, 434, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["每日采购_领取每日礼包"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_选中礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8042,
+				"y": -248
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日采购_购买礼包", "每日采购_礼包已购买"],
+		"recognition": {
+			"param": {
+				"expected": ["每日免费礼包"],
+				"roi": [574, 95, 681, 271]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_领取商品": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8564,
+				"y": 402
+			}
+		},
+		"action": {
+			"param": {
+				"target": [640, 642, 0, 0]
+			},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 购买成功！"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日采购_领取每周礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5936,
+				"y": -262
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "gift",
+				"custom_action_param": "g=每周免费礼包"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_每周礼包周期记录"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_领取每日礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5937,
+				"y": -715
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "gift",
+				"custom_action_param": "g=每日免费礼包"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_每日礼包周期记录"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_领取每月礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5934,
+				"y": 186
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "gift",
+				"custom_action_param": "g=每月免费礼包"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_每月礼包周期记录"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_领取礼包奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8562,
+				"y": -248
+			}
+		},
+		"action": {
+			"param": {
+				"target": [638, 672, 0, 0]
+			},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	}
 }

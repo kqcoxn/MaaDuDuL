@@ -83,7 +83,7 @@
 			"entry": "每日采购_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/purchase.md",
-			"option": ["每日采购-周期检查", "每日采购-每日免费礼包", "每日采购-商店采购"]
+			"option": ["每日采购-周期免费礼包", "每日采购-商店采购"]
 		},
 		{
 			"name": "圣团巡礼",
@@ -188,14 +188,53 @@
 		},
 		// ========== 领取糖果 ==========
 		// ========== 每日采购 ==========
-		"每日采购-周期检查": {
+		"每日采购-周期免费礼包": {
 			"type": "switch",
-			"label": "每日仅检查一次采购",
+			"label": "周期免费礼包",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": ["每日采购-每日免费礼包", "每日采购-每周免费礼包", "每日采购-每月免费礼包"]
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_尊享商店开始": {
+							"next": "每日采购_至尊商店结束"
+						}
+					}
+				}
+			]
+		},
+		"每日采购-每日免费礼包": {
+			"type": "switch",
+			"label": "每日免费礼包",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": ["每日采购-每日免费礼包-周期检查"]
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_每日礼包开始": {
+							"next": "每日采购_每日免费礼包结束"
+						}
+					}
+				}
+			]
+		},
+		"每日采购-每日免费礼包-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
 			"cases": [
 				{
 					"name": "No",
 					"pipeline_override": {
-						"每日采购_周期检查": {
+						"每日采购_每日礼包周期检查": {
+							"action": "DoNothing"
+						},
+						"每日采购_周期组合检查-每日礼包": {
 							"action": "DoNothing"
 						}
 					}
@@ -205,20 +244,79 @@
 				}
 			]
 		},
-		"每日采购-每日免费礼包": {
+		"每日采购-每周免费礼包": {
 			"type": "switch",
-			"label": "采购每日免费礼包",
+			"label": "每周免费礼包",
 			"cases": [
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"option": ["每日采购-每周免费礼包-周期检查"]
 				},
 				{
 					"name": "No",
 					"pipeline_override": {
-						"每日采购_每日免费礼包开始": {
-							"next": "每日采购_每日免费礼包结束"
+						"每日采购_每周礼包开始": {
+							"next": "每日采购_每周免费礼包结束"
 						}
 					}
+				}
+			]
+		},
+		"每日采购-每周免费礼包-周期检查": {
+			"type": "switch",
+			"label": "每周仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_每周礼包周期检查": {
+							"action": "DoNothing"
+						},
+						"每日采购_周期组合检查-每周礼包": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"每日采购-每月免费礼包": {
+			"type": "switch",
+			"label": "每月免费礼包",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": ["每日采购-每月免费礼包-周期检查"]
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_每月礼包开始": {
+							"next": "每日采购_每月免费礼包结束"
+						}
+					}
+				}
+			]
+		},
+		"每日采购-每月免费礼包-周期检查": {
+			"type": "switch",
+			"label": "每月仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_每月礼包周期检查": {
+							"action": "DoNothing"
+						},
+						"每日采购_周期组合检查-每月礼包": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
 				}
 			]
 		},

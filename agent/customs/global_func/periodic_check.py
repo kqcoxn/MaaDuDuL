@@ -1,10 +1,10 @@
 """周期性任务检查模块。
 
-本模块提供了周期性任务检查的功能，支持按天或按周判断任务是否已完成。
+本模块提供了周期性任务检查的功能，支持按天、按周或按月判断任务是否已完成。
 主要功能包括：
     - 任务完成状态的记录和检查
     - 基于刷新时间的日期调整（凌晨4点前算作前一天）
-    - 同日/同周判断
+    - 同日/同周/同月判断
 
 典型用法：
     在 Pipeline 中使用 periodic_check 识别器判断任务是否需要执行，
@@ -30,7 +30,7 @@ class Inspector:
     """周期性任务检查器。
 
     提供任务记录和周期判断的核心功能，所有方法均为静态方法。
-    支持按天和按周两种周期模式。
+    支持按天、按周和按月三种周期模式。
     """
 
     @staticmethod
@@ -143,6 +143,39 @@ class Inspector:
 
         return current_datetime.date() == last_date
 
+    @staticmethod
+    def same_month(key: str) -> bool:
+        """判断任务是否在同一月内已完成。
+
+        比较当前日期和上次记录日期的年份和月份。
+
+        Args:
+            key: 任务标识符。
+
+        Returns:
+            bool: 如果在同一月内已完成返回 True，否则返回 False。
+                  如果没有记录或记录格式错误，返回 False。
+
+        Note:
+            月份判断基于调整后的日期（考虑刷新时间）。
+        """
+        current_datetime = Inspector._adjust_datetime()
+        storage_key = Inspector._get_storage_key(key)
+        last_date_str: Optional[str] = LocalStorage.get(storage_key)
+
+        if not last_date_str:
+            return False
+
+        try:
+            last_date = date.fromisoformat(last_date_str)
+        except Exception as e:
+            return False
+
+        return (
+            current_datetime.year == last_date.year
+            and current_datetime.month == last_date.month
+        )
+
 
 # ====================  custom  ====================
 
@@ -152,11 +185,11 @@ class PeriodicCheck(CustomAction):
     """周期性任务检查动作。
 
     用于 Pipeline 中判断周期性任务是否需要执行。
-    支持按天（day/d）和按周（week/w）两种周期模式。
+    支持按天（day/d）、按周（week/w）和按月（month/m）三种周期模式。
 
     参数说明（通过 argv.custom_param 传入）：
         key/k: (必需) 任务标识符
-        periodic/p: (可选) 周期类型，'day'/'d' 或 'week'/'w'，默认 'day'
+        periodic/p: (可选) 周期类型，'day'/'d' 或 'week'/'w' 或 'month'/'m'，默认 'day'
         record/r: (可选) 是否立即记录，默认 True
 
     返回：
@@ -164,6 +197,7 @@ class PeriodicCheck(CustomAction):
 
     Example:
         custom_param: "k=daily_task;p=day;r=true"
+        custom_param: "k=monthly_task;p=month;r=true"
     """
 
     def run(
@@ -183,6 +217,13 @@ class PeriodicCheck(CustomAction):
         try:
             args = ParamAnalyzer(argv)
             key = args.get(["key", "k", "task", "t"])
+
+            # 直接返回
+            if key in ["False", "false", "f", False]:
+                return False
+            if key in ["True", "true", "t", True]:
+                return True
+
             periodic = args.get(["periodic", "p"], "day")
             record_immediately = args.get(["record", "r"], False)
 
@@ -198,10 +239,12 @@ class PeriodicCheck(CustomAction):
 
             # 根据周期类型判断是否已完成
             is_done = False
-            if periodic == "week" or periodic == "w":
-                is_done = Inspector.same_week(key)
-            elif periodic == "day" or periodic == "d":
+            if periodic == "day" or periodic == "d":
                 is_done = Inspector.same_day(key)
+            elif periodic == "week" or periodic == "w":
+                is_done = Inspector.same_week(key)
+            elif periodic == "month" or periodic == "m":
+                is_done = Inspector.same_month(key)
 
             # 返回是否需要执行
             return not is_done
