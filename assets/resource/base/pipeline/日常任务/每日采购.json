@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
 			"filename": "每日采购",
-			"lastSyncTime": 1767274689613,
+			"lastSyncTime": 1767275300177,
 			"prefix": "每日采购",
 			"savedViewport": {
-				"x": -6072,
-				"y": 1469,
-				"zoom": 1.39
+				"x": -324,
+				"y": 482,
+				"zoom": 0.2
 			},
 			"version": "v0.14.1"
 		}
@@ -16,8 +16,8 @@
 	"$__mpe_external_返回主界面_每日采购": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7037,
-				"y": 2080
+				"x": 7272,
+				"y": 1699
 			}
 		}
 	},
@@ -46,8 +46,8 @@
 	"每日采购_可购买": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8304,
-				"y": 402
+				"x": 4487,
+				"y": 1307
 			}
 		},
 		"action": {
@@ -135,8 +135,8 @@
 	"每日采购_商品已被购买": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8303,
-				"y": 616
+				"x": 4486,
+				"y": 1521
 			}
 		},
 		"action": {
@@ -221,7 +221,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"next": ["每日采购_普通商店结束"],
+		"next": ["每日采购_普通商店周期记录"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -267,18 +267,84 @@
 			"type": "DirectHit"
 		}
 	},
-	"每日采购_普通商店开始": {
+	"每日采购_普通商店周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 4336,
-				"y": 670
+				"x": 4606,
+				"y": 865
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已采购"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_普通商店周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4335,
+				"y": 672
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=商店采购"
+			},
+			"type": "Custom"
+		},
 		"next": ["每日采购_普通商店提醒"],
+		"on_error": ["每日采购_普通商店周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_普通商店周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6743,
+				"y": 1698
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=商店采购"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日采购_普通商店结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日采购_普通商店开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4069,
+				"y": 673
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日采购_普通商店周期检查"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -309,8 +375,8 @@
 	"每日采购_普通商店结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6777,
-				"y": 2080
+				"x": 7012,
+				"y": 1699
 			}
 		},
 		"action": {
@@ -328,8 +394,8 @@
 	"每日采购_查看商品详情": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8035,
-				"y": 406
+				"x": 4218,
+				"y": 1311
 			}
 		},
 		"action": {
@@ -685,8 +751,8 @@
 	"每日采购_礼包已购买": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8303,
-				"y": 9
+				"x": 4407,
+				"y": 26
 			}
 		},
 		"action": {
@@ -750,8 +816,8 @@
 	"每日采购_购买商品": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7764,
-				"y": 405
+				"x": 3947,
+				"y": 1310
 			}
 		},
 		"action": {
@@ -1033,8 +1099,8 @@
 	"每日采购_购买礼包": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8302,
-				"y": -248
+				"x": 4406,
+				"y": -231
 			}
 		},
 		"action": {
@@ -1056,8 +1122,8 @@
 	"每日采购_购买礼包开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7783,
-				"y": -249
+				"x": 3887,
+				"y": -232
 			}
 		},
 		"action": {
@@ -1216,8 +1282,8 @@
 	"每日采购_选中礼包": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8042,
-				"y": -248
+				"x": 4146,
+				"y": -231
 			}
 		},
 		"action": {
@@ -1236,8 +1302,8 @@
 	"每日采购_领取商品": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8564,
-				"y": 402
+				"x": 4747,
+				"y": 1307
 			}
 		},
 		"action": {
@@ -1325,8 +1391,8 @@
 	"每日采购_领取礼包奖励": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8562,
-				"y": -248
+				"x": 4666,
+				"y": -231
 			}
 		},
 		"action": {
