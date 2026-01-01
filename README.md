@@ -6,16 +6,17 @@
 
 # MaaDuDuL</br>MDDL - 嘟嘟脸小助手
 
-基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！
+基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！<br/>✨ **目前正在火速完善中，敬请期待！** ✨
 
 <p align="center">
   <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.md" target="_blank"><img alt="pipeline" src="https://img.shields.io/badge/Pipeline-%23876f69?logo=paddypower&logoColor=%23FFFFFF"></a>
   <a href="https://www.python.org/" target="_blank"><img alt="python" src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white"></a>
-  <!-- <a href="https://mirrorchyan.com/zh/projects?source=mddl-github-readme" target="_blank"><img alt="mirrorc" src="./public/mirrorc-zh.svg"></a> -->
+  <a href="https://mirrorchyan.com/zh/projects?source=mddl-github-readme" target="_blank"><img alt="mirrorc" src="./public/mirrorc-zh.svg"></a>
   <br/>
   <a href="https://github.com/kqcoxn/MaaDuDuL/commits/main/" target="_blank"><img alt="committs" src="https://img.shields.io/github/commit-activity/m/kqcoxn/MaaDuDuL?color=%23ff69b4"></a>
   <a href="https://github.com/kqcoxn/MaaDuDuL/stargazers" target="_blank"><img alt="stars" src="https://img.shields.io/github/stars/kqcoxn/MaaDuDuL?style=social"></a>
   <a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank"><img alt="stars" src="https://img.shields.io/github/downloads/kqcoxn/MaaDuDuL/total?style=social"></a>
+  <br/>
   <a href="https://deepwiki.com/kqcoxn/MaaDuDuL" target="_blank"><img alt="deepwiki" src="https://deepwiki.com/badge.svg"></a>
   <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank"><img alt="QQ交流群" src="https://img.shields.io/badge/QGroup-926874985-0e80c1?logo=qq&logoColor=white"></a>
 </p>
@@ -24,31 +25,46 @@
 
 </div>
 
-<!-- ## 功能列表 -->
-
-<!-- ### 活动功能
-
-<details>
-<summary>往期活动</summary>
-
-####
-
->
-
-- []
-
-</details> -->
-
-<!-- ### 常驻功能
+## 功能列表
 
 - **登录签到**
-  - [x] 启动登录
-  - [x] 每日签到
-  - [x] ~~紧张刺激的~~七日签到
+    - [x] 启动登录（模拟器/游戏）
+    - [x] 每日签到（打卡/月卡）
+- **日常补给**
+    - [x] 领取邮件
+    - [x] 每日糖果
+    - [x] 叶子互换
+- **每日采购**
+    - [x] 免费礼包
+    - [ ] 新礼包查阅奖励
+    - [x] 商店物资购买
+- **清体力**
+    - [x] 清紫糖（副本）
+    - [ ] 清红糖（装备）
+- **圣团巡礼**
+    - [x] 领取世界树贡品
+    - [x] 大扫除（手动/女仆）
+    - [ ] 每日冒险
+    - [ ] 每日宴席
+    - [x] 领取宠物礼物
+- **农场视察**
+    - [ ] 领取每日萝卜
+    - [ ] 每日派遣
+- **巅峰对决**
+    - [x] 领取战斗宝石
+    - [x] PVP
+- **领取奖励**
+    - [x] 每日/周奖励
+    - [x] 通行证奖励
+- **活动相关**
+    - [x] 每日通关
+    - [x] 每日成就
+    - [ ] 小游戏（视情况完成）
+- **开荒相关**
+    - [x] 副本连续作战
+    - [ ] 领取章节奖励
 
-具体更新日志可参考[更新记录](/assets/resource/Announcement/3.更新记录.md)
-
-\* 若有其他功能需求请提交 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue) -->
+\* **若有其他功能需求请提交 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue)**
 
 <!-- ## 使用教程
 
@@ -62,9 +78,11 @@
 
 如果您在使用过程中遇到了问题、有更好的想法、希望参与开发，或是单纯想要聊天吹水，欢迎加入 MDDL 交流群！
 
-<!-- ## \*Mirror 酱支持
+## \*Mirror 酱支持
 
-在 [Mirrorc 官方](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) 的帮助下， MDDL 同样也接入了 Mirror 酱 的国内高速下载与更新服务，详情请见[【Bilibili】震惊！MAA 开启收费功能？！](https://www.bilibili.com/video/BV1cZFreLEja/)
+Comming Soon！
+
+<!-- 在 [Mirrorc 官方](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) 的帮助下， MDDL 同样也接入了 Mirror 酱 的国内高速下载与更新服务，详情请见[【Bilibili】震惊！MAA 开启收费功能？！](https://www.bilibili.com/video/BV1cZFreLEja/)
 
 您可以通过 [此链接](https://mirrorchyan.com/zh/projects?rid=MDDL&os=windows&arch=x64&channel=stable&source=mddl-github-readme) 获取带有 Mirror 酱服务的 MDDL
 
