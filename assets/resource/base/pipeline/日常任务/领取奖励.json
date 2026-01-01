@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取奖励.json",
 			"filename": "领取奖励",
-			"lastSyncTime": 1767277680354,
+			"lastSyncTime": 1767290221401,
 			"prefix": "领取奖励",
 			"savedViewport": {
-				"x": -2946,
-				"y": 345,
-				"zoom": 1.21
+				"x": -2611,
+				"y": -423,
+				"zoom": 0.92
 			},
 			"version": "v0.14.1"
 		}
@@ -178,6 +178,26 @@
 		},
 		"post_delay": 0,
 		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取奖励_暂无此通行证": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3737,
+				"y": 951
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 该通行证已关闭"
+		},
+		"next": ["领取奖励_从通行证返回"],
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
@@ -596,11 +616,13 @@
 			"type": "DoNothing"
 		},
 		"next": ["领取奖励_进入通行证界面"],
+		"on_error": ["领取奖励_暂无此通行证"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
-		}
+		},
+		"timeout": 2000
 	}
 }

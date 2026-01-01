@@ -4,11 +4,7 @@
 
 <div align="center">
 
-# MaaDuDuL</br>MDDL - 嘟嘟脸小助手</br>✨ _当前正在绝赞烘焙中，敬请期待_ ✨
-
-**请您不要在任何官方社区/评论区提及 MDDL！**
-
-**目前正在底层架构中，请各位大佬稍候再来PR~**
+# MaaDuDuL</br>MDDL - 嘟嘟脸小助手
 
 基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！
 
@@ -19,8 +15,8 @@
   <br/>
   <a href="https://github.com/kqcoxn/MaaDuDuL/commits/main/" target="_blank"><img alt="committs" src="https://img.shields.io/github/commit-activity/m/kqcoxn/MaaDuDuL?color=%23ff69b4"></a>
   <a href="https://github.com/kqcoxn/MaaDuDuL/stargazers" target="_blank"><img alt="stars" src="https://img.shields.io/github/stars/kqcoxn/MaaDuDuL?style=social"></a>
-  <!-- <a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank"><img alt="stars" src="https://img.shields.io/github/downloads/kqcoxn/MaaDuDuL/total?style=social"></a> -->
-  <br/>
+  <a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank"><img alt="stars" src="https://img.shields.io/github/downloads/kqcoxn/MaaDuDuL/total?style=social"></a>
+  <a href="https://deepwiki.com/kqcoxn/MaaDuDuL" target="_blank"><img alt="deepwiki" src="https://deepwiki.com/badge.svg"></a>
   <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank"><img alt="QQ交流群" src="https://img.shields.io/badge/QGroup-926874985-0e80c1?logo=qq&logoColor=white"></a>
 </p>
 
@@ -105,7 +101,7 @@
 - GUI：[SweetSmellFox](https://github.com/SweetSmellFox)/[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
 - Pipeline 编辑器：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
 - 测试：[MaaXYZ](https://github.com/MaaXYZ)/[MaaDebugger](https://github.com/MaaXYZ/MaaDebugger)
-  <!-- - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) -->
+      <!-- - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) -->
 
 游戏官网（国服）：[Bilibili-嘟嘟脸恶作剧](https://game.bilibili.com/trickcal/)
 
