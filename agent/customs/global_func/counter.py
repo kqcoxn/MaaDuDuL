@@ -43,7 +43,7 @@ class InitCounter(CustomAction):
             key = args.get(["key", "k"], "default")
             initial_count = args.get(["initial_count", "ic"], 1)
             max_count = args.get(["max_count", "mc", "m"], 1)
-            CounterManager.get(key, initial_count, max_count).reset()
+            CounterManager.get(key, max_count, initial_count).reset()
             return True
         except Exception as e:
             return Prompter.error("初始化计数器", e)

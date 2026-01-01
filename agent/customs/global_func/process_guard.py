@@ -47,6 +47,7 @@ class OnTaskStart(CustomAction):
         返回：
             bool：操作成功返回 True，失败返回 False
         """
+        global hook_handler
         try:
             # 解析参数
             args = ParamAnalyzer(argv)

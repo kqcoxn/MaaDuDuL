@@ -8,12 +8,12 @@ class Counter:
         _max: 最大计数限制，-1 表示无限制。
     """
 
-    def __init__(self, initial_count=0, max_count=-1):
+    def __init__(self, max_count=-1, initial_count=0):
         """初始化计数器。
 
         Args:
+            max_count: 最大计数限制，默认为 -1（无限制）。
             initial_count: 初始计数值，默认为 0。
-            max: 最大计数限制，默认为 -1（无限制）。
         """
         self._count = initial_count
         self._max = max_count
@@ -86,7 +86,7 @@ class CounterManager:
 
     @classmethod
     def get(
-        cls, key: str = "default", initial_count=0, max_count=-1, strict=False
+        cls, key: str = "default", max_count=-1, initial_count=0, strict=False
     ) -> Counter:
         """获取或创建计数器实例。
 
@@ -95,8 +95,8 @@ class CounterManager:
 
         Args:
             key: 计数器的唯一标识键名，默认为 "default"。
+            max_count: 最大计数限制，默认为 -1（无限制）。仅在创建新计数器时使用。
             initial_count: 初始计数值，默认为 0。仅在创建新计数器时使用。
-            max: 最大计数限制，默认为 -1（无限制）。仅在创建新计数器时使用。
             strict: 严格模式，默认为 False。为 True 时若计数器不存在则抛出 KeyError。
 
         Returns:
@@ -108,7 +108,7 @@ class CounterManager:
         if key not in cls.counters:
             if strict:
                 raise KeyError(f"Counter with key '{key}' does not exist")
-            cls.counters[key] = Counter(initial_count, max_count)
+            cls.counters[key] = Counter(max_count, initial_count)
         return cls.counters[key]
 
     @classmethod

@@ -91,7 +91,12 @@
 			"entry": "圣团巡礼_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/saint_tour.md",
-			"option": ["圣团巡礼-收获世界树", "圣团巡礼-参观并打扫房间", "圣团巡礼-每日冒险"]
+			"option": [
+				"圣团巡礼-收获世界树",
+				"圣团巡礼-参观并打扫房间",
+				// "圣团巡礼-每日冒险",
+				"圣团巡礼-领取宠物礼物"
+			]
 		},
 		{
 			"name": "清紫糖",
@@ -686,6 +691,42 @@
 					"name": "No",
 					"pipeline_override": {
 						"圣团巡礼_冒险周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"圣团巡礼-领取宠物礼物": {
+			"type": "switch",
+			"label": "领取宠物礼物",
+			"description": "宠物移动可能较快，若截图延迟较大可能无法点击，请根据个人设备情况决定是否开启此功能",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": ["圣团巡礼-领取宠物礼物-周期检查"]
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"圣团巡礼_宠物礼物开始": {
+							"next": "圣团巡礼_宠物礼物结束"
+						}
+					}
+				}
+			]
+		},
+		"圣团巡礼-领取宠物礼物-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"圣团巡礼_宠物礼物周期检查": {
 							"action": "DoNothing"
 						}
 					}
