@@ -1,0 +1,131 @@
+{
+	"$__mpe_config_懒加载返回主界面": {
+		"$__mpe_code": {
+			"prefix": "懒加载返回主界面",
+			"savedViewport": {
+				"x": -3189,
+				"y": 524,
+				"zoom": 1.21
+			},
+			"filename": "懒加载返回主界面",
+			"version": "v0.14.1"
+		}
+	},
+	"懒加载返回主界面_开始": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"pre_delay": 0,
+		"post_delay": 0,
+		"timeout": 0,
+		"$__mpe_code": {
+			"position": {
+				"x": 2536,
+				"y": -348
+			}
+		},
+		"next": ["懒加载返回主界面_活动弹窗"],
+		"on_error": ["返回主界面_开始"]
+	},
+	"懒加载返回主界面_使徒": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["使徒"],
+				"roi": [278, 528, 378, 186]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"pre_delay": 0,
+		"post_delay": 0,
+		"timeout": 0,
+		"$__mpe_code": {
+			"position": {
+				"x": 3078,
+				"y": -351
+			}
+		},
+		"next": ["懒加载返回主界面_冒险通行证"],
+		"on_error": ["返回主界面_开始"]
+	},
+	"懒加载返回主界面_冒险通行证": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["冒险通行证"],
+				"roi": [9, 107, 441, 341]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"pre_delay": 0,
+		"post_delay": 0,
+		"$__mpe_code": {
+			"position": {
+				"x": 3354,
+				"y": -350
+			}
+		},
+		"next": ["懒加载返回主界面_已在主界面"]
+	},
+	"懒加载返回主界面_活动弹窗": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["活动弹窗"],
+				"roi": [734, 72, 539, 257]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"timeout": 0,
+		"pre_delay": 0,
+		"post_delay": 0,
+		"$__mpe_code": {
+			"position": {
+				"x": 2809,
+				"y": -349
+			}
+		},
+		"next": ["懒加载返回主界面_使徒"],
+		"on_error": ["返回主界面_开始"]
+	},
+	"懒加载返回主界面_已在主界面": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"pre_delay": 0,
+		"post_delay": 0,
+		"$__mpe_code": {
+			"position": {
+				"x": 3623,
+				"y": -350
+			}
+		}
+	},
+	"$__mpe_external_返回主界面_开始_懒加载返回主界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3355,
+				"y": -58
+			}
+		}
+	}
+}

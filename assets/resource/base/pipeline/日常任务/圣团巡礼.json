@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1767030626405,
+			"lastSyncTime": 1767277837036,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -7012,
-				"y": -735,
-				"zoom": 0.92
+				"x": -8643,
+				"y": -761,
+				"zoom": 1.39
 			},
-			"version": "v0.13.1"
+			"version": "v0.14.1"
 		}
 	},
 	"$__mpe_external_返回主界面_圣团巡礼": {
@@ -541,7 +541,8 @@
 		},
 		"action": {
 			"param": {
-				"custom_action": "on_task_start"
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
 			},
 			"type": "Custom"
 		},

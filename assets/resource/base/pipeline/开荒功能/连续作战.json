@@ -1,117 +1,119 @@
 {
-    "$__mpe_config_连续作战": {
-        "$__mpe_code": {
-            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\单次任务\\连续作战.json",
-            "filename": "连续作战",
-            "lastSyncTime": 1766076073731,
-            "prefix": "连续作战",
-            "savedViewport": {
-                "x": -154.2890220254808,
-                "y": 62.296772025122436,
-                "zoom": 1.319507910772898
-            },
-            "version": "v0.12.0_beta_0"
-        }
-    },
-    "连续作战_下一关": {
-        "$__mpe_code": {
-            "position": {
-                "x": 300,
-                "y": 303
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "focus": " > 下一关",
-        "next": ["连续作战_出发"],
-        "recognition": {
-            "param": {
-                "expected": ["下一关"],
-                "roi": [736, 381, 531, 327]
-            },
-            "type": "OCR"
-        }
-    },
-    "连续作战_出发": {
-        "$__mpe_code": {
-            "position": {
-                "x": 600,
-                "y": 120
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "focus": " > 出发",
-        "next": ["连续作战_下一关", "连续作战_失败"],
-        "rate_limit": 3000,
-        "recognition": {
-            "param": {
-                "expected": ["出发"],
-                "roi": [738, 407, 522, 295]
-            },
-            "type": "OCR"
-        },
-        "timeout": 600000
-    },
-    "连续作战_失败": {
-        "$__mpe_code": {
-            "position": {
-                "x": 900,
-                "y": 168
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "DoNothing"
-        },
-        "focus": " > 挑战失败",
-        "recognition": {
-            "param": {
-                "expected": ["再次挑战"]
-            },
-            "type": "OCR"
-        }
-    },
-    "连续作战_开始": {
-        "$__mpe_code": {
-            "position": {
-                "x": 0,
-                "y": 61
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "DoNothing"
-        },
-        "next": ["连续作战_选择卡组", "连续作战_出发", "连续作战_下一关"],
-        "recognition": {
-            "param": {},
-            "type": "DirectHit"
-        }
-    },
-    "连续作战_选择卡组": {
-        "$__mpe_code": {
-            "position": {
-                "x": 300,
-                "y": 0
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "focus": " > 选择卡组",
-        "next": ["连续作战_出发"],
-        "recognition": {
-            "param": {
-                "expected": ["选择卡组"],
-                "roi": [721, 396, 529, 320]
-            },
-            "type": "OCR"
-        }
-    }
+	"$__mpe_config_连续作战": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\开荒功能\\连续作战.json",
+			"filename": "连续作战",
+			"lastSyncTime": 1767277724662,
+			"prefix": "连续作战",
+			"savedViewport": {
+				"x": 427,
+				"y": 137,
+				"zoom": 1.6
+			},
+			"version": "v0.14.1"
+		}
+	},
+	"连续作战_下一关": {
+		"$__mpe_code": {
+			"position": {
+				"x": 300,
+				"y": 303
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": " \u003e 下一关",
+		"next": ["连续作战_出发"],
+		"recognition": {
+			"param": {
+				"expected": ["下一关"],
+				"roi": [736, 381, 531, 327]
+			},
+			"type": "OCR"
+		}
+	},
+	"连续作战_出发": {
+		"$__mpe_code": {
+			"position": {
+				"x": 600,
+				"y": 120
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": " \u003e 出发",
+		"next": ["连续作战_下一关", "连续作战_失败"],
+		"rate_limit": 3000,
+		"recognition": {
+			"param": {
+				"expected": ["出发"],
+				"roi": [738, 407, 522, 295]
+			},
+			"type": "OCR"
+		},
+		"timeout": 600000
+	},
+	"连续作战_失败": {
+		"$__mpe_code": {
+			"position": {
+				"x": 900,
+				"y": 168
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": " \u003e 挑战失败",
+		"recognition": {
+			"param": {
+				"expected": ["再次挑战"]
+			},
+			"type": "OCR"
+		}
+	},
+	"连续作战_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 0,
+				"y": 61
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["连续作战_选择卡组", "连续作战_出发", "连续作战_下一关"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"连续作战_选择卡组": {
+		"$__mpe_code": {
+			"position": {
+				"x": 300,
+				"y": 0
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": " \u003e 选择卡组",
+		"next": ["连续作战_出发"],
+		"recognition": {
+			"param": {
+				"expected": ["选择卡组"],
+				"roi": [721, 396, 529, 320]
+			},
+			"type": "OCR"
+		}
+	}
 }

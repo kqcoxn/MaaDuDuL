@@ -9,7 +9,22 @@ from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 
 from agent.customs.utils import Prompter
-from agent.customs.maahelper import RecoHelper
+from agent.customs.maahelper import RecoHelper, ParamAnalyzer, Tasker
+
+
+# ====================  hooks  ====================
+
+
+def home_start(context: Context):
+    """执行返回主界面的启动钩子。
+
+    参数：
+        context：MAA 上下文对象，用于执行任务流程
+    """
+    Tasker(context).run("懒加载返回主界面_开始")
+
+
+hook_handler = {"hs": home_start}
 
 
 # ====================  任务启动监听  ====================
@@ -33,10 +48,21 @@ class OnTaskStart(CustomAction):
             bool：操作成功返回 True，失败返回 False
         """
         try:
-            # 任务启动时的处理逻辑（当前为空实现）
+            # 解析参数
+            args = ParamAnalyzer(argv)
+            task_hooks = args.get(["hook", "h", "type", "t", "class", "cls", "c"], [])
+            if not isinstance(task_hooks, list):
+                task_hooks = [task_hooks] if task_hooks else []
+
+            # 执行相关逻辑
+            for h in task_hooks:
+                handler = hook_handler.get(h)
+                if handler:
+                    handler(context)
+
             return True
         except Exception as e:
-            return Prompter.error("设置操作间隔", e)
+            return Prompter.error("任务启动监听", e)
 
 
 # ====================  任务停止检测  ====================
@@ -66,7 +92,6 @@ class CheckStopping(CustomRecognition):
                 否则返回无结果状态
         """
         try:
-            # 检查任务执行器的停止标志，返回对应的识别结果
             return RecoHelper.rt() if context.tasker.stopping else RecoHelper.NoResult
         except Exception as e:
             return Prompter.error("检测任务停止", e, reco_detail=True)

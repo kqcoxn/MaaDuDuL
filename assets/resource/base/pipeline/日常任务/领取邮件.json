@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取邮件.json",
 			"filename": "领取邮件",
-			"lastSyncTime": 1766583869705,
+			"lastSyncTime": 1767277441811,
 			"prefix": "领取邮件",
 			"savedViewport": {
-				"x": -2152,
-				"y": 348,
-				"zoom": 1
+				"x": -1594,
+				"y": 319,
+				"zoom": 1.6
 			},
-			"version": "v0.13.0"
+			"version": "v0.14.1"
 		}
 	},
 	"$__mpe_external_返回主界面_领取邮件": {
@@ -94,7 +94,8 @@
 		},
 		"action": {
 			"param": {
-				"custom_action": "on_task_start"
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
 			},
 			"type": "Custom"
 		},

@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取奖励.json",
 			"filename": "领取奖励",
-			"lastSyncTime": 1766676740774,
+			"lastSyncTime": 1767277680354,
 			"prefix": "领取奖励",
 			"savedViewport": {
-				"x": -4603,
-				"y": -593,
+				"x": -2946,
+				"y": 345,
 				"zoom": 1.21
 			},
-			"version": "v0.13.0"
+			"version": "v0.14.1"
 		}
 	},
 	"$__mpe_external_返回主界面_领取奖励": {
@@ -152,7 +152,8 @@
 		},
 		"action": {
 			"param": {
-				"custom_action": "on_task_start"
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
 			},
 			"type": "Custom"
 		},

@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\进入活动界面.json",
 			"filename": "进入活动界面",
-			"lastSyncTime": 1766334504208,
+			"lastSyncTime": 1767277698990,
 			"prefix": "进入活动界面",
 			"savedViewport": {
-				"x": -4023.5084389023896,
-				"y": 257.80333082467484,
-				"zoom": 0.9006861597485931
+				"x": -5942,
+				"y": 292,
+				"zoom": 1.6
 			},
-			"version": "v0.13.0_beta_0"
+			"version": "v0.14.1"
 		}
 	},
 	"进入活动界面_下滑面板": {
@@ -95,7 +95,8 @@
 		},
 		"action": {
 			"param": {
-				"custom_action": "on_task_start"
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
 			},
 			"type": "Custom"
 		},
@@ -118,7 +119,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"focus": " > 未找到指定活动",
+		"focus": " \u003e 未找到指定活动",
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -158,7 +159,7 @@
 			"type": "DoNothing"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 查找指定活动"
+			"Node.Recognition.Succeeded": " \u003e 查找指定活动"
 		},
 		"next": ["进入活动界面_划至最顶部"],
 		"recognition": {
@@ -219,7 +220,7 @@
 			"type": "Click"
 		},
 		"focus": {
-			"Node.Recognition.Succeeded": " > 进入活动面板"
+			"Node.Recognition.Succeeded": " \u003e 进入活动面板"
 		},
 		"next": ["进入活动界面_确认进入活动面板"],
 		"recognition": {

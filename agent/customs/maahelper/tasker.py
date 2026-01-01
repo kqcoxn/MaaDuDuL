@@ -64,10 +64,6 @@ class Tasker:
         # 构造默认 next_override
         node_list = self.context.tasker.resource.node_list
         for node_name in node_list:
-            # 跳过监测器节点本身
-            if node_name == "_run_task_monitor_inject":
-                continue
-
             # 获取节点数据和 override 状态
             node_data = self.context.tasker.resource.get_node_data(node_name)
             exist_node_override = node_name in pipeline_override

@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
 			"filename": "每日采购",
-			"lastSyncTime": 1767275300177,
+			"lastSyncTime": 1767277850000,
 			"prefix": "每日采购",
 			"savedViewport": {
-				"x": -324,
-				"y": 482,
-				"zoom": 0.2
+				"x": -1607,
+				"y": 872,
+				"zoom": 0.61
 			},
 			"version": "v0.14.1"
 		}
@@ -179,7 +179,8 @@
 		},
 		"action": {
 			"param": {
-				"custom_action": "on_task_start"
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
 			},
 			"type": "Custom"
 		},

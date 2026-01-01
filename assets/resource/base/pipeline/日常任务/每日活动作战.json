@@ -1,16 +1,16 @@
 {
 	"$__mpe_config_每日活动作战": {
 		"$__mpe_code": {
-			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务/每日活动作战.json",
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
 			"filename": "每日活动作战",
-			"lastSyncTime": 1767029013400,
+			"lastSyncTime": 1767277780149,
 			"prefix": "每日活动作战",
 			"savedViewport": {
-				"x": -9850,
-				"y": -614,
-				"zoom": 1.6
+				"x": -5922,
+				"y": -392,
+				"zoom": 1.39
 			},
-			"version": "v0.13.1"
+			"version": "v0.14.1"
 		}
 	},
 	"$__mpe_external_返回主界面_每日活动作战": {
@@ -95,8 +95,11 @@
 			}
 		},
 		"action": {
-			"param": {},
-			"type": "DoNothing"
+			"param": {
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
+			},
+			"type": "Custom"
 		},
 		"next": ["每日活动作战_周期检查"],
 		"post_delay": 0,

@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取糖果.json",
 			"filename": "领取糖果",
-			"lastSyncTime": 1766584284223,
+			"lastSyncTime": 1767277863924,
 			"prefix": "领取糖果",
 			"savedViewport": {
-				"x": -4870,
-				"y": 227,
-				"zoom": 1.32
+				"x": -4062,
+				"y": 174,
+				"zoom": 1.21
 			},
-			"version": "v0.13.0"
+			"version": "v0.14.1"
 		}
 	},
 	"$__mpe_external_返回主界面_领取糖果": {
@@ -140,7 +140,8 @@
 		},
 		"action": {
 			"param": {
-				"custom_action": "on_task_start"
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
 			},
 			"type": "Custom"
 		},
