@@ -1,6 +1,6 @@
-<!-- <p align="center">
-  <img alt="LOGO" src="./logo.png" width="256" height="256" />
-</p> -->
+<p align="center">
+  <img alt="LOGO" src="./public/logo.png" width="256" height="256" />
+</p>
 
 <div align="center">
 
@@ -35,11 +35,11 @@
 <details>
 <summary>往期活动</summary>
 
-#### 
+####
 
-> 
+>
 
-- [] 
+- []
 
 </details> -->
 
@@ -105,7 +105,7 @@
 - GUI：[SweetSmellFox](https://github.com/SweetSmellFox)/[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
 - Pipeline 编辑器：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
 - 测试：[MaaXYZ](https://github.com/MaaXYZ)/[MaaDebugger](https://github.com/MaaXYZ/MaaDebugger)
-<!-- - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) -->
+  <!-- - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) -->
 
 游戏官网（国服）：[Bilibili-嘟嘟脸恶作剧](https://game.bilibili.com/trickcal/)
 

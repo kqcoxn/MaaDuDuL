@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1766666091771,
+			"lastSyncTime": 1767254313719,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -1520,
-				"y": -197,
-				"zoom": 1.52
+				"x": -363,
+				"y": -111,
+				"zoom": 1.15
 			},
-			"version": "v0.13.0"
+			"version": "v0.14.0"
 		}
 	},
 	"启动游戏_关闭公告": {
@@ -36,8 +36,8 @@
 	"启动游戏_关闭面板": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1944,
-				"y": 400
+				"x": 1421,
+				"y": 624
 			}
 		},
 		"action": {
@@ -46,7 +46,13 @@
 		},
 		"recognition": {
 			"param": {
-				"template": ["main/close-black.png", "main/close-yellow.png", "main/close-brown.png"]
+				"template": [
+					"main/close-black.png",
+					"main/close-yellow.png",
+					"main/close-brown.png",
+					"global/home.png",
+					"global/back.png"
+				]
 			},
 			"type": "TemplateMatch"
 		}
@@ -73,6 +79,18 @@
 			{
 				"jump_back": true,
 				"name": "启动游戏_检测公告界面"
+			},
+			{
+				"jump_back": true,
+				"name": "启动游戏_领取礼物"
+			},
+			{
+				"jump_back": true,
+				"name": "启动游戏_点击屏幕继续"
+			},
+			{
+				"jump_back": true,
+				"name": "启动游戏_关闭面板"
 			}
 		],
 		"post_delay": 0,
@@ -131,6 +149,10 @@
 			{
 				"jump_back": true,
 				"name": "启动游戏_点击屏幕继续"
+			},
+			{
+				"jump_back": true,
+				"name": "启动游戏_关闭面板"
 			}
 		],
 		"recognition": {
@@ -164,8 +186,8 @@
 	"启动游戏_点击屏幕继续": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1681,
-				"y": 397
+				"x": 1420,
+				"y": 806
 			}
 		},
 		"action": {
@@ -174,7 +196,6 @@
 			},
 			"type": "Click"
 		},
-		"next": ["启动游戏_关闭面板"],
 		"recognition": {
 			"param": {
 				"expected": ["点击屏幕继续"]
@@ -302,7 +323,6 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 检测到可领取奖励"
 		},
-		"next": ["启动游戏_点击屏幕继续"],
 		"recognition": {
 			"param": {
 				"expected": ["领取礼物", "键领取"]
