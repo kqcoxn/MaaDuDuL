@@ -9,7 +9,7 @@
 	"contact": "QQ群: 926874985",
 	"license": "LICENSE",
 	"github": "https://github.com/kqcoxn/MaaDuDuL",
-	// "mirrorchyan_rid": "MaaDuDuL",
+	// "mirrorchyan_rid": "",
 	// "mirrorchyan_multiplatform": true,
 	"controller": [
 		{
@@ -118,7 +118,7 @@
 		},
 		{
 			"name": "每日活动作战",
-			"label": "【活动】凝望月光的花朵",
+			"label": "【活动】黄油大崩溃",
 			"entry": "每日活动作战_开始",
 			"description": "Resource/descs/daily/activity_daily.md",
 			"option": ["每日活动作战-周期检查", "每日活动作战-指定作战次数"]

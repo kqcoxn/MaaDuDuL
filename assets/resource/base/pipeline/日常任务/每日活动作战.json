@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
 			"filename": "每日活动作战",
-			"lastSyncTime": 1767277780149,
+			"lastSyncTime": 1767283144437,
 			"prefix": "每日活动作战",
 			"savedViewport": {
-				"x": -5922,
-				"y": -392,
-				"zoom": 1.39
+				"x": -7368,
+				"y": -669,
+				"zoom": 1.32
 			},
 			"version": "v0.14.1"
 		}
@@ -156,7 +156,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [559, 408, 0, 0]
+				"target": [645, 426, 0, 0]
 			},
 			"type": "Click"
 		},
@@ -226,7 +226,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["成就"],
-				"roi": [1175, 370, 89, 54]
+				"roi": [247, 431, 168, 86]
 			},
 			"type": "OCR"
 		}
@@ -249,7 +249,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["战斗"],
-				"roi": [1106, 569, 122, 67]
+				"roi": [717, 615, 183, 92]
 			},
 			"type": "OCR"
 		}
