@@ -11,11 +11,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from agent.preprocess import check_and_install_dependencies, clear
-
-# 设置控制台编码
-sys.stdout.reconfigure(encoding="gbk")
-sys.stderr.reconfigure(encoding="gbk")
+from agent.preprocess import check_and_install_dependencies
 
 
 def main():
@@ -23,6 +19,7 @@ def main():
     from maa.agent.agent_server import AgentServer
     from maa.toolkit import Toolkit
     from agent import customs
+    from agent.preprocess import clear
     from agent.devops import punch_in
 
     try:
