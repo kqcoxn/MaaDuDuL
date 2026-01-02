@@ -6,7 +6,7 @@
 
 # MaaDuDuL</br>MDDL - 嘟嘟脸小助手
 
-基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！<br/>✨ **目前正在火速完善中，敬请期待！** ✨
+基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！<br/>✨ **目前正在火速完善中，敬请期待！**✨
 
 <p align="center">
   <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.md" target="_blank"><img alt="pipeline" src="https://img.shields.io/badge/Pipeline-%23876f69?logo=paddypower&logoColor=%23FFFFFF"></a>

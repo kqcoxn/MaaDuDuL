@@ -16,6 +16,11 @@
 			"name": "模拟器",
 			"type": "Adb",
 			"display_short_side": 720
+		},
+		{
+			"name": "PlayCover",
+			"type": "PlayCover",
+			"display_short_side": 720
 		}
 	],
 	"resource": [
