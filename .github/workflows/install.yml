@@ -185,7 +185,7 @@ jobs:
         run: |
           cd tools/
           python -m pip install -r ./requirements.txt  # 安装依赖
-          python ./install.py ${{ needs.meta.outputs.tag }}  # 执行安装脚本
+          python ./install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }}  # 执行安装脚本，传递平台参数
           cd ..
 
       # 映射MFAAvalonia的平台和架构命名

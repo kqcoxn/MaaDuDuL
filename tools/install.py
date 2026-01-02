@@ -2,6 +2,7 @@ from pathlib import Path
 
 import shutil
 import sys
+import platform
 
 try:
     import jsonc
@@ -18,6 +19,8 @@ from configure import configure_ocr_model
 working_dir = Path(__file__).parent.parent.resolve()
 install_path = working_dir / Path("install")
 version = len(sys.argv) > 1 and sys.argv[1] or "v0.0.1"
+# 从命令行参数获取目标平台，如果没有提供则使用当前系统平台
+target_os = len(sys.argv) > 2 and sys.argv[2] or platform.system().lower()
 
 
 # # 下载 MaaFramework
@@ -63,6 +66,14 @@ def install_resource():
         interface = jsonc.load(f)
 
     interface["version"] = version
+
+    # 根据目标平台设置Python路径
+    if target_os in ["darwin", "macos", "linux"]:
+        # macOS和Linux使用python/bin/python
+        interface["agent"]["child_exec"] = "./python/bin/python"
+    else:
+        # Windows使用python/python.exe
+        interface["agent"]["child_exec"] = "./python/python.exe"
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         jsonc.dump(interface, f, ensure_ascii=False, indent=4)
