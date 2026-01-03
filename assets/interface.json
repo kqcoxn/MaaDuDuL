@@ -1,7 +1,7 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.0 - MFAA | 测试阶段",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.0 - MFAA | 游戏版本：黄油大崩溃",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
 	"version": "v0.1.0",
@@ -20,7 +20,10 @@
 		{
 			"name": "PlayCover",
 			"type": "PlayCover",
-			"display_short_side": 720
+			"display_short_side": 720,
+			"playcover": {
+				"uuid": "com.bilibili.trickcalcn"
+			}
 		}
 	],
 	"resource": [

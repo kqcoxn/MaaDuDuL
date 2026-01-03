@@ -6,12 +6,12 @@
 
 # MaaDuDuL</br>MDDL - 嘟嘟脸小助手
 
-基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！<br/>✨ **目前正在火速完善中，敬请期待！**✨
+基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！<br/>✨ **目前正在火速完善中** ✨
 
 <p align="center">
   <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.md" target="_blank"><img alt="pipeline" src="https://img.shields.io/badge/Pipeline-%23876f69?logo=paddypower&logoColor=%23FFFFFF"></a>
   <a href="https://www.python.org/" target="_blank"><img alt="python" src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white"></a>
-  <a href="https://mirrorchyan.com/zh/projects?source=mddl-github-readme" target="_blank"><img alt="mirrorc" src="./public/mirrorc-zh.svg"></a>
+  <a href="https://mirrorchyan.com/zh/projects?rid=MaaDuDuL&os=windows&arch=x64&channel=stable&source=mddl-github-readme" target="_blank"><img alt="mirrorc" src="./public/mirrorc-zh.svg"></a>
   <br/>
   <a href="https://github.com/kqcoxn/MaaDuDuL/commits/main/" target="_blank"><img alt="committs" src="https://img.shields.io/github/commit-activity/m/kqcoxn/MaaDuDuL?color=%23ff69b4"></a>
   <a href="https://github.com/kqcoxn/MaaDuDuL/stargazers" target="_blank"><img alt="stars" src="https://img.shields.io/github/stars/kqcoxn/MaaDuDuL?style=social"></a>
@@ -21,7 +21,7 @@
   <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank"><img alt="QQ交流群" src="https://img.shields.io/badge/QGroup-926874985-0e80c1?logo=qq&logoColor=white"></a>
 </p>
 
-<!-- <a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank">📥 下载</a> | <a href="https://docs.codax.site/mddl" target="_blank">📖 文档</a> | <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank">💬 讨论</a> | <a href="https://mirrorchyan.com/zh/projects?rid=MDDL&os=windows&arch=x64&channel=stable&source=mddl-github-readme" target="_blank">🚀 镜像</a> -->
+<a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank">📥 下载</a> | <a href="https://mddl.codax.site/docs/" target="_blank">📖 文档</a> | <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank">💬 讨论</a> | <a href="https://mirrorchyan.com/zh/projects?rid=MaaDuDuL&os=windows&arch=x64&channel=stable&source=mddl-github-readme" target="_blank">🚀 镜像</a>
 
 </div>
 
@@ -80,29 +80,17 @@
 
 ## \*Mirror 酱支持
 
-Comming Soon！
+在 [Mirrorc 官方](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) 的帮助下， MDDL 同样也接入了 Mirror 酱 的国内高速下载与更新服务，您可以通过 [此链接](https://mirrorchyan.com/zh/projects?rid=MaaDuDuL&os=windows&arch=x64&channel=stable&source=mddl-github-readme) 获取带有 Mirror 酱服务的 MDDL
 
-<!-- 在 [Mirrorc 官方](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) 的帮助下， MDDL 同样也接入了 Mirror 酱 的国内高速下载与更新服务，详情请见[【Bilibili】震惊！MAA 开启收费功能？！](https://www.bilibili.com/video/BV1cZFreLEja/)
+简单来说，Mirror 酱（简称 mirrorc）是一个由开源社区维护的有偿分发平台，可以理解为一个中转站，从海外源获取一份最新版存至国内站点，当您需要时直接从国内站点下载。（实际为全球加速）
 
-您可以通过 [此链接](https://mirrorchyan.com/zh/projects?rid=MDDL&os=windows&arch=x64&channel=stable&source=mddl-github-readme) 获取带有 Mirror 酱服务的 MDDL
-
-简单来说，Mirror 酱（简称 mirrorc）是一个由开源社区维护的有偿分发平台，可以理解为一个中转站，从海外源获取一份最新版存至国内站点，当您需要时直接从国内站点下载。
-
-由于海内外下载、站点维护等需要，mirrorc 会产生大量开销，因此 mirrorc 的服务是有偿的，但这**并不代表 MDDL 是收费的，您完全可以通过其他方式更新并无限制使用，仅在您需要 mirrorc 时才需要自行向 mirrorc MDDL 社区并不承担此过程中的一切责任，当出现问题时您可以在 mirrorc 客户群联系客服解决。** -->
+由于海内外下载、站点维护等需要，mirrorc 会产生大量开销，因此 mirrorc 的服务是有偿的，但这**并不代表 MDDL 是收费的，您完全可以通过其他方式更新并无限制使用，仅在您需要 mirrorc 时才需要自行向 mirrorc 方付费，MDDL 社区并不承担此过程中的一切责任，当出现问题时您可以联系 mirrorc 客服解决。**
 
 ## 免责声明
 
 本软件开源、免费，仅供学习交流使用。若您遇到商家使用本软件进行代肝并收费，可能是分发、设备或时间等费用，产生的费用、问题及后果与本软件无关。
 
 **MDDL 可能存在任何意想不到的问题，因 MDDL 自身漏洞、文本理解有歧义、异常操作导致的账号问题等开发组不承担任何责任，请在确保在阅读完用户手册、自行尝试运行效果后谨慎使用！**
-
-<!-- ## 常见问题
-
-请确保现有 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue) 中还没有与您遇到的类似的问题
-
-- [文档站-用户手册-问题排查](https://docs.codax.site/mddl/guide/users/errors.html)
-
-如果有其他问题，欢迎提交 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue)，或在 [交流群](https://qm.qq.com/q/6pu9Cf2qJO) 内提问，您的反馈将使更多受益！ -->
 
 ## 鸣谢
 
@@ -118,8 +106,9 @@ Comming Soon！
 - 项目模板：[MaaXYZ](https://github.com/MaaXYZ)/[MaaPracticeBoilerplate](https://github.com/MaaXYZ/MaaPracticeBoilerplate)
 - GUI：[SweetSmellFox](https://github.com/SweetSmellFox)/[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
 - Pipeline 编辑器：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
+- 坨坨脸识别：[kqcoxn](https://github.com/kqcoxn)/[mddldl](https://github.com/kqcoxn/mddldl)
 - 测试：[MaaXYZ](https://github.com/MaaXYZ)/[MaaDebugger](https://github.com/MaaXYZ/MaaDebugger)
-      <!-- - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme) -->
+- 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme)
 
 游戏官网（国服）：[Bilibili-嘟嘟脸恶作剧](https://game.bilibili.com/trickcal/)
 
