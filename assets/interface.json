@@ -9,8 +9,8 @@
 	"contact": "QQ群: 926874985",
 	"license": "LICENSE",
 	"github": "https://github.com/kqcoxn/MaaDuDuL",
-	// "mirrorchyan_rid": "",
-	// "mirrorchyan_multiplatform": true,
+	"mirrorchyan_rid": "MaaDuDuL",
+	"mirrorchyan_multiplatform": true,
 	"controller": [
 		{
 			"name": "模拟器",
