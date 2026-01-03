@@ -4,7 +4,7 @@
 		"mpe": "mpelb --root assets/resource",
 		"agent": "python dev/run_agent.py",
 		"debug": "python -m MaaDebugger",
-		"release": "git tag -a v0.1.0 -m \"release v0.1.0\" && git push origin v0.1.0"
+		"release": "git tag -a v0.1.1 -m \"release v0.1.1\" && git push origin v0.1.1"
 	},
 	"devDependencies": {
 		"prettier-plugin-multiline-arrays": "^3.0.6"
