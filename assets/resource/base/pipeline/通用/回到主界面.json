@@ -1,201 +1,201 @@
 {
-  "$__mpe_config_返回主界面": {
-    "$__mpe_code": {
-      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
-      "filename": "返回主界面",
-      "lastSyncTime": 1766584007305,
-      "prefix": "返回主界面",
-      "savedViewport": {
-        "x": -2171,
-        "y": 538,
-        "zoom": 1
-      },
-      "version": "v0.13.0"
-    }
-  },
-  "返回主界面_使徒": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2978,
-        "y": -401
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {
-        "expected": [
-          "使徒"
-        ],
-        "roi": [
-          278,
-          528,
-          378,
-          186
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "返回主界面_冒险通行证": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3254,
-        "y": -400
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {
-        "expected": [
-          "冒险通行证"
-        ],
-        "roi": [
-          9,
-          107,
-          441,
-          341
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "返回主界面_导航类返回": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2713,
-        "y": 166
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "post_delay": 2000,
-    "recognition": {
-      "param": {
-        "index": -1,
-        "template": [
-          "global/home.png",
-          "global/back.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "返回主界面_开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2426,
-        "y": -170
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "on_task_start"
-      },
-      "type": "Custom"
-    },
-    "focus": {
-      "Node.Recognition.Starting": " \u003e 返回主界面"
-    },
-    "next": [
-      "返回主界面_检测主界面",
-      {
-        "jump_back": true,
-        "name": "返回主界面_导航类返回"
-      },
-      {
-        "jump_back": true,
-        "name": "返回主界面_面板类返回"
-      }
-    ],
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "返回主界面_检测主界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2712,
-        "y": -172
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 已回到主界面"
-    },
-    "post_delay": 0,
-    "pre_delay": 0,
-    "recognition": {
-      "param": {
-        "custom_recognition": "stable_reco",
-        "custom_recognition_param": "n=返回主界面_活动弹窗\u0026n=返回主界面_使徒\u0026n=返回主界面_冒险通行证"
-      },
-      "type": "Custom"
-    }
-  },
-  "返回主界面_活动弹窗": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2709,
-        "y": -399
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {
-        "expected": [
-          "活动弹窗"
-        ],
-        "roi": [
-          734,
-          72,
-          539,
-          257
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "返回主界面_面板类返回": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2711,
-        "y": 443
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "post_delay": 2000,
-    "recognition": {
-      "param": {
-        "index": -1,
-        "template": [
-          "main/close_green.png",
-          "main/close-black.png",
-          "main/close_green.png",
-          "main/close-brown.png",
-          "main/close-yellow.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  }
+	"$__mpe_config_返回主界面": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
+			"filename": "返回主界面",
+			"lastSyncTime": 1767538565174,
+			"prefix": "返回主界面",
+			"savedViewport": {
+				"x": -2650,
+				"y": 396,
+				"zoom": 1.25
+			},
+			"version": "v0.14.2"
+		}
+	},
+	"返回主界面_使徒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2978,
+				"y": -401
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["使徒"],
+				"roi": [278, 528, 378, 186]
+			},
+			"type": "OCR"
+		}
+	},
+	"返回主界面_冒险通行证": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3254,
+				"y": -400
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["冒险通行证"],
+				"roi": [9, 107, 441, 341]
+			},
+			"type": "OCR"
+		}
+	},
+	"返回主界面_导航类返回": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2713,
+				"y": 166
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"post_delay": 2000,
+		"recognition": {
+			"param": {
+				"index": -1,
+				"template": ["global/home.png", "global/back.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"返回主界面_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2426,
+				"y": -170
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 返回主界面"
+		},
+		"next": [
+			"返回主界面_检测主界面",
+			{
+				"jump_back": true,
+				"name": "返回主界面_导航类返回"
+			},
+			{
+				"jump_back": true,
+				"name": "返回主界面_面板类返回"
+			},
+			{
+				"jump_back": true,
+				"name": "返回主界面_闲时捏脸"
+			}
+		],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"返回主界面_检测主界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2712,
+				"y": -172
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 已回到主界面"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "stable_reco",
+				"custom_recognition_param": "n=返回主界面_活动弹窗\u0026n=返回主界面_使徒\u0026n=返回主界面_冒险通行证"
+			},
+			"type": "Custom"
+		}
+	},
+	"返回主界面_活动弹窗": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2709,
+				"y": -399
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["活动弹窗"],
+				"roi": [734, 72, 539, 257]
+			},
+			"type": "OCR"
+		}
+	},
+	"返回主界面_闲时捏脸": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2711,
+				"y": 430
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "pface"
+			},
+			"type": "Custom"
+		}
+	},
+	"返回主界面_面板类返回": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2981,
+				"y": 167
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"post_delay": 2000,
+		"recognition": {
+			"param": {
+				"index": -1,
+				"template": [
+					"main/close_green.png",
+					"main/close-black.png",
+					"main/close_green.png",
+					"main/close-brown.png",
+					"main/close-yellow.png"
+				]
+			},
+			"type": "TemplateMatch"
+		}
+	}
 }

@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1767254313719,
+			"lastSyncTime": 1767538642372,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -363,
-				"y": -111,
-				"zoom": 1.15
+				"x": 103,
+				"y": 70,
+				"zoom": 0.62
 			},
-			"version": "v0.14.0"
+			"version": "v0.14.2"
 		}
 	},
 	"启动游戏_关闭公告": {
@@ -91,6 +91,10 @@
 			{
 				"jump_back": true,
 				"name": "启动游戏_关闭面板"
+			},
+			{
+				"jump_back": true,
+				"name": "启动游戏_闲时捏脸"
 			}
 		],
 		"post_delay": 0,
@@ -153,6 +157,10 @@
 			{
 				"jump_back": true,
 				"name": "启动游戏_关闭面板"
+			},
+			{
+				"jump_back": true,
+				"name": "启动游戏_闲时捏脸"
 			}
 		],
 		"recognition": {
@@ -305,6 +313,26 @@
 			"param": {
 				"custom_recognition": "stable_reco",
 				"custom_recognition_param": "m=3\u0026n=启动游戏_识别开始界面"
+			},
+			"type": "Custom"
+		}
+	},
+	"启动游戏_闲时捏脸": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1417,
+				"y": 1021
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "pface"
 			},
 			"type": "Custom"
 		}
