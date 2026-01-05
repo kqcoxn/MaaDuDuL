@@ -335,9 +335,11 @@ jobs:
       - name: Read Changelog.md
         id: read_changelog
         run: |
-          # 读取Changelog.md，跳过前4行，然后设置为output
-          CHANGELOG_CONTENT=$(tail -n +5 assets/resource/Changelog.md)
+          # 读取Changelog.md，跳过前3行，然后在前面添加Mirror酱链接
+          MIRROR_LINK="[已有 Mirror 酱？点击前往高速下载！](https://mirrorchyan.com/zh/projects?rid=MaaDuDuL&source=mddl-release&os=windows&arch=x64&channel=stable)"
+          CHANGELOG_CONTENT=$(tail -n +4 assets/resource/Changelog.md)
           echo "content<<EOF" >> $GITHUB_OUTPUT
+          echo "$MIRROR_LINK" >> $GITHUB_OUTPUT
           echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
