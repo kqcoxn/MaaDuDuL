@@ -155,18 +155,18 @@ class Tasker:
         self.ctl.post_swipe(x1, y1, x2, y2, duration).wait()
         return self
 
-    def wait(self, minutes: float = 0.5):
+    def wait(self, seconds: float = 0.4):
         """执行等待操作。
 
         暂停当前任务执行指定的时间，用于在任务流程中插入延迟。
 
         Args:
-            minutes: 等待时长（分钟），默认为 0.5 分钟。
+            seconds: 等待时长（秒），默认为 0.4 秒。
 
         Returns:
             Tasker: 返回自身，支持链式调用。
         """
-        time.sleep(minutes * 60)
+        time.sleep(seconds)
         return self
 
     @staticmethod

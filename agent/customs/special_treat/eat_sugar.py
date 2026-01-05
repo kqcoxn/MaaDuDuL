@@ -67,14 +67,13 @@ class SelectCloneLevel(CustomAction):
     """选择克隆工厂关卡的自定义动作
 
     根据传入的关卡编号，自动计算屏幕坐标并点击对应的关卡。
-    支持 1-20 关卡的选择，关卡大于 12 时需要先向上滑动界面。
 
     参数格式：
-        - level 或 l：关卡编号（1-20）
+        - level 或 l：关卡编号（1-15）
 
     关卡布局：
-        - 1-12 关：屏幕可见区域，起始坐标 (118, 238)，每行 4 个，共 3 行
-        - 13-20 关：需要向上滑动后可见，起始坐标 (117, 343)，每行 4 个，共 2 行
+        - 1-8 关：屏幕可见区域，起始坐标 (118, 238)，每行 4 个，共 2 行
+        - 9-15 关：需要向上滑动后可见，起始坐标 (117, 343)，每行 4 个，共 2 行
     """
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
@@ -98,17 +97,19 @@ class SelectCloneLevel(CustomAction):
             Prompter.log(f"选择关卡：{level}")
             tasker = Tasker(context)
 
-            # 关卡 13-20：需要向上滑动界面
-            if level > 12:
-                tasker.swipe(360, 596, 360, 210).wait()
-                mo = MatrixOperator(117, 343, 163, 178)
-                level -= 8
+            # 关卡 1-8
+            if level < 8:
+                tasker.swipe(360, 210, 360, 596).wait()
+                mo = MatrixOperator(118, 238, 163, 178)
                 row = (level - 1) // 4 + 1
                 col = (level - 1) % 4 + 1
                 tasker.click(*mo.get_pos(row, col))
-            # 关卡 1-12：直接点击可见区域
+
+            # 关卡 9-15
             else:
-                mo = MatrixOperator(118, 238, 163, 178)
+                tasker.swipe(360, 596, 360, 210).wait()
+                mo = MatrixOperator(117, 343, 163, 178)
+                level -= 8
                 row = (level - 1) // 4 + 1
                 col = (level - 1) % 4 + 1
                 tasker.click(*mo.get_pos(row, col))
