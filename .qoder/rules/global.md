@@ -16,6 +16,7 @@ https://github.com/kqcoxn/MaaDuDuL
 ## 应该做的事
 
 - 当涉及 maafw 的 pipeline 或 custom api 时，应该参阅相关 `/instructions/` 下的参考文档，不要凭空生成
+- custom 输出应该使用 `Prompter.log()` 
 - 使用`yarn`作为 Node.js 的包管理器
 
 ## 禁止的工作

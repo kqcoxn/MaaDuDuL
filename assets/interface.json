@@ -1058,11 +1058,25 @@
 			]
 		},
 		"巅峰对决-竞技场对战-对手选择策略": {
-			"type": "switch",
+			"type": "select",
 			"label": "对手选择策略",
 			"cases": [
 				{
-					"name": "最低战力"
+					"name": "智能模式",
+					"description": "若存在比自身战力低的对手，选择其中排名最高的；否则选择战力最低的",
+					"pipeline_override": {
+						"巅峰对决_选择对手": {
+							"custom_recognition_param": "s=auto"
+						}
+					}
+				},
+				{
+					"name": "最低战力",
+					"pipeline_override": {
+						"巅峰对决_选择对手": {
+							"custom_recognition_param": "s=min_power"
+						}
+					}
 				},
 				{
 					"name": "最高排名",

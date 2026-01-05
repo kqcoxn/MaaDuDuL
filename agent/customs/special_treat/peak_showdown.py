@@ -75,12 +75,34 @@ class PickOpponent(CustomRecognition):
         try:
             # 解析参数
             args = ParamAnalyzer(argv)
-            strategy = args.get(["strategy", "s"], "min_power")  # min_power, max_rank
+            strategy = args.get(["strategy", "s"], "auto")  # auto, min_power, max_rank
 
-            if strategy == "min_power":
+            if strategy == "auto":
+                # 智能模式
+                # 获取自己的战斗力
+                rh = RecoHelper(context, argv).recognize("巅峰对决_识别自身战斗力")
+                if rh.hit:
+                    my_score = parse_power(rh.best_result.text)
+                    # 识别所有对手的战斗力
+                    rh = RecoHelper(context, argv).recognize("巅峰对决_识别对手战斗力")
+                    if rh.hit:
+                        results = rh.filtered_results
+                        # 筛选出比自己分数低的对手
+                        lower_opponents = [
+                            res for res in results if parse_power(res.text) < my_score
+                        ]
+                        if lower_opponents:
+                            # 如果有比自己分数低的，选择其中排名最高的
+                            target = min(lower_opponents, key=lambda res: res.box[1])
+                            return RecoHelper.rt(target)
+                        else:
+                            # 如果没有比自己分数低的，选择战斗力最低的
+                            target = min(results, key=lambda res: parse_power(res.text))
+                            return RecoHelper.rt(target)
+            elif strategy == "min_power":
                 # 最低战力
                 # 识别所有对手的战斗力文本
-                rh = RecoHelper(context, argv).recognize("巅峰对决_识别战斗力")
+                rh = RecoHelper(context, argv).recognize("巅峰对决_识别对手战斗力")
                 if rh.hit:
                     results = rh.filtered_results
                     # 选择战斗力最低的对手

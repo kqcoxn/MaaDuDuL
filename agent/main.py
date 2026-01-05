@@ -11,6 +11,36 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+
+# 设置默认编码为 UTF-8
+import locale
+
+os.environ["PYTHONIOENCODING"] = "utf-8"
+if sys.platform == "win32":
+    # Windows
+    if sys.stdout.encoding != "utf-8":
+        sys.stdout.reconfigure(encoding="utf-8")
+    if sys.stderr.encoding != "utf-8":
+        sys.stderr.reconfigure(encoding="utf-8")
+    # 设置默认文件系统编码
+    if hasattr(sys, "_enablelegacywindowsfsencoding"):
+        sys._enablelegacywindowsfsencoding()
+else:
+    # macOS、Linux
+    try:
+        locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
+    except locale.Error:
+        try:
+            locale.setlocale(locale.LC_ALL, "C.UTF-8")
+        except locale.Error:
+            pass
+
+    # 确保标准输出使用 UTF-8
+    if sys.stdout.encoding != "utf-8":
+        sys.stdout.reconfigure(encoding="utf-8")
+    if sys.stderr.encoding != "utf-8":
+        sys.stderr.reconfigure(encoding="utf-8")
+
 from agent.preprocess import check_and_install_dependencies
 
 
