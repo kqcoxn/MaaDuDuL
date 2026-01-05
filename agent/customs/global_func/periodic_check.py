@@ -68,17 +68,18 @@ class Inspector:
     def record(key: str) -> None:
         """记录任务的最后完成日期。
 
-        将当前日期（经过刷新时间调整）存储到本地，用于后续的周期判断。
+        将调整后的日期存储到本地，用于后续的周期判断。
+        4点前记录前一天，4点后记录当天。
 
         Args:
             key: 任务标识符，用于区分不同的周期性任务。
 
         Note:
-            日期会根据 _adjust_datetime 方法进行调整。
+            记录时使用调整后的日期，确保4点作为分界线。
         """
-        current_datetime = Inspector._adjust_datetime()
+        adjusted_datetime = Inspector._adjust_datetime()
         storage_key = Inspector._get_storage_key(key)
-        LocalStorage.set(storage_key, str(current_datetime.date()))
+        LocalStorage.set(storage_key, str(adjusted_datetime.date()))
 
     @staticmethod
     def same_week(key: str) -> bool:
@@ -117,19 +118,20 @@ class Inspector:
     def same_day(task: str) -> bool:
         """判断任务是否在同一天内已完成。
 
-        比较当前日期和上次记录日期是否为同一天。
+        比较当前调整后日期和上次记录日期是否为同一天。
+        4点前对比时使用前一天，4点后对比时使用当天。
 
         Args:
             task: 任务标识符。
 
         Returns:
-            bool: 如果在同一天内已完成返回 True，否则返回 False。
+            bool: 如果在同一游戏日内已完成返回 True，否则返回 False。
                   如果没有记录或记录格式错误，返回 False。
 
         Note:
-            日期判断基于调整后的日期（考虑刷新时间）。
+            对比时使用调整后的日期，与记录时保持一致。
         """
-        current_datetime = Inspector._adjust_datetime()
+        adjusted_datetime = Inspector._adjust_datetime()
         storage_key = Inspector._get_storage_key(task)
         last_date_str: Optional[str] = LocalStorage.get(storage_key)
 
@@ -141,7 +143,7 @@ class Inspector:
         except (ValueError, TypeError):
             return False
 
-        return current_datetime.date() == last_date
+        return adjusted_datetime.date() == last_date
 
     @staticmethod
     def same_month(key: str) -> bool:
@@ -215,29 +217,20 @@ class PeriodicCheck(CustomAction):
             bool: True 表示任务未完成需要执行，False 表示任务已完成无需执行。
         """
         try:
+            # 解析参数
             args = ParamAnalyzer(argv)
             key = args.get(["key", "k", "task", "t"])
 
-            # 直接返回
+            # 处理直接返回的特殊值
             if key in ["False", "false", "f", False]:
                 return False
             if key in ["True", "true", "t", True]:
                 return True
 
+            # 获取周期类型，默认为天
             periodic = args.get(["periodic", "p"], "day")
-            record_immediately = args.get(["record", "r"], False)
 
-            # 处理布尔参数
-            if record_immediately == "false":
-                record_immediately = False
-            else:
-                record_immediately = True
-
-            # 如果需要立即记录，则记录当前时间
-            if record_immediately:
-                Inspector.record(key)
-
-            # 根据周期类型判断是否已完成
+            # 根据周期类型判断任务是否已完成
             is_done = False
             if periodic == "day" or periodic == "d":
                 is_done = Inspector.same_day(key)
@@ -246,7 +239,7 @@ class PeriodicCheck(CustomAction):
             elif periodic == "month" or periodic == "m":
                 is_done = Inspector.same_month(key)
 
-            # 返回是否需要执行
+            # 返回任务是否需要执行（未完成则需要执行）
             return not is_done
         except Exception as e:
             return Prompter.error("检查周期任务", e)
