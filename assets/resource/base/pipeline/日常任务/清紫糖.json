@@ -3,21 +3,21 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
 			"filename": "清紫糖",
-			"lastSyncTime": 1767277668654,
+			"lastSyncTime": 1767613101037,
 			"prefix": "清紫糖",
 			"savedViewport": {
-				"x": -8712,
-				"y": -271,
-				"zoom": 1.39
+				"x": -7315,
+				"y": -623,
+				"zoom": 0.95
 			},
-			"version": "v0.14.1"
+			"version": "v0.14.2"
 		}
 	},
 	"$__mpe_external_返回主界面_清紫糖": {
 		"$__mpe_code": {
 			"position": {
-				"x": 8756,
-				"y": 1093
+				"x": 8984,
+				"y": 1088
 			}
 		}
 	},
@@ -158,7 +158,7 @@
 			"param": {},
 			"type": "DoNothing"
 		},
-		"next": ["返回主界面"],
+		"next": ["清紫糖_周期记录"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -208,11 +208,77 @@
 			"type": "DirectHit"
 		}
 	},
+	"清紫糖_周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7028,
+				"y": 397
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已清紫糖"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"清紫糖_周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6747,
+				"y": 178
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=清紫糖"
+			},
+			"type": "Custom"
+		},
+		"next": ["清紫糖_进入冒险界面"],
+		"on_error": ["清紫糖_周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"清紫糖_周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8719,
+				"y": 1089
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=清紫糖"
+			},
+			"type": "Custom"
+		},
+		"next": ["返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"清紫糖_开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6753,
-				"y": 332
+				"x": 6467,
+				"y": 180
 			}
 		},
 		"action": {
@@ -222,7 +288,7 @@
 			},
 			"type": "Custom"
 		},
-		"next": ["清紫糖_进入冒险界面"],
+		"next": ["清紫糖_周期检查"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -424,8 +490,8 @@
 	"清紫糖_确保进入副本界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7554,
-				"y": 335
+				"x": 7561,
+				"y": 183
 			}
 		},
 		"action": {
@@ -571,8 +637,8 @@
 	"清紫糖_进入冒险界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7019,
-				"y": 331
+				"x": 7026,
+				"y": 179
 			}
 		},
 		"action": {
@@ -593,8 +659,8 @@
 	"清紫糖_进入副本界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7294,
-				"y": 335
+				"x": 7301,
+				"y": 183
 			}
 		},
 		"action": {

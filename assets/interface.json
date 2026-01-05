@@ -111,7 +111,7 @@
 			"label": "清紫糖",
 			"entry": "清紫糖_开始",
 			"description": "Resource/descs/daily/clear_purple_candy.md",
-			"option": ["清紫糖-克隆工厂", "清紫糖-副本"]
+			"option": ["清紫糖-周期检查", "清紫糖-克隆工厂", "清紫糖-副本"]
 		},
 		{
 			"name": "巅峰对决",
@@ -752,6 +752,23 @@
 		},
 		// ========== 圣团巡礼 ==========
 		// ========== 清紫糖 ==========
+		"清紫糖-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"清紫糖_周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
 		"清紫糖-克隆工厂": {
 			"type": "switch",
 			"label": "克隆工厂作战",
