@@ -1,0 +1,457 @@
+{
+	"$__mpe_config_农场视察": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\农场视察.json",
+			"filename": "农场视察",
+			"lastSyncTime": 1767620043951,
+			"prefix": "农场视察",
+			"savedViewport": {
+				"x": -2546,
+				"y": 158,
+				"zoom": 0.72
+			},
+			"version": "v0.14.2"
+		}
+	},
+	"$__mpe_external_返回主界面_农场视察": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6141,
+				"y": 389
+			}
+		}
+	},
+	"农场视察_周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3720,
+				"y": 268
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已视察"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3445,
+				"y": 61
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=农场视察"
+			},
+			"type": "Custom"
+		},
+		"focus": {
+			"Node.Action.Succeeded": " \u003e 进入平日农场"
+		},
+		"next": ["农场视察_进入农场"],
+		"on_error": ["农场视察_周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5865,
+				"y": 386
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=农场视察"
+			},
+			"type": "Custom"
+		},
+		"next": ["返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3170,
+				"y": 62
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
+			},
+			"type": "Custom"
+		},
+		"next": ["农场视察_周期检查"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_收获宠物萝卜": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5074,
+				"y": 58
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 收集宠物萝卜"
+		},
+		"next": ["农场视察_检测宠物萝卜"],
+		"on_error": ["农场视察_获取萝卜结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 2000
+	},
+	"农场视察_无跑腿奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5071,
+				"y": 657
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e  跑腿未完成"
+		},
+		"next": ["农场视察_派遣跑腿结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"expected": ["没有可以完成的"]
+			},
+			"type": "OCR"
+		}
+	},
+	"农场视察_树桩萝卜": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4548,
+				"y": 58
+			}
+		},
+		"action": {
+			"param": {
+				"target": [305, 368, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["农场视察_获取树桩萝卜"],
+		"on_error": ["农场视察_收获宠物萝卜"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 2000
+	},
+	"农场视察_检测宠物萝卜": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5336,
+				"y": 58
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 拿来吧你！"
+		},
+		"next": ["农场视察_获取宠物萝卜"],
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"template": ["farm/carrot.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"农场视察_派遣跑腿开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4289,
+				"y": 390
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["农场视察_进入跑腿地区"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_派遣跑腿结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5599,
+				"y": 389
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["农场视察_周期记录"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_确保进入农场": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4000,
+				"y": 63
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["农场视察_获取萝卜开始"],
+		"recognition": {
+			"param": {
+				"expected": ["平日农场"],
+				"roi": [21, 4, 282, 70]
+			},
+			"type": "OCR"
+		}
+	},
+	"农场视察_获取宠物萝卜": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5607,
+				"y": -199
+			}
+		},
+		"action": {
+			"param": {
+				"target": [645, 617, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["农场视察_检测宠物萝卜"],
+		"on_error": ["农场视察_获取萝卜结束"],
+		"recognition": {
+			"param": {
+				"expected": ["点击屏幕继续"]
+			},
+			"type": "OCR"
+		},
+		"timeout": 2000
+	},
+	"农场视察_获取树桩萝卜": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4815,
+				"y": 60
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 收取每日萝卜"
+		},
+		"next": ["农场视察_收获宠物萝卜"],
+		"recognition": {
+			"param": {
+				"expected": ["确定"],
+				"roi": [596, 479, 88, 61]
+			},
+			"type": "OCR"
+		}
+	},
+	"农场视察_获取派遣奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5331,
+				"y": 390
+			}
+		},
+		"action": {
+			"param": {
+				"target": [646, 620, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["农场视察_派遣跑腿结束"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"农场视察_获取萝卜开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4277,
+				"y": 61
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["农场视察_树桩萝卜"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_获取萝卜结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5605,
+				"y": 60
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["农场视察_派遣跑腿开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"农场视察_进入农场": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3723,
+				"y": 62
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["农场视察_确保进入农场"],
+		"recognition": {
+			"param": {
+				"roi": [773, 70, 505, 280],
+				"template": ["main/farm.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"农场视察_进入跑腿地区": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4549,
+				"y": 390
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 进入跑腿地区"
+		},
+		"next": ["农场视察_领取跑腿奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["派遣跑腿"]
+			},
+			"type": "OCR"
+		}
+	},
+	"农场视察_重新派遣": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5069,
+				"y": 390
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 获取跑腿奖励并重新派遣"
+		},
+		"next": ["农场视察_获取派遣奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["重新派"],
+				"roi": [247, 567, 774, 135]
+			},
+			"type": "OCR"
+		}
+	},
+	"农场视察_领取跑腿奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4809,
+				"y": 390
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["农场视察_重新派遣", "农场视察_无跑腿奖励"],
+		"on_error": ["农场视察_派遣跑腿结束"],
+		"recognition": {
+			"param": {
+				"expected": ["键领取"],
+				"roi": [1156, 663, 97, 36]
+			},
+			"type": "OCR"
+		},
+		"timeout": 2000
+	}
+}
