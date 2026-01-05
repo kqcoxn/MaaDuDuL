@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1767288984031,
+			"lastSyncTime": 1767617484266,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -2945,
-				"y": -159,
-				"zoom": 0.46
+				"x": -5700,
+				"y": -133,
+				"zoom": 0.8
 			},
-			"version": "v0.14.1"
+			"version": "v0.14.2"
 		}
 	},
 	"$__mpe_external_返回主界面_圣团巡礼": {
@@ -899,7 +899,13 @@
 		"focus": {
 			"Node.Recognition.Starting": " \u003e 收获世界树"
 		},
-		"next": ["圣团巡礼_获取世界树"],
+		"next": [
+			"圣团巡礼_获取世界树",
+			{
+				"jump_back": true,
+				"name": "圣团巡礼_确认世界树额外奖励"
+			}
+		],
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
@@ -1197,6 +1203,26 @@
 			"type": "Click"
 		},
 		"next": ["圣团巡礼_从世界树返回"],
+		"recognition": {
+			"param": {
+				"expected": ["请点击屏幕继续"]
+			},
+			"type": "OCR"
+		}
+	},
+	"圣团巡礼_确认世界树额外奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7792,
+				"y": 378
+			}
+		},
+		"action": {
+			"param": {
+				"target": [643, 642, 0, 0]
+			},
+			"type": "Click"
+		},
 		"recognition": {
 			"param": {
 				"expected": ["请点击屏幕继续"]
