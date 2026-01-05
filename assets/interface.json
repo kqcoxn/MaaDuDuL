@@ -126,7 +126,7 @@
 			"label": "农场视察",
 			"entry": "农场视察_开始",
 			"default_check": true,
-			"description": "Resource/descs/daily/peak_battle.md",
+			"description": "Resource/descs/daily/farm.md",
 			"option": ["农场视察-周期检查", "农场视察-萝卜", "农场视察-派遣"]
 		},
 		{
@@ -193,6 +193,7 @@
 		"领取糖果-周期检查": {
 			"type": "switch",
 			"label": "每日仅检查一次糖果",
+			"description": "仅在领取成功后记录，早晚分离",
 			"cases": [
 				{
 					"name": "No",

@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
 			"filename": "返回主界面",
-			"lastSyncTime": 1767619005783,
+			"lastSyncTime": 1767620463390,
 			"prefix": "返回主界面",
 			"savedViewport": {
-				"x": -2342,
-				"y": 72,
-				"zoom": 1.09
+				"x": -1425,
+				"y": 309,
+				"zoom": 0.82
 			},
 			"version": "v0.14.2"
 		}
@@ -54,8 +54,8 @@
 	"返回主界面_导航类返回": {
 		"$__mpe_code": {
 			"position": {
-				"x": 2713,
-				"y": 166
+				"x": 2712,
+				"y": 164
 			}
 		},
 		"action": {
@@ -66,7 +66,8 @@
 		"recognition": {
 			"param": {
 				"index": -1,
-				"template": ["global/home.png", "global/back.png", "global/home2.png"]
+				"template": ["global/home.png", "global/back.png", "global/home2.png"],
+				"threshold": [0.9, 0.9, 0.9]
 			},
 			"type": "TemplateMatch"
 		}
@@ -155,8 +156,8 @@
 	"返回主界面_闲时捏脸": {
 		"$__mpe_code": {
 			"position": {
-				"x": 2711,
-				"y": 430
+				"x": 2713,
+				"y": 470
 			}
 		},
 		"action": {
@@ -176,7 +177,7 @@
 		"$__mpe_code": {
 			"position": {
 				"x": 2981,
-				"y": 167
+				"y": 165
 			}
 		},
 		"action": {
