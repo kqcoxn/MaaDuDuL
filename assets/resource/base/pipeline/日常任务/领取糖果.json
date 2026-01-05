@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取糖果.json",
 			"filename": "领取糖果",
-			"lastSyncTime": 1767277863924,
+			"lastSyncTime": 1767611946079,
 			"prefix": "领取糖果",
 			"savedViewport": {
-				"x": -4062,
-				"y": 174,
-				"zoom": 1.21
+				"x": -3134,
+				"y": 490,
+				"zoom": 0.95
 			},
-			"version": "v0.14.1"
+			"version": "v0.14.2"
 		}
 	},
 	"$__mpe_external_返回主界面_领取糖果": {
@@ -145,7 +145,7 @@
 			},
 			"type": "Custom"
 		},
-		"next": ["领取糖果_进入活动界面"],
+		"next": ["领取糖果_组合周期检查-早饭"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -233,6 +233,73 @@
 				"expected": ["请点击屏幕继续"]
 			},
 			"type": "OCR"
+		}
+	},
+	"领取糖果_组合周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4506,
+				"y": -295
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已领取所有糖果"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_组合周期检查-早饭": {
+		"$__mpe_code": {
+			"position": {
+				"x": 3974,
+				"y": -326
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=早饭糖果"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取糖果_进入活动界面"],
+		"on_error": ["领取糖果_组合周期检查-晚饭"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取糖果_组合周期检查-晚饭": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4237,
+				"y": -327
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=晚饭糖果"
+			},
+			"type": "Custom"
+		},
+		"next": ["领取糖果_进入活动界面"],
+		"on_error": ["领取糖果_组合周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
 		}
 	},
 	"领取糖果_进入活动界面": {

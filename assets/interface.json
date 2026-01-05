@@ -191,6 +191,12 @@
 					"pipeline_override": {
 						"领取糖果_周期检查": {
 							"action": "DoNothing"
+						},
+						"领取糖果_组合周期检查-早饭": {
+							"action": "DoNothing"
+						},
+						"领取糖果_组合周期检查-晚饭": {
+							"action": "DoNothing"
 						}
 					}
 				},
