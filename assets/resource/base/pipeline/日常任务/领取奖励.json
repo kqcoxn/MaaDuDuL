@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取奖励.json",
 			"filename": "领取奖励",
-			"lastSyncTime": 1767290221401,
+			"lastSyncTime": 1767617791490,
 			"prefix": "领取奖励",
 			"savedViewport": {
-				"x": -2611,
-				"y": -423,
-				"zoom": 0.92
+				"x": -4256,
+				"y": -535,
+				"zoom": 1.21
 			},
-			"version": "v0.14.1"
+			"version": "v0.14.2"
 		}
 	},
 	"$__mpe_external_返回主界面_领取奖励": {
@@ -197,7 +197,6 @@
 		"focus": {
 			"Node.Recognition.Starting": " \u003e 该通行证已关闭"
 		},
-		"next": ["领取奖励_从通行证返回"],
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
