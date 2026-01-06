@@ -8,7 +8,7 @@ from maa.custom_action import CustomAction
 from maa.context import Context
 
 from agent.customs.utils import Prompter
-from agent.customs.maahelper import ParamAnalyzer, Tasker
+from agent.customs.maahelper import ParamAnalyzer, Tasker, RecoHelper
 
 
 # ====================  活动界面导航  ====================
@@ -99,3 +99,42 @@ class ClaimCandy(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("领取糖果", e)
+
+
+# ====================  活动日活  ====================
+
+
+@AgentServer.custom_action("check_activity_progress")
+class CheckActivityProgress(CustomAction):
+    """检查活动进度的自定义动作。
+
+    识别每日活动作战的进度信息，计算剩余挑战次数并动态调整后续任务参数。
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行检查活动进度的操作。
+
+        参数：
+            context：MaaFramework 上下文对象
+            argv：自定义动作参数（本动作暂未使用参数）
+
+        返回：
+            bool：成功识别进度并计算剩余次数返回 True，识别失败或发生异常返回 False
+        """
+        try:
+            rh = RecoHelper(context).recognize("每日活动作战_识别进度")
+            if rh.hit:
+                progress = rh.best_result.text.replace("120", "").replace("/20", "")
+                left_times = 20 - int(progress)
+                if left_times <= 0:
+                    Prompter.log(f"今日已完成活动作战")
+                    return False
+                Prompter.log(f"剩余次数：{left_times}")
+                context.override_pipeline(
+                    {"每日活动作战_速战": {"custom_action_param": f"t={left_times}"}}
+                )
+                return True
+            Prompter.log(f"未检测到活动进度！")
+            return False
+        except Exception as e:
+            return Prompter.error("检查每日活动进度", e)

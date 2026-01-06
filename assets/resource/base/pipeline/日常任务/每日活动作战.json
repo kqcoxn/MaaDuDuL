@@ -3,22 +3,64 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
 			"filename": "每日活动作战",
-			"lastSyncTime": 1767283144437,
+			"lastSyncTime": 1767668001438,
 			"prefix": "每日活动作战",
 			"savedViewport": {
-				"x": -7368,
-				"y": -669,
-				"zoom": 1.32
+				"x": -9410,
+				"y": -1471,
+				"zoom": 1.65
 			},
-			"version": "v0.14.1"
+			"version": "v0.14.2"
 		}
 	},
 	"$__mpe_external_返回主界面_每日活动作战": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6803,
-				"y": 777
+				"x": 7053,
+				"y": 1090
 			}
+		}
+	},
+	"每日活动作战_从检查返回活动界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6510,
+				"y": 465
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日活动作战_检查结束"],
+		"recognition": {
+			"param": {
+				"template": ["global/back.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"每日活动作战_从检查进入成就界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5708,
+				"y": 465
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 检查剩余需求次数"
+		},
+		"next": ["每日活动作战_确保进入成就界面"],
+		"recognition": {
+			"param": {
+				"expected": ["成就"],
+				"roi": [247, 431, 168, 86]
+			},
+			"type": "OCR"
 		}
 	},
 	"每日活动作战_周期提醒": {
@@ -68,8 +110,8 @@
 	"每日活动作战_周期记录": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6538,
-				"y": 773
+				"x": 6521,
+				"y": 1086
 			}
 		},
 		"action": {
@@ -79,7 +121,10 @@
 			},
 			"type": "Custom"
 		},
-		"next": ["返回主界面"],
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日活动已完成！"
+		},
+		"next": ["每日活动作战_领取奖励结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -112,8 +157,8 @@
 	"每日活动作战_战斗开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5459,
-				"y": 462
+				"x": 5434,
+				"y": 774
 			}
 		},
 		"action": {
@@ -131,8 +176,8 @@
 	"每日活动作战_战斗结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 7055,
-				"y": 464
+				"x": 7030,
+				"y": 776
 			}
 		},
 		"action": {
@@ -150,8 +195,8 @@
 	"每日活动作战_查看作战详情": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6259,
-				"y": 463
+				"x": 6234,
+				"y": 775
 			}
 		},
 		"action": {
@@ -166,11 +211,93 @@
 			"type": "DirectHit"
 		}
 	},
+	"每日活动作战_检查开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5437,
+				"y": 465
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日活动作战_从检查进入成就界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日活动作战_检查当前进度": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6239,
+				"y": 463
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "check_activity_progress"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日活动作战_从检查返回活动界面"],
+		"on_error": ["每日活动作战_领取今日奖励"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日活动作战_检查结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6774,
+				"y": 468
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日活动作战_战斗开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"每日活动作战_检查领取时进度": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6247,
+				"y": 1086
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "check_activity_progress"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日活动作战_领取奖励结束"],
+		"on_error": ["每日活动作战_周期记录"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
 	"每日活动作战_确保微微辣": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5999,
-				"y": 463
+				"x": 5974,
+				"y": 775
 			}
 		},
 		"action": {
@@ -187,11 +314,50 @@
 			"type": "OCR"
 		}
 	},
+	"每日活动作战_确保进入成就界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5970,
+				"y": 464
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["每日活动作战_检查当前进度"],
+		"recognition": {
+			"param": {
+				"expected": ["全部领取"],
+				"roi": [1037, 633, 174, 61]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_识别进度": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6236,
+				"y": 251
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["/20", "120"],
+				"roi": [487, 154, 506, 323]
+			},
+			"type": "OCR"
+		}
+	},
 	"每日活动作战_返回活动界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6783,
-				"y": 463
+				"x": 6758,
+				"y": 775
 			}
 		},
 		"action": {
@@ -211,8 +377,8 @@
 	"每日活动作战_进入成就界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5736,
-				"y": 774
+				"x": 5711,
+				"y": 1086
 			}
 		},
 		"action": {
@@ -234,8 +400,8 @@
 	"每日活动作战_进入战斗界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5739,
-				"y": 463
+				"x": 5714,
+				"y": 775
 			}
 		},
 		"action": {
@@ -267,7 +433,7 @@
 			},
 			"type": "Click"
 		},
-		"next": ["每日活动作战_战斗开始"],
+		"next": ["每日活动作战_检查开始"],
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
@@ -276,8 +442,8 @@
 	"每日活动作战_速战": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6519,
-				"y": 463
+				"x": 6494,
+				"y": 775
 			}
 		},
 		"action": {
@@ -297,8 +463,8 @@
 	"每日活动作战_领取今日奖励": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6001,
-				"y": 775
+				"x": 5976,
+				"y": 1087
 			}
 		},
 		"action": {
@@ -308,7 +474,8 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 领取今日奖励"
 		},
-		"next": ["每日活动作战_领取奖励结束"],
+		"next": ["每日活动作战_检查领取时进度"],
+		"post_delay": 400,
 		"recognition": {
 			"param": {
 				"expected": ["全部领取"],
@@ -320,8 +487,8 @@
 	"每日活动作战_领取奖励开始": {
 		"$__mpe_code": {
 			"position": {
-				"x": 5457,
-				"y": 776
+				"x": 5432,
+				"y": 1088
 			}
 		},
 		"action": {
@@ -339,15 +506,15 @@
 	"每日活动作战_领取奖励结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 6269,
-				"y": 777
+				"x": 6794,
+				"y": 1087
 			}
 		},
 		"action": {
 			"param": {},
 			"type": "DoNothing"
 		},
-		"next": ["每日活动作战_周期记录"],
+		"next": ["返回主界面"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {

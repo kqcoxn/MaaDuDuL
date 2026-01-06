@@ -141,8 +141,9 @@
 			"name": "每日活动作战",
 			"label": "【活动】黄油大崩溃",
 			"entry": "每日活动作战_开始",
+			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",
-			"option": ["每日活动作战-周期检查", "每日活动作战-指定作战次数"]
+			"option": ["每日活动作战-周期检查", "每日活动作战-作战次数"]
 		},
 		{
 			"name": "关闭游戏",
@@ -1258,28 +1259,42 @@
 				}
 			]
 		},
-		"每日活动作战-指定作战次数": {
-			"type": "switch",
-			"label": "指定作战次数",
-			"description": "不指定时将使用最大次数",
+		"每日活动作战-作战次数": {
+			"type": "select",
+			"label": "作战次数",
 			"cases": [
 				{
-					"name": "Yes",
-					"option": ["每日活动作战-指定作战次数-次数"]
+					"name": "智能检测",
+					"description": "检测是否达到20次，若未达到则使用剩余次数作为作战次数"
 				},
 				{
-					"name": "No"
+					"name": "指定次数",
+					"option": ["每日活动作战-指定作战次数"],
+					"pipeline_override": {
+						"每日活动作战_检查开始": {
+							"next": "每日活动作战_检查结束"
+						}
+					}
+				},
+				{
+					"name": "最大次数",
+					"description": "消耗所有红糖用于活动作战",
+					"pipeline_override": {
+						"每日活动作战_检查开始": {
+							"next": "每日活动作战_检查结束"
+						}
+					}
 				}
 			]
 		},
-		"每日活动作战-指定作战次数-次数": {
+		"每日活动作战-指定作战次数": {
 			"type": "input",
 			"label": "次数",
 			"inputs": [
 				{
 					"name": "次数",
 					"label": "次数",
-					"default": "20",
+					"default": "10",
 					"pipeline_type": "string",
 					"verify": "^\\d+$"
 				}
