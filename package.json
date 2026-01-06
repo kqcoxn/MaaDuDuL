@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"dev": "python dev/build_mfaa.py",
-		"mpe": "mpelb --root assets/resource",
+		"mpe": "mpelb --root assets/resource --port 49000",
 		"agent": "python dev/run_agent.py",
 		"debug": "python -m MaaDebugger",
 		"reset": "git reset --soft HEAD~1",

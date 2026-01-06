@@ -1,0 +1,808 @@
+{
+	"$__mpe_config_新礼包查看": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\开荒功能\\新礼包查看.json",
+			"filename": "新礼包查看",
+			"lastSyncTime": 1767711461038,
+			"prefix": "新礼包查看",
+			"savedViewport": {
+				"x": -5456,
+				"y": -1126,
+				"zoom": 1.06
+			},
+			"version": "v0.14.2"
+		}
+	},
+	"$__mpe_external_返回主界面_新礼包查看": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8256,
+				"y": 1105
+			}
+		}
+	},
+	"新礼包查看_上下半滑动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6191,
+				"y": 1398
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [805, 591, 0, 0],
+				"end": [[802, 325, 0, 0]],
+				"end_hold": [500]
+			},
+			"type": "Swipe"
+		},
+		"next": ["新礼包查看_开始检查"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_上下滑动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5923,
+				"y": 1401
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [805, 601, 0, 0],
+				"end": [[805, 92, 0, 0]]
+			},
+			"type": "Swipe"
+		},
+		"next": ["新礼包查看_开始检查"],
+		"post_delay": 500,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_初始化计数器": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4839,
+				"y": 1083
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "init_counter",
+				"custom_action_param": "k=store\u0026m=1"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_开始检查"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_室内装潢开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6614,
+				"y": 2294
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查室内装潢商品"
+		},
+		"next": ["新礼包查看_进入室内装潢"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_左右滑动": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5924,
+				"y": 1662
+			}
+		},
+		"action": {
+			"param": {
+				"begin": [1205, 417, 0, 0],
+				"end": [[604, 418, 0, 0]],
+				"end_hold": [500]
+			},
+			"type": "Swipe"
+		},
+		"next": ["新礼包查看_开始检查"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5263,
+				"y": 587
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_进入尊享商店", "新礼包查看_确保已在尊享商店"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_开始检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5114,
+				"y": 1082
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["新礼包查看_检查标点"],
+		"on_error": ["新礼包查看_检查计数", "新礼包查看_计数"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 1000
+	},
+	"新礼包查看_捏脸1": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6068,
+				"y": 588
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["新礼包查看_检查开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "pface"
+			},
+			"type": "Custom"
+		}
+	},
+	"新礼包查看_月卡商店开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6612,
+				"y": 1157
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查特殊组合商品"
+		},
+		"next": ["新礼包查看_进入月卡商店"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查室内装潢": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7145,
+				"y": 2295
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "new_goods",
+				"custom_action_param": "t=r"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_检查结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6345,
+				"y": 586
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["新礼包查看_特殊组合开始"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查月卡商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7143,
+				"y": 1158
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "new_goods"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_检查结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查标点": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5383,
+				"y": 1085
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 发现未领取的礼包"
+		},
+		"next": ["新礼包查看_领取查看奖励"],
+		"recognition": {
+			"param": {
+				"order_by": "Vertical",
+				"roi": [572, 81, 690, 596],
+				"template": ["store/new.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"新礼包查看_检查每周礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7142,
+				"y": 1742
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "new_goods"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_检查结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查每月礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7144,
+				"y": 2025
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "new_goods"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_检查结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查水晶叶": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7144,
+				"y": 874
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "new_goods"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_检查结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查特殊组合": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7144,
+				"y": 587
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "new_goods"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_检查结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查精品店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7143,
+				"y": 1445
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "new_goods",
+				"custom_action_param": "t=b"
+			},
+			"type": "Custom"
+		},
+		"next": ["新礼包查看_检查结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7985,
+				"y": 1109
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查结束"
+		},
+		"next": ["返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_检查计数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5385,
+				"y": 1395
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "check_counter",
+				"custom_recognition_param": "k=store"
+			},
+			"type": "Custom"
+		}
+	},
+	"新礼包查看_每周礼包开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6611,
+				"y": 1742
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查每周礼包商品"
+		},
+		"next": ["新礼包查看_进入每周礼包"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_每月礼包开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6613,
+				"y": 2024
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查每月礼包商品"
+		},
+		"next": ["新礼包查看_进入每月礼包"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_水晶叶开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6613,
+				"y": 873
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查水晶叶商品"
+		},
+		"next": ["新礼包查看_进入水晶叶"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_特殊组合开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6614,
+				"y": 586
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查特殊组合商品"
+		},
+		"next": ["新礼包查看_进入特殊组合"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_确保已在尊享商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5798,
+				"y": 587
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"next": ["新礼包查看_捏脸1"],
+		"recognition": {
+			"param": {
+				"expected": ["尊享商店"],
+				"roi": [5, 2, 267, 88]
+			},
+			"type": "OCR"
+		}
+	},
+	"新礼包查看_精品店开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6613,
+				"y": 1444
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 检查精品店商品"
+		},
+		"next": ["新礼包查看_进入精品店"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_获取查看奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5915,
+				"y": 1085
+			}
+		},
+		"action": {
+			"param": {
+				"target": [1163, 65, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_开始检查"],
+		"recognition": {
+			"param": {
+				"expected": ["点击屏幕继续"]
+			},
+			"type": "OCR"
+		},
+		"repeat": 2,
+		"repeat_delay": 800
+	},
+	"新礼包查看_计数": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5656,
+				"y": 1397
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "count",
+				"custom_action_param": "k=store"
+			},
+			"type": "Custom"
+		},
+		"focus": {
+			"Node.Action.Succeeded": " \u003e 我再看看"
+		},
+		"next": ["新礼包查看_上下滑动"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_进入室内装潢": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6885,
+				"y": 2295
+			}
+		},
+		"action": {
+			"param": {
+				"target": [488, 571, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_检查室内装潢"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_进入尊享商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5535,
+				"y": 587
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 进入尊享商店"
+		},
+		"next": ["新礼包查看_确保已在尊享商店"],
+		"recognition": {
+			"param": {
+				"roi": [14, 553, 393, 163],
+				"template": ["main/vip-store.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"新礼包查看_进入月卡商店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6883,
+				"y": 1158
+			}
+		},
+		"action": {
+			"param": {
+				"target": [355, 442, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_检查月卡商店"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_进入每周礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6882,
+				"y": 1742
+			}
+		},
+		"action": {
+			"param": {
+				"target": [217, 582, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_检查每周礼包"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_进入每月礼包": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6884,
+				"y": 2025
+			}
+		},
+		"action": {
+			"param": {
+				"target": [353, 575, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_检查每月礼包"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_进入水晶叶": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6884,
+				"y": 874
+			}
+		},
+		"action": {
+			"param": {
+				"target": [212, 433, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_检查水晶叶"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_进入特殊组合": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6884,
+				"y": 587
+			}
+		},
+		"action": {
+			"param": {
+				"target": [75, 434, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_检查特殊组合"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_进入精品店": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6883,
+				"y": 1445
+			}
+		},
+		"action": {
+			"param": {
+				"target": [488, 441, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["新礼包查看_检查精品店"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"新礼包查看_领取查看奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5650,
+				"y": 1086
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 确认领取"
+		},
+		"next": ["新礼包查看_获取查看奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["领取"],
+				"roi": [575, 592, 117, 60]
+			},
+			"type": "OCR"
+		}
+	}
+}
