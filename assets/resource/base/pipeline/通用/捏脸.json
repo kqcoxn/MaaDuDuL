@@ -1,14 +1,14 @@
 {
 	"$__mpe_config_捏脸": {
 		"$__mpe_code": {
-			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\YOLO.json",
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\捏脸.json",
 			"filename": "捏脸",
-			"lastSyncTime": 1767538075349,
+			"lastSyncTime": 1767713176039,
 			"prefix": "捏脸",
 			"savedViewport": {
-				"x": -5631,
-				"y": 578,
-				"zoom": 1.44
+				"x": -4955,
+				"y": 595,
+				"zoom": 1.21
 			},
 			"version": "v0.14.2"
 		}
@@ -24,7 +24,7 @@
 			"param": {
 				"duration": [200],
 				"end_hold": [400],
-				"end_offset": [[100, 100, 0, 0]]
+				"end_offset": [[100, 35, 0, 0]]
 			},
 			"type": "Swipe"
 		},
@@ -46,7 +46,7 @@
 			"param": {
 				"duration": [200],
 				"end_hold": [400],
-				"end_offset": [[-100, 100, 0, 0]]
+				"end_offset": [[-100, 35, 0, 0]]
 			},
 			"type": "Swipe"
 		},
@@ -55,6 +55,26 @@
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
+		}
+	},
+	"捏脸_捏脸测试": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4830,
+				"y": -287
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"custom_recognition": "pface"
+			},
+			"type": "Custom"
 		}
 	},
 	"捏脸_面部识别": {
@@ -73,7 +93,7 @@
 		"recognition": {
 			"param": {
 				"expected": [0, 1],
-				"labels": ["rf", "lf"],
+				"labels": ["lf", "rf"],
 				"model": "face.onnx",
 				"order_by": "Random",
 				"threshold": [0.35]

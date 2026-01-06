@@ -8,6 +8,8 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 
+import random
+
 from agent.customs.utils import Prompter, CounterManager
 from agent.customs.maahelper import RecoHelper, ParamAnalyzer, Tasker
 
@@ -43,7 +45,7 @@ class PinchFace(CustomRecognition):
         try:
             rh = RecoHelper(context, argv).recognize("捏脸_面部识别")
             if rh.hit:
-                res = rh.best_result
+                res = random.choice(rh.filtered_results)
                 context.run_action(
                     "捏脸_左捏" if res.label == "lf" else "捏脸_右捏", res.box
                 )

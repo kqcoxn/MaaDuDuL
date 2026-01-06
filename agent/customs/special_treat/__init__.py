@@ -5,3 +5,4 @@ from .activity import *
 from .peak_showdown import *
 from .receive_reward import *
 from .land_reclamation import *
+from .pinch_face import *
