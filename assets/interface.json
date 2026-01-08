@@ -149,7 +149,7 @@
 			"name": "领取新商品奖励",
 			"label": "领取新商品奖励",
 			"entry": "新礼包查看_开始",
-			"option": ["领取新商品奖励-商店"],
+			"option": ["领取新商品奖励-周期检查", "领取新商品奖励-商店"],
 			"description": "Resource/descs/daily/land_reclamation.md"
 		},
 		{
@@ -1321,6 +1321,23 @@
 		},
 		// ========== 每日活动作战 ==========
 		// ========== 领取新商品奖励 ==========
+		"领取新商品奖励-周期检查": {
+			"type": "switch",
+			"label": "每周仅执行一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"新礼包查看_周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
 		"领取新商品奖励-商店": {
 			"type": "select",
 			"label": "商店",
