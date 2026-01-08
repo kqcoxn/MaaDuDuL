@@ -1,0 +1,249 @@
+{
+	"$__mpe_config_领取关卡奖励": {
+		"$__mpe_code": {
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\开荒功能\\领取关卡奖励.json",
+			"filename": "领取关卡奖励",
+			"lastSyncTime": 1767882037265,
+			"prefix": "领取关卡奖励",
+			"savedViewport": {
+				"x": -5091,
+				"y": -980,
+				"zoom": 0.82
+			},
+			"version": "v0.14.2"
+		}
+	},
+	"领取关卡奖励_上一个世界": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7970,
+				"y": 1455
+			}
+		},
+		"action": {
+			"param": {
+				"target": [44, 357, 0, 0]
+			},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 对吗对吗？"
+		},
+		"next": ["领取关卡奖励_领取1"],
+		"post_delay": 1000,
+		"recognition": {
+			"param": {
+				"expected": ["世界"],
+				"roi": [10, 391, 115, 37]
+			},
+			"type": "OCR"
+		}
+	},
+	"领取关卡奖励_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6619,
+				"y": 1453
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 开始游历世界"
+		},
+		"next": ["领取关卡奖励_领取1"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取关卡奖励_无其他世界": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7977,
+				"y": 1792
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 世界游历结束"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		}
+	},
+	"领取关卡奖励_无可领取的奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7692,
+				"y": 1719
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 哦不对不对"
+		},
+		"next": ["领取关卡奖励_上一个世界"],
+		"on_error": ["领取关卡奖励_无其他世界"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 2000
+	},
+	"领取关卡奖励_直接点击2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7145,
+				"y": 1795
+			}
+		},
+		"action": {
+			"param": {
+				"target": [350, 655, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["领取关卡奖励_领取3"],
+		"on_error": ["领取关卡奖励_直接点击3"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 2000
+	},
+	"领取关卡奖励_直接点击3": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7411,
+				"y": 1797
+			}
+		},
+		"action": {
+			"param": {
+				"target": [470, 658, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["领取关卡奖励_确保领取结束"],
+		"on_error": ["领取关卡奖励_无可领取的奖励"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 2000
+	},
+	"领取关卡奖励_确保领取结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7685,
+				"y": 1450
+			}
+		},
+		"action": {
+			"param": {
+				"target": [562, 672, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["领取关卡奖励_上一个世界"],
+		"on_error": ["领取关卡奖励_无其他世界"],
+		"recognition": {
+			"param": {
+				"expected": ["点击屏幕继续"]
+			},
+			"type": "OCR"
+		},
+		"timeout": 2000
+	},
+	"领取关卡奖励_领取1": {
+		"$__mpe_code": {
+			"position": {
+				"x": 6880,
+				"y": 1452
+			}
+		},
+		"action": {
+			"param": {
+				"target": [229, 656, 0, 0]
+			},
+			"type": "Click"
+		},
+		"next": ["领取关卡奖励_领取2"],
+		"on_error": ["领取关卡奖励_无可领取的奖励"],
+		"recognition": {
+			"param": {},
+			"type": "DirectHit"
+		},
+		"timeout": 2000
+	},
+	"领取关卡奖励_领取2": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7148,
+				"y": 1453
+			}
+		},
+		"action": {
+			"param": {
+				"target": [350, 655, 0, 0]
+			},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 哦对的对的"
+		},
+		"next": ["领取关卡奖励_领取3"],
+		"on_error": ["领取关卡奖励_无可领取的奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["点击屏幕继续"]
+			},
+			"type": "OCR"
+		},
+		"repeat": 2,
+		"timeout": 2000
+	},
+	"领取关卡奖励_领取3": {
+		"$__mpe_code": {
+			"position": {
+				"x": 7410,
+				"y": 1451
+			}
+		},
+		"action": {
+			"param": {
+				"target": [470, 658, 0, 0]
+			},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 哦对的对的"
+		},
+		"next": ["领取关卡奖励_确保领取结束"],
+		"on_error": ["领取关卡奖励_无可领取的奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["点击屏幕继续"]
+			},
+			"type": "OCR"
+		},
+		"repeat": 2,
+		"timeout": 2000
+	}
+}
