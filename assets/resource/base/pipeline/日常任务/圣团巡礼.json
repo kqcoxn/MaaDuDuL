@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1767617484266,
+			"lastSyncTime": 1767883876395,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -5700,
-				"y": -133,
-				"zoom": 0.8
+				"x": -10611,
+				"y": -1000,
+				"zoom": 1.25
 			},
 			"version": "v0.14.2"
 		}
@@ -815,7 +815,7 @@
 		"next": ["圣团巡礼_获取打扫奖励"],
 		"recognition": {
 			"param": {
-				"count": 7,
+				"count": 6,
 				"green_mask": true,
 				"roi": [9, 81, 1266, 594],
 				"template": ["holy/bom.png", "holy/soap.png", "holy/barrel.png"]
