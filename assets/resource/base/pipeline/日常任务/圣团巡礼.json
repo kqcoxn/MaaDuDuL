@@ -3,12 +3,12 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
 			"filename": "圣团巡礼",
-			"lastSyncTime": 1767883876395,
+			"lastSyncTime": 1768123337034,
 			"prefix": "圣团巡礼",
 			"savedViewport": {
-				"x": -10611,
-				"y": -1000,
-				"zoom": 1.25
+				"x": -13036,
+				"y": -1466,
+				"zoom": 1.52
 			},
 			"version": "v0.14.2"
 		}
@@ -40,6 +40,7 @@
 		},
 		"next": ["圣团巡礼_打扫房间"],
 		"on_error": ["圣团巡礼_参观周期记录"],
+		"post_delay": 500,
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
@@ -73,18 +74,18 @@
 			}
 		},
 		"action": {
-			"param": {
-				"target": [44, 40, 0, 0]
-			},
+			"param": {},
 			"type": "Click"
 		},
 		"next": ["圣团巡礼_参观结束"],
 		"recognition": {
-			"param": {},
-			"type": "DirectHit"
+			"param": {
+				"template": ["global/back.png"]
+			},
+			"type": "TemplateMatch"
 		},
 		"repeat": 2,
-		"repeat_delay": 400
+		"repeat_delay": 800
 	},
 	"圣团巡礼_休息中": {
 		"$__mpe_code": {
@@ -810,18 +811,23 @@
 			"type": "Click"
 		},
 		"focus": {
+			"Node.Recognition.Failed": " \u003e 看看 need",
 			"Node.Recognition.Succeeded": " \u003e 看看 need"
 		},
 		"next": ["圣团巡礼_获取打扫奖励"],
+		"on_error": ["圣团巡礼_下一个房间"],
 		"recognition": {
 			"param": {
-				"count": 6,
+				"count": 7,
 				"green_mask": true,
+				"order_by": "Score",
+				"ratio": 0.35,
 				"roi": [9, 81, 1266, 594],
-				"template": ["holy/bom.png", "holy/soap.png", "holy/barrel.png"]
+				"template": ["holy/soap.png", "holy/barrel.png", "holy/gift.png", "holy/bom.png", "holy/bom2.png"]
 			},
 			"type": "FeatureMatch"
-		}
+		},
+		"timeout": 5000
 	},
 	"圣团巡礼_收获世界树开始": {
 		"$__mpe_code": {
@@ -1307,6 +1313,7 @@
 			"type": "Click"
 		},
 		"next": ["圣团巡礼_下一个房间"],
+		"post_delay": 500,
 		"recognition": {
 			"param": {
 				"expected": ["请点击屏幕继续"]
