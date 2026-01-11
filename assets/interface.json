@@ -39,13 +39,13 @@
 	"task": [
 		{
 			"name": "说明",
-			"label": "说明",
+			"label": "📜说明",
 			"entry": "说明",
 			"description": "Resource/descs/others/illustrate.md"
 		},
 		{
 			"name": "操作指南",
-			"label": "操作指南",
+			"label": "✨操作指南",
 			"entry": "操作指南",
 			"description": "Resource/descs/others/guide.md"
 		},
@@ -57,14 +57,14 @@
 		},
 		{
 			"name": "启动游戏",
-			"label": "启动游戏",
+			"label": "🟢启动游戏",
 			"entry": "启动游戏_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/start_game.md"
 		},
 		{
 			"name": "领取邮件",
-			"label": "领取邮件",
+			"label": "📬领取邮件",
 			"entry": "领取邮件_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/claim_mail.md",
@@ -72,14 +72,14 @@
 		},
 		{
 			"name": "叶子互换",
-			"label": "好友叶子互换",
+			"label": "🍃好友叶子互换",
 			"entry": "叶子互换_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/leaf_change.md"
 		},
 		{
 			"name": "领取糖果",
-			"label": "领取每日糖果",
+			"label": "🍬领取每日糖果",
 			"entry": "领取糖果_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/claim_candy.md",
@@ -87,7 +87,7 @@
 		},
 		{
 			"name": "每日采购",
-			"label": "每日采购",
+			"label": "🛒每日采购",
 			"entry": "每日采购_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/purchase.md",
@@ -95,7 +95,7 @@
 		},
 		{
 			"name": "圣团巡礼",
-			"label": "圣团巡礼",
+			"label": "⛪圣团巡礼",
 			"entry": "圣团巡礼_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/saint_tour.md",
@@ -108,7 +108,7 @@
 		},
 		{
 			"name": "每日活动作战",
-			"label": "【活动】黄油大崩溃",
+			"label": "🧈黄油大崩溃【活动】",
 			"entry": "每日活动作战_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",
@@ -116,14 +116,14 @@
 		},
 		{
 			"name": "清紫糖",
-			"label": "清紫糖",
+			"label": "🪅清紫糖",
 			"entry": "清紫糖_开始",
 			"description": "Resource/descs/daily/clear_purple_candy.md",
 			"option": ["清紫糖-周期检查", "清紫糖-克隆工厂", "清紫糖-副本"]
 		},
 		{
 			"name": "巅峰对决",
-			"label": "巅峰对决",
+			"label": "⚔️巅峰对决",
 			"entry": "巅峰对决_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/peak_battle.md",
@@ -131,7 +131,7 @@
 		},
 		{
 			"name": "农场视察",
-			"label": "农场视察",
+			"label": "🐇农场视察",
 			"entry": "农场视察_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/farm.md",
@@ -139,7 +139,7 @@
 		},
 		{
 			"name": "领取奖励",
-			"label": "领取奖励",
+			"label": "🎁领取奖励",
 			"entry": "领取奖励_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/claim_reward.md",
@@ -147,14 +147,14 @@
 		},
 		{
 			"name": "领取新商品奖励",
-			"label": "领取新商品奖励",
+			"label": "📦领取新商品奖励",
 			"entry": "新礼包查看_开始",
 			"option": ["领取新商品奖励-周期检查", "领取新商品奖励-商店"],
 			"description": "Resource/descs/daily/land_reclamation.md"
 		},
 		{
 			"name": "关闭游戏",
-			"label": "关闭游戏",
+			"label": "🔴关闭游戏",
 			"entry": "关闭游戏_开始",
 			"description": "Resource/descs/daily/close_game.md"
 		},
@@ -166,13 +166,13 @@
 		},
 		{
 			"name": "连续作战",
-			"label": "连续作战",
+			"label": "🚀连续作战",
 			"entry": "连续作战_开始",
 			"description": "Resource/descs/single/continuous_battle.md"
 		},
 		{
 			"name": "领取关卡奖励",
-			"label": "领取关卡奖励",
+			"label": "🏆领取关卡奖励",
 			"entry": "领取关卡奖励_开始",
 			"option": ["领取关卡奖励-尝试全部"],
 			"description": "Resource/descs/single/level_rewards.md"
