@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1768111021948,
+			"lastSyncTime": 1768468694505,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -87,
-				"y": 139,
-				"zoom": 1.15
+				"x": -338,
+				"y": -739,
+				"zoom": 1.52
 			},
-			"version": "v0.14.2"
+			"version": "v0.15.3"
 		}
 	},
 	"启动游戏_关闭公告": {
@@ -78,26 +78,12 @@
 		"next": [
 			"启动游戏_连续识别主界面",
 			"启动游戏_连续识别开始界面",
-			{
-				"jump_back": true,
-				"name": "启动游戏_检测公告界面"
-			},
-			{
-				"jump_back": true,
-				"name": "启动游戏_领取礼物"
-			},
-			{
-				"jump_back": true,
-				"name": "启动游戏_点击屏幕继续"
-			},
-			{
-				"jump_back": true,
-				"name": "启动游戏_关闭面板"
-			},
-			{
-				"jump_back": true,
-				"name": "启动游戏_闲时捏脸"
-			}
+			"[JumpBack]启动游戏_更新游戏",
+			"[JumpBack]启动游戏_检测公告界面",
+			"[JumpBack]启动游戏_领取礼物",
+			"[JumpBack]启动游戏_点击屏幕继续",
+			"[JumpBack]启动游戏_关闭面板",
+			"[JumpBack]启动游戏_闲时捏脸"
 		],
 		"post_delay": 0,
 		"pre_delay": 0,
@@ -148,26 +134,61 @@
 		},
 		"next": [
 			"启动游戏_连续识别主界面",
-			{
-				"jump_back": true,
-				"name": "启动游戏_领取礼物"
-			},
-			{
-				"jump_back": true,
-				"name": "启动游戏_点击屏幕继续"
-			},
-			{
-				"jump_back": true,
-				"name": "启动游戏_关闭面板"
-			},
-			{
-				"jump_back": true,
-				"name": "启动游戏_闲时捏脸"
-			}
+			"[JumpBack]启动游戏_领取礼物",
+			"[JumpBack]启动游戏_点击屏幕继续",
+			"[JumpBack]启动游戏_关闭面板",
+			"[JumpBack]启动游戏_闲时捏脸"
 		],
 		"recognition": {
 			"param": {},
 			"type": "DirectHit"
+		}
+	},
+	"启动游戏_更新游戏": {
+		"$__mpe_code": {
+			"position": {
+				"x": 588,
+				"y": 390
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 更新游戏"
+		},
+		"next": ["启动游戏_更新结束"],
+		"rate_limit": 3000,
+		"recognition": {
+			"param": {
+				"expected": ["开始下载"],
+				"roi": [567, 524, 145, 61]
+			},
+			"type": "OCR"
+		},
+		"timeout": 900000
+	},
+	"启动游戏_更新结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 590,
+				"y": 731
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 更新完成"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["立刻出发"],
+				"roi": [968, 462, 302, 254]
+			},
+			"type": "OCR"
 		}
 	},
 	"启动游戏_检测公告界面": {
