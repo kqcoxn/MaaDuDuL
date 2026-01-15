@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
 			"filename": "每日活动作战",
-			"lastSyncTime": 1767668001438,
+			"lastSyncTime": 1768470475666,
 			"prefix": "每日活动作战",
 			"savedViewport": {
-				"x": -9410,
-				"y": -1471,
-				"zoom": 1.65
+				"x": -5944,
+				"y": -773,
+				"zoom": 1.15
 			},
-			"version": "v0.14.2"
+			"version": "v0.15.3"
 		}
 	},
 	"$__mpe_external_返回主界面_每日活动作战": {
@@ -58,7 +58,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["成就"],
-				"roi": [247, 431, 168, 86]
+				"roi": [950, 172, 231, 108]
 			},
 			"type": "OCR"
 		}
@@ -201,7 +201,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [645, 426, 0, 0]
+				"target": [638, 276, 0, 0]
 			},
 			"type": "Click"
 		},
@@ -309,7 +309,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["微微辣"],
-				"roi": [786, 652, 163, 61]
+				"roi": [10, 593, 1256, 124]
 			},
 			"type": "OCR"
 		}
@@ -392,7 +392,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["成就"],
-				"roi": [247, 431, 168, 86]
+				"roi": [934, 160, 276, 128]
 			},
 			"type": "OCR"
 		}
@@ -414,8 +414,8 @@
 		"next": ["每日活动作战_确保微微辣"],
 		"recognition": {
 			"param": {
-				"expected": ["战斗"],
-				"roi": [717, 615, 183, 92]
+				"expected": ["做梦"],
+				"roi": [1046, 369, 229, 148]
 			},
 			"type": "OCR"
 		}

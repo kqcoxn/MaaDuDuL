@@ -108,7 +108,7 @@
 		},
 		{
 			"name": "每日活动作战",
-			"label": "🧈黄油大崩溃【活动】",
+			"label": "🃏卡册命运【活动】",
 			"entry": "每日活动作战_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",
