@@ -6,7 +6,7 @@
 
 from maa.context import Context
 from maa.define import TaskDetail
-from maa.tasker import Controller
+from maa.tasker import Controller, Tasker as MaaTasker
 
 from typing import Dict
 import numpy as np
@@ -31,6 +31,15 @@ class Tasker:
         self.context = context
 
     @property
+    def tsk(self) -> MaaTasker:
+        """获取任务执行器实例。
+
+        Returns:
+            Controller: 当前任务执行器关联的控制器对象。
+        """
+        return self.context.tasker
+
+    @property
     def ctl(self) -> Controller:
         """获取控制器实例。
 
@@ -46,7 +55,7 @@ class Tasker:
         Returns:
             bool: 如果任务正在停止返回 True，否则返回 False。
         """
-        return self.context.tasker.stopping
+        return self.tsk.stopping
 
     def run(self, entry: str, pipeline_override: Dict = {}):
         """运行指定的任务节点。
@@ -62,10 +71,10 @@ class Tasker:
             任务执行结果对象。
         """
         # 构造默认 next_override
-        node_list = self.context.tasker.resource.node_list
+        node_list = self.tsk.resource.node_list
         for node_name in node_list:
             # 获取节点数据和 override 状态
-            node_data = self.context.tasker.resource.get_node_data(node_name)
+            node_data = self.tsk.resource.get_node_data(node_name)
             exist_node_override = node_name in pipeline_override
 
             # 处理 next 字段注入
@@ -111,6 +120,10 @@ class Tasker:
                     pipeline_override[node_name] = {"on_error": new_on_error}
 
         return self.context.run_task(entry, pipeline_override)
+
+    def stop(self):
+        """停止当前任务。"""
+        self.tsk.post_stop().wait()
 
     def screenshot(self) -> np.ndarray:
         """执行截图操作。

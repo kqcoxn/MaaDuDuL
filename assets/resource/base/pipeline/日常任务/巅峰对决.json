@@ -3,14 +3,14 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\巅峰对决.json",
 			"filename": "巅峰对决",
-			"lastSyncTime": 1767615802455,
+			"lastSyncTime": 1768489077904,
 			"prefix": "巅峰对决",
 			"savedViewport": {
-				"x": -9362,
-				"y": -2378,
-				"zoom": 1.21
+				"x": -9406,
+				"y": -1272,
+				"zoom": 1.15
 			},
-			"version": "v0.14.2"
+			"version": "v0.15.3"
 		}
 	},
 	"$__mpe_external_返回主界面_巅峰对决": {
@@ -19,6 +19,24 @@
 				"x": 9564,
 				"y": 1784
 			}
+		}
+	},
+	"巅峰对决_关闭其他界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 8049,
+				"y": 481
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"recognition": {
+			"param": {
+				"expected": ["确定"]
+			},
+			"type": "OCR"
 		}
 	},
 	"巅峰对决_宝石领取周期提醒": {
@@ -165,7 +183,7 @@
 		},
 		"next": ["巅峰对决_选择对手", "巅峰对决_对战次数耗尽"],
 		"post_delay": 0,
-		"pre_delay": 0,
+		"pre_delay": 500,
 		"recognition": {
 			"param": {
 				"expected": ["请选择对手"],
@@ -274,7 +292,7 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 再无话说，请速速动手！"
 		},
-		"next": ["巅峰对决_对战完成"],
+		"next": ["巅峰对决_对战完成", "巅峰对决_未设置使徒"],
 		"rate_limit": 3000,
 		"recognition": {
 			"param": {
@@ -350,6 +368,29 @@
 		"recognition": {
 			"param": {
 				"expected": ["当前无可领取的"]
+			},
+			"type": "OCR"
+		}
+	},
+	"巅峰对决_未设置使徒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 9008,
+				"y": 1209
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "DoNothing"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 未设置作战队伍，请配置队伍后使用"
+		},
+		"post_delay": 0,
+		"pre_delay": 0,
+		"recognition": {
+			"param": {
+				"expected": ["是谁都行"]
 			},
 			"type": "OCR"
 		}
@@ -467,7 +508,7 @@
 			"param": {},
 			"type": "Click"
 		},
-		"next": ["巅峰对决_确保进入巅峰对决"],
+		"next": ["巅峰对决_确保进入巅峰对决", "[JumpBack]巅峰对决_关闭其他界面"],
 		"recognition": {
 			"param": {
 				"expected": ["巅峰对决"],

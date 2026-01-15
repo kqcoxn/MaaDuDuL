@@ -99,6 +99,10 @@ class PickOpponent(CustomRecognition):
                             # 如果没有比自己分数低的，选择战斗力最低的
                             target = min(results, key=lambda res: parse_power(res.text))
                             return RecoHelper.rt(target)
+                else:
+                    Prompter.log("未识别到自身战斗力，请先设置防御与进攻卡组")
+                    Tasker(context).stop()
+                    return RecoHelper.NoResult
             elif strategy == "min_power":
                 # 最低战力
                 # 识别所有对手的战斗力文本
