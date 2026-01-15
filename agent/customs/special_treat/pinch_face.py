@@ -43,6 +43,10 @@ class PinchFace(CustomRecognition):
             捕获所有异常并通过 Prompter.error 返回错误信息
         """
         try:
+            args = ParamAnalyzer(argv)
+            check_once = (
+                True if args.get(["check_once", "co", "o"], "t") == "t" else False
+            )
             rh = RecoHelper(context, argv).recognize("捏脸_面部识别")
             if rh.hit:
                 res = random.choice(rh.filtered_results)
@@ -50,7 +54,8 @@ class PinchFace(CustomRecognition):
                     "捏脸_左捏" if res.label == "lf" else "捏脸_右捏", res.box
                 )
                 return rh.rt(res)
-
+            if check_once:
+                return rh.rt()
             return RecoHelper.NoResult
         except Exception as e:
             return Prompter.error("捏脸", e, reco_detail=True)
