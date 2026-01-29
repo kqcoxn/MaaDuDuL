@@ -226,6 +226,19 @@ jobs:
           out-file-path: "MFA"
           extract: true
 
+      # 修改MFAAvalonia.exe图标（仅Windows x86_64）
+      - name: Modify MFAAvalonia exe icon
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          # 下载 rcedit
+          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+
+          # 修改 exe 图标
+          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "public/logo.ico"
+
+          echo "MFAAvalonia icon modified successfully"
+
       # 安装MFAAvalonia到install目录
       - name: Install MFAAvalonia
         shell: bash
@@ -277,6 +290,7 @@ jobs:
         shell: bash
         run: |
           if [ -f "public/logo.ico" ]; then
+            mkdir -p install/Assets  # 确保Assets目录存在
             cp public/logo.ico install/Assets/logo.ico
           fi
 
