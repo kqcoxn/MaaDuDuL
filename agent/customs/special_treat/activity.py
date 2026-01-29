@@ -124,7 +124,11 @@ class CheckActivityProgress(CustomAction):
         try:
             rh = RecoHelper(context).recognize("每日活动作战_识别进度")
             if rh.hit:
-                progress = rh.best_result.text.replace("120", "").replace("/20", "")
+                progress = (
+                    rh.best_result.text.replace("120", "")
+                    .replace("/20", "")
+                    .replace("020", "")
+                )
                 left_times = 20 - int(progress)
                 if left_times <= 0:
                     Prompter.log(f"今日已完成活动作战")

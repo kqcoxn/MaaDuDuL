@@ -1,7 +1,7 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.6 - MFAA | 游戏版本：卡册之中舞动的命运",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.6 - MFAA | 游戏版本：异常的银色小镇",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
 	"version": "v0.1.6",
@@ -108,7 +108,7 @@
 		},
 		{
 			"name": "每日活动作战",
-			"label": "🃏卡册命运【活动】",
+			"label": "🌁银色小镇【活动】",
 			"entry": "每日活动作战_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",
