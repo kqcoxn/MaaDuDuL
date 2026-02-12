@@ -119,7 +119,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [662, 632, 0, 0]
+				"target": [662, 632, 1, 1]
 			},
 			"type": "Click"
 		},

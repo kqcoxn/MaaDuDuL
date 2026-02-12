@@ -52,7 +52,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [1236, 38, 0, 0]
+				"target": [1236, 38, 1, 1]
 			},
 			"type": "Click"
 		},
@@ -253,7 +253,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [643, 642, 0, 0]
+				"target": [643, 642, 1, 1]
 			},
 			"type": "Click"
 		},
@@ -276,7 +276,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [643, 642, 0, 0]
+				"target": [643, 642, 1, 1]
 			},
 			"type": "Click"
 		},
@@ -296,7 +296,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [643, 642, 0, 0]
+				"target": [643, 642, 1, 1]
 			},
 			"type": "Click"
 		},

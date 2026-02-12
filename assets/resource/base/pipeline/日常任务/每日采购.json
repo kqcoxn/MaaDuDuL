@@ -1232,7 +1232,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [207, 566, 0, 0]
+				"target": [207, 566, 1, 1]
 			},
 			"type": "Click"
 		},
@@ -1251,7 +1251,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [347, 567, 0, 0]
+				"target": [347, 567, 1, 1]
 			},
 			"type": "Click"
 		},
@@ -1270,7 +1270,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [215, 434, 0, 0]
+				"target": [215, 434, 1, 1]
 			},
 			"type": "Click"
 		},
@@ -1309,7 +1309,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [640, 642, 0, 0]
+				"target": [640, 642, 1, 1]
 			},
 			"type": "Click"
 		},
@@ -1398,7 +1398,7 @@
 		},
 		"action": {
 			"param": {
-				"target": [638, 672, 0, 0]
+				"target": [638, 672, 1, 1]
 			},
 			"type": "Click"
 		},
