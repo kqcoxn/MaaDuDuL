@@ -96,10 +96,10 @@ def copy_files():
             print("警告: agent 文件夹不存在")
 
         # 复制descs文件夹到Resource目录下
-        if os.path.exists("descs"):
-            shutil.copytree("descs", "MFAAvalonia/Resource/descs", dirs_exist_ok=True)
+        if os.path.exists("assets/resource/descs"):
+            shutil.copytree("assets/resource/descs", "MFAAvalonia/Resource/descs", dirs_exist_ok=True)
         else:
-            print("警告: descs 文件夹不存在")
+            print("警告: assets/resource/descs 文件夹不存在")
 
         # 打开MFAAvalonia.exe
         exe_path = "MFAAvalonia/MFAAvalonia.exe"

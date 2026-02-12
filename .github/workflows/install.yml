@@ -278,11 +278,11 @@ jobs:
       - name: Install descs to Resource
         shell: bash
         run: |
-          if [ -d "descs" ]; then
+          if [ -d "assets/resource/descs" ]; then
             mkdir -p install/Resource  # 确保Resource目录存在
-            cp -r descs install/Resource/  # 复制descs到Resource下
+            cp -r assets/resource/descs install/Resource/descs  # 复制descs到Resource下
           else
-            echo "Warning: descs folder not found"
+            echo "Warning: assets/resource/descs folder not found"
           fi
 
       # 替换应用图标
