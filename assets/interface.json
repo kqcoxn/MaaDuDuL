@@ -165,6 +165,12 @@
 			"description": "Resource/descs/others/independent_task.md"
 		},
 		{
+			"name": "快速剧情",
+			"label": "🍿快速剧情",
+			"entry": "快速剧情_开始",
+			"description": "Resource/descs/single/quick_plot.md"
+		},
+		{
 			"name": "连续作战",
 			"label": "🚀连续作战",
 			"entry": "连续作战_开始",

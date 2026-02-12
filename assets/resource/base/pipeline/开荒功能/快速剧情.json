@@ -1,0 +1,100 @@
+{
+	"$__mpe_config_快速剧情": {
+		"$__mpe_code": {
+			"filePath": "D:\\_programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\开荒功能\\快速剧情.json",
+			"filename": "快速剧情",
+			"lastSyncTime": 1770899021074,
+			"prefix": "快速剧情",
+			"savedViewport": {
+				"x": -2314,
+				"y": -916,
+				"zoom": 1.32
+			},
+			"version": "v1.1.1"
+		}
+	},
+	"快速剧情_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1314,
+				"y": 387
+			}
+		},
+		"next": ["快速剧情_确定跳过", "快速剧情_跳过", "快速剧情_更多"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"timeout": 3000
+	},
+	"快速剧情_更多": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1591,
+				"y": 166
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["快速剧情_跳过"],
+		"post_delay": 200,
+		"pre_delay": 200,
+		"recognition": {
+			"param": {
+				"roi": [989, 4, 287, 122],
+				"template": ["plot/more.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"快速剧情_确定跳过": {
+		"$__mpe_code": {
+			"position": {
+				"x": 2354,
+				"y": 965
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["快速剧情_开始"],
+		"post_delay": 200,
+		"pre_delay": 200,
+		"recognition": {
+			"param": {
+				"expected": ["跳过", "不看了", "继续观看", "请点击屏幕继续"],
+				"index": -1,
+				"order_by": "Vertical",
+				"roi": [460, 532, 504, 96]
+			},
+			"type": "OCR"
+		}
+	},
+	"快速剧情_跳过": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1964,
+				"y": 423
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 跳过剧情"
+		},
+		"next": ["快速剧情_确定跳过"],
+		"post_delay": 200,
+		"pre_delay": 200,
+		"recognition": {
+			"param": {
+				"roi": [995, 3, 283, 227],
+				"template": ["plot/jump.png"],
+				"threshold": [0.9]
+			},
+			"type": "TemplateMatch"
+		}
+	}
+}
