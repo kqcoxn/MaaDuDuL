@@ -53,7 +53,7 @@ class NewGoods(CustomAction):
                 pipeline_override = {
                     "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=15"},
                     "新礼包查看_领取查看奖励": {"roi": [856, 551, 99, 56]},
-                    "新礼包查看_获取查看奖励": {"roi": [1163, 108, 0, 0]},
+                    "新礼包查看_获取查看奖励": {"target": [1163, 108, 1, 1]},
                     "新礼包查看_计数": {"next": "新礼包查看_左右滑动"},
                 }
             elif store_type == "room" or store_type == "r":
