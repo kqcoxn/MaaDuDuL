@@ -1,551 +1,522 @@
 {
-  "$__mpe_config_每日活动作战": {
-    "$__mpe_code": {
-      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
-      "filename": "每日活动作战",
-      "lastSyncTime": 1769684440052,
-      "prefix": "每日活动作战",
-      "savedViewport": {
-        "x": -8268,
-        "y": -195,
-        "zoom": 1.44
-      },
-      "version": "v1.0.1"
-    }
-  },
-  "$__mpe_external_返回主界面_每日活动作战": {
-    "$__mpe_code": {
-      "position": {
-        "x": 7053,
-        "y": 1090
-      }
-    }
-  },
-  "每日活动作战_从检查返回活动界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6510,
-        "y": 465
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日活动作战_检查结束"
-    ],
-    "recognition": {
-      "param": {
-        "template": [
-          "global/back.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "每日活动作战_从检查进入成就界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5708,
-        "y": 465
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 检查剩余需求次数"
-    },
-    "next": [
-      "每日活动作战_确保进入成就界面"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "成就"
-        ],
-        "roi": [
-          61,
-          530,
-          187,
-          101
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_周期提醒": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5159,
-        "y": 637
-      }
-    },
-    "focus": {
-      "Node.Recognition.Starting": " \u003e 今日已进行活动"
-    },
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_周期检查": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4887,
-        "y": 466
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "periodic_check",
-        "custom_action_param": "k=每日活动作战"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日活动作战_进入活动界面"
-    ],
-    "on_error": [
-      "每日活动作战_周期提醒"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_周期记录": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6521,
-        "y": 1086
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "record_period",
-        "custom_action_param": "k=每日活动作战"
-      },
-      "type": "Custom"
-    },
-    "focus": {
-      "Node.Recognition.Starting": " \u003e 今日活动已完成！"
-    },
-    "next": [
-      "每日活动作战_领取奖励结束"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4614,
-        "y": 466
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "on_task_start",
-        "custom_action_param": "h=hs"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日活动作战_周期检查"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_战斗开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5434,
-        "y": 774
-      }
-    },
-    "next": [
-      "每日活动作战_进入战斗界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_战斗结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 7030,
-        "y": 776
-      }
-    },
-    "next": [
-      "每日活动作战_领取奖励开始"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_查看作战详情": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6234,
-        "y": 775
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日活动作战_速战"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "战斗"
-        ],
-        "roi": [
-          947,
-          452,
-          306,
-          254
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_检查开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5437,
-        "y": 465
-      }
-    },
-    "next": [
-      "每日活动作战_从检查进入成就界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_检查当前进度": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6239,
-        "y": 463
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "check_activity_progress"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日活动作战_从检查返回活动界面"
-    ],
-    "on_error": [
-      "每日活动作战_领取今日奖励"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_检查结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6774,
-        "y": 468
-      }
-    },
-    "next": [
-      "每日活动作战_战斗开始"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_检查领取时进度": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6247,
-        "y": 1086
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "check_activity_progress"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日活动作战_领取奖励结束"
-    ],
-    "on_error": [
-      "每日活动作战_周期记录"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_确保微微辣": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5974,
-        "y": 775
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日活动作战_查看作战详情"
-    ],
-    "post_delay": 1000,
-    "recognition": {
-      "param": {
-        "expected": [
-          "微微辣"
-        ],
-        "roi": [
-          754,
-          55,
-          524,
-          124
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_确保进入成就界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5970,
-        "y": 464
-      }
-    },
-    "next": [
-      "每日活动作战_检查当前进度"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "全部领取"
-        ],
-        "roi": [
-          1037,
-          633,
-          174,
-          61
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_识别进度": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6236,
-        "y": 251
-      }
-    },
-    "recognition": {
-      "param": {
-        "expected": [
-          "/20",
-          "120",
-          "020"
-        ],
-        "roi": [
-          487,
-          154,
-          506,
-          323
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_返回活动界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6758,
-        "y": 775
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "每日活动作战_战斗结束"
-    ],
-    "recognition": {
-      "param": {
-        "template": [
-          "global/back.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    },
-    "repeat": 2,
-    "repeat_delay": 800
-  },
-  "每日活动作战_进入成就界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5711,
-        "y": 1086
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 进入成就界面"
-    },
-    "next": [
-      "每日活动作战_领取今日奖励"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "成就"
-        ],
-        "roi": [
-          61,
-          530,
-          187,
-          101
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_进入战斗界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5714,
-        "y": 775
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 进入作战界面"
-    },
-    "next": [
-      "每日活动作战_确保微微辣"
-    ],
-    "recognition": {
-      "param": {
-        "expected": [
-          "战斗"
-        ],
-        "roi": [
-          1019,
-          435,
-          236,
-          197
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_进入活动界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5157,
-        "y": 466
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          359,
-          176,
-          0,
-          0
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      "每日活动作战_检查开始"
-    ]
-  },
-  "每日活动作战_速战": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6494,
-        "y": 775
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "quick_fight"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "每日活动作战_返回活动界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_领取今日奖励": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5976,
-        "y": 1087
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": " \u003e 领取今日奖励"
-    },
-    "next": [
-      "每日活动作战_检查领取时进度"
-    ],
-    "post_delay": 400,
-    "recognition": {
-      "param": {
-        "expected": [
-          "全部领取"
-        ],
-        "roi": [
-          1054,
-          633,
-          140,
-          62
-        ]
-      },
-      "type": "OCR"
-    }
-  },
-  "每日活动作战_领取奖励开始": {
-    "$__mpe_code": {
-      "position": {
-        "x": 5432,
-        "y": 1088
-      }
-    },
-    "next": [
-      "每日活动作战_进入成就界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  },
-  "每日活动作战_领取奖励结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 6794,
-        "y": 1087
-      }
-    },
-    "next": [
-      "返回主界面"
-    ],
-    "post_delay": 0,
-    "pre_delay": 0
-  }
+	"$__mpe_config_每日活动作战": {
+		"$__mpe_code": {
+			"filePath": "D:\\_programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
+			"filename": "每日活动作战",
+			"lastSyncTime": 1770900469608,
+			"prefix": "每日活动作战",
+			"savedViewport": {
+				"x": -4918,
+				"y": -938,
+				"zoom": 0.99
+			},
+			"version": "v1.1.1"
+		}
+	},
+	"$__mpe_external_返回主界面_每日活动作战": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1661,
+				"y": 80
+			}
+		}
+	},
+	"$__mpe_group_战斗_每日活动作战": {
+		"$__mpe_code": {
+			"childrenLabels": [
+				"战斗开始",
+				"战斗结束",
+				"查看作战详情",
+				"确保微微辣",
+				"返回活动界面",
+				"进入战斗界面",
+				"速战",
+				"版本适配",
+				"版本适配"
+			],
+			"color": "orange",
+			"height": 399,
+			"position": {
+				"x": 5278,
+				"y": 757
+			},
+			"width": 1896
+		}
+	},
+	"$__mpe_group_检查进度_每日活动作战": {
+		"$__mpe_code": {
+			"childrenLabels": [
+				"从检查返回活动界面",
+				"从检查进入成就界面",
+				"检查开始",
+				"检查当前进度",
+				"检查结束",
+				"确保进入成就界面",
+				"识别进度",
+				"版本适配"
+			],
+			"color": "green",
+			"height": 559,
+			"position": {
+				"x": 5272,
+				"y": 156
+			},
+			"width": 1637
+		}
+	},
+	"$__mpe_group_进入活动界面_每日活动作战": {
+		"$__mpe_code": {
+			"childrenLabels": ["周期提醒", "周期检查", "开始", "进入活动界面"],
+			"color": "blue",
+			"height": 513,
+			"position": {
+				"x": 4380,
+				"y": 383
+			},
+			"width": 845
+		}
+	},
+	"$__mpe_group_领取奖励_每日活动作战": {
+		"$__mpe_code": {
+			"childrenLabels": [
+				"返回主界面",
+				"周期记录",
+				"检查领取时进度",
+				"进入成就界面",
+				"领取今日奖励",
+				"领取奖励开始",
+				"领取奖励结束",
+				"版本适配"
+			],
+			"color": "purple",
+			"height": 406,
+			"position": {
+				"x": 5278,
+				"y": 1216
+			},
+			"width": 1911
+		}
+	},
+	"$__mpe_sticker_版本适配_每日活动作战": {
+		"$__mpe_code": {
+			"color": "pink",
+			"content": "成就roi位置",
+			"height": 160,
+			"position": {
+				"x": 152,
+				"y": 291
+			},
+			"width": 200
+		}
+	},
+	"每日活动作战_从检查返回活动界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1113,
+				"y": 290
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日活动作战_检查结束"],
+		"recognition": {
+			"param": {
+				"template": ["global/back.png"]
+			},
+			"type": "TemplateMatch"
+		}
+	},
+	"每日活动作战_从检查进入成就界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 311,
+				"y": 290
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 检查剩余需求次数"
+		},
+		"next": ["每日活动作战_确保进入成就界面"],
+		"recognition": {
+			"param": {
+				"expected": ["成就"],
+				"roi": [32, 532, 573, 183]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_周期提醒": {
+		"$__mpe_code": {
+			"position": {
+				"x": 580,
+				"y": 234
+			}
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日已进行活动"
+		},
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_周期检查": {
+		"$__mpe_code": {
+			"position": {
+				"x": 308,
+				"y": 63
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "periodic_check",
+				"custom_action_param": "k=每日活动作战"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日活动作战_进入活动界面"],
+		"on_error": ["每日活动作战_周期提醒"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_周期记录": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1129,
+				"y": 76
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "record_period",
+				"custom_action_param": "k=每日活动作战"
+			},
+			"type": "Custom"
+		},
+		"focus": {
+			"Node.Recognition.Starting": " \u003e 今日活动已完成！"
+		},
+		"next": ["每日活动作战_领取奖励结束"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 35,
+				"y": 63
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "on_task_start",
+				"custom_action_param": "h=hs"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日活动作战_周期检查"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_战斗开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 40,
+				"y": 76
+			}
+		},
+		"next": ["每日活动作战_进入战斗界面"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_战斗结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1636,
+				"y": 78
+			}
+		},
+		"next": ["每日活动作战_领取奖励开始"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_查看作战详情": {
+		"$__mpe_code": {
+			"position": {
+				"x": 840,
+				"y": 77
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日活动作战_速战"],
+		"recognition": {
+			"param": {
+				"expected": ["前去解决"],
+				"roi": [816, 610, 168, 72]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_检查开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 40,
+				"y": 290
+			}
+		},
+		"next": ["每日活动作战_从检查进入成就界面"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_检查当前进度": {
+		"$__mpe_code": {
+			"position": {
+				"x": 842,
+				"y": 288
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "check_activity_progress"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日活动作战_从检查返回活动界面"],
+		"on_error": ["每日活动作战_领取今日奖励"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_检查结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1377,
+				"y": 293
+			}
+		},
+		"next": ["每日活动作战_战斗开始"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_检查领取时进度": {
+		"$__mpe_code": {
+			"position": {
+				"x": 855,
+				"y": 76
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "check_activity_progress"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日活动作战_领取奖励结束"],
+		"on_error": ["每日活动作战_周期记录"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_确保微微辣": {
+		"$__mpe_code": {
+			"position": {
+				"x": 580,
+				"y": 77
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日活动作战_查看作战详情"],
+		"post_delay": 1000,
+		"recognition": {
+			"param": {
+				"expected": ["微微辣"],
+				"roi": [29, 533, 252, 157]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_确保进入成就界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 573,
+				"y": 289
+			}
+		},
+		"next": ["每日活动作战_检查当前进度"],
+		"recognition": {
+			"param": {
+				"expected": ["全部领取"],
+				"roi": [1037, 633, 174, 61]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_识别进度": {
+		"$__mpe_code": {
+			"position": {
+				"x": 839,
+				"y": 76
+			}
+		},
+		"recognition": {
+			"param": {
+				"expected": ["/20", "120", "020"],
+				"roi": [487, 154, 506, 323]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_返回活动界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1364,
+				"y": 77
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["每日活动作战_战斗结束"],
+		"recognition": {
+			"param": {
+				"template": ["global/back.png"]
+			},
+			"type": "TemplateMatch"
+		},
+		"repeat": 2,
+		"repeat_delay": 800
+	},
+	"每日活动作战_进入成就界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 319,
+				"y": 76
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 进入成就界面"
+		},
+		"next": ["每日活动作战_领取今日奖励"],
+		"recognition": {
+			"param": {
+				"expected": ["成就"],
+				"roi": [5, 539, 460, 177]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_进入战斗界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 320,
+				"y": 77
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 进入作战界面"
+		},
+		"next": ["每日活动作战_确保微微辣"],
+		"recognition": {
+			"param": {
+				"expected": ["战斗"],
+				"roi": [950, 501, 322, 215]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_进入活动界面": {
+		"$__mpe_code": {
+			"position": {
+				"x": 578,
+				"y": 63
+			}
+		},
+		"action": {
+			"param": {
+				"target": [359, 176, 1, 1]
+			},
+			"type": "Click"
+		},
+		"next": ["每日活动作战_检查开始"]
+	},
+	"每日活动作战_速战": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1100,
+				"y": 77
+			}
+		},
+		"action": {
+			"param": {
+				"custom_action": "quick_fight"
+			},
+			"type": "Custom"
+		},
+		"next": ["每日活动作战_返回活动界面"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_领取今日奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 584,
+				"y": 77
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 领取今日奖励"
+		},
+		"next": ["每日活动作战_检查领取时进度"],
+		"post_delay": 400,
+		"recognition": {
+			"param": {
+				"expected": ["全部领取"],
+				"roi": [1054, 633, 140, 62]
+			},
+			"type": "OCR"
+		}
+	},
+	"每日活动作战_领取奖励开始": {
+		"$__mpe_code": {
+			"position": {
+				"x": 40,
+				"y": 78
+			}
+		},
+		"next": ["每日活动作战_进入成就界面"],
+		"post_delay": 0,
+		"pre_delay": 0
+	},
+	"每日活动作战_领取奖励结束": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1402,
+				"y": 77
+			}
+		},
+		"next": ["返回主界面"],
+		"post_delay": 0,
+		"pre_delay": 0
+	}
 }
