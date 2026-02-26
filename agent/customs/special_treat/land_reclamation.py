@@ -49,7 +49,11 @@ class NewGoods(CustomAction):
 
             # 商店类型
             pipeline_override = {}
-            if store_type == "boutique" or store_type == "b":
+            if store_type == "group" or store_type == "g":
+                pipeline_override = {
+                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=3"},
+                }
+            elif store_type == "boutique" or store_type == "b":
                 pipeline_override = {
                     "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=15"},
                     "新礼包查看_领取查看奖励": {"roi": [856, 551, 99, 56]},
