@@ -3,14 +3,15 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\农场视察.json",
 			"filename": "农场视察",
-			"lastSyncTime": 1768123777032,
+			"isModifiedExternally": false,
+			"lastSyncTime": 1772107615841,
 			"prefix": "农场视察",
 			"savedViewport": {
-				"x": -6470,
-				"y": 406,
-				"zoom": 1.32
+				"x": -2591,
+				"y": 316,
+				"zoom": 0.92
 			},
-			"version": "v0.14.2"
+			"version": "v1.2.0"
 		}
 	},
 	"$__mpe_external_返回主界面_农场视察": {
@@ -24,23 +25,15 @@
 	"农场视察_周期提醒": {
 		"$__mpe_code": {
 			"position": {
-				"x": 3720,
-				"y": 268
+				"x": 3723,
+				"y": 322
 			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
 		},
 		"focus": {
 			"Node.Recognition.Starting": " \u003e 今日已视察"
 		},
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_周期检查": {
 		"$__mpe_code": {
@@ -62,11 +55,7 @@
 		"next": ["农场视察_进入农场"],
 		"on_error": ["农场视察_周期提醒"],
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_周期记录": {
 		"$__mpe_code": {
@@ -84,11 +73,7 @@
 		},
 		"next": ["返回主界面"],
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_宠物详情处理": {
 		"$__mpe_code": {
@@ -127,11 +112,7 @@
 		},
 		"next": ["农场视察_周期检查"],
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_收获宠物萝卜": {
 		"$__mpe_code": {
@@ -140,28 +121,36 @@
 				"y": 58
 			}
 		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
 		"focus": {
 			"Node.Recognition.Starting": " \u003e 收集宠物萝卜"
 		},
-		"next": [
-			"农场视察_检测宠物萝卜",
-			{
-				"jump_back": true,
-				"name": "农场视察_宠物详情处理"
-			}
-		],
+		"next": ["农场视察_检测宠物萝卜", "[JumpBack]农场视察_宠物详情处理"],
 		"on_error": ["农场视察_获取萝卜结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		},
 		"timeout": 2000
+	},
+	"农场视察_新的跑腿地区": {
+		"$__mpe_code": {
+			"position": {
+				"x": 4276,
+				"y": -181
+			}
+		},
+		"action": {
+			"param": {
+				"target": [640, 509, 1, 1]
+			},
+			"type": "Click"
+		},
+		"next": ["农场视察_获取萝卜开始"],
+		"recognition": {
+			"param": {
+				"expected": ["新的跑腿地区"],
+				"roi": [410, 135, 449, 152]
+			},
+			"type": "OCR"
+		}
 	},
 	"农场视察_无跑腿奖励": {
 		"$__mpe_code": {
@@ -169,10 +158,6 @@
 				"x": 5071,
 				"y": 657
 			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
 		},
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e  跑腿未完成"
@@ -187,6 +172,22 @@
 			"type": "OCR"
 		}
 	},
+	"农场视察_未获取到萝卜": {
+		"$__mpe_code": {
+			"position": {
+				"x": 5603,
+				"y": -522
+			}
+		},
+		"focus": {
+			"Node.Recognition.Succeeded": " \u003e 未命中"
+		},
+		"next": ["农场视察_检测宠物萝卜", "[JumpBack]农场视察_宠物详情处理"],
+		"on_error": ["农场视察_获取萝卜结束"],
+		"post_delay": 0,
+		"pre_delay": 0,
+		"timeout": 2000
+	},
 	"农场视察_树桩萝卜": {
 		"$__mpe_code": {
 			"position": {
@@ -200,18 +201,8 @@
 			},
 			"type": "Click"
 		},
-		"next": [
-			"农场视察_获取树桩萝卜",
-			{
-				"jump_back": true,
-				"name": "农场视察_宠物详情处理"
-			}
-		],
+		"next": ["农场视察_获取树桩萝卜", "[JumpBack]农场视察_宠物详情处理"],
 		"on_error": ["农场视察_收获宠物萝卜"],
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		},
 		"timeout": 2000
 	},
 	"农场视察_检测宠物萝卜": {
@@ -228,20 +219,16 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 拿来吧你！"
 		},
-		"next": [
-			"农场视察_获取宠物萝卜",
-			{
-				"jump_back": true,
-				"name": "农场视察_宠物详情处理"
-			}
-		],
+		"next": ["农场视察_获取宠物萝卜", "[JumpBack]农场视察_宠物详情处理"],
+		"on_error": ["农场视察_未获取到萝卜"],
 		"pre_delay": 0,
 		"recognition": {
 			"param": {
 				"template": ["farm/carrot.png"]
 			},
 			"type": "TemplateMatch"
-		}
+		},
+		"timeout": 3000
 	},
 	"农场视察_派遣跑腿开始": {
 		"$__mpe_code": {
@@ -250,17 +237,9 @@
 				"y": 390
 			}
 		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
 		"next": ["农场视察_进入跑腿地区"],
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_派遣跑腿结束": {
 		"$__mpe_code": {
@@ -269,17 +248,9 @@
 				"y": 389
 			}
 		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
 		"next": ["农场视察_周期记录"],
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_确保进入农场": {
 		"$__mpe_code": {
@@ -288,11 +259,7 @@
 				"y": 63
 			}
 		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": ["农场视察_获取萝卜开始"],
+		"next": ["农场视察_新的跑腿地区", "农场视察_获取萝卜开始"],
 		"recognition": {
 			"param": {
 				"expected": ["平日农场"],
@@ -314,13 +281,7 @@
 			},
 			"type": "Click"
 		},
-		"next": [
-			"农场视察_检测宠物萝卜",
-			{
-				"jump_back": true,
-				"name": "农场视察_宠物详情处理"
-			}
-		],
+		"next": ["农场视察_检测宠物萝卜", "[JumpBack]农场视察_宠物详情处理"],
 		"on_error": ["农场视察_获取萝卜结束"],
 		"post_delay": 500,
 		"recognition": {
@@ -345,13 +306,7 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 收取每日萝卜"
 		},
-		"next": [
-			"农场视察_收获宠物萝卜",
-			{
-				"jump_back": true,
-				"name": "农场视察_宠物详情处理"
-			}
-		],
+		"next": ["农场视察_收获宠物萝卜", "[JumpBack]农场视察_宠物详情处理"],
 		"recognition": {
 			"param": {
 				"expected": ["确定"],
@@ -388,17 +343,9 @@
 				"y": 61
 			}
 		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
 		"next": ["农场视察_树桩萝卜"],
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_获取萝卜结束": {
 		"$__mpe_code": {
@@ -407,23 +354,9 @@
 				"y": 60
 			}
 		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": [
-			"农场视察_派遣跑腿开始",
-			{
-				"jump_back": true,
-				"name": "农场视察_宠物详情处理"
-			}
-		],
+		"next": ["农场视察_派遣跑腿开始", "[JumpBack]农场视察_宠物详情处理"],
 		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
+		"pre_delay": 0
 	},
 	"农场视察_进入农场": {
 		"$__mpe_code": {
