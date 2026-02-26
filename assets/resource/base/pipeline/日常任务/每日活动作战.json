@@ -1,16 +1,17 @@
 {
 	"$__mpe_config_每日活动作战": {
 		"$__mpe_code": {
-			"filePath": "D:\\_programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
+			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
 			"filename": "每日活动作战",
-			"lastSyncTime": 1770900469608,
+			"isModifiedExternally": false,
+			"lastSyncTime": 1772105667532,
 			"prefix": "每日活动作战",
 			"savedViewport": {
-				"x": -4918,
-				"y": -938,
-				"zoom": 0.99
+				"x": -1363,
+				"y": 34,
+				"zoom": 0.44
 			},
-			"version": "v1.1.1"
+			"version": "v1.2.0"
 		}
 	},
 	"$__mpe_external_返回主界面_每日活动作战": {
@@ -30,9 +31,7 @@
 				"确保微微辣",
 				"返回活动界面",
 				"进入战斗界面",
-				"速战",
-				"版本适配",
-				"版本适配"
+				"速战"
 			],
 			"color": "orange",
 			"height": 399,
@@ -52,8 +51,7 @@
 				"检查当前进度",
 				"检查结束",
 				"确保进入成就界面",
-				"识别进度",
-				"版本适配"
+				"识别进度"
 			],
 			"color": "green",
 			"height": 559,
@@ -85,28 +83,15 @@
 				"进入成就界面",
 				"领取今日奖励",
 				"领取奖励开始",
-				"领取奖励结束",
-				"版本适配"
+				"领取奖励结束"
 			],
 			"color": "purple",
-			"height": 406,
+			"height": 399,
 			"position": {
 				"x": 5278,
 				"y": 1216
 			},
 			"width": 1911
-		}
-	},
-	"$__mpe_sticker_版本适配_每日活动作战": {
-		"$__mpe_code": {
-			"color": "pink",
-			"content": "成就roi位置",
-			"height": 160,
-			"position": {
-				"x": 152,
-				"y": 291
-			},
-			"width": 200
 		}
 	},
 	"每日活动作战_从检查返回活动界面": {
@@ -252,17 +237,13 @@
 			}
 		},
 		"action": {
-			"param": {},
+			"param": {
+				"target": [846, 321, 1, 1]
+			},
 			"type": "Click"
 		},
 		"next": ["每日活动作战_速战"],
-		"recognition": {
-			"param": {
-				"expected": ["前去解决"],
-				"roi": [816, 610, 168, 72]
-			},
-			"type": "OCR"
-		}
+		"pre_delay": 400
 	},
 	"每日活动作战_检查开始": {
 		"$__mpe_code": {
@@ -338,7 +319,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["微微辣"],
-				"roi": [29, 533, 252, 157]
+				"roi": [778, 552, 498, 165]
 			},
 			"type": "OCR"
 		}
@@ -436,7 +417,7 @@
 		"recognition": {
 			"param": {
 				"expected": ["战斗"],
-				"roi": [950, 501, 322, 215]
+				"roi": [937, 429, 338, 197]
 			},
 			"type": "OCR"
 		}

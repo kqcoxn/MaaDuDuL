@@ -1,7 +1,7 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.8 - MFAA | 游戏版本：市长、市长，我的市长大人！",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.8 - MFAA | 游戏版本：献给你的赞颂",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
 	"version": "v0.1.8",
@@ -108,7 +108,7 @@
 		},
 		{
 			"name": "每日活动作战",
-			"label": "🥺我的市长大人【活动】",
+			"label": "🥂献给你的赞颂【活动】",
 			"entry": "每日活动作战_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",
