@@ -3,14 +3,15 @@
 		"$__mpe_code": {
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
-			"lastSyncTime": 1769681482653,
+			"isModifiedExternally": false,
+			"lastSyncTime": 1772104682944,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -1324,
-				"y": -656,
-				"zoom": 1.44
+				"x": -356,
+				"y": 310,
+				"zoom": 0.87
 			},
-			"version": "v1.0.1"
+			"version": "v1.2.0"
 		}
 	},
 	"启动游戏_关闭公告": {
@@ -27,15 +28,8 @@
 		"post_delay": 2000,
 		"recognition": {
 			"param": {
-				"roi": [
-					1081,
-					52,
-					98,
-					90
-				],
-				"template": [
-					"main/close-anno.png"
-				]
+				"roi": [1081, 52, 98, 90],
+				"template": ["main/close-anno.png"]
 			},
 			"type": "TemplateMatch"
 		}
@@ -61,18 +55,10 @@
 					"global/back.png",
 					"global/home2.png",
 					"main/close-bw.png",
-					"main/close-trans.png"
+					"main/close-trans.png",
+					"main/close-orange.png"
 				],
-				"threshold": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				]
+				"threshold": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
 			},
 			"type": "TemplateMatch"
 		}
@@ -120,9 +106,7 @@
 			},
 			"type": "Custom"
 		},
-		"next": [
-			"启动游戏_启动游戏"
-		],
+		"next": ["启动游戏_启动游戏"],
 		"post_delay": 0,
 		"pre_delay": 0
 	},
@@ -135,16 +119,8 @@
 		},
 		"action": {
 			"param": {
-				"begin": [
-					738,
-					339
-				],
-				"end": [
-					[
-						593,
-						446
-					]
-				]
+				"begin": [738, 339],
+				"end": [[593, 446]]
 			},
 			"type": "Swipe"
 		},
@@ -174,21 +150,12 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 更新游戏"
 		},
-		"next": [
-			"启动游戏_更新结束"
-		],
+		"next": ["启动游戏_更新结束"],
 		"rate_limit": 3000,
 		"recognition": {
 			"param": {
-				"expected": [
-					"开始下载"
-				],
-				"roi": [
-					567,
-					524,
-					145,
-					61
-				]
+				"expected": ["开始下载"],
+				"roi": [567, 524, 145, 61]
 			},
 			"type": "OCR"
 		},
@@ -210,15 +177,8 @@
 		},
 		"recognition": {
 			"param": {
-				"expected": [
-					"立刻出发"
-				],
-				"roi": [
-					968,
-					462,
-					302,
-					254
-				]
+				"expected": ["立刻出发"],
+				"roi": [968, 462, 302, 254]
 			},
 			"type": "OCR"
 		}
@@ -233,20 +193,11 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 关闭公告界面"
 		},
-		"next": [
-			"启动游戏_关闭公告"
-		],
+		"next": ["启动游戏_关闭公告"],
 		"recognition": {
 			"param": {
-				"expected": [
-					"系统公告"
-				],
-				"roi": [
-					136,
-					136,
-					730,
-					87
-				]
+				"expected": ["系统公告"],
+				"roi": [136, 136, 730, 87]
 			},
 			"type": "OCR"
 		}
@@ -260,18 +211,13 @@
 		},
 		"action": {
 			"param": {
-				"target": [
-					640,
-					679
-				]
+				"target": [640, 679]
 			},
 			"type": "Click"
 		},
 		"recognition": {
 			"param": {
-				"expected": [
-					"点击屏幕继续"
-				]
+				"expected": ["点击屏幕继续"]
 			},
 			"type": "OCR"
 		}
@@ -290,20 +236,13 @@
 		"$__mpe_code": {
 			"position": {
 				"x": 1420,
-				"y": -155
+				"y": -184
 			}
 		},
 		"recognition": {
 			"param": {
-				"roi": [
-					1092,
-					2,
-					184,
-					75
-				],
-				"template": [
-					"main/more.png"
-				]
+				"roi": [1092, 2, 184, 75],
+				"template": ["main/more.png"]
 			},
 			"type": "TemplateMatch"
 		}
@@ -311,21 +250,14 @@
 	"启动游戏_识别开始界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 857,
-				"y": -151
+				"x": 858,
+				"y": -154
 			}
 		},
 		"recognition": {
 			"param": {
-				"expected": [
-					"拉动脸颊开始游戏"
-				],
-				"roi": [
-					331,
-					603,
-					580,
-					115
-				]
+				"expected": ["拉动脸颊开始游戏"],
+				"roi": [331, 603, 580, 115]
 			},
 			"type": "OCR"
 		}
@@ -340,9 +272,7 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 已进入主界面"
 		},
-		"next": [
-			"启动游戏_结束"
-		],
+		"next": ["启动游戏_结束"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -363,9 +293,7 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 识别到登录界面"
 		},
-		"next": [
-			"启动游戏_捏脸启动"
-		],
+		"next": ["启动游戏_捏脸启动"],
 		"post_delay": 0,
 		"pre_delay": 0,
 		"recognition": {
@@ -408,9 +336,7 @@
 		},
 		"recognition": {
 			"param": {
-				"expected": [
-					"领取"
-				]
+				"expected": ["领取"]
 			},
 			"type": "OCR"
 		}
