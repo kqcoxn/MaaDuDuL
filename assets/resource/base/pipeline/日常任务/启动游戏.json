@@ -4,12 +4,12 @@
 			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
 			"filename": "启动游戏",
 			"isModifiedExternally": false,
-			"lastSyncTime": 1772104682944,
+			"lastSyncTime": 1772255802708,
 			"prefix": "启动游戏",
 			"savedViewport": {
-				"x": -356,
-				"y": 310,
-				"zoom": 0.87
+				"x": -13,
+				"y": 84,
+				"zoom": 0.95
 			},
 			"version": "v1.2.0"
 		}
@@ -17,8 +17,8 @@
 	"启动游戏_关闭公告": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1124,
-				"y": 417
+				"x": 860,
+				"y": 672
 			}
 		},
 		"action": {
@@ -37,8 +37,8 @@
 	"启动游戏_关闭面板": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1421,
-				"y": 624
+				"x": 1454,
+				"y": 1094
 			}
 		},
 		"action": {
@@ -82,6 +82,7 @@
 		"next": [
 			"启动游戏_连续识别主界面",
 			"启动游戏_连续识别开始界面",
+			"[JumpBack]启动游戏_无可领取的奖励",
 			"[JumpBack]启动游戏_更新游戏",
 			"[JumpBack]启动游戏_检测公告界面",
 			"[JumpBack]启动游戏_领取礼物",
@@ -91,6 +92,7 @@
 		],
 		"post_delay": 0,
 		"pre_delay": 0,
+		"rate_limit": 600,
 		"timeout": 60000
 	},
 	"启动游戏_开始": {
@@ -130,17 +132,39 @@
 		},
 		"next": [
 			"启动游戏_连续识别主界面",
+			"[JumpBack]启动游戏_无可领取的奖励",
 			"[JumpBack]启动游戏_领取礼物",
 			"[JumpBack]启动游戏_点击屏幕继续",
 			"[JumpBack]启动游戏_关闭面板",
 			"[JumpBack]启动游戏_闲时捏脸"
-		]
+		],
+		"rate_limit": 600
+	},
+	"启动游戏_无可领取的奖励": {
+		"$__mpe_code": {
+			"position": {
+				"x": 1450,
+				"y": 389
+			}
+		},
+		"action": {
+			"param": {},
+			"type": "Click"
+		},
+		"next": ["启动游戏_关闭面板"],
+		"recognition": {
+			"param": {
+				"expected": ["没有可获得的奖励", "没有可领取的奖励"]
+			},
+			"type": "OCR"
+		},
+		"timeout": 2000
 	},
 	"启动游戏_更新游戏": {
 		"$__mpe_code": {
 			"position": {
 				"x": 588,
-				"y": 390
+				"y": 413
 			}
 		},
 		"action": {
@@ -164,8 +188,8 @@
 	"启动游戏_更新结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 590,
-				"y": 731
+				"x": 589,
+				"y": 733
 			}
 		},
 		"action": {
@@ -205,8 +229,8 @@
 	"启动游戏_点击屏幕继续": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1420,
-				"y": 913
+				"x": 1449,
+				"y": 888
 			}
 		},
 		"action": {
@@ -225,8 +249,8 @@
 	"启动游戏_结束": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1696,
-				"y": 64
+				"x": 1725,
+				"y": 65
 			}
 		},
 		"post_delay": 0,
@@ -235,8 +259,8 @@
 	"启动游戏_识别主界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1420,
-				"y": -184
+				"x": 1449,
+				"y": -183
 			}
 		},
 		"recognition": {
@@ -265,8 +289,8 @@
 	"启动游戏_连续识别主界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1420,
-				"y": 64
+				"x": 1449,
+				"y": 65
 			}
 		},
 		"focus": {
@@ -286,8 +310,8 @@
 	"启动游戏_连续识别开始界面": {
 		"$__mpe_code": {
 			"position": {
-				"x": 855,
-				"y": 65
+				"x": 856,
+				"y": 71
 			}
 		},
 		"focus": {
@@ -307,8 +331,8 @@
 	"启动游戏_闲时捏脸": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1422,
-				"y": 1115
+				"x": 1451,
+				"y": 1383
 			}
 		},
 		"post_delay": 0,
@@ -323,8 +347,8 @@
 	"启动游戏_领取礼物": {
 		"$__mpe_code": {
 			"position": {
-				"x": 1418,
-				"y": 398
+				"x": 1452,
+				"y": 624
 			}
 		},
 		"action": {
@@ -334,6 +358,7 @@
 		"focus": {
 			"Node.Recognition.Succeeded": " \u003e 检测到可领取奖励"
 		},
+		"post_delay": 0,
 		"recognition": {
 			"param": {
 				"expected": ["领取"]
