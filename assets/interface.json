@@ -1,10 +1,10 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.9 - MFAA | 游戏版本：献给你的赞颂",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.10 - MFAA | 游戏版本：再次绽放的蓝玫瑰",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
-	"version": "v0.1.9",
+	"version": "v0.1.10",
 	"welcome": "欢迎使用 MDDL!",
 	"contact": "QQ群: 926874985",
 	"license": "LICENSE",
@@ -108,7 +108,7 @@
 		},
 		{
 			"name": "每日活动作战",
-			"label": "🥂献给你的赞颂【活动】",
+			"label": "💠再次绽放的蓝玫瑰【活动】",
 			"entry": "每日活动作战_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",
