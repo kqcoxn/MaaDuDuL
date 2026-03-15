@@ -1,0 +1,66 @@
+{
+	"task": [
+		{
+			"name": "农场视察",
+			"label": "🐇农场视察",
+			"entry": "农场视察_开始",
+			"default_check": true,
+			"description": "Resource/descs/daily/farm.md",
+			"option": ["农场视察-周期检查", "农场视察-萝卜", "农场视察-派遣"]
+		}
+	],
+	"option": {
+		"农场视察-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"农场视察_周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"农场视察-萝卜": {
+			"type": "switch",
+			"label": "收获萝卜",
+			"cases": [
+				{
+					"name": "Yes"
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"农场视察_获取萝卜开始": {
+							"next": "农场视察_获取萝卜结束"
+						}
+					}
+				}
+			]
+		},
+		"农场视察-派遣": {
+			"type": "switch",
+			"label": "派遣跑腿",
+			"description": "启用时，请确保已设置好跑腿的项目",
+			"cases": [
+				{
+					"name": "Yes"
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"农场视察_派遣跑腿开始": {
+							"next": "农场视察_派遣跑腿结束"
+						}
+					}
+				}
+			]
+		}
+	}
+}

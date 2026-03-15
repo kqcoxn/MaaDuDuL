@@ -1,0 +1,38 @@
+{
+	"task": [
+		{
+			"name": "领取糖果",
+			"label": "🍬领取每日糖果",
+			"entry": "领取糖果_开始",
+			"default_check": true,
+			"description": "Resource/descs/daily/claim_candy.md",
+			"option": ["领取糖果-周期检查"]
+		}
+	],
+	"option": {
+		"领取糖果-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次糖果",
+			"description": "仅在领取成功后记录，早晚分离",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"领取糖果_周期检查": {
+							"action": "DoNothing"
+						},
+						"领取糖果_组合周期检查-早饭": {
+							"action": "DoNothing"
+						},
+						"领取糖果_组合周期检查-晚饭": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		}
+	}
+}

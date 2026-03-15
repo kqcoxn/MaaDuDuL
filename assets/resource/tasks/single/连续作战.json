@@ -1,0 +1,11 @@
+{
+	"task": [
+		{
+			"name": "连续作战",
+			"label": "🚀连续作战",
+			"entry": "连续作战_开始",
+			"description": "Resource/descs/single/continuous_battle.md"
+		}
+	],
+	"option": {}
+}

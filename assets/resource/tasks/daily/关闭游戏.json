@@ -1,0 +1,11 @@
+{
+	"task": [
+		{
+			"name": "关闭游戏",
+			"label": "🔴关闭游戏",
+			"entry": "关闭游戏_开始",
+			"description": "Resource/descs/daily/close_game.md"
+		}
+	],
+	"option": {}
+}
