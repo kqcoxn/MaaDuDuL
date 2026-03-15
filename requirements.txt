@@ -1,2 +1,2 @@
-maafw==5.7.1
+maafw==5.8.1
 requests==2.32.5

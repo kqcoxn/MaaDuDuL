@@ -12,6 +12,7 @@ https://github.com/kqcoxn/MaaDuDuL
 - 项目使用 pipeline + custom 双协议辅助，custom 即 agent 的内容，agent 相当于 custom 的 server
 - 本项目自封装了很多 custom 的操作，若已有封装则优先使用本项目的封装
 - 本项目使用 maafw python binding 作为 custom 的语言
+- 本项目 UI 使用 MFAAvalonia，简称 mfaa
 
 ## 应该做的事
 
