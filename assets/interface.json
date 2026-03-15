@@ -1,10 +1,10 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.10 - MFAA | 游戏版本：再次绽放的蓝玫瑰",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.2.0 - MFAA | 游戏版本：再次绽放的蓝玫瑰",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
-	"version": "v0.1.10",
+	"version": "v0.2.0",
 	"welcome": "欢迎使用 MDDL!",
 	"contact": "QQ群: 926874985",
 	"license": "LICENSE",
@@ -418,6 +418,21 @@
 				},
 				{
 					"name": "Yes",
+					"option": ["每日采购-日常商店-采购模式"]
+				}
+			]
+		},
+		"每日采购-日常商店-采购模式": {
+			"type": "select",
+			"label": "采购模式",
+			"cases": [
+				{
+					"name": "逐个购买",
+					"pipeline_override": {
+						"每日采购_进入日常商店": {
+							"next": "每日采购_购买日常朱珠糖"
+						}
+					},
 					"option": [
 						"每日采购-日常商店-朱珠糖",
 						"每日采购-日常商店-星星糖",
@@ -429,6 +444,15 @@
 						"每日采购-日常商店-房间装扮",
 						"每日采购-日常商店-料理"
 					]
+				},
+				{
+					"name": "一键购买",
+					"description": "需自行勾选好采购物品",
+					"pipeline_override": {
+						"每日采购_进入日常商店": {
+							"next": "每日采购_一键购买日常物品"
+						}
+					}
 				}
 			]
 		},
