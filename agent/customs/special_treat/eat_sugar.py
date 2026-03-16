@@ -204,3 +204,34 @@ class SelectDuplicateLevel(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("选择副本关卡", e)
+
+
+@AgentServer.custom_action("select_gold_level")
+class SelectDuplicateLevel(CustomAction):
+    """ """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """ """
+        try:
+            args = ParamAnalyzer(argv)
+            level: int = args.get(["level", "l"])
+
+            Prompter.log(f"选择关卡：{level}")
+            if type(level) is not int:
+                level = int(level)
+
+            if level < 13:
+                Prompter.error("金币大作战仅支持 13-20 关")
+                return False
+            elif level < 19:
+                Tasker(context).run("清紫糖_金币右上角")
+            else:
+                Tasker(context).run("清紫糖_金币右下角")
+
+            Tasker(context).run(
+                "清紫糖_查找关卡开始", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
+            )
+
+            return True
+        except Exception as e:
+            return Prompter.error("选择副本关卡", e)

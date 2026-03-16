@@ -111,6 +111,15 @@
 						}
 					},
 					"option": ["清紫糖-副本-面包房关卡"]
+				},
+				{
+					"name": "金币大作战（金币）",
+					"pipeline_override": {
+						"清紫糖_副本开始": {
+							"next": "清紫糖_金币"
+						}
+					},
+					"option": ["清紫糖-副本-金币关卡"]
 				}
 			]
 		},
@@ -238,6 +247,25 @@
 			],
 			"pipeline_override": {
 				"清紫糖_面包房行动": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		},
+		"清紫糖-副本-金币关卡": {
+			"type": "input",
+			"label": "金币关卡",
+			"description": "请选择可速刷的关卡，仅支持 13-20 关",
+			"inputs": [
+				{
+					"name": "关卡",
+					"label": "金币关卡",
+					"default": "13",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_金币行动": {
 					"custom_action_param": "l={关卡}"
 				}
 			}
