@@ -1,0 +1,37 @@
+{
+	"task": [
+		{
+			"name": "清红糖",
+			"label": "🍭清红糖",
+			"entry": "清红糖_开始",
+			"description": "Resource/descs/daily/clear_red_candy.md",
+			"option": ["清红糖-关卡区间"]
+		}
+	],
+	"option": {
+		"清红糖-关卡区间": {
+			"type": "input",
+			"label": "关卡区间",
+			"description": "设置要清理的红糖关卡区间，格式为\"章-关\"（如\"24-9\"），每次运行此任务时步进循环",
+			"inputs": [
+				{
+					"name": "起始关卡",
+					"default": "1-1",
+					"pipeline_type": "string",
+					"verify": "^\\d{1,2}-([1-9]|10)$"
+				},
+				{
+					"name": "结束关卡",
+					"default": "1-1",
+					"pipeline_type": "string",
+					"verify": "^\\d{1,2}-([1-9]|10)$"
+				}
+			],
+			"pipeline_override": {
+				"清红糖_指定关卡作战": {
+					"custom_action_param": "sl={起始关卡}&el={结束关卡}"
+				}
+			}
+		}
+	}
+}

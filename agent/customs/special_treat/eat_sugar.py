@@ -1,11 +1,9 @@
-"""清紫糖关卡选择模块
+"""
+清紫糖 / 清红糖 模块
 
-提供克隆工厂和到手蜡关卡选择的自定义动作。
-根据关卡编号自动计算屏幕坐标位置并执行点击操作。
-
-包含功能：
-    - SelectCloneLevel：选择克隆工厂关卡（4 列布局）
-    - SelectCrayonLevel：选择到手蜡关卡（5 列布局）
+本模块实现了游戏内两种主要糖果资源（紫糖和红糖）的清理相关自定义动作。
+包含克隆工厂、到手蜡、副本关卡、金币大作战等紫糖关卡的选择，
+以及红糖关卡的循环定位与执行功能。
 """
 
 from maa.agent.agent_server import AgentServer
@@ -14,8 +12,11 @@ from maa.context import Context
 
 import time
 
-from agent.customs.utils import Prompter, MatrixOperator
-from agent.customs.maahelper import ParamAnalyzer, Tasker
+from agent.customs.utils import Prompter, MatrixOperator, LocalStorage
+from agent.customs.maahelper import ParamAnalyzer, Tasker, RecoHelper
+
+
+# ============== 清紫糖 ==============
 
 
 @AgentServer.custom_action("quick_fight")
@@ -207,11 +208,33 @@ class SelectDuplicateLevel(CustomAction):
 
 
 @AgentServer.custom_action("select_gold_level")
-class SelectDuplicateLevel(CustomAction):
-    """ """
+class SelectGoldLevel(CustomAction):
+    """选择金币大作战关卡的自定义动作
+
+    根据传入的关卡编号，自动定位并选择金币大作战副本中的对应关卡。
+    仅支持 13-20 关，小于 13 的关卡会报错。
+
+    参数格式：
+        - level 或 l：关卡编号（13-20）
+
+    关卡定位规则：
+        - 13-18 关：点击右上角区域后查找
+        - 19-20 关：点击右下角区域后查找
+    """
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        """ """
+        """执行金币大作战关卡选择操作
+
+        参数：
+            context：MaaFramework 上下文对象
+            argv：自定义动作参数，包含关卡编号
+
+        返回：
+            bool：操作成功返回 True，失败返回 False
+
+        异常：
+            捕获所有异常并通过 Prompter.error 输出错误信息
+        """
         try:
             args = ParamAnalyzer(argv)
             level: int = args.get(["level", "l"])
@@ -235,3 +258,260 @@ class SelectDuplicateLevel(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("选择副本关卡", e)
+
+
+# ============== 清红糖 ==============
+
+
+@AgentServer.custom_action("select_red_level")
+class SelectRedLevel(CustomAction):
+    """选择红糖关卡的自定义动作
+
+    根据传入的关卡区间，循环定位并执行关卡。支持持久化记录当前执行进度，
+    确保每次执行时自动推进到下一个关卡。
+
+    参数格式：
+        - start_level 或 sl：起始关卡，格式为"章-关"（如"24-9"）
+        - end_level 或 el：结束关卡，格式为"章-关"（如"25-3"）
+
+    关卡规则：
+        - 每章固定10关
+        - 循环执行从起始关卡到结束关卡之间的所有关卡
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行红糖关卡选择操作
+
+        参数：
+            context：MaaFramework 上下文对象
+            argv：自定义动作参数，包含起始和结束关卡
+
+        返回：
+            bool：操作成功返回 True，失败返回 False
+
+        异常：
+            捕获所有异常并通过 Prompter.error 输出错误信息
+        """
+        try:
+            args = ParamAnalyzer(argv)
+            start_level: str = args.get(["start_level", "sl"])
+            end_level: str = args.get(["end_level", "el"])
+
+            # 解析关卡区间
+            start_chapter, start_stage = self._parse_level(start_level)
+            end_chapter, end_stage = self._parse_level(end_level)
+
+            if start_chapter is None or end_chapter is None:
+                return Prompter.error("选择红糖关卡", "关卡格式错误，应为'章-关'格式")
+
+            # 获取持久化的执行进度
+            storage_key = "red_level_progress"
+            current_progress = LocalStorage.get(storage_key)
+
+            # 检查进度是否在有效区间内，若不在则重置
+            if current_progress and not self._is_progress_in_range(
+                current_progress, start_chapter, start_stage, end_chapter, end_stage
+            ):
+                current_progress = None
+
+            # 确定本次要执行的关卡
+            target_chapter, target_stage = self._get_target_level(
+                start_chapter, start_stage, end_chapter, end_stage, current_progress
+            )
+
+            Prompter.log(f"本次目标关卡：{target_chapter}-{target_stage}")
+
+            # 检查当前界面的关卡，判断是第几章，若不在目标章节跳转到目标章节
+            current_chapter_results = (
+                RecoHelper(context).recognize("清红糖_识别当前章节").filtered_results
+            )
+
+            # 从关卡名中解析章节号
+            detected_chapter = None
+            if current_chapter_results:
+                for result in current_chapter_results:
+                    chapter = self._parse_chapter_from_level_name(result.text)
+                    if chapter is not None:
+                        detected_chapter = chapter
+                        Prompter.log(f"识别到当前章节：{detected_chapter}")
+                        break
+
+            # 如果当前章节与目标章节不同，则进行跳转
+            if detected_chapter != target_chapter:
+                chapter_diff = target_chapter - detected_chapter
+                direction = "后" if chapter_diff > 0 else "前"
+                Prompter.log(f"向{direction}跳转 {abs(chapter_diff)} 章")
+                if chapter_diff > 0:
+                    Tasker(context).run(
+                        "清红糖_章节后跳",
+                        {"清红糖_章节后跳": {"repeat": chapter_diff}},
+                    )
+                else:
+                    Tasker(context).run(
+                        "清红糖_章节前跳",
+                        {"清红糖_章节前跳": {"repeat": abs(chapter_diff)}},
+                    )
+            else:
+                Prompter.log(f"当前已在目标章节")
+
+            # 查找章节内关卡的位置，并选中关卡
+            Prompter.log(f"查找并选中关卡：{target_stage}")
+            Tasker(context).run(
+                "清红糖_查找关卡开始",
+                {"清红糖_查找关卡": {"expected": f"^{target_chapter}-{target_stage}$"}},
+            )
+
+            # 执行速刷
+            Tasker(context).run("速战_开始")
+
+            # 更新执行进度
+            next_chapter, next_stage = self._get_next_level(
+                target_chapter,
+                target_stage,
+                start_chapter,
+                start_stage,
+                end_chapter,
+                end_stage,
+            )
+            LocalStorage.set(storage_key, f"{next_chapter}-{next_stage}")
+            Prompter.log(f"已记录下次执行关卡：{next_chapter}-{next_stage}")
+
+            return True
+        except Exception as e:
+            return Prompter.error("选择红糖关卡", e)
+
+    def _parse_level(self, level_str: str):
+        """解析关卡字符串为章节和关卡编号
+
+        参数：
+            level_str：关卡字符串，格式为"章-关"（如"24-9"）
+
+        返回：
+            tuple: (章节编号, 关卡编号)，解析失败返回 (None, None)
+        """
+        try:
+            parts = level_str.split("-")
+            if len(parts) != 2:
+                return None, None
+            chapter = int(parts[0])
+            stage = int(parts[1])
+            if chapter < 1 or stage < 1 or stage > 10:
+                return None, None
+            return chapter, stage
+        except (ValueError, AttributeError):
+            return None, None
+
+    def _parse_chapter_from_level_name(self, level_name: str):
+        """从关卡名称中解析章节号
+
+        参数：
+            level_name：关卡名称，格式为"章-关"（如"24-9"）
+
+        返回：
+            int: 章节号，解析失败返回 None
+        """
+        try:
+            # 清理文本中的多余字符
+            cleaned = level_name.strip().replace(" ", "")
+            parts = cleaned.split("-")
+            if len(parts) >= 2:
+                chapter = int(parts[0])
+                return chapter
+            return None
+        except (ValueError, AttributeError):
+            return None
+
+    def _get_target_level(
+        self,
+        start_chapter: int,
+        start_stage: int,
+        end_chapter: int,
+        end_stage: int,
+        current_progress: str,
+    ):
+        """确定本次要执行的目标关卡
+
+        参数：
+            start_chapter：起始章节
+            start_stage：起始关卡
+            end_chapter：结束章节
+            end_stage：结束关卡
+            current_progress：持久化记录的当前进度（格式"章-关"）
+
+        返回：
+            tuple: (目标章节, 目标关卡)
+        """
+        if current_progress is None:
+            # 首次执行，从起始关卡开始
+            return start_chapter, start_stage
+
+        # 有进度记录，从记录的关卡继续
+        chapter, stage = self._parse_level(current_progress)
+        if chapter is None:
+            return start_chapter, start_stage
+        return chapter, stage
+
+    def _get_next_level(
+        self,
+        current_chapter: int,
+        current_stage: int,
+        start_chapter: int,
+        start_stage: int,
+        end_chapter: int,
+        end_stage: int,
+    ):
+        """计算下一个要执行的关卡
+
+        参数：
+            current_chapter：当前章节
+            current_stage：当前关卡
+            start_chapter：起始章节
+            start_stage：起始关卡
+            end_chapter：结束章节
+            end_stage：结束关卡
+
+        返回：
+            tuple: (下一章节, 下一关卡)，如果已完成所有关卡则回到起始关卡
+        """
+        # 检查是否已完成所有关卡，回到起始关卡继续循环
+        if current_chapter == end_chapter and current_stage == end_stage:
+            return start_chapter, start_stage
+
+        # 计算下一关卡
+        if current_stage < 10:
+            # 同一章的下一关
+            return current_chapter, current_stage + 1
+        else:
+            # 下一章的第1关
+            return current_chapter + 1, 1
+
+    def _is_progress_in_range(
+        self,
+        progress: str,
+        start_chapter: int,
+        start_stage: int,
+        end_chapter: int,
+        end_stage: int,
+    ) -> bool:
+        """检查进度是否在有效区间内
+
+        参数：
+            progress：当前进度，格式为"章-关"
+            start_chapter：起始章节
+            start_stage：起始关卡
+            end_chapter：结束章节
+            end_stage：结束关卡
+
+        返回：
+            bool：进度在区间内返回 True，否则返回 False
+        """
+        chapter, stage = self._parse_level(progress)
+        if chapter is None:
+            return False
+
+        # 将关卡转换为可比较的数值（章*10 + 关）
+        progress_value = chapter * 10 + stage
+        start_value = start_chapter * 10 + start_stage
+        end_value = end_chapter * 10 + end_stage
+
+        return start_value <= progress_value <= end_value

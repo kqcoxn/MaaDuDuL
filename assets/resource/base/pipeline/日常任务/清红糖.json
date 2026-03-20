@@ -1,0 +1,311 @@
+{
+    "$__mpe_config_清红糖": {
+        "$__mpe_code": {
+            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
+            "filename": "清红糖",
+            "isModifiedExternally": false,
+            "lastSyncTime": 1774012081237,
+            "prefix": "清红糖",
+            "savedViewport": {
+                "x": -8764,
+                "y": -635,
+                "zoom": 1.32
+            },
+            "version": "v1.3.0"
+        }
+    },
+    "$__mpe_external_返回主界面_清红糖": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7758,
+                "y": 194
+            }
+        }
+    },
+    "清红糖_开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6458,
+                "y": 188
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "on_task_start",
+                "custom_action_param": "h=hs"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "清红糖_进入冒险"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "清红糖_微微辣": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7238,
+                "y": 194
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 查找指定世界"
+        },
+        "next": [
+            "清红糖_指定关卡作战"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "微微辣"
+                ],
+                "roi": [
+                    9,
+                    607,
+                    1261,
+                    111
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "清红糖_指定关卡作战": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7498,
+                "y": 194
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "select_red_level",
+                "custom_action_param": "sl=24-1\u0026el=24-1"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "返回主界面"
+        ]
+    },
+    "清红糖_振兴之路": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6978,
+                "y": 194
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "清红糖_微微辣"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "振兴之路"
+                ],
+                "roi": [
+                    834,
+                    411,
+                    441,
+                    241
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "清红糖_查找关卡": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7193,
+                "y": 854
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "recognition": {
+            "param": {
+                "expected": [
+                    "^x-x$"
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "清红糖_查找关卡开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6673,
+                "y": 853
+            }
+        },
+        "next": [
+            "清红糖_滑动至右下角"
+        ]
+    },
+    "清红糖_滑动至右下角": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6933,
+                "y": 854
+            }
+        },
+        "action": {
+            "param": {
+                "begin": [
+                    1257,
+                    632,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        26,
+                        84,
+                        1,
+                        1
+                    ]
+                ]
+            },
+            "type": "Swipe"
+        },
+        "next": [
+            "清红糖_查找关卡",
+            "[JumpBack]清红糖_章节左滑"
+        ],
+        "repeat": 2,
+        "repeat_delay": 500
+    },
+    "清红糖_章节前跳": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6928,
+                "y": 562
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    45,
+                    361,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "repeat": 1,
+        "repeat_delay": 800
+    },
+    "清红糖_章节后跳": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7182,
+                "y": 561
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    1229,
+                    361,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "repeat": 1,
+        "repeat_delay": 800
+    },
+    "清红糖_章节左滑": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7192,
+                "y": 1024
+            }
+        },
+        "action": {
+            "param": {
+                "begin": [
+                    44,
+                    631,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        672,
+                        534,
+                        1,
+                        1
+                    ]
+                ]
+            },
+            "type": "Swipe"
+        }
+    },
+    "清红糖_识别当前章节": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6669,
+                "y": 563
+            }
+        },
+        "recognition": {
+            "param": {
+                "expected": [
+                    "-"
+                ],
+                "roi": [
+                    4,
+                    149,
+                    1267,
+                    457
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "清红糖_进入冒险": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6723,
+                "y": 191
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 进入振兴之路"
+        },
+        "next": [
+            "清红糖_振兴之路"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "冒险"
+                ],
+                "roi": [
+                    1075,
+                    604,
+                    195,
+                    106
+                ]
+            },
+            "type": "OCR"
+        }
+    }
+}
