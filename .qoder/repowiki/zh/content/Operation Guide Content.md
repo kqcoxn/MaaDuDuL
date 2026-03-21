@@ -1,20 +1,20 @@
-# MaaDuDuL 操作指南内容
+# MaaDuDuL 操作指南
 
 <cite>
 **本文档引用的文件**
 - [README.md](file://README.md)
 - [agent/main.py](file://agent/main.py)
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json)
-- [agent/config/maa_option.json](file://agent/config/maa_option.json)
+- [launcher/MaaDuDuL.py](file://launcher/MaaDuDuL.py)
+- [requirements.txt](file://requirements.txt)
+- [agent/preprocess/setup.py](file://agent/preprocess/setup.py)
+- [agent/customs/maahelper/tasker.py](file://agent/customs/maahelper/tasker.py)
+- [agent/devops/report.py](file://agent/devops/report.py)
 - [assets/config/maa_pi_config.json](file://assets/config/maa_pi_config.json)
-- [MFAAvalonia/Resource/descs/others/guide.md](file://MFAAvalonia/Resource/descs/others/guide.md)
-- [MFAAvalonia/Resource/descs/others/illustrate.md](file://MFAAvalonia/Resource/descs/others/illustrate.md)
-- [MFAAvalonia/Resource/descs/others/continuous_task.md](file://MFAAvalonia/Resource/descs/others/continuous_task.md)
-- [MFAAvalonia/Resource/descs/daily/start_game.md](file://MFAAvalonia/Resource/descs/daily/start_game.md)
-- [MFAAvalonia/Resource/descs/daily/claim_mail.md](file://MFAAvalonia/Resource/descs/daily/claim_mail.md)
-- [MFAAvalonia/Resource/descs/daily/claim_candy.md](file://MFAAvalonia/Resource/descs/daily/claim_candy.md)
-- [MFAAvalonia/Resource/descs/daily/purchase.md](file://MFAAvalonia/Resource/descs/daily/purchase.md)
-- [MFAAvalonia/Resource/descs/daily/saint_tour.md](file://MFAAvalonia/Resource/descs/daily/saint_tour.md)
+- [docsite/docs/10.用户手册/10.旅程的开始/10.下载与安装.md](file://docsite/docs/10.用户手册/10.旅程的开始/10.下载与安装.md)
+- [assets/resource/tasks/daily/启动游戏.json](file://assets/resource/tasks/daily/启动游戏.json)
+- [assets/resource/tasks/daily/关闭游戏.json](file://assets/resource/tasks/daily/关闭游戏.json)
+- [assets/resource/tasks/daily/说明.json](file://assets/resource/tasks/daily/说明.json)
+- [assets/resource/descs/daily/activity_daily.md](file://assets/resource/descs/daily/activity_daily.md)
 </cite>
 
 ## 目录
@@ -30,450 +30,411 @@
 
 ## 简介
 
-MaaDuDuL（MDDL - 嘟嘟脸小助手）是一个基于全新架构的《嘟嘟脸恶作剧》游戏自动化助手。该项目采用图像识别技术和模拟控制技术，通过MaaFramework与MFAAvalonia框架驱动，实现游戏内各项日常任务的自动化执行。
+MaaDuDuL（MDDL - 嘟嘟脸小助手）是一个基于全新架构的《嘟嘟脸恶作剧》小助手，采用图像技术和模拟控制技术，通过MaaFramework与MFAAvalonia强力驱动，实现自动化操作。该项目旨在解放双手，通过智能识别和自动化控制完成游戏中的重复性任务。
 
-### 主要功能特性
-
-- **登录签到系统**：支持启动登录和每日签到功能
-- **日常补给管理**：自动领取邮件、每日糖果和叶子互换
-- **采购管理系统**：处理免费礼包、新商品奖励和商店物资购买
-- **体力清理功能**：支持紫糖和红糖清理
-- **圣团巡礼自动化**：包括世界树贡品、大扫除和宠物礼物领取
-- **农场视察功能**：每日萝卜领取和派遣功能
-- **巅峰对决系统**：战斗宝石领取和PVP功能
-- **奖励领取管理**：每日/周奖励和通行证奖励
-- **活动相关功能**：每日通关和成就系统
-- **开荒辅助功能**：副本连续作战和章节奖励领取
+项目提供了完整的日常任务自动化功能，包括登录签到、日常补给、每日采购、清体力、圣团巡礼、农场视察、巅峰对决、奖励领取、活动相关和开荒相关等功能。
 
 ## 项目结构
 
-MaaDuDuL项目采用模块化架构设计，主要包含以下几个核心目录：
+MaaDuDuL项目采用模块化设计，主要包含以下几个核心部分：
 
 ```mermaid
 graph TB
 subgraph "项目根目录"
-A[README.md] --> B[MDDL功能说明]
-C[agent/] --> D[Agent主程序]
-E[MFAAvalonia/] --> F[GUI界面]
-G[assets/] --> H[资源配置]
-I[deps/] --> J[MaaFramework依赖]
-K[docsite/] --> L[文档站点]
-end
-subgraph "Agent模块"
-D --> M[main.py]
-D --> N[预处理模块]
-D --> O[自定义功能模块]
-end
-subgraph "GUI界面模块"
-F --> P[config/]
-F --> Q[Resource/]
-F --> R[libs/]
-F --> S[界面文件]
-end
-subgraph "资源配置模块"
-H --> T[config/]
-H --> U[presets/]
-H --> V[interface.json]
+A[agent/] --> A1[main.py]
+A --> A2[preprocess/]
+A --> A3[customs/]
+A --> A4[devops/]
+B[assets/] --> B1[config/]
+B --> B2[resource/]
+B --> B3[MaaCommonAssets/]
+C[launcher/] --> C1[MaaDuDuL.py]
+D[docsite/] --> D1[docs/]
+E[tools/] --> E1[configure.py]
+E --> E2[install.py]
+F[ci/] --> F1[merge_pipeline.py]
+G[public/] --> G1[logo.png]
+H[requirements.txt]
+H --> H1[maafw==5.8.1]
+H --> H2[requests==2.32.5]
 end
 ```
 
 **图表来源**
-- [README.md](file://README.md#L1-L117)
-- [agent/main.py](file://agent/main.py#L1-L78)
+- [agent/main.py:1-78](file://agent/main.py#L1-L78)
+- [launcher/MaaDuDuL.py:1-22](file://launcher/MaaDuDuL.py#L1-L22)
+- [requirements.txt:1-3](file://requirements.txt#L1-L3)
 
 **章节来源**
-- [README.md](file://README.md#L28-L66)
-- [agent/main.py](file://agent/main.py#L1-L78)
+- [README.md:1-117](file://README.md#L1-L117)
+- [agent/main.py:1-78](file://agent/main.py#L1-L78)
 
 ## 核心组件
 
-### Agent主程序组件
+### Agent 服务器
 
-Agent主程序是整个系统的控制中心，负责初始化环境、检查依赖并启动Agent服务器。其核心职责包括：
-
-- **环境初始化**：设置Python路径和编码环境
-- **依赖检查**：验证并安装必要的运行时依赖
-- **服务器启动**：启动Agent服务器并建立通信连接
-- **任务调度**：协调各个功能模块的执行
-
-### GUI界面组件
-
-MFAAvalonia提供了直观的图形用户界面，包含以下主要功能：
-
-- **任务配置面板**：用于配置和管理各种自动化任务
-- **实时视图**：显示游戏画面，便于监控执行状态
-- **日志系统**：提供详细的执行日志和错误信息
-- **设置管理**：支持多种配置选项和个性化设置
-
-### 资源配置组件
-
-系统采用分层资源配置机制，包括：
-
-- **全局配置**：存储基本的系统设置和偏好
-- **任务配置**：针对具体任务的参数设置
-- **界面配置**：控制GUI界面的布局和外观
-- **资源描述**：提供任务说明和使用指南
-
-**章节来源**
-- [agent/main.py](file://agent/main.py#L47-L77)
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L1-L545)
-
-## 架构概览
-
-MaaDuDuL采用分层架构设计，实现了清晰的职责分离和模块化组织：
-
-```mermaid
-graph TB
-subgraph "用户界面层"
-A[MFAAvalonia GUI]
-B[任务配置面板]
-C[实时视图]
-D[日志系统]
-end
-subgraph "业务逻辑层"
-E[Agent主程序]
-F[预处理模块]
-G[自定义功能模块]
-H[DevOps模块]
-end
-subgraph "数据访问层"
-I[资源配置]
-J[任务描述]
-K[界面资源]
-end
-subgraph "基础设施层"
-L[MaaFramework]
-M[模拟器控制]
-N[图像识别]
-O[系统调用]
-end
-A --> E
-B --> E
-C --> E
-D --> E
-E --> F
-E --> G
-E --> H
-F --> I
-G --> J
-H --> K
-I --> L
-J --> L
-K --> L
-L --> M
-L --> N
-L --> O
-```
-
-**图表来源**
-- [agent/main.py](file://agent/main.py#L49-L67)
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L459-L470)
-
-## 详细组件分析
-
-### Agent主程序组件分析
-
-Agent主程序作为系统的核心控制单元，采用了模块化的架构设计：
-
-```mermaid
-classDiagram
-class AgentMain {
-+PROJECT_ROOT : Path
-+main() : void
-+check_and_install_dependencies() : void
-+setup_encoding() : void
-}
-class AgentServer {
-+start_up(socket_id) : void
-+join() : void
-+shut_down() : void
-}
-class Toolkit {
-+init_option(path) : void
-}
-class Preprocess {
-+clear() : void
-+check_and_install_dependencies() : void
-}
-class DevOps {
-+punch_in() : void
-}
-AgentMain --> AgentServer : "启动"
-AgentMain --> Toolkit : "初始化"
-AgentMain --> Preprocess : "预处理"
-AgentMain --> DevOps : "运维"
-```
-
-**图表来源**
-- [agent/main.py](file://agent/main.py#L47-L77)
-
-#### Agent主程序执行流程
+Agent服务器是MaaDuDuL的核心执行引擎，负责初始化环境、检查依赖、启动Agent服务器并管理任务执行。
 
 ```mermaid
 sequenceDiagram
-participant User as 用户
-participant Agent as Agent主程序
-participant Toolkit as MaaFramework
-participant Server as Agent服务器
-participant DevOps as 运维模块
-User->>Agent : 启动程序
-Agent->>Agent : 检查依赖
-Agent->>Toolkit : 初始化选项
-Agent->>Server : 启动服务器
-Agent->>DevOps : 执行签到
-Agent->>Server : 等待结束
-Agent->>Server : 关闭服务器
-Agent-->>User : 程序结束
+participant Launcher as "启动器"
+participant Agent as "Agent服务器"
+participant Toolkit as "工具包"
+participant Server as "AgentServer"
+participant DevOps as "DevOps模块"
+Launcher->>Agent : 启动主程序
+Agent->>Agent : 检查依赖环境
+Agent->>Toolkit : 初始化工具包
+Toolkit->>Toolkit : 设置工作目录
+Agent->>Server : 启动Agent服务器
+Server->>Server : 等待客户端连接
+Agent->>DevOps : 发送打卡数据
+DevOps->>DevOps : 上报使用统计
+Agent->>Server : 等待服务结束
+Server->>Agent : 服务器关闭
 ```
 
 **图表来源**
-- [agent/main.py](file://agent/main.py#L55-L71)
+- [agent/main.py:47-78](file://agent/main.py#L47-L78)
+- [agent/devops/report.py:9-34](file://agent/devops/report.py#L9-L34)
 
-**章节来源**
-- [agent/main.py](file://agent/main.py#L1-L78)
+### 任务执行器
 
-### GUI界面组件分析
+任务执行器封装了MaaFramework的上下文对象，提供便捷的任务执行接口，包括节点运行、截图、点击等常用功能。
 
-MFAAvalonia GUI提供了完整的图形用户界面解决方案，包含以下核心功能模块：
+```mermaid
+classDiagram
+class Tasker {
++Context context
++MaaTasker tsk
++Controller ctl
++bool stopping
++__init__(context)
++run(entry, pipeline_override) TaskResult
++stop() void
++screenshot() ndarray
++click(x, y) Tasker
++swipe(x1, y1, x2, y2, duration) Tasker
++wait(seconds) Tasker
++get_last_node_name(task_detail) str
+}
+class Context {
++MaaTasker tasker
++Controller controller
++Resource resource
++run_task(entry, pipeline_override) TaskResult
+}
+class MaaTasker {
++post_stop() MaaTasker
++controller Controller
++resource Resource
++stopping bool
+}
+class Controller {
++post_screencap() Screencap
++post_click(x, y) Click
++post_swipe(x1, y1, x2, y2, duration) Swipe
++wait() Controller
++get() ndarray
+}
+Tasker --> Context : "封装"
+Context --> MaaTasker : "包含"
+MaaTasker --> Controller : "包含"
+```
 
-#### 任务配置面板
+**图表来源**
+- [agent/customs/maahelper/tasker.py:16-190](file://agent/customs/maahelper/tasker.py#L16-L190)
 
-任务配置面板是用户与系统交互的主要界面，支持以下功能：
+### 环境依赖管理
 
-- **任务列表管理**：显示所有可用任务并允许用户选择执行
-- **参数配置**：为每个任务提供详细的参数设置选项
-- **执行控制**：支持批量操作和单任务执行
-- **状态监控**：实时显示任务执行状态和结果
-
-#### 实时视图系统
-
-实时视图系统提供了游戏画面的实时显示功能：
-
-- **画面捕获**：从模拟器获取游戏画面
-- **显示控制**：支持调整刷新率和显示质量
-- **性能优化**：平衡显示质量和系统性能
-
-#### 日志管理系统
-
-日志系统提供了完整的执行监控和问题诊断能力：
-
-- **多级别日志**：支持不同详细程度的日志输出
-- **错误追踪**：记录执行过程中的错误和异常
-- **性能监控**：跟踪任务执行时间和资源使用情况
-
-**章节来源**
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L1-L545)
-- [MFAAvalonia/Resource/descs/others/guide.md](file://MFAAvalonia/Resource/descs/others/guide.md#L1-L36)
-
-### 资源配置组件分析
-
-资源配置系统采用了层次化的设计模式，确保了配置的灵活性和可维护性：
+系统具备自动化的环境依赖检测和安装功能，通过读取interface.json中的版本号与本地配置进行对比，决定是否需要执行pip安装操作。
 
 ```mermaid
 flowchart TD
-A[配置文件] --> B[全局配置]
-A --> C[任务配置]
-A --> D[界面配置]
-B --> E[系统设置]
-B --> F[用户偏好]
-B --> G[资源选项]
-C --> H[任务参数]
-C --> I[执行选项]
-C --> J[条件设置]
-D --> K[界面布局]
-D --> L[主题设置]
-D --> M[语言配置]
-E --> N[MaaFramework配置]
-F --> O[Agent选项]
-G --> P[资源描述]
+Start([启动检查]) --> ReadVersion["读取interface.json版本号"]
+ReadVersion --> ReadConfig["读取pip_config.json配置"]
+ReadConfig --> CompareVersion{"版本号是否一致?"}
+CompareVersion --> |是| CheckEnable{"是否启用自动安装?"}
+CompareVersion --> |否| InstallDeps["安装依赖包"]
+CheckEnable --> |是| InstallDeps
+CheckEnable --> |否| SkipInstall["跳过安装"]
+InstallDeps --> UpdateConfig["更新配置文件"]
+UpdateConfig --> Success["安装成功"]
+SkipInstall --> End([结束])
+Success --> End
 ```
 
 **图表来源**
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L1-L545)
-- [agent/config/maa_option.json](file://agent/config/maa_option.json#L1-L6)
-- [assets/config/maa_pi_config.json](file://assets/config/maa_pi_config.json#L1-L3)
+- [agent/preprocess/setup.py:204-230](file://agent/preprocess/setup.py#L204-L230)
 
 **章节来源**
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L459-L470)
-- [agent/config/maa_option.json](file://agent/config/maa_option.json#L1-L6)
+- [agent/main.py:47-78](file://agent/main.py#L47-L78)
+- [agent/customs/maahelper/tasker.py:16-190](file://agent/customs/maahelper/tasker.py#L16-L190)
+- [agent/preprocess/setup.py:204-230](file://agent/preprocess/setup.py#L204-L230)
+
+## 架构概览
+
+MaaDuDuL采用分层架构设计，各组件职责明确，耦合度低，便于维护和扩展。
+
+```mermaid
+graph TB
+subgraph "表现层"
+UI[MFAAvalonia界面]
+Launcher[启动器]
+end
+subgraph "业务逻辑层"
+Agent[Agent服务器]
+Tasker[任务执行器]
+Helper[辅助工具]
+end
+subgraph "数据访问层"
+Resource[资源管理]
+Config[配置管理]
+Storage[本地存储]
+end
+subgraph "外部服务"
+Framework[MaaFramework]
+OCR[OCR识别]
+Network[网络通信]
+end
+UI --> Agent
+Launcher --> Agent
+Agent --> Tasker
+Agent --> Helper
+Tasker --> Resource
+Helper --> Config
+Helper --> Storage
+Agent --> Framework
+Tasker --> OCR
+Agent --> Network
+```
+
+**图表来源**
+- [agent/main.py:47-78](file://agent/main.py#L47-L78)
+- [agent/customs/maahelper/tasker.py:16-190](file://agent/customs/maahelper/tasker.py#L16-L190)
+
+## 详细组件分析
+
+### 启动流程组件
+
+启动流程负责整个应用的初始化和配置，确保所有必要的组件都正确加载。
+
+```mermaid
+sequenceDiagram
+participant User as "用户"
+participant Launcher as "启动器"
+participant Agent as "Agent主程序"
+participant Preprocess as "预处理模块"
+participant Toolkit as "工具包"
+participant Server as "Agent服务器"
+User->>Launcher : 运行MaaDuDuL.py
+Launcher->>Launcher : 检测操作系统
+Launcher->>Agent : 启动Agent主程序
+Agent->>Preprocess : 清理调试文件
+Agent->>Toolkit : 初始化工具包
+Toolkit->>Toolkit : 设置工作目录
+Agent->>Server : 启动Agent服务器
+Server->>Server : 等待客户端连接
+Agent->>Agent : 等待服务结束
+Server->>Agent : 服务器关闭
+```
+
+**图表来源**
+- [launcher/MaaDuDuL.py:1-22](file://launcher/MaaDuDuL.py#L1-L22)
+- [agent/main.py:47-78](file://agent/main.py#L47-L78)
+
+### 任务管理系统
+
+系统提供了丰富的任务类型，每种任务都有详细的描述和配置选项。
+
+#### 日常任务类型
+
+| 任务类别 | 任务名称 | 功能描述 | 是否支持 |
+|---------|----------|----------|----------|
+| 登录签到 | 启动游戏 | 启动登录（模拟器/游戏） | ✅ |
+| 登录签到 | 关闭游戏 | 每日签到（打卡/月卡） | ✅ |
+| 日常补给 | 领取邮件 | 领取邮件 | ✅ |
+| 日常补给 | 每日糖果 | 每日糖果 | ✅ |
+| 日常补给 | 叶子互换 | 叶子互换 | ✅ |
+| 每日采购 | 免费礼包 | 免费礼包 | ✅ |
+| 每日采购 | 新礼包查阅奖励 | 新礼包查阅奖励 | ✅ |
+| 每日采购 | 商店物资购买 | 商店物资购买 | ✅ |
+| 清体力 | 清紫糖 | 清紫糖（副本） | ✅ |
+| 圣团巡礼 | 领取世界树贡品 | 领取世界树贡品 | ✅ |
+| 圣团巡礼 | 大扫除 | 大扫除（手动/女仆） | ✅ |
+| 农场视察 | 领取每日萝卜 | 领取每日萝卜 | ✅ |
+| 农场视察 | 每日派遣 | 每日派遣 | ✅ |
+| 峰对决 | 领取战斗宝石 | 领取战斗宝石 | ✅ |
+| 峰对决 | PVP | PVP | ✅ |
+| 领取奖励 | 每日/周奖励 | 每日/周奖励 | ✅ |
+| 领取奖励 | 通行证奖励 | 通行证奖励 | ✅ |
+| 活动相关 | 每日通关 | 每日通关 | ✅ |
+| 活动相关 | 每日成就 | 每日成就 | ✅ |
+| 开荒相关 | 副本连续作战 | 副本连续作战 | ✅ |
+| 开荒相关 | 领取章节奖励 | 领取章节奖励 | ✅ |
+
+**章节来源**
+- [assets/resource/tasks/daily/启动游戏.json:1-13](file://assets/resource/tasks/daily/启动游戏.json#L1-L13)
+- [assets/resource/tasks/daily/关闭游戏.json:1-12](file://assets/resource/tasks/daily/关闭游戏.json#L1-L12)
+- [assets/resource/tasks/daily/说明.json:1-12](file://assets/resource/tasks/daily/说明.json#L1-L12)
+- [assets/resource/descs/daily/activity_daily.md:1-13](file://assets/resource/descs/daily/activity_daily.md#L1-L13)
+
+### 数据上报组件
+
+系统集成了数据上报功能，用于收集使用统计信息，帮助开发者了解用户使用情况。
+
+```mermaid
+sequenceDiagram
+participant Agent as "Agent服务器"
+participant Report as "数据上报模块"
+participant Server as "统计服务器"
+Agent->>Report : 调用打卡函数
+Report->>Report : 创建请求数据
+Report->>Server : 发送POST请求
+Server->>Server : 处理请求
+Server-->>Report : 返回响应
+Report-->>Agent : 返回结果
+Note over Report,Server : 请求超时时间为3秒
+```
+
+**图表来源**
+- [agent/devops/report.py:9-34](file://agent/devops/report.py#L9-L34)
+
+**章节来源**
+- [agent/devops/report.py:9-34](file://agent/devops/report.py#L9-L34)
 
 ## 依赖关系分析
 
-MaaDuDuL项目建立了清晰的依赖关系网络，确保了模块间的松耦合和高内聚：
+项目的依赖关系清晰明确，主要依赖于MaaFramework和相关的Python库。
 
 ```mermaid
-graph LR
-subgraph "外部依赖"
-A[MaaFramework]
-B[MFAAvalonia]
-C[Python运行时]
-D[模拟器SDK]
+graph TB
+subgraph "核心依赖"
+A[maafw==5.8.1] --> A1[MaaFramework]
+B[requests==2.32.5] --> B1[HTTP请求]
 end
-subgraph "内部模块"
-E[Agent主程序]
-F[GUI界面]
-G[资源管理]
-H[任务引擎]
+subgraph "项目模块"
+C[agent/] --> C1[main.py]
+C --> C2[preprocess/]
+C --> C3[customs/]
+C --> C4[devops/]
+D[assets/] --> D1[config/]
+D --> D2[resource/]
+E[launcher/] --> E1[MaaDuDuL.py]
 end
-subgraph "系统接口"
-I[ADB控制]
-J[图像识别]
-K[文件系统]
-L[网络通信]
-end
-A --> E
-B --> F
+A --> C
+B --> C
+C --> D
 C --> E
-C --> F
-D --> I
-E --> H
-F --> H
-G --> H
-H --> I
-H --> J
-H --> K
-H --> L
 ```
 
 **图表来源**
-- [agent/main.py](file://agent/main.py#L49-L53)
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L459-L470)
-
-### 核心依赖关系
-
-系统的关键依赖关系包括：
-
-1. **MaaFramework依赖**：提供底层的图像识别和控制功能
-2. **MFAAvalonia依赖**：提供图形用户界面框架
-3. **模拟器依赖**：通过ADB协议控制游戏模拟器
-4. **Python生态依赖**：利用丰富的Python库生态系统
+- [requirements.txt:1-3](file://requirements.txt#L1-L3)
+- [agent/main.py:47-78](file://agent/main.py#L47-L78)
 
 **章节来源**
-- [agent/main.py](file://agent/main.py#L49-L53)
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L459-L470)
+- [requirements.txt:1-3](file://requirements.txt#L1-L3)
+- [agent/main.py:47-78](file://agent/main.py#L47-L78)
 
 ## 性能考虑
 
-### 系统性能优化
+### 系统要求
 
-MaaDuDuL在设计时充分考虑了性能优化，主要包括：
+MaaDuDuL对系统环境有明确的要求，以确保稳定运行：
 
-- **异步执行**：任务执行采用异步模式，避免阻塞主线程
-- **资源管理**：合理管理内存和CPU资源，防止过度消耗
-- **缓存机制**：对频繁使用的资源进行缓存，提高访问速度
-- **批处理优化**：支持任务批量执行，减少系统调用开销
+- **Windows**: 仅支持Windows 10和11，不支持Windows 7及更早版本
+- **macOS/Linux**: 支持X86_64和ARM64架构
+- **硬件要求**: 需要稳定的网络环境和足够的系统资源
+- **兼容性**: 不支持定制系统、微PE系统、HarmonyOS系统等
 
-### 内存使用优化
+### 网络配置
 
-系统采用了多种内存管理策略：
+系统支持多种下载方式，包括GitHub Release和Mirror酱加速服务：
 
-- **延迟加载**：按需加载资源，减少初始内存占用
-- **对象复用**：重用对象实例，降低垃圾回收压力
-- **资源池**：使用资源池管理临时对象
-- **及时释放**：确保不再使用的资源及时释放
+- **GitHub Release**: 最新版本下载，可能受网络影响
+- **Mirror酱**: 国内加速服务，提供稳定下载体验
+- **QQ群文件**: 通过群文件获取安装包
 
-### 网络通信优化
+### 环境准备
 
-对于需要网络通信的功能，系统实现了以下优化：
+首次使用前需要完成环境依赖的安装：
 
-- **连接复用**：复用网络连接，减少握手开销
-- **请求合并**：将多个小请求合并为大请求
-- **超时控制**：设置合理的超时时间，避免长时间等待
-- **错误重试**：实现智能的错误重试机制
+1. **管理员权限**: 需要以管理员身份运行依赖安装程序
+2. **网络环境**: 需要稳定的网络连接进行依赖下载
+3. **磁盘空间**: 需要足够的磁盘空间存储依赖包
+4. **系统权限**: 避免安装到需要UAC权限的系统目录
 
 ## 故障排除指南
 
-### 常见问题诊断
+### 常见问题及解决方案
 
-#### Agent启动失败
+#### 启动失败问题
 
-**问题症状**：Agent程序无法正常启动
+**问题**: Agent服务器启动失败
+**可能原因**:
+- 依赖包安装不完整
+- 系统权限不足
+- 网络连接问题
 
-**可能原因**：
-1. 依赖库未正确安装
-2. 环境变量配置错误
-3. 权限不足
-4. 端口被占用
+**解决方案**:
+1. 检查依赖包安装状态
+2. 以管理员身份重新运行
+3. 检查网络连接稳定性
 
-**解决方案**：
-1. 检查Python环境和依赖库
-2. 验证系统权限
-3. 确认端口可用性
-4. 查看详细错误日志
+#### 任务执行异常
 
-#### GUI界面显示异常
+**问题**: 任务执行过程中出现错误
+**可能原因**:
+- 图像识别失败
+- 界面元素位置变化
+- 网络延迟影响
 
-**问题症状**：GUI界面无法正常显示或显示异常
+**解决方案**:
+1. 检查OCR模型配置
+2. 更新界面识别参数
+3. 调整等待时间设置
 
-**可能原因**：
-1. 显示驱动问题
-2. 分辨率设置不当
-3. 字体渲染问题
-4. 界面资源缺失
+#### 环境依赖问题
 
-**解决方案**：
-1. 更新显示驱动
-2. 调整分辨率设置
-3. 检查字体文件
-4. 重新安装界面资源
+**问题**: 依赖包安装失败
+**可能原因**:
+- 网络连接不稳定
+- 镜像源不可用
+- Python环境问题
 
-#### 任务执行失败
+**解决方案**:
+1. 更换镜像源地址
+2. 检查Python版本兼容性
+3. 手动安装依赖包
 
-**问题症状**：自动化任务执行失败
+### 调试和诊断
 
-**可能原因**：
-1. 游戏界面变化
-2. 图像识别错误
-3. 控制命令失败
-4. 网络连接问题
+系统提供了完善的日志记录和错误处理机制：
 
-**解决方案**：
-1. 更新任务脚本
-2. 调整识别参数
-3. 检查控制设备
-4. 重置网络连接
-
-### 日志分析方法
-
-系统提供了详细的日志记录功能，有助于问题诊断：
-
-#### 日志级别说明
-
-- **INFO**：一般信息，用于跟踪程序执行流程
-- **WARNING**：警告信息，提示潜在问题
-- **ERROR**：错误信息，指示程序执行失败
-- **DEBUG**：调试信息，用于开发和高级用户
-
-#### 日志位置和格式
-
-- **Agent日志**：位于`debug/maa.log`
-- **GUI日志**：位于`MFAAvalonia/debug/maa.log`
-- **错误截图**：保存在`debug/on_error/`目录下
+1. **启动日志**: 记录Agent服务器启动过程
+2. **任务日志**: 记录每个任务的执行状态
+3. **错误日志**: 记录异常情况和错误信息
+4. **性能日志**: 记录执行时间和资源使用情况
 
 **章节来源**
-- [agent/main.py](file://agent/main.py#L69-L71)
-- [MFAAvalonia/config/config.json](file://MFAAvalonia/config/config.json#L459-L470)
+- [docsite/docs/10.用户手册/10.旅程的开始/10.下载与安装.md:10-26](file://docsite/docs/10.用户手册/10.旅程的开始/10.下载与安装.md#L10-L26)
+- [agent/main.py:69-71](file://agent/main.py#L69-L71)
 
 ## 结论
 
-MaaDuDuL项目展现了现代游戏自动化助手的完整架构设计。通过采用模块化设计、分层架构和清晰的依赖管理，系统实现了功能完整性与可维护性的良好平衡。
+MaaDuDuL是一个功能完善、架构清晰的自动化工具。通过模块化设计和分层架构，项目实现了高度的可维护性和可扩展性。系统提供了丰富的日常任务自动化功能，能够有效提升游戏体验，减少重复性劳动。
 
-### 主要优势
+项目的主要优势包括：
+- 完善的功能覆盖范围
+- 稳定的架构设计
+- 详细的文档支持
+- 良好的用户体验
+- 强大的扩展能力
 
-1. **架构清晰**：模块化设计使得系统易于理解和维护
-2. **功能完整**：覆盖了游戏的主要日常任务场景
-3. **用户友好**：提供直观的图形界面和详细的操作指导
-4. **扩展性强**：支持自定义功能和第三方扩展
-5. **稳定性好**：完善的错误处理和日志系统
+建议用户在使用过程中：
+1. 严格按照文档要求进行环境配置
+2. 定期更新依赖包和资源文件
+3. 根据实际需求调整任务配置
+4. 及时关注项目更新和维护通知
 
-### 发展方向
-
-随着项目的持续发展，建议重点关注以下方面：
-
-1. **性能优化**：进一步提升执行效率和资源利用率
-2. **功能扩展**：增加更多游戏场景的支持
-3. **用户体验**：持续改进界面设计和交互体验
-4. **稳定性增强**：提高系统在各种环境下的可靠性
-5. **社区建设**：加强开源社区的参与和贡献
-
-通过持续的改进和完善，MaaDuDuL有望成为游戏自动化领域的优秀解决方案，为用户提供更加便捷和高效的服务体验。
+通过合理使用MaaDuDuL，用户可以更好地享受游戏乐趣，同时避免繁琐的重复操作。
