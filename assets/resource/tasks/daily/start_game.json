@@ -5,7 +5,8 @@
 			"label": "🟢启动游戏",
 			"entry": "启动游戏_开始",
 			"default_check": true,
-			"description": "Resource/descs/daily/start_game.md"
+			"description": "Resource/descs/daily/start_game.md",
+			"group": ["continuous"]
 		}
 	],
 	"option": {}

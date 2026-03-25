@@ -4,6 +4,7 @@
 			"name": "领取新商品奖励",
 			"label": "📦领取新商品奖励",
 			"entry": "新礼包查看_开始",
+			"group": ["continuous"],
 			"option": ["领取新商品奖励-周期检查", "领取新商品奖励-商店"],
 			"description": "Resource/descs/daily/land_reclamation.md"
 		}

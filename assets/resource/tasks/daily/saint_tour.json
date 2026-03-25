@@ -6,6 +6,7 @@
 			"entry": "圣团巡礼_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/saint_tour.md",
+			"group": ["continuous"],
 			"option": ["圣团巡礼-收获世界树", "圣团巡礼-参观并打扫房间", "圣团巡礼-领取宠物礼物"]
 		}
 	],

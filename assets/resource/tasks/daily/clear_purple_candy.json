@@ -5,6 +5,7 @@
 			"label": "🪅清紫糖",
 			"entry": "清紫糖_开始",
 			"description": "Resource/descs/daily/clear_purple_candy.md",
+			"group": ["continuous"],
 			"option": ["清紫糖-周期检查", "清紫糖-克隆工厂", "清紫糖-副本"]
 		}
 	],

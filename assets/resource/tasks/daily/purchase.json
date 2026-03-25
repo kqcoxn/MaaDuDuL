@@ -6,6 +6,7 @@
 			"entry": "每日采购_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/purchase.md",
+			"group": ["continuous"],
 			"option": ["每日采购-周期免费礼包", "每日采购-商店采购"]
 		}
 	],

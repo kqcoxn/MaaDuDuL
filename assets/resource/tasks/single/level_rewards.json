@@ -4,8 +4,9 @@
 			"name": "领取关卡奖励",
 			"label": "🏆领取关卡奖励",
 			"entry": "领取关卡奖励_开始",
-			"option": ["领取关卡奖励-尝试全部"],
-			"description": "Resource/descs/single/level_rewards.md"
+			"description": "Resource/descs/single/level_rewards.md",
+			"group": ["independent"],
+			"option": ["领取关卡奖励-尝试全部"]
 		}
 	],
 	"option": {

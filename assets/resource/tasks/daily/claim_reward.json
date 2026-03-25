@@ -6,6 +6,7 @@
 			"entry": "领取奖励_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/claim_reward.md",
+			"group": ["continuous"],
 			"option": ["领取奖励-任务奖励", "领取奖励-通行证奖励"]
 		}
 	],

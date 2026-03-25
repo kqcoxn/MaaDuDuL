@@ -4,7 +4,8 @@
 			"name": " ——— 新增任务 ———",
 			"label": "——— 新增任务 ———",
 			"entry": "新增任务分隔符",
-			"description": "Resource/descs/others/new_task.md"
+			"description": "Resource/descs/others/new_task.md",
+			"group": ["others"]
 		}
 	],
 	"option": {}

@@ -36,6 +36,26 @@
 		"child_exec": "./python/python.exe",
 		"child_args": ["-u", "./agent/main.py"]
 	},
+	"group": [
+		{
+			"name": "continuous",
+			"label": "可连续任务/日常任务",
+			"description": "在完成当前任务后，可以连续执行下一个任务",
+			"default_expand": true
+		},
+		{
+			"name": "independent",
+			"label": "独立任务/开荒任务",
+			"description": "无法与其他任务自动串联执行",
+			"default_expand": true
+		},
+		{
+			"name": "others",
+			"label": "其他",
+			"description": "分割线等，一般无需添加",
+			"default_expand": true
+		}
+	],
 	"import": [
 		"resource/tasks/daily/illustrate.json",
 		"resource/tasks/daily/guide.json",

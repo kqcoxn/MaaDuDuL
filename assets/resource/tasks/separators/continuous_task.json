@@ -4,8 +4,9 @@
 			"name": " ——— 可连续任务 ———",
 			"label": "——— 可连续任务 ———",
 			"entry": "可连续任务分隔符",
-			"description": "Resource/descs/others/continuous_task.md"
-		}
+			"description": "Resource/descs/others/continuous_task.md",
+			"group": ["others"]
+		}	
 	],
 	"option": {}
 }

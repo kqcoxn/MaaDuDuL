@@ -4,7 +4,8 @@
 			"name": " ——— 独立任务 ———",
 			"label": "——— 独立任务 ———",
 			"entry": "独立任务分隔符",
-			"description": "Resource/descs/others/independent_task.md"
+			"description": "Resource/descs/others/independent_task.md",
+			"group": ["others"]
 		}
 	],
 	"option": {}

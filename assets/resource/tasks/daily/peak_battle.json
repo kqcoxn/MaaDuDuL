@@ -6,6 +6,7 @@
 			"entry": "巅峰对决_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/peak_battle.md",
+			"group": ["continuous"],
 			"option": ["巅峰对决-领取战斗宝石", "巅峰对决-竞技场对战"]
 		}
 	],

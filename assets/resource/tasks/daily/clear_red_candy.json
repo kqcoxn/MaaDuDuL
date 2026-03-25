@@ -5,6 +5,7 @@
 			"label": "🍭清红糖",
 			"entry": "清红糖_开始",
 			"description": "Resource/descs/daily/clear_red_candy.md",
+			"group": ["continuous"],
 			"option": ["清红糖-关卡区间"]
 		}
 	],
