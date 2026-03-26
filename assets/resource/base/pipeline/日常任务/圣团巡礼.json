@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "filename": "圣团巡礼",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774441226753,
+            "lastSyncTime": 1774525564220,
             "prefix": "圣团巡礼",
             "savedViewport": {
-                "x": -8931,
-                "y": -1886,
-                "zoom": 1.39
+                "x": -4408,
+                "y": -552,
+                "zoom": 0.72
             },
             "version": "v1.3.1"
         }
@@ -605,7 +605,7 @@
             }
         },
         "next": [
-            "圣团巡礼_冒险开始"
+            "圣团巡礼_宠物礼物开始"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -755,19 +755,6 @@
     "圣团巡礼_开始": {
         "$__mpe_code": {
             "position": {
-                "x": 6978,
-                "y": 1574
-            }
-        },
-        "next": [
-            "圣团巡礼_冒险开始"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
-    },
-    "圣团巡礼_开始1": {
-        "$__mpe_code": {
-            "position": {
                 "x": 6451,
                 "y": 588
             }
@@ -784,6 +771,19 @@
         },
         "next": [
             "圣团巡礼_进入圣团"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "圣团巡礼_开始1": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6978,
+                "y": 1574
+            }
+        },
+        "next": [
+            "圣团巡礼_冒险开始"
         ],
         "post_delay": 0,
         "pre_delay": 0
