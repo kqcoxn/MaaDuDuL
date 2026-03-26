@@ -125,7 +125,8 @@ class CheckActivityProgress(CustomAction):
             rh = RecoHelper(context).recognize("每日活动作战_识别进度")
             if rh.hit:
                 progress = (
-                    rh.best_result.text.replace("/20", "")
+                    rh.best_result.text.replace(" ", "")
+                    .replace("/20", "")
                     .replace("120", "")
                     .replace("020", "")
                     .replace(":20", "")
