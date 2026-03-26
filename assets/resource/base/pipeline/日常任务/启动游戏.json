@@ -4,14 +4,14 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "filename": "启动游戏",
             "isModifiedExternally": false,
-            "lastSyncTime": 1772255882791,
+            "lastSyncTime": 1774521543671,
             "prefix": "启动游戏",
             "savedViewport": {
-                "x": 182,
-                "y": 192,
-                "zoom": 0.62
+                "x": -441,
+                "y": -692,
+                "zoom": 0.95
             },
-            "version": "v1.2.0"
+            "version": "v1.3.1"
         }
     },
     "启动游戏_关闭公告": {
@@ -64,9 +64,11 @@
                     "main/close-bw.png",
                     "main/close-trans.png",
                     "main/close-orange.png",
-                    "main/close-lorange.png"
+                    "main/close-lorange.png",
+                    "main/close-pink.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
@@ -413,8 +415,8 @@
     "启动游戏_闲时捏脸": {
         "$__mpe_code": {
             "position": {
-                "x": 1451,
-                "y": 1383
+                "x": 1452,
+                "y": 1392
             }
         },
         "post_delay": 0,
