@@ -63,7 +63,6 @@
 		"resource/tasks/daily/start_game.json",
 		"resource/tasks/daily/claim_mail.json",
 		"resource/tasks/daily/leaf_change.json",
-		"resource/tasks/daily/claim_candy.json",
 		"resource/tasks/daily/purchase.json",
 		"resource/tasks/daily/saint_tour.json",
 		"resource/tasks/daily/activity_daily.json",

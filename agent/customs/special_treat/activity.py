@@ -1,6 +1,6 @@
 """活动相关的自定义动作模块。
 
-本模块提供活动界面导航和糖果领取等活动相关的自定义动作实现。
+本模块提供活动界面导航、活动日活等活动相关的自定义动作实现。
 """
 
 from maa.agent.agent_server import AgentServer
@@ -52,53 +52,6 @@ class EnterActivity(CustomAction):
             return False
         except Exception as e:
             return Prompter.error("进入指定活动", e)
-
-
-# ====================  糖果领取  ====================
-
-
-@AgentServer.custom_action("claim_candy")
-class ClaimCandy(CustomAction):
-    """领取糖果的自定义动作。
-
-    根据指定的时间段（早饭/晚饭）领取对应的糖果奖励。
-    """
-
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        """执行领取糖果的操作。
-
-        参数：
-            context：MaaFramework 上下文对象
-            argv：自定义动作参数，期望包含：
-                - time/t：领取时间段，可选值为 '早饭' 或 '晚饭'
-
-        返回：
-            bool：成功领取糖果返回 True，发生异常返回 False
-        """
-        try:
-            # 解析参数
-            args = ParamAnalyzer(argv)
-            time = args.get(["time", "t"])
-
-            roi = [509, 465, 278, 105] if time == "早饭" else [821, 464, 281, 108]
-            periodic_key = f"{time}糖果"
-            Prompter.log(f"领取{time}糖果")
-
-            # 运行领取糖果的 Pipeline 任务
-            Tasker(context).run(
-                "领取糖果_领取糖果开始",
-                {
-                    "领取糖果_周期检查": {"custom_action_param": f"k={periodic_key}"},
-                    "领取糖果_点击领取": {"roi": roi},
-                    "领取糖果_已领取": {"roi": roi},
-                    "领取糖果_已领取2": {"roi": roi},
-                    "领取糖果_周期记录": {"custom_action_param": f"k={periodic_key}"},
-                },
-            )
-
-            return True
-        except Exception as e:
-            return Prompter.error("领取糖果", e)
 
 
 # ====================  活动日活  ====================
