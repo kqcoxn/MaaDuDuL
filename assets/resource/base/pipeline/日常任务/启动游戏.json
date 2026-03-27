@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "filename": "启动游戏",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774617282511,
+            "lastSyncTime": 1774617349960,
             "prefix": "启动游戏",
             "savedViewport": {
-                "x": -383,
-                "y": 133,
-                "zoom": 1.15
+                "x": 188,
+                "y": 273,
+                "zoom": 0.57
             },
             "version": "v1.3.1"
         }
@@ -65,9 +65,11 @@
                     "main/close-trans.png",
                     "main/close-orange.png",
                     "main/close-lorange.png",
-                    "main/close-pink.png"
+                    "main/close-pink.png",
+                    "main/close-anno.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
