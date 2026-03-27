@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "filename": "每日活动作战",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774524172993,
+            "lastSyncTime": 1774617794207,
             "prefix": "每日活动作战",
             "savedViewport": {
-                "x": -6477,
-                "y": -385,
-                "zoom": 1.44
+                "x": -4403,
+                "y": -776,
+                "zoom": 0.92
             },
             "version": "v1.3.1"
         }
@@ -626,6 +626,7 @@
             "每日活动作战_检查领取时进度"
         ],
         "post_delay": 400,
+        "pre_delay": 400,
         "recognition": {
             "param": {
                 "expected": [
