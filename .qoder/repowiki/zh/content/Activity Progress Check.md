@@ -7,13 +7,18 @@
 - [reco_helper.py](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py)
 - [argv_analyzer.py](file://MFAAvalonia/agent/customs/maahelper/argv_analyzer.py)
 - [prompter.py](file://MFAAvalonia/agent/customs/utils/prompter.py)
-- [local_storage.py](file://MFAAvalonia/agent/customs/utils/local_storage.py)
 - [每日活动作战.json](file://MFAAvalonia/Resource/base/pipeline/日常任务/每日活动作战.json)
-- [领取糖果.json](file://MFAAvalonia/Resource/base/pipeline/日常任务/领取糖果.json)
-- [config.json](file://MFAAvalonia/config/config.json)
+- [configure.py](file://tools/configure.py)
 - [main.py](file://MFAAvalonia/agent/main.py)
 - [README.md](file://README.md)
 </cite>
+
+## 更新摘要
+**变更内容**
+- 增强了CheckActivityProgress自定义动作的OCR文本处理能力
+- 改进了活动进度识别的稳定性
+- 解决了不同格式进度文本的兼容性问题
+- 优化了OCR识别的预期模式匹配
 
 ## 目录
 1. [简介](#简介)
@@ -31,6 +36,8 @@
 MaaDuDuL 是一个基于 MaaFramework 和 MFAAvalonia 的自动化脚本系统，专门用于《嘟嘟脸恶作剧》游戏的日常任务自动化。本文档重点关注"活动进度检查"功能，这是一个关键的自定义动作模块，能够智能识别游戏中的活动进度并动态调整后续任务参数。
 
 该系统通过深度集成 OCR 识别、模板匹配和自定义动作执行，实现了高度智能化的游戏自动化。活动进度检查功能是整个系统的核心组件之一，它能够实时监控游戏状态，为其他任务提供准确的数据支持。
+
+**更新** 增强了OCR文本处理能力，改进了进度识别的稳定性和兼容性
 
 ## 项目结构
 
@@ -69,12 +76,12 @@ MaaFramework --> Control
 ```
 
 **图表来源**
-- [main.py](file://MFAAvalonia/agent/main.py#L47-L77)
-- [config.json](file://MFAAvalonia/config/config.json#L1-L545)
+- [main.py:47-77](file://MFAAvalonia/agent/main.py#L47-L77)
+- [configure.py:8-23](file://tools/configure.py#L8-L23)
 
 **章节来源**
-- [README.md](file://README.md#L1-L117)
-- [main.py](file://MFAAvalonia/agent/main.py#L1-L77)
+- [README.md:1-117](file://README.md#L1-L117)
+- [main.py:1-77](file://MFAAvalonia/agent/main.py#L1-L77)
 
 ## 核心组件
 
@@ -109,8 +116,8 @@ class Tasker {
 }
 class RecoHelper {
 +recognize(node_name) RecoHelper
-+click(offset) RecoHelper
-+concat() string
++hit bool
++best_result RecognitionResult
 }
 CheckActivityProgress --> Tasker : "使用"
 CheckActivityProgress --> RecoHelper : "使用"
@@ -119,12 +126,12 @@ ClaimCandy --> Tasker : "使用"
 ```
 
 **图表来源**
-- [activity.py](file://MFAAvalonia/agent/customs/special_treat/activity.py#L107-L145)
-- [tasker.py](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L16-L190)
-- [reco_helper.py](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L17-L256)
+- [activity.py:107-145](file://MFAAvalonia/agent/customs/special_treat/activity.py#L107-L145)
+- [tasker.py:16-190](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L16-L190)
+- [reco_helper.py:17-256](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L17-L256)
 
 **章节来源**
-- [activity.py](file://MFAAvalonia/agent/customs/special_treat/activity.py#L1-L145)
+- [activity.py:1-145](file://MFAAvalonia/agent/customs/special_treat/activity.py#L1-L145)
 
 ## 架构概览
 
@@ -149,8 +156,8 @@ Agent-->>UI : 返回执行结果
 ```
 
 **图表来源**
-- [activity.py](file://MFAAvalonia/agent/customs/special_treat/activity.py#L114-L145)
-- [tasker.py](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L60-L123)
+- [activity.py:114-145](file://MFAAvalonia/agent/customs/special_treat/activity.py#L114-L145)
+- [tasker.py:60-123](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L60-L123)
 
 ### 数据流分析
 
@@ -175,10 +182,10 @@ CompleteTask --> End
 ```
 
 **图表来源**
-- [activity.py](file://MFAAvalonia/agent/customs/special_treat/activity.py#L124-L142)
+- [activity.py:124-142](file://MFAAvalonia/agent/customs/special_treat/activity.py#L124-L142)
 
 **章节来源**
-- [每日活动作战.json](file://MFAAvalonia/Resource/base/pipeline/日常任务/每日活动作战.json#L259-L276)
+- [每日活动作战.json:259-276](file://MFAAvalonia/Resource/base/pipeline/日常任务/每日活动作战.json#L259-L276)
 
 ## 详细组件分析
 
@@ -213,18 +220,22 @@ CheckActivityProgress --> RecoHelper : "进度识别"
 ```
 
 **图表来源**
-- [activity.py](file://MFAAvalonia/agent/customs/special_treat/activity.py#L107-L145)
-- [prompter.py](file://MFAAvalonia/agent/customs/utils/prompter.py#L16-L55)
-- [reco_helper.py](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L17-L256)
+- [activity.py:107-145](file://MFAAvalonia/agent/customs/special_treat/activity.py#L107-L145)
+- [prompter.py:16-55](file://MFAAvalonia/agent/customs/utils/prompter.py#L16-L55)
+- [reco_helper.py:17-256](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L17-L256)
 
 #### 进度识别算法
+
+**更新** OCR文本处理能力得到显著增强，改进了识别稳定性和兼容性
 
 进度识别过程包含以下步骤：
 
 1. **OCR 识别** - 使用预定义的 ROI 区域进行文本识别
-2. **文本清理** - 移除特定字符如 "120"、"/20"、"020"
+2. **文本清理** - 移除特定字符如 "120"、"/20"、"020"、":20"、"：20"
 3. **数值提取** - 将清理后的文本转换为整数
 4. **剩余计算** - 20 - 已完成进度
+
+**更新** 文本清理算法现在支持更多格式的进度文本，包括全角冒号"：20"和各种数字格式"120"、"020"
 
 #### 参数动态调整
 
@@ -237,7 +248,7 @@ context.override_pipeline({
 ```
 
 **章节来源**
-- [activity.py](file://MFAAvalonia/agent/customs/special_treat/activity.py#L124-L142)
+- [activity.py:124-142](file://MFAAvalonia/agent/customs/special_treat/activity.py#L124-L142)
 
 ### 辅助工具类
 
@@ -273,7 +284,7 @@ MaaTasker --> Controller : "包含"
 ```
 
 **图表来源**
-- [tasker.py](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L16-L190)
+- [tasker.py:16-190](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L16-L190)
 
 #### RecoHelper 类
 
@@ -305,15 +316,17 @@ RecoHelper --> RecognitionResult : "处理"
 ```
 
 **图表来源**
-- [reco_helper.py](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L17-L256)
+- [reco_helper.py:17-256](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L17-L256)
 
 **章节来源**
-- [tasker.py](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L1-L190)
-- [reco_helper.py](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L1-L256)
+- [tasker.py:1-190](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L1-L190)
+- [reco_helper.py:1-256](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L1-L256)
 
 ### 管道配置集成
 
 #### 活动任务管道
+
+**更新** OCR识别配置现在支持更多格式的预期文本模式
 
 每日活动作战任务的管道配置展示了活动进度检查的完整工作流程：
 
@@ -338,10 +351,12 @@ end
 ```
 
 **图表来源**
-- [每日活动作战.json](file://MFAAvalonia/Resource/base/pipeline/日常任务/每日活动作战.json#L259-L305)
+- [每日活动作战.json:259-305](file://MFAAvalonia/Resource/base/pipeline/日常任务/每日活动作战.json#L259-L305)
+
+**更新** OCR识别节点现在配置了多种预期文本模式，包括"/20"、"120"、"020"、"：20"、":20"，提高了识别的兼容性
 
 **章节来源**
-- [每日活动作战.json](file://MFAAvalonia/Resource/base/pipeline/日常任务/每日活动作战.json#L1-L504)
+- [每日活动作战.json:477-502](file://MFAAvalonia/Resource/base/pipeline/日常任务/每日活动作战.json#L477-L502)
 
 ## 依赖关系分析
 
@@ -380,9 +395,9 @@ PipelineJSON --> Activity
 ```
 
 **图表来源**
-- [activity.py](file://MFAAvalonia/agent/customs/special_treat/activity.py#L1-L145)
-- [tasker.py](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L1-L190)
-- [reco_helper.py](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L1-L256)
+- [activity.py:1-145](file://MFAAvalonia/agent/customs/special_treat/activity.py#L1-L145)
+- [tasker.py:1-190](file://MFAAvalonia/agent/customs/maahelper/tasker.py#L1-L190)
+- [reco_helper.py:1-256](file://MFAAvalonia/agent/customs/maahelper/reco_helper.py#L1-L256)
 
 ### 关键依赖关系
 
@@ -392,8 +407,8 @@ PipelineJSON --> Activity
 4. **日志记录** - 通过 Prompter 统一的日志管理系统
 
 **章节来源**
-- [argv_analyzer.py](file://MFAAvalonia/agent/customs/maahelper/argv_analyzer.py#L1-L159)
-- [prompter.py](file://MFAAvalonia/agent/customs/utils/prompter.py#L1-L55)
+- [argv_analyzer.py:1-159](file://MFAAvalonia/agent/customs/maahelper/argv_analyzer.py#L1-L159)
+- [prompter.py:1-55](file://MFAAvalonia/agent/customs/utils/prompter.py#L1-L55)
 
 ## 性能考虑
 
@@ -411,6 +426,8 @@ PipelineJSON --> Activity
 - **内存使用** - 单个任务执行内存占用不超过 100MB
 - **CPU 利用率** - 识别过程 CPU 利用率保持在 30% 以下
 
+**更新** OCR文本处理优化提升了识别稳定性，减少了误识别率
+
 ## 故障排除指南
 
 ### 常见问题及解决方案
@@ -422,11 +439,13 @@ PipelineJSON --> Activity
 1. OCR 识别区域不正确
 2. 游戏界面变化导致 ROI 区域失效
 3. 网络延迟影响识别准确性
+4. **更新** 新增的进度文本格式未被识别
 
 **解决方案**：
 1. 检查 `每日活动作战.json` 中的 ROI 配置
 2. 更新识别模板文件
 3. 增加适当的等待时间
+4. **更新** 检查OCR预期模式配置，确保支持最新的进度文本格式
 
 #### 参数解析错误
 
@@ -451,8 +470,8 @@ PipelineJSON --> Activity
 2. 确认 Python 环境配置
 
 **章节来源**
-- [prompter.py](file://MFAAvalonia/agent/customs/utils/prompter.py#L34-L55)
-- [setup.py](file://MFAAvalonia/agent/preprocess/setup.py#L204-L230)
+- [prompter.py:34-55](file://MFAAvalonia/agent/customs/utils/prompter.py#L34-L55)
+- [configure.py:8-23](file://tools/configure.py#L8-L23)
 
 ## 结论
 
@@ -462,5 +481,7 @@ PipelineJSON --> Activity
 2. **动态适应** - 根据识别结果动态调整任务参数
 3. **模块化设计** - 清晰的模块划分便于维护和扩展
 4. **错误处理** - 完善的异常处理机制确保系统稳定性
+
+**更新** 最新版本显著增强了OCR文本处理能力，改进了活动进度识别的稳定性和兼容性，能够处理更多格式的进度文本，包括全角字符和各种数字格式。
 
 该系统为游戏自动化提供了一个优秀的参考实现，其设计理念和架构模式可以应用于其他类似的自动化场景中。随着技术的不断发展，该系统还有很大的改进空间，特别是在识别精度提升、性能优化和用户体验改善等方面。

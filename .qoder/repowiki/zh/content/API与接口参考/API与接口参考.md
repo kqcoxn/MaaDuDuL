@@ -1,7 +1,7 @@
 # API与接口参考
 
 <cite>
-**Referenced Files in This Document**   
+**本文引用的文件**
 - [interface.json](file://assets/interface.json)
 - [main.py](file://agent/main.py)
 - [MaaDuDuL.py](file://launcher/MaaDuDuL.py)
@@ -11,6 +11,8 @@
 - [maafw-guide/3.1-任务流水线协议.md](file://instructions/maafw-guide/3.1-任务流水线协议.md)
 - [run_agent.py](file://dev/run_agent.py)
 - [maa_pi_config.json](file://assets/config/maa_pi_config.json)
+- [versions.json](file://.github/versions.json)
+- [package.json](file://package.json)
 </cite>
 
 ## 目录
@@ -26,8 +28,8 @@
 
 MaaDuDuL 是基于 MaaFramework 构建的自动化助手，通过 ProjectInterfaceV2 协议对外暴露所有接口与协议。本文档详细描述了集成接口的调用方式、参数定义与返回值格式，包括同步/异步调用模式。文档还解析了回调协议的消息结构、事件类型与处理机制，说明如何监听任务状态变更。结合 interface.json 中的实际配置，说明接口配置项的含义与使用场景。
 
-**Section sources**
-- [README.md](file://README.md#L1-L118)
+**章节来源**
+- [README.md:1-117](file://README.md#L1-L117)
 
 ## ProjectInterfaceV2协议
 
@@ -41,10 +43,10 @@ interface.json 文件包含项目的基本信息，如项目名称、版本号�
 {
     "interface_version": 2,
     "name": "MaaDuDuL",
-    "title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.1.2 - MFAA | 游戏版本：黄油大崩溃",
+    "title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.2.1 - MFAA | 游戏版本：电子羊的永恒之梦",
     "icon": "logo.png",
     "description": "嘟嘟脸小助手",
-    "version": "v0.1.2",
+    "version": "v0.2.1",
     "welcome": "欢迎使用 MDDL!",
     "contact": "QQ群: 926874985",
     "license": "LICENSE",
@@ -54,8 +56,10 @@ interface.json 文件包含项目的基本信息，如项目名称、版本号�
 }
 ```
 
-**Diagram sources**
-- [interface.json](file://assets/interface.json#L1-L14)
+**更新** 版本号已从 v0.1.2 更新到 v0.2.1，标题中也反映了新的版本信息和游戏版本
+
+**图表来源**
+- [interface.json:1-14](file://assets/interface.json#L1-L14)
 
 ### 控制器配置
 
@@ -79,8 +83,8 @@ interface.json 文件包含项目的基本信息，如项目名称、版本号�
 ]
 ```
 
-**Diagram sources**
-- [interface.json](file://assets/interface.json#L14-L27)
+**图表来源**
+- [interface.json:14-27](file://assets/interface.json#L14-L27)
 
 ### 资源配置
 
@@ -95,64 +99,119 @@ interface.json 文件包含项目的基本信息，如项目名称、版本号�
 ]
 ```
 
-**Diagram sources**
-- [interface.json](file://assets/interface.json#L29-L33)
+**图表来源**
+- [interface.json:29-33](file://assets/interface.json#L29-L33)
 
 ### 任务配置
 
 任务配置定义了可执行任务的信息，包括任务入口、默认选中状态和描述。
 
 ```json
-"task": [
-    {
-        "name": "启动游戏",
-        "label": "启动游戏",
-        "entry": "启动游戏_开始",
-        "default_check": true,
-        "description": "Resource/descs/daily/start_game.md"
-    },
-    {
-        "name": "领取邮件",
-        "label": "领取邮件",
-        "entry": "领取邮件_开始",
-        "default_check": true,
-        "description": "Resource/descs/daily/claim_mail.md",
-        "option": ["领取邮件-周期检查"]
-    }
-]
+"task": [],
+"option": {}
 ```
 
-**Diagram sources**
-- [interface.json](file://assets/interface.json#L39-L71)
+**更新** 任务配置为空数组，表示任务配置现在通过导入的外部文件定义
+
+**图表来源**
+- [interface.json:83-84](file://assets/interface.json#L83-L84)
 
 ### 选项配置
 
 选项配置定义了配置项的信息，包括类型、标签和描述。
 
 ```json
-"option": {
-    "领取邮件-周期检查": {
-        "type": "switch",
-        "label": "每日仅检查一次邮箱",
-        "cases": [
-            {
-                "name": "No",
-                "pipeline_override": {
-                    "领取邮件_周期检查": {
-                        "action": "DoNothing"
-                    }
-                }
-            },
-            {
-                "name": "Yes"
-            }
-        ]
+"option": {}
+```
+
+**更新** 选项配置为空对象，表示选项配置现在通过导入的外部文件定义
+
+**图表来源**
+- [interface.json](file://assets/interface.json#L84)
+
+### 导入配置
+
+导入配置定义了从外部文件导入的任务和选项。
+
+```json
+"import": [
+    "resource/tasks/daily/illustrate.json",
+    "resource/tasks/daily/guide.json",
+    "resource/tasks/separators/continuous_task.json",
+    "resource/tasks/daily/start_game.json",
+    "resource/tasks/daily/claim_mail.json",
+    "resource/tasks/daily/leaf_change.json",
+    "resource/tasks/daily/claim_candy.json",
+    "resource/tasks/daily/purchase.json",
+    "resource/tasks/daily/saint_tour.json",
+    "resource/tasks/daily/activity_daily.json",
+    "resource/tasks/daily/clear_purple_candy.json",
+    "resource/tasks/daily/clear_red_candy.json",
+    "resource/tasks/daily/peak_battle.json",
+    "resource/tasks/daily/farm.json",
+    "resource/tasks/daily/claim_reward.json",
+    "resource/tasks/daily/claim_new_goods.json",
+    "resource/tasks/daily/close_game.json",
+    "resource/tasks/separators/independent_task.json",
+    "resource/tasks/single/quick_plot.json",
+    "resource/tasks/single/continuous_battle.json",
+    "resource/tasks/single/level_rewards.json",
+    "resource/tasks/separators/new_task.json"
+]
+```
+
+**更新** 导入了更多任务配置文件，包括日常任务、独立任务和单次任务
+
+**图表来源**
+- [interface.json:59-82](file://assets/interface.json#L59-L82)
+
+### 分组配置
+
+分组配置定义了任务的分类组织方式。
+
+```json
+"group": [
+    {
+        "name": "continuous",
+        "label": "可连续任务/日常任务",
+        "description": "在完成当前任务后，可以连续执行下一个任务",
+        "default_expand": true
+    },
+    {
+        "name": "independent",
+        "label": "独立任务/开荒任务",
+        "description": "无法与其他任务自动串联执行",
+        "default_expand": true
+    },
+    {
+        "name": "others",
+        "label": "其他",
+        "description": "分割线等，一般无需添加",
+        "default_expand": true
     }
+]
+```
+
+**更新** 添加了分组配置，用于更好地组织和展示任务
+
+**图表来源**
+- [interface.json:39-57](file://assets/interface.json#L39-L57)
+
+### Agent配置
+
+Agent配置定义了Python代理程序的执行方式。
+
+```json
+"agent": {
+    "child_exec": "./python/python.exe",
+    "child_args": ["-u", "./agent/main.py"]
 }
 ```
 
-**Diagram sources**
-- [interface.json](file://assets/interface.json#L164-L181)
+**更新** 添加了Agent配置，用于指定Python代理程序的执行路径和参数
+
+**图表来源**
+- [interface.json:35-38](file://assets/interface.json#L35-L38)
 
 ## 集成接口
 
@@ -476,8 +535,8 @@ MaaFramework 提供了多种集成接口，用于创建和管理资源、控制�
 **返回值**:
 - `MaaActionId`: 操作 ID
 
-**Section sources**
-- [maafw-guide/2.2-集成接口一览.md](file://instructions/maafw-guide/2.2-集成接口一览.md#L1-L1015)
+**章节来源**
+- [maafw-guide/2.2-集成接口一览.md:1-1015](file://instructions/maafw-guide/2.2-集成接口一览.md#L1-L1015)
 
 ## 回调协议
 
@@ -568,8 +627,8 @@ typedef void(MAA_CALL* MaaEventCallback)(void* handle, const char* message, cons
 - `Node.ActionNode.Succeeded`: 动作节点执行成功时发送。
 - `Node.ActionNode.Failed`: 动作节点执行失败时发送。
 
-**Section sources**
-- [maafw-guide/2.3-回调协议.md](file://instructions/maafw-guide/2.3-回调协议.md#L1-L365)
+**章节来源**
+- [maafw-guide/2.3-回调协议.md:1-365](file://instructions/maafw-guide/2.3-回调协议.md#L1-L365)
 
 ## 接口配置
 
@@ -581,14 +640,16 @@ interface.json 文件是 ProjectInterfaceV2 协议的核心，定义了项目的
 
 - `interface_version`: 接口版本号，当前为 2。
 - `name`: 项目唯一标识符。
-- `title`: 窗口标题。
+- `title`: 窗口标题，包含版本信息和游戏版本。
 - `icon`: 应用图标文件路径。
 - `description`: 项目描述信息。
-- `version`: 项目版本号。
+- `version`: 项目版本号，当前为 `v0.2.1`。
 - `contact`: 联系方式信息。
 - `license`: 项目许可证信息。
 - `welcome`: 欢迎消息。
 - `github`: 项目 GitHub 仓库地址。
+
+**更新** 版本号已更新到 v0.2.1，标题中反映了新的版本信息
 
 #### 控制器配置
 
@@ -621,8 +682,20 @@ interface.json 文件是 ProjectInterfaceV2 协议的核心，定义了项目的
 - `inputs`: 仅在 `type` 为 `"input"` 时使用，输入配置，为一个对象数组，定义用户可输入的字段。
 - `pipeline_override`: 当配置项为 `"input"` 类型时使用，作为用户输入内容的替换模板。
 
-**Section sources**
-- [maafw-guide/3.3-ProjectInterfaceV2协议.md](file://instructions/maafw-guide/3.3-ProjectInterfaceV2协议.md#L1-L637)
+#### 导入配置
+
+- `import`: 外部文件导入列表，包含任务配置文件的路径。
+
+#### 分组配置
+
+- `group`: 任务分组配置，包含连续任务、独立任务和其他任务的分组信息。
+
+#### Agent配置
+
+- `agent`: Python代理程序配置，包含执行路径和参数。
+
+**章节来源**
+- [maafw-guide/3.3-ProjectInterfaceV2协议.md:1-637](file://instructions/maafw-guide/3.3-ProjectInterfaceV2协议.md#L1-L637)
 
 ## 客户端集成最佳实践
 
@@ -707,8 +780,8 @@ interface.json 文件是 ProjectInterfaceV2 协议的核心，定义了项目的
    - 根据消息类型更新 UI 显示任务状态。
    - 使用 `details` 中的数据更新识别结果显示。
 
-**Section sources**
-- [maafw-guide/3.3-ProjectInterfaceV2协议.md](file://instructions/maafw-guide/3.3-ProjectInterfaceV2协议.md#L570-L633)
+**章节来源**
+- [maafw-guide/3.3-ProjectInterfaceV2协议.md:570-633](file://instructions/maafw-guide/3.3-ProjectInterfaceV2协议.md#L570-L633)
 
 ## 生产环境注意事项
 
@@ -750,6 +823,17 @@ interface.json 文件是 ProjectInterfaceV2 协议的核心，定义了项目的
    - 在发布新版本前进行全面的测试，确保功能正常。
    - 使用自动化测试工具提高测试效率。
 
-**Section sources**
-- [README.md](file://README.md#L89-L93)
-- [maafw-guide/3.3-ProjectInterfaceV2协议.md](file://instructions/maafw-guide/3.3-ProjectInterfaceV2协议.md#L75-L77)
+### 版本管理
+
+**更新** 新版本 v0.2.1 包含以下重要变更：
+- 版本号从 v0.1.2 更新到 v0.2.1
+- 标题中反映了新的版本信息和游戏版本
+- 添加了分组配置用于更好的任务组织
+- 添加了Agent配置用于Python代理程序
+- 导入了更多任务配置文件，扩展了功能范围
+
+**章节来源**
+- [README.md:89-93](file://README.md#L89-L93)
+- [maafw-guide/3.3-ProjectInterfaceV2协议.md:75-77](file://instructions/maafw-guide/3.3-ProjectInterfaceV2协议.md#L75-L77)
+- [package.json](file://package.json#L8)
+- [.github/versions.json:1-5](file://.github/versions.json#L1-L5)
