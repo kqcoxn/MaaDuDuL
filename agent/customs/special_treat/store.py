@@ -7,6 +7,8 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
 
+import time
+
 from agent.customs.utils import Prompter
 from agent.customs.maahelper import ParamAnalyzer, Tasker
 
@@ -93,3 +95,41 @@ class Buy(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("购买指定商品", e)
+
+
+@AgentServer.custom_action("special_buy")
+class SpecialBuy(CustomAction):
+    """特殊商品购买自定义动作类。
+
+    处理商店中特殊商品的批量购买操作，按固定网格位置依次购买。
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行特殊商品批量购买操作。
+
+        Args:
+            context：MaaFW 上下文对象
+            argv：自定义动作参数（本动作无需额外参数）
+
+        Returns:
+            bool：购买操作是否成功
+        """
+        try:
+            # 按 2行3列 网格遍历购买商品
+            for i in range(2):  # 行
+                for j in range(3):  # 列
+                    Prompter.log(f"购买第 {i+1} 行 {j+1} 列商品")
+                    Tasker(context).run(
+                        "每日采购_购买商品",
+                        {
+                            "每日采购_查看商品详情": {
+                                "recognition": "DirectHit",
+                                "target": [660 + j * 224, 174 + i * 220, 1, 1],
+                            },
+                        },
+                    )
+                    time.sleep(0.4)
+
+            return True
+        except Exception as e:
+            return Prompter.error("购买特殊商品", e)
