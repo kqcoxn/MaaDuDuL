@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "filename": "启动游戏",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774521543671,
+            "lastSyncTime": 1774617282511,
             "prefix": "启动游戏",
             "savedViewport": {
-                "x": -441,
-                "y": -692,
-                "zoom": 0.95
+                "x": -383,
+                "y": 133,
+                "zoom": 1.15
             },
             "version": "v1.3.1"
         }
@@ -109,7 +109,8 @@
             "[JumpBack]启动游戏_领取礼物",
             "[JumpBack]启动游戏_点击屏幕继续",
             "[JumpBack]启动游戏_关闭面板",
-            "[JumpBack]启动游戏_闲时捏脸"
+            "[JumpBack]启动游戏_闲时捏脸",
+            "[JumpBack]启动游戏_更新结束"
         ],
         "post_delay": 0,
         "pre_delay": 0,
@@ -393,7 +394,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 856,
-                "y": 71
+                "y": 65
             }
         },
         "focus": {
