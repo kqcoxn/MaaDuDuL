@@ -4,7 +4,7 @@
 			"name": "领取糖果",
 			"label": "🍬领取每日糖果",
 			"entry": "领取糖果_开始",
-			"default_check": true,
+			"default_check": false,
 			"description": "Resource/descs/daily/claim_candy.md",
 			"group": ["continuous"],
 			"option": ["领取糖果-周期检查"]
