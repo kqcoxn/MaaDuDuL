@@ -236,6 +236,7 @@ class SelectGoldLevel(CustomAction):
             捕获所有异常并通过 Prompter.error 输出错误信息
         """
         try:
+            # 解析参数获取关卡编号
             args = ParamAnalyzer(argv)
             level: int = args.get(["level", "l"])
 
@@ -243,21 +244,37 @@ class SelectGoldLevel(CustomAction):
             if type(level) is not int:
                 level = int(level)
 
-            if level < 13:
-                Prompter.error("金币大作战仅支持 13-20 关")
-                return False
-            elif level < 19:
-                Tasker(context).run("清紫糖_金币右上角")
-            else:
-                Tasker(context).run("清紫糖_金币右下角")
+            # 获取当前楼层
+            rh = RecoHelper(context).recognize("清紫糖_检测金币B1入口")
+            current_floor = 2 if len(rh.filtered_results) > 0 else 1
+            Prompter.log(f"当前楼层：{current_floor}")
 
+            # 进入对应区域
+            if level < 13:
+                Prompter.error("金币大作战仅支持 13-24 关")
+            elif level < 21:
+                if current_floor == 2:
+                    rh.click()
+                    return False
+                if level < 19:
+                    Tasker(context).run("清紫糖_金币右上角")
+                else:
+                    Tasker(context).run("清紫糖_金币右下角")
+            elif level < 25:
+                if current_floor == 1:
+                    Tasker(context).run("清紫糖_金币右下角")
+                    RecoHelper(context).recognize("清紫糖_检测金币B2入口").click()
+            else:
+                Prompter.error("金币大作战仅支持 13-24 关")
+
+            # 选择关卡
             Tasker(context).run(
                 "清紫糖_查找关卡开始", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
             )
 
             return True
         except Exception as e:
-            return Prompter.error("选择副本关卡", e)
+            return Prompter.error("选择金币大作战关卡", e)
 
 
 # ============== 清红糖 ==============
