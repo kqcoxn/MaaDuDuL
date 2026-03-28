@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\游乐场.json",
             "filename": "游乐场",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774684123898,
+            "lastSyncTime": 1774684828787,
             "prefix": "游乐场",
             "savedViewport": {
-                "x": -4170,
-                "y": 673,
-                "zoom": 1.01
+                "x": -3090,
+                "y": 895,
+                "zoom": 0.77
             },
             "version": "v1.3.1"
         }
@@ -25,8 +25,8 @@
     "游乐场_今日已完成": {
         "$__mpe_code": {
             "position": {
-                "x": 4996,
-                "y": -1012
+                "x": 5000,
+                "y": -1024
             }
         },
         "focus": {
@@ -50,6 +50,27 @@
             },
             "type": "TemplateMatch"
         }
+    },
+    "游乐场_初始化循环计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5001,
+                "y": -351
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": "k=游乐场\u0026mc=30"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "游乐场_检查计数",
+            "[JumpBack]游乐场_去获胜"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
     },
     "游乐场_初始化日常计数": {
         "$__mpe_code": {
@@ -227,6 +248,7 @@
         "next": [
             "游乐场_战斗结束"
         ],
+        "rate_limit": 3000,
         "recognition": {
             "param": {
                 "expected": [
@@ -240,7 +262,21 @@
                 ]
             },
             "type": "OCR"
-        }
+        },
+        "timeout": 200000
+    },
+    "游乐场_循环模式": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4725,
+                "y": -352
+            }
+        },
+        "next": [
+            "游乐场_初始化循环计数"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
     },
     "游乐场_战斗结束": {
         "$__mpe_code": {
@@ -354,7 +390,8 @@
             "type": "Click"
         },
         "next": [
-            "游乐场_日常模式"
+            "游乐场_日常模式",
+            "游乐场_循环模式"
         ],
         "recognition": {
             "param": {
