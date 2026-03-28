@@ -1,5 +1,4 @@
 ---
-type: project_command
 description: 
 ---
 
