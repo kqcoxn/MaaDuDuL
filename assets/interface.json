@@ -72,6 +72,7 @@
 		"resource/tasks/daily/farm.json",
 		"resource/tasks/daily/claim_reward.json",
 		"resource/tasks/daily/claim_new_goods.json",
+		"resource/tasks/daily/playground.json",
 		"resource/tasks/daily/close_game.json",
 		"resource/tasks/separators/independent_task.json",
 		"resource/tasks/single/quick_plot.json",
