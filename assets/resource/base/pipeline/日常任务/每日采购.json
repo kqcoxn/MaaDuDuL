@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
             "filename": "每日采购",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774620267326,
+            "lastSyncTime": 1774689310732,
             "prefix": "每日采购",
             "savedViewport": {
-                "x": -9204,
-                "y": -817,
-                "zoom": 1.84
+                "x": -4691,
+                "y": -2407,
+                "zoom": 1.09
             },
             "version": "v1.3.1"
         }
@@ -17,8 +17,8 @@
     "$__mpe_external_返回主界面_每日采购": {
         "$__mpe_code": {
             "position": {
-                "x": 7249,
-                "y": 1984
+                "x": 6587,
+                "y": 2436
             }
         }
     },
@@ -74,6 +74,26 @@
             },
             "type": "OCR"
         }
+    },
+    "每日采购_从商店返回主界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4717,
+                "y": 2410
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "run",
+                "custom_action_param": "t=懒加载返回主界面"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "每日采购_进入冒险界面"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
     },
     "每日采购_从至尊商店返回主界面": {
         "$__mpe_code": {
@@ -266,6 +286,64 @@
         "post_delay": 0,
         "pre_delay": 0
     },
+    "每日采购_打开糖果购买界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5292,
+                "y": 2717
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    813,
+                    41,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "next": [
+            "每日采购_指定糖果购买数量"
+        ]
+    },
+    "每日采购_指定糖果购买数量": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5558,
+                "y": 2717
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    637,
+                    376,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "next": [
+            "每日采购_输入糖果数量"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "是否购买"
+                ],
+                "roi": [
+                    453,
+                    195,
+                    391,
+                    153
+                ]
+            },
+            "type": "OCR"
+        }
+    },
     "每日采购_日常商店开始": {
         "$__mpe_code": {
             "position": {
@@ -300,8 +378,11 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": " \u003e 今日已采购"
+            "Node.Recognition.Starting": " \u003e 今日普通商店已采购"
         },
+        "next": [
+            "每日采购_普通商店结束"
+        ],
         "post_delay": 0,
         "pre_delay": 0
     },
@@ -383,7 +464,7 @@
             }
         },
         "next": [
-            "返回主界面"
+            "每日采购_糖果采购开始"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -702,6 +783,31 @@
         "post_delay": 0,
         "pre_delay": 0
     },
+    "每日采购_确保进入冒险界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5237,
+                "y": 2410
+            }
+        },
+        "next": [
+            "每日采购_购买红糖"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "冒险"
+                ],
+                "roi": [
+                    4,
+                    6,
+                    283,
+                    111
+                ]
+            },
+            "type": "OCR"
+        }
+    },
     "每日采购_确保进入水晶叶商店": {
         "$__mpe_code": {
             "position": {
@@ -756,11 +862,59 @@
             "type": "OCR"
         }
     },
+    "每日采购_确认糖果数量": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5840,
+                "y": 2880
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    634,
+                    263,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "next": [
+            "每日采购_确认购买糖果"
+        ]
+    },
+    "每日采购_确认购买糖果": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6105,
+                "y": 2717
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "recognition": {
+            "param": {
+                "expected": [
+                    "购买"
+                ],
+                "roi": [
+                    689,
+                    531,
+                    147,
+                    60
+                ]
+            },
+            "type": "OCR"
+        }
+    },
     "每日采购_礼包已购买": {
         "$__mpe_code": {
             "position": {
                 "x": 4407,
-                "y": 26
+                "y": 32
             }
         },
         "action": {
@@ -787,11 +941,96 @@
             "type": "OCR"
         }
     },
+    "每日采购_糖果采购周期提醒": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4719,
+                "y": 2717
+            }
+        },
+        "focus": {
+            "Node.Recognition.Starting": " \u003e 今日糖果已采购"
+        },
+        "next": [
+            "每日采购_糖果采购结束"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "每日采购_糖果采购周期检查": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4446,
+                "y": 2408
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=糖果采购"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "每日采购_从商店返回主界面"
+        ],
+        "on_error": [
+            "每日采购_糖果采购周期提醒"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "每日采购_糖果采购周期记录": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6034,
+                "y": 2410
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=糖果采购"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "每日采购_糖果采购结束"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "每日采购_糖果采购开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4166,
+                "y": 2409
+            }
+        },
+        "next": [
+            "每日采购_糖果采购周期检查"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "每日采购_糖果采购结束": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6303,
+                "y": 2411
+            }
+        },
+        "next": [
+            "返回主界面"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
     "每日采购_组合周期提醒-礼包": {
         "$__mpe_code": {
             "position": {
-                "x": 5403,
-                "y": -1035
+                "x": 5409,
+                "y": -1033
             }
         },
         "focus": {
@@ -1162,6 +1401,105 @@
         ],
         "post_delay": 0,
         "pre_delay": 0
+    },
+    "每日采购_购买糖果开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5032,
+                "y": 2717
+            }
+        },
+        "next": [
+            "每日采购_打开糖果购买界面"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "每日采购_购买紫糖": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5766,
+                "y": 2411
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "buy_candy",
+                "custom_action_param": "t=p\u0026c=0"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "每日采购_糖果采购周期记录"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "每日采购_购买红糖": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5497,
+                "y": 2410
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "buy_candy",
+                "custom_action_param": "t=r\u0026c=0"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "每日采购_购买紫糖"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "每日采购_输入糖果数量": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5829,
+                "y": 2717
+            }
+        },
+        "action": {
+            "param": {
+                "input_text": "1"
+            },
+            "type": "InputText"
+        },
+        "next": [
+            "每日采购_确认糖果数量"
+        ]
+    },
+    "每日采购_进入冒险界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4977,
+                "y": 2410
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "每日采购_确保进入冒险界面"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "冒险"
+                ],
+                "roi": [
+                    980,
+                    526,
+                    295,
+                    193
+                ]
+            },
+            "type": "OCR"
+        }
     },
     "每日采购_进入尊享商店": {
         "$__mpe_code": {

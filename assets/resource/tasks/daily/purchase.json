@@ -7,7 +7,7 @@
 			"default_check": true,
 			"description": "Resource/descs/daily/purchase.md",
 			"group": ["continuous"],
-			"option": ["每日采购-周期免费礼包", "每日采购-商店采购"]
+			"option": ["每日采购-周期免费礼包", "每日采购-商店采购", "每日采购-糖果采购"]
 		}
 	],
 	"option": {
@@ -474,6 +474,110 @@
 					"name": "Yes"
 				}
 			]
+		},
+		"每日采购-糖果采购": {
+			"type": "switch",
+			"label": "水晶叶糖果采购",
+			"description": "使用水晶叶购买糖果",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_糖果采购开始": {
+							"next": "每日采购_糖果采购结束"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["每日采购-糖果采购-周期检查", "每日采购-糖果采购-红糖", "每日采购-糖果采购-紫糖"]
+				}
+			]
+		},
+		"每日采购-糖果采购-周期检查": {
+			"type": "switch",
+			"label": "每日仅采购一次",
+			"cases": [
+				{
+					"name": "Yes"
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_糖果采购周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				}
+			]
+		},
+		"每日采购-糖果采购-红糖": {
+			"type": "switch",
+			"label": "采购红糖",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买红糖": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["每日采购-糖果采购-红糖-采购量"]
+				}
+			]
+		},
+		"每日采购-糖果采购-红糖-采购量": {
+			"type": "input",
+			"inputs": [
+				{
+					"name": "次数",
+					"default": "3",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"每日采购_购买红糖": {
+					"custom_action_param": "t=r&c={次数}"
+				}
+			}
+		},
+		"每日采购-糖果采购-紫糖": {
+			"type": "switch",
+			"label": "采购紫糖",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_购买紫糖": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["每日采购-糖果采购-紫糖-采购量"]
+				}
+			]
+		},
+		"每日采购-糖果采购-紫糖-采购量": {
+			"type": "input",
+			"inputs": [
+				{
+					"name": "次数",
+					"default": "3",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"每日采购_购买紫糖": {
+					"custom_action_param": "t=p&c={次数}"
+				}
+			}
 		}
 	}
 }

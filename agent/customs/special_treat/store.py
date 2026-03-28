@@ -133,3 +133,53 @@ class SpecialBuy(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("购买特殊商品", e)
+
+
+@AgentServer.custom_action("buy_candy")
+class BuyCandy(CustomAction):
+    """糖果购买自定义动作类。
+
+    处理商店中红糖和紫糖的购买操作，支持指定购买数量。
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行糖果购买操作。
+
+        Args:
+            context：MaaFW 上下文对象
+            argv：自定义动作参数，支持以下参数名：
+                - type/t：糖果类型，可选值：
+                    - red/r：红糖
+                    - purple/p：紫糖
+                - count/c：购买数量
+
+        Returns:
+            bool：购买操作是否成功
+        """
+        try:
+            args = ParamAnalyzer(argv)
+            goods = args.get(["type", "t"])
+            count = args.get(["count", "c"])
+
+            if goods == "red" or goods == "r":
+                Prompter.log("购买红糖")
+                Tasker(context).run(
+                    "每日采购_购买糖果开始",
+                    {
+                        "每日采购_打开糖果购买界面": {"target": [627, 41, 1, 1]},
+                        "每日采购_输入糖果数量": {"input_text": str(count)},
+                    },
+                )
+            elif goods == "purple" or goods == "p":
+                Prompter.log("购买紫糖")
+                Tasker(context).run(
+                    "每日采购_购买糖果开始",
+                    {
+                        "每日采购_打开糖果购买界面": {"target": [813, 41, 1, 1]},
+                        "每日采购_输入糖果数量": {"input_text": str(count)},
+                    },
+                )
+
+            return True
+        except Exception as e:
+            return Prompter.error("购买糖果", e)

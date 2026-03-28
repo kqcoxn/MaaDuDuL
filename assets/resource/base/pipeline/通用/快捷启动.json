@@ -1,127 +1,107 @@
 {
-  "$__mpe_config_新建Pipeline3": {
-    "$__mpe_code": {
-      "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\快捷启动.json",
-      "filename": "新建Pipeline3",
-      "lastSyncTime": 1768920925120,
-      "prefix": "",
-      "savedViewport": {
-        "x": 501,
-        "y": 111,
-        "zoom": 0.95
-      },
-      "version": "v0.16.1"
+    "$__mpe_config_快捷启动": {
+        "$__mpe_code": {
+            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\快捷启动.json",
+            "filename": "快捷启动",
+            "isModifiedExternally": false,
+            "lastSyncTime": 1774689484704,
+            "prefix": "",
+            "savedViewport": {
+                "x": 647,
+                "y": 140,
+                "zoom": 0.63
+            },
+            "version": "v1.3.1"
+        }
+    },
+    "$__mpe_external_懒加载返回主界面_开始_快捷启动": {
+        "$__mpe_code": {
+            "position": {
+                "x": 330,
+                "y": 890
+            }
+        }
+    },
+    "$__mpe_external_返回主界面_开始_快捷启动": {
+        "$__mpe_code": {
+            "position": {
+                "x": 332,
+                "y": 356
+            }
+        }
+    },
+    "$__mpe_external_速战_开始_快捷启动": {
+        "$__mpe_code": {
+            "position": {
+                "x": 332,
+                "y": 36
+            }
+        }
+    },
+    "回到主界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 12,
+                "y": 326
+            }
+        },
+        "next": [
+            "返回主界面_开始"
+        ]
+    },
+    "回到主页": {
+        "$__mpe_code": {
+            "position": {
+                "x": 12,
+                "y": 513
+            }
+        },
+        "next": [
+            "返回主界面_开始"
+        ]
+    },
+    "懒加载返回主界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10,
+                "y": 866
+            }
+        },
+        "next": [
+            "懒加载返回主界面_开始"
+        ]
+    },
+    "返回主界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 12,
+                "y": 700
+            }
+        },
+        "next": [
+            "返回主界面_开始"
+        ]
+    },
+    "返回主页": {
+        "$__mpe_code": {
+            "position": {
+                "x": 12,
+                "y": 139
+            }
+        },
+        "next": [
+            "返回主界面_开始"
+        ]
+    },
+    "速战": {
+        "$__mpe_code": {
+            "position": {
+                "x": 12,
+                "y": 12
+            }
+        },
+        "next": [
+            "速战_开始"
+        ]
     }
-  },
-  "$__mpe_external_返回主界面_开始_新建Pipeline3": {
-    "$__mpe_code": {
-      "position": {
-        "x": 300,
-        "y": 179
-      }
-    }
-  },
-  "$__mpe_external_速战_开始_新建Pipeline3": {
-    "$__mpe_code": {
-      "position": {
-        "x": 300,
-        "y": 647
-      }
-    }
-  },
-  "回到主界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 0,
-        "y": 0
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "返回主界面_开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "回到主页": {
-    "$__mpe_code": {
-      "position": {
-        "x": 0,
-        "y": 156
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "返回主界面_开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "返回主界面": {
-    "$__mpe_code": {
-      "position": {
-        "x": 0,
-        "y": 312
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "返回主界面_开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "返回主页": {
-    "$__mpe_code": {
-      "position": {
-        "x": 0,
-        "y": 468
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "返回主界面_开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "速战": {
-    "$__mpe_code": {
-      "position": {
-        "x": 0,
-        "y": 624
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "速战_开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  }
 }
