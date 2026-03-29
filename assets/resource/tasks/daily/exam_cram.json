@@ -1,0 +1,71 @@
+{
+	"task": [
+		{
+			"name": "短期速成班",
+			"label": "📚短期速成班",
+			"entry": "短期速成班_开始",
+			"default_check": true,
+			"description": "Resource/descs/daily/exam_cram.md",
+			"option": ["短期速成班-周期检查", "短期速成班-作战模式", "短期速成班-周末关卡选择"],
+			"group": ["continuous"]
+		}
+	],
+	"option": {
+		"短期速成班-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"短期速成班_周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"短期速成班-作战模式": {
+			"type": "select",
+			"label": "作战模式",
+			"cases": [
+				{
+					"name": "推进模式",
+					"description": "挑战最新一关",
+					"pipeline_override": {
+						"短期速成班_选择速成班课程": {
+							"next": "短期速成班_推进模式"
+						}
+					}
+				}
+			]
+		},
+		"短期速成班-周末关卡选择": {
+			"type": "input",
+			"label": "周末关卡选择",
+			"description": "周六与周日开放多个关卡，可以进行指定\n\n关卡数从左至右计算，分别为：\n- 周六：\n  - 纯真：1\n  - 冷静：2\n  - 热情：3\n- 周日：\n  - 活泼：4\n  - 忧愁：5",
+			"inputs": [
+				{
+					"name": "周六关卡",
+					"default": "2",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				},
+				{
+					"name": "周日关卡",
+					"default": "5",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"短期速成班_选择速成班课程": {
+					"custom_action_param": "w6={周六关卡}&w7={周日关卡}"
+				}
+			}
+		}
+	}
+}

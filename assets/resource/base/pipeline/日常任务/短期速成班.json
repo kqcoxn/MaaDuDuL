@@ -1,0 +1,440 @@
+{
+    "$__mpe_config_短期速成班": {
+        "$__mpe_code": {
+            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\短期速成班.json",
+            "filename": "短期速成班",
+            "isModifiedExternally": false,
+            "lastSyncTime": 1774793938206,
+            "prefix": "短期速成班",
+            "savedViewport": {
+                "x": -3629,
+                "y": 89,
+                "zoom": 0.54
+            },
+            "version": "v1.3.1"
+        }
+    },
+    "$__mpe_external_返回主界面_短期速成班": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9899,
+                "y": 588
+            }
+        }
+    },
+    "短期速成班_仍未出发": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9051,
+                "y": 671
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 今日作战已结束"
+        },
+        "next": [
+            "短期速成班_周期记录"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "出发"
+                ],
+                "roi": [
+                    978,
+                    631,
+                    129,
+                    59
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_仍未开始战斗": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8770,
+                "y": 568
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 今日作战已结束"
+        },
+        "next": [
+            "短期速成班_周期记录"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "编辑卡组"
+                ],
+                "roi": [
+                    1007,
+                    566,
+                    265,
+                    146
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_出发": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8767,
+                "y": 199
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 出发！"
+        },
+        "next": [
+            "短期速成班_战斗成功",
+            "短期速成班_战斗失败",
+            "短期速成班_仍未出发"
+        ],
+        "post_delay": 5000,
+        "rate_limit": 3000,
+        "recognition": {
+            "param": {
+                "expected": [
+                    "出发"
+                ],
+                "roi": [
+                    978,
+                    631,
+                    129,
+                    59
+                ]
+            },
+            "type": "OCR"
+        },
+        "timeout": 1200000
+    },
+    "短期速成班_周期提醒": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7168,
+                "y": 497
+            }
+        },
+        "focus": {
+            "Node.Recognition.Starting": " \u003e 今日已清速成"
+        },
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "短期速成班_周期检查": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6887,
+                "y": 198
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=短期速成班"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "短期速成班_进入冒险界面"
+        ],
+        "on_error": [
+            "短期速成班_周期提醒"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "短期速成班_周期记录": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9617,
+                "y": 560
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=短期速成班"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "返回主界面"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "短期速成班_开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6607,
+                "y": 200
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "on_task_start",
+                "custom_action_param": "h=hs"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "短期速成班_周期检查"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "短期速成班_开始战斗": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8500,
+                "y": 201
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "短期速成班_出发",
+            "短期速成班_仍未开始战斗"
+        ],
+        "post_delay": 3000,
+        "recognition": {
+            "param": {
+                "expected": [
+                    "编辑卡组"
+                ],
+                "roi": [
+                    1007,
+                    566,
+                    265,
+                    146
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_战斗失败": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9054,
+                "y": 390
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 作战失败"
+        },
+        "next": [
+            "短期速成班_终止作战"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "请帮助"
+                ],
+                "roi": [
+                    769,
+                    239,
+                    349,
+                    181
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_战斗成功": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9054,
+                "y": 125
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 作战成功，进入下一关"
+        },
+        "next": [
+            "短期速成班_出发"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "前往下一关"
+                ],
+                "roi": [
+                    1049,
+                    630,
+                    186,
+                    65
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_推进模式": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8236,
+                "y": 204
+            }
+        },
+        "next": [
+            "短期速成班_开始战斗"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "短期速成班_确保进入速成班": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7702,
+                "y": 203
+            }
+        },
+        "next": [
+            "短期速成班_选择速成班课程"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "短期速成班"
+                ],
+                "roi": [
+                    4,
+                    3,
+                    358,
+                    115
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_终止作战": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9323,
+                "y": 392
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "短期速成班_周期记录"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "退出"
+                ],
+                "roi": [
+                    762,
+                    631,
+                    144,
+                    63
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_进入冒险界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7166,
+                "y": 199
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    1184,
+                    667,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Action.Starting": " \u003e 进入速成班界面"
+        },
+        "next": [
+            "短期速成班_进入速成班"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "冒险"
+                ],
+                "roi": [
+                    1061,
+                    580,
+                    208,
+                    132
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_进入速成班": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7435,
+                "y": 202
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "短期速成班_确保进入速成班"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "短期速成班"
+                ],
+                "roi": [
+                    3,
+                    156,
+                    410,
+                    198
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "短期速成班_选择速成班课程": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7966,
+                "y": 202
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "select_cram_level",
+                "custom_action_param": "w6=2\u0026w7=5"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "短期速成班_推进模式"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    }
+}

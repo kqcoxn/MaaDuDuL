@@ -24,3 +24,5 @@ https://github.com/kqcoxn/MaaDuDuL
 
 - 不要帮我`yarn dev`，一般我是一直开着的
 - 不要自动帮我构建测试相关内容
+- 不要主动写 Pipeline JSON，如果需要扩充功能，在最后给我流水线汇总
+- 本地的 `/MFAAvalonia` 是测试环境，不应该改动，修改各资源应该在 `/assets` 中
