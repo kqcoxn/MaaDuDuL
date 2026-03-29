@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\游乐场.json",
             "filename": "游乐场",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774684828787,
+            "lastSyncTime": 1774786742910,
             "prefix": "游乐场",
             "savedViewport": {
-                "x": -3090,
-                "y": 895,
-                "zoom": 0.77
+                "x": -6220,
+                "y": 938,
+                "zoom": 1.32
             },
             "version": "v1.3.1"
         }
@@ -61,7 +61,7 @@
         "action": {
             "param": {
                 "custom_action": "init_counter",
-                "custom_action_param": "k=游乐场\u0026mc=30"
+                "custom_action_param": "k=游乐场\u0026mc=31"
             },
             "type": "Custom"
         },
@@ -82,7 +82,7 @@
         "action": {
             "param": {
                 "custom_action": "init_counter",
-                "custom_action_param": "k=游乐场\u0026mc=3"
+                "custom_action_param": "k=游乐场\u0026mc=4"
             },
             "type": "Custom"
         },
