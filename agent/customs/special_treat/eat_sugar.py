@@ -280,6 +280,56 @@ class SelectGoldLevel(CustomAction):
 # ============== 清红糖 ==============
 
 
+@AgentServer.custom_action("select_heart_type")
+class SelectHeartType(CustomAction):
+    """选择心形关卡类型的自定义动作。
+
+    根据参数指定的心形关卡类型，点击对应的关卡入口坐标。
+    支持的心形关卡类型：龙族、精灵、幽灵、仙灵、魔女、自然灵、兽人。
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行选择心形关卡类型的操作。
+
+        Args:
+            context: MaaFramework 上下文对象。
+            argv: 自定义动作运行参数。
+
+        Returns:
+            bool: 操作成功返回 True，失败返回 False。
+
+        Raises:
+            Exception: 选择关卡过程中发生异常时，通过 Prompter 记录错误并返回 False。
+        """
+        try:
+            args = ParamAnalyzer(argv)
+            level: str = args.get(["type", "t"])
+
+            # 根据关卡类型确定点击坐标
+            target = [408, 168]
+            if level == "龙族":
+                target = [408, 168]
+            elif level == "精灵":
+                target = [638, 185]
+            elif level == "幽灵":
+                target = [883, 171]
+            elif level == "仙灵":
+                target = [662, 341]
+            elif level == "魔女":
+                target = [900, 323]
+            elif level == "自然灵":
+                target = [381, 463]
+            elif level == "兽人":
+                target = [868, 488]
+            else:
+                Prompter.error("无效的心形关卡类型")
+            Tasker(context).click(*target)
+
+            return True
+        except Exception as e:
+            return Prompter.error("选择心形关卡", e)
+
+
 @AgentServer.custom_action("select_red_level")
 class SelectRedLevel(CustomAction):
     """选择红糖关卡的自定义动作
