@@ -105,13 +105,13 @@
 					"option": ["清紫糖-副本-糖果类型"]
 				},
 				{
-					"name": "神秘面包房（魔卡龙）",
+					"name": "神秘面包房（魔卡龙/奶卡龙）",
 					"pipeline_override": {
 						"清紫糖_副本开始": {
 							"next": "清紫糖_魔卡龙"
 						}
 					},
-					"option": ["清紫糖-副本-面包房关卡"]
+					"option": ["清紫糖-副本-面包房区域"]
 				},
 				{
 					"name": "金币大作战（金币）",
@@ -233,15 +233,58 @@
 				}
 			}
 		},
-		"清紫糖-副本-面包房关卡": {
+		"清紫糖-副本-面包房区域": {
+			"type": "select",
+			"label": "面包房区域",
+			"cases": [
+				{
+					"name": "魔卡龙区域",
+					"label": "魔卡龙区域（1-20）",
+					"pipeline_override": {
+						"清紫糖_进入面包房": {
+							"next": "清紫糖_魔卡龙区域"
+						}
+					},
+					"option": ["清紫糖-副本-魔卡龙关卡"]
+				},
+				{
+					"name": "奶卡龙区域",
+					"label": "奶卡龙区域（21-30）",
+					"pipeline_override": {
+						"清紫糖_进入面包房": {
+							"next": "清紫糖_奶卡龙区域"
+						}
+					},
+					"option": ["清紫糖-副本-奶卡龙关卡"]
+				}
+			]
+		},
+		"清紫糖-副本-魔卡龙关卡": {
 			"type": "input",
-			"label": "面包房关卡",
-			"description": "请选择可速刷的关卡",
+			"label": "魔卡龙关卡",
+			"description": "请选择可速刷的关卡（1-20）",
 			"inputs": [
 				{
 					"name": "关卡",
-					"label": "面包房关卡",
 					"default": "1",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"清紫糖_面包房行动": {
+					"custom_action_param": "l={关卡}"
+				}
+			}
+		},
+		"清紫糖-副本-奶卡龙关卡": {
+			"type": "input",
+			"label": "奶卡龙关卡",
+			"description": "请选择可速刷的关卡（21-30）",
+			"inputs": [
+				{
+					"name": "关卡",
+					"default": "21",
 					"pipeline_type": "string",
 					"verify": "^\\d+$"
 				}
