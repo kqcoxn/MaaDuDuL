@@ -13,20 +13,18 @@
 - [periodic_check.py](file://agent/customs/global_func/periodic_check.py)
 - [prompter.py](file://agent/customs/utils/prompter.py)
 - [saint_tour.json](file://assets/resource/tasks/daily/saint_tour.json)
+- [holy.py](file://agent/customs/special_treat/holy.py)
+- [README.md](file://README.md)
 </cite>
 
 ## 更新摘要
 **变更内容**
-- 升级至 v1.3.1 版本，管道文件从约1300行扩展到1715行
-- **重大调整**：任务流重新组织，从'圣团巡礼_开始'节点恢复到'圣团巡礼_开始1'节点作为主要入口
-- **坐标修正**：viewport坐标更新，x: -4408, y: -552, zoom: 0.72
-- **任务流变更**：下一个任务从'圣团巡礼_冒险开始'改为'圣团巡礼_宠物礼物开始'
-- **lastSyncTime更新**：文件同步时间为1774525564220
-- 新增房间探索系统，支持多房间类型识别和循环管理
-- 扩展宠物互动功能，新增区域循环管理和多地点寻访
-- 完善冒险协调系统，支持角色轮换和日程管理
-- 增强周期检查机制，支持更精细的任务调度控制
-- 新增世界树奖励检测和额外奖励处理功能
+- **重大新增**：新增"每日宴会"功能，包括完整的自定义动作实现和管道节点扩展
+- **功能扩展**：在原有世界树、房间参观、宠物礼物、冒险协调基础上增加宴会邀请功能
+- **自定义动作**：新增Banquet自定义动作类，支持批量角色邀请
+- **管道节点**：新增600+行管道节点，涵盖宴会全流程自动化
+- **配置更新**：任务配置文件新增宴会相关选项和输入参数
+- **完成状态**：README中标记"每日宴席"为[x]完成状态
 
 ## 目录
 1. [功能概述](#功能概述)
@@ -47,6 +45,7 @@
 - **参观并打扫房间**：自动参观并清理各个房间，支持多种房间类型识别和循环管理
 - **领取宠物礼物**：自动寻找并领取宠物礼物，支持多地点宠物寻访和区域循环
 - **冒险协调**：管理角色的冒险日程，支持角色轮换和日程选择
+- **每日宴会**：**新增功能** 自动邀请指定角色参加宴会，支持批量邀请和客人管理
 
 该功能具有智能的周期检查机制，可以避免重复执行已完成的任务，并提供灵活的配置选项和强大的错误恢复能力。
 
@@ -76,7 +75,7 @@ end
 
 **图表来源**
 - [main.py:1-78](file://agent/main.py#L1-L78)
-- [圣团巡礼.json:1-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L1715)
+- [圣团巡礼.json:1-2220](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L2220)
 
 **章节来源**
 - [main.py:1-78](file://agent/main.py#L1-L78)
@@ -113,7 +112,7 @@ OptionConfig --> CaseConfig : contains
 ```
 
 **图表来源**
-- [圣团巡礼.json:1-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L1715)
+- [圣团巡礼.json:1-2220](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L2220)
 
 ### 任务执行器
 
@@ -145,7 +144,7 @@ Tasker --> Context : uses
 
 **章节来源**
 - [tasker.py:16-190](file://agent/customs/maahelper/tasker.py#L16-L190)
-- [圣团巡礼.json:1-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L1715)
+- [圣团巡礼.json:1-2220](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L2220)
 
 ## 架构概览
 
@@ -186,7 +185,7 @@ Utils --> Storage
 
 **图表来源**
 - [main.py:47-78](file://agent/main.py#L47-L78)
-- [圣团巡礼.json:1-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L1715)
+- [圣团巡礼.json:1-2220](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L2220)
 
 ### 任务执行流程
 
@@ -222,6 +221,11 @@ Pipeline->>Game : 检查冒险日程
 Game-->>Pipeline : 发现可用冒险
 Pipeline->>Game : 选择角色和日程
 Game-->>Pipeline : 完成冒险
+else 每日宴会
+Pipeline->>Game : 进入宴会厅
+Game-->>Pipeline : 发现宴会界面
+Pipeline->>Game : 执行角色邀请
+Game-->>Pipeline : 宴会完成
 end
 Pipeline->>Game : 返回主界面
 Game-->>User : 任务完成
@@ -230,7 +234,7 @@ Game-->>User : 任务完成
 **图表来源**
 - [main.py:47-78](file://agent/main.py#L47-L78)
 - [tasker.py:60-122](file://agent/customs/maahelper/tasker.py#L60-L122)
-- [圣团巡礼.json:607-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L607-L1715)
+- [圣团巡礼.json:1077-1276](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1077-L1276)
 
 ## 详细组件分析
 
@@ -251,7 +255,7 @@ Game-->>User : 任务完成
 
 #### 选项配置系统
 
-系统支持四个主要选项，每个选项都有独立的开关控制：
+系统支持五个主要选项，每个选项都有独立的开关控制：
 
 ```mermaid
 flowchart TD
@@ -270,13 +274,17 @@ SkipPet --> CheckAdventure{检查冒险?}
 PetFlow --> CheckAdventure
 CheckAdventure --> |是| AdventureFlow[冒险协调流程]
 CheckAdventure --> |否| SkipAdventure[跳过冒险]
-AdventureFlow --> End([任务结束])
-SkipAdventure --> End
+SkipAdventure --> CheckBanquet{检查宴会?}
+AdventureFlow --> CheckBanquet
+CheckBanquet --> |是| BanquetFlow[宴会邀请流程]
+CheckBanquet --> |否| SkipBanquet[跳过宴会]
+BanquetFlow --> End([任务结束])
+SkipBanquet --> End
 SkipWorldTree --> End
 ```
 
 **图表来源**
-- [圣团巡礼.json:1-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L1715)
+- [圣团巡礼.json:1-2220](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L2220)
 
 #### 周期检查机制
 
@@ -290,24 +298,27 @@ Checking --> WorldTree : 世界树检查
 Checking --> Visit : 参观检查
 Checking --> Pet : 宠物检查
 Checking --> Adventure : 冒险检查
+Checking --> Banquet : 宴会检查
 WorldTree --> WorldTreeDone : 检查完成
 Visit --> VisitDone : 检查完成
 Pet --> PetDone : 检查完成
 Adventure --> AdventureDone : 检查完成
+Banquet --> BanquetDone : 检查完成
 WorldTreeDone --> RecordPeriod : 记录周期
 VisitDone --> RecordPeriod
 PetDone --> RecordPeriod
 AdventureDone --> RecordPeriod
+BanquetDone --> RecordPeriod
 RecordPeriod --> Idle : 等待下次检查
 ```
 
 **图表来源**
-- [圣团巡礼.json:254-299](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L254-L299)
+- [圣团巡礼.json:945-986](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L945-L986)
 - [圣团巡礼.json:541-586](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L541-L586)
 - [圣团巡礼.json:658-703](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L658-L703)
 
 **章节来源**
-- [圣团巡礼.json:1-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L1715)
+- [圣团巡礼.json:1-2220](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1-L2220)
 
 ### 管道执行组件
 
@@ -344,7 +355,7 @@ PipelineNode <|-- CustomActionNode
 ```
 
 **图表来源**
-- [圣团巡礼.json:25-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L25-L1715)
+- [圣团巡礼.json:25-2220](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L25-L2220)
 
 #### 关键管道节点
 
@@ -358,15 +369,79 @@ PipelineNode <|-- CustomActionNode
 | 圣团巡礼_参观开始 | 开始参观流程 | next: 参观周期检查 |
 | 圣团巡礼_领取宠物礼物 | 领取宠物礼物 | template: holy/love.png |
 | 圣团巡礼_冒险开始 | 开始冒险流程 | next: 冒险周期检查 |
-| 圣团巡礼_切换至各地点 | 多地点宠物寻访 | custom_action: run |
+| 圣团巡礼_宴会开始 | **新增** 开始宴会流程 | custom_action: banquet |
+| 圣团巡礼_宴会周期检查 | **新增** 宴会周期检查 | custom_action: periodic_check |
+| 圣团巡礼_宴会周期记录 | **新增** 宴会周期记录 | custom_action: record_period |
+| 圣团巡礼_邀请客人 | **新增** 邀请客人界面 | template: holy/invite.png |
+| 圣团巡礼_招待客人 | **新增** 招待客人 | expected: 招待 |
 
 **更新** 任务流重新组织后的节点关系：
 - **主要入口**：从'圣团巡礼_开始'恢复到'圣团巡礼_开始1'节点
-- **任务顺序**：世界树 → 宠物礼物 → 冒险协调
+- **任务顺序**：世界树 → 宠物礼物 → 冒险协调 → **每日宴会**
 - **坐标修正**：viewport坐标更新为 x: -4408, y: -552, zoom: 0.72
+- **新增节点**：宴会相关节点数量达到600+行，涵盖完整的宴会自动化流程
 
 **章节来源**
-- [圣团巡礼.json:607-1715](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L607-L1715)
+- [圣团巡礼.json:1077-1276](file://assets/resource/base/pipeline/日常任务/圣团巡礼.json#L1077-L1276)
+
+### 自定义动作组件
+
+#### Banquet自定义动作
+
+**新增功能** Banquet自定义动作类实现了宴会邀请的自动化：
+
+```mermaid
+classDiagram
+class Banquet {
++Context context
++CustomAction.RunArg argv
++run(context, argv) bool
++invite_list List[str]
++filter_empty() List[str]
++log_invitation(character) void
+}
+class ParamAnalyzer {
++get(keys) List[str]
+}
+class Tasker {
++run(entry, pipeline_override) TaskDetail
+}
+Banquet --> ParamAnalyzer : uses
+Banquet --> Tasker : uses
+```
+
+**图表来源**
+- [holy.py:18-58](file://agent/customs/special_treat/holy.py#L18-L58)
+
+#### 动作执行流程
+
+```mermaid
+sequenceDiagram
+participant User as 用户
+participant Banquet as Banquet动作
+participant Tasker as 任务执行器
+participant Game as 游戏界面
+User->>Banquet : 传入邀请名单
+Banquet->>Banquet : 解析参数
+Banquet->>Banquet : 过滤空字符串
+Banquet->>Tasker : 循环邀请每个角色
+Tasker->>Game : 进入邀请界面
+Game-->>Tasker : 发现客人界面
+Tasker->>Game : 识别指定客人
+Game-->>Tasker : 客人识别成功
+Tasker->>Game : 点击邀请
+Game-->>Tasker : 邀请完成
+Tasker->>Game : 返回客人列表
+Game-->>Tasker : 客人列表显示
+Tasker-->>Banquet : 所有邀请完成
+Banquet-->>User : 返回True
+```
+
+**图表来源**
+- [holy.py:27-57](file://agent/customs/special_treat/holy.py#L27-L57)
+
+**章节来源**
+- [holy.py:1-58](file://agent/customs/special_treat/holy.py#L1-L58)
 
 ### 计数器系统
 
@@ -539,6 +614,7 @@ subgraph "自定义模块"
 Custom[customs/] --> Helper[maahelper.tasker]
 Custom --> GlobalFunc[global_func.*]
 Custom --> Utils[utils.*]
+Custom --> SpecialTreat[special_treat.holy]
 end
 subgraph "资源配置"
 Assets[assets/] --> Tasks[tasks.daily]
@@ -569,6 +645,7 @@ Custom --> Assets
 3. **缓存策略**：合理使用图像模板缓存，减少重复计算
 4. **内存管理**：及时释放不再使用的资源和对象
 5. **节点复用**：通过CustomAction实现节点功能复用
+6. **批量处理**：宴会邀请支持批量角色处理，提高效率
 
 ### 资源管理
 
@@ -599,6 +676,8 @@ LogError --> End
 | 冒险日程冲突 | 角色无法选择 | 检查角色状态，等待休息中状态结束 |
 | 宠物寻访失败 | 无法找到宠物 | 检查多地点切换，确认宠物出现 |
 | 房间探索异常 | 无法正确识别房间类型 | 检查特征匹配参数，调整阈值 |
+| **宴会邀请失败** | **角色无法被邀请** | **检查邀请名单格式，确认角色名称正确** |
+| **客人识别错误** | **找不到指定客人** | **检查客人界面识别参数，确认模板匹配** |
 | **坐标偏移** | 界面元素位置不正确 | **检查viewport坐标修正** |
 
 ### 调试工具
@@ -619,9 +698,9 @@ LogError --> End
 日常圣团巡礼功能是一个设计精良的自动化任务系统，经过v1.3.1版本的重大升级，现已具备以下特点：
 
 1. **模块化设计**：清晰的模块分离和职责划分
-2. **灵活配置**：支持四种任务选项和自定义配置
+2. **灵活配置**：支持五种任务选项和自定义配置
 3. **智能控制**：完善的周期检查和状态管理机制
-4. **强大扩展性**：新增房间探索、多地点宠物寻访、区域循环管理等功能
+4. **强大扩展性**：新增房间探索、多地点宠物寻访、区域循环管理、**每日宴会邀请**等功能
 5. **稳定可靠**：完善的错误处理和恢复机制
 6. **高效执行**：优化的节点设计和资源管理
 
@@ -629,6 +708,13 @@ LogError --> End
 - **任务流重组**：从'圣团巡礼_开始'节点恢复到'圣团巡礼_开始1'节点，优化了任务执行顺序
 - **坐标修正**：viewport坐标更新为 x: -4408, y: -552, zoom: 0.72，提高了界面适配准确性
 - **任务顺序调整**：下一个任务从'圣团巡礼_冒险开始'改为'圣团巡礼_宠物礼物开始'，符合新的执行逻辑
-- **lastSyncTime更新**：文件同步时间为1774525564220，确保配置文件的最新状态
+- **lastSyncTime更新**：文件同步时间为1775050236698，确保配置文件的最新状态
+- **新增宴会功能**：**完成状态标记为[x]**，提供完整的宴会邀请自动化解决方案
+
+**新增功能亮点**：
+- **每日宴会**：通过Banquet自定义动作实现批量角色邀请
+- **完整管道系统**：600+行新增管道节点，涵盖宴会全流程
+- **智能邀请管理**：支持最多5个角色的批量邀请和客人管理
+- **灵活配置选项**：支持每日仅检查一次和自定义邀请名单
 
 该系统为玩家提供了高效、可靠的自动化游戏体验，是MaaDuDuL项目的重要组成部分。通过合理的架构设计和丰富的功能实现，成功地解决了游戏日常任务的自动化需求。v1.3.1版本的大幅扩展使其成为了一个功能完整、稳定性强的综合自动化解决方案。
