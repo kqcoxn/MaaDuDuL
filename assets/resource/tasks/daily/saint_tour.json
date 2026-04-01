@@ -7,7 +7,7 @@
 			"default_check": true,
 			"description": "Resource/descs/daily/saint_tour.md",
 			"group": ["continuous"],
-			"option": ["圣团巡礼-收获世界树", "圣团巡礼-参观并打扫房间", "圣团巡礼-领取宠物礼物"]
+			"option": ["圣团巡礼-收获世界树", "圣团巡礼-参观并打扫房间", "圣团巡礼-每日宴会", "圣团巡礼-领取宠物礼物"]
 		}
 	],
 	"option": {
@@ -98,6 +98,83 @@
 					"name": "Yes"
 				}
 			]
+		},
+		"圣团巡礼-每日宴会": {
+			"type": "switch",
+			"label": "每日宴会",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"圣团巡礼_宴会开始": {
+							"next": "圣团巡礼_宴会结束"
+						}
+					}
+				},
+				{
+					"name": "Yes",
+					"option": ["圣团巡礼-每日宴会-周期检查", "圣团巡礼-每日宴会-邀请名单"]
+				}
+			]
+		},
+		"圣团巡礼-每日宴会-周期检查": {
+			"type": "switch",
+			"label": "每日仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"圣团巡礼_宴会周期检查": {
+							"action": "DoNothing"
+						}
+					}
+				},
+				{
+					"name": "Yes"
+				}
+			]
+		},
+		"圣团巡礼-每日宴会-邀请名单": {
+			"type": "input",
+			"label": "邀请名单",
+			"description": "设置要邀请的角色，每个空只填一个，可留空",
+			"inputs": [
+				{
+					"name": "角色1",
+					"default": "",
+					"pipeline_type": "string",
+					"verify": ".*"
+				},
+				{
+					"name": "角色2",
+					"default": "",
+					"pipeline_type": "string",
+					"verify": ".*"
+				},
+				{
+					"name": "角色3",
+					"default": "",
+					"pipeline_type": "string",
+					"verify": ".*"
+				},
+				{
+					"name": "角色4",
+					"default": "",
+					"pipeline_type": "string",
+					"verify": ".*"
+				},
+				{
+					"name": "角色5",
+					"default": "",
+					"pipeline_type": "string",
+					"verify": ".*"
+				}
+			],
+			"pipeline_override": {
+				"圣团巡礼_开始宴会": {
+					"custom_action_param": "l={角色1}&l={角色2}&l={角色3}&l={角色4}&l={角色5}"
+				}
+			}
 		},
 		"圣团巡礼-领取宠物礼物": {
 			"type": "switch",

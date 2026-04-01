@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "filename": "圣团巡礼",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774525564220,
+            "lastSyncTime": 1775050236698,
             "prefix": "圣团巡礼",
             "savedViewport": {
-                "x": -4408,
-                "y": -552,
-                "zoom": 0.72
+                "x": -1129,
+                "y": -165,
+                "zoom": 0.23
             },
             "version": "v1.3.1"
         }
@@ -17,8 +17,8 @@
     "$__mpe_external_返回主界面_圣团巡礼": {
         "$__mpe_code": {
             "position": {
-                "x": 11231,
-                "y": 2174
+                "x": 11227,
+                "y": 2562
             }
         }
     },
@@ -53,6 +53,43 @@
         "post_delay": 500,
         "timeout": 3000
     },
+    "圣团巡礼_今日已邀请": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10347,
+                "y": 1808
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    512,
+                    583,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 今日已邀请此角色"
+        },
+        "pre_delay": 800,
+        "recognition": {
+            "param": {
+                "expected": [
+                    "使用消化药"
+                ],
+                "roi": [
+                    451,
+                    211,
+                    373,
+                    256
+                ]
+            },
+            "type": "OCR"
+        }
+    },
     "圣团巡礼_从世界树返回": {
         "$__mpe_code": {
             "position": {
@@ -78,8 +115,8 @@
     "圣团巡礼_从宠物预览返回": {
         "$__mpe_code": {
             "position": {
-                "x": 9130,
-                "y": 2753
+                "x": 9126,
+                "y": 3141
             }
         },
         "action": {
@@ -88,6 +125,29 @@
         },
         "next": [
             "圣团巡礼_领取宠物礼物开始"
+        ],
+        "recognition": {
+            "param": {
+                "template": [
+                    "global/back.png"
+                ]
+            },
+            "type": "TemplateMatch"
+        }
+    },
+    "圣团巡礼_从宴会厅返回": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8597,
+                "y": 1687
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "圣团巡礼_宴会结束"
         ],
         "recognition": {
             "param": {
@@ -124,8 +184,8 @@
     "圣团巡礼_休息中": {
         "$__mpe_code": {
             "position": {
-                "x": 10969,
-                "y": 1848
+                "x": 8870,
+                "y": 4868
             }
         },
         "focus": {
@@ -143,8 +203,8 @@
     "圣团巡礼_兼职结束": {
         "$__mpe_code": {
             "position": {
-                "x": 12283,
-                "y": 1575
+                "x": 10184,
+                "y": 4595
             }
         },
         "action": {
@@ -175,8 +235,8 @@
     "圣团巡礼_冒险1": {
         "$__mpe_code": {
             "position": {
-                "x": 8321,
-                "y": 1582
+                "x": 8944,
+                "y": 3664
             }
         },
         "action": {
@@ -198,8 +258,8 @@
     "圣团巡礼_冒险2": {
         "$__mpe_code": {
             "position": {
-                "x": 8864,
-                "y": 1583
+                "x": 9487,
+                "y": 3665
             }
         },
         "action": {
@@ -218,8 +278,8 @@
     "圣团巡礼_冒险3": {
         "$__mpe_code": {
             "position": {
-                "x": 9424,
-                "y": 1585
+                "x": 10047,
+                "y": 3667
             }
         },
         "action": {
@@ -238,8 +298,8 @@
     "圣团巡礼_冒险周期提醒": {
         "$__mpe_code": {
             "position": {
-                "x": 7794,
-                "y": 1819
+                "x": 8417,
+                "y": 3901
             }
         },
         "focus": {
@@ -254,8 +314,8 @@
     "圣团巡礼_冒险周期检查": {
         "$__mpe_code": {
             "position": {
-                "x": 7517,
-                "y": 1576
+                "x": 8140,
+                "y": 3658
             }
         },
         "action": {
@@ -280,8 +340,8 @@
     "圣团巡礼_冒险周期记录": {
         "$__mpe_code": {
             "position": {
-                "x": 9705,
-                "y": 1581
+                "x": 10328,
+                "y": 3663
             }
         },
         "action": {
@@ -300,8 +360,8 @@
     "圣团巡礼_冒险开始": {
         "$__mpe_code": {
             "position": {
-                "x": 7245,
-                "y": 1575
+                "x": 7868,
+                "y": 3657
             }
         },
         "next": [
@@ -313,21 +373,18 @@
     "圣团巡礼_冒险结束": {
         "$__mpe_code": {
             "position": {
-                "x": 9991,
-                "y": 1580
+                "x": 10614,
+                "y": 3662
             }
         },
-        "next": [
-            "圣团巡礼_宠物礼物开始"
-        ],
         "post_delay": 0,
         "pre_delay": 0
     },
     "圣团巡礼_切换冒险2": {
         "$__mpe_code": {
             "position": {
-                "x": 8589,
-                "y": 1584
+                "x": 9212,
+                "y": 3666
             }
         },
         "action": {
@@ -351,8 +408,8 @@
     "圣团巡礼_切换冒险3": {
         "$__mpe_code": {
             "position": {
-                "x": 9148,
-                "y": 1587
+                "x": 9771,
+                "y": 3669
             }
         },
         "action": {
@@ -376,8 +433,8 @@
     "圣团巡礼_切换至冒险协会": {
         "$__mpe_code": {
             "position": {
-                "x": 9632,
-                "y": 2164
+                "x": 9628,
+                "y": 2552
             }
         },
         "action": {
@@ -401,8 +458,8 @@
     "圣团巡礼_切换至宴会厅": {
         "$__mpe_code": {
             "position": {
-                "x": 8574,
-                "y": 2159
+                "x": 8570,
+                "y": 2547
             }
         },
         "action": {
@@ -426,8 +483,8 @@
     "圣团巡礼_切换至总部": {
         "$__mpe_code": {
             "position": {
-                "x": 9102,
-                "y": 2162
+                "x": 9098,
+                "y": 2550
             }
         },
         "action": {
@@ -451,8 +508,8 @@
     "圣团巡礼_切换至生产厂": {
         "$__mpe_code": {
             "position": {
-                "x": 8050,
-                "y": 2153
+                "x": 8046,
+                "y": 2541
             }
         },
         "action": {
@@ -476,8 +533,8 @@
     "圣团巡礼_切换至记录馆": {
         "$__mpe_code": {
             "position": {
-                "x": 10166,
-                "y": 2168
+                "x": 10162,
+                "y": 2556
             }
         },
         "action": {
@@ -498,11 +555,31 @@
             "圣团巡礼_检查记录馆宠物"
         ]
     },
+    "圣团巡礼_初始化客人查找计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9554,
+                "y": 1566
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": "k=查找客人\u0026mc=11"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "圣团巡礼_邀请客人"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
     "圣团巡礼_单次冒险开始": {
         "$__mpe_code": {
             "position": {
-                "x": 10438,
-                "y": 1577
+                "x": 8339,
+                "y": 4597
             }
         },
         "next": [
@@ -515,8 +592,8 @@
     "圣团巡礼_单次冒险结束": {
         "$__mpe_code": {
             "position": {
-                "x": 12543,
-                "y": 1575
+                "x": 10444,
+                "y": 4595
             }
         },
         "post_delay": 0,
@@ -605,7 +682,7 @@
             }
         },
         "next": [
-            "圣团巡礼_宠物礼物开始"
+            "圣团巡礼_宴会开始"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -642,8 +719,8 @@
     "圣团巡礼_宠物礼物周期提醒": {
         "$__mpe_code": {
             "position": {
-                "x": 7787,
-                "y": 2361
+                "x": 7783,
+                "y": 2749
             }
         },
         "focus": {
@@ -658,8 +735,8 @@
     "圣团巡礼_宠物礼物周期检查": {
         "$__mpe_code": {
             "position": {
-                "x": 7520,
-                "y": 2151
+                "x": 7516,
+                "y": 2539
             }
         },
         "action": {
@@ -684,8 +761,8 @@
     "圣团巡礼_宠物礼物周期记录": {
         "$__mpe_code": {
             "position": {
-                "x": 10692,
-                "y": 2169
+                "x": 10688,
+                "y": 2557
             }
         },
         "action": {
@@ -704,8 +781,8 @@
     "圣团巡礼_宠物礼物开始": {
         "$__mpe_code": {
             "position": {
-                "x": 7246,
-                "y": 2154
+                "x": 7242,
+                "y": 2542
             }
         },
         "next": [
@@ -717,8 +794,8 @@
     "圣团巡礼_宠物礼物结束": {
         "$__mpe_code": {
             "position": {
-                "x": 10962,
-                "y": 2171
+                "x": 10958,
+                "y": 2559
             }
         },
         "next": [
@@ -730,8 +807,8 @@
     "圣团巡礼_宠物预览": {
         "$__mpe_code": {
             "position": {
-                "x": 8858,
-                "y": 2750
+                "x": 8854,
+                "y": 3138
             }
         },
         "next": [
@@ -751,6 +828,187 @@
             },
             "type": "OCR"
         }
+    },
+    "圣团巡礼_客人列表下滑": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10088,
+                "y": 2122
+            }
+        },
+        "action": {
+            "param": {
+                "begin": [
+                    820,
+                    501,
+                    1,
+                    1
+                ],
+                "duration": [
+                    500
+                ],
+                "end": [
+                    [
+                        818,
+                        174,
+                        1,
+                        1
+                    ]
+                ]
+            },
+            "type": "Swipe"
+        },
+        "next": [
+            "圣团巡礼_客人列表点停"
+        ],
+        "post_delay": 0
+    },
+    "圣团巡礼_客人列表点停": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10347,
+                "y": 2121
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    818,
+                    174,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "next": [
+            "圣团巡礼_客人查找计数"
+        ],
+        "pre_delay": 0
+    },
+    "圣团巡礼_客人对话": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10868,
+                "y": 1824
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    621,
+                    272,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        }
+    },
+    "圣团巡礼_客人查找计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10608,
+                "y": 2120
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "count",
+                "custom_action_param": "k=查找客人"
+            },
+            "type": "Custom"
+        },
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "圣团巡礼_宴会周期提醒": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7779,
+                "y": 2042
+            }
+        },
+        "focus": {
+            "Node.Recognition.Starting": " \u003e 今日已宴会"
+        },
+        "next": [
+            "圣团巡礼_宴会结束"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "圣团巡礼_宴会周期检查": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7500,
+                "y": 1689
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=宴会"
+            },
+            "type": "Custom"
+        },
+        "focus": {
+            "Node.Action.Succeeded": " \u003e 进入宴会厅"
+        },
+        "next": [
+            "圣团巡礼_进入宴会厅"
+        ],
+        "on_error": [
+            "圣团巡礼_宴会周期提醒"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "圣团巡礼_宴会周期记录": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8328,
+                "y": 1689
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=宴会"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "圣团巡礼_从宴会厅返回"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "圣团巡礼_宴会开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7229,
+                "y": 1691
+            }
+        },
+        "next": [
+            "圣团巡礼_宴会周期检查"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "圣团巡礼_宴会结束": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8870,
+                "y": 1687
+            }
+        },
+        "next": [
+            "圣团巡礼_宠物礼物开始"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
     },
     "圣团巡礼_开始": {
         "$__mpe_code": {
@@ -778,8 +1036,8 @@
     "圣团巡礼_开始1": {
         "$__mpe_code": {
             "position": {
-                "x": 6978,
-                "y": 1574
+                "x": 7601,
+                "y": 3656
             }
         },
         "next": [
@@ -791,8 +1049,8 @@
     "圣团巡礼_开始冒险": {
         "$__mpe_code": {
             "position": {
-                "x": 12023,
-                "y": 1575
+                "x": 9924,
+                "y": 4595
             }
         },
         "action": {
@@ -816,6 +1074,26 @@
             },
             "type": "OCR"
         }
+    },
+    "圣团巡礼_开始宴会": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8051,
+                "y": 1691
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "banquet",
+                "custom_action_param": "l=埃尔芬"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "圣团巡礼_宴会周期记录"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
     },
     "圣团巡礼_打开参观列表": {
         "$__mpe_code": {
@@ -849,6 +1127,38 @@
             "type": "OCR"
         },
         "timeout": 5000
+    },
+    "圣团巡礼_打开菜单": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10348,
+                "y": 1563
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 鸡汤来喽！"
+        },
+        "next": [
+            "圣团巡礼_招待客人"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "菜单"
+                ],
+                "roi": [
+                    324,
+                    433,
+                    604,
+                    266
+                ]
+            },
+            "type": "OCR"
+        }
     },
     "圣团巡礼_打扫房间": {
         "$__mpe_code": {
@@ -894,6 +1204,36 @@
             "type": "FeatureMatch"
         },
         "timeout": 5000
+    },
+    "圣团巡礼_招待客人": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10608,
+                "y": 1563
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "圣团巡礼_邀请结束",
+            "[JumpBack]圣团巡礼_客人对话"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "招待"
+                ],
+                "roi": [
+                    908,
+                    647,
+                    124,
+                    56
+                ]
+            },
+            "type": "OCR"
+        }
     },
     "圣团巡礼_收获世界树开始": {
         "$__mpe_code": {
@@ -972,8 +1312,8 @@
     "圣团巡礼_检查冒险协会宠物": {
         "$__mpe_code": {
             "position": {
-                "x": 9891,
-                "y": 2166
+                "x": 9887,
+                "y": 2554
             }
         },
         "action": {
@@ -992,11 +1332,42 @@
         "post_delay": 0,
         "pre_delay": 0
     },
+    "圣团巡礼_检查客人查找计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10089,
+                "y": 1769
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    1048,
+                    39,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 未找到指定客人"
+        },
+        "post_delay": 0,
+        "pre_delay": 0,
+        "recognition": {
+            "param": {
+                "custom_recognition": "check_counter",
+                "custom_recognition_param": "k=查找客人"
+            },
+            "type": "Custom"
+        }
+    },
     "圣团巡礼_检查宴会厅宠物": {
         "$__mpe_code": {
             "position": {
-                "x": 8832,
-                "y": 2161
+                "x": 8828,
+                "y": 2549
             }
         },
         "action": {
@@ -1018,8 +1389,8 @@
     "圣团巡礼_检查总部宠物": {
         "$__mpe_code": {
             "position": {
-                "x": 9360,
-                "y": 2163
+                "x": 9356,
+                "y": 2551
             }
         },
         "action": {
@@ -1041,8 +1412,8 @@
     "圣团巡礼_检查生产厂宠物": {
         "$__mpe_code": {
             "position": {
-                "x": 8309,
-                "y": 2155
+                "x": 8305,
+                "y": 2543
             }
         },
         "action": {
@@ -1064,8 +1435,8 @@
     "圣团巡礼_检查记录馆宠物": {
         "$__mpe_code": {
             "position": {
-                "x": 10425,
-                "y": 2170
+                "x": 10421,
+                "y": 2558
             }
         },
         "action": {
@@ -1087,8 +1458,8 @@
     "圣团巡礼_检测宠物礼物": {
         "$__mpe_code": {
             "position": {
-                "x": 8579,
-                "y": 2547
+                "x": 8575,
+                "y": 2935
             }
         },
         "action": {
@@ -1124,8 +1495,8 @@
     "圣团巡礼_申请冒险": {
         "$__mpe_code": {
             "position": {
-                "x": 10711,
-                "y": 1573
+                "x": 8612,
+                "y": 4593
             }
         },
         "action": {
@@ -1154,8 +1525,8 @@
     "圣团巡礼_确保不在休息": {
         "$__mpe_code": {
             "position": {
-                "x": 10710,
-                "y": 1301
+                "x": 8611,
+                "y": 4321
             }
         },
         "action": {
@@ -1183,8 +1554,8 @@
     "圣团巡礼_确保在外部": {
         "$__mpe_code": {
             "position": {
-                "x": 7787,
-                "y": 2150
+                "x": 7783,
+                "y": 2538
             }
         },
         "next": [
@@ -1259,8 +1630,8 @@
     "圣团巡礼_确保进入日程界面": {
         "$__mpe_code": {
             "position": {
-                "x": 10971,
-                "y": 1573
+                "x": 8872,
+                "y": 4593
             }
         },
         "focus": {
@@ -1402,8 +1773,8 @@
     "圣团巡礼_获取宠物礼物": {
         "$__mpe_code": {
             "position": {
-                "x": 8857,
-                "y": 2548
+                "x": 8853,
+                "y": 2936
             }
         },
         "action": {
@@ -1460,11 +1831,41 @@
             "type": "OCR"
         }
     },
+    "圣团巡礼_识别客人": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10088,
+                "y": 1563
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "圣团巡礼_打开菜单",
+            "圣团巡礼_今日已邀请"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "埃尔芬"
+                ],
+                "roi": [
+                    269,
+                    114,
+                    747,
+                    558
+                ]
+            },
+            "type": "OCR"
+        }
+    },
     "圣团巡礼_进入冒险协会": {
         "$__mpe_code": {
             "position": {
-                "x": 7798,
-                "y": 1580
+                "x": 8421,
+                "y": 3662
             }
         },
         "action": {
@@ -1492,8 +1893,8 @@
     "圣团巡礼_进入协会内部": {
         "$__mpe_code": {
             "position": {
-                "x": 8058,
-                "y": 1580
+                "x": 8681,
+                "y": 3662
             }
         },
         "action": {
@@ -1534,6 +1935,37 @@
             },
             "type": "TemplateMatch"
         }
+    },
+    "圣团巡礼_进入宴会厅": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7779,
+                "y": 1691
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "圣团巡礼_开始宴会"
+        ],
+        "recognition": {
+            "param": {
+                "roi": [
+                    12,
+                    583,
+                    400,
+                    136
+                ],
+                "template": [
+                    "holy/banquet.png"
+                ]
+            },
+            "type": "TemplateMatch"
+        },
+        "repeat": 2,
+        "repeat_delay": 800
     },
     "圣团巡礼_进入总部": {
         "$__mpe_code": {
@@ -1603,8 +2035,8 @@
     "圣团巡礼_选择日程1": {
         "$__mpe_code": {
             "position": {
-                "x": 11231,
-                "y": 1573
+                "x": 9132,
+                "y": 4593
             }
         },
         "action": {
@@ -1628,8 +2060,8 @@
     "圣团巡礼_选择日程2": {
         "$__mpe_code": {
             "position": {
-                "x": 11489,
-                "y": 1572
+                "x": 9390,
+                "y": 4592
             }
         },
         "action": {
@@ -1651,8 +2083,8 @@
     "圣团巡礼_选择日程3": {
         "$__mpe_code": {
             "position": {
-                "x": 11752,
-                "y": 1571
+                "x": 9653,
+                "y": 4591
             }
         },
         "action": {
@@ -1674,11 +2106,84 @@
         ],
         "pre_delay": 0
     },
+    "圣团巡礼_邀请客人": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9824,
+                "y": 1566
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Action.Succeeded": " \u003e 查找指定客人"
+        },
+        "next": [
+            "圣团巡礼_识别客人",
+            "圣团巡礼_检查客人查找计数",
+            "[JumpBack]圣团巡礼_客人列表下滑"
+        ],
+        "post_delay": 1000,
+        "recognition": {
+            "param": {
+                "roi": [
+                    481,
+                    57,
+                    341,
+                    201
+                ],
+                "template": [
+                    "holy/invite.png"
+                ]
+            },
+            "type": "TemplateMatch"
+        }
+    },
+    "圣团巡礼_邀请客人开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9285,
+                "y": 1566
+            }
+        },
+        "next": [
+            "圣团巡礼_初始化客人查找计数"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "圣团巡礼_邀请结束": {
+        "$__mpe_code": {
+            "position": {
+                "x": 10868,
+                "y": 1563
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 吃饱辣！"
+        },
+        "recognition": {
+            "param": {
+                "expected": [
+                    "客人列表"
+                ],
+                "roi": [
+                    932,
+                    539,
+                    343,
+                    175
+                ]
+            },
+            "type": "OCR"
+        }
+    },
     "圣团巡礼_领取宠物礼物开始": {
         "$__mpe_code": {
             "position": {
-                "x": 8305,
-                "y": 2548
+                "x": 8301,
+                "y": 2936
             }
         },
         "next": [
