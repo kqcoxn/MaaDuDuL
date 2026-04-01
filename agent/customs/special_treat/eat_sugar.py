@@ -246,7 +246,7 @@ class SelectGoldLevel(CustomAction):
 
             # 获取当前楼层
             rh = RecoHelper(context).recognize("清紫糖_检测金币B1入口")
-            current_floor = 2 if len(rh.filtered_results) > 0 else 1
+            current_floor = 2 if rh.hit and len(rh.filtered_results) > 0 else 1
             Prompter.log(f"当前楼层：{current_floor}")
 
             # 进入对应区域
@@ -255,7 +255,7 @@ class SelectGoldLevel(CustomAction):
             elif level < 21:
                 if current_floor == 2:
                     rh.click()
-                    return False
+                    time.sleep(0.8)
                 if level < 19:
                     Tasker(context).run("清紫糖_金币右上角")
                 else:
@@ -263,13 +263,16 @@ class SelectGoldLevel(CustomAction):
             elif level < 25:
                 if current_floor == 1:
                     Tasker(context).run("清紫糖_金币右下角")
+                    time.sleep(0.8)
                     RecoHelper(context).recognize("清紫糖_检测金币B2入口").click()
+                    time.sleep(0.8)
             else:
                 Prompter.error("金币大作战仅支持 13-24 关")
+            time.sleep(0.8)
 
             # 选择关卡
             Tasker(context).run(
-                "清紫糖_查找关卡开始", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
+                "清紫糖_查找指定关卡", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
             )
 
             return True
