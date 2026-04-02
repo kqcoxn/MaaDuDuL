@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "filename": "圣团巡礼",
             "isModifiedExternally": false,
-            "lastSyncTime": 1775050236698,
+            "lastSyncTime": 1775131222178,
             "prefix": "圣团巡礼",
             "savedViewport": {
-                "x": -1129,
-                "y": -165,
-                "zoom": 0.23
+                "x": -9332,
+                "y": -1438,
+                "zoom": 0.99
             },
             "version": "v1.3.1"
         }
@@ -57,7 +57,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 10347,
-                "y": 1808
+                "y": 1870
             }
         },
         "action": {
@@ -832,15 +832,15 @@
     "圣团巡礼_客人列表下滑": {
         "$__mpe_code": {
             "position": {
-                "x": 10088,
-                "y": 2122
+                "x": 10091,
+                "y": 2133
             }
         },
         "action": {
             "param": {
                 "begin": [
-                    820,
-                    501,
+                    286,
+                    502,
                     1,
                     1
                 ],
@@ -849,8 +849,8 @@
                 ],
                 "end": [
                     [
-                        818,
-                        174,
+                        286,
+                        165,
                         1,
                         1
                     ]
@@ -866,15 +866,15 @@
     "圣团巡礼_客人列表点停": {
         "$__mpe_code": {
             "position": {
-                "x": 10347,
-                "y": 2121
+                "x": 10346,
+                "y": 2193
             }
         },
         "action": {
             "param": {
                 "target": [
-                    818,
-                    174,
+                    286,
+                    165,
                     1,
                     1
                 ]
@@ -908,8 +908,8 @@
     "圣团巡礼_客人查找计数": {
         "$__mpe_code": {
             "position": {
-                "x": 10608,
-                "y": 2120
+                "x": 10604,
+                "y": 2128
             }
         },
         "action": {
@@ -1147,17 +1147,17 @@
         ],
         "recognition": {
             "param": {
-                "expected": [
-                    "菜单"
-                ],
                 "roi": [
                     324,
                     433,
                     604,
                     266
+                ],
+                "template": [
+                    "holy/menu.png"
                 ]
             },
-            "type": "OCR"
+            "type": "TemplateMatch"
         }
     },
     "圣团巡礼_打扫房间": {
@@ -1208,8 +1208,8 @@
     "圣团巡礼_招待客人": {
         "$__mpe_code": {
             "position": {
-                "x": 10608,
-                "y": 1563
+                "x": 10614,
+                "y": 1562
             }
         },
         "action": {
@@ -1335,8 +1335,8 @@
     "圣团巡礼_检查客人查找计数": {
         "$__mpe_code": {
             "position": {
-                "x": 10089,
-                "y": 1769
+                "x": 10090,
+                "y": 1772
             }
         },
         "action": {
@@ -1849,7 +1849,7 @@
         "recognition": {
             "param": {
                 "expected": [
-                    "埃尔芬"
+                    "布朗谢"
                 ],
                 "roi": [
                     269,
