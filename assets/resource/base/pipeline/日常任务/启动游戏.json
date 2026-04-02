@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "filename": "启动游戏",
             "isModifiedExternally": false,
-            "lastSyncTime": 1775046165518,
+            "lastSyncTime": 1775129491706,
             "prefix": "启动游戏",
             "savedViewport": {
-                "x": -1386,
-                "y": -1341,
-                "zoom": 1.39
+                "x": -1168,
+                "y": -355,
+                "zoom": 1.21
             },
             "version": "v1.3.1"
         }
@@ -17,8 +17,8 @@
     "启动游戏_关闭公告": {
         "$__mpe_code": {
             "position": {
-                "x": 860,
-                "y": 672
+                "x": 1482,
+                "y": 1078
             }
         },
         "action": {
@@ -44,8 +44,8 @@
     "启动游戏_关闭面板": {
         "$__mpe_code": {
             "position": {
-                "x": 1454,
-                "y": 1094
+                "x": 1487,
+                "y": 370
             }
         },
         "action": {
@@ -66,11 +66,9 @@
                     "main/close-orange.png",
                     "main/close-lorange.png",
                     "main/close-pink.png",
-                    "main/close-anno.png",
                     "main/close-cherry.png"
                 ],
                 "threshold": [
-                    0.9,
                     0.9,
                     0.9,
                     0.9,
@@ -91,8 +89,8 @@
     "启动游戏_启动游戏": {
         "$__mpe_code": {
             "position": {
-                "x": 586,
-                "y": 62
+                "x": 401,
+                "y": 45
             }
         },
         "action": {
@@ -124,8 +122,8 @@
     "启动游戏_开始": {
         "$__mpe_code": {
             "position": {
-                "x": 324,
-                "y": 60
+                "x": 139,
+                "y": 43
             }
         },
         "action": {
@@ -143,8 +141,8 @@
     "启动游戏_捏脸启动": {
         "$__mpe_code": {
             "position": {
-                "x": 1130,
-                "y": 67
+                "x": 949,
+                "y": 49
             }
         },
         "action": {
@@ -172,6 +170,7 @@
             "[JumpBack]启动游戏_领取礼物",
             "[JumpBack]启动游戏_点击屏幕继续",
             "[JumpBack]启动游戏_关闭面板",
+            "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_闲时捏脸"
         ],
         "rate_limit": 600
@@ -179,8 +178,8 @@
     "启动游戏_无可领取的奖励": {
         "$__mpe_code": {
             "position": {
-                "x": 1450,
-                "y": 389
+                "x": 1219,
+                "y": 367
             }
         },
         "action": {
@@ -204,12 +203,19 @@
     "启动游戏_更新游戏": {
         "$__mpe_code": {
             "position": {
-                "x": 588,
-                "y": 413
+                "x": 674,
+                "y": 378
             }
         },
         "action": {
-            "param": {},
+            "param": {
+                "target": [
+                    636,
+                    555,
+                    1,
+                    1
+                ]
+            },
             "type": "Click"
         },
         "focus": {
@@ -218,17 +224,18 @@
         "next": [
             "启动游戏_更新结束"
         ],
+        "pre_delay": 800,
         "rate_limit": 3000,
         "recognition": {
             "param": {
                 "expected": [
-                    "开始下载"
+                    "资源下载"
                 ],
                 "roi": [
-                    567,
-                    524,
-                    145,
-                    61
+                    210,
+                    90,
+                    856,
+                    533
                 ]
             },
             "type": "OCR"
@@ -238,8 +245,8 @@
     "启动游戏_更新结束": {
         "$__mpe_code": {
             "position": {
-                "x": 589,
-                "y": 733
+                "x": 949,
+                "y": 377
             }
         },
         "action": {
@@ -267,8 +274,8 @@
     "启动游戏_检测公告界面": {
         "$__mpe_code": {
             "position": {
-                "x": 853,
-                "y": 417
+                "x": 1213,
+                "y": 1076
             }
         },
         "focus": {
@@ -295,8 +302,8 @@
     "启动游戏_点击屏幕继续": {
         "$__mpe_code": {
             "position": {
-                "x": 1449,
-                "y": 888
+                "x": 1217,
+                "y": 866
             }
         },
         "action": {
@@ -320,8 +327,8 @@
     "启动游戏_结束": {
         "$__mpe_code": {
             "position": {
-                "x": 1725,
-                "y": 65
+                "x": 1494,
+                "y": 43
             }
         },
         "post_delay": 0,
@@ -330,8 +337,8 @@
     "启动游戏_识别主界面": {
         "$__mpe_code": {
             "position": {
-                "x": 1449,
-                "y": -183
+                "x": 1218,
+                "y": -205
             }
         },
         "recognition": {
@@ -352,8 +359,8 @@
     "启动游戏_识别开始界面": {
         "$__mpe_code": {
             "position": {
-                "x": 858,
-                "y": -154
+                "x": 673,
+                "y": -171
             }
         },
         "recognition": {
@@ -374,8 +381,8 @@
     "启动游戏_连续识别主界面": {
         "$__mpe_code": {
             "position": {
-                "x": 1449,
-                "y": 65
+                "x": 1218,
+                "y": 43
             }
         },
         "focus": {
@@ -397,8 +404,8 @@
     "启动游戏_连续识别开始界面": {
         "$__mpe_code": {
             "position": {
-                "x": 856,
-                "y": 65
+                "x": 671,
+                "y": 48
             }
         },
         "focus": {
@@ -420,8 +427,8 @@
     "启动游戏_闲时捏脸": {
         "$__mpe_code": {
             "position": {
-                "x": 1452,
-                "y": 1392
+                "x": 1211,
+                "y": 1328
             }
         },
         "post_delay": 0,
@@ -436,8 +443,8 @@
     "启动游戏_领取礼物": {
         "$__mpe_code": {
             "position": {
-                "x": 1452,
-                "y": 624
+                "x": 1220,
+                "y": 592
             }
         },
         "action": {
