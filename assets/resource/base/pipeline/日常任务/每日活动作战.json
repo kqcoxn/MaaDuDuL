@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "filename": "每日活动作战",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774680210862,
+            "lastSyncTime": 1775131420088,
             "prefix": "每日活动作战",
             "savedViewport": {
-                "x": -8052,
-                "y": -939,
-                "zoom": 1.32
+                "x": -5708,
+                "y": -114,
+                "zoom": 1.14
             },
             "version": "v1.3.1"
         }
@@ -51,13 +51,14 @@
                 "检查当前进度",
                 "检查结束",
                 "确保进入成就界面",
-                "识别进度"
+                "识别进度",
+                "关闭梦境之地提示"
             ],
             "color": "green",
             "height": 559,
             "position": {
-                "x": 5272,
-                "y": 156
+                "x": 5280,
+                "y": 165
             },
             "width": 1637
         }
@@ -150,6 +151,32 @@
                     412,
                     299,
                     119
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "每日活动作战_关闭梦境之地提示": {
+        "$__mpe_code": {
+            "position": {
+                "x": 311,
+                "y": 86
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "recognition": {
+            "param": {
+                "expected": [
+                    "梦境之地"
+                ],
+                "roi": [
+                    41,
+                    323,
+                    1202,
+                    393
                 ]
             },
             "type": "OCR"
@@ -357,7 +384,8 @@
             }
         },
         "next": [
-            "每日活动作战_从检查进入成就界面"
+            "每日活动作战_从检查进入成就界面",
+            "[JumpBack]每日活动作战_关闭梦境之地提示"
         ],
         "post_delay": 0,
         "pre_delay": 0
