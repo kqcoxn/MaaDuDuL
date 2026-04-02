@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "filename": "启动游戏",
             "isModifiedExternally": false,
-            "lastSyncTime": 1775129491706,
+            "lastSyncTime": 1775130499375,
             "prefix": "启动游戏",
             "savedViewport": {
-                "x": -1168,
-                "y": -355,
-                "zoom": 1.21
+                "x": -529,
+                "y": -289,
+                "zoom": 1.06
             },
             "version": "v1.3.1"
         }
@@ -55,25 +55,15 @@
         "recognition": {
             "param": {
                 "template": [
-                    "main/close-black.png",
-                    "main/close-yellow.png",
-                    "main/close-brown.png",
-                    "global/home.png",
-                    "global/back.png",
-                    "global/home2.png",
-                    "main/close-bw.png",
-                    "main/close-trans.png",
-                    "main/close-orange.png",
-                    "main/close-lorange.png",
+                    "main/close-cherry.png",
                     "main/close-pink.png",
-                    "main/close-cherry.png"
+                    "main/close-trans.png",
+                    "main/close-blue.png",
+                    "main/close-black-yellow.png",
+                    "main/close-yellow.png",
+                    "main/close-bw.png"
                 ],
                 "threshold": [
-                    0.9,
-                    0.9,
-                    0.9,
-                    0.9,
-                    0.9,
                     0.9,
                     0.9,
                     0.9,
@@ -169,8 +159,8 @@
             "[JumpBack]启动游戏_无可领取的奖励",
             "[JumpBack]启动游戏_领取礼物",
             "[JumpBack]启动游戏_点击屏幕继续",
-            "[JumpBack]启动游戏_关闭面板",
             "[JumpBack]启动游戏_检测公告界面",
+            "[JumpBack]启动游戏_关闭面板",
             "[JumpBack]启动游戏_闲时捏脸"
         ],
         "rate_limit": 600
