@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "filename": "启动游戏",
             "isModifiedExternally": false,
-            "lastSyncTime": 1775130499375,
+            "lastSyncTime": 1775208335233,
             "prefix": "启动游戏",
             "savedViewport": {
-                "x": -529,
-                "y": -289,
-                "zoom": 1.06
+                "x": 467,
+                "y": 274,
+                "zoom": 0.44
             },
             "version": "v1.3.1"
         }
@@ -324,28 +324,6 @@
         "post_delay": 0,
         "pre_delay": 0
     },
-    "启动游戏_识别主界面": {
-        "$__mpe_code": {
-            "position": {
-                "x": 1218,
-                "y": -205
-            }
-        },
-        "recognition": {
-            "param": {
-                "roi": [
-                    1092,
-                    2,
-                    184,
-                    75
-                ],
-                "template": [
-                    "main/more.png"
-                ]
-            },
-            "type": "TemplateMatch"
-        }
-    },
     "启动游戏_识别开始界面": {
         "$__mpe_code": {
             "position": {
@@ -386,7 +364,7 @@
         "recognition": {
             "param": {
                 "custom_recognition": "stable_reco",
-                "custom_recognition_param": "m=5\u0026n=启动游戏_识别主界面"
+                "custom_recognition_param": "m=5\u0026n=返回主界面_活动弹窗\u0026n=返回主界面_使徒\u0026n=返回主界面_冒险通行证"
             },
             "type": "Custom"
         }
