@@ -199,7 +199,12 @@ class SelectDuplicateLevel(CustomAction):
                 level = f"0{level}"
 
             Tasker(context).run(
-                "清紫糖_查找关卡开始", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
+                "清紫糖_查找关卡开始",
+                {
+                    "清紫糖_查找指定关卡1": {"expected": f"{level}"},
+                    "清紫糖_查找指定关卡2": {"expected": f"{level}"},
+                    "清紫糖_查找指定关卡3": {"expected": f"{level}"},
+                },
             )
 
             return True
@@ -272,7 +277,12 @@ class SelectGoldLevel(CustomAction):
 
             # 选择关卡
             Tasker(context).run(
-                "清紫糖_查找指定关卡", {"清紫糖_查找指定关卡": {"expected": f"{level}"}}
+                "清紫糖_查找指定关卡",
+                {
+                    "清紫糖_查找指定关卡1": {"expected": f"{level}"},
+                    "清紫糖_查找指定关卡2": {"expected": f"{level}"},
+                    "清紫糖_查找指定关卡3": {"expected": f"{level}"},
+                },
             )
 
             return True
