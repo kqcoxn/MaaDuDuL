@@ -4,12 +4,12 @@
             "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
             "filename": "清紫糖",
             "isModifiedExternally": false,
-            "lastSyncTime": 1775210056910,
+            "lastSyncTime": 1775210915735,
             "prefix": "清紫糖",
             "savedViewport": {
-                "x": -8686,
-                "y": 518,
-                "zoom": 1.09
+                "x": -2787,
+                "y": 54,
+                "zoom": 0.46
             },
             "version": "v1.3.1"
         }
@@ -17,8 +17,8 @@
     "$__mpe_external_返回主界面_清紫糖": {
         "$__mpe_code": {
             "position": {
-                "x": 8984,
-                "y": 1088
+                "x": 8971,
+                "y": 1342
             }
         }
     },
@@ -63,7 +63,7 @@
             "type": "Click"
         },
         "next": [
-            "清紫糖_克隆工厂结束"
+            "清紫糖_克隆工厂周期记录"
         ],
         "recognition": {
             "param": {
@@ -80,15 +80,74 @@
             "type": "TemplateMatch"
         }
     },
-    "清紫糖_克隆工厂开始": {
+    "清紫糖_克隆工厂周期提醒": {
         "$__mpe_code": {
             "position": {
-                "x": 6808,
-                "y": 692
+                "x": 7069,
+                "y": 951
             }
+        },
+        "focus": {
+            "Node.Recognition.Starting": " \u003e 今日已检查克隆工厂"
+        },
+        "next": [
+            "清紫糖_克隆工厂结束"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "清紫糖_克隆工厂周期检查": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6802,
+                "y": 693
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=克隆工厂"
+            },
+            "type": "Custom"
         },
         "next": [
             "清紫糖_进入克隆工厂"
+        ],
+        "on_error": [
+            "清紫糖_克隆工厂周期提醒"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "清紫糖_克隆工厂周期记录": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9197,
+                "y": 693
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=克隆工厂"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "清紫糖_克隆工厂结束"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "清紫糖_克隆工厂开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6525,
+                "y": 694
+            }
+        },
+        "next": [
+            "清紫糖_克隆工厂周期检查"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -96,8 +155,8 @@
     "清紫糖_克隆工厂结束": {
         "$__mpe_code": {
             "position": {
-                "x": 9196,
-                "y": 690
+                "x": 9461,
+                "y": 695
             }
         },
         "next": [
@@ -109,8 +168,8 @@
     "清紫糖_初始化副本计数": {
         "$__mpe_code": {
             "position": {
-                "x": 8549,
-                "y": -225
+                "x": 8038,
+                "y": -129
             }
         },
         "action": {
@@ -130,15 +189,74 @@
         "post_delay": 0,
         "pre_delay": 0
     },
-    "清紫糖_副本开始": {
+    "清紫糖_副本周期提醒": {
         "$__mpe_code": {
             "position": {
-                "x": 6805,
-                "y": 1087
+                "x": 6800,
+                "y": 1627
             }
+        },
+        "focus": {
+            "Node.Recognition.Starting": " \u003e 今日已检查副本"
+        },
+        "next": [
+            "清紫糖_副本结束"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "清紫糖_副本周期检查": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6794,
+                "y": 1325
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=副本"
+            },
+            "type": "Custom"
         },
         "next": [
             "清紫糖_油画棒"
+        ],
+        "on_error": [
+            "清紫糖_副本周期提醒"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "清紫糖_副本周期记录": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8425,
+                "y": 1323
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=副本"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "清紫糖_副本结束"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "清紫糖_副本开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6522,
+                "y": 1330
+            }
+        },
+        "next": [
+            "清紫糖_副本周期检查"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -146,12 +264,12 @@
     "清紫糖_副本结束": {
         "$__mpe_code": {
             "position": {
-                "x": 8441,
-                "y": 1089
+                "x": 8692,
+                "y": 1322
             }
         },
         "next": [
-            "清紫糖_周期记录"
+            "返回主界面"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -159,8 +277,8 @@
     "清紫糖_副本计数": {
         "$__mpe_code": {
             "position": {
-                "x": 9084,
-                "y": 296
+                "x": 8573,
+                "y": 332
             }
         },
         "action": {
@@ -176,8 +294,8 @@
     "清紫糖_向上滑动副本": {
         "$__mpe_code": {
             "position": {
-                "x": 8821,
-                "y": 297
+                "x": 8310,
+                "y": 393
             }
         },
         "action": {
@@ -206,67 +324,11 @@
             "清紫糖_副本计数"
         ]
     },
-    "清紫糖_周期提醒": {
-        "$__mpe_code": {
-            "position": {
-                "x": 7066,
-                "y": 377
-            }
-        },
-        "focus": {
-            "Node.Recognition.Starting": " \u003e 今日已清紫糖"
-        },
-        "post_delay": 0,
-        "pre_delay": 0
-    },
-    "清紫糖_周期检查": {
-        "$__mpe_code": {
-            "position": {
-                "x": 6787,
-                "y": 148
-            }
-        },
-        "action": {
-            "param": {
-                "custom_action": "periodic_check",
-                "custom_action_param": "k=清紫糖"
-            },
-            "type": "Custom"
-        },
-        "next": [
-            "清紫糖_进入冒险界面"
-        ],
-        "on_error": [
-            "清紫糖_周期提醒"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
-    },
-    "清紫糖_周期记录": {
-        "$__mpe_code": {
-            "position": {
-                "x": 8719,
-                "y": 1089
-            }
-        },
-        "action": {
-            "param": {
-                "custom_action": "record_period",
-                "custom_action_param": "k=清紫糖"
-            },
-            "type": "Custom"
-        },
-        "next": [
-            "返回主界面"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
-    },
     "清紫糖_奶卡龙区域": {
         "$__mpe_code": {
             "position": {
-                "x": 7618,
-                "y": 1650
+                "x": 7605,
+                "y": 1885
             }
         },
         "action": {
@@ -294,8 +356,8 @@
     "清紫糖_开始": {
         "$__mpe_code": {
             "position": {
-                "x": 6507,
-                "y": 150
+                "x": 6238,
+                "y": 344
             }
         },
         "action": {
@@ -306,7 +368,7 @@
             "type": "Custom"
         },
         "next": [
-            "清紫糖_周期检查"
+            "清紫糖_进入冒险界面"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -314,8 +376,8 @@
     "清紫糖_查找关卡开始": {
         "$__mpe_code": {
             "position": {
-                "x": 8013,
-                "y": -228
+                "x": 7502,
+                "y": -132
             }
         },
         "next": [
@@ -327,8 +389,8 @@
     "清紫糖_查找指定关卡1": {
         "$__mpe_code": {
             "position": {
-                "x": 8819,
-                "y": -223
+                "x": 8308,
+                "y": -127
             }
         },
         "action": {
@@ -356,8 +418,8 @@
     "清紫糖_查找指定关卡2": {
         "$__mpe_code": {
             "position": {
-                "x": 8817,
-                "y": -425
+                "x": 8306,
+                "y": -329
             }
         },
         "action": {
@@ -385,8 +447,8 @@
     "清紫糖_查找指定关卡3": {
         "$__mpe_code": {
             "position": {
-                "x": 8817,
-                "y": -620
+                "x": 8306,
+                "y": -524
             }
         },
         "action": {
@@ -414,8 +476,8 @@
     "清紫糖_检查副本计数": {
         "$__mpe_code": {
             "position": {
-                "x": 8820,
-                "y": -20
+                "x": 8309,
+                "y": 76
             }
         },
         "focus": {
@@ -434,8 +496,8 @@
     "清紫糖_检测金币B1入口": {
         "$__mpe_code": {
             "position": {
-                "x": 8211,
-                "y": 2466
+                "x": 8198,
+                "y": 2701
             }
         },
         "recognition": {
@@ -450,8 +512,8 @@
     "清紫糖_检测金币B2入口": {
         "$__mpe_code": {
             "position": {
-                "x": 8469,
-                "y": 2468
+                "x": 8456,
+                "y": 2703
             }
         },
         "recognition": {
@@ -466,8 +528,8 @@
     "清紫糖_油画棒": {
         "$__mpe_code": {
             "position": {
-                "x": 7079,
-                "y": 1088
+                "x": 7066,
+                "y": 1323
             }
         },
         "action": {
@@ -498,8 +560,8 @@
     "清紫糖_滑至最底部": {
         "$__mpe_code": {
             "position": {
-                "x": 8281,
-                "y": -224
+                "x": 7770,
+                "y": -128
             }
         },
         "action": {
@@ -535,8 +597,8 @@
     "清紫糖_盖章": {
         "$__mpe_code": {
             "position": {
-                "x": 7354,
-                "y": 1089
+                "x": 7341,
+                "y": 1324
             }
         },
         "action": {
@@ -596,8 +658,8 @@
     "清紫糖_确保盖章": {
         "$__mpe_code": {
             "position": {
-                "x": 7614,
-                "y": 1089
+                "x": 7601,
+                "y": 1324
             }
         },
         "action": {
@@ -643,8 +705,8 @@
     "清紫糖_确保进入副本界面": {
         "$__mpe_code": {
             "position": {
-                "x": 7621,
-                "y": 153
+                "x": 7063,
+                "y": 345
             }
         },
         "next": [
@@ -668,8 +730,8 @@
     "清紫糖_确保进入糖果类型": {
         "$__mpe_code": {
             "position": {
-                "x": 7621,
-                "y": 1910
+                "x": 7608,
+                "y": 2145
             }
         },
         "next": [
@@ -693,8 +755,8 @@
     "清紫糖_确保进入金币大作战": {
         "$__mpe_code": {
             "position": {
-                "x": 7622,
-                "y": 2223
+                "x": 7609,
+                "y": 2458
             }
         },
         "action": {
@@ -710,8 +772,8 @@
     "清紫糖_糖果自由": {
         "$__mpe_code": {
             "position": {
-                "x": 7081,
-                "y": 1910
+                "x": 7068,
+                "y": 2145
             }
         },
         "action": {
@@ -742,8 +804,8 @@
     "清紫糖_糖果行动": {
         "$__mpe_code": {
             "position": {
-                "x": 7895,
-                "y": 1908
+                "x": 7882,
+                "y": 2143
             }
         },
         "action": {
@@ -754,7 +816,7 @@
             "type": "Custom"
         },
         "next": [
-            "清紫糖_副本结束"
+            "清紫糖_副本周期记录"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -816,8 +878,8 @@
     "清紫糖_进入冒险界面": {
         "$__mpe_code": {
             "position": {
-                "x": 7066,
-                "y": 149
+                "x": 6508,
+                "y": 341
             }
         },
         "action": {
@@ -841,8 +903,8 @@
     "清紫糖_进入副本界面": {
         "$__mpe_code": {
             "position": {
-                "x": 7361,
-                "y": 153
+                "x": 6803,
+                "y": 345
             }
         },
         "action": {
@@ -870,8 +932,8 @@
     "清紫糖_进入金币大作战": {
         "$__mpe_code": {
             "position": {
-                "x": 7350,
-                "y": 2225
+                "x": 7337,
+                "y": 2460
             }
         },
         "action": {
@@ -899,8 +961,8 @@
     "清紫糖_进入面包房": {
         "$__mpe_code": {
             "position": {
-                "x": 7348,
-                "y": 1442
+                "x": 7335,
+                "y": 1677
             }
         },
         "action": {
@@ -968,8 +1030,8 @@
     "清紫糖_选择到手蜡关卡": {
         "$__mpe_code": {
             "position": {
-                "x": 7883,
-                "y": 1088
+                "x": 7870,
+                "y": 1323
             }
         },
         "action": {
@@ -1001,8 +1063,8 @@
     "清紫糖_选择糖果类型": {
         "$__mpe_code": {
             "position": {
-                "x": 7349,
-                "y": 1912
+                "x": 7336,
+                "y": 2147
             }
         },
         "action": {
@@ -1030,8 +1092,8 @@
     "清紫糖_速战克隆到手蜡": {
         "$__mpe_code": {
             "position": {
-                "x": 8156,
-                "y": 1090
+                "x": 8143,
+                "y": 1325
             }
         },
         "action": {
@@ -1042,7 +1104,7 @@
             "type": "Custom"
         },
         "next": [
-            "清紫糖_副本结束"
+            "清紫糖_副本周期记录"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -1070,8 +1132,8 @@
     "清紫糖_速战副本": {
         "$__mpe_code": {
             "position": {
-                "x": 9093,
-                "y": -225
+                "x": 8582,
+                "y": -129
             }
         },
         "action": {
@@ -1087,8 +1149,8 @@
     "清紫糖_金币": {
         "$__mpe_code": {
             "position": {
-                "x": 7077,
-                "y": 2227
+                "x": 7064,
+                "y": 2462
             }
         },
         "action": {
@@ -1119,8 +1181,8 @@
     "清紫糖_金币右上角": {
         "$__mpe_code": {
             "position": {
-                "x": 8726,
-                "y": 2225
+                "x": 8713,
+                "y": 2460
             }
         },
         "action": {
@@ -1149,8 +1211,8 @@
     "清紫糖_金币右下角": {
         "$__mpe_code": {
             "position": {
-                "x": 8993,
-                "y": 2228
+                "x": 8980,
+                "y": 2463
             }
         },
         "action": {
@@ -1179,8 +1241,8 @@
     "清紫糖_金币左上角": {
         "$__mpe_code": {
             "position": {
-                "x": 8212,
-                "y": 2223
+                "x": 8199,
+                "y": 2458
             }
         },
         "action": {
@@ -1209,8 +1271,8 @@
     "清紫糖_金币左下角": {
         "$__mpe_code": {
             "position": {
-                "x": 8468,
-                "y": 2225
+                "x": 8455,
+                "y": 2460
             }
         },
         "action": {
@@ -1239,8 +1301,8 @@
     "清紫糖_金币行动": {
         "$__mpe_code": {
             "position": {
-                "x": 7896,
-                "y": 2220
+                "x": 7883,
+                "y": 2455
             }
         },
         "action": {
@@ -1251,7 +1313,7 @@
             "type": "Custom"
         },
         "next": [
-            "清紫糖_副本结束"
+            "清紫糖_副本周期记录"
         ],
         "post_delay": 0,
         "pre_delay": 0,
@@ -1273,8 +1335,8 @@
     "清紫糖_面包房行动": {
         "$__mpe_code": {
             "position": {
-                "x": 7884,
-                "y": 1438
+                "x": 7871,
+                "y": 1673
             }
         },
         "action": {
@@ -1285,7 +1347,7 @@
             "type": "Custom"
         },
         "next": [
-            "清紫糖_副本结束"
+            "清紫糖_副本周期记录"
         ],
         "post_delay": 0,
         "pre_delay": 0
@@ -1293,8 +1355,8 @@
     "清紫糖_魔卡龙": {
         "$__mpe_code": {
             "position": {
-                "x": 7085,
-                "y": 1446
+                "x": 7072,
+                "y": 1681
             }
         },
         "action": {
@@ -1325,8 +1387,8 @@
     "清紫糖_魔卡龙区域": {
         "$__mpe_code": {
             "position": {
-                "x": 7617,
-                "y": 1441
+                "x": 7604,
+                "y": 1676
             }
         },
         "action": {
