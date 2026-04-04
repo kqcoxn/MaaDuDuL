@@ -50,7 +50,6 @@ def main():
     from maa.toolkit import Toolkit
     from agent import customs
     from agent.preprocess import clear
-    from agent.devops import punch_in
 
     try:
         # 清理调试文件
@@ -60,8 +59,6 @@ def main():
         # 获取 socket ID 并启动服务
         socket_id = sys.argv[-1]
         AgentServer.start_up(socket_id)
-        # devops
-        punch_in()
         # 等待服务结束
         AgentServer.join()
         AgentServer.shut_down()
