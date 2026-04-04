@@ -446,7 +446,6 @@ enc_temp_folder/*
 .nuke/temp/*
 
 # Build
-deps
 build
 install
 
