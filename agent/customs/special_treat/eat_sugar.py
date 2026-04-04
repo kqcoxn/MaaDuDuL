@@ -277,7 +277,7 @@ class SelectGoldLevel(CustomAction):
 
             # 选择关卡
             Tasker(context).run(
-                "清紫糖_查找指定关卡",
+                "清紫糖_直接查找关卡",
                 {
                     "清紫糖_查找指定关卡1": {"expected": f"{level}"},
                     "清紫糖_查找指定关卡2": {"expected": f"{level}"},
