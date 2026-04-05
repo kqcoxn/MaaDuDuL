@@ -49,7 +49,11 @@ class Banquet(CustomAction):
                 Prompter.log(f"正在邀请：{character}")
                 Tasker(context).run(
                     "圣团巡礼_邀请客人开始",
-                    {"圣团巡礼_识别客人": {"expected": character}},
+                    {
+                        "圣团巡礼_识别客人1": {"expected": character},
+                        "圣团巡礼_识别客人2": {"expected": character},
+                        "圣团巡礼_识别客人3": {"expected": character},
+                    },
                 )
 
             return True
