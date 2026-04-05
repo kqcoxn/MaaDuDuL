@@ -1,17 +1,17 @@
 {
     "$__mpe_config_启动游戏": {
         "$__mpe_code": {
-            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
+            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "filename": "启动游戏",
             "isModifiedExternally": false,
-            "lastSyncTime": 1775208335233,
+            "lastSyncTime": 1775370115072,
             "prefix": "启动游戏",
             "savedViewport": {
-                "x": 467,
-                "y": 274,
-                "zoom": 0.44
+                "x": -1651,
+                "y": -310,
+                "zoom": 1.52
             },
-            "version": "v1.3.1"
+            "version": "v1.4.0"
         }
     },
     "启动游戏_关闭公告": {
@@ -61,9 +61,11 @@
                     "main/close-blue.png",
                     "main/close-black-yellow.png",
                     "main/close-yellow.png",
-                    "main/close-bw.png"
+                    "main/close-bw.png",
+                    "main/close-green.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
@@ -95,9 +97,9 @@
         "next": [
             "启动游戏_连续识别主界面",
             "启动游戏_连续识别开始界面",
+            "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_无可领取的奖励",
             "[JumpBack]启动游戏_更新游戏",
-            "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_领取礼物",
             "[JumpBack]启动游戏_点击屏幕继续",
             "[JumpBack]启动游戏_关闭面板",
@@ -156,10 +158,10 @@
         },
         "next": [
             "启动游戏_连续识别主界面",
+            "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_无可领取的奖励",
             "[JumpBack]启动游戏_领取礼物",
             "[JumpBack]启动游戏_点击屏幕继续",
-            "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_关闭面板",
             "[JumpBack]启动游戏_闲时捏脸"
         ],
@@ -188,7 +190,7 @@
             },
             "type": "OCR"
         },
-        "timeout": 2000
+        "timeout": 3000
     },
     "启动游戏_更新游戏": {
         "$__mpe_code": {
@@ -287,7 +289,8 @@
                 ]
             },
             "type": "OCR"
-        }
+        },
+        "timeout": 3000
     },
     "启动游戏_点击屏幕继续": {
         "$__mpe_code": {
@@ -395,8 +398,8 @@
     "启动游戏_闲时捏脸": {
         "$__mpe_code": {
             "position": {
-                "x": 1211,
-                "y": 1328
+                "x": 1213,
+                "y": 1371
             }
         },
         "post_delay": 0,
