@@ -7,7 +7,13 @@
 			"default_check": true,
 			"description": "Resource/descs/daily/saint_tour.md",
 			"group": ["continuous"],
-			"option": ["圣团巡礼-收获世界树", "圣团巡礼-参观并打扫房间", "圣团巡礼-每日宴会", "圣团巡礼-领取宠物礼物"]
+			"option": [
+				"圣团巡礼-收获世界树",
+				"圣团巡礼-参观并打扫房间",
+				"圣团巡礼-每日冒险",
+				"圣团巡礼-每日宴会",
+				"圣团巡礼-领取宠物礼物"
+			]
 		}
 	],
 	"option": {
@@ -65,13 +71,9 @@
 		},
 		"圣团巡礼-每日冒险": {
 			"type": "switch",
-			"label": "每日冒险",
-			"description": "将选择最靠前的3个嘟嘟脸",
+			"label": "每日冒险（测试阶段）",
+			"description": "测试阶段功能仍不完善，可能出现各类问题，请谨慎使用，若出现 bug 请在群内或 issue 反馈",
 			"cases": [
-				{
-					"name": "Yes",
-					"option": ["圣团巡礼-每日冒险-每日仅检查一次"]
-				},
 				{
 					"name": "No",
 					"pipeline_override": {
@@ -79,6 +81,14 @@
 							"next": "圣团巡礼_冒险结束"
 						}
 					}
+				},
+				{
+					"name": "Yes",
+					"option": [
+						"圣团巡礼-每日冒险-每日仅检查一次",
+						"圣团巡礼-每日冒险-狂热优先",
+						"圣团巡礼-每日冒险-冒险名单"
+					]
 				}
 			]
 		},
@@ -98,6 +108,48 @@
 					"name": "Yes"
 				}
 			]
+		},
+		"圣团巡礼-每日冒险-狂热优先": {
+			"type": "switch",
+			"label": "优先狂热冒险",
+			"description": "优先选择狂热状态角色，忽视角色列表",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"圣团巡礼_开始冒险循环": {
+							"next": ["圣团巡礼_检查狂热角色", "圣团巡礼_查找角色"]
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"圣团巡礼_开始冒险循环": {
+							"next": ["圣团巡礼_查找角色"]
+						}
+					}
+				}
+			]
+		},
+		"圣团巡礼-每日冒险-冒险名单": {
+			"type": "input",
+			"label": "冒险角色名单",
+			"description": "可填写多个，申请次数不足时自动退出",
+			"inputs": [
+				{
+					"name": "名单",
+					"label": "名单",
+					"description": "设置要邀请的角色，支持模糊搜索（如“锡安”），以顿号/分号/逗号/空格/斜杠分隔",
+					"default": "梅露娜、玛丽",
+					"pipeline_type": "string"
+				}
+			],
+			"pipeline_override": {
+				"圣团巡礼_设置冒险列表": {
+					"custom_action_param": "l={名单}"
+				}
+			}
 		},
 		"圣团巡礼-每日宴会": {
 			"type": "switch",

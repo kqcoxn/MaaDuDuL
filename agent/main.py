@@ -47,15 +47,12 @@ from agent.preprocess import check_and_install_dependencies
 def main():
     """启动 MaaDuDuL Agent 服务"""
     from maa.agent.agent_server import AgentServer
-    from maa.toolkit import Toolkit
     from agent import customs
     from agent.preprocess import clear
 
     try:
         # 清理调试文件
         clear()
-        # 初始化 MaaFW 工具包
-        Toolkit.init_option("./")
         # 获取 socket ID 并启动服务
         socket_id = sys.argv[-1]
         AgentServer.start_up(socket_id)

@@ -1,3 +1,19 @@
 {
-    "resource": "B服"
+    "resource": "B服",
+    "controller": "模拟器",
+    "adb": {
+        "adb_path": "E:/_Games/Netease/MuMu/nx_main/adb.exe",
+        "address": "127.0.0.1:16384",
+        "screencap": "64",
+        "input": "18446744073709551607",
+        "config": {
+            "extras": {
+                "mumu": {
+                    "enable": true,
+                    "index": 0,
+                    "path": "E:/_Games/Netease/MuMu"
+                }
+            }
+        }
+    }
 }
