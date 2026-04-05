@@ -38,9 +38,7 @@ class Banquet(CustomAction):
         try:
             # 解析参数
             args = ParamAnalyzer(argv)
-            invite_list: List[str] = args.get(["list", "l"])
-            # 过滤空字符串
-            invite_list = [item for item in invite_list if item and item.strip()]
+            invite_list = args.split_list(["invite_list", "list", "l"])
 
             Prompter.log(f"邀请名单：{invite_list}")
 

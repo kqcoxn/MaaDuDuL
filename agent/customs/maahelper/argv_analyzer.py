@@ -8,6 +8,7 @@ from maa.custom_recognition import CustomRecognition
 from maa.custom_action import CustomAction
 
 import json
+import re
 from urllib.parse import parse_qs, unquote
 
 
@@ -156,3 +157,60 @@ class ParamAnalyzer:
 
         # 无法转换则返回原值
         return value
+
+    def split_list(
+        self, key: str | list[str], separators: str = None, default=None
+    ) -> list:
+        """获取参数值并按分隔符拆分为列表
+
+        适用于需要将单个输入框的内容拆分为多个元素的场景。
+        默认支持的分隔符：中文逗号、英文逗号、斜杠、反斜杠、空格、中文分号、英文分号
+
+        Args:
+            key: 参数键名，可以是单个字符串或字符串列表。
+                 当传入列表时，按顺序查找，返回第一个命中的值
+            separators: 自定义分隔符字符串，为 None 时使用默认分隔符
+            default: 默认值，当 key 不存在时返回。
+                     若为 None 且未获取到值，则返回空列表 []
+
+        Returns:
+            list: 拆分后的列表，已自动过滤空字符串和去除两端空白
+
+        Example:
+            >>> # 输入: "角色1,角色2/角色3 角色4"
+            >>> args.split_list("invite_list")
+            ['角色1', '角色2', '角色3', '角色4']
+
+            >>> # 使用自定义分隔符
+            >>> args.split_list("data", separators="|;")
+            ['item1', 'item2', 'item3']
+        """
+        # 获取原始字符串值
+        raw_value = self.get(key, default=None)
+
+        # 如果未获取到值，返回默认值
+        if raw_value is None:
+            return default if default is not None else []
+
+        # 如果已经是列表，直接返回（过滤空值）
+        if isinstance(raw_value, list):
+            return [str(item).strip() for item in raw_value if str(item).strip()]
+
+        # 转换为字符串
+        raw_value = str(raw_value).strip()
+        if not raw_value:
+            return []
+
+        # 使用默认分隔符或自定义分隔符
+        if separators is None:
+            separators = "，,\\/ ;；、"  # 中文逗号、英文逗号、斜杠、反斜杠、空格、中文分号、英文分号、中文顿号
+
+        # 构建正则表达式：匹配一个或多个分隔符
+        # 特殊字符需要转义
+        escaped_separators = re.escape(separators)
+        pattern = f"[{escaped_separators}]+"
+
+        # 拆分并过滤空字符串
+        result = [item.strip() for item in re.split(pattern, raw_value) if item.strip()]
+
+        return result

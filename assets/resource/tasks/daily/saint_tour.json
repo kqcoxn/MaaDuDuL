@@ -137,42 +137,19 @@
 		"圣团巡礼-每日宴会-邀请名单": {
 			"type": "input",
 			"label": "邀请名单",
-			"description": "设置要邀请的角色，每个空只填一个，可留空",
+			"description": "建议将需要邀请的角色收藏，以提高查找效率",
 			"inputs": [
 				{
-					"name": "角色1",
-					"default": "",
-					"pipeline_type": "string",
-					"verify": ".*"
-				},
-				{
-					"name": "角色2",
-					"default": "",
-					"pipeline_type": "string",
-					"verify": ".*"
-				},
-				{
-					"name": "角色3",
-					"default": "",
-					"pipeline_type": "string",
-					"verify": ".*"
-				},
-				{
-					"name": "角色4",
-					"default": "",
-					"pipeline_type": "string",
-					"verify": ".*"
-				},
-				{
-					"name": "角色5",
-					"default": "",
-					"pipeline_type": "string",
-					"verify": ".*"
+					"name": "名单",
+					"label": "名单",
+					"description": "设置要邀请的角色，支持模糊搜索（如“锡安”），以顿号/分号/逗号/空格/斜杠分隔",
+					"default": "梅露娜、玛丽",
+					"pipeline_type": "string"
 				}
 			],
 			"pipeline_override": {
 				"圣团巡礼_开始宴会": {
-					"custom_action_param": "l={角色1}&l={角色2}&l={角色3}&l={角色4}&l={角色5}"
+					"custom_action_param": "invite_list={名单}"
 				}
 			}
 		},
