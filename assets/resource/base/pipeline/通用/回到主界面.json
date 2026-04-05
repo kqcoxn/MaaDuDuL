@@ -4,14 +4,14 @@
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
             "filename": "返回主界面",
             "isModifiedExternally": false,
-            "lastSyncTime": 1775308104514,
+            "lastSyncTime": 1775370326621,
             "prefix": "返回主界面",
             "savedViewport": {
-                "x": -1561,
-                "y": 85,
-                "zoom": 0.82
+                "x": -3231,
+                "y": -84,
+                "zoom": 1.32
             },
-            "version": "v1.3.1"
+            "version": "v1.4.0"
         }
     },
     "返回主界面_使徒": {
@@ -218,9 +218,11 @@
                     "main/close-blue.png",
                     "main/close-black-yellow.png",
                     "main/close-yellow.png",
-                    "main/close-bw.png"
+                    "main/close-bw.png",
+                    "main/close-green.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
