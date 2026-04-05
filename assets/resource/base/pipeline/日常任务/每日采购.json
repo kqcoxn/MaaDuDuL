@@ -1,17 +1,17 @@
 {
     "$__mpe_config_每日采购": {
         "$__mpe_code": {
-            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
+            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
             "filename": "每日采购",
             "isModifiedExternally": false,
-            "lastSyncTime": 1774689310732,
+            "lastSyncTime": 1775373217512,
             "prefix": "每日采购",
             "savedViewport": {
-                "x": -4691,
-                "y": -2407,
-                "zoom": 1.09
+                "x": -6448,
+                "y": -846,
+                "zoom": 1.39
             },
-            "version": "v1.3.1"
+            "version": "v1.4.0"
         }
     },
     "$__mpe_external_返回主界面_每日采购": {
@@ -373,8 +373,8 @@
     "每日采购_普通商店周期提醒": {
         "$__mpe_code": {
             "position": {
-                "x": 4545,
-                "y": 907
+                "x": 4825,
+                "y": 1030
             }
         },
         "focus": {
@@ -389,8 +389,8 @@
     "每日采购_普通商店周期检查": {
         "$__mpe_code": {
             "position": {
-                "x": 4274,
-                "y": 714
+                "x": 4547,
+                "y": 711
             }
         },
         "action": {
@@ -401,7 +401,7 @@
             "type": "Custom"
         },
         "next": [
-            "每日采购_普通商店提醒"
+            "每日采购_进入普通商店"
         ],
         "on_error": [
             "每日采购_普通商店周期提醒"
@@ -432,8 +432,8 @@
     "每日采购_普通商店开始": {
         "$__mpe_code": {
             "position": {
-                "x": 4008,
-                "y": 715
+                "x": 4281,
+                "y": 712
             }
         },
         "next": [
@@ -441,20 +441,6 @@
         ],
         "post_delay": 0,
         "pre_delay": 0
-    },
-    "每日采购_普通商店提醒": {
-        "$__mpe_code": {
-            "position": {
-                "x": 4542,
-                "y": 714
-            }
-        },
-        "focus": {
-            "Node.Recognition.Starting": " \u003e 进入普通商店"
-        },
-        "next": [
-            "每日采购_进入普通商店"
-        ]
     },
     "每日采购_普通商店结束": {
         "$__mpe_code": {
@@ -1554,10 +1540,10 @@
                     "战斗宝石商店"
                 ],
                 "roi": [
-                    14,
-                    95,
-                    233,
-                    425
+                    7,
+                    77,
+                    203,
+                    639
                 ]
             },
             "type": "OCR"
@@ -1586,10 +1572,10 @@
                     "日常商店"
                 ],
                 "roi": [
-                    14,
-                    95,
-                    233,
-                    425
+                    7,
+                    77,
+                    203,
+                    639
                 ]
             },
             "type": "OCR"
@@ -1598,13 +1584,16 @@
     "每日采购_进入普通商店": {
         "$__mpe_code": {
             "position": {
-                "x": 4812,
+                "x": 4825,
                 "y": 712
             }
         },
         "action": {
             "param": {},
             "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 进入普通商店"
         },
         "next": [
             "每日采购_特别商店开始"
@@ -1713,10 +1702,10 @@
                     "特別商店"
                 ],
                 "roi": [
-                    14,
-                    95,
-                    233,
-                    425
+                    7,
+                    77,
+                    203,
+                    639
                 ]
             },
             "type": "OCR"
