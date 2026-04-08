@@ -2,13 +2,13 @@
     "$__mpe_config_短期速成班": {
         "$__mpe_code": {
             "prefix": "短期速成班",
-            "lastSyncTime": 1775650952482,
+            "lastSyncTime": 1775652181425,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\短期速成班.json",
             "savedViewport": {
-                "x": -10370,
-                "y": -155,
-                "zoom": 1.52
+                "x": -8203,
+                "y": 114,
+                "zoom": 1
             },
             "filename": "短期速成班",
             "version": "v1.4.1"
@@ -265,6 +265,7 @@
                 ]
             }
         },
+        "pre_delay": 1000,
         "action": {
             "type": "Click",
             "param": {}
@@ -277,8 +278,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9054,
-                "y": 125
+                "x": 9053,
+                "y": 103
             }
         }
     },
