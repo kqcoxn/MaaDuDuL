@@ -12,12 +12,12 @@ class Run(CustomAction):
         try:
             args = ParamAnalyzer(argv)
             entry = args.get(["task", "t", "node", "n", "entry"])
-            expected_end = args.get(["expected_end", "ee", "e"], "")
+            expected_end = args.split_list(["expected_end", "ee", "e"], "")
 
             task_detail = Tasker(context).run(entry)
 
             if expected_end:
-                if Tasker.get_last_node_name(task_detail) != expected_end:
+                if Tasker.get_last_node_name(task_detail) not in expected_end:
                     return False
             return True
         except Exception as e:

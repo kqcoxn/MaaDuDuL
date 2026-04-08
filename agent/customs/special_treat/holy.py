@@ -14,13 +14,14 @@ import time
 from agent.customs.maahelper.reco_helper import RecoHelper
 from agent.customs.utils import Prompter
 from agent.customs.maahelper import ParamAnalyzer, Tasker
+from agent.customs.utils.matrix_operator import MatrixOperator
 
 
 # ====================  宴席邀请  ====================
 
 
-@AgentServer.custom_action("banquet")
-class Banquet(CustomAction):
+@AgentServer.custom_action("list_banquet")
+class ListBanquet(CustomAction):
     """宴席邀请自定义动作。
 
     该动作负责执行圣团巡礼活动中的宴席邀请流程，
@@ -59,6 +60,78 @@ class Banquet(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("宴席", e)
+
+
+guest_matrix = MatrixOperator(370, 208, 184, 196)
+cur_guest_index = (1, 1)
+
+
+@AgentServer.custom_action("favorites_banquet")
+class FavoritesBanquet(CustomAction):
+    """收藏客人宴席邀请自定义动作。
+
+    该动作负责按照矩阵布局依次邀请收藏的客人参加宴席，
+    通过行列索引定位客人位置并执行邀请流程。
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行收藏客人宴席邀请动作。
+
+        Args:
+            context: MAA 上下文对象，提供任务执行环境。
+            argv: 动作运行参数，包含收藏客人数量。
+
+        Returns:
+            bool: 邀请成功返回 True，失败返回 False。
+        """
+        global cur_guest_index
+        try:
+            # 解析参数，获取收藏客人数量
+            args = ParamAnalyzer(argv)
+            count = args.get(["count", "c"])
+            Prompter.log(f"收藏客人数量：{count}")
+            if count > 12:
+                Prompter.error("收藏客人数量不能超过 12")
+
+            # 遍历收藏客人矩阵，按行列索引依次邀请
+            for i in range(count):
+                cur_guest_index = (i // 4 + 1, i % 4 + 1)
+                Prompter.log(f"正在邀请：{cur_guest_index}")
+                Tasker(context).run(
+                    "圣团巡礼_邀请客人开始",
+                    {"圣团巡礼_邀请客人开始": {"next": "圣团巡礼_邀请客人2"}},
+                )
+            Prompter.log(f"邀请结束")
+
+            return True
+        except Exception as e:
+            return Prompter.error("宴席", e)
+
+
+@AgentServer.custom_action("click_matrix_guest")
+class ClickMatrixGuest(CustomAction):
+    """点击矩阵客人位置自定义动作。
+
+    该动作根据当前客人索引，在客人矩阵中定位并点击对应位置。
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行点击矩阵客人位置动作。
+
+        Args:
+            context: MAA 上下文对象，提供任务执行环境。
+            argv: 动作运行参数。
+
+        Returns:
+            bool: 点击成功返回 True，失败返回 False。
+        """
+        global cur_guest_index, guest_matrix
+        try:
+            # 根据当前客人索引获取矩阵坐标并点击
+            Tasker(context).click(*guest_matrix.get_pos(*cur_guest_index))
+            return True
+        except Exception as e:
+            return Prompter.error("选择收藏客人", e)
 
 
 # ====================  冒险协会  ====================
