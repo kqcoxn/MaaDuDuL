@@ -1,17 +1,17 @@
 {
     "$__mpe_config_清红糖": {
         "$__mpe_code": {
-            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
-            "filename": "清红糖",
-            "isModifiedExternally": false,
-            "lastSyncTime": 1774879848168,
             "prefix": "清红糖",
+            "lastSyncTime": 1775650930607,
+            "isModifiedExternally": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
             "savedViewport": {
-                "x": -7683,
-                "y": 530,
-                "zoom": 1.06
+                "x": -8858,
+                "y": 631,
+                "zoom": 1.52
             },
-            "version": "v1.3.1"
+            "filename": "清红糖",
+            "version": "v1.4.1"
         }
     },
     "$__mpe_external_返回主界面_清红糖": {
@@ -23,282 +23,277 @@
         }
     },
     "清红糖_从心形返回": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "global/back.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "repeat": 2,
+        "repeat_delay": 800,
+        "next": [
+            "清红糖_心形结束"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 8196,
                 "y": -301
             }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "next": [
-            "清红糖_心形结束"
-        ],
-        "recognition": {
-            "param": {
-                "template": [
-                    "global/back.png"
-                ]
-            },
-            "type": "TemplateMatch"
-        },
-        "repeat": 2,
-        "repeat_delay": 800
+        }
     },
     "清红糖_娃娃怪破坏者": {
-        "$__mpe_code": {
-            "position": {
-                "x": 7112,
-                "y": -300
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "next": [
-            "清红糖_选择心形种族"
-        ],
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "娃娃怪破坏者"
-                ],
                 "roi": [
                     501,
                     88,
                     454,
                     209
+                ],
+                "expected": [
+                    "娃娃怪破坏者"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "next": [
+            "清红糖_选择心形种族"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7112,
+                "y": -300
+            }
         }
     },
     "清红糖_开始": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "on_task_start",
+                "custom_action_param": "h=hs"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "清红糖_进入冒险"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 5998,
                 "y": -301
             }
-        },
-        "action": {
-            "param": {
-                "custom_action": "on_task_start",
-                "custom_action_param": "h=hs"
-            },
-            "type": "Custom"
-        },
-        "next": [
-            "清红糖_进入冒险"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
+        }
     },
     "清红糖_微微辣": {
-        "$__mpe_code": {
-            "position": {
-                "x": 7069,
-                "y": 240
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "focus": {
-            "Node.Recognition.Succeeded": " \u003e 查找指定世界"
-        },
-        "next": [
-            "清红糖_指定关卡作战"
-        ],
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "微微辣"
-                ],
                 "roi": [
                     9,
                     607,
                     1261,
                     111
+                ],
+                "expected": [
+                    "微微辣"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " > 查找指定世界"
+        },
+        "next": [
+            "清红糖_指定关卡作战"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7069,
+                "y": 240
+            }
         }
     },
     "清红糖_心形周期提醒": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Starting": " > 今日已心形"
+        },
+        "next": [
+            "清红糖_心形结束"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 7112,
                 "y": -90
             }
-        },
-        "focus": {
-            "Node.Recognition.Starting": " \u003e 今日已心形"
-        },
-        "next": [
-            "清红糖_心形结束"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
+        }
     },
     "清红糖_心形周期检查": {
-        "$__mpe_code": {
-            "position": {
-                "x": 6832,
-                "y": -297
-            }
-        },
+        "pre_delay": 0,
         "action": {
+            "type": "Custom",
             "param": {
                 "custom_action": "periodic_check",
                 "custom_action_param": "k=心形"
-            },
-            "type": "Custom"
+            }
         },
+        "post_delay": 0,
         "next": [
             "清红糖_娃娃怪破坏者"
         ],
         "on_error": [
             "清红糖_心形周期提醒"
         ],
-        "post_delay": 0,
-        "pre_delay": 0
+        "$__mpe_code": {
+            "position": {
+                "x": 6832,
+                "y": -297
+            }
+        }
     },
     "清红糖_心形周期记录": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=心形"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "清红糖_从心形返回"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 7930,
                 "y": -301
             }
-        },
-        "action": {
-            "param": {
-                "custom_action": "record_period",
-                "custom_action_param": "k=心形"
-            },
-            "type": "Custom"
-        },
-        "next": [
-            "清红糖_从心形返回"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
+        }
     },
     "清红糖_心形开始": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "清红糖_心形周期检查"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 6550,
                 "y": -298
             }
-        },
-        "next": [
-            "清红糖_心形周期检查"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
+        }
     },
     "清红糖_心形结束": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "清红糖_装备开始"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 8465,
                 "y": -302
             }
-        },
-        "next": [
-            "清红糖_装备开始"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
+        }
     },
     "清红糖_指定关卡作战": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "select_red_level",
+                "custom_action_param": "sl=24-1&el=24-1"
+            }
+        },
+        "next": [
+            "清红糖_装备结束"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 7329,
                 "y": 240
             }
-        },
-        "action": {
-            "param": {
-                "custom_action": "select_red_level",
-                "custom_action_param": "sl=24-1\u0026el=24-1"
-            },
-            "type": "Custom"
-        },
-        "next": [
-            "清红糖_装备结束"
-        ]
+        }
     },
     "清红糖_振兴之路": {
-        "$__mpe_code": {
-            "position": {
-                "x": 6809,
-                "y": 240
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "next": [
-            "清红糖_微微辣"
-        ],
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "振兴之路"
-                ],
                 "roi": [
                     834,
                     411,
                     441,
                     241
+                ],
+                "expected": [
+                    "振兴之路"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "next": [
+            "清红糖_微微辣"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6809,
+                "y": 240
+            }
         }
     },
     "清红糖_查找关卡": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^x-x$"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
         "$__mpe_code": {
             "position": {
                 "x": 7429,
                 "y": 884
             }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "recognition": {
-            "param": {
-                "expected": [
-                    "^x-x$"
-                ]
-            },
-            "type": "OCR"
         }
     },
     "清红糖_查找关卡开始": {
+        "next": [
+            "清红糖_滑动至右下角"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 6909,
                 "y": 883
             }
-        },
-        "next": [
-            "清红糖_滑动至右下角"
-        ]
+        }
     },
     "清红糖_滑动至右下角": {
-        "$__mpe_code": {
-            "position": {
-                "x": 7169,
-                "y": 884
-            }
-        },
         "action": {
+            "type": "Swipe",
             "param": {
                 "begin": [
                     1257,
@@ -314,24 +309,24 @@
                         1
                     ]
                 ]
-            },
-            "type": "Swipe"
+            }
         },
+        "repeat": 2,
+        "repeat_delay": 500,
         "next": [
             "清红糖_查找关卡",
             "[JumpBack]清红糖_章节左滑"
         ],
-        "repeat": 2,
-        "repeat_delay": 500
-    },
-    "清红糖_章节前跳": {
         "$__mpe_code": {
             "position": {
-                "x": 7164,
-                "y": 592
+                "x": 7169,
+                "y": 884
             }
-        },
+        }
+    },
+    "清红糖_章节前跳": {
         "action": {
+            "type": "Click",
             "param": {
                 "target": [
                     45,
@@ -339,20 +334,20 @@
                     1,
                     1
                 ]
-            },
-            "type": "Click"
-        },
-        "repeat": 1,
-        "repeat_delay": 800
-    },
-    "清红糖_章节后跳": {
-        "$__mpe_code": {
-            "position": {
-                "x": 7418,
-                "y": 591
             }
         },
+        "repeat": 1,
+        "repeat_delay": 800,
+        "$__mpe_code": {
+            "position": {
+                "x": 7164,
+                "y": 592
+            }
+        }
+    },
+    "清红糖_章节后跳": {
         "action": {
+            "type": "Click",
             "param": {
                 "target": [
                     1229,
@@ -360,20 +355,20 @@
                     1,
                     1
                 ]
-            },
-            "type": "Click"
-        },
-        "repeat": 1,
-        "repeat_delay": 800
-    },
-    "清红糖_章节左滑": {
-        "$__mpe_code": {
-            "position": {
-                "x": 7428,
-                "y": 1054
             }
         },
+        "repeat": 1,
+        "repeat_delay": 800,
+        "$__mpe_code": {
+            "position": {
+                "x": 7418,
+                "y": 591
+            }
+        }
+    },
+    "清红糖_章节左滑": {
         "action": {
+            "type": "Swipe",
             "param": {
                 "begin": [
                     44,
@@ -389,138 +384,150 @@
                         1
                     ]
                 ]
-            },
-            "type": "Swipe"
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 7428,
+                "y": 1054
+            }
         }
     },
     "清红糖_装备开始": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "清红糖_振兴之路"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 6545,
                 "y": 241
             }
-        },
-        "next": [
-            "清红糖_振兴之路"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
+        }
     },
     "清红糖_装备结束": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "返回主界面"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 7592,
                 "y": 243
             }
-        },
-        "next": [
-            "返回主界面"
-        ],
-        "post_delay": 0,
-        "pre_delay": 0
+        }
     },
     "清红糖_识别当前章节": {
-        "$__mpe_code": {
-            "position": {
-                "x": 6905,
-                "y": 593
-            }
-        },
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "-"
-                ],
                 "roi": [
                     4,
                     149,
                     1267,
                     457
+                ],
+                "expected": [
+                    "-"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 6905,
+                "y": 593
+            }
         }
     },
     "清红糖_进入冒险": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1070,
+                    591,
+                    207,
+                    126
+                ],
+                "expected": [
+                    "冒险"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1182,
+                    664,
+                    1,
+                    1
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " > 进入振兴之路"
+        },
+        "next": [
+            "清红糖_心形开始"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 6281,
                 "y": -300
             }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "focus": {
-            "Node.Recognition.Succeeded": " \u003e 进入振兴之路"
-        },
-        "next": [
-            "清红糖_心形开始"
-        ],
-        "recognition": {
-            "param": {
-                "expected": [
-                    "冒险"
-                ],
-                "roi": [
-                    1075,
-                    604,
-                    195,
-                    106
-                ]
-            },
-            "type": "OCR"
         }
     },
     "清红糖_选择心形种族": {
-        "$__mpe_code": {
-            "position": {
-                "x": 7391,
-                "y": -299
-            }
-        },
-        "action": {
-            "param": {
-                "custom_action": "select_heart_type",
-                "custom_action_param": "t=龙族"
-            },
-            "type": "Custom"
-        },
-        "next": [
-            "清红糖_速刷心形"
-        ],
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "娃娃怪破坏者"
-                ],
                 "roi": [
                     3,
                     2,
                     393,
                     92
+                ],
+                "expected": [
+                    "娃娃怪破坏者"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "select_heart_type",
+                "custom_action_param": "t=龙族"
+            }
+        },
+        "next": [
+            "清红糖_速刷心形"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7391,
+                "y": -299
+            }
         }
     },
     "清红糖_速刷心形": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "run",
+                "custom_action_param": "t=速战"
+            }
+        },
+        "next": [
+            "清红糖_心形周期记录"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 7663,
                 "y": -300
             }
-        },
-        "action": {
-            "param": {
-                "custom_action": "run",
-                "custom_action_param": "t=速战"
-            },
-            "type": "Custom"
-        },
-        "next": [
-            "清红糖_心形周期记录"
-        ]
+        }
     }
 }

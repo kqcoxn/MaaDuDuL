@@ -1,625 +1,678 @@
 {
-	"$__mpe_config_巅峰对决": {
-		"$__mpe_code": {
-			"filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\巅峰对决.json",
-			"filename": "巅峰对决",
-			"lastSyncTime": 1768489077904,
-			"prefix": "巅峰对决",
-			"savedViewport": {
-				"x": -9406,
-				"y": -1272,
-				"zoom": 1.15
-			},
-			"version": "v0.15.3"
-		}
-	},
-	"$__mpe_external_返回主界面_巅峰对决": {
-		"$__mpe_code": {
-			"position": {
-				"x": 9564,
-				"y": 1784
-			}
-		}
-	},
-	"巅峰对决_关闭其他界面": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8049,
-				"y": 481
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"recognition": {
-			"param": {
-				"expected": ["确定"]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_宝石领取周期提醒": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7895,
-				"y": 1318
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"focus": {
-			"Node.Recognition.Starting": " \u003e 今日宝石已领取"
-		},
-		"next": ["巅峰对决_领取战斗宝石结束"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_对战周期提醒": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7885,
-				"y": 2072
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"focus": {
-			"Node.Recognition.Starting": " \u003e 今日已对战"
-		},
-		"next": ["巅峰对决_对战结束"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_对战周期检查": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7594,
-				"y": 1791
-			}
-		},
-		"action": {
-			"param": {
-				"custom_action": "periodic_check",
-				"custom_action_param": "k=巅峰对战"
-			},
-			"type": "Custom"
-		},
-		"next": ["巅峰对决_对战提醒"],
-		"on_error": ["巅峰对决_对战周期提醒"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_对战周期记录": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8997,
-				"y": 1781
-			}
-		},
-		"action": {
-			"param": {
-				"custom_action": "record_period",
-				"custom_action_param": "k=巅峰对战"
-			},
-			"type": "Custom"
-		},
-		"next": ["巅峰对决_对战结束"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_对战完成": {
-		"$__mpe_code": {
-			"position": {
-				"x": 9006,
-				"y": 1498
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 作战完成"
-		},
-		"next": ["巅峰对决_对战循环"],
-		"recognition": {
-			"param": {
-				"expected": ["退出"],
-				"roi": [869, 636, 132, 56]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_对战开始": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7313,
-				"y": 1793
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": ["巅峰对决_对战周期检查"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_对战循环": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8165,
-				"y": 1791
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": ["巅峰对决_选择对手", "巅峰对决_对战次数耗尽"],
-		"post_delay": 0,
-		"pre_delay": 500,
-		"recognition": {
-			"param": {
-				"expected": ["请选择对手"],
-				"roi": [544, 69, 195, 69]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_对战提醒": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7890,
-				"y": 1788
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"focus": {
-			"Node.Recognition.Starting": " \u003e 开始对战"
-		},
-		"next": ["巅峰对决_对战循环"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_对战次数耗尽": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8729,
-				"y": 1778
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 挑战完成"
-		},
-		"next": ["巅峰对决_对战周期记录"],
-		"recognition": {
-			"param": {
-				"expected": ["重置挑战次数"],
-				"roi": [322, 145, 637, 227]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_对战结束": {
-		"$__mpe_code": {
-			"position": {
-				"x": 9275,
-				"y": 1782
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": ["返回主界面"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_开始": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7237,
-				"y": 656
-			}
-		},
-		"action": {
-			"param": {
-				"custom_action": "on_task_start",
-				"custom_action_param": "h=hs"
-			},
-			"type": "Custom"
-		},
-		"next": ["巅峰对决_进入冒险"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_开始对战": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8730,
-				"y": 1435
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 再无话说，请速速动手！"
-		},
-		"next": ["巅峰对决_对战完成", "巅峰对决_未设置使徒"],
-		"rate_limit": 3000,
-		"recognition": {
-			"param": {
-				"expected": ["去获胜"],
-				"roi": [994, 637, 105, 49]
-			},
-			"type": "OCR"
-		},
-		"timeout": 200000
-	},
-	"巅峰对决_战斗宝石周期检查": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7608,
-				"y": 1031
-			}
-		},
-		"action": {
-			"param": {
-				"custom_action": "periodic_check",
-				"custom_action_param": "k=领取战斗宝石"
-			},
-			"type": "Custom"
-		},
-		"next": ["巅峰对决_领取战斗宝石"],
-		"on_error": ["巅峰对决_宝石领取周期提醒"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_战斗宝石周期记录": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8458,
-				"y": 1022
-			}
-		},
-		"action": {
-			"param": {
-				"custom_action": "record_period",
-				"custom_action_param": "k=领取战斗宝石"
-			},
-			"type": "Custom"
-		},
-		"next": ["巅峰对决_领取战斗宝石结束"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_无可领取的战斗宝石": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8170,
-				"y": 1245
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 今日宝石已领取"
-		},
-		"next": ["巅峰对决_战斗宝石周期记录"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {
-				"expected": ["当前无可领取的"]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_未设置使徒": {
-		"$__mpe_code": {
-			"position": {
-				"x": 9008,
-				"y": 1209
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 未设置作战队伍，请配置队伍后使用"
-		},
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {
-				"expected": ["是谁都行"]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_确保进入巅峰对决": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8052,
-				"y": 655
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": ["巅峰对决_进入竞技场"],
-		"recognition": {
-			"param": {
-				"expected": ["巅峰对决"],
-				"roi": [5, 6, 395, 102]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_获取战斗宝石奖励": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8168,
-				"y": 1019
-			}
-		},
-		"action": {
-			"param": {
-				"target": [643, 642, 1, 1]
-			},
-			"type": "Click"
-		},
-		"next": ["巅峰对决_战斗宝石周期记录"],
-		"recognition": {
-			"param": {
-				"expected": ["请点击屏幕继续"]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_识别对手战斗力": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8165,
-				"y": 2068
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"recognition": {
-			"param": {
-				"expected": ["战斗力"],
-				"roi": [807, 86, 464, 608]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_识别自身战斗力": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8166,
-				"y": 2267
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"recognition": {
-			"param": {
-				"expected": [""],
-				"roi": [40, 498, 275, 61]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_进入冒险": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7509,
-				"y": 656
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 进入巅峰对决竞技场"
-		},
-		"next": ["巅峰对决_进入巅峰对决"],
-		"recognition": {
-			"param": {
-				"expected": ["冒险"],
-				"roi": [1126, 634, 115, 78]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_进入巅峰对决": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7782,
-				"y": 656
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"next": ["巅峰对决_确保进入巅峰对决", "[JumpBack]巅峰对决_关闭其他界面"],
-		"recognition": {
-			"param": {
-				"expected": ["巅峰对决"],
-				"roi": [355, 333, 212, 120]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_进入竞技场": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8339,
-				"y": 654
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"next": ["巅峰对决_领取战斗宝石开始"],
-		"recognition": {
-			"param": {
-				"expected": ["入场"],
-				"roi": [891, 279, 132, 80]
-			},
-			"type": "OCR"
-		}
-	},
-	"巅峰对决_选择对手": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8443,
-				"y": 1782
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Starting": " \u003e 选择对手"
-		},
-		"next": ["巅峰对决_开始对战", "巅峰对决_对战次数耗尽"],
-		"recognition": {
-			"param": {
-				"custom_recognition": "pick_opponent"
-			},
-			"type": "Custom"
-		}
-	},
-	"巅峰对决_领取战斗宝石": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7896,
-				"y": 1023
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "Click"
-		},
-		"focus": {
-			"Node.Recognition.Succeeded": " \u003e 领取战斗宝石"
-		},
-		"next": ["巅峰对决_获取战斗宝石奖励", "巅峰对决_无可领取的战斗宝石"],
-		"on_error": ["巅峰对决_战斗宝石周期记录"],
-		"recognition": {
-			"param": {
-				"expected": ["领取奖励"],
-				"roi": [5, 220, 264, 286]
-			},
-			"type": "OCR"
-		},
-		"timeout": 3000
-	},
-	"巅峰对决_领取战斗宝石开始": {
-		"$__mpe_code": {
-			"position": {
-				"x": 7327,
-				"y": 1032
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": ["巅峰对决_战斗宝石周期检查"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	},
-	"巅峰对决_领取战斗宝石结束": {
-		"$__mpe_code": {
-			"position": {
-				"x": 8754,
-				"y": 1020
-			}
-		},
-		"action": {
-			"param": {},
-			"type": "DoNothing"
-		},
-		"next": ["巅峰对决_对战开始"],
-		"post_delay": 0,
-		"pre_delay": 0,
-		"recognition": {
-			"param": {},
-			"type": "DirectHit"
-		}
-	}
+    "$__mpe_config_巅峰对决": {
+        "$__mpe_code": {
+            "prefix": "巅峰对决",
+            "lastSyncTime": 1775650757843,
+            "isModifiedExternally": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\巅峰对决.json",
+            "savedViewport": {
+                "x": -9012,
+                "y": -703,
+                "zoom": 1.32
+            },
+            "filename": "巅峰对决",
+            "version": "v1.4.1"
+        }
+    },
+    "$__mpe_external_返回主界面_巅峰对决": {
+        "$__mpe_code": {
+            "position": {
+                "x": 9564,
+                "y": 1784
+            }
+        }
+    },
+    "巅峰对决_关闭其他界面": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "确定"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 8049,
+                "y": 481
+            }
+        }
+    },
+    "巅峰对决_宝石领取周期提醒": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Starting": " > 今日宝石已领取"
+        },
+        "next": [
+            "巅峰对决_领取战斗宝石结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7895,
+                "y": 1318
+            }
+        }
+    },
+    "巅峰对决_对战周期提醒": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Starting": " > 今日已对战"
+        },
+        "next": [
+            "巅峰对决_对战结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7885,
+                "y": 2072
+            }
+        }
+    },
+    "巅峰对决_对战周期检查": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=巅峰对战"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_对战提醒"
+        ],
+        "on_error": [
+            "巅峰对决_对战周期提醒"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7594,
+                "y": 1791
+            }
+        }
+    },
+    "巅峰对决_对战周期记录": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=巅峰对战"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_对战结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8997,
+                "y": 1781
+            }
+        }
+    },
+    "巅峰对决_对战完成": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    869,
+                    636,
+                    132,
+                    56
+                ],
+                "expected": [
+                    "退出"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " > 作战完成"
+        },
+        "next": [
+            "巅峰对决_对战循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 9006,
+                "y": 1498
+            }
+        }
+    },
+    "巅峰对决_对战开始": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_对战周期检查"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7313,
+                "y": 1793
+            }
+        }
+    },
+    "巅峰对决_对战循环": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    544,
+                    69,
+                    195,
+                    69
+                ],
+                "expected": [
+                    "请选择对手"
+                ]
+            }
+        },
+        "pre_delay": 500,
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_选择对手",
+            "巅峰对决_对战次数耗尽"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8165,
+                "y": 1791
+            }
+        }
+    },
+    "巅峰对决_对战提醒": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Starting": " > 开始对战"
+        },
+        "next": [
+            "巅峰对决_对战循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7890,
+                "y": 1788
+            }
+        }
+    },
+    "巅峰对决_对战次数耗尽": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    322,
+                    145,
+                    637,
+                    227
+                ],
+                "expected": [
+                    "重置挑战次数"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " > 挑战完成"
+        },
+        "next": [
+            "巅峰对决_对战周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8729,
+                "y": 1778
+            }
+        }
+    },
+    "巅峰对决_对战结束": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "返回主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 9275,
+                "y": 1782
+            }
+        }
+    },
+    "巅峰对决_开始": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "on_task_start",
+                "custom_action_param": "h=hs"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_进入冒险"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7237,
+                "y": 656
+            }
+        }
+    },
+    "巅峰对决_开始对战": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    994,
+                    637,
+                    105,
+                    49
+                ],
+                "expected": [
+                    "去获胜"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "timeout": 200000,
+        "rate_limit": 3000,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 再无话说，请速速动手！"
+        },
+        "next": [
+            "巅峰对决_对战完成",
+            "巅峰对决_未设置使徒"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8730,
+                "y": 1435
+            }
+        }
+    },
+    "巅峰对决_战斗宝石周期检查": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=领取战斗宝石"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_领取战斗宝石"
+        ],
+        "on_error": [
+            "巅峰对决_宝石领取周期提醒"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7608,
+                "y": 1031
+            }
+        }
+    },
+    "巅峰对决_战斗宝石周期记录": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=领取战斗宝石"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_领取战斗宝石结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8458,
+                "y": 1022
+            }
+        }
+    },
+    "巅峰对决_无可领取的战斗宝石": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "当前无可领取的"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 今日宝石已领取"
+        },
+        "next": [
+            "巅峰对决_战斗宝石周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8170,
+                "y": 1245
+            }
+        }
+    },
+    "巅峰对决_未设置使徒": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "是谁都行"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 未设置作战队伍，请配置队伍后使用"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 9008,
+                "y": 1209
+            }
+        }
+    },
+    "巅峰对决_确保进入巅峰对决": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    5,
+                    6,
+                    395,
+                    102
+                ],
+                "expected": [
+                    "巅峰对决"
+                ]
+            }
+        },
+        "next": [
+            "巅峰对决_进入竞技场"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8052,
+                "y": 655
+            }
+        }
+    },
+    "巅峰对决_获取战斗宝石奖励": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "请点击屏幕继续"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    643,
+                    642,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "巅峰对决_战斗宝石周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8168,
+                "y": 1019
+            }
+        }
+    },
+    "巅峰对决_识别对手战斗力": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    807,
+                    86,
+                    464,
+                    608
+                ],
+                "expected": [
+                    "战斗力"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 8165,
+                "y": 2068
+            }
+        }
+    },
+    "巅峰对决_识别自身战斗力": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    40,
+                    498,
+                    275,
+                    61
+                ],
+                "expected": [
+                    ""
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 8166,
+                "y": 2267
+            }
+        }
+    },
+    "巅峰对决_进入冒险": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1066,
+                    585,
+                    210,
+                    130
+                ],
+                "expected": [
+                    "冒险"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1186,
+                    667,
+                    1,
+                    1
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " > 进入巅峰对决竞技场"
+        },
+        "next": [
+            "巅峰对决_进入巅峰对决"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7509,
+                "y": 656
+            }
+        }
+    },
+    "巅峰对决_进入巅峰对决": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    355,
+                    333,
+                    212,
+                    120
+                ],
+                "expected": [
+                    "巅峰对决"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "next": [
+            "巅峰对决_确保进入巅峰对决",
+            "[JumpBack]巅峰对决_关闭其他界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7782,
+                "y": 656
+            }
+        }
+    },
+    "巅峰对决_进入竞技场": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    891,
+                    279,
+                    132,
+                    80
+                ],
+                "expected": [
+                    "入场"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "next": [
+            "巅峰对决_领取战斗宝石开始"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8339,
+                "y": 654
+            }
+        }
+    },
+    "巅峰对决_选择对手": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "pick_opponent"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "focus": {
+            "Node.Recognition.Starting": " > 选择对手"
+        },
+        "next": [
+            "巅峰对决_开始对战",
+            "巅峰对决_对战次数耗尽"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8443,
+                "y": 1782
+            }
+        }
+    },
+    "巅峰对决_领取战斗宝石": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    5,
+                    220,
+                    264,
+                    286
+                ],
+                "expected": [
+                    "领取奖励"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "timeout": 3000,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 领取战斗宝石"
+        },
+        "next": [
+            "巅峰对决_获取战斗宝石奖励",
+            "巅峰对决_无可领取的战斗宝石"
+        ],
+        "on_error": [
+            "巅峰对决_战斗宝石周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7896,
+                "y": 1023
+            }
+        }
+    },
+    "巅峰对决_领取战斗宝石开始": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_战斗宝石周期检查"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7327,
+                "y": 1032
+            }
+        }
+    },
+    "巅峰对决_领取战斗宝石结束": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "巅峰对决_对战开始"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8754,
+                "y": 1020
+            }
+        }
+    }
 }
