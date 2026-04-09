@@ -2,7 +2,7 @@
 	"task": [
 		{
 			"name": "每日活动作战",
-			"label": "🌃电子羊的永恒之梦【活动】",
+			"label": "🕶️没有王国的黑帮【活动】",
 			"entry": "每日活动作战_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",

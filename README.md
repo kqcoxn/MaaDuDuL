@@ -44,7 +44,7 @@
 - **圣团巡礼**
     - [x] 领取世界树贡品
     - [x] 大扫除（手动/女仆）
-    - [ ] 每日冒险 _（Coming Soon！）_
+    - [x] 每日冒险
     - [x] 每日宴席
     - [x] 领取宠物礼物
 - **巅峰对决**
@@ -69,11 +69,9 @@
 
 \* **若有其他功能需求请提交 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue)**
 
-<!-- ## 使用教程
+## 安装与使用
 
-**每次版本更新后请手动把仅第一次出现的界面过一遍！**
-
-- [文图教程](https://docs.codax.site/mddl/guide/users/start.html) -->
+- [文图教程](https://mddl.codax.site/docs/user/init/start.html)
 
 ## 加入我们
 
