@@ -2,13 +2,13 @@
     "$__mpe_config_短期速成班": {
         "$__mpe_code": {
             "prefix": "短期速成班",
-            "lastSyncTime": 1775652181425,
+            "lastSyncTime": 1776693139277,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\短期速成班.json",
             "savedViewport": {
-                "x": -8203,
-                "y": 114,
-                "zoom": 1
+                "x": -9071,
+                "y": -871,
+                "zoom": 1.15
             },
             "filename": "短期速成班",
             "version": "v1.4.1"
@@ -435,6 +435,79 @@
             "position": {
                 "x": 7966,
                 "y": 202
+            }
+        }
+    },
+    "短期速成班_速战": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "run",
+                "custom_action_param": "t=速战"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "短期速成班_周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8773,
+                "y": 1066
+            }
+        }
+    },
+    "短期速成班_选择速战关卡": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "select_cram_battle_level",
+                "custom_action_param": "1=25&2=25&3=25&4=25&5=25"
+            }
+        },
+        "next": [
+            "短期速成班_速战"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8515,
+                "y": 1067
+            }
+        }
+    },
+    "短期速成班_识别速战关卡": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    24,
+                    81,
+                    266,
+                    618
+                ],
+                "expected": [
+                    "第10课"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 8517,
+                "y": 1269
+            }
+        }
+    },
+    "短期速成班_速战模式": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "短期速成班_选择速战关卡"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8249,
+                "y": 1065
             }
         }
     }

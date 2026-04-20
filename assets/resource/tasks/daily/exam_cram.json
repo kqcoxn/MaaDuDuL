@@ -33,6 +33,15 @@
 			"label": "作战模式",
 			"cases": [
 				{
+					"name": "速战模式",
+					"pipeline_override": {
+						"短期速成班_选择速成班课程": {
+							"next": "短期速成班_速战模式"
+						}
+					},
+					"option": ["短期速成班-速战关卡"]
+				},
+				{
 					"name": "推进模式",
 					"description": "挑战最新一关",
 					"pipeline_override": {
@@ -42,6 +51,48 @@
 					}
 				}
 			]
+		},
+		"短期速成班-速战关卡": {
+			"type": "input",
+			"lebel": "速战关卡",
+			"description": "请选择进入界面后默认可视的可速刷关卡",
+			"inputs": [
+				{
+					"name": "纯真关卡",
+					"default": "25",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				},
+				{
+					"name": "冷静关卡",
+					"default": "25",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				},
+				{
+					"name": "热情关卡",
+					"default": "25",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				},
+				{
+					"name": "活泼关卡",
+					"default": "25",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				},
+				{
+					"name": "忧愁关卡",
+					"default": "25",
+					"pipeline_type": "string",
+					"verify": "^\\d+$"
+				}
+			],
+			"pipeline_override": {
+				"短期速成班_选择速战关卡": {
+					"custom_action_param": "1={纯真关卡}&2={冷静关卡}&3={热情关卡}&4={活泼关卡}&5={忧愁关卡}"
+				}
+			}
 		},
 		"短期速成班-周末关卡选择": {
 			"type": "input",
