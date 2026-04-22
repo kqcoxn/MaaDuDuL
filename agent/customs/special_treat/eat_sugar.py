@@ -336,6 +336,7 @@ class SelectHeartType(CustomAction):
                 target = [868, 488]
             else:
                 Prompter.error("无效的心形关卡类型")
+                return False
             Tasker(context).click(*target)
 
             return True

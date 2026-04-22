@@ -2,16 +2,16 @@
     "$__mpe_config_短期速成班": {
         "$__mpe_code": {
             "prefix": "短期速成班",
-            "lastSyncTime": 1776693139277,
+            "lastSyncTime": 1776866963996,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\短期速成班.json",
             "savedViewport": {
-                "x": -9071,
-                "y": -871,
+                "x": -7698,
+                "y": -115,
                 "zoom": 1.15
             },
             "filename": "短期速成班",
-            "version": "v1.4.1"
+            "version": "v1.4.2"
         }
     },
     "$__mpe_external_返回主界面_短期速成班": {
@@ -94,8 +94,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "post_delay": 5000,
         "timeout": 1200000,
@@ -207,8 +206,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "post_delay": 3000,
         "next": [
@@ -267,8 +265,7 @@
         },
         "pre_delay": 1000,
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 作战成功，进入下一关"
@@ -337,8 +334,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "短期速成班_周期记录"
@@ -350,21 +346,29 @@
             }
         }
     },
-    "短期速成班_进入冒险界面": {
+    "短期速成班_识别速战关卡": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    1057,
-                    584,
-                    218,
-                    131
+                    24,
+                    81,
+                    266,
+                    618
                 ],
                 "expected": [
-                    "冒险"
+                    "第10课"
                 ]
             }
         },
+        "$__mpe_code": {
+            "position": {
+                "x": 8517,
+                "y": 1269
+            }
+        }
+    },
+    "短期速成班_进入冒险界面": {
         "action": {
             "type": "Click",
             "param": {
@@ -405,8 +409,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "短期速成班_确保进入速成班"
@@ -438,26 +441,6 @@
             }
         }
     },
-    "短期速成班_速战": {
-        "pre_delay": 0,
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "run",
-                "custom_action_param": "t=速战"
-            }
-        },
-        "post_delay": 0,
-        "next": [
-            "短期速成班_周期记录"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 8773,
-                "y": 1066
-            }
-        }
-    },
     "短期速成班_选择速战关卡": {
         "action": {
             "type": "Custom",
@@ -476,25 +459,23 @@
             }
         }
     },
-    "短期速成班_识别速战关卡": {
-        "recognition": {
-            "type": "OCR",
+    "短期速成班_速战": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
             "param": {
-                "roi": [
-                    24,
-                    81,
-                    266,
-                    618
-                ],
-                "expected": [
-                    "第10课"
-                ]
+                "custom_action": "run",
+                "custom_action_param": "t=速战"
             }
         },
+        "post_delay": 0,
+        "next": [
+            "短期速成班_周期记录"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 8517,
-                "y": 1269
+                "x": 8773,
+                "y": 1066
             }
         }
     },

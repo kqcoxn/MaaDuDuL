@@ -2,16 +2,16 @@
     "$__mpe_config_清红糖": {
         "$__mpe_code": {
             "prefix": "清红糖",
-            "lastSyncTime": 1775650930607,
+            "lastSyncTime": 1776866917640,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
             "savedViewport": {
-                "x": -8858,
-                "y": 631,
-                "zoom": 1.52
+                "x": -4040,
+                "y": 284,
+                "zoom": 0.66
             },
             "filename": "清红糖",
-            "version": "v1.4.1"
+            "version": "v1.4.2"
         }
     },
     "$__mpe_external_返回主界面_清红糖": {
@@ -32,8 +32,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "repeat": 2,
         "repeat_delay": 800,
@@ -63,8 +62,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清红糖_选择心形种族"
@@ -72,7 +70,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 7112,
-                "y": -300
+                "y": -298
             }
         }
     },
@@ -112,8 +110,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 查找指定世界"
@@ -132,7 +129,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已心形"
+            "Node.Recognition.Starting": " > 今日已检查心形"
         },
         "next": [
             "清红糖_心形结束"
@@ -162,8 +159,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6832,
-                "y": -297
+                "x": 6833,
+                "y": -298
             }
         }
     },
@@ -196,7 +193,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 6550,
-                "y": -298
+                "y": -296
             }
         }
     },
@@ -247,8 +244,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清红糖_微微辣"
@@ -270,8 +266,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "$__mpe_code": {
             "position": {
@@ -442,20 +437,6 @@
         }
     },
     "清红糖_进入冒险": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1070,
-                    591,
-                    207,
-                    126
-                ],
-                "expected": [
-                    "冒险"
-                ]
-            }
-        },
         "action": {
             "type": "Click",
             "param": {
@@ -466,9 +447,6 @@
                     1
                 ]
             }
-        },
-        "focus": {
-            "Node.Recognition.Succeeded": " > 进入振兴之路"
         },
         "next": [
             "清红糖_心形开始"
@@ -495,11 +473,12 @@
                 ]
             }
         },
+        "pre_delay": 800,
         "action": {
             "type": "Custom",
             "param": {
                 "custom_action": "select_heart_type",
-                "custom_action_param": "t=龙族"
+                "custom_action_param": "t=魔女"
             }
         },
         "next": [

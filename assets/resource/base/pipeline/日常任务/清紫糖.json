@@ -2,16 +2,16 @@
     "$__mpe_config_清紫糖": {
         "$__mpe_code": {
             "prefix": "清紫糖",
-            "lastSyncTime": 1775650814074,
+            "lastSyncTime": 1776866905529,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
             "savedViewport": {
-                "x": -10676,
-                "y": -452,
-                "zoom": 1.74
+                "x": -6765,
+                "y": -277,
+                "zoom": 1.15
             },
             "filename": "清紫糖",
-            "version": "v1.4.1"
+            "version": "v1.4.2"
         }
     },
     "$__mpe_external_返回主界面_清紫糖": {
@@ -38,8 +38,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_确保回到克隆工厂"
@@ -67,8 +66,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_克隆工厂周期记录"
@@ -340,8 +338,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_面包房行动"
@@ -402,8 +399,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_速战副本"
@@ -431,8 +427,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_速战副本"
@@ -460,8 +455,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_速战副本"
@@ -541,8 +535,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入到手蜡"
@@ -800,8 +793,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入糖果自由"
@@ -852,8 +844,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入克隆工厂"
@@ -891,20 +882,6 @@
         }
     },
     "清紫糖_进入冒险界面": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1065,
-                    591,
-                    212,
-                    126
-                ],
-                "expected": [
-                    "冒险"
-                ]
-            }
-        },
         "action": {
             "type": "Click",
             "param": {
@@ -945,8 +922,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_确保进入副本界面"
@@ -974,8 +950,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_确保进入金币大作战"
@@ -1105,8 +1080,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_确保进入糖果类型"
@@ -1191,8 +1165,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入金币大作战"
@@ -1397,8 +1370,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入面包房"
@@ -1429,8 +1401,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "清紫糖_面包房行动"

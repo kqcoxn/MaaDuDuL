@@ -2,16 +2,16 @@
     "$__mpe_config_巅峰对决": {
         "$__mpe_code": {
             "prefix": "巅峰对决",
-            "lastSyncTime": 1775650757843,
+            "lastSyncTime": 1776866874075,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\巅峰对决.json",
             "savedViewport": {
-                "x": -9012,
-                "y": -703,
-                "zoom": 1.32
+                "x": -6871,
+                "y": -499,
+                "zoom": 1
             },
             "filename": "巅峰对决",
-            "version": "v1.4.1"
+            "version": "v1.4.2"
         }
     },
     "$__mpe_external_返回主界面_巅峰对决": {
@@ -32,8 +32,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "$__mpe_code": {
             "position": {
@@ -133,8 +132,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 作战完成"
@@ -283,8 +281,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "timeout": 200000,
         "rate_limit": 3000,
@@ -490,20 +487,6 @@
         }
     },
     "巅峰对决_进入冒险": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1066,
-                    585,
-                    210,
-                    130
-                ],
-                "expected": [
-                    "冒险"
-                ]
-            }
-        },
         "action": {
             "type": "Click",
             "param": {
@@ -544,8 +527,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "巅峰对决_确保进入巅峰对决",
@@ -574,8 +556,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "巅峰对决_领取战斗宝石开始"
@@ -595,8 +576,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Starting": " > 选择对手"
@@ -628,8 +608,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "timeout": 3000,
         "focus": {

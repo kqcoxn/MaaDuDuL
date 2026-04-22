@@ -2,16 +2,16 @@
     "$__mpe_config_每日采购": {
         "$__mpe_code": {
             "prefix": "每日采购",
-            "lastSyncTime": 1775725732185,
+            "lastSyncTime": 1776866988101,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
             "savedViewport": {
-                "x": -3328,
-                "y": -292,
-                "zoom": 0.76
+                "x": -5699,
+                "y": -2769,
+                "zoom": 1.21
             },
             "filename": "每日采购",
-            "version": "v1.4.1"
+            "version": "v1.4.2"
         }
     },
     "$__mpe_external_返回主界面_每日采购": {
@@ -38,8 +38,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "timeout": 5000,
         "next": [
@@ -131,8 +130,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "每日采购_领取商品"
@@ -471,8 +469,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "timeout": 2000,
         "next": [
@@ -835,8 +832,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "每日采购_获取所有日常物品奖励"
@@ -886,8 +882,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "$__mpe_code": {
             "position": {
@@ -913,8 +908,7 @@
         },
         "pre_delay": 0,
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "post_delay": 0,
         "focus": {
@@ -1359,8 +1353,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 购买礼包"
@@ -1459,23 +1452,16 @@
         }
     },
     "每日采购_进入冒险界面": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    980,
-                    526,
-                    295,
-                    193
-                ],
-                "expected": [
-                    "冒险"
-                ]
-            }
-        },
         "action": {
             "type": "Click",
-            "param": {}
+            "param": {
+                "target": [
+                    1183,
+                    660,
+                    1,
+                    1
+                ]
+            }
         },
         "next": [
             "每日采购_确保进入冒险界面"
@@ -1503,8 +1489,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Action.Succeeded": " > 进入水晶叶商店",
@@ -1536,8 +1521,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "每日采购_购买战宝锻造书"
@@ -1565,8 +1549,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入日常商店"
@@ -1597,8 +1580,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入普通商店"
@@ -1695,8 +1677,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入特别商店"
@@ -1727,8 +1708,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {}
+            "type": "Click"
         },
         "next": [
             "每日采购_购买礼包",
