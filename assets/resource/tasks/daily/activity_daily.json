@@ -2,18 +2,38 @@
 	"task": [
 		{
 			"name": "每日活动作战",
-			"label": "🕶️没有王国的黑帮【活动】",
+			"label": "🎄大胆放肆的圣诞节【活动】",
 			"entry": "每日活动作战_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/activity_daily.md",
-			"group": ["continuous"],
-			"option": ["每日活动作战-周期检查", "每日活动作战-作战次数"]
+			"group": [
+				"continuous"
+			],
+			"option": [
+				"每日活动作战-周期检查",
+				"每日活动作战-作战次数"
+			]
+		},
+		{
+			"name": "每日活动作战2",
+			"label": "🐸凝聚滴落的回忆之池【活动】",
+			"entry": "每日活动作战2_开始",
+			"default_check": true,
+			"description": "Resource/descs/daily/activity_daily2.md",
+			"group": [
+				"continuous"
+			],
+			"option": [
+				"每日活动作战-周期检查",
+				"每日活动作战-作战次数"
+			]
 		}
 	],
 	"option": {
 		"每日活动作战-周期检查": {
 			"type": "switch",
-			"label": "每日仅执行一次",
+			"label": "完成后不再检查",
+			"description": "当完成 20 次每日作战后，今日不再检查此活动",
 			"cases": [
 				{
 					"name": "No",
@@ -38,7 +58,9 @@
 				},
 				{
 					"name": "指定次数",
-					"option": ["每日活动作战-指定作战次数"],
+					"option": [
+						"每日活动作战-指定作战次数"
+					],
 					"pipeline_override": {
 						"每日活动作战_检查开始": {
 							"next": "每日活动作战_检查结束"

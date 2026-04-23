@@ -1,7 +1,7 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.2.12 - MFAA | 游戏版本：没有王国的黑帮",
+	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.2.12 - MFAA | 游戏版本：圣诞节&回忆之池",
 	"icon": "logo.png",
 	"description": "嘟嘟脸小助手",
 	"version": "v0.2.12",
@@ -29,12 +29,17 @@
 	"resource": [
 		{
 			"name": "B服",
-			"path": ["./resource/base"]
+			"path": [
+				"./resource/base"
+			]
 		}
 	],
 	"agent": {
 		"child_exec": "./python/python.exe",
-		"child_args": ["-u", "./agent/main.py"]
+		"child_args": [
+			"-u",
+			"./agent/main.py"
+		]
 	},
 	"group": [
 		{
@@ -66,6 +71,7 @@
 		"resource/tasks/daily/purchase.json",
 		"resource/tasks/daily/saint_tour.json",
 		"resource/tasks/daily/activity_daily.json",
+		"resource/tasks/daily/activity_daily2.json",
 		"resource/tasks/daily/clear_purple_candy.json",
 		"resource/tasks/daily/clear_red_candy.json",
 		"resource/tasks/daily/peak_battle.json",

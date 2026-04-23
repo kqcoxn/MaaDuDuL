@@ -1,11 +1,14 @@
 {
+    "plugins": [
+        "prettier-plugin-multiline-arrays"
+    ],
+    "multilineArraysWrapThreshold": 1,
     "tabWidth": 4,
     "printWidth": 120,
     "useTabs": false,
     "bracketSameLine": true,
     "bracketSpacing": false,
     "endOfLine": "auto",
-    "multilineArraysWrapThreshold": 1,
     "overrides": [
         {
             "files": [
@@ -23,7 +26,7 @@
             ],
             "options": {
                 "parser": "json",
-                "useTabs": true,
+                "useTabs": false,
                 "bracketSameLine": false
             }
         }

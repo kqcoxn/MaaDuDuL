@@ -32,6 +32,6 @@
 	},
 	"[markdown]": {
 		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
 	}
 }
