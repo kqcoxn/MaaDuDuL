@@ -40,6 +40,9 @@
 					"pipeline_override": {
 						"每日活动作战_周期检查": {
 							"action": "DoNothing"
+						},
+						"每日活动作战2_周期检查": {
+							"action": "DoNothing"
 						}
 					}
 				},
@@ -64,6 +67,9 @@
 					"pipeline_override": {
 						"每日活动作战_检查开始": {
 							"next": "每日活动作战_检查结束"
+						},
+						"每日活动作战2_检查开始": {
+							"next": "每日活动作战_检查结束"
 						}
 					}
 				},
@@ -72,6 +78,9 @@
 					"description": "消耗所有红糖用于活动作战",
 					"pipeline_override": {
 						"每日活动作战_检查开始": {
+							"next": "每日活动作战_检查结束"
+						},
+						"每日活动作战2_检查开始": {
 							"next": "每日活动作战_检查结束"
 						}
 					}
@@ -92,6 +101,9 @@
 			],
 			"pipeline_override": {
 				"每日活动作战_速战": {
+					"custom_action_param": "t={次数}"
+				},
+				"每日活动作战2_速战": {
 					"custom_action_param": "t={次数}"
 				}
 			}

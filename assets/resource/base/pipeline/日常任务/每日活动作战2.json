@@ -2,13 +2,13 @@
     "$__mpe_config_每日活动作战2": {
         "$__mpe_code": {
             "prefix": "每日活动作战2",
-            "lastSyncTime": 1776942463901,
+            "lastSyncTime": 1776944152751,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战2.json",
             "savedViewport": {
-                "x": -4104,
-                "y": -163,
-                "zoom": 1
+                "x": -4915,
+                "y": -790,
+                "zoom": 1.15
             },
             "filename": "每日活动作战2",
             "version": "v1.4.2"
@@ -144,9 +144,9 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    622,
-                    594,
-                    184,
+                    147,
+                    570,
+                    181,
                     125
                 ],
                 "expected": [
@@ -251,7 +251,7 @@
             "type": "Custom",
             "param": {
                 "custom_action": "periodic_check",
-                "custom_action_param": "k=每日活动作战"
+                "custom_action_param": "k=每日活动作战2"
             }
         },
         "post_delay": 0,
@@ -275,7 +275,7 @@
             "type": "Custom",
             "param": {
                 "custom_action": "record_period",
-                "custom_action_param": "k=每日活动作战"
+                "custom_action_param": "k=每日活动作战2"
             }
         },
         "post_delay": 0,
@@ -372,8 +372,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    638,
-                    363,
+                    1086,
+                    420,
                     1,
                     1
                 ]
@@ -465,13 +465,13 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    394,
-                    646,
-                    198,
-                    74
+                    700,
+                    601,
+                    520,
+                    117
                 ],
                 "expected": [
-                    "占领完成"
+                    "微微辣"
                 ]
             }
         },
@@ -595,9 +595,9 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    622,
-                    594,
-                    184,
+                    147,
+                    570,
+                    181,
                     125
                 ],
                 "expected": [
@@ -626,13 +626,13 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    686,
-                    119,
-                    515,
-                    413
+                    1048,
+                    526,
+                    218,
+                    170
                 ],
                 "expected": [
-                    "占领完成"
+                    "战斗"
                 ]
             }
         },
