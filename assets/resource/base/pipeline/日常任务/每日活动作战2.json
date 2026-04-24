@@ -2,24 +2,16 @@
     "$__mpe_config_每日活动作战2": {
         "$__mpe_code": {
             "prefix": "每日活动作战2",
-            "lastSyncTime": 1776944152751,
+            "lastSyncTime": 1776944161223,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战2.json",
             "savedViewport": {
-                "x": -4915,
-                "y": -790,
-                "zoom": 1.15
+                "x": -4132,
+                "y": -415,
+                "zoom": 1
             },
             "filename": "每日活动作战2",
             "version": "v1.4.2"
-        }
-    },
-    "$__mpe_external_返回主界面_每日活动作战2": {
-        "$__mpe_code": {
-            "position": {
-                "x": 1661,
-                "y": 80
-            }
         }
     },
     "$__mpe_group_战斗_每日活动作战2": {
@@ -66,8 +58,8 @@
     "$__mpe_group_进入活动界面_每日活动作战2": {
         "$__mpe_code": {
             "position": {
-                "x": 4362,
-                "y": 369
+                "x": 4378,
+                "y": 376
             },
             "color": "blue",
             "childrenLabels": [
@@ -77,8 +69,8 @@
                 "开始",
                 "新活动入口"
             ],
-            "width": 867,
-            "height": 917
+            "width": 854,
+            "height": 988
         }
     },
     "$__mpe_group_领取奖励_每日活动作战2": {
@@ -115,6 +107,14 @@
             ],
             "width": 830,
             "height": 345
+        }
+    },
+    "$__mpe_external_返回主界面_每日活动作战2": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1661,
+                "y": 80
+            }
         }
     },
     "每日活动作战2_从检查返回活动界面": {
@@ -227,8 +227,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 580,
-                "y": 320
+                "x": 578,
+                "y": 379
             }
         }
     },
@@ -240,8 +240,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 581,
-                "y": 661
+                "x": 579,
+                "y": 731
             }
         }
     },
@@ -353,6 +353,7 @@
                 ]
             }
         },
+        "pre_delay": 0,
         "action": {
             "type": "Click"
         },
