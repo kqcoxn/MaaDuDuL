@@ -2,13 +2,13 @@
     "$__mpe_config_圣团巡礼": {
         "$__mpe_code": {
             "prefix": "圣团巡礼",
-            "lastSyncTime": 1777212961718,
+            "lastSyncTime": 1777215450780,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -8658,
-                "y": -619,
-                "zoom": 1.39
+                "x": -1384,
+                "y": -449,
+                "zoom": 0.24
             },
             "filename": "圣团巡礼",
             "version": "v1.4.3"
@@ -1764,7 +1764,7 @@
     },
     "圣团巡礼_确保进入圣团": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
                     147,
@@ -1772,8 +1772,8 @@
                     380,
                     122
                 ],
-                "template": [
-                    "holy/headquarters.png"
+                "expected": [
+                    "总部"
                 ]
             }
         },
@@ -2390,7 +2390,7 @@
     },
     "圣团巡礼_进入冒险协会": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
                     276,
@@ -2398,8 +2398,8 @@
                     388,
                     121
                 ],
-                "template": [
-                    "holy/association.png"
+                "expected": [
+                    "协会"
                 ]
             }
         },
@@ -2453,7 +2453,7 @@
     },
     "圣团巡礼_进入宴会厅": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
                     12,
@@ -2461,8 +2461,8 @@
                     400,
                     136
                 ],
-                "template": [
-                    "holy/banquet.png"
+                "expected": [
+                    "会厅"
                 ]
             }
         },
@@ -2483,7 +2483,7 @@
     },
     "圣团巡礼_进入总部": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
                     147,
@@ -2491,8 +2491,8 @@
                     380,
                     122
                 ],
-                "template": [
-                    "holy/headquarters.png"
+                "expected": [
+                    "总部"
                 ]
             }
         },
