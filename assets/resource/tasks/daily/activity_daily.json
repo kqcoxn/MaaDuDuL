@@ -32,8 +32,8 @@
 	"option": {
 		"每日活动作战-周期检查": {
 			"type": "switch",
-			"label": "完成后不再检查",
-			"description": "当完成 20 次每日作战后，今日不再检查此活动",
+			"label": "每日仅检查一次",
+			"description": "建议关闭此项，使用智能检测模式复查",
 			"cases": [
 				{
 					"name": "No",

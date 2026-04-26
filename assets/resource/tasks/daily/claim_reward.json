@@ -6,8 +6,13 @@
 			"entry": "领取奖励_开始",
 			"default_check": true,
 			"description": "Resource/descs/daily/claim_reward.md",
-			"group": ["continuous"],
-			"option": ["领取奖励-任务奖励", "领取奖励-通行证奖励"]
+			"group": [
+				"continuous"
+			],
+			"option": [
+				"领取奖励-任务奖励",
+				"领取奖励-通行证奖励"
+			]
 		}
 	],
 	"option": {
@@ -34,7 +39,11 @@
 			"cases": [
 				{
 					"name": "Yes",
-					"option": ["领取奖励-通行证奖励-等级", "领取奖励-通行证奖励-便装", "领取奖励-通行证奖励-冒险"]
+					"option": [
+						"领取奖励-通行证奖励-等级",
+						"领取奖励-通行证奖励-便装",
+						"领取奖励-通行证奖励-冒险"
+					]
 				},
 				{
 					"name": "No",
@@ -51,15 +60,15 @@
 			"label": "等级通行证",
 			"cases": [
 				{
+					"name": "Yes"
+				},
+				{
 					"name": "No",
 					"pipeline_override": {
 						"领取奖励_领取等级通行证": {
 							"action": "DoNothing"
 						}
 					}
-				},
-				{
-					"name": "Yes"
 				}
 			]
 		},

@@ -2,23 +2,41 @@
     "$__mpe_config_每日活动作战": {
         "$__mpe_code": {
             "prefix": "每日活动作战",
-            "lastSyncTime": 1777026862393,
+            "lastSyncTime": 1777210498866,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -4197,
-                "y": -232,
-                "zoom": 1
+                "x": -6199,
+                "y": -678,
+                "zoom": 1.21
             },
             "filename": "每日活动作战",
-            "version": "v1.4.2"
+            "version": "v1.4.3"
         }
     },
-    "$__mpe_external_返回主界面_每日活动作战": {
+    "每日活动作战_关闭其他面板": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    18,
+                    76,
+                    1240,
+                    509
+                ],
+                "template": [
+                    "main/close-anno.png",
+                    "main/close-green.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
         "$__mpe_code": {
             "position": {
-                "x": 1661,
-                "y": 80
+                "x": 578,
+                "y": 72
             }
         }
     },
@@ -50,6 +68,7 @@
             },
             "color": "green",
             "childrenLabels": [
+                "关闭其他面板",
                 "从检查返回活动界面",
                 "从检查进入成就界面",
                 "关闭梦境之地提示",
@@ -57,7 +76,8 @@
                 "检查当前进度",
                 "检查结束",
                 "确保进入成就界面",
-                "识别进度"
+                "识别进度",
+                "错误返回"
             ],
             "width": 1637,
             "height": 559
@@ -117,6 +137,14 @@
             "height": 345
         }
     },
+    "$__mpe_external_返回主界面_每日活动作战": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1661,
+                "y": 80
+            }
+        }
+    },
     "每日活动作战_从检查返回活动界面": {
         "recognition": {
             "type": "TemplateMatch",
@@ -161,7 +189,8 @@
             "Node.Recognition.Succeeded": " > 检查剩余需求次数"
         },
         "next": [
-            "每日活动作战_确保进入成就界面"
+            "每日活动作战_确保进入成就界面",
+            "[JumpBack]每日活动作战_关闭其他面板"
         ],
         "$__mpe_code": {
             "position": {
@@ -175,14 +204,15 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    41,
-                    323,
-                    1202,
-                    393
+                    256,
+                    322,
+                    744,
+                    396
                 ],
                 "expected": [
                     "梦境之地",
-                    "像素异世界"
+                    "像素异世界",
+                    "点击屏幕继续"
                 ]
             }
         },
@@ -191,8 +221,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 311,
-                "y": 86
+                "x": 312,
+                "y": 72
             }
         }
     },
@@ -228,7 +258,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 582,
-                "y": 374
+                "y": 422
             }
         }
     },
@@ -241,7 +271,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 579,
-                "y": 713
+                "y": 762
             }
         }
     },
@@ -357,8 +387,13 @@
         "action": {
             "type": "Click"
         },
+        "timeout": 5000,
         "next": [
-            "每日活动作战_检查开始"
+            "每日活动作战_检查开始",
+            "[JumpBack]每日活动作战_关闭梦境之地提示"
+        ],
+        "on_error": [
+            "每日活动作战_错误返回"
         ],
         "$__mpe_code": {
             "position": {
@@ -391,16 +426,30 @@
         }
     },
     "每日活动作战_检查开始": {
-        "pre_delay": 0,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    5,
+                    2,
+                    515,
+                    83
+                ],
+                "expected": [
+                    "圣诞节"
+                ]
+            }
+        },
         "post_delay": 0,
         "next": [
             "每日活动作战_从检查进入成就界面",
-            "[JumpBack]每日活动作战_关闭梦境之地提示"
+            "[JumpBack]每日活动作战_关闭梦境之地提示",
+            "[JumpBack]每日活动作战_关闭其他面板"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 40,
-                "y": 290
+                "x": 34,
+                "y": 73
             }
         }
     },
@@ -422,7 +471,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 842,
-                "y": 288
+                "y": 292
             }
         }
     },
@@ -466,15 +515,18 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    667,
-                    610,
-                    219,
-                    108
+                    696,
+                    598,
+                    569,
+                    120
                 ],
                 "expected": [
                     "微微辣"
                 ]
             }
+        },
+        "action": {
+            "type": "Click"
         },
         "post_delay": 1000,
         "next": [
@@ -507,8 +559,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 573,
-                "y": 289
+                "x": 580,
+                "y": 343
             }
         }
     },
@@ -562,8 +614,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 843,
-                "y": 79
+                "x": 844,
+                "y": 68
             }
         }
     },
@@ -777,6 +829,24 @@
             "position": {
                 "x": 311,
                 "y": 59
+            }
+        }
+    },
+    "每日活动作战_错误返回": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "run",
+                "custom_action_param": "t=返回主界面"
+            }
+        },
+        "next": [
+            "每日活动作战_周期检查"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 39,
+                "y": 347
             }
         }
     }
