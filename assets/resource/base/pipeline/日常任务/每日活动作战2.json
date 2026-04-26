@@ -2,16 +2,24 @@
     "$__mpe_config_每日活动作战2": {
         "$__mpe_code": {
             "prefix": "每日活动作战2",
-            "lastSyncTime": 1777210421759,
+            "lastSyncTime": 1777213554384,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战2.json",
             "savedViewport": {
-                "x": -6356,
-                "y": -568,
+                "x": -5486,
+                "y": -697,
                 "zoom": 1.21
             },
             "filename": "每日活动作战2",
             "version": "v1.4.3"
+        }
+    },
+    "$__mpe_external_返回主界面_每日活动作战2": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1661,
+                "y": 80
+            }
         }
     },
     "$__mpe_group_战斗_每日活动作战2": {
@@ -44,14 +52,14 @@
             "childrenLabels": [
                 "从检查返回活动界面",
                 "从检查进入成就界面",
+                "关闭其他面板",
                 "关闭梦境之地提示",
                 "检查开始",
                 "检查当前进度",
                 "检查结束",
                 "确保进入成就界面",
                 "识别进度",
-                "错误返回",
-                "关闭其他面板"
+                "错误返回"
             ],
             "width": 1637,
             "height": 559
@@ -111,14 +119,6 @@
             "height": 345
         }
     },
-    "$__mpe_external_返回主界面_每日活动作战2": {
-        "$__mpe_code": {
-            "position": {
-                "x": 1661,
-                "y": 80
-            }
-        }
-    },
     "每日活动作战2_从检查返回活动界面": {
         "recognition": {
             "type": "TemplateMatch",
@@ -170,6 +170,32 @@
             "position": {
                 "x": 311,
                 "y": 290
+            }
+        }
+    },
+    "每日活动作战2_关闭其他面板": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    18,
+                    76,
+                    1240,
+                    509
+                ],
+                "template": [
+                    "main/close-anno.png",
+                    "main/close-green.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 572,
+                "y": 78
             }
         }
     },
@@ -227,7 +253,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 切换至新活动"
+            "Node.Recognition.Succeeded": " > 切换至指定活动"
         },
         "$__mpe_code": {
             "position": {
@@ -699,6 +725,24 @@
             }
         }
     },
+    "每日活动作战2_错误返回": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "run",
+                "custom_action_param": "t=返回主界面"
+            }
+        },
+        "next": [
+            "每日活动作战2_周期检查"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 43,
+                "y": 354
+            }
+        }
+    },
     "每日活动作战2_领取今日奖励": {
         "recognition": {
             "type": "OCR",
@@ -804,50 +848,6 @@
             "position": {
                 "x": 311,
                 "y": 59
-            }
-        }
-    },
-    "每日活动作战2_错误返回": {
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "run",
-                "custom_action_param": "t=返回主界面"
-            }
-        },
-        "next": [
-            "每日活动作战2_周期检查"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 43,
-                "y": 354
-            }
-        }
-    },
-    "每日活动作战2_关闭其他面板": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    18,
-                    76,
-                    1240,
-                    509
-                ],
-                "template": [
-                    "main/close-anno.png",
-                    "main/close-green.png"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 572,
-                "y": 78
             }
         }
     }

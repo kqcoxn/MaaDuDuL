@@ -2,16 +2,16 @@
     "$__mpe_config_每日采购": {
         "$__mpe_code": {
             "prefix": "每日采购",
-            "lastSyncTime": 1776866988101,
+            "lastSyncTime": 1777213474234,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
             "savedViewport": {
-                "x": -5699,
-                "y": -2769,
+                "x": -4891,
+                "y": 1286,
                 "zoom": 1.21
             },
             "filename": "每日采购",
-            "version": "v1.4.2"
+            "version": "v1.4.3"
         }
     },
     "$__mpe_external_返回主界面_每日采购": {
@@ -1474,22 +1474,16 @@
         }
     },
     "每日采购_进入尊享商店": {
-        "recognition": {
-            "type": "TemplateMatch",
+        "action": {
+            "type": "Click",
             "param": {
-                "roi": [
-                    13,
-                    582,
-                    396,
-                    131
-                ],
-                "template": [
-                    "main/vip-store.png"
+                "target": [
+                    205,
+                    658,
+                    1,
+                    1
                 ]
             }
-        },
-        "action": {
-            "type": "Click"
         },
         "focus": {
             "Node.Action.Succeeded": " > 进入水晶叶商店",
@@ -1565,22 +1559,16 @@
         }
     },
     "每日采购_进入普通商店": {
-        "recognition": {
-            "type": "TemplateMatch",
+        "action": {
+            "type": "Click",
             "param": {
-                "roi": [
-                    140,
-                    591,
-                    398,
-                    125
-                ],
-                "template": [
-                    "main/store.png"
+                "target": [
+                    336,
+                    661,
+                    1,
+                    1
                 ]
             }
-        },
-        "action": {
-            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入普通商店"
