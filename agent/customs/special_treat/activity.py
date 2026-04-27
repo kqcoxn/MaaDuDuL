@@ -85,7 +85,13 @@ class CheckActivityProgress(CustomAction):
                     .replace(":20", "")
                     .replace("：20", "")
                 )
+
+                progress = int(progress)
+                if progress < 0:
+                    progress = -progress
                 left_times = 20 - int(progress)
+                progress = min(progress, 20)
+
                 if left_times <= 0:
                     Prompter.log(f"今日已完成活动作战")
                     return False
