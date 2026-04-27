@@ -1,7 +1,4 @@
----
-trigger: always_on
-alwaysApply: true
----
+# 项目信息
 
 ## 项目地址
 
@@ -16,7 +13,7 @@ https://github.com/kqcoxn/MaaDuDuL
 
 ## 应该做的事
 
-- 当涉及 maafw 的 pipeline 或 custom api 时，应该参阅相关 `/instructions/` 下的参考文档，不要凭空生成
+- 当涉及 maafw 的 pipeline 或 custom api 时，应该参阅相关 `/dev/instructions/` 下的参考文档，不要凭空生成
 - custom 输出应该使用 `Prompter.log()` 
 - 使用`yarn`作为 Node.js 的包管理器
 
@@ -26,3 +23,18 @@ https://github.com/kqcoxn/MaaDuDuL
 - 不要自动帮我构建测试相关内容
 - 不要主动写 Pipeline JSON，如果需要扩充功能，在最后给我流水线汇总
 - 本地的 `/MFAAvalonia` 是测试环境，不应该改动，修改各资源应该在 `/assets` 中
+
+
+# 可用参考
+
+## 说明
+
+maaframework 可缩写为 mfw、maafw，包括了 pipeline 与 custom 的相关内容
+
+## 目录
+
+- **mfw使用方式/pipeline相关**: `/dev/instructions/maafw-guide/`
+
+## 其他
+
+当需要其他 API 但本地没有时可视情况自动网络检索
