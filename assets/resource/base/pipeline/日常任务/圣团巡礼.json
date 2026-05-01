@@ -2,16 +2,38 @@
     "$__mpe_config_圣团巡礼": {
         "$__mpe_code": {
             "prefix": "圣团巡礼",
-            "lastSyncTime": 1777215450780,
+            "lastSyncTime": 1777643893967,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -1384,
-                "y": -449,
-                "zoom": 0.24
+                "x": -11950,
+                "y": -611,
+                "zoom": 1.52
             },
             "filename": "圣团巡礼",
             "version": "v1.4.3"
+        }
+    },
+    "圣团巡礼_从世界树返回2": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    44,
+                    40,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "圣团巡礼_收获世界树结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8334,
+                "y": 758
+            }
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -90,25 +112,25 @@
             }
         }
     },
-    "圣团巡礼_从世界树返回": {
+    "圣团巡礼_从世界树返回1": {
         "action": {
             "type": "Click",
             "param": {
                 "target": [
-                    44,
-                    40,
+                    186,
+                    46,
                     1,
                     1
                 ]
             }
         },
         "next": [
-            "圣团巡礼_收获世界树结束"
+            "圣团巡礼_从世界树返回2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8331,
-                "y": 583
+                "x": 8334,
+                "y": 578
             }
         }
     },
@@ -1345,7 +1367,7 @@
             "Node.Recognition.Succeeded": " > 未收到贡品"
         },
         "next": [
-            "圣团巡礼_从世界树返回"
+            "圣团巡礼_从世界树返回1"
         ],
         "$__mpe_code": {
             "position": {
@@ -1883,7 +1905,7 @@
             }
         },
         "next": [
-            "圣团巡礼_从世界树返回"
+            "圣团巡礼_从世界树返回1"
         ],
         "$__mpe_code": {
             "position": {
@@ -1944,7 +1966,7 @@
             "圣团巡礼_暂无世界树奖励"
         ],
         "on_error": [
-            "圣团巡礼_从世界树返回"
+            "圣团巡礼_从世界树返回1"
         ],
         "$__mpe_code": {
             "position": {
