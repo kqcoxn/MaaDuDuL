@@ -1,78 +1,67 @@
 {
     "$__mpe_config_返回主界面": {
         "$__mpe_code": {
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
-            "filename": "返回主界面",
-            "isModifiedExternally": false,
-            "lastSyncTime": 1775370326621,
             "prefix": "返回主界面",
+            "lastSyncTime": 1777642943480,
+            "isModifiedExternally": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
             "savedViewport": {
-                "x": -3231,
-                "y": -84,
-                "zoom": 1.32
+                "x": -3910,
+                "y": -122,
+                "zoom": 1.52
             },
-            "version": "v1.4.0"
+            "filename": "返回主界面",
+            "version": "v1.4.3"
         }
     },
     "返回主界面_使徒": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2978,
-                "y": -401
-            }
-        },
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "使徒"
-                ],
                 "roi": [
                     278,
                     528,
                     378,
                     186
+                ],
+                "expected": [
+                    "使徒"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 2978,
+                "y": -401
+            }
         }
     },
     "返回主界面_冒险通行证": {
-        "$__mpe_code": {
-            "position": {
-                "x": 3254,
-                "y": -400
-            }
-        },
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "冒险通行证"
-                ],
                 "roi": [
                     9,
                     107,
                     441,
                     341
+                ],
+                "expected": [
+                    "冒险通行证"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3254,
+                "y": -400
+            }
         }
     },
     "返回主界面_导航类返回": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2712,
-                "y": 165
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "post_delay": 2000,
         "recognition": {
+            "type": "TemplateMatch",
             "param": {
-                "index": -1,
                 "template": [
                     "global/home.png",
                     "global/back.png",
@@ -82,26 +71,32 @@
                     0.9,
                     0.9,
                     0.9
-                ]
-            },
-            "type": "TemplateMatch"
-        }
-    },
-    "返回主界面_开始": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2426,
-                "y": -170
+                ],
+                "index": -1
             }
         },
         "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "$__mpe_code": {
+            "position": {
+                "x": 2712,
+                "y": 165
+            }
+        }
+    },
+    "返回主界面_开始": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
             "param": {
                 "custom_action": "on_task_start"
-            },
-            "type": "Custom"
+            }
         },
+        "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " \u003e 返回主界面"
+            "Node.Recognition.Starting": " > 返回主界面"
         },
         "next": [
             "返回主界面_检测主界面",
@@ -110,107 +105,99 @@
             "[JumpBack]返回主界面_文字类返回",
             "[JumpBack]返回主界面_闲时捏脸"
         ],
-        "post_delay": 0,
-        "pre_delay": 0
-    },
-    "返回主界面_文字类返回": {
         "$__mpe_code": {
             "position": {
-                "x": 3241,
-                "y": 165
+                "x": 2426,
+                "y": -170
             }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "post_delay": 2000,
+        }
+    },
+    "返回主界面_文字类返回": {
         "recognition": {
+            "type": "OCR",
             "param": {
                 "expected": [
                     "取消",
                     "退出",
                     "点击屏幕继续"
                 ],
-                "index": -1,
-                "order_by": "Vertical"
-            },
-            "type": "OCR"
+                "order_by": "Vertical",
+                "index": -1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "$__mpe_code": {
+            "position": {
+                "x": 3241,
+                "y": 165
+            }
         }
     },
     "返回主界面_检测主界面": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "stable_reco",
+                "custom_recognition_param": "n=返回主界面_活动弹窗&n=返回主界面_使徒&n=返回主界面_冒险通行证"
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 已回到主界面"
+        },
         "$__mpe_code": {
             "position": {
                 "x": 2712,
                 "y": -172
             }
-        },
-        "focus": {
-            "Node.Recognition.Succeeded": " \u003e 已回到主界面"
-        },
-        "post_delay": 0,
-        "pre_delay": 0,
-        "recognition": {
-            "param": {
-                "custom_recognition": "stable_reco",
-                "custom_recognition_param": "n=返回主界面_活动弹窗\u0026n=返回主界面_使徒\u0026n=返回主界面_冒险通行证"
-            },
-            "type": "Custom"
         }
     },
     "返回主界面_活动弹窗": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2709,
-                "y": -399
-            }
-        },
         "recognition": {
+            "type": "OCR",
             "param": {
-                "expected": [
-                    "活动弹窗"
-                ],
                 "roi": [
                     734,
                     72,
                     539,
                     257
+                ],
+                "expected": [
+                    "活动弹窗"
                 ]
-            },
-            "type": "OCR"
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 2709,
+                "y": -399
+            }
         }
     },
     "返回主界面_闲时捏脸": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "pface"
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
         "$__mpe_code": {
             "position": {
                 "x": 2712,
                 "y": 540
             }
-        },
-        "post_delay": 0,
-        "pre_delay": 0,
-        "recognition": {
-            "param": {
-                "custom_recognition": "pface"
-            },
-            "type": "Custom"
         }
     },
     "返回主界面_面板类返回": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2981,
-                "y": 165
-            }
-        },
-        "action": {
-            "param": {},
-            "type": "Click"
-        },
-        "post_delay": 2000,
         "recognition": {
+            "type": "TemplateMatch",
             "param": {
-                "index": -1,
                 "template": [
                     "main/close-cherry.png",
                     "main/close-pink.png",
@@ -219,7 +206,8 @@
                     "main/close-black-yellow.png",
                     "main/close-yellow.png",
                     "main/close-bw.png",
-                    "main/close-green.png"
+                    "main/close-green.png",
+                    "main/close-brown2.png"
                 ],
                 "threshold": [
                     0.9,
@@ -230,9 +218,19 @@
                     0.9,
                     0.9,
                     0.9
-                ]
-            },
-            "type": "TemplateMatch"
+                ],
+                "index": -1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "$__mpe_code": {
+            "position": {
+                "x": 2981,
+                "y": 165
+            }
         }
     }
 }
