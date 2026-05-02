@@ -10,7 +10,6 @@ from maa.context import Context
 from agent.customs.utils import Prompter
 from agent.customs.maahelper import ParamAnalyzer, Tasker, RecoHelper
 
-
 # ====================  活动界面导航  ====================
 
 
