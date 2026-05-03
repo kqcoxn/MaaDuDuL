@@ -19,8 +19,11 @@
 		}
 	],
 	"files.associations": {
+		"*.py": "python",
 		"**/assets/**/*.json": "jsonc"
 	},
+	"python.languageServer": "Pylance",
+	"editor.semanticHighlighting.enabled": true,
 	"[json][jsonc]": {
 		"editor.formatOnSave": true,
 		"editor.insertSpaces": true,
@@ -33,5 +36,7 @@
 	"[markdown]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	},
+	"python-envs.defaultEnvManager": "ms-python.python:conda",
+	"python-envs.defaultPackageManager": "ms-python.python:conda"
 }

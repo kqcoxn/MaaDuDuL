@@ -96,13 +96,19 @@ class CheckActivityProgress(CustomAction):
                     return False
                 Prompter.log(f"剩余次数：{left_times}")
                 context.override_pipeline(
-                    {"每日活动作战_速战": {"custom_action_param": f"t={left_times}"}},
-                    {"每日活动作战2_速战": {"custom_action_param": f"t={left_times}"}},
+                    {
+                        "每日活动作战_速战": {"custom_action_param": f"t={left_times}"},
+                        "每日活动作战2_速战": {
+                            "custom_action_param": f"t={left_times}"
+                        },
+                    },
                 )
                 return True
             context.override_pipeline(
-                {"每日活动作战_速战": {"custom_action_param": f"t=20"}},
-                {"每日活动作战2_速战": {"custom_action_param": f"t=20"}},
+                {
+                    "每日活动作战_速战": {"custom_action_param": f"t=20"},
+                    "每日活动作战2_速战": {"custom_action_param": f"t=20"},
+                },
             )
             Prompter.log(f"未检测到活动进度！")
             return False

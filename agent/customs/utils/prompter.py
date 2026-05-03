@@ -4,9 +4,10 @@ from maa.context import Context
 from maa.controller import Controller
 
 import time
+from typing import Any, Literal, overload
 
 
-def cprint(content: str = "", interval: int = 0.1):
+def cprint(content: str = "", interval: float = 0.1):
     interval /= 2
     time.sleep(interval)
     print("info:" + content)
@@ -31,12 +32,39 @@ class Prompter:
             cprint("——" * 5)
 
     @staticmethod
+    @overload
     def error(
         content: str,
-        e: Exception = None,
-        reco_detail=None,
-        use_defult_postfix=True,
-    ):
+        e: Exception | str | None = None,
+        reco_detail: None = None,
+        use_defult_postfix: bool = True,
+    ) -> Literal[False]: ...
+
+    @staticmethod
+    @overload
+    def error(
+        content: str,
+        e: Exception | str | None,
+        reco_detail: Literal[True] | dict[str, Any],
+        use_defult_postfix: bool = True,
+    ) -> CustomRecognition.AnalyzeResult: ...
+
+    @staticmethod
+    @overload
+    def error(
+        content: str,
+        *,
+        reco_detail: Literal[True] | dict[str, Any],
+        use_defult_postfix: bool = True,
+    ) -> CustomRecognition.AnalyzeResult: ...
+
+    @staticmethod
+    def error(
+        content: str,
+        e: Exception | str | None = None,
+        reco_detail: Literal[True] | dict[str, Any] | None = None,
+        use_defult_postfix: bool = True,
+    ) -> Literal[False] | CustomRecognition.AnalyzeResult:
         if use_defult_postfix:
             content += "失败，请立即停止运行程序！"
         cprint("——" * 5)
