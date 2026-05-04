@@ -284,6 +284,12 @@ jobs:
           else
             echo "Warning: assets/resource/descs folder not found"
           fi
+          if [ -d "assets/resource/descs_en" ]; then
+            mkdir -p install/Resource
+            cp -r assets/resource/descs_en install/Resource/descs_en
+          else
+            echo "Warning: assets/resource/descs_en folder not found"
+          fi
 
       # 替换应用图标
       - name: Replace Icon
