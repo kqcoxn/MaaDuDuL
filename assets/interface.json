@@ -1,24 +1,33 @@
 {
 	"interface_version": 2,
 	"name": "MaaDuDuL",
-	"title": "MDDL 嘟嘟脸小助手(kqcoxn/MaaDuDuL) v0.2.17 - MFAA | 游戏版本：圣诞节&回忆之池",
+	"label": "$project_label",
+	"title": "$project_title",
 	"icon": "logo.png",
-	"description": "嘟嘟脸小助手",
+	"description": "$project_description",
 	"version": "v0.2.17",
-	"welcome": "欢迎使用 MDDL!",
-	"contact": "QQ群: 926874985",
+	"welcome": "$project_welcome",
+	"contact": "$project_contact",
 	"license": "LICENSE",
 	"github": "https://github.com/kqcoxn/MaaDuDuL",
 	"mirrorchyan_rid": "MaaDuDuL",
 	"mirrorchyan_multiplatform": true,
+	"languages": {
+		"zh_cn": "interface_zh.json",
+		"en_us": "interface_en.json"
+	},
 	"controller": [
 		{
 			"name": "模拟器",
+			"label": "$controller_emulator_label",
+			"description": "$controller_emulator_description",
 			"type": "Adb",
 			"display_short_side": 720
 		},
 		{
 			"name": "PlayCover",
+			"label": "$controller_playcover_label",
+			"description": "$controller_playcover_description",
 			"type": "PlayCover",
 			"display_short_side": 720,
 			"playcover": {
@@ -29,6 +38,8 @@
 	"resource": [
 		{
 			"name": "B服",
+			"label": "$resource_bilibili_label",
+			"description": "$resource_bilibili_description",
 			"path": [
 				"./resource/base"
 			]
@@ -44,20 +55,20 @@
 	"group": [
 		{
 			"name": "continuous",
-			"label": "可连续任务/日常任务",
-			"description": "在完成当前任务后，可以连续执行下一个任务",
+			"label": "$group_continuous_label",
+			"description": "$group_continuous_description",
 			"default_expand": true
 		},
 		{
 			"name": "independent",
-			"label": "独立任务/开荒任务",
-			"description": "无法与其他任务自动串联执行",
+			"label": "$group_independent_label",
+			"description": "$group_independent_description",
 			"default_expand": true
 		},
 		{
 			"name": "others",
-			"label": "其他",
-			"description": "分割线等，一般无需添加",
+			"label": "$group_others_label",
+			"description": "$group_others_description",
 			"default_expand": true
 		}
 	],

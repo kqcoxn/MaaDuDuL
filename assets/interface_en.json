@@ -1,0 +1,19 @@
+{
+	"project_label": "MDDL DuDuL Assistant",
+	"project_title": "MDDL DuDuL Assistant (kqcoxn/MaaDuDuL) v0.2.17 - MFAA | Game Version: Christmas & Pool of Memories",
+	"project_description": "DuDuL Assistant",
+	"project_welcome": "Welcome to MDDL!",
+	"project_contact": "QQ Group: 926874985",
+	"controller_emulator_label": "Android Emulator",
+	"controller_emulator_description": "Connect to an Android emulator or device through ADB",
+	"controller_playcover_label": "PlayCover",
+	"controller_playcover_description": "Connect to the iOS client running on macOS through PlayCover",
+	"resource_bilibili_label": "Bilibili CN",
+	"resource_bilibili_description": "Built-in resource pack for the Bilibili CN server",
+	"group_continuous_label": "Routine Tasks",
+	"group_continuous_description": "Can automatically continue to the next task after the current one finishes",
+	"group_independent_label": "Independent Tasks",
+	"group_independent_description": "Cannot be chained automatically with other tasks",
+	"group_others_label": "Others",
+	"group_others_description": "Separators and helper entries that usually do not need to be added"
+}
