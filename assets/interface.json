@@ -37,11 +37,18 @@
 	],
 	"resource": [
 		{
-			"name": "B服",
-			"label": "$resource_bilibili_label",
-			"description": "$resource_bilibili_description",
+			"name": "cn",
+			"label": "$resource_cn_label",
 			"path": [
 				"./resource/base"
+			]
+		},
+		{
+			"name": "en",
+			"label": "$resource_en_label",
+			"path": [
+				"./resource/base",
+				"./resource/en"
 			]
 		}
 	],
@@ -73,29 +80,28 @@
 		}
 	],
 	"import": [
-		"resource/tasks/daily/illustrate.json",
-		"resource/tasks/daily/guide.json",
-		"resource/tasks/separators/continuous_task.json",
-		"resource/tasks/daily/start_game.json",
-		"resource/tasks/daily/claim_mail.json",
-		"resource/tasks/daily/leaf_change.json",
-		"resource/tasks/daily/purchase.json",
-		"resource/tasks/daily/saint_tour.json",
 		"resource/tasks/daily/activity_daily.json",
-		"resource/tasks/daily/activity_daily2.json",
+		"resource/tasks/daily/claim_mail.json",
+		"resource/tasks/daily/claim_new_goods.json",
+		"resource/tasks/daily/claim_reward.json",
 		"resource/tasks/daily/clear_purple_candy.json",
 		"resource/tasks/daily/clear_red_candy.json",
-		"resource/tasks/daily/peak_battle.json",
-		"resource/tasks/daily/farm.json",
-		"resource/tasks/daily/exam_cram.json",
-		"resource/tasks/daily/claim_reward.json",
-		"resource/tasks/daily/claim_new_goods.json",
 		"resource/tasks/daily/close_game.json",
+		"resource/tasks/daily/exam_cram.json",
+		"resource/tasks/daily/farm.json",
+		"resource/tasks/daily/guide.json",
+		"resource/tasks/daily/illustrate.json",
+		"resource/tasks/daily/leaf_change.json",
+		"resource/tasks/daily/peak_battle.json",
+		"resource/tasks/daily/purchase.json",
+		"resource/tasks/daily/saint_tour.json",
+		"resource/tasks/daily/start_game.json",
+		"resource/tasks/separators/continuous_task.json",
 		"resource/tasks/separators/independent_task.json",
-		"resource/tasks/single/quick_plot.json",
+		"resource/tasks/separators/new_task.json",
 		"resource/tasks/single/continuous_battle.json",
 		"resource/tasks/single/level_rewards.json",
-		"resource/tasks/separators/new_task.json"
+		"resource/tasks/single/quick_plot.json"
 	],
 	"task": [],
 	"option": {}

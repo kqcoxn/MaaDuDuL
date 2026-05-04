@@ -1,0 +1,30 @@
+{
+	"领取邮件_没有邮件": {
+		"recognition": {
+			"param": {
+				"expected": ["No mail to claim"]
+			}
+		}
+	},
+	"领取邮件_确保进入邮件面板": {
+		"recognition": {
+			"param": {
+				"expected": ["Mailbox"]
+			}
+		}
+	},
+	"领取邮件_确认领取": {
+		"recognition": {
+			"param": {
+				"expected": ["Tap the screen to continue"]
+			}
+		}
+	},
+	"领取邮件_领取奖励": {
+		"recognition": {
+			"param": {
+				"expected": ["Claim"]
+			}
+		}
+	}
+}
