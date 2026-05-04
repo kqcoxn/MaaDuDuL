@@ -52,6 +52,8 @@ def install_resource():
 
     configure_ocr_model()
 
+    install_path.mkdir(parents=True, exist_ok=True)
+
     shutil.copytree(
         working_dir / "assets" / "resource",
         install_path / "resource",
@@ -61,6 +63,12 @@ def install_resource():
         working_dir / "assets" / "interface.json",
         install_path,
     )
+    if (working_dir / "assets" / "locales").exists():
+        shutil.copytree(
+            working_dir / "assets" / "locales",
+            install_path / "locales",
+            dirs_exist_ok=True,
+        )
 
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
         interface = jsonc.load(f)

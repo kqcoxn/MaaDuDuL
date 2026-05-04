@@ -44,6 +44,10 @@ def copy_files():
         if os.path.exists("MFAAvalonia/agent"):
             shutil.rmtree("MFAAvalonia/agent")
 
+        # 删除locales目录
+        if os.path.exists("MFAAvalonia/locales"):
+            shutil.rmtree("MFAAvalonia/locales")
+
         # 删除Resource中的descs目录
         if os.path.exists("MFAAvalonia/Resource/descs"):
             shutil.rmtree("MFAAvalonia/Resource/descs")
@@ -61,6 +65,12 @@ def copy_files():
                 jsonc.dump(interface_data, f, ensure_ascii=False, indent=4)
         else:
             print("警告: assets/interface.json 不存在")
+
+        # 复制locales文件夹，使interface.json中的相对路径在MFAA环境中可用
+        if os.path.exists("assets/locales"):
+            shutil.copytree("assets/locales", "MFAAvalonia/locales", dirs_exist_ok=True)
+        else:
+            print("警告: assets/locales 文件夹不存在")
 
         # 复制resource文件夹内容
         if os.path.exists("assets/resource"):
