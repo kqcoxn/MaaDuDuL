@@ -2,10 +2,12 @@
 	"task": [
 		{
 			"name": "说明",
-			"label": "📜说明",
+			"label": "$📜说明",
 			"entry": "说明",
-			"description": "Resource/descs/others/illustrate.md",
-			"group": ["continuous"]
+			"description": "$Resource/descs/others/illustrate.md",
+			"group": [
+				"continuous"
+			]
 		}
 	],
 	"option": {}

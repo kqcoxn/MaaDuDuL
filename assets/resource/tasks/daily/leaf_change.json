@@ -2,11 +2,13 @@
 	"task": [
 		{
 			"name": "叶子互换",
-			"label": "🍃好友叶子互换",
+			"label": "$🍃好友叶子互换",
 			"entry": "叶子互换_开始",
 			"default_check": true,
-			"description": "Resource/descs/daily/leaf_change.md",
-			"group": ["continuous"]
+			"description": "$Resource/descs/daily/leaf_change.md",
+			"group": [
+				"continuous"
+			]
 		}
 	],
 	"option": {}

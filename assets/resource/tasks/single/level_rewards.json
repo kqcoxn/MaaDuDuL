@@ -2,18 +2,22 @@
 	"task": [
 		{
 			"name": "领取关卡奖励",
-			"label": "🏆领取关卡奖励",
+			"label": "$🏆领取关卡奖励",
 			"entry": "领取关卡奖励_开始",
-			"description": "Resource/descs/single/level_rewards.md",
-			"group": ["independent"],
-			"option": ["领取关卡奖励-尝试全部"]
+			"description": "$Resource/descs/single/level_rewards.md",
+			"group": [
+				"independent"
+			],
+			"option": [
+				"领取关卡奖励-尝试全部"
+			]
 		}
 	],
 	"option": {
 		"领取关卡奖励-尝试全部": {
 			"type": "switch",
-			"label": "尝试全部",
-			"description": "若有领取了奖励2但未领取奖励3的情况，需开启此项；关闭可节省部分时间，但可能会遗漏部分奖励",
+			"label": "$尝试全部",
+			"description": "$若有领取了奖励2但未领取奖励3的情况，需开启此项；关闭可节省部分时间，但可能会遗漏部分奖励",
 			"cases": [
 				{
 					"name": "Yes",
@@ -21,11 +25,13 @@
 						"领取关卡奖励_领取1": {
 							"on_error": "领取关卡奖励_直接点击2"
 						}
-					}
+					},
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
-					"pipeline_override": {}
+					"pipeline_override": {},
+					"label": "$No"
 				}
 			]
 		}

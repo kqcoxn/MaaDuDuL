@@ -13,8 +13,8 @@
 	"mirrorchyan_rid": "MaaDuDuL",
 	"mirrorchyan_multiplatform": true,
 	"languages": {
-		"zh_cn": "interface_zh.json",
-		"en_us": "interface_en.json"
+		"zh_cn": "locales/interface_zh.json",
+		"en_us": "locales/interface_en.json"
 	},
 	"controller": [
 		{

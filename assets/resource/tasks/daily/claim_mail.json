@@ -2,18 +2,22 @@
 	"task": [
 		{
 			"name": "领取邮件",
-			"label": "📬领取邮件",
+			"label": "$📬领取邮件",
 			"entry": "领取邮件_开始",
 			"default_check": true,
-			"description": "Resource/descs/daily/claim_mail.md",
-			"group": ["continuous"],
-			"option": ["领取邮件-周期检查"]
+			"description": "$Resource/descs/daily/claim_mail.md",
+			"group": [
+				"continuous"
+			],
+			"option": [
+				"领取邮件-周期检查"
+			]
 		}
 	],
 	"option": {
 		"领取邮件-周期检查": {
 			"type": "switch",
-			"label": "每日仅检查一次邮箱",
+			"label": "$每日仅检查一次邮箱",
 			"cases": [
 				{
 					"name": "No",
@@ -21,10 +25,12 @@
 						"领取邮件_周期检查": {
 							"action": "DoNothing"
 						}
-					}
+					},
+					"label": "$No"
 				},
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"label": "$Yes"
 				}
 			]
 		}

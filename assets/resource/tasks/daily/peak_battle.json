@@ -2,22 +2,30 @@
 	"task": [
 		{
 			"name": "巅峰对决",
-			"label": "⚔️巅峰对决",
+			"label": "$⚔️巅峰对决",
 			"entry": "巅峰对决_开始",
 			"default_check": true,
-			"description": "Resource/descs/daily/peak_battle.md",
-			"group": ["continuous"],
-			"option": ["巅峰对决-领取战斗宝石", "巅峰对决-竞技场对战"]
+			"description": "$Resource/descs/daily/peak_battle.md",
+			"group": [
+				"continuous"
+			],
+			"option": [
+				"巅峰对决-领取战斗宝石",
+				"巅峰对决-竞技场对战"
+			]
 		}
 	],
 	"option": {
 		"巅峰对决-领取战斗宝石": {
 			"type": "switch",
-			"label": "领取战斗宝石",
+			"label": "$领取战斗宝石",
 			"cases": [
 				{
 					"name": "Yes",
-					"option": ["巅峰对决-领取战斗宝石-周期检查"]
+					"option": [
+						"巅峰对决-领取战斗宝石-周期检查"
+					],
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
@@ -25,13 +33,14 @@
 						"巅峰对决_领取战斗宝石开始": {
 							"next": "巅峰对决_领取战斗宝石结束"
 						}
-					}
+					},
+					"label": "$No"
 				}
 			]
 		},
 		"巅峰对决-领取战斗宝石-周期检查": {
 			"type": "switch",
-			"label": "每日仅检查一次",
+			"label": "$每日仅检查一次",
 			"cases": [
 				{
 					"name": "No",
@@ -39,20 +48,26 @@
 						"巅峰对决_战斗宝石周期检查": {
 							"action": "DoNothing"
 						}
-					}
+					},
+					"label": "$No"
 				},
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"label": "$Yes"
 				}
 			]
 		},
 		"巅峰对决-竞技场对战": {
 			"type": "switch",
-			"label": "竞技场对战",
+			"label": "$竞技场对战",
 			"cases": [
 				{
 					"name": "Yes",
-					"option": ["巅峰对决-竞技场对战-周期检查", "巅峰对决-竞技场对战-对手选择策略"]
+					"option": [
+						"巅峰对决-竞技场对战-周期检查",
+						"巅峰对决-竞技场对战-对手选择策略"
+					],
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
@@ -60,13 +75,14 @@
 						"巅峰对决_对战开始": {
 							"next": "巅峰对决_对战结束"
 						}
-					}
+					},
+					"label": "$No"
 				}
 			]
 		},
 		"巅峰对决-竞技场对战-周期检查": {
 			"type": "switch",
-			"label": "每日仅检查一次",
+			"label": "$每日仅检查一次",
 			"cases": [
 				{
 					"name": "No",
@@ -74,25 +90,28 @@
 						"巅峰对决_对战周期检查": {
 							"action": "DoNothing"
 						}
-					}
+					},
+					"label": "$No"
 				},
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"label": "$Yes"
 				}
 			]
 		},
 		"巅峰对决-竞技场对战-对手选择策略": {
 			"type": "select",
-			"label": "对手选择策略",
+			"label": "$对手选择策略",
 			"cases": [
 				{
 					"name": "智能模式",
-					"description": "若存在比自身战力低的对手，选择其中排名最高的；否则选择战力最低的",
+					"description": "$若存在比自身战力低的对手，选择其中排名最高的；否则选择战力最低的",
 					"pipeline_override": {
 						"巅峰对决_选择对手": {
 							"custom_recognition_param": "s=auto"
 						}
-					}
+					},
+					"label": "$智能模式"
 				},
 				{
 					"name": "最低战力",
@@ -100,7 +119,8 @@
 						"巅峰对决_选择对手": {
 							"custom_recognition_param": "s=min_power"
 						}
-					}
+					},
+					"label": "$最低战力"
 				},
 				{
 					"name": "最高排名",
@@ -108,7 +128,8 @@
 						"巅峰对决_选择对手": {
 							"custom_recognition_param": "s=max_rank"
 						}
-					}
+					},
+					"label": "$最高排名"
 				}
 			]
 		}

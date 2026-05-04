@@ -2,10 +2,12 @@
 	"task": [
 		{
 			"name": "操作指南",
-			"label": "✨操作指南",
+			"label": "$✨操作指南",
 			"entry": "指南",
-			"description": "Resource/descs/others/guide.md",
-			"group": ["continuous"]
+			"description": "$Resource/descs/others/guide.md",
+			"group": [
+				"continuous"
+			]
 		}
 	],
 	"option": {}

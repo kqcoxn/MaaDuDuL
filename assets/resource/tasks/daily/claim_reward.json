@@ -2,10 +2,10 @@
 	"task": [
 		{
 			"name": "领取奖励",
-			"label": "🎁领取奖励",
+			"label": "$🎁领取奖励",
 			"entry": "领取奖励_开始",
 			"default_check": true,
-			"description": "Resource/descs/daily/claim_reward.md",
+			"description": "$Resource/descs/daily/claim_reward.md",
 			"group": [
 				"continuous"
 			],
@@ -18,10 +18,11 @@
 	"option": {
 		"领取奖励-任务奖励": {
 			"type": "switch",
-			"label": "领取任务奖励",
+			"label": "$领取任务奖励",
 			"cases": [
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
@@ -29,13 +30,14 @@
 						"领取奖励_任务开始": {
 							"next": "领取奖励_任务结束"
 						}
-					}
+					},
+					"label": "$No"
 				}
 			]
 		},
 		"领取奖励-通行证奖励": {
 			"type": "switch",
-			"label": "领取通行证奖励",
+			"label": "$领取通行证奖励",
 			"cases": [
 				{
 					"name": "Yes",
@@ -43,7 +45,8 @@
 						"领取奖励-通行证奖励-等级",
 						"领取奖励-通行证奖励-便装",
 						"领取奖励-通行证奖励-冒险"
-					]
+					],
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
@@ -51,16 +54,18 @@
 						"领取奖励_通行证开始": {
 							"next": "领取奖励_通行证结束"
 						}
-					}
+					},
+					"label": "$No"
 				}
 			]
 		},
 		"领取奖励-通行证奖励-等级": {
 			"type": "switch",
-			"label": "等级通行证",
+			"label": "$等级通行证",
 			"cases": [
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
@@ -68,16 +73,18 @@
 						"领取奖励_领取等级通行证": {
 							"action": "DoNothing"
 						}
-					}
+					},
+					"label": "$No"
 				}
 			]
 		},
 		"领取奖励-通行证奖励-便装": {
 			"type": "switch",
-			"label": "便装通行证",
+			"label": "$便装通行证",
 			"cases": [
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
@@ -85,16 +92,18 @@
 						"领取奖励_领取便装通行证": {
 							"action": "DoNothing"
 						}
-					}
+					},
+					"label": "$No"
 				}
 			]
 		},
 		"领取奖励-通行证奖励-冒险": {
 			"type": "switch",
-			"label": "冒险通行证",
+			"label": "$冒险通行证",
 			"cases": [
 				{
-					"name": "Yes"
+					"name": "Yes",
+					"label": "$Yes"
 				},
 				{
 					"name": "No",
@@ -102,7 +111,8 @@
 						"领取奖励_领取冒险通行证": {
 							"action": "DoNothing"
 						}
-					}
+					},
+					"label": "$No"
 				}
 			]
 		}
