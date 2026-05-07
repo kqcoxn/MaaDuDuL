@@ -2,16 +2,16 @@
     "$__mpe_config_每日活动作战": {
         "$__mpe_code": {
             "prefix": "每日活动作战",
-            "lastSyncTime": 1777729135751,
+            "lastSyncTime": 1778152770787,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -6708,
-                "y": -397,
-                "zoom": 1.21
+                "x": -9884,
+                "y": -1278,
+                "zoom": 1.72
             },
             "filename": "每日活动作战",
-            "version": "v1.5.0"
+            "version": "v1.5.2"
         }
     },
     "$__mpe_external_返回主界面_每日活动作战": {
@@ -146,10 +146,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    314,
-                    581,
-                    248,
-                    136
+                    624,
+                    582,
+                    234,
+                    135
                 ],
                 "expected": [
                     "成就"
@@ -379,7 +379,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/christmas.png"
+                    "activity/entry/farm.png"
                 ]
             }
         },
@@ -408,8 +408,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    1021,
-                    369,
+                    1033,
+                    247,
                     1,
                     1
                 ]
@@ -436,7 +436,7 @@
                     83
                 ],
                 "expected": [
-                    "圣诞节"
+                    "生活"
                 ]
             }
         },
@@ -515,10 +515,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    696,
-                    598,
-                    569,
-                    120
+                    519,
+                    545,
+                    441,
+                    173
                 ],
                 "expected": [
                     "微微辣"
@@ -648,10 +648,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    310,
-                    579,
-                    200,
-                    125
+                    624,
+                    582,
+                    234,
+                    135
                 ],
                 "expected": [
                     "成就"
@@ -679,10 +679,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    967,
-                    358,
-                    298,
-                    189
+                    919,
+                    360,
+                    360,
+                    261
                 ],
                 "expected": [
                     "战斗"
