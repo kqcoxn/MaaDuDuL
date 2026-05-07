@@ -1,5 +1,5 @@
 {
-    "resource": "国服",
+    "resource": "cn",
     "controller": "模拟器",
     "adb": {
         "adb_path": "E:/_Games/Netease/MuMu/nx_main/adb.exe",

@@ -39,6 +39,7 @@
 		{
 			"name": "cn",
 			"label": "$resource_cn_label",
+			"description": "$resource_cn_description",
 			"path": [
 				"./resource/base"
 			]
@@ -46,6 +47,7 @@
 		{
 			"name": "en",
 			"label": "$resource_en_label",
+			"description": "$resource_en_description",
 			"path": [
 				"./resource/base",
 				"./resource/en"
