@@ -1,0 +1,441 @@
+{
+    "$__mpe_config_游乐场": {
+        "$__mpe_code": {
+            "filePath": "D:\\_Projects\\programs\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\游乐场.json",
+            "filename": "游乐场",
+            "isModifiedExternally": false,
+            "lastSyncTime": 1774786742910,
+            "prefix": "游乐场",
+            "savedViewport": {
+                "x": -6220,
+                "y": 938,
+                "zoom": 1.32
+            },
+            "version": "v1.3.1"
+        }
+    },
+    "$__mpe_external_返回主界面_游乐场": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6096,
+                "y": -638
+            }
+        }
+    },
+    "游乐场_今日已完成": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5000,
+                "y": -1024
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 今日已完成游乐场"
+        },
+        "next": [
+            "游乐场_周期记录"
+        ],
+        "post_delay": 0,
+        "recognition": {
+            "param": {
+                "roi": [
+                    916,
+                    473,
+                    361,
+                    218
+                ],
+                "template": [
+                    "activity/playground/done.png"
+                ]
+            },
+            "type": "TemplateMatch"
+        }
+    },
+    "游乐场_初始化循环计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5001,
+                "y": -351
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": "k=游乐场\u0026mc=31"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "游乐场_检查计数",
+            "[JumpBack]游乐场_去获胜"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_初始化日常计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4998,
+                "y": -663
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": "k=游乐场\u0026mc=4"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "游乐场_检查计数",
+            "[JumpBack]游乐场_去获胜"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_匹配成功": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5536,
+                "y": -333
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 匹配成功"
+        },
+        "next": [
+            "游乐场_开始战斗"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "设置游乐场攻击卡组"
+                ],
+                "roi": [
+                    7,
+                    4,
+                    482,
+                    92
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "游乐场_去获胜": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5276,
+                "y": -333
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 等待对手匹配"
+        },
+        "next": [
+            "游乐场_匹配成功"
+        ],
+        "rate_limit": 2000,
+        "recognition": {
+            "param": {
+                "expected": [
+                    "去获胜"
+                ],
+                "roi": [
+                    1066,
+                    633,
+                    150,
+                    67
+                ]
+            },
+            "type": "OCR"
+        },
+        "timeout": 30000
+    },
+    "游乐场_周期提醒": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4452,
+                "y": -445
+            }
+        },
+        "focus": {
+            "Node.Recognition.Starting": " \u003e 今日已进行游乐场"
+        },
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_周期检查": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4169,
+                "y": -657
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=游乐场"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "游乐场_进入游乐场"
+        ],
+        "on_error": [
+            "游乐场_周期提醒"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_周期记录": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5800,
+                "y": -668
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=游乐场"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "返回主界面"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_开始": {
+        "$__mpe_code": {
+            "position": {
+                "x": 3895,
+                "y": -657
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "on_task_start",
+                "custom_action_param": "h=hs"
+            },
+            "type": "Custom"
+        },
+        "next": [
+            "游乐场_周期检查"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_开始战斗": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5803,
+                "y": -330
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 再无话说，速速动手！"
+        },
+        "next": [
+            "游乐场_战斗结束"
+        ],
+        "rate_limit": 3000,
+        "recognition": {
+            "param": {
+                "expected": [
+                    "去获胜"
+                ],
+                "roi": [
+                    979,
+                    632,
+                    132,
+                    59
+                ]
+            },
+            "type": "OCR"
+        },
+        "timeout": 200000
+    },
+    "游乐场_循环模式": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4725,
+                "y": -352
+            }
+        },
+        "next": [
+            "游乐场_初始化循环计数"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_战斗结束": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6063,
+                "y": -330
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 战斗结束"
+        },
+        "next": [
+            "游乐场_计数"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "退出"
+                ],
+                "roi": [
+                    745,
+                    509,
+                    515,
+                    198
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "游乐场_日常模式": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4723,
+                "y": -654
+            }
+        },
+        "next": [
+            "游乐场_今日已完成",
+            "游乐场_初始化日常计数"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0,
+        "recognition": {
+            "param": {
+                "expected": [
+                    "游乐场"
+                ],
+                "roi": [
+                    7,
+                    4,
+                    264,
+                    101
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "游乐场_检查计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5273,
+                "y": -668
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " \u003e 今日游乐场结束"
+        },
+        "next": [
+            "游乐场_领取每日奖励"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0,
+        "recognition": {
+            "param": {
+                "custom_recognition": "check_counter",
+                "custom_recognition_param": "k=游乐场"
+            },
+            "type": "Custom"
+        }
+    },
+    "游乐场_计数": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6331,
+                "y": -328
+            }
+        },
+        "action": {
+            "param": {
+                "custom_action": "count",
+                "custom_action_param": "k=游乐场"
+            },
+            "type": "Custom"
+        },
+        "post_delay": 0,
+        "pre_delay": 0
+    },
+    "游乐场_进入游乐场": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4448,
+                "y": -656
+            }
+        },
+        "action": {
+            "param": {},
+            "type": "Click"
+        },
+        "next": [
+            "游乐场_日常模式",
+            "游乐场_循环模式"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "游乐场"
+                ],
+                "roi": [
+                    805,
+                    139,
+                    470,
+                    209
+                ]
+            },
+            "type": "OCR"
+        }
+    },
+    "游乐场_领取每日奖励": {
+        "$__mpe_code": {
+            "position": {
+                "x": 5533,
+                "y": -668
+            }
+        },
+        "action": {
+            "param": {
+                "target": [
+                    1139,
+                    580,
+                    1,
+                    1
+                ]
+            },
+            "type": "Click"
+        },
+        "next": [
+            "游乐场_周期记录"
+        ],
+        "recognition": {
+            "param": {
+                "expected": [
+                    "每日参与奖励"
+                ]
+            },
+            "type": "OCR"
+        }
+    }
+}
