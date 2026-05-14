@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1778499505896,
+            "lastSyncTime": 1778772787775,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -19106,
-                "y": -5069,
-                "zoom": 1.98
+                "x": -14044,
+                "y": -3606,
+                "zoom": 1.5
             },
             "filename": "圣团巡礼",
             "version": "v1.5.3"
@@ -206,18 +206,28 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    938,
-                    506,
-                    302,
-                    114
+                    500,
+                    568,
+                    268,
+                    144
                 ],
                 "expected": [
-                    "兼职结束"
+                    "压力指数",
+                    "生活等级"
                 ]
             }
         },
+        "pre_delay": 1200,
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    1084,
+                    564,
+                    1,
+                    1
+                ]
+            }
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 兼职结束"
@@ -1127,8 +1137,6 @@
         "action": {
             "type": "Click"
         },
-        "timeout": 60000,
-        "rate_limit": 600,
         "next": [
             "圣团巡礼_兼职结束"
         ],
