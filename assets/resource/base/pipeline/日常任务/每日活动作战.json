@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1778499660606,
+            "lastSyncTime": 1779361753640,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -7561,
-                "y": -1002,
-                "zoom": 1.5
+                "x": -6755,
+                "y": -746,
+                "zoom": 1.31
             },
             "filename": "每日活动作战",
             "version": "v1.5.3"
@@ -147,10 +147,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    624,
-                    582,
-                    234,
-                    135
+                    354,
+                    575,
+                    268,
+                    118
                 ],
                 "expected": [
                     "成就"
@@ -205,10 +205,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    256,
+                    21,
                     322,
-                    744,
-                    396
+                    1243,
+                    295
                 ],
                 "expected": [
                     "梦境之地",
@@ -271,8 +271,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 4941,
-                "y": 1131
+                "x": 4944,
+                "y": 1132
             }
         }
     },
@@ -380,7 +380,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/farm.png"
+                    "activity/entry/needle.png"
                 ]
             }
         },
@@ -409,8 +409,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    1033,
-                    247,
+                    1094,
+                    598,
                     1,
                     1
                 ]
@@ -437,7 +437,7 @@
                     83
                 ],
                 "expected": [
-                    "生活"
+                    "乐园"
                 ]
             }
         },
@@ -516,10 +516,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    519,
-                    545,
-                    441,
-                    173
+                    206,
+                    394,
+                    505,
+                    303
                 ],
                 "expected": [
                     "微微辣"
@@ -527,7 +527,15 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    310,
+                    652,
+                    1,
+                    1
+                ]
+            }
         },
         "post_delay": 1000,
         "next": [
@@ -649,10 +657,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    624,
-                    582,
-                    234,
-                    135
+                    354,
+                    575,
+                    268,
+                    118
                 ],
                 "expected": [
                     "成就"
@@ -680,10 +688,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    1023,
-                    463,
-                    245,
-                    163
+                    966,
+                    591,
+                    272,
+                    126
                 ],
                 "expected": [
                     "战斗"
@@ -694,8 +702,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    1144,
-                    545,
+                    1075,
+                    667,
                     1,
                     1
                 ]
