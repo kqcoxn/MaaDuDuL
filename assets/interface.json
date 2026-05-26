@@ -52,6 +52,15 @@
 				"./resource/base",
 				"./resource/en"
 			]
+		},
+		{
+			"name": "zh_hant",
+			"label": "$resource_zh_hant_label",
+			"description": "$resource_zh_hant_description",
+			"path": [
+				"./resource/base",
+				"./resource/zh_hant"
+			]
 		}
 	],
 	"agent": {

@@ -199,6 +199,8 @@
 	"resource_cn_label": "国服",
 	"resource_en_description": "正在适配中，暂不可用",
 	"resource_en_label": "国际服（EN）",
+	"resource_zh_hant_description": "国际服繁体中文资源包。使用独立繁中覆盖层，不复用英文资源。",
+	"resource_zh_hant_label": "国际服（繁中）",
 	"Resource/descs/daily/activity_daily.md": "Resource/descs/daily/activity_daily.md",
 	"Resource/descs/daily/activity_daily2.md": "Resource/descs/daily/activity_daily2.md",
 	"Resource/descs/daily/claim_mail.md": "Resource/descs/daily/claim_mail.md",
