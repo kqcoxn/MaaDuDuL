@@ -2,16 +2,17 @@
     "$__mpe_config_清红糖": {
         "$__mpe_code": {
             "prefix": "清红糖",
-            "lastSyncTime": 1776866917640,
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1780227600632,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
             "savedViewport": {
-                "x": -4040,
-                "y": 284,
-                "zoom": 0.66
+                "x": -8295,
+                "y": 591,
+                "zoom": 1.32
             },
             "filename": "清红糖",
-            "version": "v1.4.2"
+            "version": "v1.5.3"
         }
     },
     "$__mpe_external_返回主界面_清红糖": {
@@ -23,19 +24,13 @@
         }
     },
     "清红糖_从心形返回": {
-        "recognition": {
-            "type": "TemplateMatch",
+        "action": {
+            "type": "Custom",
             "param": {
-                "template": [
-                    "global/back.png"
-                ]
+                "custom_action": "run",
+                "custom_action_param": "n=返回主界面"
             }
         },
-        "action": {
-            "type": "Click"
-        },
-        "repeat": 2,
-        "repeat_delay": 800,
         "next": [
             "清红糖_心形结束"
         ],
@@ -85,7 +80,7 @@
         },
         "post_delay": 0,
         "next": [
-            "清红糖_进入冒险"
+            "清红糖_心形开始"
         ],
         "$__mpe_code": {
             "position": {
@@ -136,8 +131,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7112,
-                "y": -90
+                "x": 6823,
+                "y": -124
             }
         }
     },
@@ -151,16 +146,16 @@
             }
         },
         "post_delay": 0,
-        "next": [
-            "清红糖_娃娃怪破坏者"
-        ],
         "on_error": [
             "清红糖_心形周期提醒"
         ],
+        "next": [
+            "清红糖_进入冒险"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 6833,
-                "y": -298
+                "x": 6547,
+                "y": -299
             }
         }
     },
@@ -192,8 +187,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6550,
-                "y": -296
+                "x": 6266,
+                "y": -297
             }
         }
     },
@@ -392,12 +387,12 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "清红糖_振兴之路"
+            "清红糖_进入冒险2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6545,
-                "y": 241
+                "x": 6270,
+                "y": 242
             }
         }
     },
@@ -449,11 +444,11 @@
             }
         },
         "next": [
-            "清红糖_心形开始"
+            "清红糖_娃娃怪破坏者"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6281,
+                "x": 6823,
                 "y": -300
             }
         }
@@ -506,6 +501,28 @@
             "position": {
                 "x": 7663,
                 "y": -300
+            }
+        }
+    },
+    "清红糖_进入冒险2": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1182,
+                    664,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "清红糖_振兴之路"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6541,
+                "y": 241
             }
         }
     }

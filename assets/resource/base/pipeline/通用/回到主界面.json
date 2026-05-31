@@ -2,16 +2,17 @@
     "$__mpe_config_返回主界面": {
         "$__mpe_code": {
             "prefix": "返回主界面",
-            "lastSyncTime": 1777642943480,
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1780227831533,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
             "savedViewport": {
-                "x": -3910,
-                "y": -122,
-                "zoom": 1.52
+                "x": -1842,
+                "y": 248,
+                "zoom": 0.87
             },
             "filename": "返回主界面",
-            "version": "v1.4.3"
+            "version": "v1.5.3"
         }
     },
     "返回主界面_使徒": {
@@ -141,7 +142,7 @@
             "type": "Custom",
             "param": {
                 "custom_recognition": "stable_reco",
-                "custom_recognition_param": "n=返回主界面_活动弹窗&n=返回主界面_使徒&n=返回主界面_冒险通行证"
+                "custom_recognition_param": "m=2&n=返回主界面_活动弹窗&n=返回主界面_使徒&n=返回主界面_冒险通行证"
             }
         },
         "pre_delay": 0,

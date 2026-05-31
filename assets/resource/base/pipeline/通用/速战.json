@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "速战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1779361759638,
+            "lastSyncTime": 1780227420166,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\速战.json",
             "savedViewport": {
-                "x": -9092,
-                "y": -642,
-                "zoom": 1.14
+                "x": -11873,
+                "y": -1070,
+                "zoom": 1.5
             },
             "filename": "速战",
             "version": "v1.5.3"
@@ -143,7 +143,8 @@
                 "expected": [
                     "入场次数已用完",
                     "后可使用",
-                    "入场次数已用完"
+                    "入场次数已用完",
+                    "入场券不足"
                 ]
             }
         },

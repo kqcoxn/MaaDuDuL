@@ -24,7 +24,6 @@ https://github.com/kqcoxn/MaaDuDuL
 - 不要主动写 Pipeline JSON，如果需要扩充功能，在最后给我流水线汇总
 - 本地的 `/MFAAvalonia` 是测试环境，不应该改动，修改各资源应该在 `/assets` 中
 
-
 # 可用参考
 
 ## 说明
