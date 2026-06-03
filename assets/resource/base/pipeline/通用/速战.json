@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "速战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1780227420166,
+            "lastSyncTime": 1780493854794,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\速战.json",
             "savedViewport": {
-                "x": -11873,
-                "y": -1070,
-                "zoom": 1.5
+                "x": -12037,
+                "y": -910,
+                "zoom": 1.52
             },
             "filename": "速战",
-            "version": "v1.5.3"
+            "version": "v1.6.0"
         }
     },
     "速战_不购买": {
@@ -86,10 +86,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    19,
-                    504,
-                    1222,
-                    151
+                    9,
+                    439,
+                    1264,
+                    274
                 ],
                 "expected": [
                     "速战"
