@@ -35,8 +35,12 @@ class Gift(CustomAction):
             # 解析参数，获取礼包名称
             args = ParamAnalyzer(argv)
             gift = args.get(["gift", "g"])
+            gift_type = args.get(["type", "t"], "free")
 
-            Prompter.log(f"领取{gift}")
+            if gift_type == "free":
+                Prompter.log(f"领取{gift}")
+            else:
+                Prompter.log(f"购买{gift}")
 
             # 执行领取流程
             Tasker(context).run(
@@ -48,7 +52,7 @@ class Gift(CustomAction):
 
             return True
         except Exception as e:
-            return Prompter.error("领取指定礼包", e)
+            return Prompter.error("领取/购买指定礼包", e)
 
 
 @AgentServer.custom_action("buy")
