@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1779361753640,
+            "lastSyncTime": 1780571274033,
             "isModifiedExternally": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
+            "filePath": "C:\\_Products\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -6755,
-                "y": -746,
-                "zoom": 1.31
+                "x": -9016,
+                "y": -1046,
+                "zoom": 1.5
             },
             "filename": "每日活动作战",
-            "version": "v1.5.3"
+            "version": "v1.6.1"
         }
     },
     "$__mpe_external_返回主界面_每日活动作战": {
@@ -147,10 +147,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    354,
-                    575,
-                    268,
-                    118
+                    9,
+                    135,
+                    1262,
+                    577
                 ],
                 "expected": [
                     "成就"
@@ -380,7 +380,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/needle.png"
+                    "activity/entry/glove.png"
                 ]
             }
         },
@@ -409,8 +409,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    1094,
-                    598,
+                    108,
+                    655,
                     1,
                     1
                 ]
@@ -437,7 +437,7 @@
                     83
                 ],
                 "expected": [
-                    "乐园"
+                    "手套"
                 ]
             }
         },
@@ -516,10 +516,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    206,
-                    394,
-                    505,
-                    303
+                    8,
+                    79,
+                    1262,
+                    630
                 ],
                 "expected": [
                     "微微辣"
@@ -527,15 +527,7 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    310,
-                    652,
-                    1,
-                    1
-                ]
-            }
+            "type": "Click"
         },
         "post_delay": 1000,
         "next": [
@@ -640,7 +632,7 @@
         "action": {
             "type": "Click"
         },
-        "repeat": 2,
+        "repeat": 1,
         "repeat_delay": 800,
         "next": [
             "每日活动作战_战斗结束"
@@ -657,10 +649,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    354,
-                    575,
-                    268,
-                    118
+                    9,
+                    135,
+                    1262,
+                    577
                 ],
                 "expected": [
                     "成就"
@@ -688,10 +680,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    966,
-                    591,
-                    272,
-                    126
+                    14,
+                    141,
+                    1259,
+                    577
                 ],
                 "expected": [
                     "战斗"
@@ -702,8 +694,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    1075,
-                    667,
+                    155,
+                    640,
                     1,
                     1
                 ]
@@ -717,7 +709,7 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5598,
+                "x": 5595,
                 "y": 834
             }
         }
