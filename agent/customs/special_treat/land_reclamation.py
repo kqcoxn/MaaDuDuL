@@ -12,7 +12,6 @@ import time
 from agent.customs.utils import Prompter, MatrixOperator
 from agent.customs.maahelper import ParamAnalyzer, Tasker
 
-
 # ====================  新商品查看与领取  ====================
 
 
@@ -52,6 +51,10 @@ class NewGoods(CustomAction):
             if store_type == "group" or store_type == "g":
                 pipeline_override = {
                     "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=3"},
+                }
+            elif store_type == "crystal" or store_type == "c":
+                pipeline_override = {
+                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=5"},
                 }
             elif store_type == "boutique" or store_type == "b":
                 pipeline_override = {
