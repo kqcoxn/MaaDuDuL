@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1781782340849,
+            "lastSyncTime": 1781883561030,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -10496,
-                "y": -1298,
-                "zoom": 1.72
+                "x": -9450,
+                "y": -217,
+                "zoom": 1.65
             },
             "filename": "每日活动作战",
             "version": "v1.6.1"
@@ -163,6 +163,34 @@
             "position": {
                 "x": 4944,
                 "y": 791
+            }
+        }
+    },
+    "每日活动作战_区域战斗": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    58,
+                    365,
+                    364,
+                    138
+                ],
+                "expected": [
+                    "完整性的普通次元"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "每日活动作战_确保微微辣"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5834,
+                "y": 1088
             }
         }
     },
@@ -358,7 +386,6 @@
         }
     },
     "每日活动作战_检查当前进度": {
-        "pre_delay": 0,
         "action": {
             "type": "Custom",
             "param": {
@@ -512,7 +539,12 @@
                     "120",
                     "020",
                     "：20",
-                    ":20"
+                    ":20",
+                    "/ 20",
+                    "1 20",
+                    "0 20",
+                    "： 20",
+                    ": 20"
                 ]
             }
         },
@@ -759,34 +791,6 @@
             "position": {
                 "x": 5597,
                 "y": -159
-            }
-        }
-    },
-    "每日活动作战_区域战斗": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    58,
-                    365,
-                    364,
-                    138
-                ],
-                "expected": [
-                    "完整性的普通次元"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": [
-            "每日活动作战_确保微微辣"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5834,
-                "y": 1088
             }
         }
     }

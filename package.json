@@ -5,7 +5,7 @@
 		"agent": "python dev/run_agent.py",
 		"debug": "pnpm dlx @weinibuliu/maa-debugger@latest",
 		"reset": "git reset --soft HEAD~1",
-		"release": "git tag -a v0.2.26 -m \"release v0.2.26\" && git push origin v0.2.26"
+		"release": "git tag -a v0.2.27 -m \"release v0.2.27\" && git push origin v0.2.27"
 	},
 	"devDependencies": {
 		"prettier-plugin-multiline-arrays": "^3.0.6"
