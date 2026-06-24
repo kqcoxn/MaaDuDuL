@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "清红糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1780227600632,
+            "lastSyncTime": 1782317710641,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
             "savedViewport": {
-                "x": -8295,
-                "y": 591,
-                "zoom": 1.32
+                "x": -10307,
+                "y": -987,
+                "zoom": 1.5
             },
             "filename": "清红糖",
-            "version": "v1.5.3"
+            "version": "v1.6.2"
         }
     },
     "$__mpe_external_返回主界面_清红糖": {
@@ -146,11 +146,11 @@
             }
         },
         "post_delay": 0,
-        "on_error": [
-            "清红糖_心形周期提醒"
-        ],
         "next": [
             "清红糖_进入冒险"
+        ],
+        "on_error": [
+            "清红糖_心形周期提醒"
         ],
         "$__mpe_code": {
             "position": {
@@ -256,7 +256,7 @@
             "type": "OCR",
             "param": {
                 "expected": [
-                    "^x-x$"
+                    "^\\s*x\\s*-\\s*x\\s*$"
                 ]
             }
         },
@@ -453,6 +453,28 @@
             }
         }
     },
+    "清红糖_进入冒险2": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1182,
+                    664,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "清红糖_振兴之路"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6541,
+                "y": 241
+            }
+        }
+    },
     "清红糖_选择心形种族": {
         "recognition": {
             "type": "OCR",
@@ -501,28 +523,6 @@
             "position": {
                 "x": 7663,
                 "y": -300
-            }
-        }
-    },
-    "清红糖_进入冒险2": {
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    1182,
-                    664,
-                    1,
-                    1
-                ]
-            }
-        },
-        "next": [
-            "清红糖_振兴之路"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 6541,
-                "y": 241
             }
         }
     }

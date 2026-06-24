@@ -15,7 +15,6 @@ import time
 from agent.customs.utils import Prompter, MatrixOperator, LocalStorage
 from agent.customs.maahelper import ParamAnalyzer, Tasker, RecoHelper
 
-
 # ============== 清紫糖 ==============
 
 
@@ -439,7 +438,11 @@ class SelectRedLevel(CustomAction):
             Prompter.log(f"查找并选中关卡：{target_stage}")
             Tasker(context).run(
                 "清红糖_查找关卡开始",
-                {"清红糖_查找关卡": {"expected": f"^{target_chapter}-{target_stage}$"}},
+                {
+                    "清红糖_查找关卡": {
+                        "expected": f"^\\s*{target_chapter}\\s*-\\s*{target_stage}\\s*$"
+                    }
+                },
             )
 
             # 执行速刷
