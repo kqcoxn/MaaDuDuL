@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "启动游戏",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1779358978691,
+            "lastSyncTime": 1782318006410,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "savedViewport": {
-                "x": -355,
-                "y": -44,
-                "zoom": 1.31
+                "x": -2622,
+                "y": -855,
+                "zoom": 2.5
             },
             "filename": "启动游戏",
-            "version": "v1.5.3"
+            "version": "v1.6.2"
         }
     },
     "启动游戏_关闭公告": {
@@ -36,8 +36,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 1482,
-                "y": 1078
+                "x": 1480,
+                "y": 1123
             }
         }
     },
@@ -178,9 +178,17 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    10,
+                    8,
+                    1,
+                    1
+                ]
+            }
         },
-        "timeout": 3000,
+        "timeout": 2000,
         "next": [
             "启动游戏_关闭面板"
         ],
@@ -285,8 +293,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1213,
-                "y": 1076
+                "x": 1211,
+                "y": 1121
             }
         }
     },
@@ -310,8 +318,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 1217,
-                "y": 866
+                "x": 1215,
+                "y": 911
             }
         }
     },
@@ -404,8 +412,8 @@
         "post_delay": 0,
         "$__mpe_code": {
             "position": {
-                "x": 1213,
-                "y": 1371
+                "x": 1211,
+                "y": 1416
             }
         }
     },
@@ -427,8 +435,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 1220,
-                "y": 592
+                "x": 1218,
+                "y": 637
             }
         }
     }
