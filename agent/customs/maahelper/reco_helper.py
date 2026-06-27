@@ -14,6 +14,15 @@ import numpy as np
 from .tasker import Tasker
 
 
+class _MergedResult:
+    __slots__ = ("box", "text", "score")
+
+    def __init__(self, box, text, score):
+        self.box = box
+        self.text = text
+        self.score = score
+
+
 class RecoHelper:
     """识别辅助类。
 
@@ -228,6 +237,81 @@ class RecoHelper:
             list[RecognitionResult]: 按可信度降序排列的识别结果列表
         """
         return sorted(results, key=lambda r: r.score, reverse=True)
+
+    @staticmethod
+    def merge_nearby(
+        results: list[RecognitionResult],
+        radius: int = 30,
+    ) -> list:
+        """按最短顶点距离合并相邻的识别结果。
+
+        计算每对 box 四个顶点之间的最短欧氏距离，
+        距离 <= radius 的结果归为同组，组内按 x 排序后拼接。
+
+        Args:
+            results: 识别结果列表
+            radius: 合并距离阈值（像素），两个 box 最短顶点距离在此范围内则合并
+
+        Returns:
+            list: 合并后的结果列表，每项具有 box、text、score 属性
+        """
+        if not results:
+            return []
+
+        n = len(results)
+        parent = list(range(n))
+
+        def find(x):
+            while parent[x] != x:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
+
+        def union(a, b):
+            ra, rb = find(a), find(b)
+            if ra != rb:
+                parent[ra] = rb
+
+        for i in range(n):
+            for j in range(i + 1, n):
+                if RecoHelper._min_vertex_dist(results[i].box, results[j].box) <= radius:
+                    union(i, j)
+
+        groups: dict[int, list] = {}
+        for i in range(n):
+            groups.setdefault(find(i), []).append(results[i])
+
+        merged = []
+        for group in groups.values():
+            group.sort(key=lambda r: r.box[0])
+            merged.append(RecoHelper._merge_group(group))
+
+        return merged
+
+    @staticmethod
+    def _min_vertex_dist(box_a, box_b) -> float:
+        """计算两个 box 四个顶点之间的最短欧氏距离。"""
+        ax, ay, aw, ah = box_a
+        bx, by, bw, bh = box_b
+        verts_a = [(ax, ay), (ax + aw, ay), (ax, ay + ah), (ax + aw, ay + ah)]
+        verts_b = [(bx, by), (bx + bw, by), (bx, by + bh), (bx + bw, by + bh)]
+        min_d = float("inf")
+        for va in verts_a:
+            for vb in verts_b:
+                d = ((va[0] - vb[0]) ** 2 + (va[1] - vb[1]) ** 2) ** 0.5
+                min_d = min(min_d, d)
+        return min_d
+
+    @staticmethod
+    def _merge_group(group: list):
+        """将一组结果合并为单个结果。"""
+        x = min(r.box[0] for r in group)
+        y = min(r.box[1] for r in group)
+        x2 = max(r.box[0] + r.box[2] for r in group)
+        y2 = max(r.box[1] + r.box[3] for r in group)
+        text = "".join(r.text for r in group)
+        score = min(r.score for r in group)
+        return _MergedResult((x, y, x2 - x, y2 - y), text, score)
 
     @staticmethod
     def rt(

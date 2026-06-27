@@ -8,8 +8,10 @@
 
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
+from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 
+import re
 import time
 
 from agent.customs.utils import Prompter, MatrixOperator, LocalStorage
@@ -292,6 +294,47 @@ class SelectGoldLevel(CustomAction):
 # ============== 清红糖 ==============
 
 
+@AgentServer.custom_recognition("find_level")
+class FindLevel(CustomRecognition):
+    """关卡查找识别器。
+
+    对 OCR 结果进行空间合并后再做正则匹配，
+    解决新版 ppocr 将类似 "9-3" 拆分成多个独立文本框的问题。
+
+    参数格式（custom_recognition_param）：
+        - chapter 或 c：章节号
+        - stage 或 s：关卡号
+    """
+
+    def analyze(
+        self,
+        context: Context,
+        argv: CustomRecognition.AnalyzeArg,
+    ) -> CustomRecognition.AnalyzeResult:
+        try:
+            args = ParamAnalyzer(argv)
+            chapter = args.get(["chapter", "c"])
+            stage = args.get(["stage", "s"])
+
+            rh = RecoHelper(context, argv).recognize("识别", {"recognition": "OCR"})
+            if not rh.hit:
+                Prompter.log("OCR 未识别到任何文本")
+                return RecoHelper.NoResult
+
+            merged = RecoHelper.merge_nearby(rh.filtered_results, radius=20)
+
+            pattern = rf"^\s*{chapter}.*?{stage}\D*$"
+
+            for item in merged:
+                text = item.text.strip()
+                if re.search(pattern, text):
+                    return RecoHelper.rt(result=item)
+
+            return RecoHelper.NoResult
+        except Exception as e:
+            return Prompter.error("查找关卡", e, reco_detail=True)
+
+
 @AgentServer.custom_action("select_heart_type")
 class SelectHeartType(CustomAction):
     """选择心形关卡类型的自定义动作。
@@ -440,7 +483,7 @@ class SelectRedLevel(CustomAction):
                 "清红糖_查找关卡开始",
                 {
                     "清红糖_查找关卡": {
-                        "expected": f"^\\s*{target_chapter}\\s*-\\s*{target_stage}\\s*$"
+                        "custom_recognition_param": f"c={target_chapter}&s={target_stage}"
                     }
                 },
             )

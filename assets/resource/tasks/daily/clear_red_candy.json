@@ -150,26 +150,40 @@
 		"清红糖-装备-关卡区间": {
 			"type": "input",
 			"label": "$关卡区间",
-			"description": "$设置要清理的红糖关卡区间，格式为\"章-关\"（如\"24-9\"），每次运行此任务时步进循环",
+			"description": "$设置要清理的红糖关卡区间，每次运行此任务时步进循环",
 			"inputs": [
 				{
-					"name": "起始关卡",
-					"default": "1-1",
+					"name": "起始章节",
+					"default": "1",
 					"pipeline_type": "string",
-					"verify": "^\\d{1,2}-([1-9]|10)$",
+					"verify": "^\\d{1,2}$",
+					"label": "$起始章节"
+				},
+				{
+					"name": "起始关卡",
+					"default": "1",
+					"pipeline_type": "string",
+					"verify": "^([1-9]|10)$",
 					"label": "$起始关卡"
 				},
 				{
-					"name": "结束关卡",
-					"default": "1-1",
+					"name": "结束章节",
+					"default": "1",
 					"pipeline_type": "string",
-					"verify": "^\\d{1,2}-([1-9]|10)$",
+					"verify": "^\\d{1,2}$",
+					"label": "$结束章节"
+				},
+				{
+					"name": "结束关卡",
+					"default": "1",
+					"pipeline_type": "string",
+					"verify": "^([1-9]|10)$",
 					"label": "$结束关卡"
 				}
 			],
 			"pipeline_override": {
 				"清红糖_指定关卡作战": {
-					"custom_action_param": "sl={起始关卡}&el={结束关卡}"
+					"custom_action_param": "sl={起始章节}-{起始关卡}&el={结束章节}-{结束关卡}"
 				}
 			}
 		}
