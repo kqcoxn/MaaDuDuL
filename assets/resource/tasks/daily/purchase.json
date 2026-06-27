@@ -27,6 +27,7 @@
 						"每日采购-每日免费礼包",
 						"每日采购-圣团研究礼包",
 						"每日采购-每周免费礼包",
+						"每日采购-兔子代币",
 						"每日采购-每月免费礼包"
 					],
 					"label": "$Yes"
@@ -163,6 +164,47 @@
 							"action": "DoNothing"
 						},
 						"每日采购_周期组合检查-每周礼包": {
+							"action": "DoNothing"
+						}
+					},
+					"label": "$No"
+				},
+				{
+					"name": "Yes",
+					"label": "$Yes"
+				}
+			]
+		},
+		"每日采购-兔子代币": {
+			"type": "switch",
+			"label": "$领取兔子代币",
+			"cases": [
+				{
+					"name": "Yes",
+					"option": [
+						"每日采购-兔子代币-周期检查"
+					],
+					"label": "$Yes"
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_兔子代币开始": {
+							"next": "每日采购_兔子代币结束"
+						}
+					},
+					"label": "$No"
+				}
+			]
+		},
+		"每日采购-兔子代币-周期检查": {
+			"type": "switch",
+			"label": "$每周仅检查一次",
+			"cases": [
+				{
+					"name": "No",
+					"pipeline_override": {
+						"每日采购_兔子代币周期检查": {
 							"action": "DoNothing"
 						}
 					},
