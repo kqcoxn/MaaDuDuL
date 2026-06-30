@@ -3,7 +3,7 @@
 本模块提供了周期性任务检查的功能，支持按天、按周或按月判断任务是否已完成。
 主要功能包括：
     - 任务完成状态的记录和检查
-    - 基于刷新时间的日期调整（凌晨4点前算作前一天）
+    - 基于刷新时间的日期调整（凌晨3点前算作前一天）
     - 同日/同周/同月判断
 
 典型用法：
@@ -20,6 +20,7 @@ from typing import Optional
 from datetime import datetime, date, timedelta
 
 from agent.customs.utils import Prompter, LocalStorage
+from agent.customs.utils.game_time import DAILY_REFRESH_HOUR
 from agent.customs.maahelper import ParamAnalyzer
 
 
@@ -37,18 +38,18 @@ class Inspector:
     def _adjust_datetime() -> datetime:
         """根据游戏刷新时间调整日期。
 
-        考虑到游戏凌晨4点刷新的特性，如果当前时间在凌晨4点之前，
+        考虑到游戏凌晨3点刷新的特性，如果当前时间在凌晨3点之前，
         则认为仍处于前一天。这样可以确保周期判断符合游戏逻辑。
 
         Returns:
             datetime: 调整后的日期时间对象。
 
         Example:
-            凌晨3点调用时，返回的日期是前一天。
+            凌晨2点调用时，返回的日期是前一天。
             早上5点调用时，返回的日期是当天。
         """
         current_datetime = datetime.now()
-        if current_datetime.hour < 4:
+        if current_datetime.hour < DAILY_REFRESH_HOUR:
             return current_datetime - timedelta(days=1)
         return current_datetime
 
@@ -69,13 +70,13 @@ class Inspector:
         """记录任务的最后完成日期。
 
         将调整后的日期存储到本地，用于后续的周期判断。
-        4点前记录前一天，4点后记录当天。
+        3点前记录前一天，3点后记录当天。
 
         Args:
             key: 任务标识符，用于区分不同的周期性任务。
 
         Note:
-            记录时使用调整后的日期，确保4点作为分界线。
+            记录时使用调整后的日期，确保3点作为分界线。
         """
         adjusted_datetime = Inspector._adjust_datetime()
         storage_key = Inspector._get_storage_key(key)
@@ -119,7 +120,7 @@ class Inspector:
         """判断任务是否在同一天内已完成。
 
         比较当前调整后日期和上次记录日期是否为同一天。
-        4点前对比时使用前一天，4点后对比时使用当天。
+        3点前对比时使用前一天，3点后对比时使用当天。
 
         Args:
             task: 任务标识符。

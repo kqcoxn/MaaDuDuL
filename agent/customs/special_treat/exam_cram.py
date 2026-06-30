@@ -35,7 +35,7 @@ class SelectCramLevel(CustomAction):
             bool: 执行成功返回 True，失败返回 False
 
         Note:
-            游戏日期计算逻辑：凌晨 4 点前视为前一天
+            游戏日期计算逻辑：凌晨 3 点前视为前一天
         """
         try:
             # 解析自定义动作参数
