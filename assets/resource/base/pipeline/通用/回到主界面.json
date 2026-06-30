@@ -1,18 +1,18 @@
 {
-    "$__mpe_config_返回主界面": {
+    "$__mpe_config_回到主界面": {
         "$__mpe_code": {
             "prefix": "返回主界面",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1780227831533,
+            "lastSyncTime": 1782822723753,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
             "savedViewport": {
-                "x": -1842,
-                "y": 248,
-                "zoom": 0.87
+                "x": -5458,
+                "y": -387,
+                "zoom": 2
             },
-            "filename": "返回主界面",
-            "version": "v1.5.3"
+            "filename": "回到主界面",
+            "version": "v1.7.1"
         }
     },
     "返回主界面_使徒": {
@@ -199,7 +199,7 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": [
+               "template": [
                     "main/close-cherry.png",
                     "main/close-pink.png",
                     "main/close-trans.png",
@@ -208,9 +208,11 @@
                     "main/close-yellow.png",
                     "main/close-bw.png",
                     "main/close-green.png",
-                    "main/close-brown2.png"
+                    "main/close-brown2.png",
+                    "main/close-pw.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
