@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1781883561030,
+            "lastSyncTime": 1782997838658,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -9450,
-                "y": -217,
-                "zoom": 1.65
+                "x": -3570,
+                "y": -427,
+                "zoom": 0.72
             },
             "filename": "每日活动作战",
-            "version": "v1.6.1"
+            "version": "v1.7.2"
         }
     },
     "$__mpe_external_返回主界面_每日活动作战": {
@@ -108,10 +108,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    28,
-                    79,
-                    1051,
-                    631
+                    244,
+                    77,
+                    1007,
+                    634
                 ],
                 "expected": [
                     "梦境之地",
@@ -311,7 +311,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/time.png"
+                    "activity/entry/show.png"
                 ]
             }
         },
@@ -340,8 +340,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    282,
-                    617,
+                    573,
+                    566,
                     1,
                     1
                 ]
@@ -368,7 +368,7 @@
                     83
                 ],
                 "expected": [
-                    "时刻"
+                    "午夜"
                 ]
             }
         },
@@ -626,21 +626,13 @@
             }
         },
         "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    237,
-                    502,
-                    1,
-                    1
-                ]
-            }
+            "type": "Click"
         },
         "focus": {
             "Node.Recognition.Succeeded": " > 进入作战界面"
         },
         "next": [
-            "每日活动作战_区域战斗"
+            "每日活动作战_确保微微辣"
         ],
         "$__mpe_code": {
             "position": {
