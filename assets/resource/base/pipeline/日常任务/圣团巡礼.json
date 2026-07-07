@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1779362179159,
+            "lastSyncTime": 1783435928170,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -12714,
-                "y": -2773,
-                "zoom": 1.72
+                "x": -16898,
+                "y": -4059,
+                "zoom": 1.65
             },
             "filename": "圣团巡礼",
-            "version": "v1.5.3"
+            "version": "v1.7.3"
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -217,7 +217,7 @@
                 ]
             }
         },
-        "pre_delay": 1200,
+        "pre_delay": 2000,
         "action": {
             "type": "Click",
             "param": {
@@ -246,7 +246,9 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "圣团巡礼_查找角色"
+            "圣团巡礼_查找角色",
+            "圣团巡礼_兼职结束",
+            "圣团巡礼_角色升级"
         ],
         "$__mpe_code": {
             "position": {
@@ -353,7 +355,7 @@
             "Node.Recognition.Succeeded": " > 今日冒险已结束"
         },
         "next": [
-            "圣团巡礼_冒险结束"
+            "圣团巡礼_从冒险返回"
         ],
         "$__mpe_code": {
             "position": {
@@ -383,8 +385,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 10731,
-                "y": 2569
+                "x": 10974,
+                "y": 2572
             }
         }
     },
@@ -2715,6 +2717,51 @@
             "position": {
                 "x": 9659,
                 "y": 1050
+            }
+        }
+    },
+    "圣团巡礼_角色升级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "点击屏幕继续"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "圣团巡礼_再次查找"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 9651,
+                "y": 2204
+            }
+        }
+    },
+    "圣团巡礼_从冒险返回": {
+        "pre_delay": 400,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    81,
+                    79,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "圣团巡礼_冒险结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 10705,
+                "y": 2572
             }
         }
     }
