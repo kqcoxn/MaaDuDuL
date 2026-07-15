@@ -1,2 +1,2 @@
 json-with-comments
-maafw==5.10.2
+maafw==5.12.1

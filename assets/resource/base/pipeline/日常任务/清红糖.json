@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "清红糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1782572541194,
+            "lastSyncTime": 1784119544765,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
             "savedViewport": {
-                "x": -8265,
-                "y": -908,
-                "zoom": 1.25
+                "x": -14378,
+                "y": -1563,
+                "zoom": 2
             },
             "filename": "清红糖",
-            "version": "v1.6.2"
+            "version": "v1.7.4"
         }
     },
     "$__mpe_external_返回主界面_清红糖": {
@@ -256,7 +256,7 @@
             "type": "Custom",
             "param": {
                 "custom_recognition": "find_level",
-                "custom_recognition_param": "c=9&s=3"
+                "custom_recognition_param": "c=9&s=1"
             }
         },
         "action": {
