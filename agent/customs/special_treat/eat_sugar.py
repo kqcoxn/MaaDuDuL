@@ -298,8 +298,8 @@ class SelectGoldLevel(CustomAction):
 class FindLevel(CustomRecognition):
     """关卡查找识别器。
 
-    对 OCR 结果进行空间合并后再做正则匹配，
-    解决新版 ppocr 将类似 "9-3" 拆分成多个独立文本框的问题。
+    优先匹配完整 OCR 结果，未命中时仅合并可能组成关卡名的文本碎片，
+    解决新版 ppocr 将类似 "9-3" 拆分成多个文本框的问题，并排除星级等装饰文本。
 
     参数格式（custom_recognition_param）：
         - chapter 或 c：章节号
@@ -321,13 +321,26 @@ class FindLevel(CustomRecognition):
                 Prompter.log("OCR 未识别到任何文本")
                 return RecoHelper.NoResult
 
-            merged = RecoHelper.merge_nearby(rh.filtered_results, radius=20)
+            pattern = re.compile(
+                rf"^\s*{re.escape(str(chapter))}.*?{re.escape(str(stage))}\D*$"
+            )
 
-            pattern = rf"^\s*{chapter}.*?{stage}\D*$"
+            # 优先使用完整 OCR 结果，保留精确的点击范围。
+            for item in rh.filtered_results:
+                if pattern.search(item.text.strip()):
+                    return RecoHelper.rt(result=item)
+
+            # 合并前排除星级等装饰文本，避免污染关卡名。
+            level_parts = [
+                item
+                for item in rh.filtered_results
+                if re.search(r"\d", item.text)
+                or re.fullmatch(r"\s*[-–—]\s*", item.text)
+            ]
+            merged = RecoHelper.merge_nearby(level_parts, radius=20)
 
             for item in merged:
-                text = item.text.strip()
-                if re.search(pattern, text):
+                if pattern.search(item.text.strip()):
                     return RecoHelper.rt(result=item)
 
             return RecoHelper.NoResult
