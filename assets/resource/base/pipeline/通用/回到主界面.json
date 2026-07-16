@@ -204,9 +204,11 @@
                     "main/close-home-back-1.png",
                     "main/close-home-back-2.png",
                     "main/close-anno.png",
-                    "main/close-trans.png"
+                    "main/close-trans.png",
+                    "main/close-email.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,

@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1782997838658,
+            "lastSyncTime": 1784220113268,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -3570,
-                "y": -427,
-                "zoom": 0.72
+                "x": -6577,
+                "y": -444,
+                "zoom": 1.5
             },
             "filename": "每日活动作战",
-            "version": "v1.7.2"
+            "version": "v1.7.4"
         }
     },
     "$__mpe_external_返回主界面_每日活动作战": {
@@ -310,7 +310,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/show.png"
+                    "activity/entry/odyssey.png"
                 ]
             }
         },
@@ -339,8 +339,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    573,
-                    566,
+                    650,
+                    338,
                     1,
                     1
                 ]
@@ -367,7 +367,7 @@
                     83
                 ],
                 "expected": [
-                    "午夜"
+                    "艾利亚斯"
                 ]
             }
         },
