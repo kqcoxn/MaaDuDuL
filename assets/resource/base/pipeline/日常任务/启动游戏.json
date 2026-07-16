@@ -7,12 +7,12 @@
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "savedViewport": {
-                "x": -1350,
-                "y": -247,
-                "zoom": 1.5
+                "x": -3159,
+                "y": -796,
+                "zoom": 2.5
             },
             "filename": "启动游戏",
-            "version": "v1.7.1"
+            "version": "v1.7.4"
         }
     },
     "启动游戏_关闭公告": {
@@ -46,24 +46,13 @@
             "type": "TemplateMatch",
             "param": {
                 "template": [
-                    "main/close-cherry.png",
-                    "main/close-pink.png",
-                    "main/close-trans.png",
-                    "main/close-blue.png",
-                    "main/close-black-yellow.png",
-                    "main/close-yellow.png",
-                    "main/close-bw.png",
-                    "main/close-green.png",
-                    "main/close-brown2.png",
-                    "main/close-pw.png",
-                    "main/close-mc.png"
+                    "main/close-check-in-1.png",
+                    "main/close-home-back-1.png",
+                    "main/close-home-back-2.png",
+                    "main/close-anno.png",
+                    "main/close-trans.png"
                 ],
                 "threshold": [
-                    0.9,
-                    0.9,
-                    0.9,
-                    0.9,
-                    0.9,
                     0.9,
                     0.9,
                     0.9,
@@ -110,8 +99,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 401,
-                "y": 45
+                "x": 402,
+                "y": 47
             }
         }
     },
