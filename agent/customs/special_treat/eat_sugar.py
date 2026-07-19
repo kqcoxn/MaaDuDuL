@@ -194,18 +194,25 @@ class SelectDuplicateLevel(CustomAction):
         try:
             args = ParamAnalyzer(argv)
             level: int = args.get(["level", "l"])
-
             Prompter.log(f"选择关卡：{level}")
-            if type(level) is int and level < 10:
-                level = f"0{level}"
 
-            Tasker(context).run(
-                "清紫糖_查找关卡开始",
-                {
-                    "清紫糖_查找指定关卡1": {"expected": f"{level}"},
-                    "清紫糖_查找指定关卡2": {"expected": f"{level}"},
-                    "清紫糖_查找指定关卡3": {"expected": f"{level}"},
-                },
+            tasker = Tasker(context)
+            if level < 7:
+                tasker.swipe(360, 210, 360, 596).wait()
+                mo = MatrixOperator(125, 160, 230, 230)
+                row = (level - 1) // 3 + 1
+                col = (level - 1) % 3 + 1
+                tasker.click(*mo.get_pos(row, col))
+            else:
+                tasker.swipe(360, 596, 360, 210).wait()
+                mo = MatrixOperator(125, 320, 230, 230)
+                level -= 6
+                row = (level - 1) // 3 + 1
+                col = (level - 1) % 3 + 1
+                tasker.click(*mo.get_pos(row, col))
+
+            tasker.run(
+                "速战", {"速战": {"custom_recognition_param": "e=速战_确认奖励"}}
             )
 
             return True

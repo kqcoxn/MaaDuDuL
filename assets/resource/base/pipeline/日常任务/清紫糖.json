@@ -2,16 +2,17 @@
     "$__mpe_config_清紫糖": {
         "$__mpe_code": {
             "prefix": "清紫糖",
-            "lastSyncTime": 1776866905529,
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1784466102066,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
             "savedViewport": {
-                "x": -6765,
-                "y": -277,
-                "zoom": 1.15
+                "x": -10987,
+                "y": -2963,
+                "zoom": 1.5
             },
             "filename": "清紫糖",
-            "version": "v1.4.2"
+            "version": "v1.7.4"
         }
     },
     "$__mpe_external_返回主界面_清紫糖": {
@@ -814,7 +815,7 @@
             "type": "Custom",
             "param": {
                 "custom_action": "select_duplicate_level",
-                "custom_action_param": "l=01"
+                "custom_action_param": "l=12"
             }
         },
         "post_delay": 0,
