@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1784220113268,
+            "lastSyncTime": 1784465947106,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -6577,
-                "y": -444,
-                "zoom": 1.5
+                "x": -5409,
+                "y": -179,
+                "zoom": 1.09
             },
             "filename": "每日活动作战",
             "version": "v1.7.4"
@@ -60,6 +60,7 @@
                 ]
             }
         },
+        "pre_delay": 800,
         "action": {
             "type": "Click"
         },
@@ -68,7 +69,8 @@
         },
         "next": [
             "每日活动作战_确保进入成就界面",
-            "[JumpBack]每日活动作战_关闭其他面板"
+            "[JumpBack]每日活动作战_关闭其他面板",
+            "每日活动作战_从检查进入成就界面"
         ],
         "$__mpe_code": {
             "position": {
@@ -188,8 +190,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5834,
-                "y": 1088
+                "x": 5609,
+                "y": 1083
             }
         }
     },
@@ -281,8 +283,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5318,
-                "y": 833
+                "x": 5324,
+                "y": 828
             }
         }
     },
@@ -452,12 +454,25 @@
                 ],
                 "expected": [
                     "微微辣"
+                ],
+                "order_by": "Vertical",
+                "index": -1
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    0,
+                    21,
+                    0,
+                    0
                 ]
             }
         },
-        "action": {
-            "type": "Click"
-        },
+        "repeat": 2,
+        "repeat_delay": 800,
         "post_delay": 1000,
         "next": [
             "每日活动作战_查看作战详情"
@@ -465,7 +480,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 5858,
-                "y": 834
+                "y": 829
             }
         }
     },
@@ -635,8 +650,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5595,
-                "y": 834
+                "x": 5589,
+                "y": 830
             }
         }
     },
