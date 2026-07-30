@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1784465947106,
+            "lastSyncTime": 1785415299047,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -5409,
-                "y": -179,
-                "zoom": 1.09
+                "x": -6191,
+                "y": -1023,
+                "zoom": 1.14
             },
             "filename": "每日活动作战",
             "version": "v1.7.4"
@@ -109,10 +109,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    244,
-                    77,
-                    1007,
-                    634
+                    9,
+                    136,
+                    1066,
+                    566
                 ],
                 "expected": [
                     "梦境之地",
@@ -142,7 +142,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/raincoat.png"
+                    "activity/entry/odyssey.png"
                 ]
             }
         },
@@ -312,7 +312,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/odyssey.png"
+                    "activity/entry/strange.png"
                 ]
             }
         },
@@ -341,8 +341,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    650,
-                    338,
+                    1033,
+                    628,
                     1,
                     1
                 ]
@@ -369,7 +369,7 @@
                     83
                 ],
                 "expected": [
-                    "艾利亚斯"
+                    "奇奇怪怪"
                 ]
             }
         },
@@ -461,15 +461,7 @@
         },
         "pre_delay": 800,
         "action": {
-            "type": "Click",
-            "param": {
-                "target_offset": [
-                    0,
-                    21,
-                    0,
-                    0
-                ]
-            }
+            "type": "Click"
         },
         "repeat": 2,
         "repeat_delay": 800,
