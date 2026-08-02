@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1785415299047,
+            "lastSyncTime": 1785675699161,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -6191,
-                "y": -1023,
-                "zoom": 1.14
+                "x": -5999,
+                "y": -1028,
+                "zoom": 1.15
             },
             "filename": "每日活动作战",
             "version": "v1.7.4"
@@ -627,8 +627,10 @@
                     577
                 ],
                 "expected": [
-                    "战斗"
-                ]
+                    "战"
+                ],
+                "order_by": "Vertical",
+                "index": -1
             }
         },
         "action": {
@@ -642,8 +644,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5589,
-                "y": 830
+                "x": 5596,
+                "y": 756
             }
         }
     },
@@ -703,6 +705,8 @@
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "repeat_delay": 400,
         "post_delay": 400,
         "focus": {
             "Node.Recognition.Succeeded": " > 领取今日奖励"
