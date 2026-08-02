@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "启动游戏",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1784465405785,
+            "lastSyncTime": 1785675057110,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "savedViewport": {
-                "x": -638,
-                "y": -351,
-                "zoom": 1.14
+                "x": -5,
+                "y": 309,
+                "zoom": 0.57
             },
             "filename": "启动游戏",
             "version": "v1.7.4"
@@ -51,9 +51,11 @@
                     "main/close-home-back-2.png",
                     "main/close-anno.png",
                     "main/close-trans.png",
-                    "main/close-email.png"
+                    "main/close-email.png",
+                    "main/close-month.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
@@ -400,6 +402,7 @@
         }
     },
     "启动游戏_闲时捏脸": {
+        "max_hit": 50,
         "recognition": {
             "type": "Custom",
             "param": {
@@ -416,7 +419,7 @@
         }
     },
     "启动游戏_领取礼物": {
-        "max_hit": 5,
+        "max_hit": 10,
         "recognition": {
             "type": "OCR",
             "param": {

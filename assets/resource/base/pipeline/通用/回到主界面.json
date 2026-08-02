@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "返回主界面",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1784218728898,
+            "lastSyncTime": 1785674930617,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\回到主界面.json",
             "savedViewport": {
-                "x": -3235,
-                "y": 183,
-                "zoom": 1.44
+                "x": -2116,
+                "y": 20,
+                "zoom": 0.87
             },
             "filename": "回到主界面",
             "version": "v1.7.4"
@@ -205,9 +205,11 @@
                     "main/close-home-back-2.png",
                     "main/close-anno.png",
                     "main/close-trans.png",
-                    "main/close-email.png"
+                    "main/close-email.png",
+                    "main/close-month.png"
                 ],
                 "threshold": [
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
