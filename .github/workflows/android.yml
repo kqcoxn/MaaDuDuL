@@ -34,7 +34,7 @@ jobs:
       # Keep the Python binding aligned with MFAAvalonia's Maa.Framework API package.
       MAAFW_PYTHON_REF: v5.10.0
       # Pin the reviewed upstream Android implementation for reproducible artifacts.
-      MFA_REF: fa152987e3aea2f3cb45d2a85ce754832c36ec46
+      MFA_REF: 699485299ce1ed846b9ac6ec073591e2a0d1eb5a
 
     steps:
       - name: Checkout MaaDuDuL
@@ -58,7 +58,7 @@ jobs:
           path: maafw-python-source
           sparse-checkout: source/binding/Python/maa
 
-      - name: Align MFAAvalonia Android dependencies and payload
+      - name: Align and verify MFAAvalonia Android dependencies
         shell: bash
         run: |
           python3 - <<'PY'
@@ -92,69 +92,8 @@ jobs:
                       reference.set("Version", avalonia_version)
                       updated_packages.add(name)
 
-              if project_path.name == "MFAAvalonia.Android.csproj":
-                  marshal_property = root.find(".//AndroidEnableMarshalMethods")
-                  if marshal_property is None:
-                      raise RuntimeError("AndroidEnableMarshalMethods is missing")
-                  marshal_property.text = "false"
-
-                  payload_target = root.find("./Target[@Name='PrepareAndroidResourcePackage']")
-                  if payload_target is None:
-                      raise RuntimeError("PrepareAndroidResourcePackage target is missing")
-                  payload_items = payload_target.find("ItemGroup")
-                  if payload_items is None:
-                      raise RuntimeError("Android payload ItemGroup is missing")
-                  locale_item = ET.SubElement(
-                      payload_items,
-                      "_AndroidLocaleFile",
-                      {
-                          "Include": "$(AndroidResourcePackageSource)\\locales\\**\\*",
-                          "Condition": "Exists('$(AndroidResourcePackageSource)\\locales')",
-                      },
-                  )
-                  locale_item.tail = "\n        "
-
-                  task_copy = next(
-                      (
-                          element
-                          for element in payload_target.findall("Copy")
-                          if "_AndroidTaskFile" in element.get("SourceFiles", "")
-                      ),
-                      None,
-                  )
-                  if task_copy is None:
-                      raise RuntimeError("Android task payload copy is missing")
-                  task_copy_index = list(payload_target).index(task_copy)
-                  payload_target.insert(
-                      task_copy_index + 1,
-                      ET.Element(
-                          "Copy",
-                          {
-                              "SourceFiles": "@(_AndroidLocaleFile)",
-                              "DestinationFiles": "@(_AndroidLocaleFile->'$(AndroidResourcePackageStagingDirectory)\\locales\\%(RecursiveDir)%(Filename)%(Extension)')",
-                              "SkipUnchangedFiles": "true",
-                          },
-                      ),
-                  )
-
               ET.indent(tree, space="    ")
               tree.write(project_path, encoding="utf-8", xml_declaration=False)
-
-          manifest_path = Path(
-              "mfa-source/MFAAvalonia.Android/Properties/AndroidManifest.xml"
-          )
-          manifest_tree = ET.parse(manifest_path)
-          manifest_root = manifest_tree.getroot()
-          android_namespace = "http://schemas.android.com/apk/res/android"
-          ET.register_namespace("android", android_namespace)
-          provider = manifest_root.find("./application/provider")
-          if provider is None:
-              raise RuntimeError("Shizuku provider is missing from AndroidManifest.xml")
-          provider.set(
-              f"{{{android_namespace}}}authorities", "${applicationId}.shizuku"
-          )
-          ET.indent(manifest_tree, space="  ")
-          manifest_tree.write(manifest_path, encoding="utf-8", xml_declaration=True)
 
           missing_packages = package_names - updated_packages
           if missing_packages:
@@ -163,10 +102,18 @@ jobs:
               )
           PY
 
+          test "$(git -C mfa-source rev-parse HEAD)" = "$MFA_REF"
           grep -F '<AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>' \
             mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj
-          grep -F 'android:authorities="${applicationId}.shizuku"' \
-            mfa-source/MFAAvalonia.Android/Properties/AndroidManifest.xml
+          grep -F '_AndroidLocalesFile' \
+            mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj
+          grep -F 'shizukuAuthority=$(ApplicationId).shizuku' \
+            mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj
+          grep -F 'fileProviderAuthority=$(ApplicationId).fileprovider' \
+            mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj
+          grep -F '"agent", "data", "locales", "python"' \
+            mfa-source/MFAAvalonia.Android/AndroidAssetBootstrap.cs
+          test -f mfa-source/MFAAvalonia.Android/AndroidCrashDiagnostics.cs
           if grep -E 'Include="Avalonia([."]|$).*Version="11\.3\.12"' \
             mfa-source/MFAAvalonia/MFAAvalonia.csproj \
             mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj; then
@@ -368,10 +315,13 @@ jobs:
           apk_entries="$RUNNER_TEMP/mfa-resource-apk-${{ matrix.arch }}-entries.txt"
           unzip -Z1 "$apk_path" > "$apk_entries"
           grep -Fxq 'assets/MfaPackage/package.zip' "$apk_entries"
+          grep -Fxq 'assets/MfaDependencies/shizuku.apk' "$apk_entries"
           grep -Fxq "lib/${{ matrix.abi }}/libMaaFramework.so" "$apk_entries"
           grep -Eq "^lib/${{ matrix.abi }}/libpython3\.[0-9]+\.so$" "$apk_entries"
 
-          actual_application_id=$(aapt dump badging "$apk_path" | sed -n "s/^package: name='\([^']*\)'.*/\1/p")
+          apk_badging="$RUNNER_TEMP/mddl-apk-${{ matrix.arch }}-badging.txt"
+          "$ANDROID_HOME/build-tools/36.0.0/aapt2" dump badging "$apk_path" > "$apk_badging"
+          actual_application_id=$(sed -n "s/^package: name='\([^']*\)'.*/\1/p" "$apk_badging")
           if [[ "$actual_application_id" != "$APPLICATION_ID" ]]; then
             echo "[ERR] Unexpected application ID: $actual_application_id"
             exit 1
