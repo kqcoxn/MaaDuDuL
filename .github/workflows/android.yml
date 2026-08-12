@@ -34,7 +34,7 @@ jobs:
       # Keep the Python binding aligned with MFAAvalonia's Maa.Framework API package.
       MAAFW_PYTHON_REF: v5.10.0
       # Pin the reviewed upstream Android implementation for reproducible artifacts.
-      MFA_REF: 699485299ce1ed846b9ac6ec073591e2a0d1eb5a
+      MFA_REF: 61a538248b64c91c23096bb639a6b0ab329eb675
 
     steps:
       - name: Checkout MaaDuDuL
@@ -95,6 +95,30 @@ jobs:
               ET.indent(tree, space="    ")
               tree.write(project_path, encoding="utf-8", xml_declaration=False)
 
+          adapter_path = Path("mfa-source/workflows/android/mfa_android_agent.py")
+          adapter_text = adapter_path.read_text(encoding="utf-8")
+          # The adapter preloads Maa before agent/main.py; v5.10.0 reads only this
+          # variable when resolving the APK's native MaaAgentServer library.
+          native_dir_line = '        os.environ["MAA_FRAMEWORK_LIB_DIR"] = native_library_dir\n'
+          binary_path_line = '        os.environ.setdefault("MAAFW_BINARY_PATH", native_library_dir)\n'
+          if binary_path_line not in adapter_text:
+              if native_dir_line not in adapter_text:
+                  raise RuntimeError(
+                      "MFA Android adapter no longer exposes its native library directory"
+                  )
+              adapter_text = adapter_text.replace(
+                  native_dir_line,
+                  native_dir_line + binary_path_line,
+                  1,
+              )
+              adapter_path.write_text(adapter_text, encoding="utf-8")
+          if adapter_text.index(binary_path_line) > adapter_text.index(
+              "    _preload_maa_agent_binding()"
+          ):
+              raise RuntimeError(
+                  "MAAFW_BINARY_PATH must be set before Maa binding preload"
+              )
+
           missing_packages = package_names - updated_packages
           if missing_packages:
               raise RuntimeError(
@@ -114,6 +138,18 @@ jobs:
           grep -F '"agent", "data", "locales", "python"' \
             mfa-source/MFAAvalonia.Android/AndroidAssetBootstrap.cs
           test -f mfa-source/MFAAvalonia.Android/AndroidCrashDiagnostics.cs
+          grep -F 'def _preload_maa_agent_binding() -> None:' \
+            mfa-source/workflows/android/mfa_android_agent.py
+          grep -F 'platform.system = lambda: "Linux"' \
+            mfa-source/workflows/android/mfa_android_agent.py
+          grep -F 'os.environ.setdefault("MAAFW_BINARY_PATH", native_library_dir)' \
+            mfa-source/workflows/android/mfa_android_agent.py
+          grep -Fx '        platform.system = original_system' \
+            mfa-source/workflows/android/mfa_android_agent.py
+          grep -Fx '    _preload_maa_agent_binding()' \
+            mfa-source/workflows/android/mfa_android_agent.py
+          grep -F 'protected override AutomationPeer OnCreateAutomationPeer() => new PreviewHostAutomationPeer(this);' \
+            mfa-source/MFAAvalonia.Android/AndroidVirtualDisplayPreviewHost.cs
           if grep -E 'Include="Avalonia([."]|$).*Version="11\.3\.12"' \
             mfa-source/MFAAvalonia/MFAAvalonia.csproj \
             mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj; then
@@ -151,6 +187,7 @@ jobs:
           jq -n \
             --arg resource_commit "$GITHUB_SHA" \
             --arg mfa_commit "$MFA_REF" \
+            --arg maafw_python_ref "$MAAFW_PYTHON_REF" \
             --arg avalonia_version "$AVALONIA_VERSION" \
             --arg application_id "$APPLICATION_ID" \
             --arg display_version "$DISPLAY_VERSION" \
@@ -159,8 +196,11 @@ jobs:
             '{
               resource_commit: $resource_commit,
               mfa_commit: $mfa_commit,
+              maafw_python_ref: $maafw_python_ref,
               avalonia_version: $avalonia_version,
               android_enable_marshal_methods: false,
+              android_agent_binding_preload: true,
+              android_agent_binary_path_compatibility: true,
               application_id: $application_id,
               display_version: $display_version,
               workflow_run_id: $workflow_run_id,
@@ -337,12 +377,16 @@ jobs:
           unzip -p "$payload_archive" resource/mddl-build-info.json | jq -e \
             --arg resource_commit "$GITHUB_SHA" \
             --arg mfa_commit "$MFA_REF" \
+            --arg maafw_python_ref "$MAAFW_PYTHON_REF" \
             --arg application_id "$APPLICATION_ID" \
             --arg avalonia_version "$AVALONIA_VERSION" \
             '.resource_commit == $resource_commit
              and .mfa_commit == $mfa_commit
+             and .maafw_python_ref == $maafw_python_ref
              and .application_id == $application_id
              and .avalonia_version == $avalonia_version
+             and .android_agent_binding_preload == true
+             and .android_agent_binary_path_compatibility == true
              and .android_enable_marshal_methods == false' > /dev/null
 
           output_dir="$GITHUB_WORKSPACE/android-artifacts"
