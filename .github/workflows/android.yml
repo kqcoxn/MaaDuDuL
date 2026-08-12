@@ -30,6 +30,7 @@ jobs:
       P4A_ENTRYPOINT: agent/main.py
       P4A_REF: v2026.05.09
       P4A_NDK_VERSION: 28.2.13676358
+      AVALONIA_VERSION: 11.3.13
       # Keep the Python binding aligned with MFAAvalonia's Maa.Framework API package.
       MAAFW_PYTHON_REF: v5.10.0
       # Pin the reviewed upstream Android implementation for reproducible artifacts.
@@ -57,32 +58,175 @@ jobs:
           path: maafw-python-source
           sparse-checkout: source/binding/Python/maa
 
-      - name: Prepare MaaDuDuL Android payload
-        id: payload
+      - name: Align MFAAvalonia Android dependencies and payload
         shell: bash
-        working-directory: resource-source
         run: |
-          python -m pip install -r tools/requirements.txt
-          python -u ci/merge_pipeline.py
-          python tools/install.py "ci.${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}" android
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          import xml.etree.ElementTree as ET
 
-          mkdir -p install/python
-          cp -a ../maafw-python-source/source/binding/Python/maa install/python/maa
+          avalonia_version = os.environ["AVALONIA_VERSION"]
+          package_names = {
+              "Avalonia",
+              "Avalonia.Android",
+              "Avalonia.Controls.ColorPicker",
+              "Avalonia.Controls.DataGrid",
+              "Avalonia.Diagnostics",
+              "Avalonia.Fonts.Inter",
+              "Avalonia.Themes.Fluent",
+              "Avalonia.Themes.Simple",
+          }
+          project_paths = [
+              Path("mfa-source/MFAAvalonia/MFAAvalonia.csproj"),
+              Path("mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj"),
+          ]
+          updated_packages = set()
 
-          test -f install/interface.json
-          test -f install/agent/main.py
-          test -d install/resource
-          test -d install/python/maa
-          echo "root=$(realpath install)" >> "$GITHUB_OUTPUT"
+          for project_path in project_paths:
+              tree = ET.parse(project_path)
+              root = tree.getroot()
+              for reference in root.findall(".//PackageReference"):
+                  name = reference.get("Include")
+                  if name in package_names:
+                      reference.set("Version", avalonia_version)
+                      updated_packages.add(name)
+
+              if project_path.name == "MFAAvalonia.Android.csproj":
+                  marshal_property = root.find(".//AndroidEnableMarshalMethods")
+                  if marshal_property is None:
+                      raise RuntimeError("AndroidEnableMarshalMethods is missing")
+                  marshal_property.text = "false"
+
+                  payload_target = root.find("./Target[@Name='PrepareAndroidResourcePackage']")
+                  if payload_target is None:
+                      raise RuntimeError("PrepareAndroidResourcePackage target is missing")
+                  payload_items = payload_target.find("ItemGroup")
+                  if payload_items is None:
+                      raise RuntimeError("Android payload ItemGroup is missing")
+                  locale_item = ET.SubElement(
+                      payload_items,
+                      "_AndroidLocaleFile",
+                      {
+                          "Include": "$(AndroidResourcePackageSource)\\locales\\**\\*",
+                          "Condition": "Exists('$(AndroidResourcePackageSource)\\locales')",
+                      },
+                  )
+                  locale_item.tail = "\n        "
+
+                  task_copy = next(
+                      (
+                          element
+                          for element in payload_target.findall("Copy")
+                          if "_AndroidTaskFile" in element.get("SourceFiles", "")
+                      ),
+                      None,
+                  )
+                  if task_copy is None:
+                      raise RuntimeError("Android task payload copy is missing")
+                  task_copy_index = list(payload_target).index(task_copy)
+                  payload_target.insert(
+                      task_copy_index + 1,
+                      ET.Element(
+                          "Copy",
+                          {
+                              "SourceFiles": "@(_AndroidLocaleFile)",
+                              "DestinationFiles": "@(_AndroidLocaleFile->'$(AndroidResourcePackageStagingDirectory)\\locales\\%(RecursiveDir)%(Filename)%(Extension)')",
+                              "SkipUnchangedFiles": "true",
+                          },
+                      ),
+                  )
+
+              ET.indent(tree, space="    ")
+              tree.write(project_path, encoding="utf-8", xml_declaration=False)
+
+          manifest_path = Path(
+              "mfa-source/MFAAvalonia.Android/Properties/AndroidManifest.xml"
+          )
+          manifest_tree = ET.parse(manifest_path)
+          manifest_root = manifest_tree.getroot()
+          android_namespace = "http://schemas.android.com/apk/res/android"
+          ET.register_namespace("android", android_namespace)
+          provider = manifest_root.find("./application/provider")
+          if provider is None:
+              raise RuntimeError("Shizuku provider is missing from AndroidManifest.xml")
+          provider.set(
+              f"{{{android_namespace}}}authorities", "${applicationId}.shizuku"
+          )
+          ET.indent(manifest_tree, space="  ")
+          manifest_tree.write(manifest_path, encoding="utf-8", xml_declaration=True)
+
+          missing_packages = package_names - updated_packages
+          if missing_packages:
+              raise RuntimeError(
+                  f"Expected Avalonia package references are missing: {sorted(missing_packages)}"
+              )
+          PY
+
+          grep -F '<AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>' \
+            mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj
+          grep -F 'android:authorities="${applicationId}.shizuku"' \
+            mfa-source/MFAAvalonia.Android/Properties/AndroidManifest.xml
+          if grep -E 'Include="Avalonia([."]|$).*Version="11\.3\.12"' \
+            mfa-source/MFAAvalonia/MFAAvalonia.csproj \
+            mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj; then
+            echo "[ERR] Avalonia 11.3.12 remains in MFA projects"
+            exit 1
+          fi
 
       - name: Resolve APK metadata
         id: metadata
         shell: bash
         run: |
           short_sha="${GITHUB_SHA::7}"
+          application_id="com.kqcoxn.maadudul.ci.r${GITHUB_RUN_NUMBER}"
+          echo "application_id=$application_id" >> "$GITHUB_OUTPUT"
+          echo "display_version=ci.${GITHUB_RUN_NUMBER}-${short_sha}" >> "$GITHUB_OUTPUT"
           echo "output_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk" >> "$GITHUB_OUTPUT"
-          echo "artifact_name=MaaDuDuL-android-${{ matrix.arch }}" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}" >> "$GITHUB_OUTPUT"
           echo "launcher_icon=$(realpath resource-source/public/logo.png)" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare MaaDuDuL Android payload
+        id: payload
+        shell: bash
+        working-directory: resource-source
+        env:
+          APPLICATION_ID: ${{ steps.metadata.outputs.application_id }}
+          DISPLAY_VERSION: ${{ steps.metadata.outputs.display_version }}
+        run: |
+          python -m pip install -r tools/requirements.txt
+          python -u ci/merge_pipeline.py
+          python tools/install.py "$DISPLAY_VERSION" android
+
+          mkdir -p install/python
+          cp -a ../maafw-python-source/source/binding/Python/maa install/python/maa
+
+          jq -n \
+            --arg resource_commit "$GITHUB_SHA" \
+            --arg mfa_commit "$MFA_REF" \
+            --arg avalonia_version "$AVALONIA_VERSION" \
+            --arg application_id "$APPLICATION_ID" \
+            --arg display_version "$DISPLAY_VERSION" \
+            --arg workflow_run_id "$GITHUB_RUN_ID" \
+            --arg workflow_run_number "$GITHUB_RUN_NUMBER" \
+            '{
+              resource_commit: $resource_commit,
+              mfa_commit: $mfa_commit,
+              avalonia_version: $avalonia_version,
+              android_enable_marshal_methods: false,
+              application_id: $application_id,
+              display_version: $display_version,
+              workflow_run_id: $workflow_run_id,
+              workflow_run_number: $workflow_run_number
+            }' > install/resource/mddl-build-info.json
+
+          test -f install/interface.json
+          test -f install/agent/main.py
+          test -d install/resource
+          test -d install/python/maa
+          test -f install/locales/interface_zh.json
+          test -f install/resource/mddl-build-info.json
+          echo "root=$(realpath install)" >> "$GITHUB_OUTPUT"
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -186,6 +330,8 @@ jobs:
           PAYLOAD_ROOT: ${{ steps.payload.outputs.root }}
           LAUNCHER_ICON: ${{ steps.metadata.outputs.launcher_icon }}
           PYTHON_AAR: ${{ steps.python_runtime.outputs.aar }}
+          APPLICATION_ID: ${{ steps.metadata.outputs.application_id }}
+          DISPLAY_VERSION: ${{ steps.metadata.outputs.display_version }}
         working-directory: mfa-source
         run: |
           dotnet publish MFAAvalonia.Android/MFAAvalonia.Android.csproj \
@@ -195,6 +341,9 @@ jobs:
             --no-restore \
             -p:AndroidSdkDirectory="$ANDROID_HOME" \
             -p:AndroidEmbedResourcePackage=true \
+            "-p:ApplicationId=$APPLICATION_ID" \
+            "-p:ApplicationVersion=$GITHUB_RUN_NUMBER" \
+            "-p:ApplicationDisplayVersion=$DISPLAY_VERSION" \
             "-p:AndroidResourcePackageSource=$PAYLOAD_ROOT" \
             "-p:AndroidLauncherLabel=MaaDuDuL" \
             "-p:AndroidLauncherIcon=$LAUNCHER_ICON" \
@@ -206,6 +355,8 @@ jobs:
         shell: bash
         env:
           OUTPUT_NAME: ${{ steps.metadata.outputs.output_name }}
+          APPLICATION_ID: ${{ steps.metadata.outputs.application_id }}
+          BUILD_INFO: ${{ steps.payload.outputs.root }}/resource/mddl-build-info.json
         run: |
           publish_dir="mfa-source/MFAAvalonia.Android/bin/Release/net10.0-android/${{ matrix.rid }}/publish"
           apk_path=$(find "$publish_dir" -maxdepth 1 -type f -name '*-Signed.apk' -print -quit)
@@ -220,10 +371,36 @@ jobs:
           grep -Fxq "lib/${{ matrix.abi }}/libMaaFramework.so" "$apk_entries"
           grep -Eq "^lib/${{ matrix.abi }}/libpython3\.[0-9]+\.so$" "$apk_entries"
 
+          actual_application_id=$(aapt dump badging "$apk_path" | sed -n "s/^package: name='\([^']*\)'.*/\1/p")
+          if [[ "$actual_application_id" != "$APPLICATION_ID" ]]; then
+            echo "[ERR] Unexpected application ID: $actual_application_id"
+            exit 1
+          fi
+
+          payload_archive="$RUNNER_TEMP/mddl-payload-${{ matrix.arch }}.zip"
+          payload_entries="$RUNNER_TEMP/mddl-payload-${{ matrix.arch }}-entries.txt"
+          unzip -p "$apk_path" assets/MfaPackage/package.zip > "$payload_archive"
+          unzip -Z1 "$payload_archive" > "$payload_entries"
+          grep -Fxq 'locales/interface_zh.json' "$payload_entries"
+          grep -Fxq 'locales/interface_en.json' "$payload_entries"
+          grep -Fxq 'resource/mddl-build-info.json' "$payload_entries"
+          unzip -p "$payload_archive" resource/mddl-build-info.json | jq -e \
+            --arg resource_commit "$GITHUB_SHA" \
+            --arg mfa_commit "$MFA_REF" \
+            --arg application_id "$APPLICATION_ID" \
+            --arg avalonia_version "$AVALONIA_VERSION" \
+            '.resource_commit == $resource_commit
+             and .mfa_commit == $mfa_commit
+             and .application_id == $application_id
+             and .avalonia_version == $avalonia_version
+             and .android_enable_marshal_methods == false' > /dev/null
+
           output_dir="$GITHUB_WORKSPACE/android-artifacts"
           mkdir -p "$output_dir"
           cp "$apk_path" "$output_dir/$OUTPUT_NAME"
-          echo "path=$output_dir/$OUTPUT_NAME" >> "$GITHUB_OUTPUT"
+          cp "$BUILD_INFO" "$output_dir/${OUTPUT_NAME%.apk}.build-info.json"
+          (cd "$output_dir" && sha256sum "$OUTPUT_NAME" > "$OUTPUT_NAME.sha256")
+          echo "path=$output_dir" >> "$GITHUB_OUTPUT"
 
       - name: Upload Android APK
         uses: actions/upload-artifact@v4
