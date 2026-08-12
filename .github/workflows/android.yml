@@ -1,0 +1,234 @@
+name: Android APK
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-android:
+    name: Build Android (${{ matrix.arch }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: android-arm64
+            abi: arm64-v8a
+            arch: arm64
+          - rid: android-x64
+            abi: x86_64
+            arch: x64
+
+    env:
+      P4A_REQUIREMENTS: python3,numpy,strenum
+      P4A_ENTRYPOINT: agent/main.py
+      P4A_REF: v2026.05.09
+      P4A_NDK_VERSION: 28.2.13676358
+      # Keep the Python binding aligned with MFAAvalonia's Maa.Framework API package.
+      MAAFW_PYTHON_REF: v5.10.0
+      # Pin the reviewed upstream Android implementation for reproducible artifacts.
+      MFA_REF: fa152987e3aea2f3cb45d2a85ce754832c36ec46
+
+    steps:
+      - name: Checkout MaaDuDuL
+        uses: actions/checkout@v5
+        with:
+          path: resource-source
+          submodules: recursive
+
+      - name: Checkout MFAAvalonia Android shell
+        uses: actions/checkout@v5
+        with:
+          repository: MaaXYZ/MFAAvalonia
+          ref: ${{ env.MFA_REF }}
+          path: mfa-source
+
+      - name: Checkout matching MaaFramework Python binding
+        uses: actions/checkout@v5
+        with:
+          repository: MaaXYZ/MaaFramework
+          ref: ${{ env.MAAFW_PYTHON_REF }}
+          path: maafw-python-source
+          sparse-checkout: source/binding/Python/maa
+
+      - name: Prepare MaaDuDuL Android payload
+        id: payload
+        shell: bash
+        working-directory: resource-source
+        run: |
+          python -m pip install -r tools/requirements.txt
+          python -u ci/merge_pipeline.py
+          python tools/install.py "ci.${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}" android
+
+          mkdir -p install/python
+          cp -a ../maafw-python-source/source/binding/Python/maa install/python/maa
+
+          test -f install/interface.json
+          test -f install/agent/main.py
+          test -d install/resource
+          test -d install/python/maa
+          echo "root=$(realpath install)" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve APK metadata
+        id: metadata
+        shell: bash
+        run: |
+          short_sha="${GITHUB_SHA::7}"
+          echo "output_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=MaaDuDuL-android-${{ matrix.arch }}" >> "$GITHUB_OUTPUT"
+          echo "launcher_icon=$(realpath resource-source/public/logo.png)" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK, build tools and NDK
+        shell: bash
+        run: |
+          sdkmanager \
+            "platforms;android-36" \
+            "build-tools;36.0.0" \
+            "ndk;$P4A_NDK_VERSION"
+
+      - name: Setup build Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install python-for-android host dependencies
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            autoconf automake ccache cmake gettext libffi-dev libltdl-dev \
+            libssl-dev libtool openjdk-17-jdk patch pkg-config unzip zip
+          python -m pip install --upgrade pip wheel setuptools
+          git clone --depth 1 --branch "$P4A_REF" \
+            https://github.com/kivy/python-for-android.git "$RUNNER_TEMP/python-for-android"
+          python -m pip install --editable "$RUNNER_TEMP/python-for-android"
+
+      - name: Build python-for-android service AAR
+        id: python_runtime
+        shell: bash
+        env:
+          ANDROIDSDK: ${{ env.ANDROID_HOME }}
+          ANDROIDNDK: ${{ env.ANDROID_HOME }}/ndk/${{ env.P4A_NDK_VERSION }}
+          ANDROIDAPI: "36"
+          NDKAPI: "26"
+        run: |
+          private_root="$RUNNER_TEMP/mfa-p4a-private-${{ matrix.arch }}"
+          mkdir -p "$private_root"
+          cp mfa-source/workflows/android/mfa_android_agent.py "$private_root/mfa_android_agent.py"
+
+          build_root="$RUNNER_TEMP/mfa-p4a-build-${{ matrix.arch }}"
+          mkdir -p "$build_root"
+          cd "$build_root"
+          p4a aar \
+            --private "$private_root" \
+            --package com.fox.mfa.python \
+            --name MFAAndroidPythonAgent \
+            --version 1.0 \
+            --bootstrap service_library \
+            --requirements "$P4A_REQUIREMENTS" \
+            --service mfaagent:mfa_android_agent.py \
+            --arch "${{ matrix.abi }}" \
+            --android-api 36 \
+            --ndk-api 26 \
+            --release
+
+          aar_path=$(find "$build_root" -type f -name '*.aar' -print -quit)
+          if [[ -z "$aar_path" ]]; then
+            echo "[ERR] python-for-android did not generate an AAR"
+            exit 1
+          fi
+          aar_entries="$RUNNER_TEMP/mfa-python-aar-${{ matrix.arch }}-entries.txt"
+          unzip -Z1 "$aar_path" > "$aar_entries"
+          if ! grep -Eq "^jni/${{ matrix.abi }}/libpython3\.[0-9]+\.so$" "$aar_entries"; then
+            echo "[ERR] AAR does not contain CPython for ${{ matrix.abi }}"
+            exit 1
+          fi
+          echo "aar=$aar_path" >> "$GITHUB_OUTPUT"
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+          config-file: mfa-source/NuGet.config
+
+      - name: Install .NET Android workload
+        run: dotnet workload install android --skip-manifest-update
+
+      - name: Restore MFAAvalonia Android dependencies
+        shell: bash
+        env:
+          NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+        working-directory: mfa-source
+        run: |
+          dotnet restore MFAAvalonia.Android/MFAAvalonia.Android.csproj \
+            -r "${{ matrix.rid }}" \
+            -p:AndroidSdkDirectory="$ANDROID_HOME"
+
+      - name: Build APK with MaaDuDuL resources
+        shell: bash
+        env:
+          NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+          PAYLOAD_ROOT: ${{ steps.payload.outputs.root }}
+          LAUNCHER_ICON: ${{ steps.metadata.outputs.launcher_icon }}
+          PYTHON_AAR: ${{ steps.python_runtime.outputs.aar }}
+        working-directory: mfa-source
+        run: |
+          dotnet publish MFAAvalonia.Android/MFAAvalonia.Android.csproj \
+            -c Release \
+            -f net10.0-android \
+            -r "${{ matrix.rid }}" \
+            --no-restore \
+            -p:AndroidSdkDirectory="$ANDROID_HOME" \
+            -p:AndroidEmbedResourcePackage=true \
+            "-p:AndroidResourcePackageSource=$PAYLOAD_ROOT" \
+            "-p:AndroidLauncherLabel=MaaDuDuL" \
+            "-p:AndroidLauncherIcon=$LAUNCHER_ICON" \
+            "-p:AndroidPythonRuntimeAar=$PYTHON_AAR" \
+            "-p:AndroidPythonAgentEntryPoint=$P4A_ENTRYPOINT"
+
+      - name: Verify and collect Android APK
+        id: apk
+        shell: bash
+        env:
+          OUTPUT_NAME: ${{ steps.metadata.outputs.output_name }}
+        run: |
+          publish_dir="mfa-source/MFAAvalonia.Android/bin/Release/net10.0-android/${{ matrix.rid }}/publish"
+          apk_path=$(find "$publish_dir" -maxdepth 1 -type f -name '*-Signed.apk' -print -quit)
+          if [[ -z "$apk_path" ]]; then
+            echo "[ERR] Signed Android APK was not generated in $publish_dir"
+            exit 1
+          fi
+
+          apk_entries="$RUNNER_TEMP/mfa-resource-apk-${{ matrix.arch }}-entries.txt"
+          unzip -Z1 "$apk_path" > "$apk_entries"
+          grep -Fxq 'assets/MfaPackage/package.zip' "$apk_entries"
+          grep -Fxq "lib/${{ matrix.abi }}/libMaaFramework.so" "$apk_entries"
+          grep -Eq "^lib/${{ matrix.abi }}/libpython3\.[0-9]+\.so$" "$apk_entries"
+
+          output_dir="$GITHUB_WORKSPACE/android-artifacts"
+          mkdir -p "$output_dir"
+          cp "$apk_path" "$output_dir/$OUTPUT_NAME"
+          echo "path=$output_dir/$OUTPUT_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.metadata.outputs.artifact_name }}
+          path: ${{ steps.apk.outputs.path }}
+          if-no-files-found: error
+          retention-days: 7

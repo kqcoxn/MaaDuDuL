@@ -11,6 +11,11 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+# MFAAvalonia Android exposes the APK's native libraries through this directory.
+android_native_dir = os.environ.get("MAA_LIBRARY_DIR")
+if android_native_dir:
+    os.environ.setdefault("MAAFW_BINARY_PATH", android_native_dir)
+
 
 # 设置默认编码为 UTF-8
 import locale
@@ -66,6 +71,6 @@ def main():
 
 
 if __name__ == "__main__":
-    if not os.getenv("MDDL_DEV_MODE"):
+    if not os.getenv("MDDL_DEV_MODE") and not android_native_dir:
         check_and_install_dependencies()
     main()
