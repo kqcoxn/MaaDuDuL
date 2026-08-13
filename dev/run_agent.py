@@ -24,8 +24,11 @@ def run_agent_debug():
     env = os.environ.copy()
     env["MDDL_DEV_MODE"] = "1"
 
-    # 从环境变量获取模拟的 socket ID，若未设置则使用默认值
-    socket_id = env.get("MDDL_SOCKET_ID", "debug")
+    # 优先使用命令行参数，其次读取环境变量
+    arguments = sys.argv[1:]
+    if arguments and arguments[0] in {"-s", "--socket-id"}:
+        arguments = arguments[1:]
+    socket_id = arguments[0] if arguments else env.get("MDDL_SOCKET_ID", "debug")
 
     print(f"🚀 开发模式启动 Agent...")
     print(f"📡 Socket ID: {socket_id}")
@@ -34,7 +37,7 @@ def run_agent_debug():
     print("-" * 50)
 
     # 启动 Agent
-    cmd = [sys.executable, "agent/main.py", socket_id]
+    cmd = [sys.executable, str(project_root / "agent" / "main.py"), socket_id]
 
     try:
         subprocess.run(cmd, env=env, check=True)

@@ -29,5 +29,7 @@
    ```shell
    yarn debug
    ```
+
+   根目录的开发命令已按当前系统自动选择 Python 与 MFAAvalonia 可执行文件，Windows、macOS、Linux 均使用同一套命令。若系统未将 Python 命令加入 PATH，可通过 `MDDL_PYTHON` 指定解释器路径。
 6. 增删改代码（项目目录说明详见下一节）
 7. 提交 PR

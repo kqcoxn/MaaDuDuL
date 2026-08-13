@@ -16,7 +16,7 @@ from pathlib import Path
 current_file_path = os.path.abspath(__file__)
 current_dir = os.path.dirname(current_file_path)  # agent/preprocess
 agent_dir = os.path.dirname(current_dir)  # agent
-project_root = os.path.dirname(agent_dir)  # 项目根目录
+project_root = Path(agent_dir).parent  # 项目根目录
 os.chdir(project_root)  # 切换到项目根目录
 
 if current_dir not in sys.path:
@@ -29,21 +29,26 @@ if current_dir not in sys.path:
 def _get_python_executable() -> str:
     """获取正确的Python可执行文件路径。
 
-    优先使用打包环境的嵌入式Python（python/python.exe），
+    优先使用打包环境的嵌入式Python（Windows: python/python.exe，
+    macOS/Linux: python/bin/python），
     如果不存在则使用当前运行的Python（sys.executable）。
 
     Returns：
         Python可执行文件的绝对路径
     """
-    # 检测嵌入式Python路径（相对于项目根目录）
-    embedded_python = Path("./python/python.exe")
+    embedded_python_candidates = (
+        project_root / "python" / "python.exe",
+        project_root / "python" / "bin" / "python",
+        project_root / "python" / "bin" / "python3",
+    )
 
-    if embedded_python.exists():
-        print(f"info:检测到内置 Agent 环境")
-        return str(embedded_python.resolve())
-    else:
-        print(f"info:使用系统 Python 环境")
-        return sys.executable
+    for embedded_python in embedded_python_candidates:
+        if embedded_python.is_file():
+            print("info:检测到内置 Agent 环境")
+            return str(embedded_python.resolve())
+
+    print("info:使用系统 Python 环境")
+    return sys.executable
 
 
 # ====================  全局路径常量  ====================

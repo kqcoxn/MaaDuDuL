@@ -1,4 +1,5 @@
 # dev
+.DS_Store
 MFAAvalonia/*
 .nicegui/
 .maa/

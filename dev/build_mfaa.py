@@ -1,32 +1,52 @@
 import os
-import sys
-import subprocess
+import platform
 import shutil
+import subprocess
+import sys
+from pathlib import Path
+
 import jsonc
 
-current_file_path = os.path.abspath(__file__)
-current_dir = os.path.dirname(current_file_path)
-parent_dir = os.path.dirname(current_dir)
-os.chdir(parent_dir)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+MFAA_ROOT = PROJECT_ROOT / "MFAAvalonia"
+MFAA_RESOURCE_ROOT = MFAA_ROOT / "resource"
+os.chdir(PROJECT_ROOT)
 
-if current_dir not in sys.path:
-    sys.path.insert(0, current_dir)
+
+def _get_mfaa_executable() -> Path:
+    """Return the MFAAvalonia executable for the current platform."""
+    if platform.system() == "Windows":
+        candidates = [MFAA_ROOT / "MFAAvalonia.exe"]
+    else:
+        candidates = [
+            MFAA_ROOT / "MFAAvalonia",
+            MFAA_ROOT / "MFAAvalonia.app" / "Contents" / "MacOS" / "MFAAvalonia",
+        ]
+
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+
+    expected = ", ".join(str(path) for path in candidates)
+    raise FileNotFoundError(f"找不到 MFAAvalonia 可执行文件，已检查: {expected}")
 
 
 def copy_files():
-    # 确保目标目录存在
-    os.makedirs("MFAAvalonia/Resource", exist_ok=True)
-    os.makedirs("MFAAvalonia", exist_ok=True)
-
     try:
+        # 先确认启动目标，避免路径错误时清理测试目录
+        mfaa_executable = _get_mfaa_executable()
+
+        # 确保目标目录存在
+        MFAA_RESOURCE_ROOT.mkdir(parents=True, exist_ok=True)
+
         # 先删除目标目录中的现有文件
         if os.path.exists("MFAAvalonia/interface.json"):
             os.remove("MFAAvalonia/interface.json")
 
-        # 清空Resource目录
-        if os.path.exists("MFAAvalonia/Resource"):
-            for item in os.listdir("MFAAvalonia/Resource"):
-                item_path = os.path.join("MFAAvalonia/Resource", item)
+        # 清空 resource 目录
+        if MFAA_RESOURCE_ROOT.exists():
+            for item in os.listdir(MFAA_RESOURCE_ROOT):
+                item_path = MFAA_RESOURCE_ROOT / item
                 if os.path.isdir(item_path):
                     shutil.rmtree(item_path)
                 else:
@@ -48,20 +68,23 @@ def copy_files():
         if os.path.exists("MFAAvalonia/locales"):
             shutil.rmtree("MFAAvalonia/locales")
 
-        # 删除Resource中的descs目录
-        if os.path.exists("MFAAvalonia/Resource/descs"):
-            shutil.rmtree("MFAAvalonia/Resource/descs")
+        # 删除 resource 中的 descs 目录
+        if (MFAA_RESOURCE_ROOT / "descs").exists():
+            shutil.rmtree(MFAA_RESOURCE_ROOT / "descs")
 
-        # 复制interface.json并修改为使用系统Python
-        if os.path.exists("assets/interface.json"):
-            with open("assets/interface.json", "r", encoding="utf-8") as f:
+        # 复制interface.json并使用当前运行此脚本的Python
+        interface_path = PROJECT_ROOT / "assets" / "interface.json"
+        if interface_path.exists():
+            with interface_path.open("r", encoding="utf-8") as f:
                 interface_data = jsonc.load(f)
 
-            # 修改agent配置，使用系统Python（python命令）
+            # 使用绝对路径，避免 macOS 的 python/python3 命令差异
             if "agent" in interface_data:
-                interface_data["agent"]["child_exec"] = "python"
+                interface_data["agent"]["child_exec"] = str(
+                    Path(sys.executable).resolve()
+                )
 
-            with open("MFAAvalonia/interface.json", "w", encoding="utf-8") as f:
+            with (MFAA_ROOT / "interface.json").open("w", encoding="utf-8") as f:
                 jsonc.dump(interface_data, f, ensure_ascii=False, indent=4)
         else:
             print("警告: assets/interface.json 不存在")
@@ -76,7 +99,7 @@ def copy_files():
         if os.path.exists("assets/resource"):
             for item in os.listdir("assets/resource"):
                 src = os.path.join("assets/resource", item)
-                dst = os.path.join("MFAAvalonia/Resource", item)
+                dst = MFAA_RESOURCE_ROOT / item
                 if os.path.isdir(src):
                     shutil.copytree(src, dst, dirs_exist_ok=True)
                 else:
@@ -87,40 +110,32 @@ def copy_files():
         # 复制agent文件夹
         if os.path.exists("agent"):
             shutil.copytree("agent", "MFAAvalonia/agent", dirs_exist_ok=True)
-
-            # 修改main.py文件，设置为开发模式
-            main_py_path = "MFAAvalonia/agent/main.py"
-            if os.path.exists(main_py_path):
-                with open(main_py_path, "r", encoding="utf-8") as f:
-                    content = f.read()
-
-                # 替换环境变量检查为直接跳过依赖安装
-                content = content.replace(
-                    'if __name__ == "__main__":\n    if not os.getenv("MDDL_DEV_MODE"):\n        check_and_install_dependencies()\n    main()',
-                    'if __name__ == "__main__":\n    # 开发模式：跳过依赖检查，使用本地Python环境\n    main()',
-                )
-
-                with open(main_py_path, "w", encoding="utf-8") as f:
-                    f.write(content)
         else:
             print("警告: agent 文件夹不存在")
 
-        # 复制descs文件夹到Resource目录下
+        # 复制 descs 文件夹到 resource 目录下
         if os.path.exists("assets/resource/descs"):
-            shutil.copytree("assets/resource/descs", "MFAAvalonia/Resource/descs", dirs_exist_ok=True)
+            shutil.copytree(
+                "assets/resource/descs",
+                MFAA_RESOURCE_ROOT / "descs",
+                dirs_exist_ok=True,
+            )
         else:
             print("警告: assets/resource/descs 文件夹不存在")
 
-        # 打开MFAAvalonia.exe
-        exe_path = "MFAAvalonia/MFAAvalonia.exe"
-        if os.path.exists(exe_path):
-            subprocess.Popen(exe_path)
-            print("MFAAvalonia 程序构建成功！（开发模式）")
-        else:
-            print(f"错误: {exe_path} 不存在")
+        # 以开发模式启动 MFAAvalonia，Agent 会继承该环境变量
+        env = os.environ.copy()
+        env["MDDL_DEV_MODE"] = "1"
+        subprocess.Popen(
+            [str(mfaa_executable)],
+            cwd=str(MFAA_ROOT),
+            env=env,
+        )
+        print(f"MFAAvalonia 程序构建成功！（开发模式）{mfaa_executable.name}")
 
     except Exception as e:
         print(f"发生错误: {e}")
+        raise
 
 
 if __name__ == "__main__":

@@ -23,6 +23,25 @@ version = len(sys.argv) > 1 and sys.argv[1] or "v0.0.1"
 target_os = len(sys.argv) > 2 and sys.argv[2] or platform.system().lower()
 
 
+def get_agent_python_path(os_name: str) -> str:
+    """Return the embedded Python path used by a target platform."""
+    normalized_os = os_name.lower()
+    if normalized_os in {"win", "windows", "win32"}:
+        return "./python/python.exe"
+    if normalized_os in {"darwin", "macos", "mac", "linux"}:
+        unix_candidates = (
+            install_path / "python" / "bin" / "python",
+            install_path / "python" / "bin" / "python3",
+        )
+        for candidate in unix_candidates:
+            if candidate.is_file():
+                return f"./python/bin/{candidate.name}"
+        raise FileNotFoundError(
+            "No Unix Python executable found under install/python/bin"
+        )
+    raise ValueError(f"Unsupported target platform: {os_name}")
+
+
 # # 下载 MaaFramework
 # def install_deps():
 #     if not (working_dir / "deps" / "bin").exists():
@@ -76,12 +95,7 @@ def install_resource():
     interface["version"] = version
 
     # 根据目标平台设置Python路径
-    if target_os in ["darwin", "macos", "linux"]:
-        # macOS和Linux使用python/bin/python
-        interface["agent"]["child_exec"] = "./python/bin/python"
-    else:
-        # Windows使用python/python.exe
-        interface["agent"]["child_exec"] = "./python/python.exe"
+    interface["agent"]["child_exec"] = get_agent_python_path(target_os)
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         jsonc.dump(interface, f, ensure_ascii=False, indent=4)
