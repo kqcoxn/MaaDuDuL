@@ -297,7 +297,10 @@ jobs:
           LAUNCHER_ICON_INPUT: ${{ vars.MFA_ANDROID_LAUNCHER_ICON || 'public/logo.png' }}
         run: |
           short_sha="${GITHUB_SHA::7}"
-          application_id="com.kqcoxn.maadudul.ci.r${GITHUB_RUN_NUMBER}"
+          # Keep the CI package identity stable so later APKs can update the
+          # previously installed CI build. The run number remains in the
+          # version and artifact name for build traceability.
+          application_id="com.kqcoxn.maadudul.ci"
           echo "application_id=$application_id" >> "$GITHUB_OUTPUT"
           echo "display_version=ci.${GITHUB_RUN_NUMBER}-${short_sha}" >> "$GITHUB_OUTPUT"
           echo "output_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk" >> "$GITHUB_OUTPUT"
@@ -478,6 +481,31 @@ jobs:
             -r "${{ matrix.rid }}" \
             -p:AndroidSdkDirectory="$ANDROID_HOME"
 
+      - name: Prepare Android signing key
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.MFA_ANDROID_KEYSTORE_BASE64 }}
+          SIGNING_KEY_ALIAS: ${{ secrets.MFA_ANDROID_KEY_ALIAS }}
+          SIGNING_STORE_PASS: ${{ secrets.MFA_ANDROID_STORE_PASSWORD }}
+          SIGNING_KEY_PASS: ${{ secrets.MFA_ANDROID_KEY_PASSWORD }}
+        run: |
+          for variable in \
+            KEYSTORE_BASE64 SIGNING_KEY_ALIAS SIGNING_STORE_PASS SIGNING_KEY_PASS; do
+            if [[ -z "${!variable}" ]]; then
+              echo "[ERR] Required Android signing secret is missing: $variable"
+              exit 1
+            fi
+          done
+
+          keystore="$RUNNER_TEMP/maadudul-ci.p12"
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$keystore"
+          chmod 600 "$keystore"
+          keytool -list \
+            -keystore "$keystore" \
+            -storepass:env SIGNING_STORE_PASS \
+            -alias "$SIGNING_KEY_ALIAS" > /dev/null
+          echo "ANDROID_SIGNING_KEYSTORE=$keystore" >> "$GITHUB_ENV"
+
       - name: Build APK with MaaDuDuL resources
         shell: bash
         env:
@@ -488,6 +516,9 @@ jobs:
           PYTHON_AAR: ${{ steps.python_runtime.outputs.aar }}
           APPLICATION_ID: ${{ steps.metadata.outputs.application_id }}
           DISPLAY_VERSION: ${{ steps.metadata.outputs.display_version }}
+          SIGNING_KEY_ALIAS: ${{ secrets.MFA_ANDROID_KEY_ALIAS }}
+          SIGNING_STORE_PASS: ${{ secrets.MFA_ANDROID_STORE_PASSWORD }}
+          SIGNING_KEY_PASS: ${{ secrets.MFA_ANDROID_KEY_PASSWORD }}
         working-directory: mfa-source
         run: |
           dotnet publish MFAAvalonia.Android/MFAAvalonia.Android.csproj \
@@ -504,7 +535,12 @@ jobs:
             "-p:AndroidLauncherLabel=$LAUNCHER_LABEL" \
             "-p:AndroidLauncherIcon=$LAUNCHER_ICON" \
             "-p:AndroidPythonRuntimeAar=$PYTHON_AAR" \
-            "-p:AndroidPythonAgentEntryPoint=$P4A_ENTRYPOINT"
+            "-p:AndroidPythonAgentEntryPoint=$P4A_ENTRYPOINT" \
+            -p:AndroidKeyStore=true \
+            "-p:AndroidSigningKeyStore=$ANDROID_SIGNING_KEYSTORE" \
+            "-p:AndroidSigningKeyAlias=$SIGNING_KEY_ALIAS" \
+            -p:AndroidSigningStorePass=env:SIGNING_STORE_PASS \
+            -p:AndroidSigningKeyPass=env:SIGNING_KEY_PASS
 
           # Android 12 splash uses the same Icon drawable as the launcher.
           grep -Rqs 'windowSplashScreenAnimatedIcon.*@drawable/Icon' MFAAvalonia.Android/Resources
@@ -530,6 +566,10 @@ jobs:
           grep -Fxq 'assets/MfaDependencies/shizuku.apk' "$apk_entries"
           grep -Fxq "lib/${{ matrix.abi }}/libMaaFramework.so" "$apk_entries"
           grep -Eq "^lib/${{ matrix.abi }}/libpython3\.[0-9]+\.so$" "$apk_entries"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify \
+            --verbose \
+            --print-certs \
+            "$apk_path"
 
           merged_manifest="mfa-source/MFAAvalonia.Android/obj/Release/net10.0-android/${{ matrix.rid }}/android/AndroidManifest.xml"
           if [[ ! -f "$merged_manifest" ]]; then
