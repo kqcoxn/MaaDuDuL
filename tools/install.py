@@ -24,8 +24,13 @@ target_os = len(sys.argv) > 2 and sys.argv[2] or platform.system().lower()
 
 
 def get_agent_python_path(os_name: str) -> str:
-    """Return the embedded Python path used by a target platform."""
+    """Return the Agent executable configured for a target platform."""
     normalized_os = os_name.lower()
+    if normalized_os in {"android"}:
+        # MFAAvalonia's Android service runs the embedded interpreter itself and
+        # resolves the Agent script from child_args/entrypoint.  A desktop
+        # embedded-Python path would either not exist or be treated as a script.
+        return "python"
     if normalized_os in {"win", "windows", "win32"}:
         return "./python/python.exe"
     if normalized_os in {"darwin", "macos", "mac", "linux"}:
