@@ -5,7 +5,7 @@
 	"title": "$project_title",
 	"icon": "logo.png",
 	"description": "$project_description",
-	"version": "v0.6.0",
+	"version": "v0.6.1",
 	"welcome": "$project_welcome",
 	"contact": "$project_contact",
 	"license": "LICENSE",
