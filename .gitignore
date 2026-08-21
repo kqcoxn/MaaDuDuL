@@ -455,3 +455,6 @@ tools/ImageCropper/**/*.png
 
 debug
 agent/config
+
+# Everything Maa local installer state (contains absolute paths)
+.codex/.everything-maa.json

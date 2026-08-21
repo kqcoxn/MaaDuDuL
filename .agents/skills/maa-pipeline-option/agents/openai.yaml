@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Pipeline Option"
+  short_description: "Wire Maa runtime options end to end"
+  default_prompt: "Use $maa-pipeline-option to add this runtime option across the Maa UI, Pipeline, and Python paths."

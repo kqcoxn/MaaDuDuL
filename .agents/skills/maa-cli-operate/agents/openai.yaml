@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa CLI Operate"
+  short_description: "Run Maa device and Pipeline CLI workflows"
+  default_prompt: "Use $maa-cli-operate to validate a Pipeline and run the next safe Maa CLI operation."

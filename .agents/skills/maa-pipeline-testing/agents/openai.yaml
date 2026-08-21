@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Pipeline Testing"
+  short_description: "Validate Maa nodes and runtime wiring"
+  default_prompt: "Use $maa-pipeline-testing to validate this MaaFramework node or task from static checks through runtime behavior."

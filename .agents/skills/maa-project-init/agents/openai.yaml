@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Project Init"
+  short_description: "Scan Maa projects into reusable context"
+  default_prompt: "Use $maa-project-init to scan this MaaFramework project and prepare a verified basic_info.md handoff."

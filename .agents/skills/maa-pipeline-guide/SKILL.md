@@ -1,17 +1,121 @@
 ---
-name: pipeline-guide
-description: "Universal Pipeline JSON 编写指南。基于 MaaFramework Pipeline 协议，提供节点命名、识别算法、动作类型、流程控制、可复用节点等编码规范与模式参考。在编写、修改或审查 Pipeline JSON、设计节点流程、使用 TemplateMatch/OCR/Custom 识别或 Click/Swipe 动作时使用。"
+name: maa-pipeline-guide
+description: Universal Pipeline JSON 编写指南。基于 MaaFramework Pipeline 协议，提供节点命名、识别算法、动作类型、流程控制、可复用节点等编码规范与模式参考。在编写、修改或审查 Pipeline JSON、设计节点流程、使用 TemplateMatch/OCR/Custom 识别或 Click/Swipe 动作时使用。
 ---
 
 # Universal Pipeline 编写指南
+
+## 官方知识核对
+
+本指南中的 Pipeline 约定是工作经验和社区规范，不能替代 pinned 版本的官方协议、schema 或源码。当字段语义、默认值、版本差异或 API 行为存在疑问时，通过 `$maa-wiki` 定位 MaaLLMWiki catalog 中的原始来源，再以官方文档、`tools/pipeline.schema.json` 或 MaaFramework 源码为准。
+
+如果用户提出的是尚未定义起始状态、安全边界和验收条件的端到端自动化目标，先交给 `$maa-workflow-build` 建立任务契约与状态机；已有契约时，再用本 skill 处理 Pipeline 设计、修改或审查。
+
+## 项目初始化接力
+
+开始广泛扫描仓库前，先在目标项目根目录查找 `basic_info.md`：
+
+1. 存在时先读其中“0. Maa Skills 接力协议”，再优先读第 3/4/5/7/8/9 节，获取主 Pipeline、公共节点、返回/弹窗、OCR、模板与 ROI 约定。
+2. 它只是 `maa-project-init` 生成的上下文缓存；待修改节点必须回到当前 JSON/Python 核实，设备相关结论必须用当前截图或识别结果核实。
+3. 文件缺失或没有第 0 节时，按本 skill 正常发现项目结构并说明未使用初始化缓存；不得自动调用 `$maa-project-init`，只有用户明确要求初始化或刷新时才调用。
+4. 相关 `interface.json`、Pipeline 或 Agent 文件晚于 `basic_info.md` 时，将缓存视为可能过期并以当前源码为准；不得自动刷新或覆盖已有非空文件。
 
 ## 核心原则
 
 1. **状态驱动**：遵循"识别 → 操作 → 识别"循环。每次操作必须基于识别结果，禁止假设操作后画面状态。
 2. **高命中率**：扩充 `next` 列表，覆盖当前操作后所有可能画面，力争一次截图命中。
-3. **避免硬延迟**：尽量不用 `pre_delay` / `post_delay` / `timeout`，优先通过增加中间识别节点解决；只在必须等画面稳定时才用 `pre_wait_freezes` / `post_wait_freezes`。当确实不需要延迟时，要在节点上显式将 `rate_limit` / `pre_delay` / `post_delay` 设为 0（协议默认 `rate_limit=1000ms`、`pre_delay/post_delay=200ms`，省略字段会引入隐式等待；仓库的 `tools/add_node_defaults.py` 会为 Common 节点补齐这些 0 值字段）。
+3. **显式等待策略**：优先通过中间识别节点确认状态，不用盲目的长 `delay` 掩盖问题；但启动、动画、结算、加载稳定等场景可以使用短的 `pre_delay` / `post_delay` / `timeout` / `*_wait_freezes`。当确实不需要等待时，要在节点上显式将 `rate_limit` / `pre_delay` / `post_delay` 设为 0（协议默认 `rate_limit=1000ms`、`pre_delay/post_delay=200ms`，省略字段会引入隐式等待）。不要假设仓库存在自动补默认值脚本，使用前先发现真实工具。
 4. **720p 基准**：所有坐标、ROI、图片必须基于 **720X1280**。
 5. **格式化**：JSON 遵循 `.prettierrc`（4 空格缩进，数组元素换行）。
+
+需要完整字段速查时读取 [references/field-reference.md](references/field-reference.md)，不要把整份字段表重复加载到日常任务上下文。
+
+## 历史审查后的设计准则
+
+这些规则来自 MaaGumballs 与 M9A 的 Pipeline 历史审查，优先级高于早期经验里的绝对化表述：
+
+1. **状态机优先，不等于禁止 Python**：稳定、可枚举的页面流转优先写成 `next` + `[JumpBack]`。当逻辑需要运行时数据、事件库、动态目标选择、跨节点计数、复杂 OCR/图像后处理、`pipeline_override` 计算或失败策略时，使用 CustomAction/CustomRecognition。
+2. **Custom 不只是 action**：MaaGumballs 主要使用 `action: Custom`，M9A 同时大量使用 `custom_action`、`custom_recognition`、`tasker_sink`。设计新流程时先判断问题属于“控制流/动作决策”还是“识别/列表解析/图像后处理”。
+3. **链路要显式**：父节点的 `next` 放“当前页面可能出现的下一批状态”；临时弹窗、加载、确认框用 `[JumpBack]`；高风险分支（战斗、购买、消耗、结算继续）要和普通调查/领取/返回分开。
+4. **等待不是禁用项**：不要用盲目的长 `delay` 掩盖状态识别问题；但启动、切页动画、结算、加载后稳定画面等场景可以使用短的 `post_delay`、`rate_limit` 或 `*_wait_freezes`，并配套下一屏识别验证。
+5. **校验分层**：资源加载通过只说明 JSON/资源可加载，不代表 Custom 名称、Python 参数路径、`run_task()` 结果判断都正确。Custom 映射和关键链路需要单独检查。
+
+## Pipeline 链路设计
+
+- 入口节点只负责分发当前可能状态，不要把所有业务语义塞进一个超宽 `next` 后再让 Python 猜。
+- `next` 顺序表达优先级：先放最确定、最安全的稳定状态，再放可恢复分支，最后放异常/弹窗 `[JumpBack]`。
+- `[JumpBack]X` 是“执行 X 后回到父节点继续识别”，不是普通跳转；适合关闭弹窗、处理加载、补一次确认、滑动列表后回到父识别。
+- 对消耗资源或改变账号状态的分支，先识别稳定状态，再做动作；动作后必须有下一屏或完成态验证。
+- 可滚动列表优先用父级 orchestrator 节点控制滑动，不要把 swipe 直接塞到每个目标节点的 `next` 里造成死循环。
+
+## Custom 边界
+
+- **CustomAction**：适合动态控制流、跨节点状态、事件库、计数器、运行时 `override_pipeline()`、多步任务编排、失败后是否继续的策略。
+- **CustomRecognition**：适合 OCR 结果后处理、列表扫描、颜色/模板组合、图像裁剪分析、返回动态 box/ROI。
+- **不要为了“配置统一”强行加 Python**：如果 UI 选项只是改一个已有节点的 `next`、`enabled`、`expected` 或 `roi`，优先 pure `pipeline_override`。
+- **也不要为了“纯 JSON”硬绕开 Python**：一旦判断依赖运行时数据、历史状态、动态列表、复杂识别结果或安全策略，Custom 比堆叠巨大 JSON 分支更可靠。
+
+## 项目兼容与实战约定
+
+### 保持本文件既有语法风格
+
+MaaFramework 协议推荐 v2 object 形态，但本仓库不少历史 pipeline 仍使用平铺字段:
+
+```jsonc
+{
+    "AutoSky_CheckExplorationInfo": {
+        "recognition": "OCR",
+        "expected": "探索信息",
+        "roi": [32, 964, 214, 103],
+        "action": "DoNothing"
+    }
+}
+```
+
+编辑既有文件时优先沿用该文件已有风格，避免在同一个局部把 v1 平铺与 v2 object 混得过碎。若要新增 UI 选项或 Python 读取配置，先确认 `context.get_node_data()` 返回结构和当前代码读取路径。
+
+### `enabled` 与 `enable`
+
+协议字段是 `enabled`；部分项目/历史节点可能使用 `enable` 作为自定义开关字段。新增开关时:
+
+- 若节点由 MaaFramework 原生启停，优先使用 `enabled`。
+- 若 Python 代码显式读取 `enable` 或已有辅助函数兼容 `enable/enabled`，沿用该功能已有字段。
+- `interface.json` 的 `pipeline_override` 必须覆盖代码实际读取的字段；不要 UI 写 `enabled`，Python 却读 `enable`。
+
+### Python 中判断任务结果
+
+`context.run_task()` 返回的 `result.nodes` 可能包含已经尝试过但识别失败的节点。调试面板里的红叉节点也可能出现在列表中，所以不要用 `if result.nodes` 或"节点名出现过"当作命中。
+
+可靠判断顺序:
+
+1. 优先用 `context.run_recognition("Node", img).hit` 判断当前截图。
+2. 必须分析 `run_task()` 结果时，检查目标 node 的 `completed` 或 `node.recognition.hit`。
+3. 对会回到稳定页面的流程，先检测稳定状态节点（如 `AutoSky_CheckExplorationInfo`），避免已经回到页面后又误跑危险兜底动作。
+
+```python
+def task_result_has_hit(result, names: set[str]) -> bool:
+    if not result or not result.nodes:
+        return False
+    for node in result.nodes:
+        if getattr(node, "name", None) not in names:
+            continue
+        if getattr(node, "completed", False):
+            return True
+        recognition = getattr(node, "recognition", None)
+        if recognition and getattr(recognition, "hit", False):
+            return True
+    return False
+```
+
+### 宽入口与高风险分支拆开
+
+不要把"战斗"、"调查"、"开启神殿"、"领奖"等语义不同的节点全塞进一个宽泛 `EventDetection.next` 后再由 Python 统一当战斗处理。高风险分支应在 Python 或上层状态机里先做分类:
+
+- 非战斗事件：调查、拾取、神殿开启，命中后直接作为事件处理。
+- 战斗事件：袭击、进入战斗，只有这一类才进入战斗失败/克隆体战损检测。
+- 稳定状态：回到雷达/主界面后优先终止本次检测链。
+
+这能避免"空雷达/调查事件被误判成战斗结算"一类问题。
 
 ## 节点命名
 
@@ -72,9 +176,9 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 }
 ```
 
-- `expected` 写完整文本，不要写片段。
-- 无需手动维护多语言——`tools/i18n` 会自动处理。
-- 需要写片段或正则时，在 `expected` 数组中加 `// @i18n-skip` 注释。
+- 用户可见、固定文案优先写完整文本，便于多语言和维护。
+- 片段、正则、数字状态（如 `0/\d+`）是合法设计，适合动态数值、状态栏、干扰多的 ROI；使用时要在测试记录里说明原因，并按项目 i18n 规则处理跳过/翻译。
+- 不要假设所有项目都有同一套 `tools/i18n`；先发现目标仓库的 i18n 工具与约定。
 
 ### ColorMatch（找色）
 
@@ -116,7 +220,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 
 ### Custom（自定义识别）
 
-调用 go-service 注册的自定义识别器：
+调用 AgentServer 注册的自定义识别器。适合把“识别后的判断”放到 Python：OCR 后处理、列表扫描、动态 box、颜色/模板组合、复杂图像判断等。
 
 ```jsonc
 "recognition": {
@@ -125,6 +229,20 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
         "custom_recognition": "ExpressionRecognition",
         "custom_recognition_param": {
             "expression": "{CreditOCR}<300"
+        }
+    }
+}
+```
+
+自定义动作使用 `action: Custom` 或 v5 object-form 的 `action.type = "Custom"`，适合把“执行策略”放到 Python：动态分支、事件库、计数器、运行时 `override_pipeline()`、多步子任务、失败是否继续等。
+
+```jsonc
+"action": {
+    "type": "Custom",
+    "param": {
+        "custom_action": "NodeOverride",
+        "custom_action_param": {
+            "SomeNode": { "enabled": false }
         }
     }
 }
@@ -214,9 +332,10 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 ### Custom 节点
 
 - `SubTask`：顺序执行子任务列表。
-- `ClearHitCount`：清除节点命中计数。
-- `ExpressionRecognition`：计算布尔表达式。
-- 详见 `docs/zh_cn/developers/custom.md`。
+- `ResetCount` / `ClearHitCount`：清除节点命中计数；具体名称以目标项目注册函数为准。
+- `NodeOverride` / `DisableNode`：运行时覆盖或禁用节点；适合动态状态，不适合替代简单 UI option。
+- `ExpressionRecognition` / CustomRecognition：计算布尔表达式或做复杂识别后处理；具体名称以目标项目注册函数为准。
+- 详见 `docs/zh_cn/develop/Custom编写.md`。
 
 ## 典型模式
 
@@ -292,7 +411,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
         示例：跳过整个 handle_sailing_festival 函数
 ```
 
-详细反模式参见 [.claude/skills/pipeline-option/SKILL.md](../pipeline-option/SKILL.md) 的「不要做 #10」。
+详细反模式参见 [maa-pipeline-option anti-patterns](../maa-pipeline-option/references/anti-patterns.md)。
 
 ### 确认后验证画面变化
 
@@ -330,7 +449,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 - [ ] 无不必要的 `pre_delay` / `post_delay` / `timeout`
 - [ ] `next` 列表覆盖所有可能画面，含弹窗/加载/异常
 - [ ] 每次点击后有识别验证，不假设操作后状态
-- [ ] ROI / target 坐标基于 1280×720
+- [ ] ROI / target 坐标基于 720×1280（宽×高）
 - [ ] JSON 格式化符合 `.prettierrc`
 - [ ] `locales/` 已添加新增任务的多语言文本
 - [ ] OCR `expected` 写完整文本
@@ -340,7 +459,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 ## 参考
 
 - Pipeline 协议完整规范：[PipelineProtocol](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/en_us/3.1-PipelineProtocol.md)
-- 通用按钮文档：`docs/zh_cn/developers/common-buttons.md`
-- Custom 节点文档：`docs/zh_cn/developers/custom.md`
-- 开发手册：`docs/zh_cn/developers/README.md`
-- 节点测试：`docs/zh_cn/developers/node-testing.md`
+- Pipeline 编写：`docs/zh_cn/develop/Pipeline编写.md`
+- Custom 节点：`docs/zh_cn/develop/Custom编写.md`
+- Interface 选项：`docs/zh_cn/develop/interface.json编写.md`
+- 项目结构：`docs/zh_cn/develop/项目结构.md`

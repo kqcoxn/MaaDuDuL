@@ -1,0 +1,5 @@
+# BEGIN EVERYTHING-MAA MCP
+[mcp_servers.maa-mcp]
+command = "uvx"
+args = ["--from", "maa-mcp==1.2.3", "maa-mcp"]
+# END EVERYTHING-MAA MCP

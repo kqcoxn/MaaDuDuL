@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Interface Guide"
+  short_description: "审查并维护 MaaFramework Interface V2"
+  default_prompt: "使用 $maa-interface-guide 审查并修改这个项目现有的 Project Interface V2。"

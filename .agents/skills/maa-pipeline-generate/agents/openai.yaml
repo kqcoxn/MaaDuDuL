@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Pipeline Generate"
+  short_description: "Generate Maa recognition and action nodes"
+  default_prompt: "Use $maa-pipeline-generate to generate and safely integrate a MaaFramework Pipeline node."

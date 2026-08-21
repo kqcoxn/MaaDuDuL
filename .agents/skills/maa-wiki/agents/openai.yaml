@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Wiki"
+  short_description: "Find authoritative MaaFramework source knowledge"
+  default_prompt: "Use $maa-wiki to verify this MaaFramework documentation, schema, API, binding, release, or semantic-change fact against the MaaLLMWiki catalog."

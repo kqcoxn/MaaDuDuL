@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Pipeline Graph"
+  short_description: "Map Maa Pipeline state relationships"
+  default_prompt: "Use $maa-pipeline-graph to map this Maa project state machine and identify broken or orphaned links."

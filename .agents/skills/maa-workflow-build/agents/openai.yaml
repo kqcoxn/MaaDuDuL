@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Workflow Build"
+  short_description: "Orchestrate Maa workflows from intent to proof"
+  default_prompt: "Use $maa-workflow-build to turn this Maa automation request into a verified end-to-end workflow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Pipeline Guide"
+  short_description: "Design and review Maa Pipeline JSON"
+  default_prompt: "Use $maa-pipeline-guide to design or review this MaaFramework Pipeline flow."

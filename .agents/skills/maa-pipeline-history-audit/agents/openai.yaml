@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Pipeline History Audit"
+  short_description: "Audit Maa Pipeline evolution in Git"
+  default_prompt: "Use $maa-pipeline-history-audit to audit this Maa project history and extract Pipeline and Custom implementation lessons."

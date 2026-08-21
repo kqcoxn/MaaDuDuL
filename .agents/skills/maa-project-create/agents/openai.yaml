@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Project Create"
+  short_description: "Create and maintain MaaFramework projects"
+  default_prompt: "Use $maa-project-create to create a MaaFramework project and validate the result."
