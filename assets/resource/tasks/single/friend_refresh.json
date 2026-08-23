@@ -1,0 +1,105 @@
+{
+	"task": [
+		{
+			"name": "好友换新",
+			"label": "$♻️好友换新",
+			"entry": "好友换新_开始",
+			"description": "$Resource/descs/single/friend_refresh.md",
+			"group": [
+				"independent"
+			],
+			"option": [
+				"好友换新-删除旧好友",
+				"好友换新-添加新好友"
+			]
+		}
+	],
+	"option": {
+		"好友换新-删除旧好友": {
+			"type": "switch",
+			"label": "$删除旧好友",
+			"description": "$执行删除长期未登录好友的流程",
+			"cases": [
+				{
+					"name": "Yes",
+					"label": "$Yes",
+					"option": [
+						"好友换新-未登录天数"
+					]
+				},
+				{
+					"name": "No",
+					"label": "$No",
+					"pipeline_override": {
+						"好友换新_删除旧好友开始": {
+							"next": "好友换新_删除旧好友结束"
+						}
+					}
+				}
+			]
+		},
+		"好友换新-未登录天数": {
+			"type": "input",
+			"label": "$未登录天数",
+			"description": "$删除最后登录时间达到该天数的好友",
+			"inputs": [
+				{
+					"name": "天数",
+					"label": "$天数",
+					"default": "7",
+					"pipeline_type": "string",
+					"verify": "^[1-9]\\d*$",
+					"pattern_msg": "$请输入大于 0 的整数"
+				}
+			],
+			"pipeline_override": {
+				"好友换新_检查登录时间": {
+					"custom_recognition_param": "d={天数}"
+				}
+			}
+		},
+		"好友换新-添加新好友": {
+			"type": "switch",
+			"label": "$添加新好友",
+			"description": "$执行处理好友申请并添加新好友的流程",
+			"cases": [
+				{
+					"name": "Yes",
+					"label": "$Yes",
+					"option": [
+						"好友换新-申请轮次"
+					]
+				},
+				{
+					"name": "No",
+					"label": "$No",
+					"pipeline_override": {
+						"好友换新_添加新好友开始": {
+							"next": "好友换新_添加新好友结束"
+						}
+					}
+				}
+			]
+		},
+		"好友换新-申请轮次": {
+			"type": "input",
+			"label": "$申请轮次",
+			"description": "$控制刷新申请列表的轮次",
+			"inputs": [
+				{
+					"name": "轮次",
+					"label": "$轮次",
+					"default": "3",
+					"pipeline_type": "int",
+					"verify": "^[1-9]\\d*$",
+					"pattern_msg": "$请输入大于 0 的整数"
+				}
+			],
+			"pipeline_override": {
+				"好友换新_刷新申请列表": {
+					"max_hit": "{轮次}"
+				}
+			}
+		}
+	}
+}

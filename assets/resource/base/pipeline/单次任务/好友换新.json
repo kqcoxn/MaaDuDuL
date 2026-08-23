@@ -1,0 +1,523 @@
+{
+    "$__mpe_config_好友换新": {
+        "$__mpe_code": {
+            "prefix": "好友换新",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1787479338875,
+            "isModifiedExternally": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\单次任务\\好友换新.json",
+            "savedViewport": {
+                "x": -7672,
+                "y": -947,
+                "zoom": 1.14
+            },
+            "filename": "好友换新",
+            "version": "v1.8.0"
+        }
+    },
+    "$__mpe_external_返回主界面_好友换新": {
+        "$__mpe_code": {
+            "position": {
+                "x": 7745,
+                "y": 678
+            }
+        }
+    },
+    "好友换新_初始化删除计数器": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": "k=好友换新&ic=0&mc=11"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "好友换新_检查删除计数",
+            "好友换新_检查登录时间",
+            "[JumpBack]好友换新_向下滑动好友"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5624,
+                "y": 632
+            }
+        }
+    },
+    "好友换新_初始化申请计数器": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": "k=好友申请&ic=0&mc=3"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "好友换新_申请检查计数",
+            "[JumpBack]好友换新_申请好友",
+            "[JumpBack]好友换新_向下滑动申请"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6945,
+                "y": 631
+            }
+        }
+    },
+    "好友换新_删除下滑计数": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "count",
+                "custom_action_param": "k=好友换新"
+            }
+        },
+        "post_delay": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": 6150,
+                "y": 1237
+            }
+        }
+    },
+    "好友换新_删除好友": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    692,
+                    524,
+                    145,
+                    57
+                ],
+                "expected": [
+                    "就这样吧"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 再无话说，速速动手！"
+        },
+        "next": [
+            "好友换新_初始化删除计数器"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6151,
+                "y": 933
+            }
+        }
+    },
+    "好友换新_删除旧好友开始": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "好友换新_进入好友列表"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5088,
+                "y": 631
+            }
+        }
+    },
+    "好友换新_删除旧好友结束": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "好友换新_添加新好友开始"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6158,
+                "y": 630
+            }
+        }
+    },
+    "好友换新_刷新申请列表": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1088,
+                    637,
+                    113,
+                    65
+                ],
+                "expected": [
+                    "刷新"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "好友换新_初始化申请计数器"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7476,
+                "y": 367
+            }
+        }
+    },
+    "好友换新_向下滑动好友": {
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    770,
+                    585,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        778,
+                        169,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    600
+                ],
+                "duration": [
+                    300
+                ]
+            }
+        },
+        "next": [
+            "好友换新_删除下滑计数"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5890,
+                "y": 1240
+            }
+        }
+    },
+    "好友换新_向下滑动申请": {
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    770,
+                    585,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        778,
+                        169,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    600
+                ],
+                "duration": [
+                    300
+                ]
+            }
+        },
+        "next": [
+            "好友换新_申请下滑计数"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7211,
+                "y": 1223
+            }
+        }
+    },
+    "好友换新_开始": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "on_task_start"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "好友换新_进入好友界面",
+            "好友换新_确保在好友界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4569,
+                "y": 635
+            }
+        }
+    },
+    "好友换新_检查删除计数": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "check_counter",
+                "custom_recognition_param": "k=好友换新"
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "好友换新_删除旧好友结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5893,
+                "y": 632
+            }
+        }
+    },
+    "好友换新_检查登录时间": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "find_inactive_friend",
+                "custom_recognition_param": "d=7",
+                "roi": [
+                    831,
+                    85,
+                    159,
+                    546
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    317,
+                    -48,
+                    0,
+                    0
+                ]
+            }
+        },
+        "next": [
+            "好友换新_删除好友"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5891,
+                "y": 933
+            }
+        }
+    },
+    "好友换新_添加新好友开始": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "好友换新_进入查找页面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6418,
+                "y": 629
+            }
+        }
+    },
+    "好友换新_添加新好友结束": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "返回主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7475,
+                "y": 631
+            }
+        }
+    },
+    "好友换新_申请下滑计数": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "count",
+                "custom_action_param": "k=好友申请"
+            }
+        },
+        "post_delay": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": 7471,
+                "y": 1220
+            }
+        }
+    },
+    "好友换新_申请好友": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1024,
+                    92,
+                    186,
+                    534
+                ],
+                "expected": [
+                    "好友申请"
+                ],
+                "order_by": "Vertical"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 400,
+        "$__mpe_code": {
+            "position": {
+                "x": 7213,
+                "y": 935
+            }
+        }
+    },
+    "好友换新_申请检查计数": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "check_counter",
+                "custom_recognition_param": "k=好友申请"
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "好友换新_刷新申请列表",
+            "好友换新_添加新好友结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7214,
+                "y": 631
+            }
+        }
+    },
+    "好友换新_确保在好友界面": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    7,
+                    3,
+                    300,
+                    90
+                ],
+                "expected": [
+                    "好友"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " > 进入好友页面"
+        },
+        "next": [
+            "好友换新_删除旧好友开始"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4828,
+                "y": 632
+            }
+        }
+    },
+    "好友换新_进入好友列表": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    53,
+                    136,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 800,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 开始删除旧好友"
+        },
+        "next": [
+            "好友换新_初始化删除计数器"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5353,
+                "y": 631
+            }
+        }
+    },
+    "好友换新_进入好友界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    801,
+                    71,
+                    477,
+                    251
+                ],
+                "template": [
+                    "main/friend.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "好友换新_确保在好友界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4825,
+                "y": 344
+            }
+        }
+    },
+    "好友换新_进入查找页面": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    74,
+                    219,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 800,
+        "focus": {
+            "Node.Recognition.Succeeded": " > 开始添加新好友"
+        },
+        "next": [
+            "好友换新_初始化申请计数器"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6678,
+                "y": 629
+            }
+        }
+    }
+}

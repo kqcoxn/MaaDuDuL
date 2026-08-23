@@ -8,3 +8,4 @@ from .land_reclamation import *
 from .pinch_face import *
 from .exam_cram import *
 from .holy import *
+from .friend import *

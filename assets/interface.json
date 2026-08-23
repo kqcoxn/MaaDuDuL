@@ -113,6 +113,7 @@
 		"resource/tasks/single/quick_plot.json",
 		"resource/tasks/single/continuous_battle.json",
 		"resource/tasks/single/level_rewards.json",
+		"resource/tasks/single/friend_refresh.json",
 		"resource/tasks/separators/new_task.json"
 	],
 	"task": [],
