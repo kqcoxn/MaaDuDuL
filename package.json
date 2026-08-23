@@ -5,7 +5,7 @@
 		"agent": "node dev/run_python.js dev/run_agent.py",
 		"debug": "node dev/run_debugger.js",
 		"reset": "git reset --soft HEAD~1",
-		"release": "git tag -a v0.6.1 -m \"release v0.6.1\" && git push origin v0.6.1"
+		"release": "git tag -a v0.6.2 -m \"release v0.6.2\" && git push origin v0.6.2"
 	},
 	"devDependencies": {
 		"prettier-plugin-multiline-arrays": "^3.0.6"

@@ -3,16 +3,16 @@
         "$__mpe_code": {
             "prefix": "速战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1780493854794,
+            "lastSyncTime": 1787320982675,
             "isModifiedExternally": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\速战.json",
             "savedViewport": {
-                "x": -12037,
-                "y": -910,
-                "zoom": 1.52
+                "x": -11848,
+                "y": -559,
+                "zoom": 1.5
             },
             "filename": "速战",
-            "version": "v1.6.0"
+            "version": "v1.8.0"
         }
     },
     "速战_不购买": {
@@ -115,6 +115,20 @@
         }
     },
     "速战_指定作战次数": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    319,
+                    241,
+                    212,
+                    67
+                ],
+                "expected": [
+                    "请设置速战次数"
+                ]
+            }
+        },
         "action": {
             "type": "Click",
             "param": {
@@ -126,13 +140,14 @@
                 ]
             }
         },
+        "post_delay": 600,
         "next": [
             "速战_输入作战次数"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8221,
-                "y": 519
+                "x": 8214,
+                "y": 399
             }
         }
     },
