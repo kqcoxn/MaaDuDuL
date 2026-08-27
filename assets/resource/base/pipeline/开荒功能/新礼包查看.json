@@ -97,7 +97,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 发现可能的免费礼包，请在手动领取后再次执行任务"
+            "Node.Recognition.Succeeded": "> 发现可能的免费礼包，请在手动领取后再次执行任务"
         },
         "$__mpe_code": {
             "position": {
@@ -130,7 +130,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 本周已检查新礼包"
+            "Node.Recognition.Starting": "> 本周已检查新礼包"
         },
         "$__mpe_code": {
             "position": {
@@ -174,7 +174,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查结束"
+            "Node.Recognition.Starting": "> 检查结束"
         },
         "next": [
             "返回主界面"
@@ -190,7 +190,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查室内装潢商品"
+            "Node.Recognition.Starting": "> 检查室内装潢商品"
         },
         "next": [
             "新礼包查看_进入室内装潢"
@@ -295,7 +295,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查特殊组合商品"
+            "Node.Recognition.Starting": "> 检查特殊组合商品"
         },
         "next": [
             "新礼包查看_进入月卡商店"
@@ -380,7 +380,7 @@
         },
         "timeout": 3000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 发现未领取的礼包"
+            "Node.Recognition.Succeeded": "> 发现未领取的礼包"
         },
         "next": [
             "新礼包查看_领取查看奖励"
@@ -514,7 +514,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查每周礼包商品"
+            "Node.Recognition.Starting": "> 检查每周礼包商品"
         },
         "next": [
             "新礼包查看_进入每周礼包"
@@ -530,7 +530,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查每月礼包商品"
+            "Node.Recognition.Starting": "> 检查每月礼包商品"
         },
         "next": [
             "新礼包查看_进入每月礼包"
@@ -546,7 +546,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查水晶叶商品"
+            "Node.Recognition.Starting": "> 检查水晶叶商品"
         },
         "next": [
             "新礼包查看_进入水晶叶"
@@ -562,7 +562,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查特殊组合商品"
+            "Node.Recognition.Starting": "> 检查特殊组合商品"
         },
         "next": [
             "新礼包查看_进入特殊组合"
@@ -603,7 +603,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 检查精品店商品"
+            "Node.Recognition.Starting": "> 检查精品店商品"
         },
         "next": [
             "新礼包查看_进入精品店"
@@ -658,7 +658,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Succeeded": " > 我再看看"
+            "Node.Action.Succeeded": "> 我再看看"
         },
         "next": [
             "新礼包查看_上下滑动"
@@ -711,7 +711,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入尊享商店"
+            "Node.Recognition.Succeeded": "> 进入尊享商店"
         },
         "next": [
             "新礼包查看_确保已在尊享商店"
@@ -874,7 +874,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 确认领取"
+            "Node.Recognition.Succeeded": "> 确认领取"
         },
         "next": [
             "新礼包查看_获取查看奖励"

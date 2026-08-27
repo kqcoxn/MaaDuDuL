@@ -38,7 +38,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 今日作战已结束"
+            "Node.Recognition.Succeeded": "> 今日作战已结束"
         },
         "next": [
             "短期速成班_周期记录"
@@ -66,7 +66,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 今日作战已结束"
+            "Node.Recognition.Succeeded": "> 今日作战已结束"
         },
         "next": [
             "短期速成班_周期记录"
@@ -100,7 +100,7 @@
         "timeout": 1200000,
         "rate_limit": 3000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 出发！"
+            "Node.Recognition.Succeeded": "> 出发！"
         },
         "next": [
             "短期速成班_战斗成功",
@@ -118,7 +118,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已清速成"
+            "Node.Recognition.Starting": "> 今日已清速成"
         },
         "$__mpe_code": {
             "position": {
@@ -236,7 +236,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 作战失败"
+            "Node.Recognition.Succeeded": "> 作战失败"
         },
         "next": [
             "短期速成班_终止作战"
@@ -268,7 +268,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 作战成功，进入下一关"
+            "Node.Recognition.Succeeded": "> 作战成功，进入下一关"
         },
         "next": [
             "短期速成班_出发"
@@ -381,7 +381,7 @@
             }
         },
         "focus": {
-            "Node.Action.Starting": " > 进入速成班界面"
+            "Node.Action.Starting": "> 进入速成班界面"
         },
         "next": [
             "短期速成班_进入速成班"

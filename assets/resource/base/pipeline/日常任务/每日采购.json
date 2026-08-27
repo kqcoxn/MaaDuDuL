@@ -145,7 +145,7 @@
     },
     "每日采购_商品已被购买": {
         "focus": {
-            "Node.Recognition.Starting": " > 本期已购买"
+            "Node.Recognition.Starting": "> 本期已购买"
         },
         "$__mpe_code": {
             "position": {
@@ -158,7 +158,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已检查圣团研究礼包"
+            "Node.Recognition.Starting": "> 今日已检查圣团研究礼包"
         },
         "next": [
             "每日采购_圣团研究礼包结束"
@@ -276,7 +276,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入战斗宝石商店"
+            "Node.Recognition.Succeeded": "> 进入战斗宝石商店"
         },
         "next": [
             "每日采购_进入战斗宝石商店"
@@ -389,7 +389,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日普通商店已采购"
+            "Node.Recognition.Starting": "> 今日普通商店已采购"
         },
         "next": [
             "每日采购_普通商店结束"
@@ -519,7 +519,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 本周已检查每周礼包"
+            "Node.Recognition.Starting": "> 本周已检查每周礼包"
         },
         "next": [
             "每日采购_每周免费礼包结束"
@@ -604,7 +604,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已检查每日礼包"
+            "Node.Recognition.Starting": "> 今日已检查每日礼包"
         },
         "next": [
             "每日采购_每日免费礼包结束"
@@ -689,7 +689,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 本月已检查每月礼包"
+            "Node.Recognition.Starting": "> 本月已检查每月礼包"
         },
         "next": [
             "每日采购_每月免费礼包结束"
@@ -929,7 +929,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 今日已购买"
+            "Node.Recognition.Succeeded": "> 今日已购买"
         },
         "$__mpe_code": {
             "position": {
@@ -942,7 +942,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日糖果已采购"
+            "Node.Recognition.Starting": "> 今日糖果已采购"
         },
         "next": [
             "每日采购_糖果采购结束"
@@ -1357,7 +1357,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 购买礼包"
+            "Node.Recognition.Succeeded": "> 购买礼包"
         },
         "next": [
             "每日采购_领取礼包奖励"
@@ -1487,8 +1487,8 @@
             }
         },
         "focus": {
-            "Node.Action.Succeeded": " > 进入水晶叶商店",
-            "Node.Recognition.Starting": " > 进入尊享商店"
+            "Node.Action.Succeeded": "> 进入水晶叶商店",
+            "Node.Recognition.Starting": "> 进入尊享商店"
         },
         "next": [
             "每日采购_确保进入水晶叶商店"
@@ -1547,7 +1547,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入日常商店"
+            "Node.Recognition.Succeeded": "> 进入日常商店"
         },
         "next": [
             "每日采购_购买日常朱珠糖"
@@ -1572,7 +1572,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入普通商店"
+            "Node.Recognition.Succeeded": "> 进入普通商店"
         },
         "next": [
             "每日采购_日常商店开始"
@@ -1691,7 +1691,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入特别商店"
+            "Node.Recognition.Succeeded": "> 进入特别商店"
         },
         "next": [
             "每日采购_购买特殊物品"
@@ -1753,7 +1753,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 购买成功！"
+            "Node.Recognition.Succeeded": "> 购买成功！"
         },
         "$__mpe_code": {
             "position": {
@@ -1886,7 +1886,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 本周已检查兔子代币"
+            "Node.Recognition.Starting": "> 本周已检查兔子代币"
         },
         "next": [
             "每日采购_兔子代币结束"

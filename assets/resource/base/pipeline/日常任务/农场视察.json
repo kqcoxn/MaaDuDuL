@@ -26,7 +26,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已视察"
+            "Node.Recognition.Starting": "> 今日已视察"
         },
         "$__mpe_code": {
             "position": {
@@ -46,7 +46,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Succeeded": " > 进入平日农场"
+            "Node.Action.Succeeded": "> 进入平日农场"
         },
         "next": [
             "农场视察_进入农场"
@@ -142,7 +142,7 @@
         "post_delay": 0,
         "timeout": 2000,
         "focus": {
-            "Node.Recognition.Starting": " > 收集宠物萝卜"
+            "Node.Recognition.Starting": "> 收集宠物萝卜"
         },
         "next": [
             "农场视察_检测宠物萝卜",
@@ -206,7 +206,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " >  跑腿未完成"
+            "Node.Recognition.Succeeded": ">  跑腿未完成"
         },
         "next": [
             "农场视察_派遣跑腿结束"
@@ -223,7 +223,7 @@
         "post_delay": 0,
         "timeout": 2000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 未命中"
+            "Node.Recognition.Succeeded": "> 未命中"
         },
         "next": [
             "农场视察_检测宠物萝卜",
@@ -281,7 +281,7 @@
         },
         "timeout": 3000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 拿来吧你！"
+            "Node.Recognition.Succeeded": "> 拿来吧你！"
         },
         "next": [
             "农场视察_获取宠物萝卜",
@@ -404,7 +404,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 收取每日萝卜"
+            "Node.Recognition.Succeeded": "> 收取每日萝卜"
         },
         "next": [
             "农场视察_收获宠物萝卜",
@@ -509,7 +509,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入跑腿地区"
+            "Node.Recognition.Succeeded": "> 进入跑腿地区"
         },
         "next": [
             "农场视察_领取跑腿奖励"
@@ -540,7 +540,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 获取跑腿奖励并重新派遣"
+            "Node.Recognition.Succeeded": "> 获取跑腿奖励并重新派遣"
         },
         "next": [
             "农场视察_获取派遣奖励"

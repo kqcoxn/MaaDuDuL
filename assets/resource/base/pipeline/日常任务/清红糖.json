@@ -108,7 +108,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 查找指定世界"
+            "Node.Recognition.Succeeded": "> 查找指定世界"
         },
         "next": [
             "清红糖_指定关卡作战"
@@ -124,7 +124,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已检查心形"
+            "Node.Recognition.Starting": "> 今日已检查心形"
         },
         "next": [
             "清红糖_心形结束"

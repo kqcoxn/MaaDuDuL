@@ -160,7 +160,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 检查剩余需求次数"
+            "Node.Recognition.Succeeded": "> 检查剩余需求次数"
         },
         "next": [
             "每日活动作战2_确保进入成就界面",
@@ -252,7 +252,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 切换至指定活动"
+            "Node.Recognition.Succeeded": "> 切换至指定活动"
         },
         "$__mpe_code": {
             "position": {
@@ -265,7 +265,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已进行活动"
+            "Node.Recognition.Starting": "> 今日已进行活动"
         },
         "$__mpe_code": {
             "position": {
@@ -309,7 +309,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日活动已完成！"
+            "Node.Recognition.Starting": "> 今日活动已完成！"
         },
         "next": [
             "每日活动作战2_领取奖励结束"
@@ -662,7 +662,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入成就界面"
+            "Node.Recognition.Succeeded": "> 进入成就界面"
         },
         "next": [
             "每日活动作战2_领取今日奖励"
@@ -693,7 +693,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入作战界面"
+            "Node.Recognition.Succeeded": "> 进入作战界面"
         },
         "next": [
             "每日活动作战2_确保微微辣"
@@ -763,7 +763,7 @@
         },
         "post_delay": 400,
         "focus": {
-            "Node.Recognition.Succeeded": " > 领取今日奖励"
+            "Node.Recognition.Succeeded": "> 领取今日奖励"
         },
         "next": [
             "每日活动作战2_检查领取时进度"
@@ -835,7 +835,7 @@
         },
         "timeout": 3000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 领取黄铁矿金库"
+            "Node.Recognition.Succeeded": "> 领取黄铁矿金库"
         },
         "next": [
             "每日活动作战2_确定领取"

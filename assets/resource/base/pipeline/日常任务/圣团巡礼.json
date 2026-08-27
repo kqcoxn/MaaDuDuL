@@ -38,8 +38,8 @@
         "post_delay": 500,
         "timeout": 3000,
         "focus": {
-            "Node.Action.Failed": " > 打扫结束",
-            "Node.Recognition.Starting": " > 下一家！"
+            "Node.Action.Failed": "> 打扫结束",
+            "Node.Recognition.Starting": "> 下一家！"
         },
         "next": [
             "圣团巡礼_打扫房间"
@@ -82,7 +82,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 今日已邀请此角色"
+            "Node.Recognition.Succeeded": "> 今日已邀请此角色"
         },
         "$__mpe_code": {
             "position": {
@@ -230,7 +230,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 兼职结束"
+            "Node.Recognition.Succeeded": "> 兼职结束"
         },
         "next": [
             "圣团巡礼_再次查找"
@@ -303,7 +303,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已冒险"
+            "Node.Recognition.Starting": "> 今日已冒险"
         },
         "next": [
             "圣团巡礼_冒险结束"
@@ -326,7 +326,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Succeeded": " > 进入冒险协会"
+            "Node.Action.Succeeded": "> 进入冒险协会"
         },
         "next": [
             "圣团巡礼_进入冒险协会"
@@ -352,7 +352,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 今日冒险已结束"
+            "Node.Recognition.Succeeded": "> 今日冒险已结束"
         },
         "next": [
             "圣团巡礼_从冒险返回"
@@ -454,7 +454,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": " > 检查冒险协会宠物"
+            "Node.Recognition.Starting": "> 检查冒险协会宠物"
         },
         "next": [
             "圣团巡礼_检查冒险协会宠物"
@@ -479,7 +479,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": " > 检查宴会厅宠物"
+            "Node.Recognition.Starting": "> 检查宴会厅宠物"
         },
         "next": [
             "圣团巡礼_检查宴会厅宠物"
@@ -504,7 +504,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": " > 检查总部宠物"
+            "Node.Recognition.Starting": "> 检查总部宠物"
         },
         "next": [
             "圣团巡礼_检查总部宠物"
@@ -589,7 +589,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": " > 检查生产厂宠物"
+            "Node.Recognition.Starting": "> 检查生产厂宠物"
         },
         "next": [
             "圣团巡礼_检查生产厂宠物"
@@ -614,7 +614,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": " > 检查记录馆宠物"
+            "Node.Recognition.Starting": "> 检查记录馆宠物"
         },
         "next": [
             "圣团巡礼_检查记录馆宠物"
@@ -674,7 +674,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已参观"
+            "Node.Recognition.Starting": "> 今日已参观"
         },
         "next": [
             "圣团巡礼_参观结束"
@@ -697,7 +697,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Succeeded": " > 参观并打扫房间"
+            "Node.Action.Succeeded": "> 参观并打扫房间"
         },
         "next": [
             "圣团巡礼_进入总部"
@@ -790,7 +790,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已领取宠物礼物"
+            "Node.Recognition.Starting": "> 今日已领取宠物礼物"
         },
         "next": [
             "圣团巡礼_宠物礼物结束"
@@ -813,7 +813,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Succeeded": " > 收取宠物礼物"
+            "Node.Action.Succeeded": "> 收取宠物礼物"
         },
         "next": [
             "圣团巡礼_确保在外部"
@@ -1014,7 +1014,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 今日已宴会"
+            "Node.Recognition.Starting": "> 今日已宴会"
         },
         "next": [
             "圣团巡礼_宴会结束"
@@ -1037,7 +1037,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Succeeded": " > 进入宴会厅"
+            "Node.Action.Succeeded": "> 进入宴会厅"
         },
         "next": [
             "圣团巡礼_进入宴会厅"
@@ -1109,7 +1109,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Succeeded": " > 进入圣团"
+            "Node.Action.Succeeded": "> 进入圣团"
         },
         "next": [
             "圣团巡礼_进入圣团"
@@ -1193,7 +1193,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Action.Failed": " > 收藏客人已全部邀请"
+            "Node.Action.Failed": "> 收藏客人已全部邀请"
         },
         "next": [
             "圣团巡礼_宴会周期记录"
@@ -1256,7 +1256,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 鸡汤来喽！"
+            "Node.Recognition.Succeeded": "> 鸡汤来喽！"
         },
         "next": [
             "圣团巡礼_招待客人"
@@ -1296,8 +1296,8 @@
         },
         "timeout": 5000,
         "focus": {
-            "Node.Recognition.Failed": " > 看看 need",
-            "Node.Recognition.Succeeded": " > 看看 need"
+            "Node.Recognition.Failed": "> 看看 need",
+            "Node.Recognition.Succeeded": "> 看看 need"
         },
         "next": [
             "圣团巡礼_获取打扫奖励"
@@ -1377,7 +1377,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 未收到贡品"
+            "Node.Recognition.Succeeded": "> 未收到贡品"
         },
         "next": [
             "圣团巡礼_从世界树返回1"
@@ -1451,7 +1451,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": " > 收获世界树"
+            "Node.Recognition.Starting": "> 收获世界树"
         },
         "next": [
             "圣团巡礼_获取世界树",
@@ -1475,7 +1475,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 等待宠物出现"
+            "Node.Recognition.Starting": "> 等待宠物出现"
         },
         "next": [
             "圣团巡礼_切换至记录馆"
@@ -1509,7 +1509,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 未找到指定客人"
+            "Node.Recognition.Succeeded": "> 未找到指定客人"
         },
         "$__mpe_code": {
             "position": {
@@ -1540,7 +1540,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 未找到指定客人"
+            "Node.Recognition.Succeeded": "> 未找到指定客人"
         },
         "$__mpe_code": {
             "position": {
@@ -1560,7 +1560,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 等待宠物出现"
+            "Node.Recognition.Starting": "> 等待宠物出现"
         },
         "next": [
             "圣团巡礼_切换至总部"
@@ -1583,7 +1583,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 等待宠物出现"
+            "Node.Recognition.Starting": "> 等待宠物出现"
         },
         "next": [
             "圣团巡礼_切换至冒险协会"
@@ -1614,7 +1614,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 检测到狂热状态角色"
+            "Node.Recognition.Succeeded": "> 检测到狂热状态角色"
         },
         "next": [
             "圣团巡礼_确保不在休息",
@@ -1638,7 +1638,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 等待宠物出现"
+            "Node.Recognition.Starting": "> 等待宠物出现"
         },
         "next": [
             "圣团巡礼_切换至宴会厅"
@@ -1661,7 +1661,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Starting": " > 等待宠物出现"
+            "Node.Recognition.Starting": "> 等待宠物出现"
         },
         "next": [
             "圣团巡礼_宠物礼物周期记录"
@@ -1693,7 +1693,7 @@
         "repeat_delay": 400,
         "timeout": 2000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 抓到你了！"
+            "Node.Recognition.Succeeded": "> 抓到你了！"
         },
         "next": [
             "圣团巡礼_获取宠物礼物",
@@ -1729,7 +1729,7 @@
         },
         "timeout": 5000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 申请冒险"
+            "Node.Recognition.Succeeded": "> 申请冒险"
         },
         "next": [
             "圣团巡礼_确保进入日程界面"
@@ -1760,7 +1760,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 当前角色休息中"
+            "Node.Recognition.Succeeded": "> 当前角色休息中"
         },
         "next": [
             "圣团巡礼_再次查找"
@@ -2565,7 +2565,7 @@
         },
         "timeout": 3000,
         "focus": {
-            "Node.Action.Failed": " > 打扫结束"
+            "Node.Action.Failed": "> 打扫结束"
         },
         "next": [
             "圣团巡礼_打扫房间"
@@ -2600,7 +2600,7 @@
         },
         "post_delay": 1000,
         "focus": {
-            "Node.Action.Succeeded": " > 查找指定客人"
+            "Node.Action.Succeeded": "> 查找指定客人"
         },
         "next": [
             "圣团巡礼_识别客人1",
@@ -2674,7 +2674,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 吃饱辣！"
+            "Node.Recognition.Succeeded": "> 吃饱辣！"
         },
         "$__mpe_code": {
             "position": {

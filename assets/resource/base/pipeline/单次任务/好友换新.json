@@ -104,7 +104,7 @@
         },
         "post_delay": 1000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 再无话说，速速动手！"
+            "Node.Recognition.Succeeded": "> 再无话说，速速动手！"
         },
         "next": [
             "好友换新_初始化删除计数器"
@@ -425,7 +425,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入好友页面"
+            "Node.Recognition.Succeeded": "> 进入好友页面"
         },
         "next": [
             "好友换新_删除旧好友开始"
@@ -451,7 +451,7 @@
         },
         "post_delay": 800,
         "focus": {
-            "Node.Recognition.Succeeded": " > 开始删除旧好友"
+            "Node.Recognition.Succeeded": "> 开始删除旧好友"
         },
         "next": [
             "好友换新_初始化删除计数器"
@@ -508,7 +508,7 @@
         },
         "post_delay": 800,
         "focus": {
-            "Node.Recognition.Succeeded": " > 开始添加新好友"
+            "Node.Recognition.Succeeded": "> 开始添加新好友"
         },
         "next": [
             "好友换新_初始化申请计数器"

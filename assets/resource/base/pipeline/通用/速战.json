@@ -50,7 +50,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 体力不足"
+            "Node.Recognition.Succeeded": "> 体力不足"
         },
         "next": [
             "速战_不购买"
@@ -100,7 +100,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Starting": " > 准备速战"
+            "Node.Recognition.Starting": "> 准备速战"
         },
         "next": [
             "速战_确保可战斗",
@@ -164,7 +164,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 关卡不可用"
+            "Node.Recognition.Succeeded": "> 关卡不可用"
         },
         "$__mpe_code": {
             "position": {
@@ -267,7 +267,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 领取战斗奖励"
+            "Node.Recognition.Succeeded": "> 领取战斗奖励"
         },
         "$__mpe_code": {
             "position": {
@@ -372,7 +372,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 开始战斗"
+            "Node.Recognition.Succeeded": "> 开始战斗"
         },
         "next": [
             "速战_跳过动画",

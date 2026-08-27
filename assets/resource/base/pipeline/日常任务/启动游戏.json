@@ -89,7 +89,7 @@
         "timeout": 60000,
         "rate_limit": 600,
         "focus": {
-            "Node.Action.Succeeded": " > 尝试识别关键界面"
+            "Node.Action.Succeeded": "> 尝试识别关键界面"
         },
         "next": [
             "启动游戏_连续识别主界面",
@@ -147,8 +147,8 @@
         },
         "rate_limit": 600,
         "focus": {
-            "Node.Action.Starting": " > 启动！",
-            "Node.Action.Succeeded": " > 尝试识别主界面"
+            "Node.Action.Starting": "> 启动！",
+            "Node.Action.Succeeded": "> 尝试识别主界面"
         },
         "next": [
             "启动游戏_连续识别主界面",
@@ -228,7 +228,7 @@
         "timeout": 900000,
         "rate_limit": 3000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 更新游戏"
+            "Node.Recognition.Succeeded": "> 更新游戏"
         },
         "next": [
             "启动游戏_更新结束"
@@ -259,7 +259,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 更新完成"
+            "Node.Recognition.Succeeded": "> 更新完成"
         },
         "$__mpe_code": {
             "position": {
@@ -285,7 +285,7 @@
         },
         "timeout": 3000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 关闭公告界面"
+            "Node.Recognition.Succeeded": "> 关闭公告界面"
         },
         "next": [
             "启动游戏_关闭公告"
@@ -368,7 +368,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 已进入主界面"
+            "Node.Recognition.Succeeded": "> 已进入主界面"
         },
         "next": [
             "启动游戏_结束"
@@ -391,7 +391,7 @@
         "pre_delay": 0,
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 识别到登录界面"
+            "Node.Recognition.Succeeded": "> 识别到登录界面"
         },
         "next": [
             "启动游戏_捏脸启动"
@@ -435,7 +435,7 @@
         },
         "post_delay": 0,
         "focus": {
-            "Node.Recognition.Succeeded": " > 检测到可领取奖励"
+            "Node.Recognition.Succeeded": "> 检测到可领取奖励"
         },
         "$__mpe_code": {
             "position": {
