@@ -64,7 +64,7 @@
     - [x] 副本连续作战
     - [x] 领取章节奖励
     - [x] 快速剧情
-    - [ ] 好友清理
+    - [x] 好友清理
 
 \* **若有其他功能需求请提交 [issue](https://github.com/kqcoxn/MaaDuDuL/issues?q=is%3Aissue)**
 
@@ -105,13 +105,8 @@
 - **本项目由 [MaaXYZ](https://github.com/MaaXYZ)/[MaaFramework](https://github.com/MaaXYZ/MaaFramework) 强力驱动！**
 - 项目模板：[MaaXYZ](https://github.com/MaaXYZ)/[MaaPracticeBoilerplate](https://github.com/MaaXYZ/MaaPracticeBoilerplate)
 - GUI：[SweetSmellFox](https://github.com/SweetSmellFox)/[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
-- Pipeline 编辑器：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
+- Pipeline 编辑器 / 测试：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
 - 坨坨脸识别：[kqcoxn](https://github.com/kqcoxn)/[mddldl](https://github.com/kqcoxn/mddldl)
-- 测试：[MaaXYZ](https://github.com/MaaXYZ)/[MaaDebugger](https://github.com/MaaXYZ/MaaDebugger)
 - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme)
 
 游戏官网（国服）：[Bilibili-嘟嘟脸恶作剧](https://game.bilibili.com/trickcal/)
-
-## 统计
-
-[![Star History Chart](https://api.star-history.com/svg?repos=kqcoxn/MaaDuDuL&type=Date)](https://www.star-history.com/#kqcoxn/MaaDuDuL&Date)
