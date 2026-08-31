@@ -3,16 +3,17 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1783435928170,
+            "lastSyncTime": 1788177914317,
             "isModifiedExternally": false,
+            "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -16898,
-                "y": -4059,
-                "zoom": 1.65
+                "x": -7076,
+                "y": -2071,
+                "zoom": 0.92
             },
             "filename": "圣团巡礼",
-            "version": "v1.7.3"
+            "version": "v1.9.2"
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -135,6 +136,29 @@
             }
         }
     },
+    "圣团巡礼_从冒险返回": {
+        "pre_delay": 400,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    81,
+                    79,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "圣团巡礼_冒险结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 10705,
+                "y": 2572
+            }
+        }
+    },
     "圣团巡礼_从宠物预览返回": {
         "recognition": {
             "type": "TemplateMatch",
@@ -252,8 +276,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9394,
-                "y": 2342
+                "x": 9391,
+                "y": 2297
             }
         }
     },
@@ -1157,8 +1181,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8589,
-                "y": 2567
+                "x": 8596,
+                "y": 2572
             }
         }
     },
@@ -1622,8 +1646,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8857,
-                "y": 2256
+                "x": 8854,
+                "y": 2211
             }
         }
     },
@@ -1767,8 +1791,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9138,
-                "y": 2307
+                "x": 9135,
+                "y": 2262
             }
         }
     },
@@ -2072,6 +2096,28 @@
             }
         }
     },
+    "圣团巡礼_角色升级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "点击屏幕继续"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "圣团巡礼_再次查找"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 9651,
+                "y": 2204
+            }
+        }
+    },
     "圣团巡礼_设置冒险列表": {
         "pre_delay": 0,
         "action": {
@@ -2083,7 +2129,7 @@
         },
         "post_delay": 0,
         "next": [
-            "圣团巡礼_开始冒险循环"
+            "圣团巡礼_确保进入申请界面"
         ],
         "$__mpe_code": {
             "position": {
@@ -2103,12 +2149,12 @@
         },
         "post_delay": 0,
         "next": [
-            "圣团巡礼_开始冒险循环"
+            "圣团巡礼_确保进入申请界面"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8320,
-                "y": 2567
+                "x": 8078,
+                "y": 2610
             }
         }
     },
@@ -2123,7 +2169,7 @@
                     208
                 ],
                 "expected": [
-                    "布朗谢"
+                    "斯诺基"
                 ]
             }
         },
@@ -2720,48 +2766,61 @@
             }
         }
     },
-    "圣团巡礼_角色升级": {
+    "圣团巡礼_确保进入申请界面": {
         "recognition": {
             "type": "OCR",
             "param": {
+                "roi": [
+                    6,
+                    5,
+                    488,
+                    104
+                ],
                 "expected": [
-                    "点击屏幕继续"
+                    "申请书"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 400,
+        "next": [
+            "[JumpBack]圣团巡礼_检查优先级",
+            "圣团巡礼_开始冒险循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8334,
+                "y": 2569
+            }
+        }
+    },
+    "圣团巡礼_检查优先级": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1206,
+                    94,
+                    62,
+                    49
+                ],
+                "template": [
+                    "holy/up.png"
+                ],
+                "threshold": [
+                    0.8
                 ]
             }
         },
         "action": {
             "type": "Click"
         },
-        "next": [
-            "圣团巡礼_再次查找"
-        ],
+        "post_delay": 800,
         "$__mpe_code": {
             "position": {
-                "x": 9651,
-                "y": 2204
-            }
-        }
-    },
-    "圣团巡礼_从冒险返回": {
-        "pre_delay": 400,
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    81,
-                    79,
-                    1,
-                    1
-                ]
-            }
-        },
-        "next": [
-            "圣团巡礼_冒险结束"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 10705,
-                "y": 2572
+                "x": 8595,
+                "y": 2211
             }
         }
     }
