@@ -3,16 +3,17 @@
         "$__mpe_code": {
             "prefix": "启动游戏",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1786629502458,
+            "lastSyncTime": 1788262965009,
             "isModifiedExternally": false,
-            "filePath": "/Users/kqcoxn/_Programs/MaaDuDuL/assets/resource/base/pipeline/日常任务/启动游戏.json",
+            "isDeleted": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "savedViewport": {
-                "x": -1593,
-                "y": -320,
-                "zoom": 1.38
+                "x": -2315,
+                "y": -498,
+                "zoom": 1.98
             },
             "filename": "启动游戏",
-            "version": "v1.7.6"
+            "version": "v1.9.2"
         }
     },
     "启动游戏_关闭公告": {
