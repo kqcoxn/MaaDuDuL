@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788963619504,
+            "lastSyncTime": 1788965235865,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -7085,
-                "y": -784,
-                "zoom": 0.99
+                "x": -10156,
+                "y": -2363,
+                "zoom": 1.14
             },
             "filename": "圣团巡礼",
             "version": "v1.9.3"
@@ -236,8 +236,7 @@
                     144
                 ],
                 "expected": [
-                    "压力指数",
-                    "生活等级"
+                    "压力指数"
                 ]
             }
         },
@@ -271,8 +270,8 @@
         "post_delay": 0,
         "next": [
             "圣团巡礼_查找角色",
-            "圣团巡礼_兼职结束",
-            "圣团巡礼_角色升级"
+            "圣团巡礼_角色升级",
+            "圣团巡礼_兼职结束"
         ],
         "$__mpe_code": {
             "position": {
@@ -2159,20 +2158,29 @@
             "type": "OCR",
             "param": {
                 "expected": [
-                    "点击屏幕继续"
+                    "点击屏幕继续",
+                    "生活技能升级"
                 ]
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    611,
+                    690,
+                    1,
+                    1
+                ]
+            }
         },
         "next": [
             "圣团巡礼_再次查找"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9651,
-                "y": 2204
+                "x": 9685,
+                "y": 2194
             }
         }
     },
