@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788965235865,
+            "lastSyncTime": 1788966116411,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -10156,
-                "y": -2363,
-                "zoom": 1.14
+                "x": -4057,
+                "y": -393,
+                "zoom": 0.63
             },
             "filename": "圣团巡礼",
             "version": "v1.9.3"
@@ -137,25 +137,22 @@
         }
     },
     "圣团巡礼_从冒险返回": {
-        "pre_delay": 400,
         "action": {
             "type": "Click",
             "param": {
                 "target": [
-                    81,
-                    79,
+                    47,
+                    39,
                     1,
                     1
                 ]
             }
         },
-        "next": [
-            "圣团巡礼_冒险结束"
-        ],
+        "post_delay": 1200,
         "$__mpe_code": {
             "position": {
-                "x": 10705,
-                "y": 2572
+                "x": 10707,
+                "y": 2801
             }
         }
     },
@@ -378,12 +375,13 @@
             "Node.Recognition.Succeeded": "> 今日冒险已结束"
         },
         "next": [
-            "圣团巡礼_从冒险返回"
+            "圣团巡礼_确保从冒险返回",
+            "[JumpBack]圣团巡礼_从冒险返回"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 10445,
-                "y": 2569
+                "x": 10442,
+                "y": 2573
             }
         }
     },
@@ -408,8 +406,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 10974,
-                "y": 2572
+                "x": 10960,
+                "y": 2578
             }
         }
     },
@@ -2615,7 +2613,15 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    205,
+                    661,
+                    1,
+                    1
+                ]
+            }
         },
         "repeat": 2,
         "repeat_delay": 800,
@@ -2837,6 +2843,31 @@
             "position": {
                 "x": 9659,
                 "y": 1050
+            }
+        }
+    },
+    "圣团巡礼_确保从冒险返回": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    2,
+                    8,
+                    503,
+                    106
+                ],
+                "expected": [
+                    "圣团"
+                ]
+            }
+        },
+        "next": [
+            "圣团巡礼_冒险结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 10710,
+                "y": 2575
             }
         }
     }
