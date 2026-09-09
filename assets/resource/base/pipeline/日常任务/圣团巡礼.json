@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788177914317,
+            "lastSyncTime": 1788963619504,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -7076,
-                "y": -2071,
-                "zoom": 0.92
+                "x": -7085,
+                "y": -784,
+                "zoom": 0.99
             },
             "filename": "圣团巡礼",
-            "version": "v1.9.2"
+            "version": "v1.9.3"
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -1488,6 +1488,36 @@
             }
         }
     },
+    "圣团巡礼_检查优先级": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1206,
+                    94,
+                    62,
+                    49
+                ],
+                "template": [
+                    "holy/up.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "$__mpe_code": {
+            "position": {
+                "x": 8595,
+                "y": 2211
+            }
+        }
+    },
     "圣团巡礼_检查冒险协会宠物": {
         "pre_delay": 0,
         "action": {
@@ -1921,6 +1951,34 @@
             }
         }
     },
+    "圣团巡礼_确保进入申请界面": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    6,
+                    5,
+                    488,
+                    104
+                ],
+                "expected": [
+                    "申请书"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 400,
+        "next": [
+            "[JumpBack]圣团巡礼_检查优先级",
+            "圣团巡礼_开始冒险循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 8334,
+                "y": 2569
+            }
+        }
+    },
     "圣团巡礼_确认世界树奖励": {
         "recognition": {
             "type": "OCR",
@@ -2178,8 +2236,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 8722,
-                "y": 3043
+                "x": 8721,
+                "y": 3044
             }
         }
     },
@@ -2579,7 +2637,15 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    335,
+                    667,
+                    1,
+                    1
+                ]
+            }
         },
         "next": [
             "圣团巡礼_确保进入总部"
@@ -2763,64 +2829,6 @@
             "position": {
                 "x": 9659,
                 "y": 1050
-            }
-        }
-    },
-    "圣团巡礼_确保进入申请界面": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    6,
-                    5,
-                    488,
-                    104
-                ],
-                "expected": [
-                    "申请书"
-                ]
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 400,
-        "next": [
-            "[JumpBack]圣团巡礼_检查优先级",
-            "圣团巡礼_开始冒险循环"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 8334,
-                "y": 2569
-            }
-        }
-    },
-    "圣团巡礼_检查优先级": {
-        "max_hit": 1,
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    1206,
-                    94,
-                    62,
-                    49
-                ],
-                "template": [
-                    "holy/up.png"
-                ],
-                "threshold": [
-                    0.8
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 800,
-        "$__mpe_code": {
-            "position": {
-                "x": 8595,
-                "y": 2211
             }
         }
     }
