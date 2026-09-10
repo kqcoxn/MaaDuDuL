@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788966116411,
+            "lastSyncTime": 1789043369904,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -4057,
-                "y": -393,
-                "zoom": 0.63
+                "x": -9756,
+                "y": -613,
+                "zoom": 1.5
             },
             "filename": "圣团巡礼",
             "version": "v1.9.3"
@@ -1823,6 +1823,31 @@
             }
         }
     },
+    "圣团巡礼_确保从冒险返回": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    2,
+                    8,
+                    503,
+                    106
+                ],
+                "expected": [
+                    "圣团"
+                ]
+            }
+        },
+        "next": [
+            "圣团巡礼_冒险结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 10710,
+                "y": 2575
+            }
+        }
+    },
     "圣团巡礼_确保在外部": {
         "recognition": {
             "type": "OCR",
@@ -1853,13 +1878,13 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    147,
-                    592,
-                    380,
-                    122
+                    7,
+                    3,
+                    500,
+                    128
                 ],
                 "expected": [
-                    "总部"
+                    "圣团"
                 ]
             }
         },
@@ -2843,31 +2868,6 @@
             "position": {
                 "x": 9659,
                 "y": 1050
-            }
-        }
-    },
-    "圣团巡礼_确保从冒险返回": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    2,
-                    8,
-                    503,
-                    106
-                ],
-                "expected": [
-                    "圣团"
-                ]
-            }
-        },
-        "next": [
-            "圣团巡礼_冒险结束"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 10710,
-                "y": 2575
             }
         }
     }
