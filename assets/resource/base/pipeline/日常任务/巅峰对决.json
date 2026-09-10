@@ -2,16 +2,18 @@
     "$__mpe_config_巅峰对决": {
         "$__mpe_code": {
             "prefix": "巅峰对决",
-            "lastSyncTime": 1776866874075,
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1789044455552,
             "isModifiedExternally": false,
+            "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\巅峰对决.json",
             "savedViewport": {
-                "x": -6871,
-                "y": -499,
-                "zoom": 1
+                "x": -3195,
+                "y": -488,
+                "zoom": 0.49
             },
             "filename": "巅峰对决",
-            "version": "v1.4.2"
+            "version": "v1.9.3"
         }
     },
     "$__mpe_external_返回主界面_巅峰对决": {
@@ -52,8 +54,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7895,
-                "y": 1318
+                "x": 7897,
+                "y": 1390
             }
         }
     },
@@ -142,8 +144,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9006,
-                "y": 1498
+                "x": 9003,
+                "y": 1480
             }
         }
     },
@@ -294,8 +296,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8730,
-                "y": 1435
+                "x": 8727,
+                "y": 1417
             }
         }
     },
@@ -361,8 +363,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8170,
-                "y": 1245
+                "x": 8169,
+                "y": 1254
             }
         }
     },
@@ -382,8 +384,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 9008,
-                "y": 1209
+                "x": 9005,
+                "y": 1192
             }
         }
     },
@@ -459,8 +461,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 8165,
-                "y": 2068
+                "x": 8166,
+                "y": 2109
             }
         }
     },
@@ -482,7 +484,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 8166,
-                "y": 2267
+                "y": 2303
             }
         }
     },

@@ -114,7 +114,7 @@ class PickOpponent(CustomRecognition):
                     return RecoHelper.rt(min_result)
             elif strategy == "max_rank":
                 # 最高排名
-                return RecoHelper.rt(box=(695, 234, 0, 0))
+                return RecoHelper.rt(box=(695, 234, 1, 1))
 
             return RecoHelper.NoResult
         except Exception as e:

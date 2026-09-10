@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "领取奖励",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789042200348,
+            "lastSyncTime": 1789044337902,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\领取奖励.json",
             "savedViewport": {
-                "x": -3411,
-                "y": -377,
-                "zoom": 0.99
+                "x": -4958,
+                "y": -894,
+                "zoom": 1.5
             },
             "filename": "领取奖励",
             "version": "v1.9.3"
@@ -221,6 +221,28 @@
             "position": {
                 "x": 4613,
                 "y": -417
+            }
+        }
+    },
+    "领取奖励_特殊日活奖励已领取": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "没有可领取"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": " > 奖励已领取"
+        },
+        "next": [
+            "领取奖励_特殊日活结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4436,
+                "y": 1007
             }
         }
     },
@@ -461,6 +483,28 @@
             }
         }
     },
+    "领取奖励_进入成就界面": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "成就"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "领取奖励_领取特殊日活奖励"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3903,
+                "y": 771
+            }
+        }
+    },
     "领取奖励_进入特殊日活界面": {
         "recognition": {
             "type": "OCR",
@@ -476,9 +520,12 @@
                 ]
             }
         },
+        "pre_delay": 2000,
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "repeat_delay": 600,
         "next": [
             "领取奖励_进入成就界面"
         ],
@@ -536,28 +583,6 @@
             "position": {
                 "x": 5907,
                 "y": 598
-            }
-        }
-    },
-    "领取奖励_特殊日活奖励已领取": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "expected": [
-                    "没有可领取"
-                ]
-            }
-        },
-        "focus": {
-            "Node.Recognition.Succeeded": " > 奖励已领取"
-        },
-        "next": [
-            "领取奖励_特殊日活结束"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 4436,
-                "y": 1007
             }
         }
     },
@@ -807,28 +832,6 @@
             "position": {
                 "x": 5107,
                 "y": 367
-            }
-        }
-    },
-    "领取奖励_进入成就界面": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "expected": [
-                    "成就"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": [
-            "领取奖励_领取特殊日活奖励"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 3903,
-                "y": 771
             }
         }
     }
