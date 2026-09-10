@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789043369904,
+            "lastSyncTime": 1789043433677,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -9756,
-                "y": -613,
+                "x": -11002,
+                "y": -1489,
                 "zoom": 1.5
             },
             "filename": "圣团巡礼",
@@ -702,8 +702,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7794,
-                "y": 1295
+                "x": 7795,
+                "y": 1394
             }
         }
     },
@@ -2662,7 +2662,7 @@
     },
     "圣团巡礼_进入总部": {
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
                     147,
@@ -2670,8 +2670,11 @@
                     380,
                     122
                 ],
-                "expected": [
-                    "总部"
+                "template": [
+                    "holy/headquarters.png"
+                ],
+                "threshold": [
+                    0.8
                 ]
             }
         },
