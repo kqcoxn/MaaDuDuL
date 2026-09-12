@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789043433677,
+            "lastSyncTime": 1789223673984,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -11002,
-                "y": -1489,
-                "zoom": 1.5
+                "x": -13887,
+                "y": -4977,
+                "zoom": 1.6
             },
             "filename": "圣团巡礼",
-            "version": "v1.9.3"
+            "version": "v1.10.0"
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -302,16 +302,13 @@
             "type": "Click",
             "param": {
                 "target": [
-                    807,
-                    257,
+                    812,
+                    198,
                     1,
                     1
                 ]
             }
         },
-        "next": [
-            "圣团巡礼_冒险角色查找计数"
-        ],
         "$__mpe_code": {
             "position": {
                 "x": 9267,
@@ -416,14 +413,14 @@
             "type": "Swipe",
             "param": {
                 "begin": [
-                    810,
+                    812,
                     540,
                     1,
                     1
                 ],
                 "end": [
                     [
-                        807,
+                        812,
                         257,
                         1,
                         1
