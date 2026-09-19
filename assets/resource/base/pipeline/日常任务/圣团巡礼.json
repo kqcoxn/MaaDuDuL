@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789223695789,
+            "lastSyncTime": 1789823189217,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -5319,
-                "y": -1880,
-                "zoom": 0.66
+                "x": -11956,
+                "y": -2773,
+                "zoom": 1.32
             },
             "filename": "圣团巡礼",
-            "version": "v1.10.0"
+            "version": "v1.10.1"
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -1161,7 +1161,8 @@
             "type": "Click"
         },
         "next": [
-            "圣团巡礼_兼职结束"
+            "圣团巡礼_兼职结束",
+            "圣团巡礼_角色升级"
         ],
         "$__mpe_code": {
             "position": {
