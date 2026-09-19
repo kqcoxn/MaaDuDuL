@@ -3,16 +3,17 @@
         "$__mpe_code": {
             "prefix": "每日采购",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1782572971740,
+            "lastSyncTime": 1789822697669,
             "isModifiedExternally": false,
+            "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
             "savedViewport": {
-                "x": -3706,
-                "y": 445,
-                "zoom": 0.8
+                "x": -8548,
+                "y": -5909,
+                "zoom": 1.74
             },
             "filename": "每日采购",
-            "version": "v1.6.2"
+            "version": "v1.10.1"
         }
     },
     "$__mpe_external_返回主界面_每日采购": {
@@ -112,6 +113,91 @@
             "position": {
                 "x": 6712,
                 "y": 1149
+            }
+        }
+    },
+    "每日采购_兔子代币周期提醒": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Starting": "> 本周已检查兔子代币"
+        },
+        "next": [
+            "每日采购_兔子代币结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5666,
+                "y": 348
+            }
+        }
+    },
+    "每日采购_兔子代币周期检查": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=兔子代币&p=w"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "每日采购_进入水晶叶商店3"
+        ],
+        "on_error": [
+            "每日采购_兔子代币周期提醒"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5400,
+                "y": 186
+            }
+        }
+    },
+    "每日采购_兔子代币周期记录": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=兔子代币"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "每日采购_兔子代币结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6197,
+                "y": 188
+            }
+        }
+    },
+    "每日采购_兔子代币开始": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "每日采购_兔子代币周期检查"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5132,
+                "y": 186
+            }
+        }
+    },
+    "每日采购_兔子代币结束": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "每日采购_每月礼包开始"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6459,
+                "y": 187
             }
         }
     },
@@ -798,6 +884,7 @@
                 ]
             }
         },
+        "post_delay": 800,
         "next": [
             "每日采购_购买红糖"
         ],
@@ -1672,6 +1759,28 @@
             }
         }
     },
+    "每日采购_进入水晶叶商店3": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    215,
+                    434,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "每日采购_领取兔子代币"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5666,
+                "y": 186
+            }
+        }
+    },
     "每日采购_进入特别商店": {
         "recognition": {
             "type": "OCR",
@@ -1729,6 +1838,26 @@
             "position": {
                 "x": 4146,
                 "y": -231
+            }
+        }
+    },
+    "每日采购_领取兔子代币": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "gift",
+                "custom_action_param": "g=兔子代币"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "每日采购_兔子代币周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5932,
+                "y": 188
             }
         }
     },
@@ -1866,133 +1995,6 @@
             "position": {
                 "x": 4666,
                 "y": -231
-            }
-        }
-    },
-    "每日采购_兔子代币结束": {
-        "pre_delay": 0,
-        "post_delay": 0,
-        "next": [
-            "每日采购_每月礼包开始"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 6459,
-                "y": 187
-            }
-        }
-    },
-    "每日采购_兔子代币周期提醒": {
-        "pre_delay": 0,
-        "post_delay": 0,
-        "focus": {
-            "Node.Recognition.Starting": "> 本周已检查兔子代币"
-        },
-        "next": [
-            "每日采购_兔子代币结束"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5666,
-                "y": 348
-            }
-        }
-    },
-    "每日采购_兔子代币周期检查": {
-        "pre_delay": 0,
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "periodic_check",
-                "custom_action_param": "k=兔子代币&p=w"
-            }
-        },
-        "post_delay": 0,
-        "next": [
-            "每日采购_进入水晶叶商店3"
-        ],
-        "on_error": [
-            "每日采购_兔子代币周期提醒"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5400,
-                "y": 186
-            }
-        }
-    },
-    "每日采购_兔子代币周期记录": {
-        "pre_delay": 0,
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "record_period",
-                "custom_action_param": "k=兔子代币"
-            }
-        },
-        "post_delay": 0,
-        "next": [
-            "每日采购_兔子代币结束"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 6197,
-                "y": 188
-            }
-        }
-    },
-    "每日采购_兔子代币开始": {
-        "pre_delay": 0,
-        "post_delay": 0,
-        "next": [
-            "每日采购_兔子代币周期检查"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5132,
-                "y": 186
-            }
-        }
-    },
-    "每日采购_进入水晶叶商店3": {
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    215,
-                    434,
-                    1,
-                    1
-                ]
-            }
-        },
-        "next": [
-            "每日采购_领取兔子代币"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5666,
-                "y": 186
-            }
-        }
-    },
-    "每日采购_领取兔子代币": {
-        "pre_delay": 0,
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "gift",
-                "custom_action_param": "g=兔子代币"
-            }
-        },
-        "post_delay": 0,
-        "next": [
-            "每日采购_兔子代币周期记录"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5932,
-                "y": 188
             }
         }
     }
