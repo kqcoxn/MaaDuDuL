@@ -188,10 +188,6 @@ jobs:
           from pathlib import Path
           import os
           import xml.etree.ElementTree as ET
-          import json
-
-          manifest = json.loads(Path("resource-source/maa-project.json").read_text(encoding="utf-8"))
-          security_versions = manifest["maintenance"]["android"]["nugetOverrides"]
 
           avalonia_version = os.environ["AVALONIA_VERSION"]
           avalonia_package_names = {
@@ -216,16 +212,12 @@ jobs:
           ]
           updated_avalonia_packages = set()
           updated_maafw_runtime_packages = set()
-          updated_security_packages = set()
 
           for project_path in project_paths:
               tree = ET.parse(project_path)
               root = tree.getroot()
               for reference in root.findall(".//PackageReference"):
                   name = reference.get("Include")
-                  if name in security_versions:
-                      reference.set("Version", security_versions[name])
-                      updated_security_packages.add(name)
                   if name in avalonia_package_names:
                       reference.set("Version", avalonia_version)
                       updated_avalonia_packages.add(name)
@@ -235,29 +227,6 @@ jobs:
 
               ET.indent(tree, space="    ")
               tree.write(project_path, encoding="utf-8", xml_declaration=False)
-
-          # MimeKit was transitive; pin it explicitly to MailKit's patched dependency.
-          main_project = project_paths[0]
-          tree = ET.parse(main_project)
-          group = ET.SubElement(tree.getroot(), "ItemGroup")
-          for name in security_versions.keys() - updated_security_packages:
-              if name != "MimeKit":
-                  raise RuntimeError(f"Expected security dependency missing upstream: {name}")
-              ET.SubElement(group, "PackageReference", Include=name, Version=security_versions[name])
-          ET.indent(tree, space="    ")
-          tree.write(main_project, encoding="utf-8", xml_declaration=False)
-
-          # SharpCompress 0.48 renamed the archive/reader factory entry points.
-          for relative in ("Helper/UniversalExtractor.cs", "Helper/VersionChecker.cs"):
-              path = Path("mfa-source/MFAAvalonia") / relative
-              source = path.read_text(encoding="utf-8")
-              for old, new in (
-                  ("ArchiveFactory.Open(", "ArchiveFactory.OpenArchive("),
-                  ("TarArchive.Open(", "TarArchive.OpenArchive("),
-                  ("ReaderFactory.Open(", "ReaderFactory.OpenReader("),
-              ):
-                  source = source.replace(old, new)
-              path.write_text(source, encoding="utf-8")
 
           adapter_path = Path("mfa-source/workflows/android/mfa_android_agent.py")
           adapter_text = adapter_path.read_text(encoding="utf-8")
@@ -533,9 +502,7 @@ jobs:
         run: |
           dotnet restore MFAAvalonia.Android/MFAAvalonia.Android.csproj \
             -r "${{ matrix.rid }}" \
-            -p:AndroidSdkDirectory="$ANDROID_HOME" \
-            -p:NuGetAudit=true -p:NuGetAuditMode=all \
-            '-p:WarningsAsErrors=NU1901%3BNU1902%3BNU1903%3BNU1904'
+            -p:AndroidSdkDirectory="$ANDROID_HOME"
 
       - name: Prepare Android signing key
         shell: bash

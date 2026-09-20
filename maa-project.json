@@ -114,12 +114,7 @@
             "java": "17",
             "dotnet": "10.0.x",
             "sdk": "36",
-            "buildTools": "36.0.0",
-            "nugetOverrides": {
-                "MailKit": "4.16.0",
-                "MimeKit": "4.16.0",
-                "SharpCompress": "0.48.0"
-            }
+            "buildTools": "36.0.0"
         },
         "rcedit": "2.0.0",
         "rceditSha256": "3e7801db1a5edbec91b49a24a094aad776cb4515488ea5a4ca2289c400eade2a"
