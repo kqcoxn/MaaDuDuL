@@ -1,42 +1,55 @@
 {
-	"json.schemas": [
-		{
-			"fileMatch": [
-				"/assets/resource/**/*.json",
-				"/install/resource/**/*.json",
-				"/assets/resource/**/*.jsonc",
-				"/install/resource/**/*.jsonc"
-			],
-			"url": "/deps/tools/pipeline.schema.json"
-		},
-		{
-			"fileMatch": ["/assets/interface.json", "/install/interface.json"],
-			"url": "/deps/tools/interface.schema.json"
-		},
-		{
-			"fileMatch": ["/install/config/maa_pi_config.json"],
-			"url": "/deps/tools/interface_config.schema.json"
-		}
-	],
-	"files.associations": {
-		"*.py": "python",
-		"**/assets/**/*.json": "jsonc"
-	},
-	"python.languageServer": "Pylance",
-	"editor.semanticHighlighting.enabled": true,
-	"[json][jsonc]": {
-		"editor.formatOnSave": true,
-		"editor.insertSpaces": true,
-		"editor.tabSize": 4,
-		"editor.indentSize": "tabSize"
-	},
-	"[python]": {
-		"editor.defaultFormatter": "ms-python.black-formatter"
-	},
-	"[markdown]": {
-		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"python-envs.defaultEnvManager": "ms-python.python:conda",
-	"python-envs.defaultPackageManager": "ms-python.python:conda"
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/interface.json"
+            ],
+            "url": "./tools/schema/interface.schema.json"
+        },
+        {
+            "fileMatch": [
+                "/tasks/**/*.json"
+            ],
+            "url": "./tools/schema/interface_import.schema.json"
+        },
+        {
+            "fileMatch": [
+                "/resource/*/default_pipeline.json",
+                "/resource/*/pipeline/*.json",
+                "/resource/*/pipeline/**/*.json"
+            ],
+            "url": "./tools/schema/pipeline.schema.json"
+        }
+    ],
+    "files.associations": {
+        "*.py": "python",
+        "**/resource/**/*.json": "jsonc",
+        "**/tasks/**/*.json": "jsonc",
+        "*.json": "jsonc",
+        "*.jsonc": "jsonc"
+    },
+    "python.languageServer": "Pylance",
+    "editor.semanticHighlighting.enabled": true,
+    "[json][jsonc]": {
+        "editor.formatOnSave": true,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.indentSize": "tabSize"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.formatOnSave": true,
+    "files.eol": "\n",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv"
 }

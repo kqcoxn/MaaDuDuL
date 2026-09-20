@@ -1,25 +1,22 @@
 # 项目结构
 
-::: tip 注意
-本小节编写时基于 MDDL `v3.0.4` 版本
-:::
-
 ## 项目目录
 
-- `/.github`：存放 GitHub 配置文件，一般不用管
-- `/DocSite`：文档站源码
-- `/MFAAvalonia`：MFAAvalonia 本地调试存储
-- `/MFATools`：MFATools 本地使用存储
-- **`/agent`：存放 Custom 代码**
-- **`/assets`：存放 Pipeline、Interface 文件与静态资源，请配合 MPE 使用**
-- `/ci`：存放自动化部署脚本，一般不用管
-- `/deps`：存放 MaaFramework 依赖包
-- `/dev`：存放开发相关脚本，可以在`开发相关.md`中查看调用方式
-- `/docs`：存放不重要的文档，如更新记录等
-- `/feedbacker`：自动打包小工具
-- `/gc`：安全清理小工具
-- `/launcher`：MDDL 启动器
-- 其他文件：全局相关配置
+- `/agent`：Python Custom 与 Agent 服务入口。
+- `/resource`：Pipeline、图片、OCR 与任务说明。
+- `/tasks`、`/locales`：Interface 导入的任务选项与翻译。
+- `/interface.json`：UI 入口；`maa-project.json`：CMP 项目和运行库配置。
+- `/tools`：统一存放开发与维护工具，详见仓库 `tools/README.md`。
+  - `dev/`：本地开发、Agent 与调试器启动脚本。
+  - `ci/`：CI 辅助脚本、发布配置与 Android 依赖清单。
+  - `launcher/`：保留的旧启动器源码，当前 CMP 桌面发布不使用。
+  - `docs/`：开发参考与 `template-migration.md` 迁移说明。
+  - `schema/`：CMP 管理的协议 schema。
+- `/docsite`：文档站源码；`/public`：文档与 Android 使用的静态素材。
+- `/assets`：保留的 MaaCommonAssets 子模块与旧本机配置。
+- `/.github`：GitHub Actions 工作流；`/.vscode`：编辑器配置。
+- `/MFAAvalonia`：本地测试环境。
+- 根目录的 package、pyproject、锁文件及点配置：对应工具的项目入口与自动发现配置。
 
 ## Custom 调用
 

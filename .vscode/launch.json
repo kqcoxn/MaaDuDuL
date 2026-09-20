@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Maa Agent: Debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/agent/main.py",
+            "args": [
+                "{AGENT_ID}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "MDDL_DEV_MODE": "1",
+                "MDDL_STATE_ROOT": "${workspaceFolder}/.local/agent"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "python": "${workspaceFolder}/.venv/bin/python",
+            "windows": {
+                "python": "${workspaceFolder}/.venv/Scripts/python.exe"
+            }
+        }
+    ]
+}

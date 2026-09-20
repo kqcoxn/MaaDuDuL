@@ -1,30 +1,36 @@
-name: check
+name: Check
 
 on:
   pull_request:
-    branches:
-      - "**"
-    paths:
-      - ".github/workflows/check.yml"
-      - "assets/**"
-      - "**.py"
-  workflow_dispatch:
+  push:
+    branches: [main, master]
 
 jobs:
-  resource:
-    runs-on: macos-latest
+  check:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
-          fetch-depth: 0
-          submodules: recursive
-
-      # pip install maafw
-      - name: Install maafw
-        run: |
-            python -m pip install --upgrade pip
-            python -m pip install --upgrade maafw --pre
-
-      - name: Check Resource
-        run: |  
-            python ./check_resource.py ./assets/resource/base
+          submodules: true
+      - name: Read project versions
+        id: versions
+        run: node tools/versions.mjs --ci
+      - uses: actions/setup-python@v7
+        if: hashFiles('pyproject.toml') != ''
+        with:
+          python-version: ${{ steps.versions.outputs.python }}
+      - uses: astral-sh/setup-uv@v9.0.0
+        if: hashFiles('pyproject.toml') != ''
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ steps.versions.outputs.node }}
+          cache: yarn
+      - run: corepack enable
+      - run: yarn install --frozen-lockfile
+      - run: yarn audit --level high
+      - run: yarn run check
+      - run: uv sync --frozen
+      - run: uv run --frozen python tools/configure.py
+      - run: uv run --frozen python tools/check_resource.py resource/base

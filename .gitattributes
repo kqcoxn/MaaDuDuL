@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.onnx binary
+interface.json linguist-language=JSON-with-Comments
+tasks/*.json linguist-language=JSON-with-Comments
+resource/**/default_pipeline.json linguist-language=JSON-with-Comments
+resource/**/pipeline/*.json linguist-language=JSON-with-Comments
+resource/**/pipeline/**/*.json linguist-language=JSON-with-Comments

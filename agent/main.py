@@ -1,6 +1,6 @@
 """MaaDuDuL Agent 主入口。
 
-负责初始化环境、检查依赖、启动 Agent 服务器。
+负责初始化环境并启动 Agent 服务器；发布包在构建时安装依赖。
 """
 
 import os
@@ -46,31 +46,15 @@ else:
     if sys.stderr.encoding != "utf-8":
         sys.stderr.reconfigure(encoding="utf-8")
 
-from agent.preprocess import check_and_install_dependencies
+os.chdir(PROJECT_ROOT)
 
 
 def main():
-    """启动 MaaDuDuL Agent 服务"""
-    from maa.agent.agent_server import AgentServer
-    from agent import customs
-    from agent.preprocess import clear
+    """启动 MaaDuDuL Agent 服务。"""
+    from agent.agent_runtime import run_agent
 
-    try:
-        # 清理调试文件
-        clear()
-        # 获取 socket ID 并启动服务
-        socket_id = sys.argv[-1]
-        AgentServer.start_up(socket_id)
-        # 等待服务结束
-        AgentServer.join()
-        AgentServer.shut_down()
-
-    except Exception as e:
-        print(f"info:Agent 启动失败：{e}")
-        sys.exit(1)
+    sys.exit(run_agent())
 
 
 if __name__ == "__main__":
-    if not os.getenv("MDDL_DEV_MODE") and not android_native_dir:
-        check_and_install_dependencies()
     main()

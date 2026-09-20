@@ -18,7 +18,8 @@ class LocalStorage:
     customs_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     agent_dir = os.path.dirname(customs_dir)
     project_root = os.path.dirname(agent_dir)
-    config_dir = os.path.join(project_root, "config", "mddl")
+    state_root = os.path.abspath(os.environ.get("MDDL_STATE_ROOT", project_root))
+    config_dir = os.path.join(state_root, "config", "mddl")
     storage_path = os.path.join(config_dir, "local_storage.json")
 
     @classmethod

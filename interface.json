@@ -1,0 +1,125 @@
+{
+    "interface_version": 2,
+    "name": "maa-dudul",
+    "label": "$project_label",
+    "title": "$project_title",
+    "icon": "public/logo.png",
+    "description": "$project_description",
+    "version": "v1.1.7",
+    "welcome": "$project_welcome",
+    "contact": "$project_contact",
+    "license": "LICENSE",
+    "github": "https://github.com/kqcoxn/MaaDuDuL",
+    "mirrorchyan_rid": "MaaDuDuL",
+    "mirrorchyan_multiplatform": true,
+    "languages": {
+        "zh_cn": "locales/interface_zh.json",
+        "en_us": "locales/interface_en.json"
+    },
+    "controller": [
+        {
+            "name": "模拟器",
+            "label": "$controller_emulator_label",
+            "description": "$controller_emulator_description",
+            "type": "Adb",
+            "display_short_side": 720
+        },
+        {
+            "name": "PlayCover",
+            "label": "$controller_playcover_label",
+            "description": "$controller_playcover_description",
+            "type": "PlayCover",
+            "display_short_side": 720,
+            "playcover": {
+                "uuid": "com.bilibili.trickcalcn"
+            }
+        }
+    ],
+    "resource": [
+        {
+            "name": "cn",
+            "label": "$resource_cn_label",
+            "description": "$resource_cn_description",
+            "path": [
+                "./resource/base"
+            ]
+        },
+        {
+            "name": "en",
+            "label": "$resource_en_label",
+            "description": "$resource_en_description",
+            "path": [
+                "./resource/base",
+                "./resource/en"
+            ]
+        },
+        {
+            "name": "zh_hant",
+            "label": "$resource_zh_hant_label",
+            "description": "$resource_zh_hant_description",
+            "path": [
+                "./resource/base",
+                "./resource/zh_hant"
+            ]
+        }
+    ],
+    "agent": {
+        "child_exec": "uv",
+        "child_args": [
+            "run",
+            "--frozen",
+            "--no-sync",
+            "python",
+            "-u",
+            "./agent/local_main.py"
+        ]
+    },
+    "group": [
+        {
+            "name": "continuous",
+            "label": "$group_continuous_label",
+            "description": "$group_continuous_description",
+            "default_expand": true
+        },
+        {
+            "name": "independent",
+            "label": "$group_independent_label",
+            "description": "$group_independent_description",
+            "default_expand": true
+        },
+        {
+            "name": "others",
+            "label": "$group_others_label",
+            "description": "$group_others_description",
+            "default_expand": true
+        }
+    ],
+    "import": [
+        "tasks/daily/illustrate.json",
+        "tasks/daily/guide.json",
+        "tasks/separators/continuous_task.json",
+        "tasks/daily/start_game.json",
+        "tasks/daily/claim_mail.json",
+        "tasks/daily/leaf_change.json",
+        "tasks/daily/purchase.json",
+        "tasks/daily/saint_tour.json",
+        "tasks/daily/activity_daily.json",
+        "tasks/daily/clear_purple_candy.json",
+        "tasks/daily/clear_red_candy.json",
+        "tasks/daily/peak_battle.json",
+        "tasks/daily/farm.json",
+        "tasks/daily/exam_cram.json",
+        "tasks/daily/claim_reward.json",
+        "tasks/daily/playground.json",
+        "tasks/daily/claim_new_goods.json",
+        "tasks/daily/close_game.json",
+        "tasks/separators/independent_task.json",
+        "tasks/single/quick_plot.json",
+        "tasks/single/continuous_battle.json",
+        "tasks/single/level_rewards.json",
+        "tasks/single/friend_refresh.json",
+        "tasks/separators/new_task.json"
+    ],
+    "task": [],
+    "option": {}
+}

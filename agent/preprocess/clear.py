@@ -3,6 +3,7 @@
 本模块负责在任务执行前清理调试产生的临时文件。
 """
 
+import os
 import shutil
 from pathlib import Path
 
@@ -34,6 +35,8 @@ def clear():
     该函数是清理模块的对外接口，负责调用所有内部清理函数。
     即使清理过程出错也不会中断程序，仅输出提示信息。
     """
+    if os.environ.get("MDDL_DEV_MODE") == "1":
+        return
     try:
         _clear_on_error_images()
     except Exception as e:

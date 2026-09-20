@@ -103,7 +103,8 @@
 ### 依赖与工具
 
 - **本项目由 [MaaXYZ](https://github.com/MaaXYZ)/[MaaFramework](https://github.com/MaaXYZ/MaaFramework) 强力驱动！**
-- 项目模板：[MaaXYZ](https://github.com/MaaXYZ)/[MaaPracticeBoilerplate](https://github.com/MaaXYZ/MaaPracticeBoilerplate)
+- 项目脚手架：[create-maa-project](https://github.com/Windsland52/create-maa-project)；原始模板：[MaaPracticeBoilerplate](https://github.com/MaaXYZ/MaaPracticeBoilerplate)
+- 开发与维护：[模板迁移说明](tools/docs/template-migration.md)
 - GUI：[SweetSmellFox](https://github.com/SweetSmellFox)/[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
 - Pipeline 编辑器 / 测试：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
 - 坨坨脸识别：[kqcoxn](https://github.com/kqcoxn)/[mddldl](https://github.com/kqcoxn/mddldl)

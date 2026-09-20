@@ -1,0 +1,122 @@
+{
+    "addons": {
+        "devTools": {
+            "enabled": true
+        },
+        "github": {
+            "enabled": true
+        },
+        "vscode": {
+            "enabled": true
+        }
+    },
+    "controller": {
+        "kinds": [
+            "Adb",
+            "PlayCover"
+        ]
+    },
+    "features": {
+        "ci": {
+            "enabled": true
+        },
+        "quality": {
+            "enabled": true
+        },
+        "release": {
+            "enabled": true
+        },
+        "vscode": {
+            "enabled": true
+        }
+    },
+    "license": {
+        "spdx": "AGPL-3.0-or-later"
+    },
+    "maafw": {
+        "channel": "stable",
+        "version": "5.13.0"
+    },
+    "network": {
+        "mode": "auto"
+    },
+    "project": {
+        "displayName": "MaaDuDuL",
+        "initialTemplate": "agent",
+        "slug": "maa-dudul",
+        "version": "1.1.7",
+        "github": "https://github.com/kqcoxn/MaaDuDuL",
+        "interfaceUnmanaged": true
+    },
+    "python": {
+        "devCommand": [
+            "uv",
+            "run",
+            "python",
+            "agent/main.py"
+        ],
+        "recommendedPython": "3.13",
+        "requiresPython": ">=3.11,<3.14"
+    },
+    "resources": [
+        {
+            "slug": "base",
+            "label": "简体中文",
+            "path": "resource/base",
+            "enabled": true
+        },
+        {
+            "slug": "en",
+            "label": "English",
+            "path": "resource/en",
+            "enabled": true
+        },
+        {
+            "slug": "zh-hant",
+            "label": "繁體中文",
+            "path": "resource/zh_hant",
+            "enabled": true
+        }
+    ],
+    "runtime": {
+        "mfa": {
+            "channel": "beta",
+            "enabled": true,
+            "version": "v2.16.2-beta.2"
+        }
+    },
+    "schemaVersion": 2,
+    "ocr": {
+        "source": "submodule",
+        "submodulePath": "assets/MaaCommonAssets/OCR",
+        "files": {
+            "det.onnx": "ppocr_v6/small/det.onnx",
+            "rec.onnx": "ppocr_v6/small/rec.onnx",
+            "keys.txt": "ppocr_v6/small/keys.txt"
+        }
+    },
+    "maintenance": {
+        "node": "22",
+        "nodeMinimum": "22.13",
+        "yarn": "1.22.22",
+        "cmp": "3.5.2",
+        "pythonRuntime": {
+            "windows": "3.13.14",
+            "standalone": "3.13.15",
+            "standaloneRelease": "20260901"
+        },
+        "android": {
+            "mfaRepository": "MaaXYZ/MFAAvalonia",
+            "p4a": "v2026.05.09",
+            "ndk": "28.2.13676358",
+            "avalonia": "11.3.13",
+            "buildPython": "3.11",
+            "java": "17",
+            "dotnet": "10.0.x",
+            "sdk": "36",
+            "buildTools": "36.0.0"
+        },
+        "rcedit": "2.0.0",
+        "rceditSha256": "3e7801db1a5edbec91b49a24a094aad776cb4515488ea5a4ca2289c400eade2a"
+    }
+}

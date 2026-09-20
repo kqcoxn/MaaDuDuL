@@ -27,12 +27,6 @@ jobs:
 
     env:
       P4A_ENTRYPOINT: agent/main.py
-      P4A_REF: v2026.05.09
-      P4A_NDK_VERSION: 28.2.13676358
-      AVALONIA_VERSION: 11.3.13
-      # Override these repository variables to build your committed MFAAvalonia fork.
-      MFA_REPOSITORY: ${{ vars.MFA_ANDROID_MFA_REPOSITORY || 'SweetSmellFox/MFAAvalonia' }}
-      MFA_REF: ${{ vars.MFA_ANDROID_MFA_REF || 'master' }}
 
     steps:
       - name: Checkout MaaDuDuL
@@ -40,6 +34,10 @@ jobs:
         with:
           path: resource-source
           submodules: recursive
+
+      - name: Read project versions
+        id: versions
+        run: node resource-source/tools/versions.mjs --ci
 
       - name: Checkout MFAAvalonia Android shell
         uses: actions/checkout@v5
@@ -59,7 +57,7 @@ jobs:
           root = Path("resource-source")
           path = next(
               (candidate for candidate in
-               (root / "requirements-android.txt", root / "requirements.txt")
+               (root / "tools" / "ci" / "requirements-android.txt", root / "requirements.txt")
                if candidate.is_file()),
               None,
           )
@@ -92,6 +90,11 @@ jobs:
               raise SystemExit(
                   "MaaDuDuL Android build requires an exact maafw==VERSION requirement"
               )
+          import json
+          manifest = json.loads((root / "maa-project.json").read_text(encoding="utf-8"))
+          if maafw_version != manifest["maafw"]["version"]:
+              raise SystemExit("Android requirements drift: run yarn versions:sync")
+          maafw_version = manifest["maafw"]["version"]
           maafw_ref = f"v{maafw_version}"
 
           # Resolve the Python distribution dependency closure at build time.
@@ -302,7 +305,7 @@ jobs:
           # version and artifact name for build traceability.
           application_id="com.kqcoxn.maadudul.ci"
           echo "application_id=$application_id" >> "$GITHUB_OUTPUT"
-          echo "display_version=ci.${GITHUB_RUN_NUMBER}-${short_sha}" >> "$GITHUB_OUTPUT"
+          echo "display_version=v${PROJECT_VERSION}-ci.${GITHUB_RUN_NUMBER}-${short_sha}" >> "$GITHUB_OUTPUT"
           echo "output_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk" >> "$GITHUB_OUTPUT"
           echo "artifact_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}" >> "$GITHUB_OUTPUT"
           launcher_icon=$(realpath -m "resource-source/$LAUNCHER_ICON_INPUT")
@@ -322,8 +325,8 @@ jobs:
           DISPLAY_VERSION: ${{ steps.metadata.outputs.display_version }}
         run: |
           python -m pip install -r tools/requirements.txt
-          python -u ci/merge_pipeline.py
-          python tools/install.py "$DISPLAY_VERSION" android
+          python -u tools/ci/merge_pipeline.py
+          python tools/package_android.py "$DISPLAY_VERSION" android
 
           mkdir -p install/python
           cp -a ../maafw-python-source/source/binding/Python/maa install/python/maa
@@ -367,7 +370,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: ${{ env.JAVA_VERSION }}
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -376,14 +379,14 @@ jobs:
         shell: bash
         run: |
           sdkmanager \
-            "platforms;android-36" \
-            "build-tools;36.0.0" \
+            "platforms;android-$ANDROID_SDK" \
+            "build-tools;$ANDROID_BUILD_TOOLS" \
             "ndk;$P4A_NDK_VERSION"
 
       - name: Setup build Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ env.ANDROID_PYTHON }}
 
       - name: Install python-for-android host dependencies
         shell: bash
@@ -418,7 +421,7 @@ jobs:
             --private "$private_root" \
             --package com.fox.mfa.python \
             --name MFAAndroidPythonAgent \
-            --version 1.0 \
+            --version "$PROJECT_VERSION" \
             --bootstrap service_library \
             --requirements "$P4A_REQUIREMENTS" \
             --service mfaagent:mfa_android_agent.py \
@@ -465,7 +468,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: ${{ env.DOTNET_VERSION }}
           config-file: mfa-source/NuGet.config
 
       - name: Install .NET Android workload

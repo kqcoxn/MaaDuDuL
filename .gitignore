@@ -458,3 +458,28 @@ agent/config
 
 # Everything Maa local installer state (contains absolute paths)
 .codex/.everything-maa.json
+
+# BEGIN create-maa-project
+node_modules/
+.venv/
+.uv-cache/
+__pycache__/
+config/
+dist/
+debug/
+.create-maa-project/
+# END create-maa-project
+
+runtimes/
+libs/
+plugins/
+deps/
+!.vscode/tasks.json
+!.vscode/launch.json
+
+!tools/build-release.mjs
+!tools/ci/config/
+!tools/ci/config/**
+
+# Local development state
+/.local/

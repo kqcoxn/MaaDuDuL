@@ -22,6 +22,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 # 本地环境使用当前 Python 环境，不触发打包环境的依赖安装流程。
 os.environ.setdefault("MDDL_DEV_MODE", "1")
+os.environ.setdefault("MDDL_STATE_ROOT", str(PROJECT_ROOT / ".local" / "agent"))
 
 
 def _socket_id(arguments: list[str]) -> str:

@@ -1,1 +1,10 @@
-maafw==5.12.3
+maaagentbinary==1.0.1
+    # via maafw
+maafw==5.13.0
+    # via maa-dudul
+numpy==2.4.6 ; python_full_version < '3.12'
+    # via maafw
+numpy==2.5.3 ; python_full_version >= '3.12'
+    # via maafw
+strenum==0.4.15
+    # via maafw

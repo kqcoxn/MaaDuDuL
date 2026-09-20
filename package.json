@@ -1,13 +1,82 @@
 {
-	"scripts": {
-		"dev": "node dev/run_python.js dev/build_mfaa.py",
-		"mpe": "mpelb --root assets/resource",
-		"agent": "node dev/run_python.js dev/run_agent.py",
-		"debug": "node dev/run_debugger.js",
-		"reset": "git reset --soft HEAD~1",
-		"release": "git tag -a v1.1.7 -m \"release v1.1.7\" && git push origin v1.1.7"
-	},
-	"devDependencies": {
-		"prettier-plugin-multiline-arrays": "^3.0.6"
-	}
+    "devDependencies": {
+        "@nekosu/maa-tools": "1.1.2",
+        "@nekosu/prettier-plugin-maafw-sort": "1.0.6",
+        "ajv": "8.20.0",
+        "ajv-formats": "3.0.1",
+        "jsonc-parser": "3.3.1",
+        "prettier": "3.9.6",
+        "prettier-plugin-multiline-arrays": "4.1.11",
+        "create-maa-project": "3.5.2"
+    },
+    "engines": {
+        "node": ">=22.13"
+    },
+    "license": "AGPL-3.0-or-later",
+    "name": "maa-dudul",
+    "packageManager": "yarn@1.22.22",
+    "private": true,
+    "scripts": {
+        "check": "yarn versions:check && yarn format:check && yarn check:schema",
+        "check:maa": "yarn maa-tools check",
+        "check:py": "yarn lint:py && yarn typecheck:py",
+        "check:schema": "node tools/validate-schema.mjs",
+        "format": "prettier --write .",
+        "format:check": "prettier --check package.json maa-project.json maatools.config.mts \"tools/*.mjs\" \".vscode/*.json\"",
+        "format:py": "uv run --frozen ruff format .",
+        "lint:py": "uv run --frozen ruff check .",
+        "release:dry-run": "node tools/build-release.mjs --dry-run",
+        "sync:runtime": "node tools/sync-runtime.mjs",
+        "typecheck:py": "uv run --frozen pyright",
+        "dev": "yarn dev:prepare && yarn dev:start",
+        "mpe": "mpelb --root resource",
+        "agent": "node tools/dev/run_python.js tools/dev/run_agent.py",
+        "debug": "node tools/dev/run_debugger.js",
+        "reset": "git reset --soft HEAD~1",
+        "release": "node tools/release.mjs",
+        "cmp": "create-maa-project",
+        "doctor": "create-maa-project --doctor --report",
+        "dev:prepare": "node tools/dev/run_python.js tools/dev/mfaa.py prepare",
+        "dev:start": "node tools/dev/run_python.js tools/dev/mfaa.py start",
+        "dev:status": "node tools/dev/run_python.js tools/dev/mfaa.py status",
+        "dev:install": "node tools/dev/run_python.js tools/dev/install_mfaa.py",
+        "versions:sync": "node tools/versions.mjs --sync",
+        "versions:check": "node tools/versions.mjs --check"
+    },
+    "version": "1.1.7",
+    "type": "module",
+    "prettier": {
+        "plugins": [
+            "prettier-plugin-multiline-arrays"
+        ],
+        "multilineArraysWrapThreshold": 1,
+        "tabWidth": 4,
+        "printWidth": 120,
+        "useTabs": false,
+        "bracketSameLine": true,
+        "bracketSpacing": false,
+        "endOfLine": "auto",
+        "overrides": [
+            {
+                "files": [
+                    "**/*.yml",
+                    "**/*.yaml"
+                ],
+                "options": {
+                    "parser": "yaml",
+                    "tabWidth": 2
+                }
+            },
+            {
+                "files": [
+                    "*.json"
+                ],
+                "options": {
+                    "parser": "json",
+                    "useTabs": false,
+                    "bracketSameLine": false
+                }
+            }
+        ]
+    }
 }
