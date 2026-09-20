@@ -28,6 +28,8 @@
 
 ## 边界
 
+Package Smoke 仅支持手动触发，日常提交和 PR 不执行打包 smoke，继续由 Check 执行常规检查。修改打包逻辑或升级 MaaFramework、MFAA、内置 Python 后，可在 GitHub Actions 的 Package Smoke 页面选择 Run workflow，对所选分支执行全部 6 个平台组合的打包及内置 Python 检查。正式发布仍保留全部平台构建。
+
 普通第三方 Node/Python 库依赖继续由 package.json、pyproject.toml 及各自锁文件管理，GitHub Actions 的 `uses:` 版本继续留在工作流中。这里统一的是项目、Maa 运行库及显式构建工具链版本，没有把所有依赖再复制一份进 manifest。
 
 Windows 内置 Python 保留原来的 3.13.14。Linux/macOS 原先跟随 python-build-standalone latest，本次固定为已查询到的 Python 3.13.15、release 20260901；它们的 minor 须与 recommendedPython 一致。Android 构建宿主 Python 仍独立为 3.11，不与桌面宿主版本强行合并。

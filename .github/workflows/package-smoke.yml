@@ -1,33 +1,13 @@
 name: Package Smoke
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "agent/**"
-      - "tools/**"
-      - ".github/workflows/package-smoke.yml"
-      - ".github/workflows/release.yml"
-      - "interface.json"
-      - "maa-project.json"
-      - "requirements.txt"
-  pull_request:
-    paths:
-      - "agent/**"
-      - "tools/**"
-      - ".github/workflows/package-smoke.yml"
-      - ".github/workflows/release.yml"
-      - "interface.json"
-      - "maa-project.json"
-      - "requirements.txt"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: package-smoke-${{ github.event.pull_request.number || github.ref }}
+  group: package-smoke-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
