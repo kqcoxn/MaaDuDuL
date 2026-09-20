@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Diagnose"
+  short_description: "Diagnose unknown failures with upstream guidance"
+  default_prompt: "Use $maa-diagnose to load authoritative MaaEvidenceKit guidance and diagnose this failed Maa run."

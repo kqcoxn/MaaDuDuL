@@ -42,7 +42,7 @@ Pipeline 由 Node 组成。本 skill 针对**OCR 文本识别节点**，按 Pipe
 |------|------|------|------|
 | `target_text` | ✅ | — | 要识别的目标中文文字 |
 | `node_name` | ✅ | — | 节点名（PascalCase） |
-| `pipeline_file` | ✅ | — | 目标 pipeline 路径（相对 `assets/resource/base/pipeline/xxx.json` 或绝对路径） |
+| `pipeline_file` | ✅ | — | 目标 pipeline 路径（推荐传主 Interface 声明资源根下的项目相对或绝对路径；`assets/resource/base/pipeline/xxx.json` 是 boilerplate-family 项目示例） |
 | `action_type` | ❌ | `Click` | Click / DoNothing / LongPress / Swipe / ClickKey / InputText |
 | `expand_offset` | ❌ | `20` | ROI 扩边像素（**推荐先用 sweep 找最佳**） |
 | `post_delay` | ❌ | `500` | |
@@ -84,10 +84,10 @@ roi = [
 from maa_mcp.pipeline_tools import load_pipeline, save_pipeline
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-pipeline_path = Path(pipeline_file)
-if not pipeline_path.is_absolute():
-    pipeline_path = PROJECT_ROOT / "assets" / "resource" / "base" / "pipeline" / pipeline_file
+# Read resource[].path from the project's main Interface and resolve the
+# supplied path against that project root before reading or writing it.
+project_root = find_project_root()
+pipeline_path = resolve_pipeline_path(pipeline_file)
 
 existing = load_pipeline(str(pipeline_path)) or {}
 if node_name in existing and not overwrite:
@@ -136,7 +136,7 @@ python "<skill-dir>/scripts/generate_sweep.py" "角色" "46,1248,50,30" 0,5,10,1
 ### 步骤 2: 正式生成节点
 
 ```bash
-python "<skill-dir>/scripts/generate_node.py" "角色" UI_RoleListPage main_ui.json --expand 20 --overwrite
+python "<skill-dir>/scripts/generate_node.py" "角色" UI_RoleListPage resource/base/pipeline/main_ui.json --expand 20 --overwrite
 ```
 
 ## 关键经验
@@ -144,6 +144,8 @@ python "<skill-dir>/scripts/generate_node.py" "角色" UI_RoleListPage main_ui.j
 ### 历史审查后的生成策略
 
 - 先判断节点类型，不要默认所有问题都是 OCR：稳定图标/按钮优先 TemplateMatch，颜色状态可用 ColorMatch，动态文本用 OCR，列表/复杂图像后处理用 CustomRecognition。
+- **点击目标必须由识别结果推导**：生成 Click 节点时不写 `target`，让 MaaFramework 点识别框中心；非文字元素用 `screencap` 裁图存进该资源根的 image 目录后走 TemplateMatch。不要用 `DirectHit` + 硬编码 `target` 跳过识别，也不要识别命中后再用写死的 `target_offset` 挪到未被识别的控件上。写法与例外见 [coordinate-hygiene](../maa-pipeline-guide/references/coordinate-hygiene.md)。
+- **UI 流程未探明时不要先生成节点**：节点的 ROI、`expected` 和模板都应来自实际探索到的画面。起始状态或成功状态还是猜测时，先回到 [`$maa-workflow-build`](../maa-workflow-build/SKILL.md) 的 EXPLORE 阶段用 `ocr`/`screencap`/`click` 走通一次完整流程，再生成节点。
 - MaaGumballs 的历史文件多为平铺字段风格；M9A HEAD 多为 v5 object-form：`action: { type, param }`、`recognition: { type, param }`。生成时沿用目标文件的既有风格，不要在同一局部混用两套格式。
 - 生成链路时先画父级 `next` 状态机：稳定页面、成功态、弹窗 `[JumpBack]`、加载 `[JumpBack]`、危险确认分支分开建节点。
 - 对会消耗资源或改变账号状态的节点，默认生成 `DoNothing` 或单独验证节点；只有用户明确要执行时才生成直接点击确认。
@@ -167,7 +169,7 @@ python "<skill-dir>/scripts/generate_node.py" "角色" UI_RoleListPage main_ui.j
 
 13. **跨页面流程用 `next` 状态机而非 Python orchestration**：当一个流程涉及多个页面跳转（如：大地图 → 活动入口 → 难度选择 → 队伍 → 战斗），用 MaaFramework 的 `next` + `[JumpBack]` 串节点。**不要**写 Python `for/while` 调 `context.run_task()` 模拟状态机。详见 [option 反模式](../maa-pipeline-option/references/anti-patterns.md) 和 [maa-pipeline-guide](../maa-pipeline-guide/SKILL.md) 的「跨页面状态机」。
 
-14. **跨文件节点引用在 `run_pipeline` 测试中会失败**：MaaFramework 全局加载时所有 `assets/resource/base/pipeline/*.json` 合并到同一命名空间，`[JumpBack]OtherFileNode` 能解析。但 `run_pipeline` **只加载单文件**，跨文件引用会报"加载 Pipeline 失败"。**应对**：
+14. **跨文件节点引用在 `run_pipeline` 测试中会失败**：MaaFramework 全局加载同一声明 resource bundle 时，`pipeline/` 目录下各 JSON 合并到同一命名空间，`[JumpBack]OtherFileNode` 能解析。但 `run_pipeline` **只加载单文件**，跨文件引用会报"加载 Pipeline 失败"。**应对**：
     - 单元测试每个节点用 `run_pipeline`（无跨文件依赖的子流程）是 OK 的
     - 含跨文件引用的状态机流程，集成测试必须用 MaaFramework GUI/CLI 触发
     - 调试时可考虑 `MaaCli` 命令行运行全 bundle
@@ -295,7 +297,7 @@ python "<skill-dir>/scripts/generate_node.py" "角色" UI_RoleListPage main_ui.j
 
 1. **`[JumpBack]` 是状态回退的关键**：命中后执行完节点链，自动返回父节点的 `next` 继续。
 2. **窄 ROI 区分同名字段**：用 y 范围 [490, 740, 100, 80] vs [490, 590, 100, 80] 区分两个"确定"按钮行（y 范围不重叠）。
-3. **`target_offset` 偏移点击**：识别难度文字后用 `target_offset: [270, 0, 0, 0]` 把点击位置右移到"确定"按钮上。
+3. **偏移点击是最后手段**：能识别目标本身就直接识别（OCR 窄 ROI 或 TemplateMatch）。只有目标既无稳定文字也无稳定图案时，才在识别结果上加 `target_offset`（如 `target_offset: [270, 0, 0, 0]`），并记录该偏移量的实测来源；不要把偏移写成与识别无关的绝对坐标。详见 [coordinate-hygiene](../maa-pipeline-guide/references/coordinate-hygiene.md)。
 4. **跨文件节点引用**：MaaFramework 全局加载会合并所有 `pipeline/*.json`，所以 `[JumpBack]BigMap_Activity`（在 main_ui.json）能从 growth_trial.json 引用。但 `run_pipeline` 测试只加载单文件，集成测试需用 GUI/CLI。
 
 ### 与 Python orchestration 的本质区别

@@ -25,7 +25,7 @@
 "Flag_EnableSailingFestivalPurchase": { "enabled": true }
 ```
 
-**验证方法**：加完后跑 `python tools/ci/check_resource.py assets/resource/base`（或目标项目真实资源检查命令），并在 Python 里加个 `None` 兜底日志。
+**验证方法**：加完后跑目标项目锁定的 Interface / resource 语义检查（例如读取 `package.json` scripts 与 `maatools.config.mts` 后运行对应命令），并在 Python 里加个 `None` 兜底日志。
 
 ### 2. 不要忘了注册到 task 的 option 数组
 
@@ -97,10 +97,10 @@ def handle_sailing_festival(context):
 `parse_and_override_once` 合并所有 pipeline JSON 时**严格拒绝**重复顶层 key。检查方法：
 
 ```bash
-grep -rn "^\s*\"YourNodeName\":" assets/resource/base/pipeline/
+grep -rn "^\s*\"YourNodeName\":" <declared-resource-root>/pipeline/
 ```
 
-两个文件都定义同一个顶层节点会直接让整个 `check_resource.py` 失败，且 Python `json.load()` 检测不出来（Python 会静默覆盖），必须用 C++ 解析器或 C++ 模拟检测。
+两个文件都定义同一个顶层节点会直接让目标项目的 resource 语义检查失败，且 Python `json.load()` 检测不出来（Python 会静默覆盖），必须用项目锁定的加载器或等价语义检查检测。
 
 ### 9. 不要为了"配置统一"硬塞 Flag 节点
 
@@ -203,4 +203,3 @@ self._clone_enabled = _node_enabled(context, "AutoSky_CloneConfig")
 自检口诀：**UI 写哪条路径，Python 就读哪条路径；pure override 则 Python 不读。**
 
 ---
-

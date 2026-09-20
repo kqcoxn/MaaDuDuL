@@ -223,7 +223,7 @@ value = data.get("recognition", {}).get("param", {}).get("expected", [""])[0]
 }
 ```
 
-`Event_MercenaryJoin` 节点本身在 [event_utils.json](../../assets/resource/base/pipeline/event_utils.json) 里有完整定义（`recognition` / `expected` / `roi` / `timeout` 都在），`pipeline_override` 只覆盖 `next` 字段，其他字段保持原值。
+`Event_MercenaryJoin` 节点本身必须已经在主 Interface 声明资源根下的某个 `pipeline/**/*.json` 文件中有完整定义（`recognition` / `expected` / `roi` / `timeout` 都在），`pipeline_override` 只覆盖 `next` 字段，其他字段保持原值。
 
 ### `next` 数组的单元素 vs 多元素语义
 
@@ -288,7 +288,7 @@ value = data.get("recognition", {}).get("param", {}).get("expected", [""])[0]
 
 ### 跨文件节点引用的测试陷阱
 
-MaaFramework 全局加载时，所有 `assets/resource/base/pipeline/*.json` 会合并到同一命名空间，所以 `[JumpBack]OtherFileNode` 能解析。但 `run_pipeline` 测试工具**只加载单文件**，跨文件引用会报"加载 Pipeline 失败"。
+MaaFramework 全局加载同一 resource bundle 时，`pipeline/` 目录下的节点会合并到同一命名空间，所以 `[JumpBack]OtherFileNode` 能解析。但 `run_pipeline` 测试工具**只加载单文件**，跨文件引用会报"加载 Pipeline 失败"。
 
 **应对**：
 - 集成测试必须用 MaaFramework GUI / CLI 触发，不能依赖 `run_pipeline`

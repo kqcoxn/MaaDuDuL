@@ -13,9 +13,10 @@ maa-pipeline-generate: 自动生成 OCR 文本节点并合并到指定 pipeline�
 
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
+
+from project_paths import find_project_root, resolve_pipeline_path
 
 # Windows GBK 编码下 emoji/特殊字符报错 → 强制 UTF-8
 if sys.platform == "win32":
@@ -27,26 +28,6 @@ if sys.platform == "win32":
 
 # 默认基准分辨率
 DEFAULT_SCREEN_W, DEFAULT_SCREEN_H = 720, 1280
-
-# 目标项目根目录。脚本可能安装在用户级或插件缓存中，不能从脚本路径反推目标项目。
-PROJECT_ROOT = None
-
-def find_project_root() -> Path:
-    env_root = os.getenv("MAAHUB_ROOT") or os.getenv("PROJECT_ROOT")
-    if env_root:
-        return Path(env_root).resolve()
-
-    current = Path.cwd().resolve()
-    for candidate in [current, *current.parents]:
-        if (candidate / "assets" / "interface.json").exists():
-            return candidate
-        if (candidate / "interface.json").exists():
-            return candidate.parent if candidate.name == "assets" else candidate
-
-    if (current / ".git").exists():
-        return current
-
-    raise RuntimeError("无法定位项目根目录，请设置 MAAHUB_ROOT 或 PROJECT_ROOT 环境变量")
 
 
 def get_screen_size(width: int | None, height: int | None) -> tuple[int, int]:
@@ -72,19 +53,6 @@ def get_screen_size(width: int | None, height: int | None) -> tuple[int, int]:
 def _val(r, key):
     """兼容 OCRResult 对象 (r.text) 和 dict (r['text'])。"""
     return getattr(r, key, None) if hasattr(r, key) else r[key]
-
-
-def resolve_pipeline_path(pipeline_file: str) -> Path:
-    """解析 pipeline 路径。绝对路径直接用；相对路径基于项目根目录的 assets/resource/base/pipeline/ 解析。"""
-    path = Path(pipeline_file)
-    if path.is_absolute():
-        return path
-    # 1. 先试 CWD（项目根）
-    cwd_candidate = Path.cwd() / path
-    if cwd_candidate.exists():
-        return cwd_candidate
-    # 2. 再试显式发现的目标项目根目录
-    return PROJECT_ROOT / "assets" / "resource" / "base" / "pipeline" / pipeline_file
 
 
 def connect_device():
@@ -196,10 +164,7 @@ def main():
     args = parser.parse_args()
 
     screen_w, screen_h = get_screen_size(args.screen_width, args.screen_height)
-    global PROJECT_ROOT
-    PROJECT_ROOT = find_project_root()
-
-    # 解析 pipeline 路径：相对路径基于项目根目录的 assets/resource/base/pipeline/
+    # 显式项目相对路径优先；裸文件名按 Interface 声明资源消歧。
     path = resolve_pipeline_path(args.pipeline_file)
     print(f"目标 pipeline: {path}")
 
@@ -230,7 +195,7 @@ def main():
 
     # 回显
     print("\n" + "=" * 50)
-    print(f"基准分辨率: {SCREEN_W}x{SCREEN_H}")
+    print(f"基准分辨率: {screen_w}x{screen_h}")
     print(f"OCR score: {score:.3f}")
     print(f"原始 box: {box}")
     print(f"扩大 ROI: {roi}")

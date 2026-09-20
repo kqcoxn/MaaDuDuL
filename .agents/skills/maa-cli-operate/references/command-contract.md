@@ -36,6 +36,8 @@ Supported recognition types are `TemplateMatch`, `FeatureMatch`, `ColorMatch`, a
 
 ## Pipeline operations
 
+The `./assets/resource/base/...` paths below are examples from a boilerplate-family packaged layout. In a Project Interface V2 project, derive resource paths from the main Interface's `resource[].path`, which resolves relative to that Interface.
+
 ```bash
 uvx --from maafw-cli==0.1.6 maafw-cli --json pipeline validate ./assets/resource/base/pipeline
 uvx --from maafw-cli==0.1.6 maafw-cli --json pipeline load ./assets/resource/base/pipeline

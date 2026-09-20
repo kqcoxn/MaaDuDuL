@@ -18,29 +18,10 @@ import sys
 import json
 from pathlib import Path
 
+from project_paths import find_project_root
+
 # 默认基准分辨率
 DEFAULT_SCREEN_W, DEFAULT_SCREEN_H = 720, 1280
-
-# 目标项目根目录。脚本可能安装在用户级或插件缓存中，不能从脚本路径反推目标项目。
-PROJECT_ROOT = None
-
-def find_project_root() -> Path:
-    env_root = os.getenv("MAAHUB_ROOT") or os.getenv("PROJECT_ROOT")
-    if env_root:
-        return Path(env_root).resolve()
-
-    current = Path.cwd().resolve()
-    for candidate in [current, *current.parents]:
-        if (candidate / "assets" / "interface.json").exists():
-            return candidate
-        if (candidate / "interface.json").exists():
-            return candidate.parent if candidate.name == "assets" else candidate
-
-    if (current / ".git").exists():
-        return current
-
-    raise RuntimeError("无法定位项目根目录，请设置 MAAHUB_ROOT 或 PROJECT_ROOT 环境变量")
-
 
 def get_screen_size(width: int | None, height: int | None) -> tuple[int, int]:
     if width is not None or height is not None:
@@ -128,7 +109,6 @@ def main():
     box = parse_box(sys.argv[2])
     expands = parse_expands(sys.argv[3]) if len(sys.argv) > 3 else [0, 5, 10, 15, 20, 25, 30, 50, 100]
     screen_w, screen_h = get_screen_size(None, None)
-    global PROJECT_ROOT
     PROJECT_ROOT = find_project_root()
 
     safe_target_text = sanitize_filename(target_text)

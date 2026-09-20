@@ -1,54 +1,30 @@
 # CLI fallback and report contract
 
-Use the pinned external runtime. Do not use a moving release tag in automated workflows.
+Use the latest external runtime and read its current integrated Skill or README first as described in [upstream-skill-discovery.md](upstream-skill-discovery.md). Do not compose a project-changing command until that handoff and the current `--help` output have been read.
 
 ## Base command
 
 ```bash
-uvx --from create-maa-project==2.0.0 create-maa-project
+uvx --upgrade --from create-maa-project create-maa-project
 ```
 
-The 2.0.0 CLI does not expose a conventional `--help` option. Use the documented commands below and require `--report` for non-interactive agent use.
-
-## Create examples
+Verify the resolved CLI before use:
 
 ```bash
-# Pipeline project
-uvx --from create-maa-project==2.0.0 create-maa-project ./maa-example \
-  --template pipeline --controller Adb --license MIT \
-  --add dev-tools --add github --no-interactive --yes --report
-
-# Python Agent project without network downloads during scaffolding
-uvx --from create-maa-project==2.0.0 create-maa-project ./maa-agent \
-  --template agent --controller Adb,Win32 --license MIT \
-  --skip-download --no-interactive --yes --report
+uvx --upgrade --from create-maa-project create-maa-project --cli-version
+uvx --upgrade --from create-maa-project create-maa-project --help
 ```
 
-Set the process working directory to the target project for maintenance commands:
+The upstream Skill or README and `--help` define the command contract. Require the current report mode for non-interactive agent use unless the operation is only version or help discovery.
 
-```bash
-uvx --from create-maa-project==2.0.0 create-maa-project --doctor --report
-uvx --from create-maa-project==2.0.0 create-maa-project --diff --report
-uvx --from create-maa-project==2.0.0 create-maa-project --add agent --report
-uvx --from create-maa-project==2.0.0 create-maa-project --update schema --diff --report
-uvx --from create-maa-project==2.0.0 create-maa-project --update schema --report
-```
+## Create and maintenance routing
+
+Use the smallest operation named by the current upstream contract. Set the process working directory to the target project for maintenance commands. Do not chain partial create operations, invent an update-all operation, or substitute remembered 3.x examples for the current help surface.
+
+Before restore, list backups, inspect the selected backup, run a dry-run preview when available, and obtain explicit confirmation when restoration can replace current work.
 
 ## Report fields
 
-The CLI writes a single JSON document to stdout in report mode. Read these fields:
-
-| Field | Meaning |
-| --- | --- |
-| `ok` / `exitCode` | Operation result; doctor findings may intentionally produce a failing status |
-| `command` | `create`, `doctor`, `diff`, `sync`, or `update` |
-| `root` | Project root used by the operation |
-| `written` / `skipped` | Files changed or intentionally left alone |
-| `pending` | Follow-up commands with reasons |
-| `changedManagedFiles` | Drift in files owned by the scaffold tool |
-| `changedUserFiles` | Changes in project-owned files |
-| `suggestedCommands` | Explicit next actions and whether the tool considers them auto-runnable |
-| `logPath` | Diagnostic log to retain on failure |
-| `error` | Structured failure message and optional code |
+When the current contract provides a JSON report, read the structured document rather than human-readable stderr. Preserve command results, pending actions, doctor checks, backup identifiers, Git decisions, log paths, and structured errors verbatim enough for the user to audit the operation.
 
 Do not parse human-readable stderr as the primary result when a JSON report exists.

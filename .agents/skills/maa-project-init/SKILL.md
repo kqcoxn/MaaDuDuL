@@ -1,6 +1,6 @@
 ---
 name: maa-project-init
-description: Scan and initialize a MaaFramework game or app automation project for Maa skills and MaaMCP workflows. Use when asked for maa-project-init, project-pipeline-init, basic_info.md, researching a Maa project, scanning pipeline nodes, finding common Back/Return/Exit/Confirm nodes, mapping node relationships, generating entry flowcharts, summarizing image assets and OCR conventions, or reducing discovery cost for later Maa skill work.
+description: Scan and initialize a MaaFramework game or app automation project for Maa skills and MaaMCP workflows. Use when asked for maa-project-init, project-pipeline-init, basic_info.md, researching a Maa project, loading a Project Interface bundle, scanning declared resources and pipeline nodes, finding common Back/Return/Exit/Confirm nodes, mapping node relationships, generating entry flowcharts, summarizing image assets and OCR conventions, or reducing discovery cost for later Maa skill work.
 ---
 
 # Maa Project Init
@@ -9,14 +9,27 @@ Use this skill to turn a MaaFramework consumer project into a compact onboarding
 
 The generated file is a producer/consumer handoff: `maa-project-init` produces project context, while `maa-pipeline-guide`, `maa-pipeline-generate`, `maa-pipeline-graph`, `maa-pipeline-option`, and `maa-pipeline-testing` consume the relevant sections before broad repository discovery.
 
-Do not run this skill against MaaMCP itself unless the user explicitly asks to analyze MaaMCP as a consumer project. MaaMCP is the tool runtime; the normal target is a MaaFramework consumer project containing `assets/interface.json` or `interface.json`.
+Do not run this skill against MaaMCP itself unless the user explicitly asks to analyze MaaMCP as a consumer project. MaaMCP is the tool runtime; the normal target is a MaaFramework consumer project with a main `interface.json` or `interface.jsonc`.
+
+## Project Discovery Contract
+
+The main Interface is the source of truth. Do not infer a MaaFramework project from an `assets/...` directory convention.
+
+- Accept a root-level `interface.json` / `interface.jsonc` or an `assets/interface.json` / `assets/interface.jsonc` as the main Interface. Both are common valid project layouts. If both locations exist, use the root-level Interface first as a deterministic tie-breaker.
+- Resolve every `import[]` path relative to the main Interface directory. Imports may contribute only top-level `task`, `option`, and `preset`; controller, resource, agent, and other project-level declarations remain in the main Interface.
+- Resolve every `resource[].path` relative to the main Interface directory. Pipeline and image files are read from those declared resource roots.
+- Resolve `languages[]` relative to the main Interface directory when it is present.
+- Accept `agent` in either object form or array form; collect `.py` paths from every config's `child_args`.
+- If the main Interface or an import is missing or malformed, report the diagnostic and continue with the declarations that can be loaded. Do not silently guess resource or task roots from unrelated directories.
+
+M9A is a standard root-Interface project: the root `interface.json` imports `tasks/**/*.json`, declares resource combinations such as `resource/base` plus channel overlays, and uses array-form `agent` with `agent/bootstrap.py`. Boilerplate-family projects such as MAAPVZ, MaaDuDuL, and MaaNTE commonly place the main Interface at `assets/interface.json` or `assets/interface.jsonc`; their task entries may live in the main Interface or come entirely from imports. Treat both shape families as valid acceptance cases.
 
 ## Core Workflow
 
 1. Locate the target project root.
    - Prefer a user-provided path.
-   - Otherwise look for `assets/interface.json`, then `interface.json`.
-   - Treat `assets/interface.json` as the source of resource groups, controller types, task entries, and agent settings.
+   - Otherwise look for the main Interface using the Project Discovery Contract above.
+   - Treat the loaded Interface bundle as the source of resource groups, controller types, task entries, options, and agent settings.
 
 2. Run the analyzer in summary mode first:
 
@@ -26,6 +39,7 @@ Do not run this skill against MaaMCP itself unless the user explicitly asks to a
 
 3. Inspect the summary for:
    - resource groups and task entries from `interface.json`
+   - Interface import diagnostics and warnings
    - pipeline file count and unique node count
    - high in-degree common nodes
    - Back / Return / Exit / Close / Confirm / Wait / Flag nodes
@@ -35,6 +49,8 @@ Do not run this skill against MaaMCP itself unless the user explicitly asks to a
    - Python `context.run_task()` / `run_recognition()` external entries
    - orphan candidates after excluding interface and Python entry points
    - agent script paths (declared `child_args` resolution + project_root 与 4 层 ancestor 约定入口候选 + 交叉对比)
+
+Task counts describe the merged Interface bundle's total top-level `task[]` entries after imports. Separator and other display-only task entries remain counted; if a report separately claims a functional-task count, it must state the filter used.
 
 4. Generate `basic_info.md` only after the summary looks reasonable:
 
@@ -54,16 +70,15 @@ Do not run this skill against MaaMCP itself unless the user explicitly asks to a
 
 ## What The Analyzer Reads
 
-- `assets/interface.json` or `interface.json`
-- all `assets/resource/**/pipeline/**/*.json`
-- `default_pipeline.json` under resource roots
-- all files under `assets/resource/**/image/**`
+- the main `interface.json` / `interface.jsonc` and its direct `import[]` declaration files
+- `pipeline/**/*.json` and `default_pipeline.json` under each resource path declared by the main Interface
+- all files under each declared resource root's `image/**`
 - static string targets passed to `context.run_task()` and `context.run_recognition()` under `agent/**/*.py`
 - `@AgentServer.custom_action(...)` registrations under `agent/**/*.py`
-- `interface.json` `agent.child_args` 里每条 `.py` 的磁盘解析状态（与运行时 `maa_mcp/agent_supervisor._build_subprocess_cmd` 同步上溯 4 层）
+- Interface `agent[]` / `agent.child_args` 里每条 `.py` 的磁盘解析状态（与运行时 `maa_mcp/agent_supervisor._build_subprocess_cmd` 同步上溯 4 层）
 - project_root 与 4 层 ancestor 内 `agent/main.py`、`agent/server.py` 等约定入口的候选存在性（`AGENT_DIR_NAMES × AGENT_ENTRY_BASENAMES`，不递归子目录）
 
-For MaaGumballs-style projects, the script should discover entries such as `Start_Up`, `DailyTask`, `Reward_Execute`, `Shop`, `AutoSky`, `JJC`, `Mars`, `DivineForgeLand_Start`, `TSD_Entry`, `AutoCdk`, and `StopGumballs`, then connect them to the pipeline nodes that define them.
+For a legacy MaaGumballs-style layout, the script should discover entries such as `Start_Up`, `DailyTask`, `Reward_Execute`, `Shop`, `AutoSky`, `JJC`, `Mars`, `DivineForgeLand_Start`, `TSD_Entry`, `AutoCdk`, and `StopGumballs`, then connect them to the pipeline nodes that define them. For M9A, the same acceptance check is root `interface.json`, all loaded task imports, all declared resource roots, and the declared bootstrap agent. For boilerplate-family projects, the equivalent check is the `assets/` main Interface, all loaded task imports, declared resource roots, and the declared agent path.
 
 ## Relationship Rules
 
@@ -81,6 +96,17 @@ Support these node reference forms:
 - prefixed strings: `"[JumpBack]BackText"`, `"[Anchor]SomeNode"`
 
 Strip bracket prefixes when resolving the target node, but preserve the prefix in summaries where useful.
+
+### Node-level `anchor` declarations
+
+A node's own top-level `anchor` field (`string | list | object`) is a distinct concept from the `next`-element `anchor` attribute above: it declares an anchor *name* that `[Anchor]X` references resolve against, not a reference itself.
+
+- `"anchor": "Cooking"` — anchor `Cooking` now targets this node.
+- `"anchor": ["A", "B"]` — several anchors now target this node.
+- `"anchor": { "Cooking": "TargetNode" }` — object form: explicit target, which need not be this node.
+- `"anchor": { "Cooking": "" }` — clears the anchor; the name stays declared with no current target.
+
+Resolve every `[Anchor]X` / `{"anchor": true}` reference through the anchor name → target node table built from these declarations (case-insensitive on the `anchor` attr) before computing unresolved references, in-degree, isolated nodes, and orphan candidates — otherwise every anchor reference is misreported as a dangling node reference. One anchor name may legitimately map to many target nodes (whichever node declared it last wins at runtime); treat that as normal, not a conflict. Report an anchor name that is never declared (`unresolved_anchor_refs`) separately from a declared anchor whose explicit object-form target does not exist (`dangling_anchor_targets`) — they indicate different problems.
 
 ## Entry Flowcharts
 
@@ -132,9 +158,9 @@ For section 2, the "Agent script paths" subsection includes three parts:
 
 - **Declared**: each `child_args` `.py` with `Status` (`resolved` / `unresolved` / `non-py` / `absolute`) and the absolute path of resolution (if any).
 - **Discovered**: every `AGENT_DIR_NAMES × AGENT_ENTRY_BASENAMES` candidate under root + 4 ancestor levels with an `Exists` column.
-- **Cross-check**: unresolved declarations, discovered-but-unreferenced candidates, and orphan declarations (resolved paths outside the convention list).
+- **Cross-check**: unresolved declarations and discovered-but-unreferenced candidates. A resolved declaration is authoritative even when its filename is outside the conventional candidate list; do not call `agent/bootstrap.py` an orphan.
 
-Warnings are emitted when `child_args` is empty, has no `.py` entries, has unresolved paths, references a non-convention name, or when a convention candidate exists but is not referenced by `child_args`. The scanner mirrors `maa_mcp/agent_supervisor._build_subprocess_cmd`'s parent-walk semantics (`AGENT_PARENT_WALK_LIMIT = 4`); keep the two limits in sync if you change one.
+Warnings are emitted when an agent config has malformed `child_args`, when the aggregate `child_args` is empty or has no `.py` entries, or when a declared `.py` cannot be resolved. Discovered-but-unused conventional entries are compatibility context, not warnings. The scanner mirrors `maa_mcp/agent_supervisor._build_subprocess_cmd`'s parent-walk semantics (`AGENT_PARENT_WALK_LIMIT = 4`); keep the two limits in sync if you change one.
 
 Keep automatically detected facts separate from TODOs. Do not invent game semantics that are not present in the project files.
 

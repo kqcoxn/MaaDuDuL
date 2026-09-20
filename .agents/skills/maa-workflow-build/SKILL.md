@@ -10,12 +10,13 @@ Own an end-to-end Maa automation request from ambiguous intent through evidence-
 ## Operating contract
 
 - Do not jump from a vague request directly to Pipeline nodes.
+- Do not plan or implement against a scene that has not been observed. When a start or success state rests on a guess, explore the real UI first and write nodes from what was observed.
 - Maintain one task contract and one current run state throughout the task.
 - Separate observed facts, user decisions, working assumptions, and unresolved questions.
 - Ask only about choices that materially change behavior, safety, or acceptance. Make reversible, low-risk assumptions explicit and continue.
 - Define verification before implementation. Do not declare completion because files were written or a single smoke test passed.
 
-Read [references/task-contract.md](references/task-contract.md) before finalizing the goal. Read [references/run-state.md](references/run-state.md) before the first action and at every phase transition.
+Read [references/task-contract.md](references/task-contract.md) before finalizing the goal. Read [references/run-state.md](references/run-state.md) before the first action and at every phase transition. Read [references/exploration-first.md](references/exploration-first.md) whenever a start or success state is not backed by a screenshot or recognition result captured in this task.
 
 ## Specialist roles
 
@@ -25,6 +26,7 @@ Read [references/task-contract.md](references/task-contract.md) before finalizin
 - Invoke `$maa-pipeline-option` only when the task contract requires a user-facing toggle, selector, checkbox, switch, or input. Do not create options merely because the skill is available.
 - Run `$maa-pipeline-testing` after each coherent implementation increment and again against the integrated end-to-end flow. Use its evidence to route a failure back to the specialist or orchestrator phase that owns the defect.
 - Treat `$maa-cli-operate` as an execution backend for repeatable checks or guarded runtime operations, not a mandatory business phase.
+- Invoke `$maa-diagnose` only from `RECOVER`, and only when a failure exists whose owner is still unknown after focused testing. It is a read-only evidence producer, never a routine phase, and never a repair actor.
 - Treat `$maa-wiki` as an official-knowledge reference provider. Use it when the task contract, design, or acceptance criteria depend on MaaFramework documentation, schema, API, binding, release, or semantic-change facts; navigate to original sources before treating those facts as authoritative.
 
 Do not treat the specialists as a fixed `guide -> generate -> option -> testing` sequence. Call only the capability required by the current task state, then return its artifacts and evidence to this control loop.
@@ -37,6 +39,8 @@ Compile the request into a task contract. Define the goal, non-goals, observable
 
 Treat start state as a set of observable states, not one ideal screen. Include safe behavior for an unknown or unexpected state. Resolve project-independent product choices before editing, such as whether paid currency, purchases, repeated consumptions, or destructive actions are allowed.
 
+Record how each state was established. Mark a state `evidence_status: observed` only when a screencap, OCR result, or recognition trace captured in this task shows it, and record that artifact. A state inferred from documentation, an existing node name, a reused CustomAction's assumed precondition, a similar game, or the model's expectation is `evidence_status: guessed`.
+
 ### 2. DISCOVER
 
 Locate the target project and check for optional project-level context artifacts before broad discovery:
@@ -47,7 +51,22 @@ Locate the target project and check for optional project-level context artifacts
 
 Never invoke `$maa-project-init` or `$maa-pipeline-graph` automatically. Use those one-time or low-frequency project tools only when the user explicitly requests initialization, refresh, visualization, or graph regeneration. Confirm current Pipeline files, task entries, resource groups, public return/recovery nodes, option surfaces, Python entries, device availability, and current UI evidence directly from the project and environment.
 
-### 3. DESIGN
+### 3. EXPLORE
+
+Check the exploration gate before leaving DISCOVER. The gate is a condition, not a judgement call:
+
+- **open** — at least one `start_states` or `success_states` entry is still `evidence_status: guessed`;
+- **closed** — every `start_states` and `success_states` entry is `evidence_status: observed` and names the artifact that shows it.
+
+While the gate is open, the task is in exploration-first mode. Drive the real UI with the MaaMCP tools (`screencap`, `ocr`, `click`, `swipe`) and observe at least one complete round-trip: from an observed start state, through every intermediate state, to the observed success state, and back to a stable return state. Record every hop as an observation with its screenshot, recognized text, box, and the action that caused the transition.
+
+Do not write Pipeline nodes, CustomAction code, or a full implementation plan while the gate is open. Treat every reused node, processor, or CustomAction as having an entry precondition and observe the state it expects; do not assume an existing component is reachable from the current screen.
+
+Read [references/exploration-first.md](references/exploration-first.md) for the round-trip definition, the observation record, and the exit criteria. When exploration is impossible because no device, no authorized entry point, or no permitted side effect is available, stop with an explicit gap instead of designing on guesses.
+
+### 4. DESIGN
+
+Enter DESIGN only when the exploration gate is closed, and design every node from the states, ROIs, and text recorded during exploration. Never write a node first and match it to the UI afterwards.
 
 Design the complete state machine before generating nodes. Include:
 
@@ -61,7 +80,7 @@ Design the complete state machine before generating nodes. Include:
 
 Use `$maa-pipeline-guide` to choose Pipeline state transitions versus CustomAction or CustomRecognition. Define the required files, nodes, options, and verification ladder. For actions that spend currency, consume items, start battles, or change an account, design a non-mutating probe before the real action.
 
-### 4. IMPLEMENT
+### 5. IMPLEMENT
 
 Apply the smallest coherent change that can satisfy the task contract:
 
@@ -72,9 +91,9 @@ Apply the smallest coherent change that can satisfy the task contract:
 - use `$maa-cli-operate` for compact repeatable validation and guarded runtime operations;
 - use `$maa-pipeline-testing` after each coherent increment for recognition, Custom wiring, and behavioral validation, then run the integrated verification ladder.
 
-Keep temporary probes distinguishable from deliverable nodes. Preserve the target project's existing schema and naming conventions. Update the run state after each meaningful observation, edit, or failed attempt.
+Keep temporary probes distinguishable from deliverable nodes. Derive every click target from a recognition result instead of a hardcoded coordinate; see [coordinate hygiene](../maa-pipeline-guide/references/coordinate-hygiene.md). Preserve the target project's existing schema and naming conventions. Update the run state after each meaningful observation, edit, or failed attempt.
 
-### 5. VERIFY
+### 6. VERIFY
 
 Read [references/acceptance-protocol.md](references/acceptance-protocol.md). Verify in increasing-risk order:
 
@@ -87,17 +106,19 @@ Read [references/acceptance-protocol.md](references/acceptance-protocol.md). Ver
 
 Attach observable evidence to each acceptance criterion. A skipped or unavailable check remains open unless the contract explicitly permits a documented limitation.
 
-### 6. COMPLETE
+### 7. COMPLETE
 
 Complete only when every required acceptance criterion has supporting evidence, no unexplained high-risk finding remains, temporary artifacts are handled, and the final state is stable.
 
 Do not declare completion based only on generated JSON, a clean resource load, an unverified plan, or the model's own assessment. Report changed artifacts, verification evidence, remaining limitations, and safe follow-up actions.
 
-### 7. RECOVER
+### 8. RECOVER
 
 Read [references/recovery-policy.md](references/recovery-policy.md) whenever an observation, tool call, edit, or test fails. Record the root cause or best bounded hypothesis, a safe retry, retry count, evidence needed from the retry, and an explicit stop condition.
 
-Re-observe after navigation or unexpected output. Replan when the state model is wrong. Stop instead of repeating ambiguous clicks, resource-consuming actions, or an unchanged failing attempt.
+Re-observe after navigation or unexpected output. Replan when the state model is wrong. Return to `EXPLORE` and reopen the gate when a failure shows that a state, a transition, or a reused component's precondition was assumed rather than observed. Stop instead of repeating ambiguous clicks, resource-consuming actions, or an unchanged failing attempt.
+
+When the failure class itself is unknown, request evidence from `$maa-diagnose` before choosing a route, then decide retry, replan, delegate a repair, request user action, or stop from its normalized result. This orchestrator owns that decision; the diagnostic skill only supplies evidence and a bounded owner.
 
 ## Phase output
 

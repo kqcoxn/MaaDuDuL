@@ -10,12 +10,17 @@ non_goals: []
 start_states:
   - id: stable-state-name
     evidence: how the state is recognized
+    evidence_status: observed | guessed
+    evidence_artifact: screenshot, capture id, or recognition trace
   - id: unknown-state
     evidence: unexpected or insufficient observation
+    evidence_status: observed | guessed
 
 success_states:
   - id: completed-state
     evidence: observable postcondition
+    evidence_status: observed | guessed
+    evidence_artifact: screenshot, capture id, or recognition trace
 
 failure_states:
   - id: bounded-failure
@@ -43,6 +48,9 @@ acceptance_criteria:
 
 - Express the goal as a result, not an implementation choice.
 - Describe every start and success state using observable evidence.
+- Give every start and success state an `evidence_status`. Use `observed` only when a capture taken in this task shows the state and `evidence_artifact` names it; anything inferred is `guessed`.
+- A required state that is still `guessed` opens the exploration gate. Explore before design; see [exploration-first.md](exploration-first.md).
+- Record the entry precondition of every reused node, processor, or CustomAction as its own state, and observe it like any other.
 - Include a no-op path when the requested action is unnecessary or disabled.
 - Make unsafe fallback behavior forbidden by default.
 - Require a post-action observation; an attempted click or executed node is not success.
@@ -59,15 +67,24 @@ non_goals:
 start_states:
   - id: original-task
     evidence: the task entry or its stable pre-action screen is recognized
+    evidence_status: observed
+    evidence_artifact: capture-01 main screen
   - id: stamina-insufficient-dialog
     evidence: the insufficient-stamina message is recognized
+    evidence_status: observed
+    evidence_artifact: capture-03 dialog
   - id: recovery-dialog
     evidence: the owned normal item and its use control are recognized
+    evidence_status: observed
+    evidence_artifact: capture-04 item list
   - id: unknown-state
     evidence: none of the supported stable states is recognized
+    evidence_status: observed
 success_states:
   - id: resumed
     evidence: stamina increased or the insufficient dialog disappeared, and the original task resumed
+    evidence_status: observed
+    evidence_artifact: capture-06 after item use
 constraints:
   - Never purchase an item or spend premium currency.
   - Never repeat consumption after an unverified attempt.

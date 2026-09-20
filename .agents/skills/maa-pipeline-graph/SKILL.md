@@ -7,7 +7,7 @@ description: 生成 MaaFramework Pipeline 项目的可交互状态机图谱。�
 
 ## 项目初始化接力
 
-画图前先查目标根目录的 `basic_info.md`。存在且包含第 0 节时，读取“0. Maa Skills 接力协议”和第 2/3/6 节，把 task entry、Pipeline 文件清单、JSON 边与 Python 外部入口作为图谱种子；随后仍须扫描当前 `interface.json`、全部目标 Pipeline 文件，以及 `agent/**/*.py` 的 `run_task()` / `run_recognition()`，不能把缓存当完整图数据库。文件缺失或没有第 0 节时直接扫描当前项目；不得自动调用 `$maa-project-init`，只有用户明确要求初始化或刷新时才调用。源码比文档新时以源码为准并报告缓存过期，不自动刷新或覆盖已有非空文档。
+画图前先查目标根目录的 `basic_info.md`。存在且包含第 0 节时，读取“0. Maa Skills 接力协议”和第 2/3/6 节，把 task entry、Pipeline 文件清单、JSON 边与 Python 外部入口作为图谱种子；随后仍须扫描当前主 `interface.json` / `interface.jsonc`、其 `import[]`、每个 `resource[].path` 声明资源根内的 Pipeline，以及 `agent/**/*.py` 的 `run_task()` / `run_recognition()`，不能把缓存当完整图数据库。文件缺失或没有第 0 节时直接扫描当前项目；不得自动调用 `$maa-project-init`，只有用户明确要求初始化或刷新时才调用。源码比文档新时以源码为准并报告缓存过期，不自动刷新或覆盖已有非空文档。
 
 ## TL;DR
 
@@ -98,13 +98,13 @@ python tools/pipeline_to_mermaid.py
 
 **真相**:这些节点是**外部入口**,被两个地方调用:
 - Python 代码里的 `context.run_task("X")`
-- `assets/interface.json` 的 `task[].entry`(MaaPiCli 暴露给用户的入口)
+- 主 Interface bundle（含 `import[]`）的 `task[].entry`（MaaPiCli 暴露给用户的入口）
 
 **解法**:扫描这两处,把调用边也画进图。
 
 **怎么扫**:
 - **Python**:用 `ast` 解析 `agent/**/*.py`,在 `ast.Call` 里找 `func.attr == "run_task"`,记录 `Class.method` 调用方
-- **interface.json**:读 `task[]` 数组,每个 `entry` 字段就是用户级入口
+- **Interface bundle**:读主 Interface 与 import 合并后的 `task[]`,每个 `entry` 字段就是用户级入口
 
 ### 3️⃣ 双遍解析:先建索引,再画边
 

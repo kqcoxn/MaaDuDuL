@@ -17,7 +17,7 @@ Treat acceptance as a mapping from every required criterion to observable eviden
 criterion: AC-1
 status: pass | fail | blocked
 evidence:
-  type: file | test | graph | screenshot | log | runtime-trace
+  type: file | test | graph | screenshot | log | runtime-trace | exploration-trace
   artifact: path, command result, or stable identifier
   observation: what the evidence demonstrates
 limitations: []
@@ -29,6 +29,7 @@ Declare completion only when:
 
 - every required criterion is `pass`;
 - every pass has observable evidence;
+- no criterion depends on a state that is still `evidence_status: guessed`;
 - no high-risk warning remains unexplained;
 - temporary probes and test state are handled;
 - the final UI or project state is known and stable;

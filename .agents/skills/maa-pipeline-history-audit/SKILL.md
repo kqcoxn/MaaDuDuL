@@ -21,14 +21,13 @@ Default to the current repository and current `HEAD` unless the user provides a 
 2. Classify every commit.
    - Traverse with `git log --reverse --date=short --format=%H%x00%h%x00%ad%x00%s <target>`.
    - For each commit, inspect `git diff-tree --root --no-commit-id --name-status -r <commit>`.
+   - At the target commit, read the main `interface.json` / `interface.jsonc`, resolve its `import[]` and `resource[].path` relative to that main Interface, and derive the target declaration and resource path set. Do not infer paths from an `assets/...` convention.
    - Mark a commit as relevant if it touches:
-     - `assets/resource/**/pipeline*.json`
-     - `assets/resource/**/pipeline/**/*.json`
-     - `assets/resource/**/default_pipeline.json`
-     - `assets/interface.json`
-     - `agent/**/*.py`
-     - `assets/table/**/*.json` or `intelligence_data/**`
-    - `skills/maa-pipeline-*` or legacy `.claude/skills/pipeline-*`
+     - the main Interface or an Interface import
+     - pipeline / default pipeline / image files under declared resource roots
+     - agent-related Python files or the project's declared agent entry
+     - project data tables used by those pipelines, such as table JSON or intelligence data when present
+     - `skills/maa-pipeline-*` or legacy `.claude/skills/pipeline-*`
    - Relevant type labels are `Pipeline`, `Option`, `Agent`, `Table`, and `Skill`; labels may overlap.
    - List all commits in an appendix, including irrelevant commits.
 
@@ -45,7 +44,7 @@ Default to the current repository and current `HEAD` unless the user provides a 
    - Use these counts as navigation aids, not as the final conclusion.
 
 4. Parse the target tree.
-   - Load every target pipeline JSON and count files, nodes, action types, recognition types, `next` entries, and `[JumpBack]` entries.
+   - Load every target pipeline JSON/JSONC under the declared resource roots and count files, nodes, action types, recognition types, `next` entries, and `[JumpBack]` entries.
    - Extract `action: Custom` nodes with `custom_action` and `custom_action_param`.
    - Parse `agent/**/*.py` with Python `ast`. Walk both `ast.ClassDef` and
      `ast.FunctionDef` decorator lists because Maa projects commonly register
@@ -55,7 +54,7 @@ Default to the current repository and current `HEAD` unless the user provides a 
      - `context.run_recognition("Node")`
      - `context.get_node_data("Node")`
    - Build a `Pipeline node -> custom_action -> Python registration` table and explicitly list missing registrations.
-   - Parse `assets/interface.json` for option/task counts and `pipeline_override` usage.
+   - Parse the loaded main Interface plus imports for option/task counts and `pipeline_override` usage.
 
 5. Review key commits.
    - Always sample major introduction/refactor/fix commits found by history, especially commits that introduce CustomAction, new pipeline files, options, ColorMatch/color_filter, or skill updates.
@@ -64,10 +63,7 @@ Default to the current repository and current `HEAD` unless the user provides a 
 
 6. Validate the target.
    - Run JSON parsing on all pipeline files.
-   - If a resource checker exists, run it against the target commit. For this repo family, prefer:
-     ```powershell
-     python tools\ci\check_resource.py assets\resource\base
-     ```
+   - If a project-locked checker exists, run it against the target commit. Discover it from `package.json` scripts, lockfile, `packageManager`, `maatools.config.mts`, and CI rather than assuming a path. M9A's current entry is `pnpm check` (including schema and `maa-tools check`); it is not `python tools/ci/check_resource.py assets/resource/base`.
    - If checking an un-checked-out target commit, create a temporary detached worktree, run validation there, then remove the worktree. Verify the temp path before recursive deletion.
    - Note that resource loading may not detect missing Python CustomAction registrations; report both results separately.
 
@@ -103,9 +99,9 @@ git -C <repo> status --short
 git -C <repo> rev-list --count <target>
 git -C <repo> log --reverse --date=short --format="%H%x00%h%x00%ad%x00%s" <target>
 git -C <repo> diff-tree --root --no-commit-id --name-status -r <commit>
-git -C <repo> log --format=%H -G'"action"\s*:\s*"Custom"' <target> -- assets/resource agent assets/interface.json
+git -C <repo> log --format=%H -G'"action"\s*:\s*"Custom"' <target> -- <main-interface> <interface-imports> <declared-resource-roots> agent
 git -C <repo> show --stat --oneline <commit>
-git -C <repo> show <target>:assets/interface.json
+git -C <repo> show <target>:interface.json
 ```
 
 When generating analysis scripts, keep them temporary unless the user asks for a reusable script. Do not leave generated helper scripts in the repo.

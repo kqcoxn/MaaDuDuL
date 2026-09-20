@@ -26,9 +26,10 @@ description: Universal Pipeline JSON 编写指南。基于 MaaFramework Pipeline
 2. **高命中率**：扩充 `next` 列表，覆盖当前操作后所有可能画面，力争一次截图命中。
 3. **显式等待策略**：优先通过中间识别节点确认状态，不用盲目的长 `delay` 掩盖问题；但启动、动画、结算、加载稳定等场景可以使用短的 `pre_delay` / `post_delay` / `timeout` / `*_wait_freezes`。当确实不需要等待时，要在节点上显式将 `rate_limit` / `pre_delay` / `post_delay` 设为 0（协议默认 `rate_limit=1000ms`、`pre_delay/post_delay=200ms`，省略字段会引入隐式等待）。不要假设仓库存在自动补默认值脚本，使用前先发现真实工具。
 4. **720p 基准**：所有坐标、ROI、图片必须基于 **720X1280**。
-5. **格式化**：JSON 遵循 `.prettierrc`（4 空格缩进，数组元素换行）。
+5. **点击目标由识别结果推导**：优先让 MaaFramework 点击识别框中心（`target` 默认 `true`）。不要用 `DirectHit` + 硬编码 `target` 跳过识别，也不要在识别命中后用写死的 `target_offset` 把点击挪到未被识别的控件上——模拟器分辨率、缩放与 UI 版本差异会让这类坐标静默点错位置。
+6. **格式化**：JSON 遵循 `.prettierrc`（4 空格缩进，数组元素换行）。
 
-需要完整字段速查时读取 [references/field-reference.md](references/field-reference.md)，不要把整份字段表重复加载到日常任务上下文。
+需要完整字段速查时读取 [references/field-reference.md](references/field-reference.md)，不要把整份字段表重复加载到日常任务上下文。编写或审查带点击动作的节点时读取 [references/coordinate-hygiene.md](references/coordinate-hygiene.md)，其中有两种坐标坏味、OCR/TemplateMatch 点击的推荐写法和允许偏移的例外条件。
 
 ## 历史审查后的设计准则
 
@@ -394,7 +395,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 
 - **`[JumpBack]` 是状态回退原语**：命中后执行完节点链，自动返回父节点的 `next` 继续识别。
 - **窄 ROI 区分同名字段**：用 y 范围 [490, 740, 100, 80] vs [490, 590, 100, 80] 区分两个"确定"按钮行。
-- **`target_offset` 偏移点击**：识别难度文字后用 `target_offset: [270, 0, 0, 0]` 右移到"确定"按钮位置。
+- **优先识别目标本身，而不是偏移过去**：能 OCR 到"确定"就直接 OCR + 窄 ROI 点它；只有目标既无稳定文字也无稳定图案时，才在识别结果上用 `target_offset` 偏移（如 `target_offset: [270, 0, 0, 0]`），并记录偏移量的实测来源。写死坐标的坏味与例外条件见 [references/coordinate-hygiene.md](references/coordinate-hygiene.md)。
 - **跨文件节点引用**：MaaFramework 全局加载会合并所有 `pipeline/*.json`，跨文件引用 OK。但 `run_pipeline` 测试工具只加载单文件，集成测试需用 GUI/CLI。
 
 **实战决策流程**：
@@ -450,6 +451,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 - [ ] `next` 列表覆盖所有可能画面，含弹窗/加载/异常
 - [ ] 每次点击后有识别验证，不假设操作后状态
 - [ ] ROI / target 坐标基于 720×1280（宽×高）
+- [ ] 点击目标来自识别结果，没有 `DirectHit` + 硬编码 `target`，也没有无锚点的硬编码 `target_offset`
 - [ ] JSON 格式化符合 `.prettierrc`
 - [ ] `locales/` 已添加新增任务的多语言文本
 - [ ] OCR `expected` 写完整文本

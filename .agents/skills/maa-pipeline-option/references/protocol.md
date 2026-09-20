@@ -9,6 +9,8 @@
 
 ## option 字段位置
 
+以下示例展示主 Interface 中的声明。若项目使用 `import[]`，则被导入文件相对主 Interface 目录解析，顶层只能提供 `task`、`option` 与 `preset`；task 条目自身可以携带 group / option 等展示引用。不要把某个固定目录路径当作协议要求。
+
 ```jsonc
 {
     "interface_version": 2,
@@ -234,7 +236,7 @@ Client 会根据 case 的 name 来匹配用户的 Y/N 输入，其他输入会�
 { "NodeA": { "expected": ["value2"], "enabled": true } }
 ```
 
-> ⚠️ **同名顶层 key 跨文件也会冲突**。`PipelineResMgr::parse_and_override_once` 在合并同一目录下多个 pipeline JSON 时，**严格拒绝**重复顶层 key。Python `json.load()` 静默覆盖检测不出来，必须用 `check_resource.py` 验证。
+> ⚠️ **同名顶层 key 跨文件也会冲突**。`PipelineResMgr::parse_and_override_once` 在合并同一目录下多个 pipeline JSON 时，**严格拒绝**重复顶层 key。Python `json.load()` 静默覆盖检测不出来，必须用目标项目锁定的 Interface / resource 语义检查验证。
 
 ---
 
