@@ -1,0 +1,3 @@
+# Match the Cython recipe in python-for-android v2026.05.09.
+# Host build tools only; do not include these in the Android application payload.
+Cython==0.29.36

@@ -147,9 +147,16 @@ jobs:
           path: dist/*
           if-no-files-found: error
 
+  android:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: read
+    uses: ./.github/workflows/android.yml
+    secrets: inherit
+
   release:
     if: startsWith(github.ref, 'refs/tags/')
-    needs: package
+    needs: [package, android]
     permissions:
       contents: write
       actions: write
@@ -172,6 +179,9 @@ jobs:
           files: |
             release-assets/*.zip
             release-assets/*.tar.gz
+            release-assets/*.apk
+            release-assets/*.apk.sha256
+            release-assets/*.build-info.json
       - name: Upload to MirrorChyan
         if: github.repository_owner == 'kqcoxn'
         env:

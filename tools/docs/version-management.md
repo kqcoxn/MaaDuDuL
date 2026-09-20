@@ -24,9 +24,17 @@
 
 `yarn run check` 已包含版本检查。CI 读取 manifest 设置工具链，再校验派生文件。`versions:check` 需要 uv；Python 锁文件检查使用离线模式。同步声明不等于安装运行库，也不会自动更新已安装的 MFAA。
 
-`yarn release` 按 `project.version` 创建并推送 `v<版本>` tag，执行前先检查版本一致性。该命令会发布 tag，不能当作检查命令使用。桌面正式发布拒绝与 manifest 不符的 tag；package-smoke 的显式测试 tag 保留。Android 显示版本为 `v<项目版本>-ci.<运行号>-<提交>`，额外信息仅用于构建追踪。
+`yarn release` 按 `project.version` 创建并推送 `v<版本>` tag，执行前先检查版本一致性。该命令会发布 tag，不能当作检查命令使用。桌面正式发布拒绝与 manifest 不符的 tag；package-smoke 的显式测试 tag 保留。Android 普通手动构建的显示版本为 `v<项目版本>-ci.<运行号>-<提交>`，tag 构建使用发布 tag。
 
 ## 边界
+
+推送 `v*` tag 时，Release 会复用 Android APK 工作流，与桌面端并行构建 ARM64 和 x64 APK，待所有平台成功后统一上传到 GitHub Release（包含 APK、SHA-256 和构建信息）。Android 构建失败会阻止本次发布。沿用现有 `MFA_ANDROID_*` 签名 secrets 和应用 ID；内部 versionCode 使用自 2020 年起的秒数，避免不同工作流的运行序号导致版本倒退。tag 构建的显示版本和文件名使用发布 tag，普通手动构建保留 CI 标记。
+
+Android APK 仍可单独手动运行，此时只上传保留 7 天的 Actions artifacts，不发布 Release。Release 的手动入口仍仅执行桌面 dry-run，不构建 Android。
+
+Android 以 GitHub 下载和覆盖安装为分发目标。包名 `com.kqcoxn.maadudul.ci` 和现有签名密钥保持稳定，正式包与手动测试包共用应用数据。CI 校验 APK 的签名、版本、名称、图标、启动入口、非调试状态、最低 Android 8.0、ABI 和 ZIP 对齐，并将证书 SHA-256、versionCode、ABI 写入随包发布的 build-info。随后与最近 100 个 Release 中最近一个其他 tag 的同架构 build-info 比对包名、证书和递增版本号；首次没有基线时明确提示尚未验证跨版本升级。该比对不覆盖未发布的手动安装包，也不能代替真机验证。
+
+首次发布后应在同一设备上验证旧版安装、修改配置、新版直接覆盖安装、启动及配置保留；不要先卸载旧版。上游资源引导器保留已有 config，但仍需通过真实升级确认。不要更换签名 secrets 中的密钥；如需调整签名，须另行设计密钥迁移。时间 versionCode 按构建先后排序，重建旧 tag 也会得到更大的序号，因此不应把旧源码重建包当作新版分发。
 
 Package Smoke 仅支持手动触发，日常提交和 PR 不执行打包 smoke，继续由 Check 执行常规检查。修改打包逻辑或升级 MaaFramework、MFAA、内置 Python 后，可在 GitHub Actions 的 Package Smoke 页面选择 Run workflow，对所选分支执行全部 6 个平台组合的打包及内置 Python 检查。正式发布仍保留全部平台构建。
 

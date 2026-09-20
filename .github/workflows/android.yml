@@ -2,6 +2,7 @@ name: Android APK
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
@@ -45,6 +46,14 @@ jobs:
           repository: ${{ env.MFA_REPOSITORY }}
           ref: ${{ env.MFA_REF }}
           path: mfa-source
+
+      - name: Setup build Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.ANDROID_PYTHON }}
+
+      - name: Install workflow parser dependencies
+        run: python -m pip install packaging
 
       - name: Resolve Android Python requirements
         id: python_requirements
@@ -179,6 +188,10 @@ jobs:
           from pathlib import Path
           import os
           import xml.etree.ElementTree as ET
+          import json
+
+          manifest = json.loads(Path("resource-source/maa-project.json").read_text(encoding="utf-8"))
+          security_versions = manifest["maintenance"]["android"]["nugetOverrides"]
 
           avalonia_version = os.environ["AVALONIA_VERSION"]
           avalonia_package_names = {
@@ -203,12 +216,16 @@ jobs:
           ]
           updated_avalonia_packages = set()
           updated_maafw_runtime_packages = set()
+          updated_security_packages = set()
 
           for project_path in project_paths:
               tree = ET.parse(project_path)
               root = tree.getroot()
               for reference in root.findall(".//PackageReference"):
                   name = reference.get("Include")
+                  if name in security_versions:
+                      reference.set("Version", security_versions[name])
+                      updated_security_packages.add(name)
                   if name in avalonia_package_names:
                       reference.set("Version", avalonia_version)
                       updated_avalonia_packages.add(name)
@@ -218,6 +235,29 @@ jobs:
 
               ET.indent(tree, space="    ")
               tree.write(project_path, encoding="utf-8", xml_declaration=False)
+
+          # MimeKit was transitive; pin it explicitly to MailKit's patched dependency.
+          main_project = project_paths[0]
+          tree = ET.parse(main_project)
+          group = ET.SubElement(tree.getroot(), "ItemGroup")
+          for name in security_versions.keys() - updated_security_packages:
+              if name != "MimeKit":
+                  raise RuntimeError(f"Expected security dependency missing upstream: {name}")
+              ET.SubElement(group, "PackageReference", Include=name, Version=security_versions[name])
+          ET.indent(tree, space="    ")
+          tree.write(main_project, encoding="utf-8", xml_declaration=False)
+
+          # SharpCompress 0.48 renamed the archive/reader factory entry points.
+          for relative in ("Helper/UniversalExtractor.cs", "Helper/VersionChecker.cs"):
+              path = Path("mfa-source/MFAAvalonia") / relative
+              source = path.read_text(encoding="utf-8")
+              for old, new in (
+                  ("ArchiveFactory.Open(", "ArchiveFactory.OpenArchive("),
+                  ("TarArchive.Open(", "TarArchive.OpenArchive("),
+                  ("ReaderFactory.Open(", "ReaderFactory.OpenReader("),
+              ):
+                  source = source.replace(old, new)
+              path.write_text(source, encoding="utf-8")
 
           adapter_path = Path("mfa-source/workflows/android/mfa_android_agent.py")
           adapter_text = adapter_path.read_text(encoding="utf-8")
@@ -300,14 +340,26 @@ jobs:
           LAUNCHER_ICON_INPUT: ${{ vars.MFA_ANDROID_LAUNCHER_ICON || 'public/logo.png' }}
         run: |
           short_sha="${GITHUB_SHA::7}"
-          # Keep the CI package identity stable so later APKs can update the
-          # previously installed CI build. The run number remains in the
-          # version and artifact name for build traceability.
+          # Preserve the existing application identity and signing key for upgrades.
           application_id="com.kqcoxn.maadudul.ci"
           echo "application_id=$application_id" >> "$GITHUB_OUTPUT"
-          echo "display_version=v${PROJECT_VERSION}-ci.${GITHUB_RUN_NUMBER}-${short_sha}" >> "$GITHUB_OUTPUT"
-          echo "output_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk" >> "$GITHUB_OUTPUT"
-          echo "artifact_name=MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}" >> "$GITHUB_OUTPUT"
+          # Workflow run numbers are independent between manual and Release runs.
+          # Seconds since 2020 keep versionCode increasing across both entry points.
+          echo "version_code=$(( $(date -u +%s) - 1577836800 ))" >> "$GITHUB_OUTPUT"
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            if [[ "$GITHUB_REF_NAME" != "v${PROJECT_VERSION}" ]]; then
+              echo "[ERR] Release tag does not match maa-project.json"
+              exit 1
+            fi
+            display_version="$GITHUB_REF_NAME"
+            artifact_name="MaaDuDuL-${GITHUB_REF_NAME}-android-${{ matrix.arch }}"
+          else
+            display_version="v${PROJECT_VERSION}-ci.${GITHUB_RUN_NUMBER}-${short_sha}"
+            artifact_name="MaaDuDuL-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}"
+          fi
+          echo "display_version=$display_version" >> "$GITHUB_OUTPUT"
+          echo "output_name=${artifact_name}.apk" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=$artifact_name" >> "$GITHUB_OUTPUT"
           launcher_icon=$(realpath -m "resource-source/$LAUNCHER_ICON_INPUT")
           resource_root=$(realpath resource-source)
           case "$launcher_icon" in "$resource_root"/*) ;; *) echo "[ERR] launcher icon outside resource repository"; exit 1;; esac
@@ -367,13 +419,13 @@ jobs:
           echo "root=$(realpath install)" >> "$GITHUB_OUTPUT"
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4.0.4
         with:
           # The default includes the unavailable legacy "tools" package.
           packages: platform-tools
@@ -386,19 +438,15 @@ jobs:
             "build-tools;$ANDROID_BUILD_TOOLS" \
             "ndk;$P4A_NDK_VERSION"
 
-      - name: Setup build Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.ANDROID_PYTHON }}
-
       - name: Install python-for-android host dependencies
         shell: bash
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             autoconf automake ccache cmake gettext libffi-dev libltdl-dev \
-            libssl-dev libtool openjdk-17-jdk patch pkg-config unzip zip
+            libssl-dev libtool lld openjdk-17-jdk patch pkg-config unzip zip
           python -m pip install --upgrade pip wheel setuptools
+          python -m pip install -r resource-source/tools/ci/requirements-android-host.txt
           git clone --depth 1 --branch "$P4A_REF" \
             https://github.com/kivy/python-for-android.git "$RUNNER_TEMP/python-for-android"
           python -m pip install --editable "$RUNNER_TEMP/python-for-android"
@@ -485,7 +533,9 @@ jobs:
         run: |
           dotnet restore MFAAvalonia.Android/MFAAvalonia.Android.csproj \
             -r "${{ matrix.rid }}" \
-            -p:AndroidSdkDirectory="$ANDROID_HOME"
+            -p:AndroidSdkDirectory="$ANDROID_HOME" \
+            -p:NuGetAudit=true -p:NuGetAuditMode=all \
+            '-p:WarningsAsErrors=NU1901%3BNU1902%3BNU1903%3BNU1904'
 
       - name: Prepare Android signing key
         shell: bash
@@ -511,6 +561,11 @@ jobs:
             -storepass:env SIGNING_STORE_PASS \
             -alias "$SIGNING_KEY_ALIAS" > /dev/null
           echo "ANDROID_SIGNING_KEYSTORE=$keystore" >> "$GITHUB_ENV"
+          certificate="$RUNNER_TEMP/mddl-signing-cert.der"
+          keytool -exportcert -keystore "$keystore" \
+            -storepass:env SIGNING_STORE_PASS -alias "$SIGNING_KEY_ALIAS" \
+            -file "$certificate"
+          echo "ANDROID_SIGNING_SHA256=$(sha256sum "$certificate" | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
 
       - name: Build APK with MaaDuDuL resources
         shell: bash
@@ -523,6 +578,7 @@ jobs:
           APPLICATION_ID: ${{ steps.metadata.outputs.application_id }}
           DISPLAY_VERSION: ${{ steps.metadata.outputs.display_version }}
           SIGNING_KEY_ALIAS: ${{ secrets.MFA_ANDROID_KEY_ALIAS }}
+          VERSION_CODE: ${{ steps.metadata.outputs.version_code }}
           SIGNING_STORE_PASS: ${{ secrets.MFA_ANDROID_STORE_PASSWORD }}
           SIGNING_KEY_PASS: ${{ secrets.MFA_ANDROID_KEY_PASSWORD }}
         working-directory: mfa-source
@@ -535,7 +591,7 @@ jobs:
             -p:AndroidSdkDirectory="$ANDROID_HOME" \
             -p:AndroidEmbedResourcePackage=true \
             "-p:ApplicationId=$APPLICATION_ID" \
-            "-p:ApplicationVersion=$GITHUB_RUN_NUMBER" \
+            "-p:ApplicationVersion=$VERSION_CODE" \
             "-p:ApplicationDisplayVersion=$DISPLAY_VERSION" \
             "-p:AndroidResourcePackageSource=$PAYLOAD_ROOT" \
             "-p:AndroidLauncherLabel=$LAUNCHER_LABEL" \
@@ -557,6 +613,10 @@ jobs:
         env:
           OUTPUT_NAME: ${{ steps.metadata.outputs.output_name }}
           APPLICATION_ID: ${{ steps.metadata.outputs.application_id }}
+          VERSION_CODE: ${{ steps.metadata.outputs.version_code }}
+          DISPLAY_VERSION: ${{ steps.metadata.outputs.display_version }}
+          LAUNCHER_LABEL: ${{ steps.metadata.outputs.launcher_label }}
+          EXPECTED_ABI: ${{ matrix.abi }}
           BUILD_INFO: ${{ steps.payload.outputs.root }}/resource/mddl-build-info.json
         run: |
           publish_dir="mfa-source/MFAAvalonia.Android/bin/Release/net10.0-android/${{ matrix.rid }}/publish"
@@ -572,10 +632,18 @@ jobs:
           grep -Fxq 'assets/MfaDependencies/shizuku.apk' "$apk_entries"
           grep -Fxq "lib/${{ matrix.abi }}/libMaaFramework.so" "$apk_entries"
           grep -Eq "^lib/${{ matrix.abi }}/libpython3\.[0-9]+\.so$" "$apk_entries"
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify \
+          build_tools="$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS"
+          signature_report="$RUNNER_TEMP/mddl-apk-signature-${{ matrix.arch }}.txt"
+          "$build_tools/apksigner" verify \
             --verbose \
             --print-certs \
-            "$apk_path"
+            "$apk_path" | tee "$signature_report"
+          actual_signer=$(sed -n 's/^Signer #1 certificate SHA-256 digest: //p' "$signature_report" | tr '[:upper:]' '[:lower:]')
+          if [[ "$actual_signer" != "$ANDROID_SIGNING_SHA256" ]]; then
+            echo "[ERR] APK certificate does not match the configured signing key"
+            exit 1
+          fi
+          "$build_tools/zipalign" -c -P 16 4 "$apk_path"
 
           merged_manifest="mfa-source/MFAAvalonia.Android/obj/Release/net10.0-android/${{ matrix.rid }}/android/AndroidManifest.xml"
           if [[ ! -f "$merged_manifest" ]]; then
@@ -588,12 +656,42 @@ jobs:
           fi
 
           apk_badging="$RUNNER_TEMP/mddl-apk-${{ matrix.arch }}-badging.txt"
-          "$ANDROID_HOME/build-tools/36.0.0/aapt2" dump badging "$apk_path" > "$apk_badging"
+          "$build_tools/aapt2" dump badging "$apk_path" > "$apk_badging"
           actual_application_id=$(sed -n "s/^package: name='\([^']*\)'.*/\1/p" "$apk_badging")
           if [[ "$actual_application_id" != "$APPLICATION_ID" ]]; then
             echo "[ERR] Unexpected application ID: $actual_application_id"
             exit 1
           fi
+          python - "$apk_badging" <<'PY'
+          import os
+          import re
+          import sys
+          from pathlib import Path
+
+          badging = Path(sys.argv[1]).read_text(encoding="utf-8")
+          package = next(line for line in badging.splitlines() if line.startswith("package:"))
+          fields = dict(re.findall(r"(\w+)='([^']*)'", package))
+          for field, env in (("versionCode", "VERSION_CODE"), ("versionName", "DISPLAY_VERSION")):
+              if fields.get(field) != os.environ[env]:
+                  raise SystemExit(f"[ERR] APK {field} differs from requested metadata")
+          if not 0 < int(fields["versionCode"]) <= 2100000000:
+              raise SystemExit("[ERR] APK versionCode is out of range")
+          if "application-debuggable" in badging:
+              raise SystemExit("[ERR] Release APK is debuggable")
+          if not re.search(r"^launchable-activity: name='[^']+'", badging, re.M):
+              raise SystemExit("[ERR] APK has no launcher activity")
+          if f"application-label:'{os.environ['LAUNCHER_LABEL']}'" not in badging.splitlines():
+              raise SystemExit("[ERR] APK launcher label differs from requested metadata")
+          if not re.search(r"^application:.*icon='[^']+'", badging, re.M):
+              raise SystemExit("[ERR] APK launcher icon is missing")
+          abi = re.search(r"^native-code: (.+)$", badging, re.M)
+          if not abi or re.findall(r"'([^']+)'", abi[1]) != [os.environ["EXPECTED_ABI"]]:
+              raise SystemExit("[ERR] APK contains unexpected native architectures")
+          minimum = re.search(r"^sdkVersion:'(\d+)'", badging, re.M)
+          if not minimum or minimum[1] != "26":
+              raise SystemExit("[ERR] APK no longer supports the expected Android 8.0 minimum")
+          print("[OK] APK installation metadata verified")
+          PY
 
           payload_archive="$RUNNER_TEMP/mddl-payload-${{ matrix.arch }}.zip"
           payload_entries="$RUNNER_TEMP/mddl-payload-${{ matrix.arch }}-entries.txt"
@@ -622,12 +720,52 @@ jobs:
           output_dir="$GITHUB_WORKSPACE/android-artifacts"
           mkdir -p "$output_dir"
           cp "$apk_path" "$output_dir/$OUTPUT_NAME"
-          cp "$BUILD_INFO" "$output_dir/${OUTPUT_NAME%.apk}.build-info.json"
+          jq --argjson version_code "$VERSION_CODE" \
+            --arg abi "$EXPECTED_ABI" \
+            --arg signing_certificate_sha256 "$ANDROID_SIGNING_SHA256" \
+            '. + {version_code: $version_code, abi: $abi, signing_certificate_sha256: $signing_certificate_sha256}' \
+            "$BUILD_INFO" > "$output_dir/${OUTPUT_NAME%.apk}.build-info.json"
           (cd "$output_dir" && sha256sum "$OUTPUT_NAME" > "$OUTPUT_NAME.sha256")
           echo "path=$output_dir" >> "$GITHUB_OUTPUT"
 
+      - name: Verify compatibility with published Android package
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OUTPUT_NAME: ${{ steps.metadata.outputs.output_name }}
+          APK_OUTPUT: ${{ steps.apk.outputs.path }}
+          ARCH: ${{ matrix.arch }}
+        run: |
+          # Use a different published tag as the upgrade baseline; ignore drafts.
+          gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" > "$RUNNER_TEMP/mddl-releases.json"
+          previous_asset=$(jq -r --arg current "$GITHUB_REF_NAME" --arg suffix "-android-$ARCH.build-info.json" \
+            '[.[] | select(.draft == false and .tag_name != $current) | .assets[] | select(.name | endswith($suffix))][0].id // empty' \
+            "$RUNNER_TEMP/mddl-releases.json")
+          if [[ -z "$previous_asset" ]]; then
+            echo "::warning::No published Android build-info baseline found; cross-version upgrade compatibility is not yet verified."
+            exit 0
+          fi
+          previous_info="$RUNNER_TEMP/mddl-previous-android.json"
+          gh api "repos/$GITHUB_REPOSITORY/releases/assets/$previous_asset" \
+            -H 'Accept: application/octet-stream' > "$previous_info"
+          python - "$previous_info" "$APK_OUTPUT/${OUTPUT_NAME%.apk}.build-info.json" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          previous, current = [json.loads(Path(p).read_text(encoding="utf-8")) for p in sys.argv[1:]]
+          for key in ("application_id", "abi", "signing_certificate_sha256"):
+              if not previous.get(key):
+                  raise SystemExit(f"[ERR] Published baseline lacks {key}; inspect the old APK before approving an upgrade")
+              if previous[key] != current[key]:
+                  raise SystemExit(f"[ERR] Android upgrade identity changed: {key}")
+          if int(current["version_code"]) <= int(previous["version_code"]):
+              raise SystemExit("[ERR] APK versionCode must exceed the previous published package")
+          print("[OK] Package identity, signing certificate and upgrade version verified")
+          PY
+
       - name: Upload Android APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.metadata.outputs.artifact_name }}
           path: ${{ steps.apk.outputs.path }}
