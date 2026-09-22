@@ -1,0 +1,16 @@
+// Keep the published package identity without editing MaaFwApp's source/plugins.
+// Its profile supports only a package suffix, and its default versionCode counts upstream commits.
+gradle.beforeProject { project ->
+    if (project.path == ':app') {
+        project.pluginManager.withPlugin('com.android.application') {
+            project.extensions.getByName('androidComponents').finalizeDsl { android ->
+                android.defaultConfig.applicationId = System.getenv('APPLICATION_ID')
+                android.defaultConfig.versionCode = Integer.parseInt(System.getenv('VERSION_CODE'))
+                android.compileSdk = Integer.parseInt(System.getenv('ANDROID_SDK'))
+                android.buildToolsVersion = System.getenv('ANDROID_BUILD_TOOLS')
+                android.ndkVersion = System.getenv('ANDROID_NDK')
+                android.externalNativeBuild.cmake.version = System.getenv('ANDROID_CMAKE')
+            }
+        }
+    }
+}

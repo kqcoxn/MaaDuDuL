@@ -8,17 +8,67 @@ import argparse
 import hashlib
 import json
 import os
-from pathlib import Path
+import platform
 import subprocess
 import sys
 import tempfile
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 STATE = ".mddl-dev.json"
 LOCK = ".mddl-dev.lock"
 TREES = ("resource", "tasks", "locales", "agent")
 EXCLUDED = {"__pycache__", "config", "debug", "logs", ".git"}
+
+
+def runtime_platform() -> str:
+    system = {"Windows": "win", "Linux": "linux", "Darwin": "osx"}.get(platform.system())
+    arch = {"amd64": "x64", "x86_64": "x64", "arm64": "arm64", "aarch64": "arm64"}.get(platform.machine().lower())
+    if not system or not arch:
+        raise ValueError("Unsupported operating system or CPU architecture.")
+    return f"{system}-{arch}"
+
+
+def framework_version(workspace: Path) -> str:
+    """Read MaaVersion in a child process so DLLs are released before replacement."""
+    filename = {"win32": "MaaFramework.dll", "darwin": "libMaaFramework.dylib"}.get(sys.platform, "libMaaFramework.so")
+    library = safe_path(workspace, f"runtimes/{runtime_platform()}/native/{filename}")
+    if not library.is_file():
+        raise ValueError(f"MaaFramework library missing: {library}. Run yarn dev:install.")
+    probe = (
+        "import ctypes, os, pathlib, sys; "
+        "p = pathlib.Path(sys.argv[1]); "
+        "dll_dir = os.add_dll_directory(str(p.parent)) if sys.platform == 'win32' else None; "
+        "lib = (ctypes.WinDLL if sys.platform == 'win32' else ctypes.CDLL)(str(p)); "
+        "lib.MaaVersion.restype = ctypes.c_char_p; "
+        "lib.MaaVersion.argtypes = []; print('MDDL_MAA_VERSION=' + lib.MaaVersion().decode())"
+    )
+    try:
+        result = subprocess.run(
+            [sys.executable, "-B", "-c", probe, str(library)],
+            cwd=tempfile.gettempdir(), capture_output=True, text=True, timeout=15, check=False,
+            **({"creationflags": subprocess.CREATE_NO_WINDOW} if sys.platform == "win32" else {}),
+        )
+    except subprocess.TimeoutExpired as error:
+        raise ValueError("MaaFramework version probe timed out; run yarn dev:install.") from error
+    versions = [
+        line.removeprefix("MDDL_MAA_VERSION=")
+        for line in result.stdout.splitlines() if line.startswith("MDDL_MAA_VERSION=")
+    ]
+    if result.returncode or len(versions) != 1:
+        raise ValueError(f"Cannot read MaaFramework version: {result.stderr.strip()}. Run yarn dev:install.")
+    return versions[0].removeprefix("v")
+
+
+def runtime_ready(workspace: Path) -> bool:
+    expected = json.loads((ROOT / "maa-project.json").read_text(encoding="utf-8"))["maafw"]["version"]
+    actual = framework_version(workspace)
+    print(f"MFAA MaaFramework: {actual}; required: {expected}")
+    if actual != expected:
+        print("Runtime mismatch. Close MFAA, run yarn dev:install --framework-only, then yarn dev:prepare.")
+        return False
+    return True
 
 
 def safe_path(root: Path, relative: str) -> Path:
@@ -120,6 +170,8 @@ def ensure_gui_stopped(gui: Path) -> None:
 def prepare(workspace: Path) -> None:
     import jsonc
 
+    if not runtime_ready(workspace):
+        raise ValueError("Preparation cancelled: MFAA and the project require different MaaFramework versions.")
     sources = inventory(ROOT)
     source_digest = digest(sources)
     for name in (*TREES, "interface.json", "public/logo.png"):
@@ -155,7 +207,7 @@ def prepare(workspace: Path) -> None:
         raise ValueError("Source changed during preparation; run yarn dev:prepare again.")
     state = {
         "source": str(ROOT), "python": os.path.abspath(sys.executable),
-        "prepared_at": datetime.now(timezone.utc).isoformat(),
+        "prepared_at": datetime.now(UTC).isoformat(),
         "source_digest": source_digest, "payload_digest": digest(inventory(workspace)),
     }
     write_atomic(state_path, (json.dumps(state, ensure_ascii=False, indent=4) + "\n").encode())
@@ -165,12 +217,14 @@ def prepare(workspace: Path) -> None:
 def status(workspace: Path) -> bool:
     state_path = safe_path(workspace, STATE)
     print(f"Source: {ROOT}\nWorkspace: {workspace}\nPython: {os.path.abspath(sys.executable)}")
+    runtime_matches = runtime_ready(workspace)
     if not state_path.is_file():
         print("Not prepared (or preparation was interrupted). Run yarn dev:prepare.")
         return False
     state = json.loads(state_path.read_text(encoding="utf-8"))
     ready = (
-        state.get("source") == str(ROOT)
+        runtime_matches
+        and state.get("source") == str(ROOT)
         and state.get("python") == os.path.abspath(sys.executable)
         and state.get("source_digest") == digest(inventory(ROOT))
         and state.get("payload_digest") == digest(inventory(workspace))
@@ -201,7 +255,10 @@ def main(arguments=None) -> int:
         try:
             descriptor = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
         except FileExistsError:
-            raise ValueError(f"Workspace busy: {lock}. Close the managed GUI first. If interrupted, verify no GUI/Agent is running before removing this lock.") from None
+            raise ValueError(
+                f"Workspace busy: {lock}. Close the managed GUI first. "
+                "If interrupted, verify no GUI/Agent is running before removing this lock."
+            ) from None
         try:
             with os.fdopen(descriptor, "w") as stream:
                 stream.write(str(os.getpid()))

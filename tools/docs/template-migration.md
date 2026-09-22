@@ -28,7 +28,7 @@ Prettier 配置合并到 `package.json` 的 `prettier` 字段，不再另设 `.p
 - Interface 设置 `project.interfaceUnmanaged: true`。控制器名、资源 ID、任务、分组、选项、MirrorChyan ID 和国际化标签由项目维护。
 - 资源选择顺序仍为 cn → base、en → base + en、zh_hant → base + zh_hant。配置中的资源 slug `zh-hant` 与实际目录 `zh_hant` 有意不同。
 - MaaFramework 与 Python binding 统一锁定 5.13.0，MFAAvalonia 保持原 CI 的 v2.16.2-beta.2。后续升级统一修改 manifest，再执行 `yarn versions:sync` 与 `yarn versions:check`，详见 [版本维护](version-management.md)。
-- Python 支持 3.11–3.13，桌面模板打包 Python 3.13，Android 继续使用现有 python-for-android 流程。
+- Python 支持 3.11–3.13，桌面模板打包 Python 3.13；Android 使用 MaaFwApp 与预编译 Python 内核。
 
 ## 开发命令
 
@@ -46,7 +46,7 @@ Yarn 1 的 `yarn check` 是其内置依赖检查，务必使用 `yarn run check`
 
 ## 发布和维护
 
-桌面 `release.yml` 使用六个平台的对应架构 runner、CMP runtime 同步和内置 Python。依赖在构建时安装，Agent 首次启动不执行 pip。CMP 直接将 GUI 可执行文件命名为 `MaaDuDuL`，不再用 PyInstaller 构建额外启动器。发布包额外包含 locales、tools/ci/config 和图标，并保留项目更新日志和 MirrorChyan 上传。Android 继续使用单对象 Agent 声明和原有 APK 集成方式，单独的 `tools/ci/requirements-android.txt` 避免将桌面锁文件及平台标记传给 p4a。
+桌面 `desktop.yml` 使用六个平台的对应架构 runner、CMP runtime 同步和内置 Python，供手动构建及 `release.yml` 复用。依赖在构建时安装，Agent 首次启动不执行 pip。CMP 直接将 GUI 可执行文件命名为 `MaaDuDuL`，不再用 PyInstaller 构建额外启动器。发布包额外包含 locales、tools/ci/config 和图标，并保留项目更新日志和 MirrorChyan 上传。Android 使用 MaaFwApp 配方接入资源和 Python agent，依赖由 `tools/ci/requirements-android.txt` 声明。
 
 ```sh
 yarn doctor

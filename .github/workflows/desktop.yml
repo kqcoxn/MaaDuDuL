@@ -1,0 +1,183 @@
+name: Desktop Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: Desktop platform (win = Windows, osx = macOS)
+        type: choice
+        default: win
+        options: [win, linux, osx, all]
+      arch:
+        description: CPU architecture
+        type: choice
+        default: x64
+        options: [x64, arm64, all]
+  workflow_call:
+    inputs:
+      platform:
+        type: string
+        default: all
+      arch:
+        type: string
+        default: all
+      dry_run:
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  select-platforms:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+    steps:
+      - name: Select build targets
+        id: select
+        shell: bash
+        env:
+          PLATFORM: ${{ inputs.platform }}
+          ARCH: ${{ inputs.arch }}
+        run: |
+          node --input-type=module <<'JS'
+          import {appendFileSync} from 'node:fs';
+          const {PLATFORM, ARCH} = process.env;
+          if (!['all', 'win', 'linux', 'osx'].includes(PLATFORM) ||
+              !['all', 'x64', 'arm64'].includes(ARCH)) {
+            throw new Error('Unsupported desktop platform or architecture');
+          }
+          const targets = [
+            {"os":"windows-latest","artifact_os":"win","arch":"x86_64","runtime_os":"win","runtime_arch":"x64","ext":"zip"},
+            {"os":"windows-11-arm","artifact_os":"win","arch":"aarch64","runtime_os":"win","runtime_arch":"arm64","ext":"zip"},
+            {"os":"ubuntu-latest","artifact_os":"linux","arch":"x86_64","runtime_os":"linux","runtime_arch":"x64","ext":"tar.gz"},
+            {"os":"ubuntu-24.04-arm","artifact_os":"linux","arch":"aarch64","runtime_os":"linux","runtime_arch":"arm64","ext":"tar.gz"},
+            {"os":"macos-15-intel","artifact_os":"macos","arch":"x86_64","runtime_os":"osx","runtime_arch":"x64","ext":"tar.gz"},
+            {"os":"macos-latest","artifact_os":"macos","arch":"aarch64","runtime_os":"osx","runtime_arch":"arm64","ext":"tar.gz"},
+          ];
+          const include = targets.filter(target =>
+            (PLATFORM === 'all' || target.runtime_os === PLATFORM) &&
+            (ARCH === 'all' || target.runtime_arch === ARCH));
+          appendFileSync(process.env.GITHUB_OUTPUT, 'matrix=' + JSON.stringify({include}) + '\n');
+          JS
+
+  package:
+    name: ${{ matrix.artifact_os }}-${{ matrix.arch }} package
+    needs: select-platforms
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.select-platforms.outputs.matrix) }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: true
+      - name: Read project versions
+        id: versions
+        run: node tools/versions.mjs --ci
+      - uses: actions/setup-python@v7
+        if: hashFiles('pyproject.toml') != ''
+        with:
+          python-version: ${{ steps.versions.outputs.python }}
+      - uses: astral-sh/setup-uv@v9.0.0
+        if: hashFiles('pyproject.toml') != ''
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ steps.versions.outputs.node }}
+          cache: yarn
+      - run: corepack enable
+      - run: yarn install --frozen-lockfile
+      - run: yarn audit --level high
+      - run: yarn run check
+      - run: yarn release:dry-run
+        if: inputs.dry_run
+      - name: Resolve package version
+        if: ${{ !inputs.dry_run }}
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            package_version="$GITHUB_REF_NAME"
+          else
+            package_version="v${PROJECT_VERSION}-ci.${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}-${GITHUB_SHA:0:7}"
+          fi
+          echo "PACKAGE_VERSION=$package_version" >> "$GITHUB_ENV"
+      - run: yarn sync:runtime
+        if: ${{ !inputs.dry_run }}
+        env:
+          CREATE_MAA_PROJECT_RUNTIME_PLATFORM: ${{ matrix.runtime_os }}-${{ matrix.runtime_arch }}
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Build desktop packages
+        if: ${{ !inputs.dry_run }}
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            node tools/build-release.mjs
+          else
+            node tools/build-release.mjs --release-tag "$PACKAGE_VERSION"
+          fi
+        env:
+          CREATE_MAA_PROJECT_RUNTIME_PLATFORM: ${{ matrix.runtime_os }}-${{ matrix.runtime_arch }}
+      - name: Apply app icon
+        if: ${{ !inputs.dry_run && hashFiles('public/logo.ico') != '' }}
+        shell: bash
+        run: |
+          for pkg_dir in dist/package-*; do
+            [ -d "$pkg_dir" ] || continue
+            gui=$(basename "$pkg_dir" | sed 's/^package-//')
+            cp public/logo.ico "$pkg_dir/logo.ico"
+
+            if [[ "${{ matrix.runtime_os }}" == "win" ]]; then
+              if [ ! -f rcedit.exe ]; then
+                rcedit_version="$RCEDIT_VERSION"
+                curl -fsSL "https://github.com/electron/rcedit/releases/download/v${rcedit_version}/rcedit-x64.exe" -o rcedit.exe
+              fi
+              echo "$RCEDIT_SHA256  rcedit.exe" | sha256sum --check --strict
+              exe="$(find "$pkg_dir" -maxdepth 1 -type f -name '*.exe' | head -n 1)"
+              if [[ -n "$exe" ]]; then
+                ./rcedit.exe "$exe" --set-icon public/logo.ico
+                echo "[OK] Applied Windows executable icon: $exe ($gui)"
+              else
+                echo "[WARN] Windows executable was not found in $pkg_dir; skipped."
+              fi
+            fi
+          done
+      - name: Package
+        if: ${{ !inputs.dry_run }}
+        shell: bash
+        run: |
+          mkdir -p dist
+          shopt -s nullglob
+          package_dirs=(dist/package-*/)
+          if (( ${#package_dirs[@]} == 0 )); then
+            echo "[ERR] no release packages were generated"
+            exit 1
+          fi
+          for pkg_dir in "${package_dirs[@]}"; do
+            gui=$(basename "$pkg_dir" | sed 's/^package-//')
+            # macOS runners resolve `shell: bash` to the system bash 3.2, which predates the
+            # parameter-expansion case modifiers, so uppercase through tr instead.
+            gui_upper="$(printf '%s' "$gui" | tr '[:lower:]' '[:upper:]')"
+            archive="MaaDuDuL-${{ matrix.artifact_os }}-${{ matrix.arch }}-${PACKAGE_VERSION}-${gui_upper}.${{ matrix.ext }}"
+            (
+              cd "$pkg_dir"
+              if [[ "${{ matrix.ext }}" == "zip" ]]; then
+                7z a "../$archive" .
+              else
+                tar -czf "../$archive" .
+                tar -tzvf "../$archive" > "../$archive.manifest"
+                if ! awk '$1 ~ /^-/ && $0 ~ /(^|\/)(MaaDuDuL|MFAAvalonia|mxu|MaaPiCli|MaaAgentServer|maa-cli|python3?)$/ && $1 !~ /^-..x/ { print; bad=1 } END { exit bad }' "../$archive.manifest"; then
+                  echo "[ERR] Unix archive is missing executable permission metadata"
+                  exit 1
+                fi
+                echo "[OK] Unix archive executable metadata smoke passed"
+              fi
+            )
+            rm -rf "$pkg_dir"
+          done
+      - uses: actions/upload-artifact@v7
+        if: ${{ !inputs.dry_run }}
+        with:
+          name: ${{ matrix.artifact_os }}-${{ matrix.arch }}
+          path: dist/*
+          if-no-files-found: error

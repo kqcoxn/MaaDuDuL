@@ -11,7 +11,7 @@ def run_agent() -> int:
     from agent.preprocess import clear
 
     if len(sys.argv) < 2:
-        Prompter.log("缺少 Agent socket ID，请通过 MFAAvalonia 或 yarn agent 启动。")
+        Prompter.log("缺少 Agent socket ID，请通过客户端或 yarn agent 启动。")
         return 2
 
     try:

@@ -1,138 +1,42 @@
-"""Android resource payload adapter; desktop packaging uses build-release.mjs."""
-from pathlib import Path
+"""Stage MaaDuDuL resources for MaaFwApp without modifying development resources."""
 
+import json
 import shutil
 import sys
-import platform
+from pathlib import Path
 
-try:
-    import jsonc
-except ModuleNotFoundError as e:
-    raise ImportError(
-        "Missing dependency 'json-with-comments' (imported as 'jsonc').\n"
-        f"Install it with:\n  {sys.executable} -m pip install json-with-comments\n"
-        "Or add it to your project's requirements."
-    ) from e
-
-from configure import configure_ocr_model
+ROOT = Path(__file__).resolve().parent.parent
 
 
-working_dir = Path(__file__).parent.parent.resolve()
-install_path = working_dir / Path("install")
-with (working_dir / "maa-project.json").open(encoding="utf-8") as manifest_file:
-    project_version = jsonc.load(manifest_file)["project"]["version"]
-version = sys.argv[1] if len(sys.argv) > 1 else f"v{project_version}"
-# 从命令行参数获取目标平台，如果没有提供则使用当前系统平台
-target_os = len(sys.argv) > 2 and sys.argv[2] or platform.system().lower()
+def stage(version: str) -> Path:
+    manifest = json.loads((ROOT / "maa-project.json").read_text(encoding="utf-8"))
+    target = ROOT / "install"
+    if target.exists():
+        raise FileExistsError("install/ already exists; use a fresh checkout for Android packaging")
+    target.mkdir()
+    for directory in ("tasks", "resource", "locales", "agent"):
+        ignored = ["__pycache__", "*.pyc"] + (["config"] if directory == "agent" else [])
+        shutil.copytree(ROOT / directory, target / directory, ignore=shutil.ignore_patterns(*ignored))
+    shutil.copytree(ROOT / "tools/ci/config", target / "config")
+    (target / "public").mkdir()
+    shutil.copy2(ROOT / "public/logo.png", target / "public/logo.png")
+    for filename in ("LICENSE", "README.md"):
+        shutil.copy2(ROOT / filename, target / filename)
 
-
-def get_agent_python_path(os_name: str) -> str:
-    """Return the Agent executable configured for a target platform."""
-    normalized_os = os_name.lower()
-    if normalized_os in {"android"}:
-        # MFAAvalonia's Android service runs the embedded interpreter itself and
-        # resolves the Agent script from child_args/entrypoint.  A desktop
-        # embedded-Python path would either not exist or be treated as a script.
-        return "python"
-    if normalized_os in {"win", "windows", "win32"}:
-        return "./python/python.exe"
-    if normalized_os in {"darwin", "macos", "mac", "linux"}:
-        unix_candidates = (
-            install_path / "python" / "bin" / "python",
-            install_path / "python" / "bin" / "python3",
-        )
-        for candidate in unix_candidates:
-            if candidate.is_file():
-                return f"./python/bin/{candidate.name}"
-        raise FileNotFoundError(
-            "No Unix Python executable found under install/python/bin"
-        )
-    raise ValueError(f"Unsupported target platform: {os_name}")
-
-
-def install_resource():
-
-    configure_ocr_model()
-
-    install_path.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(working_dir / "tasks", install_path / "tasks", dirs_exist_ok=True)
-    (install_path / "public").mkdir(parents=True, exist_ok=True)
-    shutil.copy2(working_dir / "public" / "logo.png", install_path / "public" / "logo.png")
-
-    shutil.copytree(
-        working_dir / "resource",
-        install_path / "resource",
-        dirs_exist_ok=True,
-    )
-    shutil.copy2(
-        working_dir / "interface.json",
-        install_path,
-    )
-    if (working_dir / "locales").exists():
-        shutil.copytree(
-            working_dir / "locales",
-            install_path / "locales",
-            dirs_exist_ok=True,
-        )
-
-    with open(install_path / "interface.json", "r", encoding="utf-8") as f:
-        interface = jsonc.load(f)
-
+    interface = json.loads((ROOT / "interface.json").read_text(encoding="utf-8"))
     interface["version"] = version
+    # MaaFwApp takes the actual executable/args from pi-profile.yaml. Preserve
+    # the project's agent declaration and desktop command in the source file.
+    (target / "interface.json").write_text(json.dumps(interface, ensure_ascii=False, indent=4) + "\n", encoding="utf-8")
 
-    # 根据目标平台设置Python路径
-    interface["agent"]["child_exec"] = get_agent_python_path(target_os)
-    interface["agent"]["child_args"] = ["-u", "agent/main.py"]
-
-    with open(install_path / "interface.json", "w", encoding="utf-8") as f:
-        jsonc.dump(interface, f, ensure_ascii=False, indent=4)
-
-
-def install_chores():
-    shutil.copy2(
-        working_dir / "README.md",
-        install_path,
-    )
-    shutil.copy2(
-        working_dir / "LICENSE",
-        install_path,
-    )
-    # 复制requirements.txt供用户手动更新依赖
-    if (working_dir / "requirements.txt").exists():
-        shutil.copy2(
-            working_dir / "requirements.txt",
-            install_path,
-        )
-
-
-def install_config():
-    """安装config和descs配置文件夹"""
-    # 创建install目录（如果不存在）
-    install_path.mkdir(parents=True, exist_ok=True)
-
-    # 复制config文件夹
-    if (working_dir / "tools" / "ci" / "config").exists():
-        shutil.copytree(
-            working_dir / "tools" / "ci" / "config",
-            install_path / "config",
-            dirs_exist_ok=True,
-        )
-
-
-def install_agent():
-    """安装agent代码，但排除config目录（已在install_config中处理）"""
-    shutil.copytree(
-        working_dir / "agent",
-        install_path / "agent",
-        ignore=shutil.ignore_patterns("config"),  # 排除agent/config，使用根目录的config
-        dirs_exist_ok=True,
-    )
+    ocr = manifest["ocr"]
+    model_dir = target / "resource/base/model/ocr"
+    model_dir.mkdir(parents=True, exist_ok=True)
+    for filename, source in ocr["files"].items():
+        shutil.copy2(ROOT / ocr["submodulePath"] / source, model_dir / filename)
+    print(f"Android resources staged at {target}")
+    return target
 
 
 if __name__ == "__main__":
-    install_resource()
-    install_chores()
-    install_agent()
-    install_config()
-
-    print(f"Install to {install_path} successfully.")
+    stage(sys.argv[1])

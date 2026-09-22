@@ -1,0 +1,33 @@
+# Paths are relative to this profile. CI prepares install/ without changing the source Interface.
+assets: ../../../install
+include:
+  - interface.json
+  - tasks/**
+  - resource/**
+  - locales/**
+  - public/**
+  - agent/**
+  - config/**
+  - LICENSE
+  - README.md
+exclude:
+  - "**/__pycache__/**"
+  - "**/*.pyc"
+agent:
+  sourceDir: "${MDDL_ANDROID_AGENT_DIR}"
+  abi: [arm64-v8a, x86_64]
+  runtimes:
+    - location: bundle
+      executable: bin/python3
+      args: [-u, agent/main.py]
+      env:
+        PYTHONHOME: "{bundle}/prefix"
+        PYTHONPATH: "{bundle}/site-packages/pure.zip:{bundle}/site-packages"
+        LD_LIBRARY_PATH: "{bundle}/prefix/lib:{nativeLibs}"
+        MAAFW_BINARY_PATH: "{nativeLibs}"
+        PYTHONIOENCODING: utf-8
+        # MaaFwApp replaces the entire PI directory on upgrade. Keep custom state beside it.
+        MDDL_STATE_ROOT: ../mddl-state
+app:
+  label: MaaDuDuL
+  icon: ../../../public/logo.png

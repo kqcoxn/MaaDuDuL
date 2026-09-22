@@ -106,14 +106,16 @@
             "standaloneRelease": "20260901"
         },
         "android": {
-            "mfaRepository": "MaaXYZ/MFAAvalonia",
-            "p4a": "v2026.05.09",
+            "appRepository": "Aliothmoon/MaaFwApp",
+            "appRef": "v0.1.0",
+            "agentCoreRepository": "Aliothmoon/MaaAgentCoreAndroid",
+            "agentCoreTag": "3.13.15-maafw5.12.3",
+            "agentPython": "3.13.15",
             "ndk": "28.2.13676358",
-            "avalonia": "11.3.13",
-            "buildPython": "3.11",
+            "buildPython": "3.13",
             "java": "17",
-            "dotnet": "10.0.x",
-            "sdk": "36",
+            "cmake": "3.22.1",
+            "sdk": "37",
             "buildTools": "36.0.0"
         },
         "rcedit": "2.0.0",

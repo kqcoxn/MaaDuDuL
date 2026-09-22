@@ -1,6 +1,6 @@
 ---
 name: mddl-version-maintenance
-description: 维护 MaaDuDuL 的项目、MaaFramework、MFAA 和构建工具链版本，核对 maa-project.json、派生配置、锁文件以及本地与 CI 的一致性。用于升级、降级、锁定版本、准备版本号或排查版本漂移；不用于一般 Pipeline 功能开发，也不因修改版本而自动发布或安装测试环境。
+description: 维护 MaaDuDuL 的项目、MaaFramework、MFAA、MaaFwApp 和构建工具链版本，核对 maa-project.json、派生配置、锁文件以及本地与 CI 的一致性。用于升级、降级、锁定版本、准备版本号或排查版本漂移；不用于一般 Pipeline 功能开发，也不因修改版本而自动发布或安装测试环境。
 ---
 
 # MaaDuDuL 版本维护
@@ -22,7 +22,9 @@ description: 维护 MaaDuDuL 的项目、MaaFramework、MFAA 和构建工具链�
 
 - `project.version`：不带 `v` 的项目版本；Interface 和正式发布 tag 派生为 `v<版本>`。
 - `maafw.version`：桌面运行库、Python binding、Android 与本地检查共同使用。
-- `runtime.mfa.version`：MFAA 本地安装、桌面 CI 和 Android 源码 tag 共同使用；渠道字段也需匹配。
+- `runtime.mfa.version`：MFAA 本地安装和桌面 CI 使用；渠道字段也需匹配。
+- `maintenance.android.appRepository` / `appRef`：Android 的 MaaFwApp 上游与固定 ref；独立于桌面 MFAA。
+- `maintenance.android.agentCoreRepository` / `agentCoreTag` / `agentPython`：预编译 Android Python 内核来源与版本。内核 tag 中的 MaaFramework 版本是原始绑定版本；CI 使用 `tools/ci/android/align_binding.py` 将绑定替换为 `maafw.version`，原生库也使用该版本。
 - `python`：推荐解释器和兼容范围；`maintenance.pythonRuntime`：内置 Python 精确版本及 standalone release。
 - `maintenance`：项目自定义的 Node、Yarn、CMP、Android 工具链、rcedit 版本及校验值。
 
@@ -42,7 +44,8 @@ description: 维护 MaaDuDuL 的项目、MaaFramework、MFAA 和构建工具链�
 
 ## 按需兼容性核对
 
-- **MFAA**：核实目标 tag 有所需平台/架构资产；Android 的 `maintenance.android.mfaRepository` 必须有同一 tag。不能只确认桌面压缩包存在就宣称 Android 可构建；也不能静默回退 master 或旧仓库变量。
+- **MFAA**：核实目标 tag 有所需桌面平台/架构资产。
+- **MaaFwApp / Android 内核**：核实固定 ref 的配方与构建脚本、两种 ABI 的内核资产、`agentPython` 与内核元数据一致。升级 MaaFramework 时检查 binding 的 Android 平台适配和原生库依赖；不能直接依赖内核打包脚本，它会优先保留自带的旧 binding。保留既有应用 ID、签名和递增 versionCode。
 - **MaaFramework**：核实 Python binding、原生运行库和 Android 源码 tag 对应。涉及 API 或 Pipeline 语义变化时按项目要求查 `tools/docs/maafw-guide/`，必要时使用可用的 Maa 文档 skill。
 - **Python**：内置解释器 minor 与 recommendedPython 一致；Windows 版本和 standalone 的 Python 版本/release 分别核实。Android 构建宿主 Python 是独立配置，不强行改成桌面版本。
 - **CMP**：升级 npm 版本不等于重新生成模板。保留 `maintenance`、Yarn、版本读取脚本和自定义工作流；只有用户要求刷新模板时才走对应 CMP 维护流程。

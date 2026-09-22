@@ -6,7 +6,7 @@
 
 # MaaDuDuL</br>MDDL - 嘟嘟脸小助手
 
-基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 与 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 强力驱动！
+基于全新架构的 [**嘟嘟脸恶作剧**](https://game.bilibili.com/trickcal/) 小助手<br/>图像技术 + 模拟控制，解放双手，由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 驱动!
 
 <p align="center">
   <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.md" target="_blank"><img alt="pipeline" src="https://img.shields.io/badge/Pipeline-%23876f69?logo=paddypower&logoColor=%23FFFFFF"></a>
@@ -105,7 +105,8 @@
 - **本项目由 [MaaXYZ](https://github.com/MaaXYZ)/[MaaFramework](https://github.com/MaaXYZ/MaaFramework) 强力驱动！**
 - 项目脚手架：[create-maa-project](https://github.com/Windsland52/create-maa-project)；原始模板：[MaaPracticeBoilerplate](https://github.com/MaaXYZ/MaaPracticeBoilerplate)
 - 开发与维护：[模板迁移说明](tools/docs/template-migration.md)
-- GUI：[SweetSmellFox](https://github.com/SweetSmellFox)/[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
+- 桌面 GUI：[MaaXYZ/MFAAvalonia](https://github.com/MaaXYZ/MFAAvalonia)
+- 安卓 GUI：[Aliothmoon/MaaFwApp](https://github.com/Aliothmoon/MaaFwApp)
 - Pipeline 编辑器 / 测试：[kqcoxn](https://github.com/kqcoxn)/[MaaPipelineEditor](https://github.com/kqcoxn/MaaPipelineEditor)
 - 坨坨脸识别：[kqcoxn](https://github.com/kqcoxn)/[mddldl](https://github.com/kqcoxn/mddldl)
 - 分发：[MirrorChyan](https://github.com/MirrorChyan)/[Mirror 酱](https://mirrorchyan.com/zh/projects?source=mddl-github-readme)

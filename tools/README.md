@@ -5,7 +5,7 @@
 | 路径 | 用途 |
 | --- | --- |
 | `dev/` | 本地开发、Agent 和调试器启动脚本；独立 package.json 保留 CommonJS |
-| `ci/` | Android Pipeline 合并、发布默认 config、Android 依赖清单 |
+| `ci/` | MaaFwApp 打包配方与 APK 校验、发布默认 config、Android 依赖清单 |
 | `launcher/` | 旧 PyInstaller 启动器源码；CMP 桌面发布已不使用 |
 | `docs/` | 开发参考、协议文档与模板迁移说明 |
 | `schema/` | CMP 管理的 schema 快照 |
@@ -15,7 +15,7 @@
 
 根目录保留 Interface、CMP 和 maa-tools 入口，以及 Yarn、uv 的依赖清单与锁文件。`.github`、`.vscode`、`.editorconfig`、Prettier 配置和语言版本文件也保留在工具默认查找的位置。图标统一复用 `public/`，Interface 与开发/Android 资源包使用 `public/logo.png`；桌面打包还将 `public/logo.ico` 复制为包根目录的 `logo.ico`。
 
-CMP 的脚本与 schema 继续使用默认 `tools/` 路径。重新生成工作流时，应保留项目适配：`tools/ci/config` 打包到发布包的 `config/`，Android 使用 `tools/ci/requirements-android.txt` 和 `tools/ci/merge_pipeline.py`，资源检查使用 `tools/check_resource.py`。
+CMP 的脚本与 schema 继续使用默认 `tools/` 路径。重新生成工作流时，应保留项目适配：`tools/ci/config` 打包到发布包的 `config/`，Android 使用 `tools/ci/requirements-android.txt` 和 `tools/ci/android/`，资源检查使用 `tools/check_resource.py`。
 
 目录整理只修改文件位置和路径引用；未启动开发环境或执行构建、资源加载、设备测试。架构维护方式见 [模板迁移说明](docs/template-migration.md)。
 
