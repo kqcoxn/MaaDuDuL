@@ -654,9 +654,12 @@ jobs:
           abi = re.search(r"^native-code: (.+)$", badging, re.M)
           if not abi or re.findall(r"'([^']+)'", abi[1]) != [os.environ["EXPECTED_ABI"]]:
               raise SystemExit("[ERR] APK contains unexpected native architectures")
-          minimum = re.search(r"^sdkVersion:'(\d+)'", badging, re.M)
-          if not minimum or minimum[1] != "26":
-              raise SystemExit("[ERR] APK no longer supports the expected Android 8.0 minimum")
+          # Newer aapt2 calls this minSdkVersion; older versions use sdkVersion.
+          minimum = re.search(r"^(?:minSdkVersion|sdkVersion):'(\d+)'", badging, re.M)
+          if not minimum:
+              raise SystemExit(f"[ERR] Cannot read APK minimum SDK from aapt2 badging:\n{badging}")
+          if minimum[1] != "26":
+              raise SystemExit(f"[ERR] APK minimum SDK is {minimum[1]}; expected 26 (Android 8.0)")
           print("[OK] APK installation metadata verified")
           PY
 
