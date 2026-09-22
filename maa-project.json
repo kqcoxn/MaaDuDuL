@@ -116,6 +116,7 @@
             "java": "17",
             "cmake": "3.22.1",
             "sdk": "37",
+            "sdkPlatform": "37.0",
             "buildTools": "36.0.0"
         },
         "rcedit": "2.0.0",

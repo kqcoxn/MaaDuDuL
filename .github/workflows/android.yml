@@ -107,7 +107,7 @@ jobs:
 
       - name: Install Android build tools
         run: |
-          sdkmanager "platforms;android-$ANDROID_SDK" \
+          sdkmanager "platforms;android-$ANDROID_SDK_PLATFORM" \
             "build-tools;$ANDROID_BUILD_TOOLS" "ndk;$ANDROID_NDK" "cmake;$ANDROID_CMAKE"
 
       - name: Setup Gradle

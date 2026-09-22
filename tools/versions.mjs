@@ -46,6 +46,8 @@ if (mode === "--ci") {
         JAVA_VERSION: a.java,
         ANDROID_CMAKE: a.cmake,
         ANDROID_SDK: a.sdk,
+        // SDK package IDs may include a minor version even when compileSdk is an integer.
+        ANDROID_SDK_PLATFORM: a.sdkPlatform,
         ANDROID_BUILD_TOOLS: a.buildTools,
         RCEDIT_VERSION: m.rcedit,
         RCEDIT_SHA256: m.rceditSha256,
