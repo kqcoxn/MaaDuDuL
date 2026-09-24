@@ -362,7 +362,9 @@ async function downloadWithRetry(url) {
                 throw error;
             }
             const waitMs = 1_000 * 2 ** (attempt - 1);
-            console.warn(`[WARN] Download attempt ${attempt}/${maxAttempts} failed: ${error.message}. Retrying in ${waitMs / 1_000}s...`);
+            console.warn(
+                `[WARN] Download attempt ${attempt}/${maxAttempts} failed: ${error.message}. Retrying in ${waitMs / 1_000}s...`,
+            );
             await delay(waitMs);
         }
     }
