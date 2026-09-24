@@ -71,11 +71,11 @@ class SelectCloneLevel(CustomAction):
     根据传入的关卡编号，自动计算屏幕坐标并点击对应的关卡。
 
     参数格式：
-        - level 或 l：关卡编号（1-15）
+        - level 或 l：关卡编号（1-18）
 
     关卡布局：
         - 1-8 关：屏幕可见区域，起始坐标 (118, 238)，每行 4 个，共 2 行
-        - 9-15 关：需要向上滑动后可见，起始坐标 (117, 343)，每行 4 个，共 2 行
+        - 9-18 关：需要向上滑动至底部后可见，起始坐标 (117, 174)，每行 4 个，共 3 行
     """
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
@@ -100,17 +100,17 @@ class SelectCloneLevel(CustomAction):
             tasker = Tasker(context)
 
             # 关卡 1-8
-            if level < 8:
-                tasker.swipe(360, 210, 360, 596).wait()
+            if level <= 8:
+                tasker.swipe(360, 210, 360, 596).wait(1)
                 mo = MatrixOperator(118, 238, 163, 178)
                 row = (level - 1) // 4 + 1
                 col = (level - 1) % 4 + 1
                 tasker.click(*mo.get_pos(row, col))
 
-            # 关卡 9-15
+            # 关卡 9-18
             else:
-                tasker.swipe(360, 596, 360, 210).wait()
-                mo = MatrixOperator(117, 343, 163, 178)
+                tasker.swipe(360, 596, 360, 210).wait(1)
+                mo = MatrixOperator(117, 174, 163, 178)
                 level -= 8
                 row = (level - 1) // 4 + 1
                 col = (level - 1) % 4 + 1
@@ -126,12 +126,14 @@ class SelectCrayonLevel(CustomAction):
     """选择到手蜡关卡的自定义动作
 
     根据传入的关卡编号，自动计算屏幕坐标并点击对应的关卡。
-    到手蜡关卡采用 5 列布局
+    到手蜡关卡采用每页 2 行、每行 5 列的布局。
 
     参数格式：
-        - level 或 l：关卡编号（从 1 开始）
+        - level 或 l：关卡编号（1-12）
 
     关卡布局：
+        - 第 1 页：1-10 关，左翻页按钮坐标 (244, 679)
+        - 第 2 页：11-12 关，右翻页按钮坐标 (439, 679)
         - 起始坐标：(80, 264)
         - 间隔：横向 123px，纵向 276px
         - 每行 5 个关卡
@@ -156,6 +158,12 @@ class SelectCrayonLevel(CustomAction):
 
             Prompter.log(f"选择关卡：{level}")
             tasker = Tasker(context)
+
+            if level <= 10:
+                tasker.click(244, 679).wait()
+            else:
+                tasker.click(439, 679).wait()
+                level -= 10
 
             mo = MatrixOperator(80, 264, 123, 276)
             row = (level - 1) // 5 + 1

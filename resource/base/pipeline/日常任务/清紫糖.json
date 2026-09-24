@@ -3,16 +3,17 @@
         "$__mpe_code": {
             "prefix": "清紫糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1784466102066,
+            "lastSyncTime": 1790264295139,
             "isModifiedExternally": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
+            "isDeleted": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
             "savedViewport": {
-                "x": -10987,
-                "y": -2963,
-                "zoom": 1.5
+                "x": -10773,
+                "y": -1848,
+                "zoom": 1.52
             },
             "filename": "清紫糖",
-            "version": "v1.7.4"
+            "version": "v1.10.1"
         }
     },
     "$__mpe_external_返回主界面_清紫糖": {
@@ -90,8 +91,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7069,
-                "y": 951
+                "x": 7066,
+                "y": 983
             }
         }
     },
@@ -199,8 +200,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6800,
-                "y": 1627
+                "x": 6798,
+                "y": 1676
             }
         }
     },
@@ -607,8 +608,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    1086,
-                    484,
+                    1005,
+                    326,
                     1,
                     1
                 ]
