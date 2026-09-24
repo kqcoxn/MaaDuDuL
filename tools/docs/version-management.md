@@ -4,7 +4,7 @@
 
 | 字段 | 用途 |
 | --- | --- |
-| `project.version` | 项目版本；同步到 Interface、package 和 pyproject，发布 tag 必须匹配 |
+| `project.version` | 项目版本；同步到 Interface、package、pyproject、更新日志首行和中英文窗口标题，发布 tag 必须匹配 |
 | `maafw.version` | 桌面运行库、Python binding、本地环境检查、Android binding/runtime、maa-tools |
 | `runtime.mfa.version` | 本地 MFAA 安装、桌面运行库 |
 | `python.recommendedPython` / `requiresPython` | 开发与桌面 CI Python、Python 兼容范围 |
@@ -16,6 +16,25 @@
 `maintenance` 是项目自定义配置，CMP 3.5.2 的配置读取保留此字段。重新生成模板时需保留它及本项目的版本读取逻辑。Android 从 `maintenance.android.appRepository` / `appRef` 读取 MaaFwApp 上游；与桌面 MFAA 的版本独立。`agentCoreRepository` / `agentCoreTag` / `agentPython` 固定预编译内核，CI 将其中的 Python binding 替换为 `maafw.version` 对应源码并保留 Android 平台名适配，因此内核 tag 中的旧 MaaFramework 版本不代表 APK 的实际版本。
 
 ## 修改流程
+
+仅替换项目版号时，在仓库根目录执行：
+
+```sh
+yarn version:set 1.2.3
+```
+
+也支持 `v1.2.3`，以及 `1.2.3-alpha.1`、`1.2.3-beta.1`、`1.2.3-rc.1` 预发布版。
+命令修改 `maa-project.json` 的 `project.version`，随后自动执行现有的版本同步及一致性检查，
+更新 `package.json`、`interface.json`、`pyproject.toml` 及 Python 锁文件/导出，
+同时更新 `resource/Changelog.md` 的首行版号和 `locales/interface_zh.json`、`locales/interface_en.json` 的 `project_title` 版号。
+更新日志的日期、正文和历史记录保持不变，窗口标题中的游戏版本文字保持不变。
+这些字段也纳入 `yarn versions:sync` 和 `yarn versions:check`，遗漏同步时检查会报错。
+需要已安装 Node.js、Yarn 和 uv，同步期间可能访问网络。重复传入当前版号也会执行同步检查。
+同步会以 manifest 为准处理全部受管理的版本字段，因此其他尚未同步的版本修改也会一并生效。
+失败时命令返回非零退出码并保留已发生的修改，修复原因后可重新执行。
+该命令不安装本地 MFAA、不构建、不创建或推送 tag；实际发布仍单独使用 `yarn release`。
+
+需要调整 MaaFramework、MFAA 或工具链版本时：
 
 1. 修改 `maa-project.json` 中相关版本。
 2. 执行 `yarn versions:sync`：同步派生版本文件、运行 `uv lock` 并导出 requirements；CMP 依赖版本变化时同步 Yarn 锁文件。

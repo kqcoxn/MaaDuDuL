@@ -107,6 +107,24 @@ if (mode === "--ci") {
             `"version": "v${version}"`,
         ],
     ]);
+    // 只更新本次日志的首行版号，保留日期、正文及可能存在的历史记录。
+    replace("resource/Changelog.md", [
+        [
+            /^# v\d+\.\d+\.\d+(?:-[\w.-]+)?(?=[ \t]*(?:\n|$))/,
+            `# v${version}`,
+        ],
+    ]);
+    for (const path of [
+        "locales/interface_zh.json",
+        "locales/interface_en.json",
+    ]) {
+        replace(path, [
+            [
+                /("project_title"\s*:\s*"[^"\r\n]*? )v\d+\.\d+\.\d+(?:-[\w.-]+)?(?= - MFAA\b)/,
+                (_, prefix) => `${prefix}v${version}`,
+            ],
+        ]);
+    }
     replace("pyproject.toml", [
         [
             /^version = "[^"]+"/m,

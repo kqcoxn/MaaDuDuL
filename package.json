@@ -41,10 +41,11 @@
         "dev:start": "node tools/dev/run_python.js tools/dev/mfaa.py start",
         "dev:status": "node tools/dev/run_python.js tools/dev/mfaa.py status",
         "dev:install": "node tools/dev/run_python.js tools/dev/install_mfaa.py",
+        "version:set": "node tools/set-version.mjs",
         "versions:sync": "node tools/versions.mjs --sync",
         "versions:check": "node tools/versions.mjs --check"
     },
-    "version": "1.1.7",
+    "version": "1.2.0",
     "type": "module",
     "prettier": {
         "plugins": [

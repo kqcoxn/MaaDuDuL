@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "启动游戏",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788262965009,
+            "lastSyncTime": 1790251005999,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "savedViewport": {
-                "x": -2315,
-                "y": -498,
-                "zoom": 1.98
+                "x": -1888,
+                "y": -322,
+                "zoom": 1.74
             },
             "filename": "启动游戏",
-            "version": "v1.9.2"
+            "version": "v1.10.1"
         }
     },
     "启动游戏_关闭公告": {
@@ -54,9 +54,13 @@
                     "main/close-trans.png",
                     "main/close-email.png",
                     "main/close-month.png",
-                    "global/home.png"
+                    "global/home.png",
+                    "main/close-activity-1.png",
+                    "main/close-activity-2.png"
                 ],
                 "threshold": [
+                    0.9,
+                    0.9,
                     0.9,
                     0.9,
                     0.9,
@@ -97,12 +101,12 @@
             "启动游戏_连续识别开始界面",
             "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_无可领取的奖励",
-            "[JumpBack]启动游戏_更新游戏",
             "[JumpBack]启动游戏_领取礼物",
             "[JumpBack]启动游戏_点击屏幕继续",
             "[JumpBack]启动游戏_关闭面板",
-            "[JumpBack]启动游戏_闲时捏脸",
-            "[JumpBack]启动游戏_更新结束"
+            "[JumpBack]启动游戏_更新游戏",
+            "[JumpBack]启动游戏_更新结束",
+            "[JumpBack]启动游戏_闲时捏脸"
         ],
         "$__mpe_code": {
             "position": {
@@ -264,8 +268,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 951,
-                "y": 380
+                "x": 949,
+                "y": 471
             }
         }
     },
