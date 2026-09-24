@@ -169,7 +169,7 @@ jobs:
                 # Info-ZIP preserves Unix executable permissions and symlinks.
                 zip -qry "../$archive" .
                 zipinfo -l "../$archive" > "../$archive.manifest"
-                if ! awk '$1 ~ /^-/ && $0 ~ /(^|\/)(MaaDuDuL|MFAAvalonia|mxu|MaaPiCli|MaaAgentServer|maa-cli|python3?)$/ && $1 !~ /^-..x/ { print; bad=1 } END { exit bad }' "../$archive.manifest"; then
+                if ! LC_ALL=C awk '$1 ~ /^-/ && $0 ~ /(^|\/)(MaaDuDuL|MFAAvalonia|mxu|MaaPiCli|MaaAgentServer|maa-cli|python3?)$/ && $1 !~ /^-..x/ { print; bad=1 } END { exit bad }' "../$archive.manifest"; then
                   echo "[ERR] Unix archive is missing executable permission metadata"
                   exit 1
                 fi
