@@ -31,7 +31,7 @@ features:
       details: MDDL 是开源的，您可以通过 Github、群文件等多种方式获取 MDDL。
     - icon: ⭐
       title: 多平台支持
-      details: 支持 Windows、MacOS（PlayCover）、Linux 系统，在任意设备上开始自动化之旅。
+      details: 支持 Windows、macOS（模拟器或 PlayCover）、Linux，Android 端现提供试用 APK。
 ---
 
 <script setup lang="ts">
