@@ -1,6 +1,6 @@
 [project]
 name = "maa-dudul"
-version = "1.2.0"
+version = "1.2.1"
 description = "MaaDuDuL MaaFW Agent project"
 requires-python = ">=3.11,<3.14"
 dependencies = [

@@ -11,6 +11,7 @@ import {
     writeFileSync,
 } from "node:fs";
 import {dirname, join} from "node:path";
+import {setTimeout as delay} from "node:timers/promises";
 
 // Rendered from src/assets.ts so the CLI's own interpreter download and this project-side script
 // can never fetch different Python runtimes.
@@ -332,11 +333,7 @@ async function downloadToCache(url, filename, expectedSha256) {
     mkdirSync(cacheDir, {recursive: true});
     const target = join(cacheDir, filename);
     console.log(`Downloading ${url}`);
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error(`Failed to download ${url}: HTTP ${response.status}`);
-    }
-    const content = Buffer.from(await response.arrayBuffer());
+    const content = await downloadWithRetry(url);
     if (expectedSha256) {
         const actual = sha256(content);
         if (actual !== expectedSha256) {
@@ -345,6 +342,30 @@ async function downloadToCache(url, filename, expectedSha256) {
     }
     writeFileSync(target, content);
     return target;
+}
+
+async function downloadWithRetry(url) {
+    const maxAttempts = 4;
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+        let retryable = true;
+        try {
+            const response = await fetch(url, {signal: AbortSignal.timeout(120_000)});
+            if (!response.ok) {
+                retryable = response.status === 408 || response.status === 429 || response.status >= 500;
+                await response.body?.cancel();
+                throw new Error(`Failed to download ${url}: HTTP ${response.status}`);
+            }
+            // Read the body inside the retry boundary so interrupted transfers retry too.
+            return Buffer.from(await response.arrayBuffer());
+        } catch (error) {
+            if (!retryable || attempt === maxAttempts) {
+                throw error;
+            }
+            const waitMs = 1_000 * 2 ** (attempt - 1);
+            console.warn(`[WARN] Download attempt ${attempt}/${maxAttempts} failed: ${error.message}. Retrying in ${waitMs / 1_000}s...`);
+            await delay(waitMs);
+        }
+    }
 }
 
 function extractZipWithPython(archivePath, target) {

@@ -51,10 +51,10 @@ jobs:
           const targets = [
             {"os":"windows-latest","artifact_os":"win","arch":"x86_64","runtime_os":"win","runtime_arch":"x64","ext":"zip"},
             {"os":"windows-11-arm","artifact_os":"win","arch":"aarch64","runtime_os":"win","runtime_arch":"arm64","ext":"zip"},
-            {"os":"ubuntu-latest","artifact_os":"linux","arch":"x86_64","runtime_os":"linux","runtime_arch":"x64","ext":"tar.gz"},
-            {"os":"ubuntu-24.04-arm","artifact_os":"linux","arch":"aarch64","runtime_os":"linux","runtime_arch":"arm64","ext":"tar.gz"},
-            {"os":"macos-15-intel","artifact_os":"macos","arch":"x86_64","runtime_os":"osx","runtime_arch":"x64","ext":"tar.gz"},
-            {"os":"macos-latest","artifact_os":"macos","arch":"aarch64","runtime_os":"osx","runtime_arch":"arm64","ext":"tar.gz"},
+            {"os":"ubuntu-latest","artifact_os":"linux","arch":"x86_64","runtime_os":"linux","runtime_arch":"x64","ext":"zip"},
+            {"os":"ubuntu-24.04-arm","artifact_os":"linux","arch":"aarch64","runtime_os":"linux","runtime_arch":"arm64","ext":"zip"},
+            {"os":"macos-15-intel","artifact_os":"macos","arch":"x86_64","runtime_os":"osx","runtime_arch":"x64","ext":"zip"},
+            {"os":"macos-latest","artifact_os":"macos","arch":"aarch64","runtime_os":"osx","runtime_arch":"arm64","ext":"zip"},
           ];
           const include = targets.filter(target =>
             (PLATFORM === 'all' || target.runtime_os === PLATFORM) &&
@@ -155,17 +155,20 @@ jobs:
           fi
           for pkg_dir in "${package_dirs[@]}"; do
             gui=$(basename "$pkg_dir" | sed 's/^package-//')
-            # macOS runners resolve `shell: bash` to the system bash 3.2, which predates the
-            # parameter-expansion case modifiers, so uppercase through tr instead.
-            gui_upper="$(printf '%s' "$gui" | tr '[:lower:]' '[:upper:]')"
-            archive="MaaDuDuL-${{ matrix.artifact_os }}-${{ matrix.arch }}-${PACKAGE_VERSION}-${gui_upper}.${{ matrix.ext }}"
+            # Keep the default client name compatible with historical releases.
+            suffix=""
+            if [[ "$gui" != "mfaa" ]]; then
+              suffix="-$(printf '%s' "$gui" | tr '[:lower:]' '[:upper:]')"
+            fi
+            archive="MaaDuDuL-${{ matrix.artifact_os }}-${{ matrix.arch }}-${PACKAGE_VERSION}${suffix}.${{ matrix.ext }}"
             (
               cd "$pkg_dir"
-              if [[ "${{ matrix.ext }}" == "zip" ]]; then
+              if [[ "${{ matrix.runtime_os }}" == "win" ]]; then
                 7z a "../$archive" .
               else
-                tar -czf "../$archive" .
-                tar -tzvf "../$archive" > "../$archive.manifest"
+                # Info-ZIP preserves Unix executable permissions and symlinks.
+                zip -qry "../$archive" .
+                zipinfo -l "../$archive" > "../$archive.manifest"
                 if ! awk '$1 ~ /^-/ && $0 ~ /(^|\/)(MaaDuDuL|MFAAvalonia|mxu|MaaPiCli|MaaAgentServer|maa-cli|python3?)$/ && $1 !~ /^-..x/ { print; bad=1 } END { exit bad }' "../$archive.manifest"; then
                   echo "[ERR] Unix archive is missing executable permission metadata"
                   exit 1

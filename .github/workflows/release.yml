@@ -45,9 +45,7 @@ jobs:
           body_path: release-notes.md
           files: |
             release-assets/*.zip
-            release-assets/*.tar.gz
             release-assets/*.apk
-            release-assets/*.apk.sha256
             release-assets/*.build-info.json
       - name: Upload to MirrorChyan
         if: github.repository_owner == 'kqcoxn'
