@@ -7,12 +7,12 @@
 
     python agent/local_main.py [socket_id]
     python agent/local_main.py --socket-id [socket_id]
+    python agent/local_main.py --check-env
 """
 
 import os
 import sys
 from pathlib import Path
-
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 os.chdir(PROJECT_ROOT)
@@ -34,6 +34,14 @@ def _socket_id(arguments: list[str]) -> str:
 
 def main() -> None:
     """使用正式 Agent 入口启动本地服务。"""
+    from agent.dev_environment import check_environment
+
+    check_only = sys.argv[1:] == ["--check-env"]
+    if not check_environment(verbose=check_only):
+        raise SystemExit(1)
+    if check_only:
+        return
+
     socket_id = _socket_id(sys.argv[1:])
 
     # agent.main.main() 从 sys.argv[-1] 读取 socket_id，保持其原有入口契约。

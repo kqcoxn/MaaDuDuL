@@ -15,6 +15,8 @@
 | `yarn dev:start` | 仅启动已准备且与源码和 Python 匹配的副本；前台等待 GUI 退出 |
 | `yarn dev` | 依次 prepare、start，保留原快捷入口 |
 | `yarn agent` | 独立启动源码 Agent，支持 socket 参数 |
+| `yarn agent:check` | 使用源码 Interface 相同的 uv/Python 入口检查环境；不启动 Agent、不连接设备 |
+| `yarn mpe` | 启动 MPE LocalBridge，以仓库为文件根目录，显式读取源码 `interface.json`；要求支持 `--interface` 的 MPE 2.0 |
 
 默认测试目录为仓库 `MFAAvalonia/`。可通过 `MDDL_MFAA_ROOT` 或 `--workspace` 指向仓库外已有 MFAA 安装，例如 `yarn dev:status --workspace D:/MaaTest`。只有显式执行 `yarn dev:install` 才下载或更新 GUI，prepare/start 不会触发安装。
 
@@ -30,11 +32,28 @@
 
 ## Python 与 Interface
 
-- 源码 Interface：`uv run --frozen --no-sync python -u agent/local_main.py`。本地入口设置开发环境后调用正式 Agent；依赖须先安装，不在 GUI 启动期间自动同步。
+- 源码 Interface：`uv run --frozen --no-sync python -u agent/local_main.py`。本地入口先检查当前 Python 和 maafw 版本，再调用正式 Agent；依赖须先安装，不在 GUI 启动期间自动同步。
 - MFAA 测试 Interface：写入选定 Python 的绝对路径，运行测试副本的 `agent/main.py`。保留虚拟环境入口路径，不把 Unix venv 的符号链接解析成系统 Python。
 - 桌面发布：打包器生成包内 Python 相对路径和正式入口参数，不依赖用户的 uv 或开发环境。
 - Android：打包器同时重写 child_exec 和 child_args，不继承源码的 uv 参数。
-- VS Code 调试使用 `.venv` 的平台对应解释器。已有编辑器解释器选择如覆盖了默认设置，应手动切换到项目环境。
+- VS Code 调试使用 `.venv` 的平台对应解释器和 `agent/local_main.py`，与源码 Interface 共用环境检查。已有编辑器解释器选择如覆盖了默认设置，应手动切换到项目环境。
+
+`agent/dev_environment.py` 是源码入口、VS Code 和 yarn 开发命令的共享检查实现，只读取 manifest 和当前解释器的包信息，不安装依赖、不导入 MaaFramework 或注册 Custom。失败时在标准错误中给出实际 Python 路径、版本问题和修复命令；由于此时 maafw 可能缺失，不依赖会导入 maa 的 `Prompter`。正式入口 `agent/main.py` 不执行开发环境检查，发布包也不需要源码 manifest。
+
+默认开发环境为仓库 `.venv`。`MDDL_PYTHON` 仅影响经 `tools/dev/run_python.js` 启动的 yarn 命令；源码 Interface、`yarn agent:check` 和 MPE 默认仍由 uv 选择项目环境，不读取这个覆盖变量。使用自定义解释器时，应在 MPE 的本地 Agent 覆盖中选择该解释器并保留 `-u agent/local_main.py` 参数；覆盖只影响 MPE，不修改源码 Interface。
+
+## MPE 2.0 直接读取源码 Interface
+
+已静态核对本地 MaaPipelineEditor 的 `dev/2.0.0` 分支（`60d16436`）：LocalBridge 以主 Interface 所在目录启动 Agent，通过进程 PATH 查找 `uv`，并在参数末尾追加 socket ID；支持本地 Agent 启动覆盖。此结论针对该分支源码，不代表已安装的旧版 `mpelb` 已具备这些功能。
+
+1. 首次准备或依赖变化后，在仓库根目录手动执行 `uv sync --frozen`。
+2. 执行 `yarn agent:check`，确认源码入口实际选择的解释器及 maafw 版本。这个命令只检查环境，不启动 AgentServer。
+3. 使用支持 `--interface` 的 MPE 2.0 LocalBridge 执行 `yarn mpe`。命令等价于 `mpelb --root . --interface ./interface.json`；文件扫描范围由原来的 `resource/` 扩大到仓库，显式入口避免与 `MFAAvalonia/` 等目录中的测试 Interface 混淆。
+4. 在 MPE 中按需测试 Agent 连接或调试。单纯读取 Interface 不会启动 Agent。若此前配置过启动覆盖，应先检查覆盖是否仍然适用。
+
+MPE 运行仓库中的 Agent，修改 Python 后重启 Agent 即可生效，无需 `dev:prepare`；没有热更新。`yarn dev` 继续运行 MFAA 测试副本，修改后仍需关闭 GUI/Agent 并重新 prepare。两种模式的 Custom 本地数据分别位于 `.local/agent/config/mddl/` 和测试目录的 `config/mddl/`（显式设置 `MDDL_STATE_ROOT` 时除外）。
+
+如果 MPE 报找不到 `uv`，错误发生在 Python 入口执行之前，共享检查无法拦截。应让启动 LocalBridge 的进程 PATH 包含 uv 所在目录，安装 uv 后重启旧的终端/LocalBridge；也可以在 MPE 本地覆盖中将 `child_exec` 指向项目 Python 的绝对路径，`child_args` 设置为 `["-u", "agent/local_main.py"]`。不要手工追加 socket ID，LocalBridge 会自动传入。若提示 `--interface` 未知，需更新到支持该参数的 LocalBridge。
 
 `MDDL_STATE_ROOT` 控制 Custom LocalStorage 的运行数据根目录：独立 Agent/VS Code 使用 `.local/agent`，受管理 MFAA 使用其测试目录，所以保留现有 `config/mddl`。未设置时维持发布环境的原路径。该变量不是 MFAA 自身的配置项；GUI 的日志与配置仍位于测试安装目录。不自动迁移或删除已有本地数据。
 

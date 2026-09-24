@@ -4,7 +4,7 @@
 
 const {spawnSync} = require("node:child_process");
 const {platform} = require("node:os");
-const {existsSync, readFileSync} = require("node:fs");
+const {existsSync} = require("node:fs");
 const {resolve} = require("node:path");
 
 const scriptArgs = process.argv.slice(2);
@@ -30,22 +30,18 @@ if (!existsSync(python)) {
     );
     process.exit(1);
 }
-const project = JSON.parse(readFileSync(resolve(__dirname, "..", "..", "maa-project.json"), "utf8"));
 const probe = spawnSync(
     python,
-    [
-        "-c",
-        "import sys, importlib.metadata as m; import re, operator; ops = {'>=':operator.ge, '<=':operator.le, '>':operator.gt, '<':operator.lt, '==':operator.eq}; bounds = [re.fullmatch(r'(>=|<=|>|<|==)([0-9.]+)', x.strip()) for x in sys.argv[2].split(',')]; assert all(b and ops[b[1]](sys.version_info[:len(b[2].split('.'))], tuple(map(int,b[2].split('.')))) for b in bounds), 'Python does not match maa-project.json python.requiresPython'; assert m.version('maafw') == sys.argv[1], 'Run uv sync --frozen: maafw version mismatch'",
-        project.maafw.version,
-        project.python.requiresPython,
-    ],
+    ["-B", resolve(__dirname, "..", "..", "agent", "dev_environment.py")],
     {
         stdio: "inherit",
         windowsHide: true,
     },
 );
 if (probe.error || probe.status !== 0) {
-    console.error("Python environment validation failed. Run uv sync --frozen.");
+    if (probe.error) {
+        console.error(`Failed to check Python environment: ${probe.error.message}`);
+    }
     process.exit(1);
 }
 

@@ -4,7 +4,7 @@ version = "1.1.7"
 description = "MaaDuDuL MaaFW Agent project"
 requires-python = ">=3.11,<3.14"
 dependencies = [
-    "maafw==5.13.0",
+    "maafw==5.13.1",
 ]
 
 [dependency-groups]

@@ -1,6 +1,6 @@
 maaagentbinary==1.0.1
     # via maafw
-maafw==5.13.0
+maafw==5.13.1
     # via maa-dudul
 numpy==2.4.6 ; python_full_version < '3.12'
     # via maafw
