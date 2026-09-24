@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789040276672,
+            "lastSyncTime": 1790261635858,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -2921,
-                "y": -270,
-                "zoom": 0.66
+                "x": -6214,
+                "y": -1339,
+                "zoom": 1.15
             },
             "filename": "每日活动作战",
-            "version": "v1.9.3"
+            "version": "v1.10.1"
         }
     },
     "$__mpe_external_返回主界面_每日活动作战": {
@@ -342,8 +342,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    397,
-                    376,
+                    643,
+                    620,
                     1,
                     1
                 ]
@@ -370,7 +370,7 @@
                     83
                 ],
                 "expected": [
-                    "无处安放的书签"
+                    "为谁而祈祷"
                 ]
             }
         },
