@@ -94,7 +94,7 @@
         },
         "timeout": 2000,
         "focus": {
-            "Node.Recognition.Succeeded": " > 不可领取"
+            "Node.Recognition.Succeeded": "> 不可领取"
         },
         "next": [
             "领取奖励_领取任务满进度奖励"
@@ -196,7 +196,7 @@
     },
     "领取奖励_暂无此通行证": {
         "focus": {
-            "Node.Recognition.Starting": " > 该通行证已关闭"
+            "Node.Recognition.Starting": "> 该通行证已关闭"
         },
         "$__mpe_code": {
             "position": {
@@ -215,7 +215,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 不可领取"
+            "Node.Recognition.Succeeded": "> 不可领取"
         },
         "$__mpe_code": {
             "position": {
@@ -234,7 +234,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 奖励已领取"
+            "Node.Recognition.Succeeded": "> 奖励已领取"
         },
         "next": [
             "领取奖励_特殊日活结束"
@@ -443,7 +443,7 @@
             "type": "Click"
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 进入任务界面"
+            "Node.Recognition.Succeeded": "> 进入任务界面"
         },
         "next": [
             "领取奖励_确保进入任务界面"
@@ -574,7 +574,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": " > 奖励已领取"
+            "Node.Recognition.Succeeded": "> 奖励已领取"
         },
         "next": [
             "领取奖励_从通行证返回"
