@@ -35,7 +35,7 @@
     },
     "maafw": {
         "channel": "stable",
-        "version": "5.13.1"
+        "version": "5.14.2"
     },
     "network": {
         "mode": "auto"
@@ -80,9 +80,9 @@
     ],
     "runtime": {
         "mfa": {
-            "channel": "beta",
+            "channel": "stable",
             "enabled": true,
-            "version": "v2.16.2-beta.2"
+            "version": "v2.16.2"
         }
     },
     "schemaVersion": 2,
@@ -107,9 +107,9 @@
         },
         "android": {
             "appRepository": "Aliothmoon/MaaFwApp",
-            "appRef": "d6e607fc3e1e5bc30c32d3b1311a0fd1798071e6",
+            "appRef": "3ff2d7ee1df165ce2fe54758c15e49165768dc72",
             "agentCoreRepository": "Aliothmoon/MaaAgentCoreAndroid",
-            "agentCoreTag": "3.13.15-maafw5.12.3",
+            "agentCoreTag": "3.13.15-maafw5.14.2",
             "agentPython": "3.13.15",
             "ndk": "28.2.13676358",
             "buildPython": "3.13",

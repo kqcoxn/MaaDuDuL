@@ -38,7 +38,8 @@ def validate_environment() -> str:
             raise ValueError(f"Python {sys.version.split()[0]} does not satisfy {requires_python}.")
 
     try:
-        actual_maafw = version("maafw")
+        # Some official wheels retain the release tag's leading v in METADATA.
+        actual_maafw = version("maafw").removeprefix("v")
     except PackageNotFoundError as error:
         raise ValueError("The selected Python environment does not have maafw installed.") from error
     if actual_maafw != expected_maafw:
