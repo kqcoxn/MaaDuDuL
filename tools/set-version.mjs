@@ -4,7 +4,7 @@ import {fileURLToPath} from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const args = process.argv.slice(2);
-const usage = "用法：yarn version:set <版本号>（例如 1.2.3、v1.2.3 或 1.2.3-beta.1）";
+const usage = "用法：yarn migrate <版本号>（例如 1.2.3、v1.2.3 或 1.2.3-beta.1）";
 
 if (
     args.length === 1 &&
