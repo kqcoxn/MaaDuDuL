@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "清紫糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790264295139,
+            "lastSyncTime": 1790876338405,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
             "savedViewport": {
-                "x": -10773,
-                "y": -1848,
-                "zoom": 1.52
+                "x": -3826,
+                "y": -375,
+                "zoom": 0.66
             },
             "filename": "清紫糖",
-            "version": "v1.10.1"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_返回主界面_清紫糖": {
@@ -537,7 +537,15 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    1006,
+                    249,
+                    1,
+                    1
+                ]
+            }
         },
         "focus": {
             "Node.Recognition.Succeeded": "> 进入到手蜡"
@@ -608,8 +616,8 @@
             "type": "Click",
             "param": {
                 "target": [
-                    1005,
-                    326,
+                    1086,
+                    484,
                     1,
                     1
                 ]
@@ -1057,7 +1065,7 @@
         },
         "post_delay": 400,
         "next": [
-            "清紫糖_速战克隆到手蜡"
+            "清紫糖_速战到手蜡"
         ],
         "$__mpe_code": {
             "position": {
@@ -1094,7 +1102,7 @@
             }
         }
     },
-    "清紫糖_速战克隆到手蜡": {
+    "清紫糖_速战到手蜡": {
         "pre_delay": 0,
         "action": {
             "type": "Custom",
