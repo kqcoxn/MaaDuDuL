@@ -107,7 +107,7 @@
         },
         "android": {
             "appRepository": "Aliothmoon/MaaFwApp",
-            "appRef": "v0.1.0",
+            "appRef": "d6e607fc3e1e5bc30c32d3b1311a0fd1798071e6",
             "agentCoreRepository": "Aliothmoon/MaaAgentCoreAndroid",
             "agentCoreTag": "3.13.15-maafw5.12.3",
             "agentPython": "3.13.15",
