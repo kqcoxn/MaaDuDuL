@@ -277,6 +277,7 @@
 					"name": "Yes",
 					"option": [
 						"每日采购-商店采购-周期检查",
+						"每日采购-特别商店",
 						"每日采购-日常商店",
 						"每日采购-战斗宝石商店"
 					],
@@ -305,8 +306,9 @@
 		},
 		"每日采购-特别商店": {
 			"type": "switch",
-			"label": "$特别商店",
+			"label": "$一周年商店",
 			"description": "$固定采购前六项（每日刷新项）",
+			"default_case": "No",
 			"cases": [
 				{
 					"name": "No",
@@ -319,6 +321,18 @@
 				},
 				{
 					"name": "Yes",
+					"pipeline_override": {
+						"每日采购_进入特别商店": {
+							"recognition": {
+								"param": {
+									"expected": ["一周年商店"]
+								}
+							},
+							"focus": {
+								"Node.Recognition.Succeeded": "> 进入一周年商店"
+							}
+						}
+					},
 					"label": "$Yes"
 				}
 			]

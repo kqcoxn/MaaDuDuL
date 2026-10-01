@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "每日采购",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789822697669,
+            "lastSyncTime": 1790875723042,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日采购.json",
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\每日采购.json",
             "savedViewport": {
-                "x": -8548,
-                "y": -5909,
-                "zoom": 1.74
+                "x": -7478,
+                "y": -2426,
+                "zoom": 1.52
             },
             "filename": "每日采购",
-            "version": "v1.10.1"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_返回主界面_每日采购": {
@@ -1662,7 +1662,7 @@
             "Node.Recognition.Succeeded": "> 进入普通商店"
         },
         "next": [
-            "每日采购_日常商店开始"
+            "每日采购_特别商店开始"
         ],
         "$__mpe_code": {
             "position": {
@@ -1792,7 +1792,7 @@
                     639
                 ],
                 "expected": [
-                    "特別商店"
+                    "周年商店"
                 ]
             }
         },
