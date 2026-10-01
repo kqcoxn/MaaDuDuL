@@ -50,22 +50,22 @@ class NewGoods(CustomAction):
             pipeline_override = {}
             if store_type == "group" or store_type == "g":
                 pipeline_override = {
-                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=3"},
+                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=7"},
                 }
             elif store_type == "crystal" or store_type == "c":
                 pipeline_override = {
-                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=5"},
+                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=7"},
                 }
             elif store_type == "boutique" or store_type == "b":
                 pipeline_override = {
-                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=15"},
+                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=20"},
                     "新礼包查看_领取查看奖励": {"roi": [856, 551, 99, 56]},
                     "新礼包查看_获取查看奖励": {"target": [1163, 108, 1, 1]},
                     "新礼包查看_计数": {"next": "新礼包查看_左右滑动"},
                 }
             elif store_type == "room" or store_type == "r":
                 pipeline_override = {
-                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=5"},
+                    "新礼包查看_初始化计数器": {"custom_action_param": "k=store&m=7"},
                     "新礼包查看_计数": {"next": "新礼包查看_上下半滑动"},
                 }
 
