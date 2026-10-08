@@ -5,7 +5,7 @@
     "title": "$project_title",
     "icon": "public/logo.png",
     "description": "$project_description",
-    "version": "v1.2.2",
+    "version": "v1.2.3",
     "welcome": "$project_welcome",
     "contact": "$project_contact",
     "license": "LICENSE",
@@ -103,7 +103,6 @@
         "tasks/daily/leaf_change.json",
         "tasks/daily/purchase.json",
         "tasks/daily/saint_tour.json",
-        "tasks/daily/activity_daily.json",
         "tasks/daily/clear_purple_candy.json",
         "tasks/daily/clear_red_candy.json",
         "tasks/daily/peak_battle.json",
@@ -118,7 +117,8 @@
         "tasks/single/continuous_battle.json",
         "tasks/single/level_rewards.json",
         "tasks/single/friend_refresh.json",
-        "tasks/separators/new_task.json"
+        "tasks/separators/new_task.json",
+        "tasks/daily/activity_daily.json"
     ],
     "task": [],
     "option": {}

@@ -1,4 +1,4 @@
-## **Pool of Dripping Memories**
+## **Paranoia Chronicle**
 
 **[Routine Task] [Event Task] [Daily Task]**
 

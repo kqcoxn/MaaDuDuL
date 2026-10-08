@@ -2,121 +2,26 @@
     "$__mpe_config_每日活动作战2": {
         "$__mpe_code": {
             "prefix": "每日活动作战2",
-            "lastSyncTime": 1777728491100,
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791462701362,
             "isModifiedExternally": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\每日活动作战2.json",
+            "isDeleted": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\每日活动作战2.json",
             "savedViewport": {
-                "x": -8690,
-                "y": -1023,
-                "zoom": 1.5
+                "x": -4433,
+                "y": -452,
+                "zoom": 0.87
             },
             "filename": "每日活动作战2",
-            "version": "v1.5.0"
+            "version": "v2.0.7"
         }
     },
-    "$__mpe_external_返回主界面_每日活动作战2": {
+    "$__mpe_external_返回主界_每日活动作战2": {
         "$__mpe_code": {
             "position": {
-                "x": 1661,
-                "y": 80
+                "x": 6939,
+                "y": 1439
             }
-        }
-    },
-    "$__mpe_group_战斗_每日活动作战2": {
-        "$__mpe_code": {
-            "position": {
-                "x": 5278,
-                "y": 757
-            },
-            "color": "orange",
-            "childrenLabels": [
-                "战斗开始",
-                "战斗结束",
-                "查看作战详情",
-                "确保微微辣",
-                "返回活动界面",
-                "进入战斗界面",
-                "速战"
-            ],
-            "width": 1896,
-            "height": 399
-        }
-    },
-    "$__mpe_group_检查进度_每日活动作战2": {
-        "$__mpe_code": {
-            "position": {
-                "x": 5280,
-                "y": 165
-            },
-            "color": "green",
-            "childrenLabels": [
-                "从检查返回活动界面",
-                "从检查进入成就界面",
-                "关闭其他面板",
-                "关闭梦境之地提示",
-                "检查开始",
-                "检查当前进度",
-                "检查结束",
-                "确保进入成就界面",
-                "识别进度",
-                "错误返回"
-            ],
-            "width": 1637,
-            "height": 559
-        }
-    },
-    "$__mpe_group_进入活动界面_每日活动作战2": {
-        "$__mpe_code": {
-            "position": {
-                "x": 4378,
-                "y": 376
-            },
-            "color": "blue",
-            "childrenLabels": [
-                "其他活动入口",
-                "周期提醒",
-                "周期检查",
-                "开始",
-                "新活动入口"
-            ],
-            "width": 854,
-            "height": 988
-        }
-    },
-    "$__mpe_group_领取奖励_每日活动作战2": {
-        "$__mpe_code": {
-            "position": {
-                "x": 5278,
-                "y": 1216
-            },
-            "color": "purple",
-            "childrenLabels": [
-                "返回主界面",
-                "周期记录",
-                "检查领取时进度",
-                "进入成就界面",
-                "领取今日奖励",
-                "领取奖励开始",
-                "领取奖励结束"
-            ],
-            "width": 1911,
-            "height": 399
-        }
-    },
-    "$__mpe_group_额外工作_每日活动作战2": {
-        "$__mpe_code": {
-            "position": {
-                "x": 5286,
-                "y": -218
-            },
-            "color": "gray",
-            "childrenLabels": [
-                "确定领取",
-                "领取黄铁矿金库开始",
-                "黄铁矿"
-            ],
-            "width": 830,
-            "height": 345
         }
     },
     "每日活动作战2_从检查返回活动界面": {
@@ -136,8 +41,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1113,
-                "y": 290
+                "x": 6393,
+                "y": 455
             }
         }
     },
@@ -146,16 +51,17 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    147,
-                    570,
-                    181,
-                    125
+                    9,
+                    135,
+                    1262,
+                    577
                 ],
                 "expected": [
                     "成就"
                 ]
             }
         },
+        "pre_delay": 800,
         "action": {
             "type": "Click"
         },
@@ -164,12 +70,13 @@
         },
         "next": [
             "每日活动作战2_确保进入成就界面",
-            "[JumpBack]每日活动作战2_关闭其他面板"
+            "[JumpBack]每日活动作战2_关闭其他面板",
+            "每日活动作战2_从检查进入成就界面"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 311,
-                "y": 290
+                "x": 5591,
+                "y": 455
             }
         }
     },
@@ -193,8 +100,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 572,
-                "y": 78
+                "x": 5858,
+                "y": 237
             }
         }
     },
@@ -203,10 +110,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    39,
-                    315,
-                    1205,
-                    314
+                    50,
+                    16,
+                    940,
+                    688
                 ],
                 "expected": [
                     "梦境之地",
@@ -220,8 +127,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 310,
-                "y": 76
+                "x": 5592,
+                "y": 237
             }
         }
     },
@@ -236,7 +143,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/christmas.png"
+                    "activity/entry/main.png"
                 ]
             }
         },
@@ -256,8 +163,36 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 580,
-                "y": 407
+                "x": 4941,
+                "y": 832
+            }
+        }
+    },
+    "每日活动作战2_区域战斗": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    58,
+                    365,
+                    364,
+                    138
+                ],
+                "expected": [
+                    "完整性的普通次元"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "每日活动作战2_确保微微辣"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5595,
+                "y": 1188
             }
         }
     },
@@ -269,8 +204,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 581,
-                "y": 745
+                "x": 4940,
+                "y": 1169
             }
         }
     },
@@ -280,7 +215,7 @@
             "type": "Custom",
             "param": {
                 "custom_action": "periodic_check",
-                "custom_action_param": "k=每日活动作战2"
+                "custom_action_param": "k=每日活动作战"
             }
         },
         "post_delay": 0,
@@ -293,8 +228,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 308,
-                "y": 63
+                "x": 4670,
+                "y": 432
             }
         }
     },
@@ -304,7 +239,7 @@
             "type": "Custom",
             "param": {
                 "custom_action": "record_period",
-                "custom_action_param": "k=每日活动作战2"
+                "custom_action_param": "k=每日活动作战"
             }
         },
         "post_delay": 0,
@@ -316,8 +251,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1129,
-                "y": 76
+                "x": 6407,
+                "y": 1435
             }
         }
     },
@@ -336,8 +271,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 35,
-                "y": 63
+                "x": 4397,
+                "y": 432
             }
         }
     },
@@ -349,8 +284,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 40,
-                "y": 76
+                "x": 5321,
+                "y": 915
             }
         }
     },
@@ -362,8 +297,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1636,
-                "y": 78
+                "x": 6911,
+                "y": 922
             }
         }
     },
@@ -378,7 +313,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/raincoat.png"
+                    "activity/entry/sub.png"
                 ]
             }
         },
@@ -396,19 +331,19 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 579,
-                "y": 65
+                "x": 4942,
+                "y": 436
             }
         }
     },
     "每日活动作战2_查看作战详情": {
-        "pre_delay": 400,
+        "pre_delay": 3400,
         "action": {
             "type": "Click",
             "param": {
                 "target": [
-                    1086,
-                    420,
+                    1093,
+                    402,
                     1,
                     1
                 ]
@@ -419,8 +354,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 840,
-                "y": 77
+                "x": 6115,
+                "y": 921
             }
         }
     },
@@ -429,17 +364,16 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    4,
-                    3,
-                    679,
-                    81
+                    5,
+                    2,
+                    515,
+                    83
                 ],
                 "expected": [
-                    "回忆"
+                    "偏执实录"
                 ]
             }
         },
-        "pre_delay": 0,
         "post_delay": 0,
         "next": [
             "每日活动作战2_从检查进入成就界面",
@@ -448,13 +382,12 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 39,
-                "y": 72
+                "x": 5314,
+                "y": 238
             }
         }
     },
     "每日活动作战2_检查当前进度": {
-        "pre_delay": 0,
         "action": {
             "type": "Custom",
             "param": {
@@ -470,8 +403,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 842,
-                "y": 288
+                "x": 6122,
+                "y": 457
             }
         }
     },
@@ -483,8 +416,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1377,
-                "y": 293
+                "x": 6657,
+                "y": 458
             }
         }
     },
@@ -505,8 +438,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 855,
-                "y": 76
+                "x": 6133,
+                "y": 1435
             }
         }
     },
@@ -515,27 +448,32 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    700,
-                    601,
-                    520,
-                    117
+                    8,
+                    79,
+                    1262,
+                    630
                 ],
                 "expected": [
                     "微微辣"
-                ]
+                ],
+                "order_by": "Vertical",
+                "index": -1
             }
         },
+        "pre_delay": 800,
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "repeat_delay": 800,
         "post_delay": 1000,
         "next": [
             "每日活动作战2_查看作战详情"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 580,
-                "y": 77
+                "x": 5855,
+                "y": 916
             }
         }
     },
@@ -559,8 +497,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 575,
-                "y": 343
+                "x": 5860,
+                "y": 508
             }
         }
     },
@@ -588,8 +526,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 571,
-                "y": 59
+                "x": 5857,
+                "y": -159
             }
         }
     },
@@ -608,14 +546,19 @@
                     "120",
                     "020",
                     "：20",
-                    ":20"
+                    ":20",
+                    "/ 20",
+                    "1 20",
+                    "0 20",
+                    "： 20",
+                    ": 20"
                 ]
             }
         },
         "$__mpe_code": {
             "position": {
-                "x": 843,
-                "y": 79
+                "x": 6124,
+                "y": 233
             }
         }
     },
@@ -638,8 +581,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1364,
-                "y": 77
+                "x": 6639,
+                "y": 921
             }
         }
     },
@@ -648,10 +591,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    147,
-                    570,
-                    181,
-                    125
+                    9,
+                    135,
+                    1262,
+                    577
                 ],
                 "expected": [
                     "成就"
@@ -669,8 +612,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 319,
-                "y": 76
+                "x": 5597,
+                "y": 1435
             }
         }
     },
@@ -679,14 +622,16 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    1048,
-                    526,
-                    218,
-                    170
+                    14,
+                    141,
+                    1259,
+                    577
                 ],
                 "expected": [
-                    "战斗"
-                ]
+                    "战"
+                ],
+                "order_by": "Vertical",
+                "index": -1
             }
         },
         "action": {
@@ -700,8 +645,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 320,
-                "y": 77
+                "x": 5593,
+                "y": 843
             }
         }
     },
@@ -719,8 +664,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1100,
-                "y": 77
+                "x": 6375,
+                "y": 921
             }
         }
     },
@@ -737,8 +682,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 43,
-                "y": 354
+                "x": 5311,
+                "y": 544
             }
         }
     },
@@ -761,6 +706,8 @@
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "repeat_delay": 400,
         "post_delay": 400,
         "focus": {
             "Node.Recognition.Succeeded": "> 领取今日奖励"
@@ -770,8 +717,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 584,
-                "y": 77
+                "x": 5862,
+                "y": 1436
             }
         }
     },
@@ -783,8 +730,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 40,
-                "y": 78
+                "x": 5318,
+                "y": 1437
             }
         }
     },
@@ -796,8 +743,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1402,
-                "y": 77
+                "x": 6680,
+                "y": 1436
             }
         }
     },
@@ -810,8 +757,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 42,
-                "y": 61
+                "x": 5328,
+                "y": -157
             }
         }
     },
@@ -845,8 +792,16 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 311,
-                "y": 59
+                "x": 5597,
+                "y": -159
+            }
+        }
+    },
+    "$__mpe_external_返回主界面_每日活动作战2": {
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
             }
         }
     }

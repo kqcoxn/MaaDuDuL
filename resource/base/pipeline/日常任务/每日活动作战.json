@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790261635858,
+            "lastSyncTime": 1791460753218,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -6214,
-                "y": -1339,
+                "x": -5017,
+                "y": -453,
                 "zoom": 1.15
             },
             "filename": "每日活动作战",
-            "version": "v1.10.1"
+            "version": "v2.0.7"
         }
     },
     "$__mpe_external_返回主界面_每日活动作战": {
@@ -143,7 +143,7 @@
                     208
                 ],
                 "template": [
-                    "activity/entry/odyssey.png"
+                    "activity/entry/sub.png"
                 ]
             }
         },
