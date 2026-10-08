@@ -15,12 +15,56 @@ The package requires Python 3.10 or later and is currently alpha software. Keep 
 | --- | --- |
 | Check local models | `--json resource status` |
 | Discover controllers | `--json device adb`, `--json device win32`, or `--json device all` |
-| Connect ADB | `--on NAME --json connect adb ADDRESS` |
-| Connect Win32 | `--on NAME --json connect win32 TITLE_OR_HWND` |
+| Connect ADB | `--on NAME --json connect adb ADDRESS --size short:720` |
+| Connect Win32 | `--on NAME --json connect win32 TITLE_OR_HWND --size short:720` |
 | List sessions | `--json session list` |
 | Inspect daemon | `--json daemon status` |
 
 Put global options such as `--json` and `--on NAME` before the subcommand.
+
+### Screenshot size
+
+For ADB and Win32, `connect` accepts `--size short:<px>`, `--size long:<px>`, or
+`--size raw`. Both controller kinds default to `short:720`, matching the
+MaaFramework 720p baseline. The other side scales by aspect ratio, so this is a
+short-side baseline rather than a guarantee of exactly 720x1280 for every
+device. `screenshot` has no separate scaling option; it uses the size configured
+when the named session connected.
+
+Use `raw` only when explicitly required for evidence or diagnosis. Raw-size
+screenshots no longer match the 720p ROI/template baseline and can make copied
+coordinates resolve incorrectly on other devices. In version 0.1.6, PlayCover
+and wlroots do not expose `--size`; their controllers use the runtime defaults.
+
+### MaaFramework scaling behavior
+
+Inside MaaFramework, `ControllerAgent` defaults to a 720-pixel screenshot short
+side. When a raw frame's size changes, or the target size is not initialized,
+the controller recalculates a target size from the current raw size, then
+resizes it with `INTER_AREA` unless raw size was requested. With `short:720`,
+the shorter side is exactly 720 and the other side is calculated from the raw
+aspect ratio, then rounded. It is therefore a short-side baseline, not a fixed
+`720x1280` contract.
+
+Pipeline coordinates are evaluated on this cached, scaled image: `roi`,
+`roi_offset`, recognition `box`, `target`, and `target_offset` all use those
+coordinates. For touch actions, MaaFramework maps the point back to raw screen
+coordinates using the current raw/target ratios. A few controllers declare
+`NoScalingTouchPoints` and intentionally skip that final mapping, so their
+input contract must be checked separately.
+
+ProjectInterface V2 expresses the same choice per controller:
+`display_short_side` and `display_long_side` select the target short or long
+side; `display_expand` takes `[width, height]` and applies Unity Canvas Scaler
+Expand semantics (`scale = max(width / raw_width, height / raw_height)`), so the
+output preserves the raw aspect ratio and both sides are at least the reference;
+`display_raw` requests unscaled screenshots. These fields are mutually exclusive
+in the PI protocol. When none is set, the PI runtime passes short side 720 to
+MaaFramework. The current MaaPiCli runner resolves overlapping settings in
+`raw -> expand -> long -> short` order, but a valid Interface must not rely on
+that tie-break. `display_raw` is useful for diagnosing a raw frame, but
+resources whose ROIs and templates assume the normalized baseline must not be
+reused against it.
 
 ## Recognition and actions
 

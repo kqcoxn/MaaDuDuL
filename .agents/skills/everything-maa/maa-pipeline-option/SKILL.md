@@ -1,6 +1,6 @@
 ---
 name: maa-pipeline-option
-description: "Add runtime UI options (select/checkbox/switch/input) to a MaaFramework Project Interface and its imported option surfaces. Use when adding a user-facing toggle, selector, checkbox, or input; wiring options to `pipeline_override`; aligning option paths with Python `context.get_node_data()` or CustomAction params; or reviewing option behavior across declared resources, Pipeline JSON, and Python."
+description: "Add runtime UI options (select/checkbox/switch/input/hotkey) to a MaaFramework Project Interface and its imported option surfaces. Use when adding a user-facing toggle, selector, checkbox, bounded checkbox, input, password field, or hotkey; wiring options to `pipeline_override`; aligning option paths with Python `context.get_node_data()` or CustomAction params; or reviewing option behavior across declared resources, Pipeline JSON, and Python."
 ---
 
 # Pipeline Option 工作流
@@ -13,7 +13,7 @@ description: "Add runtime UI options (select/checkbox/switch/input) to a MaaFram
 
 ## Option Surface 发现规则
 
-从主 `interface.json` / `interface.jsonc` 出发，而不是从目录约定猜测。`import[]` 相对主 Interface 目录解析，顶层只向 Interface bundle 贡献 `task`、`option` 和 `preset`；task 条目自身可以携带 `group`、`option` 等展示引用。`resource[].path` 同样相对主 Interface 目录解析，目标 Pipeline 文件从这些资源根读取。
+从主 `interface.json` / `interface.jsonc` 出发，而不是从目录约定猜测。`import[]` 相对主 Interface 目录解析；导入片段实际可贡献哪些 option 相关声明，必须按目标项目锁定的 PI 版本和 schema 核实。`resource[].path` 同样相对主 Interface 目录解析，目标 Pipeline 文件从这些资源根读取。
 
 M9A 是根目录 `interface.json` + 根目录 `tasks/**/*.json` import + `resource/base` 与渠道资源组合；它的 agent 也是数组形式并声明 `agent/bootstrap.py`。`assets/interface.json` 与 `assets/resource/**` 不是 M9A 的布局，但它们是 MaaPracticeBoilerplate 系项目的常见有效布局；仍必须由主 Interface 的声明推导，不能按目录约定猜测。
 
@@ -32,7 +32,7 @@ M9A 是根目录 `interface.json` + 根目录 `tasks/**/*.json` import + `resour
 
 > ⚠️ **pipeline_override 只做属性合并，不会凭空创建节点。** 少了第 3 步，`context.get_node_data()` 会返回 `None`，运行时静默失败。
 
-完整协议参考（嵌套 option、global_option、controller/resource 限制、占位符注入）：[references/protocol.md](references/protocol.md)
+本 skill 不维护 option type、字段矩阵、默认值语义或版本能力快照。字段的完整协议来源通过 `$maa-wiki` 定位 Project Interface V2 文档、`interface*.schema.json` 和目标项目锁定的 revision 后读取；本地只负责接线边界和项目内闭环。
 
 ## 历史校正
 
@@ -43,14 +43,17 @@ M9A 是根目录 `interface.json` + 根目录 `tasks/**/*.json` import + `resour
 
 ---
 
-## 4 种 type 速查
+## 常见接线映射
+
+下表是本项目常见的选项接线示例，不是协议全量清单。遇到新 type 或字段时，先回到 pinned 官方协议来源；不要根据这份表推断可用性。
 
 | type | 选择 | override 字段 | 节点预定义形态 |
 |------|------|---------------|---------------|
 | `select` | 单选互斥 | `expected` | `recognition: "OCR"` + `expected: [...]` |
 | `switch` | 二元 Yes/No | `enabled`（或项目已有的 `enable`） | `{"enabled": bool}` / `{"enable": bool}` |
-| `input` | 自由文本 | `{name}` 占位符可注入目标字段 | 按最终读取方预定义 `expected` 或 `action.param.custom_action_param` |
-| `checkbox` | 多选 | `enabled` | `{"enabled": false}` |
+| `input` | 自由文本或密码 | `{name}` 占位符可注入目标字段 | 按最终读取方预定义 `expected` 或 `action.param.custom_action_param` |
+| `checkbox` | 多选，可用 `min_count` / `max_count` 约束 | `enabled` | `{"enabled": false}` |
+| `hotkey` | 快捷键，替换为虚拟键码整数 | `key` | 按键动作节点预定义 |
 
 ## 选哪个模式？
 
@@ -60,6 +63,7 @@ M9A 是根目录 `interface.json` + 根目录 `tasks/**/*.json` import + `resour
 | 从多个互斥选项里选一个值 | **B**（select + OCR 节点） |
 | 同时启用多个独立的功能模块 | **C**（checkbox + 多个 Flag 节点） |
 | 用户输入自定义文本 | **D**（input + 占位符注入） |
+| 捕获用户快捷键并传给按键动作 | **hotkey + `{name}.primary`** |
 | 切换行为（点哪个按钮 / 走哪条 next 链）但不想改 Python | **E**（pure override 现有节点字段） |
 
 > **经验法则**：行为只等于“覆盖已有节点字段”时优先 pure override；一旦需要运行时数据、计数、动态识别、失败策略或跨节点状态，改用 Flag + Python / CustomAction / CustomRecognition。目标是让改动面和逻辑复杂度匹配。
@@ -119,6 +123,8 @@ if _node_enabled(context, "OptionalNode"):
 | 新开关让功能默认开启 | `Yes`（保留旧行为） |
 | 旧代码无条件开启 | `Yes`（兼容） |
 | 旧代码无条件关闭 | `No`（兼容） |
+
+不要把敏感输入、秘密或凭证放进 `default`、Preset、参数示例、日志或文档。具体 `password`、数量约束和默认值限制先核对 pinned 官方协议与项目 schema；实现时保持既有行为不变，并让默认值满足当前字段约束。
 
 ---
 
@@ -181,4 +187,4 @@ if _node_enabled(context, "OptionalNode"):
 
 ## 完整协议
 
-更多 type 字段、嵌套 option、global_option、controller/resource 限制、`{占位符}` 注入机制等高级特性见 [references/protocol.md](references/protocol.md)。
+字段合法性、嵌套 option、控制器/资源限制、占位符、hotkey、password 和数量约束等协议语义，通过 `$maa-wiki` 定位 Project Interface V2 官方文档、schema 和 pinned revision 后读取。跨 Interface 的引用、pretask、Agent `PI_*` 环境、resource hash 与 Preset 快照按 `$maa-interface-guide` 的 [review-guide.md](../maa-interface-guide/references/review-guide.md)发现来源并审查；不要把本仓库文件当成协议缓存。

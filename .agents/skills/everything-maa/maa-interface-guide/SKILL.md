@@ -1,6 +1,6 @@
 ---
 name: maa-interface-guide
-description: 解释、审查、诊断和修改已有 MaaFramework Project Interface V2。用于处理现有 interface.json / interface.jsonc、Interface import、controller、resource、task、group、option、preset、setting、国际化、路径与跨文件引用，或执行 schema 与 maa-tools 校验；不用于创建新项目、从零生成 Interface 或支持 Project Interface v1。
+description: 解释、审查、诊断和修改已有 MaaFramework Project Interface V2。用于处理现有 interface.json / interface.jsonc、Interface import、controller、resource、task、group、option、preset、setting、pretask、agent、telemetry、resource hash、attach_resource_path、国际化、路径与跨文件引用，或执行 schema 与 maa-tools 校验；不用于创建新项目、从零生成 Interface 或支持 Project Interface v1。
 ---
 
 # Maa Interface V2 工作流
@@ -11,30 +11,31 @@ description: 解释、审查、诊断和修改已有 MaaFramework Project Interf
 
 1. 在目标项目中定位 `interface.json` 或 `interface.jsonc`。不存在时停止，要求先使用 `$maa-project-create` 创建项目；不得生成孤立的 Interface。
 2. 读取 `interface_version`。只接受 V2；缺失、为 1 或呈现 v1 结构时报告不支持，不提供迁移或兼容写法。
-3. 先读取目标项目已有的 schema 关联、MaaFramework 版本锁、`maatools.config.mts`、Interface import 和语言文件。项目内证据优先于本 skill 的经验。
-4. 若项目没有足够的协议依据，再查 [MaaFramework 官方仓库](https://github.com/MaaXYZ/MaaFramework)当前对应版本的文档与 `tools/interface*.schema.json`。记录实际采用的 tag、commit、schema 路径或 URL；不要依赖个人机器上的 MaaFramework 绝对路径。
+3. 先读取目标项目已有的 schema 关联、MaaFramework 版本锁、`maatools.config.mts`、Interface import 和语言文件。项目内证据优先于本 skill 的经验。`interface_version: 2` 不是 PI 扩展能力的语义版本；字段能力以项目锁定的 PI 协议版本为准。
+4. 若项目没有足够的协议依据，通过 `$maa-wiki` 加载 MaaLLMWiki 上游 `maallmwiki` skill，定位对应 PI 文档和 `interface*.schema.json` 的 pinned revision，再回到 MaaFramework 官方原始来源核实。仅当上游 skill 不可达时，按 `$maa-wiki` 的披露顺序用根 README 降级。记录实际采用的 tag、commit、schema 路径或 URL；不要依赖个人机器上的 MaaFramework 绝对路径。
 5. 保留目标文件现有的 JSON/JSONC、缩进、字段排序、命名和拆分风格，除非用户明确要求统一格式。
 
-需要检查字段选择与引用关系时读取 [references/review-guide.md](references/review-guide.md)。需要选择和运行验证工具时读取 [references/validation.md](references/validation.md)。
+本 skill 不维护 PI 字段矩阵、能力快照或版本语义缓存。pretask、Agent `PI_*` 环境、resource hash、`attach_resource_path`、telemetry、setting 和 Preset 快照等上游语义，先按来源优先级从项目证据和 pinned 官方来源发现；无法闭环核实时明确标记为未验证。需要检查字段选择与引用关系时读取 [references/review-guide.md](references/review-guide.md)。需要选择和运行验证工具时读取 [references/validation.md](references/validation.md)。
 
 ## 操作模式
 
 ### 解释
 
-只读主文件、import、语言文件及相关 Pipeline 入口，说明 controller、resource、task、group、option、preset 和 setting 的实际关系。区分“schema 允许”“Client 可能支持”和“当前项目确实使用”，不要把推断表述成事实。
+只读主文件、import、语言文件及相关 Pipeline 入口，说明 controller、resource、task、group、option、preset、setting、pretask、agent 环境和 telemetry 的实际关系。区分“schema 允许”“Client 可能支持”“PI 文档允许但 schema 滞后”和“当前项目确实使用”，不要把推断表述成事实。
 
 ### 审查或诊断
 
 按以下顺序检查并报告带文件位置的证据：
 
-1. V2 版本与 schema 合法性；
-2. import、资源路径、图标、语言文件等路径是否可解析；
-3. controller、resource、group、task、option、case、input、preset 和 locale 引用是否存在且唯一；
-4. controller/resource 过滤后，task、option、preset 与 setting 是否仍然适用；
+1. V2 结构主版本、目标 PI 语义版本与 schema 合法性；
+2. import、resource path、hash、`attach_resource_path`、图标、语言文件等路径是否可解析；
+3. controller、resource、group、task、option、case、input、hotkey、preset、setting、pretask 和 locale 引用是否存在且唯一；
+4. controller/resource 过滤后，task、option、preset、setting 与 pretask 是否仍然适用；
 5. task entry 是否能在所选资源的 Pipeline 中解析；
 6. `pipeline_override` 是否只覆盖已存在的节点；
-7. Interface 配置和多语言内容是否完整；
-8. 项目已有校验工具的诊断结果。
+7. pretask 执行契约、Agent `PI_*` 兼容性、password/preset 隐私约束和 telemetry 用户授权是否明确；
+8. Interface 配置、`welcome` 和多语言内容是否完整；
+9. 项目已有校验工具的诊断结果。
 
 审查请求默认不修复。区分协议错误、跨文件语义错误、Client 兼容风险和维护性建议。
 
@@ -42,7 +43,7 @@ description: 解释、审查、诊断和修改已有 MaaFramework Project Interf
 
 1. 先列出受影响的声明、引用和 controller/resource 组合。
 2. 仅修改主 Interface、其 import、语言文件和 Interface 配置文件。
-3. 做最小闭环修改；同步更新允许范围内的引用和翻译，不顺手重排无关字段。
+3. 做最小闭环修改；同步更新允许范围内的引用、preset 快照、pretask 过滤和翻译，不顺手重排无关字段。
 4. Pipeline、Python Agent、图片和构建配置只读。需要修改这些文件时按“技能接力”处理。
 5. 修改后执行“验证与完成标准”。
 

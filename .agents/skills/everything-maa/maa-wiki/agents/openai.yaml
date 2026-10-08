@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maa Wiki"
+  short_description: "Find authoritative MaaFramework source knowledge"
+  default_prompt: "Use $maa-wiki to load the MaaLLMWiki maallmwiki skill and verify this MaaFramework fact against its pinned original source."

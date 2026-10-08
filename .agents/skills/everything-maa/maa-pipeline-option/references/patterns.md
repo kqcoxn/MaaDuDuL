@@ -1,5 +1,7 @@
 # Maa Pipeline Option Patterns
 
+这些文件记录常见接线示例和本仓库的历史经验，不是协议全量清单或字段权威。实现前先按目标项目锁定的 schema 和 `$maa-wiki` 定位的官方来源核对当前 option 协议。
+
 ## Contents
 
 - 模式 A：switch + Flag 节点

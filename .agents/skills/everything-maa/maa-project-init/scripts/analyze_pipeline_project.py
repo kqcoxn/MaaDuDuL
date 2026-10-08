@@ -608,7 +608,12 @@ def classify_node(name: str, node: dict, in_degree: int) -> list[str]:
     return sorted(set(categories))
 
 
-def analyze_pipeline_files(project_root: Path, pipeline_files: list[Path]) -> dict:
+def analyze_pipeline_files(
+    project_root: Path,
+    pipeline_files: list[Path],
+    resource_dirs: list[Path] | None = None,
+    resource_bundle_for: dict[str, str] | None = None,
+) -> dict:
     node_defs: dict[str, list[dict]] = defaultdict(list)
     file_summaries: list[dict] = []
     edges: list[Edge] = []
@@ -618,6 +623,23 @@ def analyze_pipeline_files(project_root: Path, pipeline_files: list[Path]) -> di
     roi_nodes: list[dict] = []
     custom_action_nodes: list[dict] = []
     anchor_defs: list[dict] = []
+    resource_roots = [Path(path).resolve() for path in resource_dirs or []]
+    bundle_by_root = {
+        portable_path(Path(path).resolve()): bundle
+        for path, bundle in (resource_bundle_for or {}).items()
+    }
+
+    def resource_for(path: Path) -> str:
+        resolved = path.resolve()
+        for resource_root in resource_roots:
+            try:
+                resolved.relative_to(resource_root)
+            except ValueError:
+                continue
+            return bundle_by_root.get(
+                portable_path(resource_root), portable_path(resource_root)
+            )
+        return "<unknown>"
 
     for path in pipeline_files:
         rel_file = rel(path, project_root)
@@ -637,6 +659,7 @@ def analyze_pipeline_files(project_root: Path, pipeline_files: list[Path]) -> di
             node_defs[name].append(
                 {
                     "file": rel_file,
+                    "resource": resource_for(path),
                     "recognition": node_recognition_name(node),
                     "action": node_action_name(node),
                     "node": node,
@@ -744,7 +767,16 @@ def analyze_pipeline_files(project_root: Path, pipeline_files: list[Path]) -> di
     isolated = sorted(
         name for name in node_names if in_degree[name] == 0 and out_degree[name] == 0
     )
-    duplicate_nodes = sorted(name for name, defs in node_defs.items() if len(defs) > 1)
+    duplicate_nodes = sorted(
+        name
+        for name, defs in node_defs.items()
+        if len(defs) > len({definition["resource"] for definition in defs})
+    )
+    cross_bundle_override_nodes = sorted(
+        name
+        for name, defs in node_defs.items()
+        if len({definition["resource"] for definition in defs}) > 1
+    )
     cycles = find_cycle_candidates(node_names, edges)
 
     common_nodes = []
@@ -786,6 +818,7 @@ def analyze_pipeline_files(project_root: Path, pipeline_files: list[Path]) -> di
         "node_definition_count": sum(len(defs) for defs in node_defs.values()),
         "node_names": sorted(node_defs),
         "duplicate_nodes": duplicate_nodes,
+        "cross_bundle_override_nodes": cross_bundle_override_nodes,
         "file_summaries": file_summaries,
         "edges": [asdict(edge) for edge in edges],
         "edge_type_counts": dict(edge_type_counts),
@@ -1418,9 +1451,16 @@ def analyze_project(project_root: str | Path) -> dict:
 
     resource_groups = resolve_resource_dirs(root, interface_path, interface)
     resource_dirs = unique_existing_resource_dirs(resource_groups)
+    resource_bundle_for = {
+        path: group["name"]
+        for group in resource_groups
+        for path in group["existing_paths"]
+    }
     pipeline_files, default_files = discover_pipeline_files(root, resource_dirs)
     image_files = discover_image_files(resource_dirs)
-    pipeline = analyze_pipeline_files(root, pipeline_files)
+    pipeline = analyze_pipeline_files(
+        root, pipeline_files, resource_dirs, resource_bundle_for
+    )
     python_pipeline = analyze_python_pipeline_calls(root)
 
     controllers = [
@@ -1777,6 +1817,7 @@ def render_summary(analysis: dict) -> str:
         f"- Zero-in-degree candidates after external-entry scan: {len(pipeline['orphan_candidates'])}",
         f"- Dynamic Python Pipeline calls: {len(pipeline['python_pipeline']['dynamic_calls'])}",
         f"- Duplicate node names: {len(pipeline['duplicate_nodes'])}",
+        f"- Cross-bundle override node names: {len(pipeline['cross_bundle_override_nodes'])}",
         f"- Cycle candidates: {len(pipeline['cycle_candidates'])}",
         f"- Unresolved agent script paths: {analysis.get('agent_scripts', {}).get('declared_unresolved_count', 0)}",
         f"- Orphan agent script path declarations: {len(analysis.get('agent_scripts', {}).get('orphan_declarations', []))}",
@@ -1929,6 +1970,7 @@ def render_basic_info(analysis: dict) -> str:
         f"- anchor 目标缺失数: {len(pipeline['dangling_anchor_targets'])}",
         f"- 孤立节点数: {len(pipeline['isolated_nodes'])}",
         f"- 重复节点名数: {len(pipeline['duplicate_nodes'])}",
+        f"- 跨 bundle 覆盖节点名数: {len(pipeline['cross_bundle_override_nodes'])}",
         f"- 疑似循环/SCC 数: {len(pipeline['cycle_candidates'])}",
         "",
         "### Top in-degree nodes",
@@ -1991,6 +2033,7 @@ def render_basic_info(analysis: dict) -> str:
         f"- Python 动态目标调用数: {len(pipeline['python_pipeline']['dynamic_calls'])}",
         f"- 外部入口未解析引用: {', '.join(pipeline['external_unresolved_refs'][:30]) or 'None detected'}",
         f"- 重复节点名样例: {', '.join(pipeline['duplicate_nodes'][:30]) or 'None detected'}",
+        f"- 跨 bundle 覆盖样例: {', '.join(pipeline['cross_bundle_override_nodes'][:30]) or 'None detected'}",
         f"- 疑似循环样例: {display_value(pipeline['cycle_candidates'][:10]) or 'None detected'}",
         f"- Agent script paths unresolved: {analysis.get('agent_scripts', {}).get('declared_unresolved_count', 0)}",
         f"- Agent script path orphan declarations: {len(analysis.get('agent_scripts', {}).get('orphan_declarations', []))}",

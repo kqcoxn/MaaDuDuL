@@ -336,7 +336,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 - `ResetCount` / `ClearHitCount`：清除节点命中计数；具体名称以目标项目注册函数为准。
 - `NodeOverride` / `DisableNode`：运行时覆盖或禁用节点；适合动态状态，不适合替代简单 UI option。
 - `ExpressionRecognition` / CustomRecognition：计算布尔表达式或做复杂识别后处理；具体名称以目标项目注册函数为准。
-- 详见 `docs/zh_cn/develop/Custom编写.md`。
+- 详见 `docs/zh_cn/1.3-Custom&Agent.md`。
 
 ## 典型模式
 
@@ -460,8 +460,7 @@ Universal pipeline 使用 v2 格式，recognition 和 action 放入二级字典�
 
 ## 参考
 
-- Pipeline 协议完整规范：[PipelineProtocol](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/en_us/3.1-PipelineProtocol.md)
-- Pipeline 编写：`docs/zh_cn/develop/Pipeline编写.md`
-- Custom 节点：`docs/zh_cn/develop/Custom编写.md`
-- Interface 选项：`docs/zh_cn/develop/interface.json编写.md`
-- 项目结构：`docs/zh_cn/develop/项目结构.md`
+- Pipeline 协议完整规范：`docs/zh_cn/3.1-任务流水线协议.md`
+- Custom 节点与 Agent：`docs/zh_cn/1.3-Custom&Agent.md`
+- Interface 协议：`docs/zh_cn/3.3-ProjectInterfaceV2协议.md`
+- 项目结构：`docs/zh_cn/1.2-术语解释.md`
