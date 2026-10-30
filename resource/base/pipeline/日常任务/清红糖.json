@@ -3,23 +3,48 @@
         "$__mpe_code": {
             "prefix": "清红糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1784119544765,
+            "lastSyncTime": 1793360509811,
             "isModifiedExternally": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\清红糖.json",
+            "isDeleted": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\清红糖.json",
             "savedViewport": {
-                "x": -14378,
-                "y": -1563,
-                "zoom": 2
+                "x": -1087,
+                "y": 379,
+                "zoom": 0.35
             },
             "filename": "清红糖",
-            "version": "v1.7.4"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_返回主界面_清红糖": {
         "$__mpe_code": {
             "position": {
-                "x": 7868,
-                "y": 269
+                "x": 8405,
+                "y": 629
+            }
+        }
+    },
+    "$__mpe_external_速战_确认奖励_清红糖": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8372,
+                "y": 255
+            }
+        }
+    },
+    "$__mpe_external_速战_等级提升_清红糖": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8372,
+                "y": 332
+            }
+        }
+    },
+    "$__mpe_external_速战_跳过动画_清红糖": {
+        "$__mpe_code": {
+            "position": {
+                "x": 8372,
+                "y": 177
             }
         }
     },
@@ -60,8 +85,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5870,
-                "y": -300
+                "x": 5943,
+                "y": -299
             }
         }
     },
@@ -100,12 +125,13 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8730,
-                "y": 1770
+                "x": 8064,
+                "y": 989
             }
         }
     },
     "清红糖_复位装备轮次": {
+        "pre_delay": 0,
         "action": {
             "type": "Custom",
             "param": {
@@ -113,17 +139,19 @@
                 "custom_action_param": "k=equip_pass&ic=0&mc=0"
             }
         },
+        "post_delay": 0,
         "next": [
             "清红糖_预留设置"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5500,
-                "y": 1800
+                "x": 5382,
+                "y": -306
             }
         }
     },
     "清红糖_复位轮次": {
+        "pre_delay": 0,
         "action": {
             "type": "Custom",
             "param": {
@@ -131,13 +159,14 @@
                 "custom_action_param": "k=buy_red_pass&ic=0&mc=1"
             }
         },
+        "post_delay": 0,
         "next": [
             "清红糖_复位装备轮次"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5760,
-                "y": 1800
+                "x": 5110,
+                "y": -305
             }
         }
     },
@@ -184,8 +213,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5998,
-                "y": -301
+                "x": 4852,
+                "y": -303
             }
         }
     },
@@ -316,15 +345,15 @@
         "next": [
             "清红糖_装备结束"
         ],
+        "on_error": [
+            "清红糖_购买红糖周期检查"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 7329,
                 "y": 240
             }
-        },
-        "on_error": [
-            "返回主界面"
-        ]
+        }
     },
     "清红糖_振兴之路": {
         "recognition": {
@@ -367,8 +396,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 7429,
-                "y": 884
+                "x": 6786,
+                "y": 942
             }
         }
     },
@@ -378,8 +407,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6909,
-                "y": 883
+                "x": 6266,
+                "y": 941
             }
         }
     },
@@ -411,8 +440,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7169,
-                "y": 884
+                "x": 6526,
+                "y": 942
             }
         }
     },
@@ -432,8 +461,8 @@
         "repeat_delay": 800,
         "$__mpe_code": {
             "position": {
-                "x": 7164,
-                "y": 592
+                "x": 6521,
+                "y": 650
             }
         }
     },
@@ -453,8 +482,8 @@
         "repeat_delay": 800,
         "$__mpe_code": {
             "position": {
-                "x": 7418,
-                "y": 591
+                "x": 6775,
+                "y": 649
             }
         }
     },
@@ -480,8 +509,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 7429,
-                "y": 1080
+                "x": 6786,
+                "y": 1138
             }
         }
     },
@@ -508,8 +537,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6020,
-                "y": 1800
+                "x": 8060,
+                "y": 150
             }
         }
     },
@@ -556,8 +585,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 6905,
-                "y": 593
+                "x": 6262,
+                "y": 651
             }
         }
     },
@@ -574,15 +603,15 @@
         "next": [
             "清红糖_购买红糖周期记录"
         ],
-        "$__mpe_code": {
-            "position": {
-                "x": 7868,
-                "y": 1080
-            }
-        },
         "on_error": [
             "返回主界面"
-        ]
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5552,
+                "y": 367
+            }
+        }
     },
     "清红糖_购买红糖周期提醒": {
         "focus": {
@@ -593,8 +622,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6280,
-                "y": 1800
+                "x": 5553,
+                "y": 721
             }
         }
     },
@@ -617,8 +646,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6540,
-                "y": 1800
+                "x": 5287,
+                "y": 369
             }
         }
     },
@@ -635,8 +664,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6800,
-                "y": 1800
+                "x": 5826,
+                "y": 365
             }
         }
     },
@@ -727,15 +756,15 @@
         "next": [
             "清红糖_心形周期记录"
         ],
+        "on_error": [
+            "清红糖_购买红糖周期检查"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 7663,
                 "y": -300
             }
-        },
-        "on_error": [
-            "返回主界面"
-        ]
+        }
     },
     "清红糖_预留设置": {
         "action": {
@@ -750,8 +779,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7060,
-                "y": 1800
+                "x": 5652,
+                "y": -305
             }
         }
     },
@@ -770,9 +799,6 @@
                 ]
             }
         },
-        "action": {
-            "type": "DoNothing"
-        },
         "focus": {
             "Node.Recognition.Succeeded": "> 体力不足且已达购买上限"
         },
@@ -781,8 +807,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8730,
-                "y": 1470
+                "x": 8064,
+                "y": 689
             }
         }
     }

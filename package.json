@@ -11,9 +11,12 @@
     },
     "resolutions": {
         "@modelcontextprotocol/sdk": "1.32.1",
+        "body-parser": "2.4.0",
         "http-cache-semantics": "4.3.0",
         "hono": "4.13.11",
-        "ip-address": "10.7.4"
+        "ip-address": "10.7.4",
+        "undici": "6.29.1",
+        "zod": "4.6.6"
     },
     "engines": {
         "node": ">=22.13"
@@ -50,7 +53,7 @@
         "format:py": "uv run --frozen ruff format .",
         "reset": "git reset --soft HEAD~1"
     },
-    "version": "1.4.0",
+    "version": "1.4.1",
     "type": "module",
     "prettier": {
         "plugins": [

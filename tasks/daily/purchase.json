@@ -19,8 +19,7 @@
 			],
 			"option": [
 				"每日采购-周期免费礼包",
-				"每日采购-商店采购",
-				"每日采购-糖果采购"
+				"每日采购-商店采购"
 			]
 		}
 	],
@@ -678,130 +677,6 @@
 					"label": "$Yes"
 				}
 			]
-		},
-		"每日采购-糖果采购": {
-			"type": "switch",
-			"label": "$水晶叶糖果采购",
-			"description": "$使用水晶叶购买糖果",
-			"cases": [
-				{
-					"name": "No",
-					"pipeline_override": {
-						"每日采购_糖果采购开始": {
-							"next": "每日采购_糖果采购结束"
-						}
-					},
-					"label": "$No"
-				},
-				{
-					"name": "Yes",
-					"option": [
-						"每日采购-糖果采购-周期检查",
-						"每日采购-糖果采购-红糖",
-						"每日采购-糖果采购-紫糖"
-					],
-					"label": "$Yes"
-				}
-			]
-		},
-		"每日采购-糖果采购-周期检查": {
-			"type": "switch",
-			"label": "$每日仅采购一次",
-			"cases": [
-				{
-					"name": "Yes",
-					"label": "$Yes"
-				},
-				{
-					"name": "No",
-					"pipeline_override": {
-						"每日采购_糖果采购周期检查": {
-							"action": "DoNothing"
-						}
-					},
-					"label": "$No"
-				}
-			]
-		},
-		"每日采购-糖果采购-红糖": {
-			"type": "switch",
-			"label": "$采购红糖",
-			"cases": [
-				{
-					"name": "No",
-					"pipeline_override": {
-						"每日采购_购买红糖": {
-							"action": "DoNothing"
-						}
-					},
-					"label": "$No"
-				},
-				{
-					"name": "Yes",
-					"option": [
-						"每日采购-糖果采购-红糖-采购量"
-					],
-					"label": "$Yes"
-				}
-			]
-		},
-		"每日采购-糖果采购-红糖-采购量": {
-			"type": "input",
-			"inputs": [
-				{
-					"name": "次数",
-					"default": "3",
-					"pipeline_type": "string",
-					"verify": "^\\d+$",
-					"label": "$次数"
-				}
-			],
-			"pipeline_override": {
-				"每日采购_购买红糖": {
-					"custom_action_param": "t=r&c={次数}"
-				}
-			},
-			"label": "$红糖采购次数"
-		},
-		"每日采购-糖果采购-紫糖": {
-			"type": "switch",
-			"label": "$采购紫糖",
-			"cases": [
-				{
-					"name": "No",
-					"pipeline_override": {
-						"每日采购_购买紫糖": {
-							"action": "DoNothing"
-						}
-					},
-					"label": "$No"
-				},
-				{
-					"name": "Yes",
-					"option": [
-						"每日采购-糖果采购-紫糖-采购量"
-					],
-					"label": "$Yes"
-				}
-			]
-		},
-		"每日采购-糖果采购-紫糖-采购量": {
-			"type": "input",
-			"inputs": [
-				{
-					"name": "次数",
-					"default": "3",
-					"pipeline_type": "string",
-					"verify": "^\\d+$",
-					"label": "$次数"
-				}
-			],
-			"pipeline_override": {
-				"每日采购_购买紫糖": {
-					"custom_action_param": "t=p&c={次数}"
-				}
-			},
-			"label": "$紫糖采购次数"
 		}
 	}
 }

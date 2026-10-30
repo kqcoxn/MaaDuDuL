@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "清紫糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790876338405,
+            "lastSyncTime": 1793357751782,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
             "savedViewport": {
-                "x": -3826,
-                "y": -375,
-                "zoom": 0.66
+                "x": -491,
+                "y": 285,
+                "zoom": 0.2
             },
             "filename": "清紫糖",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_返回主界面_清紫糖": {
@@ -367,8 +367,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6238,
-                "y": 344
+                "x": 5438,
+                "y": 355
             }
         }
     },
@@ -851,15 +851,15 @@
         "next": [
             "清紫糖_购买紫糖周期记录"
         ],
-        "$__mpe_code": {
-            "position": {
-                "x": 6319,
-                "y": 344
-            }
-        },
         "on_error": [
             "清紫糖_进入冒险界面"
-        ]
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5974,
+                "y": 346
+            }
+        }
     },
     "清紫糖_购买紫糖周期检查": {
         "action": {
@@ -880,8 +880,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5500,
-                "y": 1800
+                "x": 5705,
+                "y": 355
             }
         }
     },
@@ -898,8 +898,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5760,
-                "y": 1800
+                "x": 6246,
+                "y": 342
             }
         }
     },
@@ -912,8 +912,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6020,
-                "y": 1800
+                "x": 5963,
+                "y": 704
             }
         }
     },

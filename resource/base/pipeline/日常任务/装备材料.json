@@ -3,13 +3,17 @@
         "$__mpe_code": {
             "prefix": "装备材料",
             "coordinateMode": "absolute-v1",
-            "filename": "装备材料",
+            "lastSyncTime": 1793358313923,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\装备材料.json",
             "savedViewport": {
-                "x": 0,
-                "y": 0,
-                "zoom": 1
+                "x": 200,
+                "y": 303,
+                "zoom": 0.23
             },
-            "version": "v1.8.0"
+            "filename": "装备材料",
+            "version": "v2.1.0"
         }
     },
     "装备材料_刷取轮次": {
@@ -31,8 +35,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5500,
-                "y": 2400
+                "x": 320,
+                "y": 593
             }
         }
     },
@@ -46,8 +50,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5760,
-                "y": 2400
+                "x": 1280,
+                "y": 195
             }
         }
     },
@@ -71,8 +75,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6020,
-                "y": 2400
+                "x": 640,
+                "y": 454
             }
         }
     },
@@ -90,8 +94,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6280,
-                "y": 2400
+                "x": 6080,
+                "y": 443
             }
         }
     },
@@ -115,8 +119,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5875,
-                "y": 0
+                "x": 960,
+                "y": 572
             }
         }
     },
@@ -135,8 +139,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6000,
-                "y": 0
+                "x": 0,
+                "y": 589
             }
         }
     },
@@ -158,8 +162,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7500,
-                "y": 0
+                "x": 3200,
+                "y": 504
             }
         }
     },
@@ -181,8 +185,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7000,
-                "y": 0
+                "x": 2560,
+                "y": 504
             }
         }
     },
@@ -205,22 +209,22 @@
             "type": "Click"
         },
         "post_delay": 900,
+        "timeout": 3000,
         "focus": {
             "Node.Recognition.Succeeded": "> 打开背包"
         },
         "next": [
             "装备材料_进入装备"
         ],
-        "$__mpe_code": {
-            "position": {
-                "x": 6500,
-                "y": 0
-            }
-        },
-        "timeout": 3000,
         "on_error": [
             "装备材料_点击背包"
-        ]
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1600,
+                "y": 502
+            }
+        }
     },
     "装备材料_打开菜单": {
         "action": {
@@ -240,8 +244,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6250,
-                "y": 0
+                "x": 1280,
+                "y": 562
             }
         }
     },
@@ -265,8 +269,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9250,
-                "y": 0
+                "x": 5440,
+                "y": 460
             }
         }
     },
@@ -291,8 +295,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8375,
-                "y": 250
+                "x": 4160,
+                "y": 488
             }
         }
     },
@@ -321,8 +325,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6375,
-                "y": 250
+                "x": 1920,
+                "y": 632
             }
         }
     },
@@ -345,32 +349,32 @@
             "type": "Click"
         },
         "post_delay": 800,
+        "focus": {
+            "Node.Recognition.Starting": "> 排序方式=所持数量"
+        },
         "next": [
             "装备材料_校正排序"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8000,
-                "y": 0
+                "x": 3840,
+                "y": 472
             }
-        },
-        "focus": {
-            "Node.Recognition.Starting": "> 排序方式=所持数量"
         }
     },
     "装备材料_结束": {
         "pre_delay": 0,
         "post_delay": 0,
-        "next": [
-            "清红糖_购买红糖周期检查"
-        ],
         "focus": {
             "Node.Recognition.Starting": "> 刷取结束"
         },
+        "next": [
+            "清红糖_购买红糖周期检查"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 11250,
-                "y": 750
+                "x": 6400,
+                "y": 325
             }
         }
     },
@@ -401,8 +405,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8750,
-                "y": 0
+                "x": 4800,
+                "y": 472
             }
         }
     },
@@ -423,8 +427,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 9500,
-                "y": 250
+                "x": 0,
+                "y": 0
             }
         }
     },
@@ -445,8 +449,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 10250,
-                "y": 750
+                "x": 5760,
+                "y": 727
             }
         }
     },
@@ -473,8 +477,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9000,
-                "y": 0
+                "x": 5120,
+                "y": 488
             }
         }
     },
@@ -497,22 +501,22 @@
             "type": "Click"
         },
         "post_delay": 700,
+        "timeout": 3000,
         "focus": {
             "Node.Recognition.Succeeded": "> 进入装备页"
         },
         "next": [
             "装备材料_打开筛选"
         ],
-        "$__mpe_code": {
-            "position": {
-                "x": 6750,
-                "y": 0
-            }
-        },
-        "timeout": 3000,
         "on_error": [
             "装备材料_返回大厅"
-        ]
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2240,
+                "y": 503
+            }
+        }
     },
     "装备材料_选择所持数量": {
         "recognition": {
@@ -538,8 +542,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7750,
-                "y": 0
+                "x": 3520,
+                "y": 488
             }
         }
     },
@@ -564,8 +568,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 8500,
-                "y": 0
+                "x": 4480,
+                "y": 488
             }
         }
     },
@@ -596,8 +600,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7250,
-                "y": 0
+                "x": 2880,
+                "y": 472
             }
         }
     },
@@ -621,8 +625,16 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9500,
-                "y": 0
+                "x": 5760,
+                "y": 324
+            }
+        }
+    },
+    "$__mpe_external_清红糖_购买红糖周期检查_装备材料": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6720,
+                "y": 429
             }
         }
     }
