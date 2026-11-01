@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "启动游戏",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791553302088,
+            "lastSyncTime": 1793512443656,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "savedViewport": {
-                "x": 192,
-                "y": 47,
-                "zoom": 0.66
+                "x": -2111,
+                "y": -433,
+                "zoom": 1.84
             },
             "filename": "启动游戏",
-            "version": "v2.1.0_beta_2"
+            "version": "v2.1.0"
         }
     },
     "启动游戏_关闭公告": {
@@ -364,6 +364,31 @@
             }
         }
     },
+    "启动游戏_跳过": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1075,
+                    5,
+                    200,
+                    92
+                ],
+                "expected": [
+                    "跳过"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 1487,
+                "y": 907
+            }
+        }
+    },
     "启动游戏_连续识别主界面": {
         "recognition": {
             "type": "Custom",
@@ -448,31 +473,6 @@
             "position": {
                 "x": 1219,
                 "y": 631
-            }
-        }
-    },
-    "启动游戏_跳过": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1075,
-                    5,
-                    200,
-                    92
-                ],
-                "expected": [
-                    "跳过"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 1487,
-                "y": 907
             }
         }
     }

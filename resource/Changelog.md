@@ -4,6 +4,8 @@
 
 ## 主要内容
 
+- **版本适配**
+    - 适配新签到界面
 - **新增选项**
     - 清红糖-预留活动体力（[@eci-ice](https://github.com/eci-ice)）
     - 清红糖-装备-自动刷取所持最少的装备材料（[@eci-ice](https://github.com/eci-ice)）
