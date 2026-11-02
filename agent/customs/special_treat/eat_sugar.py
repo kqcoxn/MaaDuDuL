@@ -17,7 +17,7 @@ import time
 
 import numpy as np
 
-from agent.customs.utils import Prompter, MatrixOperator, LocalStorage
+from agent.customs.utils import CounterManager, Prompter, MatrixOperator, LocalStorage
 from agent.customs.maahelper import ParamAnalyzer, Tasker, RecoHelper
 
 from .store import RedReserve
@@ -524,10 +524,18 @@ class SelectRedLevel(CustomAction):
             )
 
             # 执行速刷（走我们自己的速战包装，带入场券不足/饥饿提示/补糖分支与预留场次）
-            if run_candy_fight(context) is None:
+            detail = run_candy_fight(context)
+            if detail is None:
+                Prompter.log("预留体力不足，跳过区间战斗")
+                return False
+            # 没打到收尾节点（入场券不足/关卡不可用/挨饿等）不算成功，也不推进进度
+            if not fight_finished(detail):
+                Prompter.log(
+                    f"区间战斗没打成，最后节点 {Tasker.get_last_node_name(detail)}，本轮跳过且不推进进度"
+                )
                 return False
 
-            # 更新执行进度
+            # 更新执行进度（只有真的打完才推进）
             next_chapter, next_stage = self._get_next_level(
                 target_chapter,
                 target_stage,
@@ -846,17 +854,23 @@ def has_leading_zero(text: str) -> bool:
     return any(re.match(r"^0\d+", token) for token in re.findall(r"\d+", text.replace(",", "")))
 
 
-def read_roi(rh: RecoHelper, roi: list[int]) -> tuple[str, int | None]:
+def read_roi(rh: RecoHelper, roi: list[int], only_rec: bool) -> tuple[str, int | None]:
     """按指定 ROI 读一次体力。
 
     Args:
         rh：识别辅助器
         roi：取字框
+        only_rec：为 True 时跳过文字检测、整框直接识别。
+            相机里「111」这种三连数字，检测常把三个 1 并成一个框而只认出一个「1」，
+            跳过检测就能整行读回 111/204。
 
     Returns:
         tuple：OCR 原文与解析出的体力（无效为 None）
     """
-    text = rh.recognize(STAMINA_NODE, {"roi": roi}).concat() or ""
+    override = {"roi": roi}
+    if only_rec:
+        override["only_rec"] = True
+    text = rh.recognize(STAMINA_NODE, override).concat() or ""
     return text, parse_stamina(text)
 
 
@@ -917,7 +931,8 @@ def dump_stamina_failure() -> str:
         Prompter.log(f"未能读取红糖体力，锚点 {anchor}，截图存在 {path}")
         Prompter.log(
             f"宽框 {_PROBE.get('wide')} 读到 {display_text(_PROBE.get('wide_text', ''))}，"
-            f"常规框 {_PROBE.get('normal')} 读到 {display_text(_PROBE.get('normal_text', ''))}"
+            f"常规框 {_PROBE.get('normal')} 读到 {display_text(_PROBE.get('normal_text', ''))}，"
+            f"整框 {display_text(_PROBE.get('pure_text', ''))}"
         )
     return path
 
@@ -944,17 +959,27 @@ def scan_stamina(context: Context) -> tuple[str, int | None]:
         boxes = [[anchor + x, top, width, height] for x, top, width, height in offsets]
         _PROBE["wide"] = boxes[0]
         _PROBE["normal"] = boxes[1]
-        left_text, left_value = read_roi(rh, boxes[0])
-        right_text, right_value = read_roi(rh, boxes[1])
+        left_text, left_value = read_roi(rh, boxes[0], only_rec=False)
+        right_text, right_value = read_roi(rh, boxes[1], only_rec=False)
         _PROBE["wide_text"] = left_text
         _PROBE["normal_text"] = right_text
         value_text, value = cross_read((left_text, left_value), (right_text, right_value))
         text = value_text
+
+        # 再整框读一次（跳过检测）：三连数字被检测并成一个框时，这里能读回完整数值
+        pure_text, pure_value = read_roi(rh, boxes[1], only_rec=True)
+        _PROBE["pure_text"] = pure_text
+        if pure_value is not None:
+            if value is not None and pure_value != value:
+                Prompter.log(
+                    f"体力两种读法不一致（检测 {value} / 整框 {pure_value}），采用整框读数"
+                )
+            return pure_text, pure_value
         if value is not None:
             return text, value
 
     for roi in STAMINA_FALLBACK_ROIS:
-        text, stamina = read_roi(rh, roi)
+        text, stamina = read_roi(rh, roi, only_rec=False)
         if stamina is not None:
             return text, stamina
     return text, None
@@ -1060,6 +1085,34 @@ def plan_fights(context: Context) -> tuple[bool, int | None]:
     return True, fights
 
 
+# 速战可能的正常收尾节点：跳过动画 / 领取奖励 / 等级提升
+FIGHT_DONE_NODES = ("速战_确认奖励", "速战_等级提升", "速战_跳过动画")
+
+# 这些失败出口自己已经打过原因，收尾判定不再补一句，避免前端重复
+FIGHT_LOGGED_EXITS = (
+    "清红糖_入场券不足",
+    "清红糖_饥饿提示",
+    "速战_无法速战",
+    "速战_体力不足",
+    "清红糖_补糖",
+)
+
+
+def fight_finished(detail) -> bool:
+    """判断一次速战是否走到了正常收尾节点。
+
+    速战有几条「打不了」的出口（入场券不足、关卡不可用、挨饿），
+    它们同样会让任务正常返回，所以不能只看任务有没有抛异常。
+
+    Args:
+        detail：Tasker.run 返回的任务详情
+
+    Returns:
+        bool：走到了正常收尾节点返回 True
+    """
+    return Tasker.get_last_node_name(detail) in FIGHT_DONE_NODES
+
+
 def run_candy_fight(context: Context):
     """用我们自己的 next 覆盖发起一次速战。
 
@@ -1088,7 +1141,8 @@ def run_candy_fight(context: Context):
 class CandyFight(CustomAction):
     """红糖速战包装自定义动作类。
 
-    以我们自己的 next 覆盖发起速战，候选里包含入场券不足、饥饿提示与补糖。
+    以我们自己的 next 覆盖发起速战，候选里包含入场券不足、饥饿提示与补糖；
+    只有真的打完（走到速战收尾节点）才算成功，打不了时返回 False 交给 on_error。
     """
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
@@ -1099,12 +1153,58 @@ class CandyFight(CustomAction):
             argv：自定义动作参数（本动作无需额外参数）
 
         Returns:
-            bool：速战流程执行完毕返回 True
+            bool：正常打完并领到奖励返回 True
         """
         try:
-            return run_candy_fight(context) is not None
+            detail = run_candy_fight(context)
+            if detail is None:
+                Prompter.log("预留体力不足，跳过本次速战")
+                return False
+            if not fight_finished(detail):
+                last_node = Tasker.get_last_node_name(detail)
+                if last_node not in FIGHT_LOGGED_EXITS:
+                    Prompter.log(f"速战没打成，最后节点 {last_node}，本轮跳过")
+                return False
+            return True
         except Exception as e:
             return Prompter.error("红糖速战", e)
+
+
+@AgentServer.custom_action("candy_loop_gate")
+class CandyLoopGate(CustomAction):
+    """清红糖「购买红糖 → 心形」循环的兜底计数。
+
+    购买成功后流程会经 购买红糖周期记录 回到 心形开始，形成循环；
+    这里按轮次计数，超过上限就返回 False，交给流水线的 on_error 结束本轮，
+    避免买得到糖却一直重跑。
+
+    参数格式（custom_action_param）：
+        - k：计数器键名，默认 buy_red_loop
+        - m：最大轮次，默认 3
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行轮次计数。
+
+        Args:
+            context：MaaFW 上下文对象
+            argv：自定义动作参数
+
+        Returns:
+            bool：还在上限内返回 True，超过上限返回 False
+        """
+        try:
+            args = ParamAnalyzer(argv)
+            key = args.get(["key", "k"], "buy_red_loop")
+            limit = args.get(["max", "m", "mc"], 3)
+            if not isinstance(limit, int) or limit <= 0:
+                limit = 3
+            if CounterManager.get(key, limit, 0).count() < 0:
+                Prompter.log(f"购买与刷取已循环 {limit} 轮，结束本轮清红糖")
+                return False
+            return True
+        except Exception as e:
+            return Prompter.error("购买与刷取轮次", e)
 
 
 @AgentServer.custom_action("red_stamina_check")
