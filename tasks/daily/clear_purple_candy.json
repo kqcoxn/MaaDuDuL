@@ -439,8 +439,7 @@
 					"name": "Yes",
 					"label": "$Yes"
 				}
-			],
-			"default_case": "Yes"
+			]
 		}
 	}
 }

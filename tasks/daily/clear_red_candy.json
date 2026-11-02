@@ -304,8 +304,7 @@
 					"name": "Yes",
 					"label": "$Yes"
 				}
-			],
-			"default_case": "Yes"
+			]
 		},
 		"清红糖-购买红糖-周期检查": {
 			"type": "switch",
@@ -324,8 +323,7 @@
 					"name": "Yes",
 					"label": "$Yes"
 				}
-			],
-			"default_case": "Yes"
+			]
 		},
 		"清红糖-预留活动体力": {
 			"type": "switch",
