@@ -13,7 +13,7 @@ import numpy as np
 from agent.customs.utils import CounterManager, Prompter
 from agent.customs.maahelper import ParamAnalyzer, RecoHelper, Tasker
 
-from .eat_sugar import run_candy_fight
+from .eat_sugar import FIGHT_LOGGED_EXITS, fight_finished, run_candy_fight
 
 
 @AgentServer.custom_action("material_fight")
@@ -26,9 +26,6 @@ class MaterialFight(CustomAction):
         只有走到速战的正常收尾节点（跳过动画 / 确认奖励 / 等级提升）才算刷取成功，其余情况返回 False，
         交给流水线的 on_error 收尾，避免无条件回跳造成死循环。
     """
-
-    # 速战可能的正常收尾节点：跳过动画 / 领取奖励 / 等级提升
-    DONE_NODES = ("速战_确认奖励", "速战_等级提升", "速战_跳过动画")
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         """执行装备材料速战。
@@ -46,9 +43,10 @@ class MaterialFight(CustomAction):
                 Prompter.log("预留体力不足，跳过本次刷取")
                 return False
 
-            last = Tasker.get_last_node_name(detail)
-            if last not in self.DONE_NODES:
-                Prompter.log(f"速战未正常结束，最后节点 {last}，跳过本次刷取")
+            if not fight_finished(detail):
+                last_node = Tasker.get_last_node_name(detail)
+                if last_node not in FIGHT_LOGGED_EXITS:
+                    Prompter.log(f"速战未正常结束，最后节点 {last_node}，跳过本次刷取")
                 return False
             return True
         except Exception as e:
