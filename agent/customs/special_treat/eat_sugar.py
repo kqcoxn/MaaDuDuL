@@ -8,7 +8,6 @@
 
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
-from maa.tasker import MaaStatusEnum
 from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 
@@ -1117,9 +1116,7 @@ def fight_finished(detail) -> bool:
     Returns:
         bool：走到了正常收尾节点返回 True
     """
-    if detail is None:
-        return False
-    if detail.status != MaaStatusEnum.succeeded:
+    if detail is None or not detail.status.succeeded:
         return False
     return Tasker.get_last_node_name(detail) in FIGHT_DONE_NODES
 
