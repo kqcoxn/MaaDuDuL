@@ -1,17 +1,14 @@
-# v1.4.1
+# v1.5.0
 
-> 2026.11.1
+> 2026.11.5
 
 ## 主要内容
 
 - **版本适配**
-    - 适配新签到界面
-- **新增选项**
-    - 清红糖-预留活动体力（[@eci-ice](https://github.com/eci-ice)）
-    - 清红糖-装备-自动刷取所持最少的装备材料（[@eci-ice](https://github.com/eci-ice)）
-- **功能优化**
-    - 将红糖与紫糖采购流程调整至对应刷取任务（[@eci-ice](https://github.com/eci-ice)）
-    - 优化清红糖体力读取与体力不足时的补糖流程（[@eci-ice](https://github.com/eci-ice)）
+    - 【活动】篡夺与越轨之间（[@eci-ice](https://github.com/eci-ice)）
+    - 适配温馨提示类弹窗
+- **问题修复**
+    - 修复清红糖速战失败时逻辑（[@eci-ice](https://github.com/eci-ice)）
 
 > 更多日志与累积更新请在公告相关板块中查看
 
