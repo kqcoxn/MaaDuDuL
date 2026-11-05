@@ -80,9 +80,6 @@
 					"pipeline_override": {
 						"每日采购_每日礼包周期检查": {
 							"action": "DoNothing"
-						},
-						"每日采购_周期组合检查-每日礼包": {
-							"action": "DoNothing"
 						}
 					},
 					"label": "$No"
@@ -124,9 +121,6 @@
 					"pipeline_override": {
 						"每日采购_圣团研究礼包周期检查": {
 							"action": "DoNothing"
-						},
-						"每日采购_周期组合检查-圣团研究礼包": {
-							"action": "DoNothing"
 						}
 					},
 					"label": "$No"
@@ -167,9 +161,6 @@
 					"name": "No",
 					"pipeline_override": {
 						"每日采购_每周礼包周期检查": {
-							"action": "DoNothing"
-						},
-						"每日采购_周期组合检查-每周礼包": {
 							"action": "DoNothing"
 						}
 					},
@@ -278,9 +269,6 @@
 					"name": "No",
 					"pipeline_override": {
 						"每日采购_每月礼包周期检查": {
-							"action": "DoNothing"
-						},
-						"每日采购_周期组合检查-每月礼包": {
 							"action": "DoNothing"
 						}
 					},

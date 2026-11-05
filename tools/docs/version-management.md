@@ -57,4 +57,20 @@ Package Smoke 仅支持手动触发，日常提交和 PR 不执行打包 smoke�
 
 普通第三方 Node/Python 库依赖继续由 package.json、pyproject.toml 及各自锁文件管理，GitHub Actions 的 `uses:` 版本继续留在工作流中。这里统一的是项目、Maa 运行库及显式构建工具链版本，没有把所有依赖再复制一份进 manifest。
 
-Windows、Linux/macOS 内置 Python 均固定为 3.13.17，Linux/macOS 使用 python-build-standalone release 20261021；它们的 minor 须与 recommendedPython 一致。Android 构建宿主 Python 和预编译内核 Python 分别维护，当前内核为 `3.13.15-maafw5.14.3`。
+Windows 内置 Python 固定为 3.13.17，Linux/macOS 固定为 3.13.18，使用 python-build-standalone release 20261026；它们的 minor 须与 recommendedPython 一致。Python 3.13.18 已进入仅源码发布阶段，没有官方 Windows 嵌入式包，因此不能直接把 Windows 下载版本同步为 3.13.18。Android 构建宿主 Python 和预编译内核 Python 分别维护，当前内核为 `3.13.15-maafw5.15.0`。
+
+## 2026-11-05 依赖维护
+
+- MaaFramework 与 Python binding：5.14.3 → [5.15.0](https://github.com/MaaXYZ/MaaFramework/releases/tag/v5.15.0)。Custom 识别仍兼容现有单结果回调，无需改写业务 Custom；Android 继续执行 binding 对齐及 Android 平台名适配。
+- MFAA：v2.16.2 → [v2.16.4](https://github.com/MaaXYZ/MFAAvalonia/releases/tag/v2.16.4)，已核实六种桌面平台/架构资产齐全。
+- MaaFwApp：`de65f7a` → [`c2449d8`](https://github.com/Aliothmoon/MaaFwApp/commit/c2449d8030644386e1a9e3ba7cb21037c2bcdbdf)。资源配方、内核打包参数和身份覆盖接口保持兼容；Android 内核同步为 `3.13.15-maafw5.15.0`，ARM64/x64 资产齐全。
+- CMP：3.7.3 → 3.7.4；maa-tools：1.1.3 → 1.3.0。仅更新依赖，不重新生成 Agent 或工作流模板。
+- Linux/macOS 内置 Python：3.13.17 → [3.13.18](https://www.python.org/downloads/release/python-31318/)，核实 standalone 四种目标资产及 SHA-256；Windows 和 Android 解释器分别保持 3.13.17、3.13.15。
+
+本地四份上游 schema 使用 MaaFramework 5.15.0 的提交 `172ec7b97df3e5b10adf69e36df01f8dc495b6f6`，来源与实际文件 SHA-256 记录于 `tools/schema/schema-manifest.json`。CMP 的 `--update schema` 当前写入其随包携带的 main 基线；刷新后须与目标版本回源核对，不能用开发分支 schema 代替发布版本契约。
+
+适配中删除采购选项对四个已不存在的“周期组合检查”节点的覆盖，保留实际周期检查节点的覆盖。繁中资源层此前只有 `.gitkeep`，加载时 `to_load=false`；增加 `pipeline/placeholder.json` 空对象，保留继承基础资源的行为并使资源层可加载。
+
+验证结果：`yarn versions:sync`、`yarn versions:check`、`yarn run check` 通过；maa-tools 检查中的三组资源全部加载成功。`yarn check:maa` 仍返回非零：pipeline-manager 1.1.0 将同一节点的 `next` 和 `on_error` 引用合并去重，误报 `清红糖_指定关卡作战`、`购买糖果_点击购买`、`购买糖果_紫糖点击购买` 的三条重复路由。成功与失败分支有意指向同一收尾节点，保留这些恢复路径及原检查级别。MPE 元数据警告属于有意保留的编辑器配置。
+
+CMP doctor 的 pnpm 文件、固定写法的 Node CI、默认 Agent 文件和 maa-tools 配置检查不适配本项目的 Yarn、manifest 动态读取、自定义 Agent 布局，未按模板建议覆盖现有配置。此次未安装或修改 MFAAvalonia 测试环境、未启动任务、未构建或发布。

@@ -154,10 +154,10 @@
   dependencies:
     "@nekosu/simple-parser" "1.0.0"
 
-"@nekosu/maa-tools@1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@nekosu/maa-tools/-/maa-tools-1.1.3.tgz#c83cca438a28f77267d8eac786f3b5ec6183b33f"
-  integrity sha512-SK0lBDnR/tDFjWQbfhvLNbjQx+VZQYed7Rvjecow7dG+ZdWheTosq1rYI9VypNRptjOV2Bg0lS5FvDwQMx3xBQ==
+"@nekosu/maa-tools@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@nekosu/maa-tools/-/maa-tools-1.3.0.tgz#e9c68b7513e1a42517f64e1987fa5f695e8e7472"
+  integrity sha512-EapP65M2jFh7i2LoJfuF0Pgm+vNTSl+C6RwlSseKsgVqA4Fc3vVoqcMSO8o2MfC8lNokTQ05wo5L0gZZoUESNA==
   dependencies:
     "@actions/core" "^3.0.0"
     "@nekosu/maa-locale" "1.2.0"
@@ -512,10 +512,10 @@ cors@^2.8.5:
     object-assign "^4"
     vary "^1"
 
-create-maa-project@3.7.3:
-  version "3.7.3"
-  resolved "https://registry.yarnpkg.com/create-maa-project/-/create-maa-project-3.7.3.tgz#d0af5a96bf694d25d9ed956390766d19408f91a5"
-  integrity sha512-Vqlv5i2mzf9lE74cCgP0VdWb4gwCUPR/FdbtKKsmhl/tVetJddElv/afmoQj8VjrhpYFv8udbA93n7A0vkDATA==
+create-maa-project@3.7.4:
+  version "3.7.4"
+  resolved "https://registry.yarnpkg.com/create-maa-project/-/create-maa-project-3.7.4.tgz#8438ee970806b48f382fa791fa3821f08409f15a"
+  integrity sha512-vwxLyaHWfG7Vm6BU5QTAplZ9h87er7mTETUMxUOBvZKl+ArMhjvYng9tqhwrSI60SAi+ODP2hmYrzidL0bGo5Q==
   dependencies:
     "@modelcontextprotocol/sdk" "^1.32.1"
 
