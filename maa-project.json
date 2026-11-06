@@ -44,7 +44,7 @@
         "displayName": "MaaDuDuL",
         "initialTemplate": "agent",
         "slug": "maa-dudul",
-        "version": "1.5.0",
+        "version": "1.5.1",
         "github": "https://github.com/kqcoxn/MaaDuDuL",
         "interfaceUnmanaged": true
     },

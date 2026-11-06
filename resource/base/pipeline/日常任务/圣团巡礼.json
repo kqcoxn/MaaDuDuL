@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789823189217,
+            "lastSyncTime": 1793978830495,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -11956,
-                "y": -2773,
-                "zoom": 1.32
+                "x": -7579,
+                "y": -3717,
+                "zoom": 1.06
             },
             "filename": "圣团巡礼",
-            "version": "v1.10.1"
+            "version": "v2.1.1"
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -837,15 +837,15 @@
             "Node.Action.Succeeded": "> 收取宠物礼物"
         },
         "next": [
-            "圣团巡礼_确保在外部"
+            "圣团巡礼_宠物礼物界面检查"
         ],
         "on_error": [
             "圣团巡礼_宠物礼物周期提醒"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7481,
-                "y": 3684
+                "x": 7211,
+                "y": 3689
             }
         }
     },
@@ -877,8 +877,24 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7207,
-                "y": 3687
+                "x": 6937,
+                "y": 3692
+            }
+        }
+    },
+    "圣团巡礼_宠物礼物界面检查": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "圣团巡礼_确保在外部"
+        ],
+        "on_error": [
+            "圣团巡礼_宠物礼物识别失败"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7466,
+                "y": 3690
             }
         }
     },
@@ -892,6 +908,22 @@
             "position": {
                 "x": 10923,
                 "y": 3704
+            }
+        }
+    },
+    "圣团巡礼_宠物礼物识别失败": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "focus": {
+            "Node.Recognition.Starting": "> 未能识别圣团外部界面，跳过宠物礼物"
+        },
+        "next": [
+            "圣团巡礼_宠物礼物结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7488,
+                "y": 3979
             }
         }
     },
