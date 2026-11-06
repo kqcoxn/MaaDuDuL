@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "每日活动作战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792692226336,
+            "lastSyncTime": 1793993230339,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\每日活动作战.json",
             "savedViewport": {
-                "x": -7756,
-                "y": -240,
-                "zoom": 1.6
+                "x": -4968,
+                "y": -732,
+                "zoom": 0.99
             },
             "filename": "每日活动作战",
-            "version": "v2.1.0"
+            "version": "v2.1.1"
         }
     },
     "$__mpe_external_返回主界面_每日活动作战": {
@@ -443,6 +443,33 @@
             }
         }
     },
+    "每日活动作战_确保关卡列表": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    6,
+                    4,
+                    439,
+                    132
+                ],
+                "expected": [
+                    "活动关卡列表"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "post_delay": 1000,
+        "next": [
+            "每日活动作战_确保微微辣"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5850,
+                "y": 1296
+            }
+        }
+    },
     "每日活动作战_确保微微辣": {
         "recognition": {
             "type": "OCR",
@@ -794,33 +821,6 @@
             "position": {
                 "x": 5597,
                 "y": -159
-            }
-        }
-    },
-    "每日活动作战_确保关卡列表": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    6,
-                    4,
-                    439,
-                    132
-                ],
-                "expected": [
-                    "活动关卡列表"
-                ]
-            }
-        },
-        "pre_delay": 800,
-        "post_delay": 1000,
-        "next": [
-            "每日活动作战_查看作战详情"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5878,
-                "y": 1299
             }
         }
     }
