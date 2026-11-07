@@ -200,7 +200,7 @@
 					"name": "输出/辅助",
 					"pipeline_override": {
 						"清紫糖_选择糖果类型": {
-							"expected": "防御"
+							"expected": "防[御禦]"
 						}
 					},
 					"option": [
@@ -212,7 +212,7 @@
 					"name": "防御/辅助",
 					"pipeline_override": {
 						"清紫糖_选择糖果类型": {
-							"expected": "输出"
+							"expected": "[输輸]出"
 						}
 					},
 					"option": [
@@ -224,7 +224,7 @@
 					"name": "防御/输出",
 					"pipeline_override": {
 						"清紫糖_选择糖果类型": {
-							"expected": "辅助"
+							"expected": "[辅輔]助"
 						}
 					},
 					"option": [
