@@ -344,7 +344,7 @@
 						"每日采购_进入特别商店": {
 							"recognition": {
 								"param": {
-									"expected": ["一周年商店"]
+									"expected": ["一[周週]年商店"]
 								}
 							},
 							"focus": {
