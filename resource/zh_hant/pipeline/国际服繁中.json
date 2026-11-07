@@ -1,0 +1,10 @@
+{
+    "国际服繁中_资源标识": {
+        "recognition": {
+            "type": "DirectHit"
+        },
+        "action": {
+            "type": "DoNothing"
+        }
+    }
+}

@@ -12,6 +12,8 @@ from typing import Dict
 import numpy as np
 import time
 
+from .zh_hant import localize_override
+
 
 class Tasker:
     """任务执行器类。
@@ -70,6 +72,9 @@ class Tasker:
         Returns:
             任务执行结果对象。
         """
+        # 国际服繁中资源下，运行时覆盖的 expected 同样需要适配
+        pipeline_override = localize_override(self.context, pipeline_override)
+
         # 构造默认 next_override
         node_list = self.tsk.resource.node_list
         for node_name in node_list:

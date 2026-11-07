@@ -116,6 +116,7 @@ if (mode === "--ci") {
     ]);
     for (const path of [
         "locales/interface_zh.json",
+        "locales/interface_zh_tw.json",
         "locales/interface_en.json",
     ]) {
         replace(path, [

@@ -12,6 +12,7 @@
 | `build-release.mjs`、`sync-runtime.mjs` | CMP 桌面打包与运行库同步 |
 | `validate-schema.mjs`、`check_resource.py` | 静态 schema 检查与 MaaFramework 原生资源加载检查 |
 | `configure.py`、`package_android.py`、`requirements.txt` | OCR 配置、Android 资源打包与辅助脚本依赖 |
+| `gen_zh_hant.py` | 由国服 pipeline 生成国际服繁中覆盖层 `resource/zh_hant/pipeline`；国服 pipeline 更新后需重新执行 |
 
 根目录保留 Interface、CMP 和 maa-tools 入口，以及 Yarn、uv 的依赖清单与锁文件。`.github`、`.vscode`、`.editorconfig`、Prettier 配置和语言版本文件也保留在工具默认查找的位置。图标统一复用 `public/`，Interface 与开发/Android 资源包使用 `public/logo.png`；桌面打包还将 `public/logo.ico` 复制为包根目录的 `logo.ico`。
 
