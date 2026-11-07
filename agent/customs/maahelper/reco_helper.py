@@ -12,6 +12,7 @@ import time
 import numpy as np
 
 from .tasker import Tasker
+from .zh_hant import localize_override
 
 
 class _MergedResult:
@@ -95,7 +96,7 @@ class RecoHelper:
         else:
             image = self.refresh_screencap().screencap
         self.reco_detail = self.context.run_recognition(
-            node_name, image, {node_name: override_key_value}
+            node_name, image, localize_override(self.context, {node_name: override_key_value})
         )
         if self.hit:
             self.filtered_results = self.reco_detail.filtered_results

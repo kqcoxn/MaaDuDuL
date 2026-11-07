@@ -1,0 +1,9 @@
+{
+    "关闭游戏_关闭游戏": {
+        "action": {
+            "param": {
+                "package": "com.bilibili.trickcal"
+            }
+        }
+    }
+}
