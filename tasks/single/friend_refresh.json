@@ -5,6 +5,10 @@
 			"label": "$♻️好友换新",
 			"entry": "好友换新_开始",
 			"description": "$Resource/descs/single/friend_refresh.md",
+			"resource": [
+				"cn",
+				"en"
+			],
 			"group": [
 				"independent"
 			],

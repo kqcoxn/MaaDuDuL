@@ -5,6 +5,10 @@
 			"label": "$🏆领取关卡奖励",
 			"entry": "领取关卡奖励_开始",
 			"description": "$Resource/descs/single/level_rewards.md",
+			"resource": [
+				"cn",
+				"en"
+			],
 			"group": [
 				"independent"
 			],

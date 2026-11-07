@@ -5,6 +5,10 @@
 			"label": "$🎡游乐场",
 			"entry": "游乐场_开始",
 			"description": "$Resource/descs/daily/playground.md",
+			"resource": [
+				"cn",
+				"en"
+			],
 			"group": [
 				"continuous"
 			],
