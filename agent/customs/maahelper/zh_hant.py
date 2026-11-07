@@ -79,6 +79,8 @@ TERMS: dict[str, str] = {
     # 宴会选菜面板右下角的按钮
     "招待": "上菜",
     "篡夺与越轨之间": "篡夺与脱序之间",
+    # 棉花糖关卡的「禁止選擇肉盾類型使者」
+    "防御": "肉盾",
 }
 
 _TERMS_RE = re.compile("|".join(sorted(map(re.escape, TERMS), key=len, reverse=True)))

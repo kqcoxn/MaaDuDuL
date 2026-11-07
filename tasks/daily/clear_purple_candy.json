@@ -200,7 +200,7 @@
 					"name": "输出/辅助",
 					"pipeline_override": {
 						"清紫糖_选择糖果类型": {
-							"expected": "防[御禦]"
+							"expected": "防[御禦]|肉盾"
 						}
 					},
 					"option": [
