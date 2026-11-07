@@ -87,14 +87,27 @@ TERMS: dict[str, str] = {
 _TERMS_RE = re.compile("|".join(sorted(map(re.escape, TERMS), key=len, reverse=True)))
 
 
+def _build_char_patterns() -> dict[str, str]:
+    """为简繁字的每种写法建立字符类，兼容用户输入繁体而 OCR 返回简体的情况。"""
+    variants: dict[str, str] = {}
+    for simplified, traditional in CHARS.items():
+        forms = simplified + traditional
+        for char in forms:
+            variants[char] = "".join(dict.fromkeys(variants.get(char, "") + forms))
+    return {char: f"[{forms}]" for char, forms in variants.items()}
+
+
+_CHAR_PATTERNS = _build_char_patterns()
+
+
 def mixed_pattern(text: str) -> str:
-    """把有繁体写法的字替换为 [简繁] 字符类，例如 活动视窗 → 活[动動][视視]窗。
+    """把简体或繁体输入转换为 [简繁] 字符类，例如 活動視窗 → 活[动動][视視]窗。
 
     已含字符类的正则原样返回，避免破坏原有语法。
     """
     if "[" in text:
         return text
-    return "".join(f"[{ch}{CHARS[ch]}]" if ch in CHARS else ch for ch in text)
+    return "".join(_CHAR_PATTERNS.get(ch, ch) for ch in text)
 
 
 def variants(text: str) -> list[str]:

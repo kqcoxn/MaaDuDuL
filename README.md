@@ -17,7 +17,6 @@
   <a href="https://github.com/kqcoxn/MaaDuDuL/stargazers" target="_blank"><img alt="stars" src="https://img.shields.io/github/stars/kqcoxn/MaaDuDuL?style=social"></a>
   <a href="https://github.com/kqcoxn/MaaDuDuL/releases" target="_blank"><img alt="stars" src="https://img.shields.io/github/downloads/kqcoxn/MaaDuDuL/total?style=social"></a>
   <br/>
-  <a href="https://deepwiki.com/kqcoxn/MaaDuDuL" target="_blank"><img alt="deepwiki" src="https://deepwiki.com/badge.svg"></a>
   <a href="https://qm.qq.com/q/6pu9Cf2qJO" target="_blank"><img alt="QQ交流群" src="https://img.shields.io/badge/QGroup-926874985-0e80c1?logo=qq&logoColor=white"></a>
 </p>
 
@@ -60,6 +59,8 @@
 - **活动相关**
     - [x] 每日通关
     - [x] 每日成就
+- **小游戏**
+    - [x] 诡计筛子
 - **开荒相关**
     - [x] 副本连续作战
     - [x] 领取章节奖励
@@ -99,6 +100,8 @@
 感谢以下开发者对本项目作出的贡献:
 
 [![Contributors](https://contrib.rocks/image?repo=kqcoxn/MaaDuDuL&max=1000)](https://github.com/kqcoxn/MaaDuDuL/graphs/contributors)
+
+感谢 [ZerooNight](https://github.com/ZerooNight) 贡献国际服（繁中）资源适配与繁中界面翻译。
 
 ### 依赖与工具
 
