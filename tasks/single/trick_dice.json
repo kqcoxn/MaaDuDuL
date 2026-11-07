@@ -1,0 +1,116 @@
+{
+    "task": [
+        {
+            "name": "诡计骰子",
+            "label": "$🎲诡计骰子",
+            "entry": "诡计骰子_开始",
+            "description": "$Resource/descs/single/trick_dice.md",
+            "resource": [
+                "cn"
+            ],
+            "group": [
+                "independent"
+            ],
+            "option": [
+                "诡计骰子-任务模式"
+            ]
+        }
+    ],
+    "option": {
+        "诡计骰子-任务模式": {
+            "type": "select",
+            "label": "$诡计骰子_任务模式",
+            "default_case": "每日任务",
+            "cases": [
+                {
+                    "name": "每日任务",
+                    "label": "$诡计骰子_每日任务",
+                    "pipeline_override": {
+                        "诡计骰子_开始": {
+                            "next": [
+                                "诡计骰子_每日任务"
+                            ]
+                        }
+                    },
+                    "option": [
+                        "诡计骰子-每日仅检测一次"
+                    ]
+                },
+                {
+                    "name": "循环执行",
+                    "label": "$诡计骰子_循环执行",
+                    "pipeline_override": {
+                        "诡计骰子_开始": {
+                            "next": [
+                                "诡计骰子_循环执行"
+                            ]
+                        }
+                    },
+                    "option": [
+                        "诡计骰子-执行次数"
+                    ]
+                }
+            ]
+        },
+        "诡计骰子-每日仅检测一次": {
+            "type": "switch",
+            "label": "$诡计骰子_每日仅检测一次",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "$Yes",
+                    "pipeline_override": {
+                        "诡计骰子_周期检查": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "periodic_check",
+                                    "custom_action_param": {
+                                        "key": "诡计骰子_每日任务"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "$No",
+                    "pipeline_override": {
+                        "诡计骰子_周期检查": {
+                            "action": "DoNothing"
+                        }
+                    }
+                }
+            ]
+        },
+        "诡计骰子-执行次数": {
+            "type": "input",
+            "label": "$诡计骰子_执行次数",
+            "inputs": [
+                {
+                    "name": "次数",
+                    "label": "$次数",
+                    "default": "10",
+                    "pipeline_type": "int",
+                    "verify": "^[1-9]\\d*$",
+                    "pattern_msg": "$请输入大于 0 的整数"
+                }
+            ],
+            "pipeline_override": {
+                "诡计骰子_循环执行": {
+                    "action": {
+                        "param": {
+                            "custom_action_param": {
+                                "key": "诡计骰子循环",
+                                "initial_count": 0,
+                                "max_count": "{次数}"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

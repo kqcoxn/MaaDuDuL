@@ -117,6 +117,7 @@
         "tasks/single/continuous_battle.json",
         "tasks/single/level_rewards.json",
         "tasks/single/friend_refresh.json",
+        "tasks/single/trick_dice.json",
         "tasks/separators/new_task.json",
         "tasks/daily/activity_daily.json"
     ],

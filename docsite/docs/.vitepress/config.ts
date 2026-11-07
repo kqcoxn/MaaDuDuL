@@ -127,6 +127,11 @@ export default defineConfig({
                 link: "/user/init/start",
                 activeMatch: "/10.用户手册/",
             },
+            {
+                text: "小游戏算法",
+                link: "/algorithms/trick-dice",
+                activeMatch: "/(20.小游戏算法/|algorithms)",
+            },
             // {
             //     text: "参与贡献",
             //     link: "/guide/start/intro",

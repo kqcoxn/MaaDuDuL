@@ -255,5 +255,12 @@
     "Resource/descs/single/friend_refresh.md": "resource/descs_en/single/friend_refresh.md",
     "Resource/descs/single/level_rewards.md": "resource/descs_en/single/level_rewards.md",
     "Resource/descs/single/quick_plot.md": "resource/descs_en/single/quick_plot.md",
-    "Yes": "Yes"
+    "Yes": "Yes",
+    "🎲诡计骰子": "🎲Trick Dice",
+    "Resource/descs/single/trick_dice.md": "resource/descs_en/single/trick_dice.md",
+    "诡计骰子_任务模式": "Task mode",
+    "诡计骰子_每日任务": "Daily tasks",
+    "诡计骰子_循环执行": "Repeat matches",
+    "诡计骰子_每日仅检测一次": "Check only once per day",
+    "诡计骰子_执行次数": "Match count"
 }

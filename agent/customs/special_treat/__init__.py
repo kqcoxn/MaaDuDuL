@@ -10,3 +10,5 @@ from .pinch_face import *
 from .exam_cram import *
 from .holy import *
 from .friend import *
+from .trick_dice import *
+from .trick_dice_session import *

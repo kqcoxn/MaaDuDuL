@@ -1,0 +1,1703 @@
+{
+    "$__mpe_config_诡计骰子": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1794049401056,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\单次任务\\诡计骰子.json",
+            "savedViewport": {
+                "x": 460,
+                "y": -207,
+                "zoom": 0.22
+            },
+            "filename": "诡计骰子",
+            "version": "v2.1.1"
+        }
+    },
+    "$__mpe_external_返回主界面_诡计骰子": {
+        "$__mpe_code": {
+            "position": {
+                "x": 3840,
+                "y": 600
+            }
+        }
+    },
+    "诡计骰子_主界面入口": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1160,
+                    255,
+                    120,
+                    75
+                ],
+                "expected": [
+                    "诡计[骰般散殷]子"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500,
+        "timeout": 30000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_大厅就绪"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1440,
+                "y": 584
+            }
+        }
+    },
+    "诡计骰子_使用小聪明": {
+        "max_hit": 8,
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_move",
+                "custom_recognition_param": "skill"
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "trick_dice_skill"
+            }
+        },
+        "post_delay": 200,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_对局识别"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 3107
+            }
+        }
+    },
+    "诡计骰子_保留骰子": {
+        "max_hit": 160,
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_move",
+                "custom_recognition_param": "hold"
+            }
+        },
+        "pre_delay": 0,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 250,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_对局识别"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 2183
+            }
+        }
+    },
+    "诡计骰子_免费入场": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_entry",
+                "custom_recognition_param": ""
+            }
+        },
+        "pre_delay": 0,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1061,
+                    624,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "timeout": 60000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 匹配对手"
+        },
+        "next": [
+            "诡计骰子_等待开局"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 640,
+                "y": 3301
+            }
+        }
+    },
+    "诡计骰子_入场按钮": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    900,
+                    555,
+                    345,
+                    110
+                ],
+                "expected": [
+                    "来掷[骰般殷]子吧"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 240,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_入场次数": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    925,
+                    628,
+                    335,
+                    70
+                ],
+                "expected": [
+                    "入场次数.*[0-9]+\\s*/\\s*[0-9]+"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 480,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_全部领取按钮": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    560,
+                    540,
+                    160,
+                    60
+                ],
+                "expected": [
+                    "全部领取"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_关闭成就": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1010,
+                    82,
+                    90,
+                    90
+                ],
+                "template": [
+                    "trick_dice/achievement_close.png"
+                ],
+                "threshold": 0.88
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 700,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_大厅标记"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 560,
+                "y": 464
+            }
+        }
+    },
+    "诡计骰子_初始化策略": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "trick_dice_init"
+            }
+        },
+        "post_delay": 0,
+        "next": [
+            "诡计骰子_次数不足",
+            "诡计骰子_免费入场"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 320,
+                "y": 2945
+            }
+        }
+    },
+    "诡计骰子_单局": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_初始化策略"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 2939
+            }
+        }
+    },
+    "诡计骰子_周期提醒": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 今日已完成，跳过"
+        },
+        "next": [
+            "返回主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3520,
+                "y": 464
+            }
+        }
+    },
+    "诡计骰子_周期检查": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": {
+                    "key": "诡计骰子_每日任务"
+                }
+            }
+        },
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_每日对局"
+        ],
+        "on_error": [
+            "诡计骰子_周期提醒"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3200,
+                "y": 501
+            }
+        }
+    },
+    "诡计骰子_周期记录": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": {
+                    "key": "诡计骰子_每日任务"
+                }
+            }
+        },
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Action.Succeeded": "> 每日任务完成"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3840,
+                "y": 877
+            }
+        }
+    },
+    "诡计骰子_回合标记": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    30,
+                    22,
+                    105,
+                    90
+                ],
+                "expected": [
+                    "Round"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 720,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_大厅就绪": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "stable_reco",
+                "custom_recognition_param": {
+                    "max": 2,
+                    "node": [
+                        "诡计骰子_大厅标记",
+                        "诡计骰子_入场按钮",
+                        "诡计骰子_入场次数"
+                    ]
+                }
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 30000,
+        "rate_limit": 300,
+        "$__mpe_code": {
+            "position": {
+                "x": 1760,
+                "y": 464
+            }
+        }
+    },
+    "诡计骰子_大厅标记": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    715,
+                    600,
+                    190,
+                    115
+                ],
+                "expected": [
+                    "新手教程"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 880,
+                "y": 524
+            }
+        }
+    },
+    "诡计骰子_奖励继续": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    455,
+                    555,
+                    390,
+                    50
+                ],
+                "expected": [
+                    "请点击屏幕继续"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 2320,
+                "y": 963
+            }
+        }
+    },
+    "诡计骰子_对局识别": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_提交完成",
+            "诡计骰子_结算下一步",
+            "诡计骰子_结算退出",
+            "诡计骰子_收起说明",
+            "诡计骰子_选择计分",
+            "诡计骰子_保留骰子",
+            "诡计骰子_使用小聪明",
+            "诡计骰子_投掷",
+            "诡计骰子_等待对手"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1600,
+                "y": 3338
+            }
+        }
+    },
+    "诡计骰子_已填分数": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    195,
+                    145,
+                    78,
+                    34
+                ],
+                "expected": [
+                    "^\\d{1,2}$"
+                ],
+                "replace": [
+                    [
+                        "[oO。]",
+                        "0"
+                    ]
+                ],
+                "only_rec": true
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": 960,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_开始": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "on_task_start"
+            }
+        },
+        "post_delay": 0,
+        "timeout": 20000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_每日任务"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2560,
+                "y": 529
+            }
+        }
+    },
+    "诡计骰子_开局就绪": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "诡计骰子_回合标记"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 开始对局"
+        },
+        "next": [
+            "诡计骰子_对局识别"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1280,
+                "y": 3349
+            }
+        }
+    },
+    "诡计骰子_循环对局": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "trick_dice_session",
+                "custom_action_param": {
+                    "mode": "loop"
+                }
+            }
+        },
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Action.Succeeded": "> 循环执行完成"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 5920,
+                "y": 18
+            }
+        }
+    },
+    "诡计骰子_循环执行": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": {
+                    "initial_count": 0,
+                    "key": "诡计骰子循环",
+                    "max_count": 10
+                }
+            }
+        },
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 循环执行"
+        },
+        "next": [
+            "诡计骰子_循环对局"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5600,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_打开成就": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    875,
+                    100,
+                    155,
+                    70
+                ],
+                "expected": [
+                    "^成就$"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_每日成就页签"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5040,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_技能按钮": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    455,
+                    300,
+                    135,
+                    45
+                ],
+                "expected": [
+                    "要点小聪明"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_技能次数": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    510,
+                    282,
+                    20,
+                    25
+                ],
+                "expected": [
+                    "^[01]$"
+                ],
+                "replace": [
+                    [
+                        "[lI]",
+                        "1"
+                    ],
+                    [
+                        "[oO〇]",
+                        "0"
+                    ]
+                ],
+                "only_rec": true,
+                "threshold": 0.3
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": 2640,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_投掷": {
+        "max_hit": 24,
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_move",
+                "custom_recognition_param": "roll"
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "LongPress",
+            "param": {
+                "duration": 300
+            }
+        },
+        "post_delay": 400,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_对局识别"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 3982
+            }
+        }
+    },
+    "诡计骰子_投掷数字": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    868,
+                    566,
+                    22,
+                    29
+                ],
+                "expected": [
+                    "^[0-3]$"
+                ],
+                "replace": [
+                    [
+                        "[oO〇]",
+                        "0"
+                    ],
+                    [
+                        "[lI]",
+                        "1"
+                    ]
+                ],
+                "only_rec": true,
+                "threshold": 0.3
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 2880,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_投掷次数": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    810,
+                    555,
+                    150,
+                    48
+                ],
+                "expected": [
+                    "投掷.*剩余次"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 1200,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_提交完成": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_commit_ready"
+            }
+        },
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "trick_dice_commit"
+            }
+        },
+        "post_delay": 200,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_对局识别"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2240,
+                "y": 3483
+            }
+        }
+    },
+    "诡计骰子_收起说明": {
+        "max_hit": 16,
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_move",
+                "custom_recognition_param": "clear"
+            }
+        },
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "trick_dice_clear"
+            }
+        },
+        "post_delay": 400,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_对局识别"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 2659
+            }
+        }
+    },
+    "诡计骰子_数字": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    100,
+                    40
+                ],
+                "expected": [
+                    "^\\d{1,2}$"
+                ],
+                "only_rec": true,
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 3120,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_次数不足": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    925,
+                    628,
+                    335,
+                    70
+                ],
+                "expected": [
+                    "入场次数\\s*0\\s*/"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 入场次数不足"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 640,
+                "y": 2861
+            }
+        }
+    },
+    "诡计骰子_每日任务": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "init_counter",
+                "custom_action_param": {
+                    "initial_count": 0,
+                    "key": "诡计骰子每日",
+                    "max_count": 3
+                }
+            }
+        },
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 检查每日任务"
+        },
+        "next": [
+            "诡计骰子_周期检查"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2880,
+                "y": 497
+            }
+        }
+    },
+    "诡计骰子_每日对局": {
+        "pre_delay": 0,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "trick_dice_session",
+                "custom_action_param": {
+                    "mode": "daily"
+                }
+            }
+        },
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3520,
+                "y": 875
+            }
+        }
+    },
+    "诡计骰子_每日成就可领": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    270,
+                    460,
+                    760,
+                    55
+                ],
+                "expected": [
+                    "^领取$"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 2160,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_每日成就已选": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    235,
+                    175,
+                    130,
+                    55
+                ],
+                "template": [
+                    "trick_dice/daily_tab_selected.png"
+                ],
+                "threshold": 0.94
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 320,
+                "y": 464
+            }
+        }
+    },
+    "诡计骰子_每日成就状态": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    270,
+                    460,
+                    760,
+                    55
+                ],
+                "expected": [
+                    "^(领取|完成|未达成)$"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 2400,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_每日成就页签": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    240,
+                    175,
+                    155,
+                    60
+                ],
+                "expected": [
+                    "每日任务"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 5360,
+                "y": 10
+            }
+        }
+    },
+    "诡计骰子_游玩奖励可领1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    464,
+                    566,
+                    72,
+                    72
+                ],
+                "template": [
+                    "trick_dice/daily_ready_1.png"
+                ],
+                "threshold": 0.88
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 3360,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_游玩奖励可领2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    529,
+                    566,
+                    72,
+                    72
+                ],
+                "template": [
+                    "trick_dice/daily_ready_2.png"
+                ],
+                "threshold": 0.88
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 3600,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_游玩奖励可领3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    594,
+                    566,
+                    72,
+                    72
+                ],
+                "template": [
+                    "trick_dice/daily_ready_3.png"
+                ],
+                "threshold": 0.88
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 3840,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_游玩奖励已领1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    470,
+                    580,
+                    60,
+                    48
+                ],
+                "template": [
+                    "trick_dice/daily_claimed.png"
+                ],
+                "threshold": 0.9
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 4080,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_游玩奖励已领2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    535,
+                    580,
+                    60,
+                    48
+                ],
+                "template": [
+                    "trick_dice/daily_claimed.png"
+                ],
+                "threshold": 0.9
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 4320,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_游玩奖励已领3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    600,
+                    580,
+                    60,
+                    48
+                ],
+                "template": [
+                    "trick_dice/daily_claimed.png"
+                ],
+                "threshold": 0.9
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 4560,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_登记组合": {
+        "max_hit": 8,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    455,
+                    145,
+                    110,
+                    45
+                ],
+                "expected": [
+                    "登记组合"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 200,
+        "timeout": 12000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_提交完成",
+            "诡计骰子_结算下一步",
+            "诡计骰子_结算退出",
+            "诡计骰子_确认计分"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1600,
+                "y": 4822
+            }
+        }
+    },
+    "诡计骰子_确认计分": {
+        "max_hit": 8,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_提交完成",
+            "诡计骰子_结算下一步",
+            "诡计骰子_结算退出"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 4990
+            }
+        }
+    },
+    "诡计骰子_等待对手": {
+        "max_hit": 600,
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_opponent",
+                "custom_recognition_param": ""
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 600,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_对局识别"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 3566
+            }
+        }
+    },
+    "诡计骰子_等待开局": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 120000,
+        "rate_limit": 300,
+        "next": [
+            "诡计骰子_结算下一步",
+            "诡计骰子_结算退出",
+            "诡计骰子_开局就绪"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 960,
+                "y": 3371
+            }
+        }
+    },
+    "诡计骰子_结算下一步": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1090,
+                    635,
+                    190,
+                    85
+                ],
+                "expected": [
+                    "下[一ー]步"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500,
+        "timeout": 20000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_结算退出"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2240,
+                "y": 4781
+            }
+        }
+    },
+    "诡计骰子_结算退出": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    25,
+                    20,
+                    200,
+                    90
+                ],
+                "template": [
+                    "trick_dice/exit.png"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "pre_delay": 0,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500,
+        "timeout": 30000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_返回大厅"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2560,
+                "y": 4518
+            }
+        }
+    },
+    "诡计骰子_轮次": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    33,
+                    51,
+                    91,
+                    52
+                ],
+                "expected": [
+                    "^[1-8].*8$"
+                ],
+                "replace": [
+                    [
+                        "[lI]",
+                        "1"
+                    ]
+                ],
+                "only_rec": true
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": 1440,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_返回大厅": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "诡计骰子_大厅就绪"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 2880,
+                "y": 4610
+            }
+        }
+    },
+    "诡计骰子_进入大厅": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 30000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_大厅就绪",
+            "诡计骰子_主界面入口"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1120,
+                "y": 467
+            }
+        }
+    },
+    "诡计骰子_选择每日成就": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "诡计骰子_每日成就页签"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_每日成就已选"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 505
+            }
+        }
+    },
+    "诡计骰子_选择计分": {
+        "max_hit": 8,
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "trick_dice_move",
+                "custom_recognition_param": "score"
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "trick_dice_select"
+            }
+        },
+        "post_delay": 200,
+        "timeout": 4000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_提交完成",
+            "诡计骰子_结算下一步",
+            "诡计骰子_结算退出",
+            "诡计骰子_登记组合"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 4489
+            }
+        }
+    },
+    "诡计骰子_长按提示": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1065,
+                    480,
+                    215,
+                    45
+                ],
+                "expected": [
+                    "长按"
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 1680,
+                "y": 0
+            }
+        }
+    },
+    "诡计骰子_领取每日成就": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "诡计骰子_每日成就已选",
+                    "诡计骰子_每日成就可领",
+                    "诡计骰子_全部领取按钮"
+                ],
+                "box_index": 2
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 领取每日奖励"
+        },
+        "next": [
+            "诡计骰子_奖励继续"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2000,
+                "y": 890
+            }
+        }
+    },
+    "诡计骰子_领取游玩奖励1": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "诡计骰子_游玩奖励可领1"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_奖励继续"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2000,
+                "y": 1380
+            }
+        }
+    },
+    "诡计骰子_领取游玩奖励2": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "诡计骰子_游玩奖励可领2"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_奖励继续"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2000,
+                "y": 1806
+            }
+        }
+    },
+    "诡计骰子_领取游玩奖励3": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "诡计骰子_游玩奖励可领3"
+                ]
+            }
+        },
+        "pre_delay": 800,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "next": [
+            "诡计骰子_奖励继续"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2000,
+                "y": 464
+            }
+        }
+    },
+    "诡计骰子_骰盅": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    980,
+                    225,
+                    300,
+                    270
+                ],
+                "template": [
+                    "trick_dice/cup_full.png",
+                    "trick_dice/cup_empty.png",
+                    "trick_dice/cup_rim.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.75,
+                    0.75,
+                    0.9
+                ]
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "timeout": 15000,
+        "rate_limit": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 4800,
+                "y": 0
+            }
+        }
+    }
+}
