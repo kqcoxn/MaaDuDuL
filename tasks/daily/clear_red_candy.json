@@ -240,7 +240,8 @@
 						}
 					},
 					"option": [
-						"清红糖-装备-自动刷取-周期检查"
+						"清红糖-装备-自动刷取-周期检查",
+						"清红糖-装备-自动刷取-限制阶级"
 					],
 					"description": "$自动刷取最少的装备材料",
 					"label": "$自动刷取"
@@ -330,6 +331,44 @@
 					"label": "$Yes"
 				}
 			]
+		},
+		"清红糖-装备-自动刷取-限制阶级": {
+			"type": "switch",
+			"label": "$限制材料阶级",
+			"description": "$只刷取指定阶级中持有量最少的材料",
+			"cases": [
+				{
+					"name": "No",
+					"label": "$No"
+				},
+				{
+					"name": "Yes",
+					"option": [
+						"清红糖-装备-自动刷取-阶级"
+					],
+					"label": "$Yes"
+				}
+			]
+		},
+		"清红糖-装备-自动刷取-阶级": {
+			"type": "input",
+			"label": "$材料阶级",
+			"description": "$可填写多个或范围，如 8、7-9",
+			"inputs": [
+				{
+					"name": "阶级",
+					"label": "$材料阶级",
+					"default": "8",
+					"pipeline_type": "string",
+					"verify": "^[\\d\\s,，、\\-~～]+$",
+					"pattern_msg": "$请输入阶级，如 8 或 7-9"
+				}
+			],
+			"pipeline_override": {
+				"装备材料_选择第一行第一个": {
+					"custom_action_param": "t={阶级}"
+				}
+			}
 		},
 		"清红糖-购买红糖-周期检查": {
 			"type": "switch",

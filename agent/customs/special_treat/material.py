@@ -1,12 +1,14 @@
 """装备材料刷取相关自定义动作模块。
 
-本模块提供装备材料获取途径的星级关卡定位与装备刷取轮次控制，
+本模块提供按阶级选择材料、装备材料获取途径的星级关卡定位与装备刷取轮次控制，
 速战部分复用通用「速战」流水线（由 eat_sugar.run_candy_fight 编排）。
 """
 
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
+
+import re
 
 import numpy as np
 
@@ -296,6 +298,119 @@ class FindMaterialStage(CustomAction):
         region = (slice(y0, y1), slice(x0, x1))
         diff = np.abs(before[region].astype(np.int16) - after[region].astype(np.int16))
         return float(diff.mean()) < self.SAME_DIFF
+
+
+@AgentServer.custom_action("select_material_by_tier")
+class SelectMaterialByTier(CustomAction):
+    """按阶级选择要刷取的装备材料。
+
+    背包的装备材料已按持有量升序排列。未限制阶级时直接选第一个（持有量最少）；
+    限制阶级时从第一个起逐个点选，读取右侧详情标题里的「N阶」，选中第一个符合的材料，
+    即指定阶级中持有量最少的一个。本屏没有就向下翻，翻不动说明已到底，此时返回 False。
+
+    参数格式（custom_action_param）：
+        - tier 或 t：允许的阶级，可填多个或范围（如 8、7-9），留空表示不限制
+    """
+
+    # 详情标题（如「靴子图纸（8阶）」）与格子数量的识别节点
+    TIER_NODE = "装备材料_识别阶级"
+    COUNT_NODE = "装备材料_识别数量"
+    TIER_PATTERN = re.compile(r"(\d+)\s*[阶階]")
+    # 材料格子（1280x720 基准）：5 列；行位置由格子下方的数量推导，识别不到时用固定 4 行
+    GRID_X = (307, 427, 547, 667, 787)
+    GRID_Y = (237, 357, 477, 597)
+    COUNT_TO_ICON = 36
+    ROW_TOP, ROW_BOTTOM = 190, 640
+    # 一次向下翻约 3 行
+    SWIPE_DOWN = (547, 597, 547, 237)
+    SWIPE_MS = 1000
+    MAX_SWIPES = 15
+    CLICK_WAIT = 0.5
+    # 判断「是否到底」的格子区域与阈值，沿用 FindMaterialStage._same
+    LIST_ROI = (250, 160, 595, 530)
+    SAME_DIFF = 1.0
+    BASE_WIDTH = 1280
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行按阶级选择材料。
+
+        Args:
+            context：MaaFW 上下文对象
+            argv：自定义动作参数，支持允许的阶级
+
+        Returns:
+            bool：选中了材料返回 True，找不到符合阶级的材料返回 False
+        """
+        try:
+            tiers = self._parse_tiers(ParamAnalyzer(argv).split_list(["tier", "t"]))
+            tasker = Tasker(context)
+            if not tiers:
+                tasker.click(self.GRID_X[0], self.GRID_Y[0])
+                return True
+
+            Prompter.log(f"只刷取 {'、'.join(map(str, sorted(tiers)))} 阶的材料")
+            seen: set[str] = set()
+            for swiped in range(self.MAX_SWIPES + 1):
+                for y in self._rows(context):
+                    for x in self.GRID_X:
+                        tasker.click(x, y).wait(self.CLICK_WAIT)
+                        title = self._title(context)
+                        if not title or title in seen:
+                            continue
+                        seen.add(title)
+                        match = self.TIER_PATTERN.search(title)
+                        if match and int(match.group(1)) in tiers:
+                            Prompter.log(f"选中材料：{title}")
+                            return True
+                if swiped == self.MAX_SWIPES:
+                    break
+                before = tasker.screenshot()
+                tasker.swipe(*self.SWIPE_DOWN, duration=self.SWIPE_MS).wait(1)
+                if self._same(before, tasker.screenshot()):
+                    break
+
+            Prompter.log(f"已查看 {len(seen)} 种材料，没有符合阶级的材料，本次跳过")
+            return False
+        except Exception as e:
+            return Prompter.error("按阶级选择材料", e)
+
+    @staticmethod
+    def _parse_tiers(items: list[str]) -> set[int]:
+        """把「8」「7-9」等写法解析为阶级集合，无法解析的项忽略。"""
+        tiers: set[int] = set()
+        for item in items:
+            bounds = re.fullmatch(r"(\d+)\s*[-~～]\s*(\d+)", item)
+            if bounds:
+                low, high = sorted(map(int, bounds.groups()))
+                tiers.update(range(low, high + 1))
+            elif item.isdigit():
+                tiers.add(int(item))
+        return tiers
+
+    def _title(self, context: Context) -> str | None:
+        """读取右侧详情标题，标题不含阶级时返回 None。"""
+        rh = RecoHelper(context).recognize(self.TIER_NODE, refresh_image=True)
+        return rh.best_result.text if rh.hit else None
+
+    def _rows(self, context: Context) -> list[int]:
+        """由格子下方的数量位置推导当前可见各行的点击 y 坐标。
+
+        同一行的数量 y 相近，按间距分组后取中位数；图标上偶尔会被误识别出单个数字，
+        所以至少两格识别到数量才算一行。
+        """
+        rh = RecoHelper(context).recognize(self.COUNT_NODE, refresh_image=True)
+        centers = sorted(r.box[1] + r.box[3] / 2 - self.COUNT_TO_ICON for r in rh.filtered_results) if rh.hit else []
+        groups: list[list[float]] = []
+        for y in centers:
+            if groups and y - groups[-1][-1] < 40:
+                groups[-1].append(y)
+            else:
+                groups.append([y])
+        rows = [round(g[len(g) // 2]) for g in groups if len(g) >= 2]
+        rows = [y for y in rows if self.ROW_TOP <= y <= self.ROW_BOTTOM]
+        return rows or list(self.GRID_Y)
+
+    _same = FindMaterialStage._same
 
 
 @AgentServer.custom_action("equip_pass_gate")
