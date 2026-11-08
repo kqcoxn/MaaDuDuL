@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "清紫糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1793357751782,
+            "lastSyncTime": 1794215780198,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
+            "filePath": "I:\\bkzbk\\github\\fix\\DDL\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\清紫糖.json",
             "savedViewport": {
-                "x": -491,
-                "y": 285,
-                "zoom": 0.2
+                "x": -2550,
+                "y": -46,
+                "zoom": 0.61
             },
             "filename": "清紫糖",
-            "version": "v2.1.0"
+            "version": "v2.1.1"
         }
     },
     "$__mpe_external_返回主界面_清紫糖": {
@@ -42,6 +42,7 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
             "清紫糖_确保回到克隆工厂"
         ],
@@ -70,6 +71,7 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
             "清紫糖_克隆工厂周期记录"
         ],
@@ -367,8 +369,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5438,
-                "y": 355
+                "x": 4623,
+                "y": 381
             }
         }
     },
@@ -740,8 +742,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7063,
-                "y": 345
+                "x": 6526,
+                "y": 379
             }
         }
     },
@@ -818,6 +820,82 @@
             }
         }
     },
+    "清紫糖_糖果自由自动": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "cotton_auto"
+            }
+        },
+        "focus": {
+            "Node.Action.Starting": "> 自动选择棉花糖组合"
+        },
+        "next": [
+            "清紫糖_糖果自由自动记录"
+        ],
+        "on_error": [
+            "清紫糖_糖果自由自动结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7336,
+                "y": 2840
+            }
+        }
+    },
+    "清紫糖_糖果自由自动检查": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "periodic_check",
+                "custom_action_param": "k=糖果自由"
+            }
+        },
+        "focus": {
+            "Node.Action.Starting": "> 检查今日是否已自动刷取棉花糖"
+        },
+        "next": [
+            "清紫糖_糖果自由自动"
+        ],
+        "on_error": [
+            "清紫糖_糖果自由自动结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7062,
+                "y": 2840
+            }
+        }
+    },
+    "清紫糖_糖果自由自动结束": {
+        "next": [
+            "清紫糖_副本结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7879,
+                "y": 2840
+            }
+        }
+    },
+    "清紫糖_糖果自由自动记录": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "record_period",
+                "custom_action_param": "k=糖果自由"
+            }
+        },
+        "next": [
+            "清紫糖_副本周期记录"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7607,
+                "y": 2840
+            }
+        }
+    },
     "清紫糖_糖果行动": {
         "pre_delay": 0,
         "action": {
@@ -835,6 +913,31 @@
             "position": {
                 "x": 7882,
                 "y": 2143
+            }
+        }
+    },
+    "清紫糖_紫糖数量检查": {
+        "pre_delay": 600,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "purple_stamina_check",
+                "custom_action_param": "m=10"
+            }
+        },
+        "focus": {
+            "Node.Recognition.Starting": "> 检查紫糖数量"
+        },
+        "next": [
+            "清紫糖_进入副本界面"
+        ],
+        "on_error": [
+            "清紫糖_副本结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5886,
+                "y": 379
             }
         }
     },
@@ -856,8 +959,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5974,
-                "y": 346
+                "x": 5263,
+                "y": 381
             }
         }
     },
@@ -880,8 +983,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5705,
-                "y": 355
+                "x": 4943,
+                "y": 381
             }
         }
     },
@@ -894,12 +997,12 @@
             }
         },
         "next": [
-            "清紫糖_进入冒险界面"
+            "清紫糖_紫糖数量检查"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6246,
-                "y": 342
+                "x": 5586,
+                "y": 666
             }
         }
     },
@@ -912,8 +1015,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5963,
-                "y": 704
+                "x": 5266,
+                "y": 779
             }
         }
     },
@@ -982,16 +1085,17 @@
                 ]
             }
         },
+        "post_delay": 1500,
         "focus": {
-            "Node.Action.Starting": "> 进入副本界面"
+            "Node.Action.Starting": "> 进入冒险界面"
         },
         "next": [
-            "清紫糖_进入副本界面"
+            "清紫糖_紫糖数量检查"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6508,
-                "y": 341
+                "x": 5583,
+                "y": 381
             }
         }
     },
@@ -1018,8 +1122,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6803,
-                "y": 345
+                "x": 6209,
+                "y": 379
             }
         }
     },

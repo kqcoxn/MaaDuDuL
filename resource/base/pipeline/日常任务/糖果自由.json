@@ -1,0 +1,121 @@
+{
+    "$__mpe_config_糖果自由": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1794222537539,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "I:\\bkzbk\\github\\fix\\DDL\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\糖果自由.json",
+            "savedViewport": {
+                "x": 301,
+                "y": 354,
+                "zoom": 0.61
+            },
+            "filename": "糖果自由",
+            "version": "v2.1.1"
+        }
+    },
+    "清紫糖_星星糖不足": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "无法继续恢复星星糖"
+                ]
+            }
+        },
+        "post_delay": 300,
+        "$__mpe_code": {
+            "position": {
+                "x": 840,
+                "y": 209
+            }
+        }
+    },
+    "糖果自由_识别关卡编号": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    0,
+                    90,
+                    730,
+                    620
+                ],
+                "expected": [
+                    "\\d+"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 840,
+                "y": 0
+            }
+        }
+    },
+    "糖果自由_识别奖励名称": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    745,
+                    76,
+                    230,
+                    32
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 600,
+                "y": 0
+            }
+        }
+    },
+    "糖果自由_识别奖励数量": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1120,
+                    76,
+                    170,
+                    32
+                ],
+                "expected": [
+                    "所持数量"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 1080,
+                "y": 0
+            }
+        }
+    },
+    "糖果自由_识别选中关卡": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    730,
+                    145,
+                    90,
+                    60
+                ],
+                "expected": [
+                    "\\d+"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 600,
+                "y": 209
+            }
+        }
+    }
+}

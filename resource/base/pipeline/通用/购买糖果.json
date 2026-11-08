@@ -288,7 +288,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": "> 检测到星星糖购买界面"
+            "Node.Recognition.Starting": "> 检测到紫糖购买界面"
         },
         "$__mpe_code": {
             "position": {
@@ -388,9 +388,6 @@
                     "星星糖"
                 ]
             }
-        },
-        "focus": {
-            "Node.Recognition.Starting": "> 检测到星星糖购买界面"
         },
         "$__mpe_code": {
             "position": {
