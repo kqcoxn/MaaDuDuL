@@ -44,7 +44,8 @@
                 "x": 6393,
                 "y": 455
             }
-        }
+        },
+        "post_delay": 1500
     },
     "每日活动作战2_从检查进入成就界面": {
         "recognition": {
@@ -448,21 +449,27 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    8,
-                    79,
-                    1262,
-                    630
+                    820,
+                    640,
+                    130,
+                    55
                 ],
                 "expected": [
                     "微微辣"
-                ],
-                "order_by": "Vertical",
-                "index": -1
+                ]
             }
         },
         "pre_delay": 800,
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    870,
+                    667,
+                    1,
+                    1
+                ]
+            }
         },
         "repeat": 2,
         "repeat_delay": 800,
@@ -584,7 +591,8 @@
                 "x": 6639,
                 "y": 921
             }
-        }
+        },
+        "post_delay": 1500
     },
     "每日活动作战2_进入成就界面": {
         "recognition": {
