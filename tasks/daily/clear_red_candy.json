@@ -135,8 +135,33 @@
 						}
 					},
 					"label": "$秘灵"
+				},
+				{
+					"name": "轮换",
+					"option": [
+						"清红糖-心形-轮换种族"
+					],
+					"label": "$轮换"
 				}
 			]
+		},
+		"清红糖-心形-轮换种族": {
+			"type": "input",
+			"label": "$轮换种族",
+			"description": "$每个游戏日（凌晨 3 点刷新）依名单顺序选择下一个种族，以顿号/逗号/空格分隔",
+			"inputs": [
+				{
+					"name": "种族",
+					"label": "$轮换种族",
+					"default": "龙族、精灵、幽灵、仙灵、魔女、自然灵、兽人、秘灵",
+					"pipeline_type": "string"
+				}
+			],
+			"pipeline_override": {
+				"清红糖_选择心形种族": {
+					"custom_action_param": "t={种族}"
+				}
+			}
 		},
 		"清红糖-装备": {
 			"type": "switch",

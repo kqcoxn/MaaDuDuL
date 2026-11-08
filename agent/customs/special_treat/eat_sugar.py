@@ -17,7 +17,7 @@ import time
 
 import numpy as np
 
-from agent.customs.utils import CounterManager, Prompter, MatrixOperator, LocalStorage
+from agent.customs.utils import CounterManager, Prompter, MatrixOperator, LocalStorage, get_game_date
 from agent.customs.maahelper import ParamAnalyzer, Tasker, RecoHelper
 
 from .store import RedReserve
@@ -368,12 +368,30 @@ class FindLevel(CustomRecognition):
             return Prompter.error("查找关卡", e, reco_detail=True)
 
 
+# 心形关卡各种族入口的点击坐标
+HEART_TARGETS: dict[str, tuple[int, int]] = {
+    "龙族": (408, 168),
+    "精灵": (638, 185),
+    "幽灵": (883, 171),
+    "仙灵": (662, 341),
+    "魔女": (900, 323),
+    "自然灵": (381, 463),
+    "兽人": (868, 488),
+    "秘灵": (642, 490),
+}
+
+# 允许以繁体填写种族名
+_HEART_TRADITIONAL = str.maketrans({"龍": "龙", "靈": "灵", "獸": "兽", "祕": "秘"})
+
+
 @AgentServer.custom_action("select_heart_type")
 class SelectHeartType(CustomAction):
     """选择心形关卡类型的自定义动作。
 
     根据参数指定的心形关卡类型，点击对应的关卡入口坐标。
     支持的心形关卡类型：龙族、精灵、幽灵、仙灵、魔女、自然灵、兽人、秘灵。
+    填写多个种族时按游戏日轮换：每个游戏日（凌晨 3 点刷新）依名单顺序选择下一个种族，
+    同一天内重复执行会选择同一个种族。
     """
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
@@ -391,30 +409,16 @@ class SelectHeartType(CustomAction):
         """
         try:
             args = ParamAnalyzer(argv)
-            level: str = args.get(["type", "t"])
+            levels = [t.translate(_HEART_TRADITIONAL) for t in args.split_list(["type", "t"])]
+            invalid = [t for t in levels if t not in HEART_TARGETS]
+            if not levels or invalid:
+                return Prompter.error("选择心形关卡", f"无效的种族：{'、'.join(invalid) or '未填写'}")
 
-            # 根据关卡类型确定点击坐标
-            target = [408, 168]
-            if level == "龙族":
-                target = [408, 168]
-            elif level == "精灵":
-                target = [638, 185]
-            elif level == "幽灵":
-                target = [883, 171]
-            elif level == "仙灵":
-                target = [662, 341]
-            elif level == "魔女":
-                target = [900, 323]
-            elif level == "自然灵":
-                target = [381, 463]
-            elif level == "兽人":
-                target = [868, 488]
-            elif level == "秘灵":
-                target = [642, 490]
-            else:
-                Prompter.error("无效的心形关卡类型")
-                return False
-            Tasker(context).click(*target)
+            # 多个种族时按游戏日轮换
+            level = levels[get_game_date().toordinal() % len(levels)]
+            if len(levels) > 1:
+                Prompter.log(f"今日轮换种族：{level}")
+            Tasker(context).click(*HEART_TARGETS[level])
 
             return True
         except Exception as e:
