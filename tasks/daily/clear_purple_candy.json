@@ -421,7 +421,8 @@
 					"name": "No",
 					"pipeline_override": {
 						"清紫糖_购买紫糖": {
-							"action": "DoNothing"
+							"action": "DoNothing",
+							"next": "清紫糖_进入冒险界面"
 						}
 					},
 					"label": "$No"
