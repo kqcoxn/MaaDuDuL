@@ -262,5 +262,6 @@
     "诡计骰子_每日任务": "Daily tasks",
     "诡计骰子_循环执行": "Repeat matches",
     "诡计骰子_每日仅检测一次": "Check only once per day",
-    "诡计骰子_执行次数": "Match count"
+    "诡计骰子_执行次数": "Match count",
+    "自动刷取需要已推关到第七关以后（该关之后才产出优质棉花糖）": "Auto farm requires clearing stage 7 first (cotton candy drops after it)"
 }

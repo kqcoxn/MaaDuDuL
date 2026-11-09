@@ -2,6 +2,7 @@ from .activity import *
 from .store import *
 from .eat_sugar import *
 from .material import *
+from .cotton import *
 from .activity import *
 from .peak_showdown import *
 from .receive_reward import *

@@ -905,7 +905,7 @@ def cross_read(left: tuple[str, int | None], right: tuple[str, int | None]) -> t
     return right_text, None
 
 
-def dump_stamina_failure() -> str:
+def dump_stamina_failure(label: str = "红糖体力", has_anchor: bool = True) -> str:
     """把最近一次扫描的现场转储成 npy，并输出一行诊断日志。
 
     截图用 numpy 直接存 .npy（仓库没有 PIL），目录 debug/stamina/ 已被 .gitignore 忽略。
@@ -925,10 +925,12 @@ def dump_stamina_failure() -> str:
             path = ""
 
     anchor = _PROBE.get("anchor")
-    if anchor is None:
-        Prompter.log(f"未能读取红糖体力，锚点未找到，截图存在 {path}")
+    if not has_anchor:
+        Prompter.log(f"未能读取{label}，截图存在 {path}")
+    elif anchor is None:
+        Prompter.log(f"未能读取{label}，锚点未找到，截图存在 {path}")
     else:
-        Prompter.log(f"未能读取红糖体力，锚点 {anchor}，截图存在 {path}")
+        Prompter.log(f"未能读取{label}，锚点 {anchor}，截图存在 {path}")
         Prompter.log(
             f"宽框 {_PROBE.get('wide')} 读到 {display_text(_PROBE.get('wide_text', ''))}，"
             f"常规框 {_PROBE.get('normal')} 读到 {display_text(_PROBE.get('normal_text', ''))}，"
@@ -989,6 +991,111 @@ def scan_stamina(context: Context) -> tuple[str, int | None]:
         if stamina is not None:
             return text, stamina
     return text, None
+
+
+# 紫糖（星星糖）顶部读数：与红糖同一套多读一致性判定，roi 单独量
+# 窄框只压数字，读不到再退到覆盖整颗星星糖计数区的宽框
+PURPLE_ROIS = ([715, 20, 130, 36], [660, 8, 420, 64])
+
+
+def parse_purple(text: str) -> int | None:
+    """从顶部紫糖文本里取出当前数量。
+
+    紫糖的显示上限固定是 180，但买糖后当前值会超过上限（实测出现过 360/180），
+    而 OCR 又常把斜杠吃掉、把旁边的金币粘在后面（如 360/180803,790），因此这里
+    直接按「上限 180」定位：
+
+    - 先找「当前值/180」：斜杠后可能直接粘着金币数字，所以只认上限 180 这一段；
+    - 斜杠丢了（0/180 读成 0180）时，退化成找紧挨 180 的前缀数字，
+      前缀去前导零即为当前值（0180 → 0、360180 → 360）。
+
+    Args:
+        text：OCR 原文
+
+    Returns:
+        int | None：当前数量，认不出时返回 None
+    """
+    raw = (text or "").replace(",", "")
+    matched = re.search(r"(\d{1,4})\s*/\s*180", raw) or re.search(r"(\d{1,4})180", raw)
+    if not matched:
+        return None
+    value = int(matched.group(1))
+    return value if value <= 999 else None
+
+
+def read_purple_roi(rh: RecoHelper, roi: list[int]) -> tuple[str, int | None]:
+    """按指定 ROI 读一次紫糖数量。
+
+    Args:
+        rh：识别辅助器
+        roi：取字框
+
+    Returns:
+        tuple：OCR 原文与解析出的数量（无效为 None）
+    """
+    text = rh.recognize(STAMINA_NODE, {"roi": roi}).concat() or ""
+    return text, parse_purple(text)
+
+
+def scan_purple(context: Context) -> tuple[str, int | None]:
+    """扫一次顶部紫糖（星星糖）数量。
+
+    Args:
+        context：MaaFW 上下文对象
+
+    Returns:
+        tuple：最后一次 OCR 原文与解析出的数量（解析不到为 None）
+    """
+    rh = RecoHelper(context).refresh_screencap()
+    _PROBE.clear()
+    _PROBE["image"] = rh.screencap
+    text = ""
+    for roi in PURPLE_ROIS:
+        text, value = read_purple_roi(rh, roi)
+        if value is not None:
+            return text, value
+    return text, None
+
+
+def read_purple_stamina(context: Context) -> int | None:
+    """读取顶部紫糖（星星糖）数量：多次读取做一致性判定。
+
+    Note:
+        - 与 read_stamina 同一口径：最多读 STAMINA_READS 次、每次重新截图；
+          前两次一致即采纳，否则读第三次，出现两次的采纳，全不同则取最新；
+        - 紫糖上限是 180，parse_stamina 的 999 容量判定同样适用。
+
+    Args:
+        context：MaaFW 上下文对象
+
+    Returns:
+        int | None：当前紫糖数量，读不到时返回 None
+    """
+    reads: list[tuple[str, int]] = []
+    for _ in range(STAMINA_READS):
+        text, value = scan_purple(context)
+        if value is None:
+            continue
+        reads.append((text, value))
+        if len(reads) >= 2 and reads[-1][1] == reads[-2][1]:
+            Prompter.log(f"读到紫糖 {display_text(text)}")
+            return value
+
+    if not reads:
+        text, _ = scan_purple(context)
+        dump_stamina_failure("紫糖数量", has_anchor=False)
+        if text:
+            Prompter.log(f"紫糖读到的原文：{display_text(text)}")
+        return None
+
+    for text, value in reads:
+        if sum(1 for _, other in reads if other == value) >= 2:
+            Prompter.log(f"读到紫糖 {display_text(text)}")
+            return value
+
+    text, value = reads[-1]
+    Prompter.log(f"紫糖读数不一致，取最新 {display_text(text)}")
+    return value
 
 
 def read_stamina(context: Context) -> int | None:

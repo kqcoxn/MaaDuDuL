@@ -82,6 +82,8 @@ TERMS: dict[str, str] = {
     "篡夺与越轨之间": "篡夺与脱序之间",
     # 棉花糖关卡的「禁止選擇肉盾類型使者」
     "防御": "肉盾",
+    # 棉花糖档位：国服「初级/中级/优质」在国际服是「下等/中等/上等」
+    "优质": "上等",
 }
 
 _TERMS_RE = re.compile("|".join(sorted(map(re.escape, TERMS), key=len, reverse=True)))
@@ -140,6 +142,43 @@ def expand_expected(expected: Any, extra: Iterable[str] = (), keep: Iterable[str
             if v not in merged:
                 merged.append(v)
     return merged if len(merged) > len(items) else expected
+
+
+_FOLD_CHARS: dict[str, str] = {
+    traditional: simplified
+    for simplified, traditions in CHARS.items()
+    for traditional in traditions
+    if traditional != simplified
+}
+
+# 只反查纯中文的国际服用词，避免把正则写法当成文本替换
+_FOLD_TERMS: dict[str, str] = {
+    global_term: local_term
+    for local_term, global_term in TERMS.items()
+    if re.fullmatch(r"[\u4e00-\u9fff]+", global_term)
+    and re.fullmatch(r"[\u4e00-\u9fff]+", local_term)
+}
+
+
+def fold(text: str) -> str:
+    """把繁中写法与国际服用词折成国服简体写法，仅用于文本比较。
+
+    国际服客户端的 OCR 文本既可能是繁体字（輔助），也可能换用词（肉盾、上等），
+    agent 侧按国服词表做关键字匹配前先过一遍这个函数即可对齐；
+    不用于生成 expected（那边用 variants/expand_expected 保留两种写法）。
+
+    Args:
+        text：待归一化的文本
+
+    Returns:
+        str：折成国服简体写法后的文本
+    """
+    if not text:
+        return ""
+    folded = "".join(_FOLD_CHARS.get(char, char) for char in text)
+    for global_term, local_term in _FOLD_TERMS.items():
+        folded = folded.replace(global_term, local_term)
+    return folded
 
 
 def localize_override(context: Any, pipeline_override: dict[str, Any]) -> dict[str, Any]:

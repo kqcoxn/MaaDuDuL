@@ -148,7 +148,7 @@ class SpecialBuy(CustomAction):
                             },
                         },
                     )
-                    time.sleep(0.4)
+                    time.sleep(0.6)
 
             return True
         except Exception as e:
@@ -263,9 +263,8 @@ class BuyStamina(CustomAction):
                     context, key, name, entry, nodes, single, count, strict
                 )
             finally:
-                # 紫糖购买会停在冒险页，恢复到主界面以免影响后续节点
-                if key == "purple":
-                    Tasker(context).run("返回主界面")
+                # 紫糖购买结束后会停在冒险页，后续节点直接从冒险页接着走，不再绕回主界面
+                pass
 
             # 顶部体力只有红糖那套读数口径，紫糖读的是星星糖，不能拿来对账
             if strict and key == "red" and before is not None:
@@ -392,6 +391,8 @@ class BuyStamina(CustomAction):
             return skipped, before, 0
 
         Tasker(context).run(nodes["buy"])
+        if key == "purple" and current is not None and single:
+            PurpleStaminaCheck.remember(current + single * bought)
         return True, before, bought
 
     def _read_stamina(self, context: Context) -> int | None:
@@ -769,3 +770,51 @@ class RedSupply(BuyStamina):
         Tasker(context).run(BuyStamina.RED_NODES["cancel"])
         return False
 
+@AgentServer.custom_action("purple_stamina_check")
+class PurpleStaminaCheck(CustomAction):
+    """清紫糖开局紫糖（星星糖）数量检查。
+
+    与红糖的 red_stamina_check 同一口径：数量不足一场速战就结束本轮，
+    读数交给 read_purple_stamina（多读一致性判定），读不到才跳过检查。
+    购买流程里已经算出的数量会先记在 cached 里，命中时直接判定，省一次 OCR。
+    """
+
+    MIN_STAMINA = 10
+    cached: int | None = None
+
+    @classmethod
+    def remember(cls, value: int | None) -> None:
+        """记录购买后的紫糖数量（None 表示没买、无值可记）。"""
+        cls.cached = value
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """检查紫糖数量是否够继续跑副本。
+
+        Args:
+            context：MaaFW 上下文对象
+            argv：自定义动作参数，min/m 为最低数量门槛，默认 10
+
+        Returns:
+            bool：数量够继续返回 True，不足返回 False（由 on_error 回大厅收尾）
+        """
+        try:
+            args = ParamAnalyzer(argv)
+            minimum = args.get(["min", "m"], self.MIN_STAMINA)
+            cached = type(self).cached
+            type(self).cached = None
+            if cached is not None:
+                current = cached
+            else:
+                # 延迟导入避免与 eat_sugar 形成循环依赖
+                from .eat_sugar import read_purple_stamina
+
+                current = read_purple_stamina(context)
+            if current is None:
+                Prompter.log("未能读取紫糖数量，跳过数量检查")
+                return True
+            if current >= minimum:
+                return True
+            Prompter.log(f"紫糖不足，当前 {current}，结束本轮")
+            return False
+        except Exception as e:
+            return Prompter.error("紫糖数量检查", e)
