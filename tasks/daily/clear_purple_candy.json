@@ -420,9 +420,10 @@
 				{
 					"name": "No",
 					"pipeline_override": {
-						"清紫糖_购买紫糖": {
+						"清紫糖_购买紫糖周期检查": {
 							"action": "DoNothing",
-							"next": "清紫糖_进入冒险界面"
+							"next": "清紫糖_进入冒险界面",
+							"focus": {}
 						}
 					},
 					"label": "$No"
