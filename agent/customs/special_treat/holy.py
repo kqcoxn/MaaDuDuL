@@ -9,7 +9,10 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
 
+import re
 import time
+
+import numpy as np
 
 from agent.customs.maahelper.reco_helper import RecoHelper
 from agent.customs.utils import Prompter
@@ -237,6 +240,156 @@ class FindAdventureCharacter(CustomAction):
             return True
         except Exception as e:
             return Prompter.error("查找冒险角色", e)
+
+
+@AgentServer.custom_action("find_adventure_auto")
+class FindAdventureAuto(CustomAction):
+    """自动挑选冒险角色：压力指数最低，其次生活等级最低。
+
+    申请书列表按生活等级升序查看（若为降序会先切换排序），从顶端起逐个点选，读取左侧的
+    角色名、压力指数与「休息中」状态，跳过休息中的角色。遇到压力为 0% 的角色即选中，
+    也就是压力为 0% 的角色里生活等级最低的一个；查看完指定数量仍没有时，
+    回到顶端改选压力最低的角色。
+
+    参数格式（custom_action_param）：
+        - max 或 n：最多查看的角色数，默认 12
+    """
+
+    LEVEL_NODE = "圣团巡礼_识别冒险等级"
+    NAME_NODE = "圣团巡礼_识别冒险角色名"
+    PRESSURE_NODE = "圣团巡礼_识别申请压力"
+    RESTING_NODE = "圣团巡礼_确保不在休息"
+    # 卡片头像相对「Lv.N」标签的偏移，以及完整可见卡片标签的 y 范围（1280x720 基准）
+    LABEL_TO_CARD = (-53, -40)
+    LABEL_TOP, LABEL_BOTTOM = 200, 560
+    SORT_BUTTON = (1233, 117)
+    # 列表下滑与点停（与「圣团巡礼_冒险角色列表下滑」「圣团巡礼_冒险列表点停」相同）
+    SWIPE = (812, 540, 812, 257)
+    SWIPE_MS = 500
+    STOP = (812, 198)
+    MAX_PAGES = 20
+    CLICK_WAIT = 0.6
+    # 判断列表是否到头的区域与阈值
+    LIST_ROI = (810, 150, 465, 430)
+    SAME_DIFF = 1.0
+    BASE_WIDTH = 1280
+
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        """执行自动挑选冒险角色。
+
+        Args:
+            context: MAA 上下文对象，提供任务执行环境。
+            argv: 动作运行参数，支持最多查看的角色数。
+
+        Returns:
+            bool: 选中角色返回 True，没有可申请的角色返回 False。
+        """
+        try:
+            limit = ParamAnalyzer(argv).get(["max", "n"], 12)
+            if not isinstance(limit, int) or limit <= 0:
+                limit = 12
+            tasker = Tasker(context)
+            self._ensure_ascending(context, tasker)
+
+            best = None  # (压力, 角色名)
+            for name, pressure, resting in self._scan(context, tasker, limit):
+                if resting or pressure is None:
+                    continue
+                if pressure == 0:
+                    Prompter.log(f"选择冒险角色：{name}（压力 0%）")
+                    return True
+                if best is None or pressure < best[0]:
+                    best = (pressure, name)
+            if best is None:
+                Prompter.log("没有可申请冒险的角色")
+                return False
+
+            Prompter.log(f"没有压力为 0% 的角色，改选压力最低的 {best[1]}（{best[0]}%）")
+            self._to_top(tasker)
+            for name, _, _ in self._scan(context, tasker, limit):
+                if name == best[1]:
+                    return True
+            Prompter.log(f"回到列表顶端后没有找到 {best[1]}")
+            return False
+        except Exception as e:
+            return Prompter.error("自动选择冒险角色", e)
+
+    def _labels(self, context: Context) -> list[tuple[int, int, int]]:
+        """识别可见卡片的「Lv.N」标签，按行列顺序返回 (x, y, 等级)。"""
+        rh = RecoHelper(context).recognize(self.LEVEL_NODE)
+        labels = []
+        for r in rh.filtered_results if rh.hit else []:
+            x, y = r.box[0] + r.box[2] // 2, r.box[1] + r.box[3] // 2
+            level = re.search(r"\d+", r.text)
+            if self.LABEL_TOP <= y <= self.LABEL_BOTTOM and level:
+                labels.append((x, y, int(level.group())))
+        # 同一行的标签 y 相差不大，按行（y 每 60 像素一组）再按列排序
+        return sorted(labels, key=lambda t: (t[1] // 60, t[0]))
+
+    def _ensure_ascending(self, context: Context, tasker: Tasker):
+        """若列表为生活等级降序，点排序按钮切换为升序。
+
+        狂热角色会排在最前面，因此按相邻卡片的升降次数判断，而不只比较首尾。
+        """
+        levels = [level for _, _, level in self._labels(context)]
+        pairs = list(zip(levels, levels[1:]))
+        if sum(a > b for a, b in pairs) > sum(a < b for a, b in pairs):
+            Prompter.log("申请书列表为降序，切换为生活等级升序")
+            tasker.click(*self.SORT_BUTTON).wait(1)
+
+    def _read(self, context: Context) -> tuple[str, int | None, bool]:
+        """读取左侧当前角色的名字、压力指数与是否休息中。"""
+        rh = RecoHelper(context).refresh_screencap()
+        rh.recognize(self.NAME_NODE)
+        name = rh.best_result.text.strip() if rh.hit else ""
+        resting = rh.recognize(self.RESTING_NODE).hit
+        pressure = None
+        if rh.recognize(self.PRESSURE_NODE).hit:
+            digits = re.search(r"\d+", rh.best_result.text)
+            pressure = int(digits.group()) if digits else None
+        return name, pressure, resting
+
+    def _scan(self, context: Context, tasker: Tasker, limit: int):
+        """从当前位置向下逐个点选卡片，每选中一个新角色产出一次 (名字, 压力, 是否休息中)。
+
+        产出时该角色正处于选中状态；按名字去重，查看满 limit 个或列表到底时结束。
+        """
+        seen: set[str] = set()
+        for _ in range(self.MAX_PAGES):
+            for x, y, _ in self._labels(context):
+                tasker.click(x + self.LABEL_TO_CARD[0], y + self.LABEL_TO_CARD[1]).wait(self.CLICK_WAIT)
+                name, pressure, resting = self._read(context)
+                if not name or name in seen:
+                    continue
+                seen.add(name)
+                state = "休息中" if resting else f"压力 {pressure}%"
+                Prompter.log(f"{name}：{state}")
+                yield name, pressure, resting
+                if len(seen) >= limit:
+                    return
+            before = tasker.screenshot()
+            tasker.swipe(*self.SWIPE, duration=self.SWIPE_MS).click(*self.STOP).wait(0.8)
+            if self._same(before, tasker.screenshot()):
+                return
+
+    def _to_top(self, tasker: Tasker):
+        """把申请书列表滑回顶端。"""
+        x1, y1, x2, y2 = self.SWIPE
+        for _ in range(self.MAX_PAGES):
+            before = tasker.screenshot()
+            tasker.swipe(x2, y2, x1, y1, duration=self.SWIPE_MS).click(*self.STOP).wait(0.8)
+            if self._same(before, tasker.screenshot()):
+                return
+
+    def _same(self, before: np.ndarray, after: np.ndarray) -> bool:
+        """判断两次截图的列表区域是否基本一致，用于确认列表是否到头。"""
+        if before.shape != after.shape:
+            return False
+        scale = after.shape[1] / self.BASE_WIDTH
+        x, y, w, h = self.LIST_ROI
+        region = (slice(round(y * scale), round((y + h) * scale)), slice(round(x * scale), round((x + w) * scale)))
+        diff = np.abs(before[region].astype(np.int16) - after[region].astype(np.int16))
+        return float(diff.mean()) < self.SAME_DIFF
 
 
 @AgentServer.custom_action("decide_adventure")
