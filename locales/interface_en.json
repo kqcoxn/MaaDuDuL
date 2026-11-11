@@ -189,6 +189,8 @@
     "轮换": "Rotate",
     "轮换种族": "Rotation races",
     "每个游戏日（凌晨 3 点刷新）依名单顺序选择下一个种族，以顿号/逗号/空格分隔": "Pick the next race in list order each game day (resets at 3:00 AM). Separate with 、, commas or spaces.",
+    "持有量最少": "Fewest held",
+    "读取种族选择画面上各种族材料的持有量，刷持有量最少的种族；并列时按日轮换": "Read each race's material count on the race screen and farm the race with the fewest. Ties rotate by day.",
     "周六关卡": "Saturday Stage",
     "周六与周日开放多个关卡，可以进行指定\n\n关卡数从左至右计算，分别为：\n- 周六：\n  - 纯真：1\n  - 冷静：2\n  - 热情：3\n- 周日：\n  - 活泼：4\n  - 忧愁：5": "Multiple stages are available on weekends for manual selection.\n\nStage numbers are counted from left to right:\n- Saturday:\n  - Innocence: 1\n  - Calm: 2\n  - Passion: 3\n- Sunday:\n  - Cheerful: 4\n  - Melancholy: 5",
     "周末关卡选择": "Weekend Stage Selection",
