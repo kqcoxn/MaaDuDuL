@@ -17,7 +17,7 @@ import time
 
 import numpy as np
 
-from agent.customs.utils import CounterManager, Prompter, MatrixOperator, LocalStorage
+from agent.customs.utils import CounterManager, Prompter, MatrixOperator, LocalStorage, get_game_date
 from agent.customs.maahelper import ParamAnalyzer, Tasker, RecoHelper
 
 from .store import RedReserve
@@ -368,13 +368,39 @@ class FindLevel(CustomRecognition):
             return Prompter.error("查找关卡", e, reco_detail=True)
 
 
+# 心形关卡各种族入口的点击坐标
+HEART_TARGETS: dict[str, tuple[int, int]] = {
+    "龙族": (408, 168),
+    "精灵": (638, 185),
+    "幽灵": (883, 171),
+    "仙灵": (662, 341),
+    "魔女": (900, 323),
+    "自然灵": (381, 463),
+    "兽人": (868, 488),
+    "秘灵": (642, 490),
+}
+
+# 允许以繁体填写种族名
+_HEART_TRADITIONAL = str.maketrans({"龍": "龙", "靈": "灵", "獸": "兽", "祕": "秘"})
+
+
 @AgentServer.custom_action("select_heart_type")
 class SelectHeartType(CustomAction):
     """选择心形关卡类型的自定义动作。
 
     根据参数指定的心形关卡类型，点击对应的关卡入口坐标。
     支持的心形关卡类型：龙族、精灵、幽灵、仙灵、魔女、自然灵、兽人、秘灵。
+    填写多个种族时按游戏日轮换：每个游戏日（凌晨 3 点刷新）依名单顺序选择下一个种族，
+    同一天内重复执行会选择同一个种族。
+    填写「最少」时读取种族选择画面上各种族奖励材料的持有量，选持有量最少的种族；
+    画面上的数量会四舍五入成「30K」这类写法，并列最少时同样按游戏日轮换。
     """
+
+    COUNT_NODE = "清红糖_识别心形材料数量"
+    LEAST = {"最少", "最少持有", "持有量最少"}
+    # 数量标签在种族入口下方，离入口坐标超过这个距离就不认
+    COUNT_MAX_DIST = 150
+    COUNT_MIN_HEIGHT = 18
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         """执行选择心形关卡类型的操作。
@@ -391,34 +417,79 @@ class SelectHeartType(CustomAction):
         """
         try:
             args = ParamAnalyzer(argv)
-            level: str = args.get(["type", "t"])
+            levels = [t.translate(_HEART_TRADITIONAL) for t in args.split_list(["type", "t"])]
+            if levels and all(t in self.LEAST for t in levels):
+                level = self._least(context)
+                Tasker(context).click(*HEART_TARGETS[level])
+                return True
+            invalid = [t for t in levels if t not in HEART_TARGETS]
+            if not levels or invalid:
+                return Prompter.error("选择心形关卡", f"无效的种族：{'、'.join(invalid) or '未填写'}")
 
-            # 根据关卡类型确定点击坐标
-            target = [408, 168]
-            if level == "龙族":
-                target = [408, 168]
-            elif level == "精灵":
-                target = [638, 185]
-            elif level == "幽灵":
-                target = [883, 171]
-            elif level == "仙灵":
-                target = [662, 341]
-            elif level == "魔女":
-                target = [900, 323]
-            elif level == "自然灵":
-                target = [381, 463]
-            elif level == "兽人":
-                target = [868, 488]
-            elif level == "秘灵":
-                target = [642, 490]
-            else:
-                Prompter.error("无效的心形关卡类型")
-                return False
-            Tasker(context).click(*target)
+            # 多个种族时按游戏日轮换
+            level = levels[get_game_date().toordinal() % len(levels)]
+            if len(levels) > 1:
+                Prompter.log(f"今日轮换种族：{level}")
+            Tasker(context).click(*HEART_TARGETS[level])
 
             return True
         except Exception as e:
             return Prompter.error("选择心形关卡", e)
+
+    def _least(self, context: Context) -> str:
+        """读取各种族奖励材料的持有量，返回持有量最少的种族。
+
+        读不到任何数量时按游戏日在全部种族中轮换，避免整轮中断。
+        """
+        rh = RecoHelper(context).recognize(self.COUNT_NODE, refresh_image=True)
+        counts: dict[str, float] = {}
+        widths: dict[str, int] = {}
+        for res in rh.filtered_results if rh.hit else []:
+            value = parse_heart_count(res.text)
+            # 数量左边的小宝石图标常被读成「0」「1」，字高明显较矮，排除掉
+            if value is None or res.box[3] < self.COUNT_MIN_HEIGHT:
+                continue
+            x, y = RecoHelper.get_res_center(res)
+            # 数量标签在种族入口正下方：只认入口在标签上方且距离够近的
+            near = [
+                (abs(x - tx) + (y - ty), name)
+                for name, (tx, ty) in HEART_TARGETS.items()
+                if ty < y and abs(x - tx) + (y - ty) <= self.COUNT_MAX_DIST
+            ]
+            if near:
+                # 同一个种族读到多段时取最宽的一段（完整的数量标签）
+                name = min(near)[1]
+                if res.box[2] > widths.get(name, 0):
+                    counts[name], widths[name] = value, res.box[2]
+
+        races = list(HEART_TARGETS)
+        if not counts:
+            level = races[get_game_date().toordinal() % len(races)]
+            Prompter.log(f"未能读取各种族的材料数量，改为轮换：{level}")
+            return level
+        Prompter.log("材料持有量：" + "、".join(f"{name} {format_heart_count(counts[name])}" for name in races if name in counts))
+        fewest = min(counts.values())
+        tied = [name for name in races if counts.get(name) == fewest]
+        level = tied[get_game_date().toordinal() % len(tied)]
+        Prompter.log(f"持有量最少的种族：{level}" + (f"（{len(tied)} 个并列，按日轮换）" if len(tied) > 1 else ""))
+        return level
+
+
+def parse_heart_count(text: str) -> float | None:
+    """把「30K」「9,876」「1.2M」这类数量文本换算成数值，认不出时返回 None。"""
+    matched = re.fullmatch(r"\s*(\d[\d,]*(?:\.\d+)?)\s*([KkMm]?)\s*", text or "")
+    if not matched:
+        return None
+    number, unit = matched.groups()
+    value = float(number.replace(",", ""))
+    return value * {"": 1, "k": 1_000, "m": 1_000_000}[unit.lower()]
+
+
+def format_heart_count(value: float) -> str:
+    """把数量写回成便于阅读的文本（30000 → 30K）。"""
+    if value >= 1_000 and value % 1_000 == 0:
+        return f"{int(value // 1_000)}K"
+    return f"{value:g}"
 
 
 @AgentServer.custom_action("select_red_level")

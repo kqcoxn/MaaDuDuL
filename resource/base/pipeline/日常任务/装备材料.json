@@ -432,6 +432,50 @@
             }
         }
     },
+    "装备材料_识别阶级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    900,
+                    115,
+                    350,
+                    55
+                ],
+                "expected": [
+                    "\\d+\\s*[阶階]"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 160
+            }
+        }
+    },
+    "装备材料_识别数量": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    250,
+                    160,
+                    595,
+                    530
+                ],
+                "expected": [
+                    "^[\\d,.]+$"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 320
+            }
+        }
+    },
     "装备材料_返回大厅": {
         "action": {
             "type": "Custom",
@@ -549,22 +593,21 @@
     },
     "装备材料_选择第一行第一个": {
         "action": {
-            "type": "Click",
+            "type": "Custom",
             "param": {
-                "target": [
-                    307,
-                    237,
-                    1,
-                    1
-                ]
+                "custom_action": "select_material_by_tier",
+                "custom_action_param": "t="
             }
         },
         "post_delay": 900,
         "focus": {
-            "Node.Recognition.Starting": "> 选中第一个材料"
+            "Node.Recognition.Starting": "> 选择要刷取的材料"
         },
         "next": [
             "装备材料_获取途径"
+        ],
+        "on_error": [
+            "装备材料_返回大厅"
         ],
         "$__mpe_code": {
             "position": {

@@ -135,8 +135,43 @@
 						}
 					},
 					"label": "$秘灵"
+				},
+				{
+					"name": "轮换",
+					"option": [
+						"清红糖-心形-轮换种族"
+					],
+					"label": "$轮换"
+				},
+				{
+					"name": "最少",
+					"description": "$读取种族选择画面上各种族材料的持有量，刷持有量最少的种族；并列时按日轮换",
+					"pipeline_override": {
+						"清红糖_选择心形种族": {
+							"custom_action_param": "t=最少"
+						}
+					},
+					"label": "$持有量最少"
 				}
 			]
+		},
+		"清红糖-心形-轮换种族": {
+			"type": "input",
+			"label": "$轮换种族",
+			"description": "$每个游戏日（凌晨 3 点刷新）依名单顺序选择下一个种族，以顿号/逗号/空格分隔",
+			"inputs": [
+				{
+					"name": "种族",
+					"label": "$轮换种族",
+					"default": "龙族、精灵、幽灵、仙灵、魔女、自然灵、兽人、秘灵",
+					"pipeline_type": "string"
+				}
+			],
+			"pipeline_override": {
+				"清红糖_选择心形种族": {
+					"custom_action_param": "t={种族}"
+				}
+			}
 		},
 		"清红糖-装备": {
 			"type": "switch",
@@ -215,7 +250,8 @@
 						}
 					},
 					"option": [
-						"清红糖-装备-自动刷取-周期检查"
+						"清红糖-装备-自动刷取-周期检查",
+						"清红糖-装备-自动刷取-限制阶级"
 					],
 					"description": "$自动刷取最少的装备材料",
 					"label": "$自动刷取"
@@ -305,6 +341,44 @@
 					"label": "$Yes"
 				}
 			]
+		},
+		"清红糖-装备-自动刷取-限制阶级": {
+			"type": "switch",
+			"label": "$限制材料阶级",
+			"description": "$只刷取指定阶级中持有量最少的材料",
+			"cases": [
+				{
+					"name": "No",
+					"label": "$No"
+				},
+				{
+					"name": "Yes",
+					"option": [
+						"清红糖-装备-自动刷取-阶级"
+					],
+					"label": "$Yes"
+				}
+			]
+		},
+		"清红糖-装备-自动刷取-阶级": {
+			"type": "input",
+			"label": "$材料阶级",
+			"description": "$可填写多个或范围，如 8、7-9",
+			"inputs": [
+				{
+					"name": "阶级",
+					"label": "$材料阶级",
+					"default": "8",
+					"pipeline_type": "string",
+					"verify": "^\\s*\\d+(?:\\s*[-~～]\\s*\\d+)?(?:[\\s,，、]+\\d+(?:\\s*[-~～]\\s*\\d+)?)*\\s*$",
+					"pattern_msg": "$请输入阶级，如 8 或 7-9"
+				}
+			],
+			"pipeline_override": {
+				"装备材料_选择第一行第一个": {
+					"custom_action_param": "t={阶级}&required=1"
+				}
+			}
 		},
 		"清红糖-购买红糖-周期检查": {
 			"type": "switch",
