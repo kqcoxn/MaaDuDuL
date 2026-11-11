@@ -370,13 +370,13 @@
 					"label": "$材料阶级",
 					"default": "8",
 					"pipeline_type": "string",
-					"verify": "^[\\d\\s,，、\\-~～]+$",
+					"verify": "^\\s*\\d+(?:\\s*[-~～]\\s*\\d+)?(?:[\\s,，、]+\\d+(?:\\s*[-~～]\\s*\\d+)?)*\\s*$",
 					"pattern_msg": "$请输入阶级，如 8 或 7-9"
 				}
 			],
 			"pipeline_override": {
 				"装备材料_选择第一行第一个": {
-					"custom_action_param": "t={阶级}"
+					"custom_action_param": "t={阶级}&required=1"
 				}
 			}
 		},

@@ -310,6 +310,7 @@ class SelectMaterialByTier(CustomAction):
 
     参数格式（custom_action_param）：
         - tier 或 t：允许的阶级，可填多个或范围（如 8、7-9），留空表示不限制
+        - required：为 1 时必须填写有效阶级，输入无效则跳过
     """
 
     # 详情标题（如「靴子图纸（8阶）」）与格子数量的识别节点
@@ -342,7 +343,14 @@ class SelectMaterialByTier(CustomAction):
             bool：选中了材料返回 True，找不到符合阶级的材料返回 False
         """
         try:
-            tiers = self._parse_tiers(ParamAnalyzer(argv).split_list(["tier", "t"]))
+            args = ParamAnalyzer(argv)
+            try:
+                tiers = self._parse_tiers(str(args.get(["tier", "t"], "")))
+                if args.get("required", 0) and not tiers:
+                    raise ValueError("请填写材料阶级")
+            except ValueError as e:
+                Prompter.log(f"材料阶级设置无效：{e}，本次跳过")
+                return False
             tasker = Tasker(context)
             if not tiers:
                 tasker.click(self.GRID_X[0], self.GRID_Y[0])
@@ -375,8 +383,15 @@ class SelectMaterialByTier(CustomAction):
             return Prompter.error("按阶级选择材料", e)
 
     @staticmethod
-    def _parse_tiers(items: list[str]) -> set[int]:
-        """把「8」「7-9」等写法解析为阶级集合，无法解析的项忽略。"""
+    def _parse_tiers(text: str) -> set[int]:
+        """解析单个阶级、列表或范围；空串表示不限制，其他无效输入报错。"""
+        if text == "":
+            return set()
+        if not re.fullmatch(r"\s*\d+(?:\s*[-~～]\s*\d+)?(?:[\s,，、]+\d+(?:\s*[-~～]\s*\d+)?)*\s*", text):
+            raise ValueError("请输入阶级，如 8 或 7-9")
+        # 先合并范围两侧的空白，避免「7 - 9」被空格拆成两个端点。
+        text = re.sub(r"\s*([-~～])\s*", r"\1", text.strip())
+        items = re.split(r"[\s,，、]+", text)
         tiers: set[int] = set()
         for item in items:
             bounds = re.fullmatch(r"(\d+)\s*[-~～]\s*(\d+)", item)
