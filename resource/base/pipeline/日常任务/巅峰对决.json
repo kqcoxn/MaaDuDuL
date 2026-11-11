@@ -514,6 +514,7 @@
         }
     },
     "巅峰对决_进入巅峰对决": {
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -531,9 +532,11 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 2000,
         "next": [
             "巅峰对决_确保进入巅峰对决",
-            "[JumpBack]巅峰对决_关闭其他界面"
+            "[JumpBack]巅峰对决_关闭其他界面",
+            "巅峰对决_进入巅峰对决"
         ],
         "$__mpe_code": {
             "position": {
