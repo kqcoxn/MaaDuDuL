@@ -248,11 +248,11 @@ class FindAdventureAuto(CustomAction):
 
     申请书列表按生活等级升序查看（若为降序会先切换排序），从顶端起逐个点选，读取左侧的
     角色名、压力指数与「休息中」状态，跳过休息中的角色。遇到压力为 0% 的角色即选中，
-    也就是压力为 0% 的角色里生活等级最低的一个；查看完指定数量仍没有时，
-    回到顶端改选压力最低的角色。
+    也就是压力为 0% 的角色里生活等级最低的一个；比较完指定数量仍没有时，
+    回到顶端改选其中压力最低的角色。
 
     参数格式（custom_action_param）：
-        - max 或 n：最多查看的角色数，默认 12
+        - max 或 n：最多比较的角色数（休息中的不计入），默认 12
     """
 
     LEVEL_NODE = "圣团巡礼_识别冒险等级"
@@ -292,7 +292,8 @@ class FindAdventureAuto(CustomAction):
             self._ensure_ascending(context, tasker)
 
             best = None  # (压力, 角色名)
-            for name, pressure, resting in self._scan(context, tasker, limit):
+            checked = 0
+            for name, pressure, resting in self._scan(context, tasker):
                 if resting or pressure is None:
                     continue
                 if pressure == 0:
@@ -300,13 +301,16 @@ class FindAdventureAuto(CustomAction):
                     return True
                 if best is None or pressure < best[0]:
                     best = (pressure, name)
+                checked += 1
+                if checked >= limit:
+                    break
             if best is None:
                 Prompter.log("没有可申请冒险的角色")
                 return False
 
             Prompter.log(f"没有压力为 0% 的角色，改选压力最低的 {best[1]}（{best[0]}%）")
             self._to_top(tasker)
-            for name, _, _ in self._scan(context, tasker, limit):
+            for name, _, _ in self._scan(context, tasker):
                 if name == best[1]:
                     return True
             Prompter.log(f"回到列表顶端后没有找到 {best[1]}")
@@ -349,10 +353,10 @@ class FindAdventureAuto(CustomAction):
             pressure = int(digits.group()) if digits else None
         return name, pressure, resting
 
-    def _scan(self, context: Context, tasker: Tasker, limit: int):
+    def _scan(self, context: Context, tasker: Tasker):
         """从当前位置向下逐个点选卡片，每选中一个新角色产出一次 (名字, 压力, 是否休息中)。
 
-        产出时该角色正处于选中状态；按名字去重，查看满 limit 个或列表到底时结束。
+        产出时该角色正处于选中状态；按名字去重，由调用方决定何时停止，列表到底时结束。
         """
         seen: set[str] = set()
         for _ in range(self.MAX_PAGES):
@@ -365,8 +369,6 @@ class FindAdventureAuto(CustomAction):
                 state = "休息中" if resting else f"压力 {pressure}%"
                 Prompter.log(f"{name}：{state}")
                 yield name, pressure, resting
-                if len(seen) >= limit:
-                    return
             before = tasker.screenshot()
             tasker.swipe(*self.SWIPE, duration=self.SWIPE_MS).click(*self.STOP).wait(0.8)
             if self._same(before, tasker.screenshot()):

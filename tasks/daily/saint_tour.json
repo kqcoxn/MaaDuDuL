@@ -189,20 +189,38 @@
 				{
 					"name": "自动",
 					"description": "$依生活等级由低到高查看角色，选压力为 0% 的第一个；都没有时选压力最低的",
-					"pipeline_override": {
-						"圣团巡礼_查找角色": {
-							"action": {
-								"type": "Custom",
-								"param": {
-									"custom_action": "find_adventure_auto",
-									"custom_action_param": "n=12"
-								}
-							}
-						}
-					},
+					"option": [
+						"圣团巡礼-每日冒险-比较人数"
+					],
 					"label": "$自动选择"
 				}
 			]
+		},
+		"圣团巡礼-每日冒险-比较人数": {
+			"type": "input",
+			"label": "$最多比较人数",
+			"description": "$都没有 0% 时，从等级最低的这么多人里选压力最低的；休息中的不计入",
+			"inputs": [
+				{
+					"name": "人数",
+					"label": "$人数",
+					"default": "12",
+					"pipeline_type": "string",
+					"verify": "^[1-9]\\d*$",
+					"pattern_msg": "$请输入大于 0 的整数"
+				}
+			],
+			"pipeline_override": {
+				"圣团巡礼_查找角色": {
+					"action": {
+						"type": "Custom",
+						"param": {
+							"custom_action": "find_adventure_auto",
+							"custom_action_param": "n={人数}"
+						}
+					}
+				}
+			}
 		},
 		"圣团巡礼-每日冒险-冒险名单": {
 			"type": "input",
