@@ -2110,7 +2110,7 @@
         "action": {
             "type": "Click"
         },
-        "timeout": 8000,
+        "timeout": 20000,
         "rate_limit": 600,
         "next": [
             "圣团巡礼_确认世界树奖励",
