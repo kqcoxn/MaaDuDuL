@@ -93,15 +93,35 @@
     "新礼包查看_免费礼包": {
         "pre_delay": 0,
         "action": {
-            "type": "StopTask"
+            "type": "Custom",
+            "param": {
+                "custom_action": "run",
+                "custom_action_param": "n=返回主界面"
+            }
         },
         "post_delay": 0,
         "focus": {
             "Node.Recognition.Succeeded": "> 发现可能的免费礼包，请在手动领取后再次执行任务"
         },
+        "next": [
+            "新礼包查看_免费礼包停止"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 5908,
+                "y": 995
+            }
+        }
+    },
+    "新礼包查看_免费礼包停止": {
+        "pre_delay": 0,
+        "action": {
+            "type": "StopTask"
+        },
+        "post_delay": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": 6208,
                 "y": 995
             }
         }
