@@ -399,8 +399,18 @@ class DecideAdventure(CustomAction):
     """冒险日程决策自定义动作。
 
     根据当前压力值和日程卡片类型（工作/休息），
-    自动选择最优的日程安排策略。
+    自动选择最优的日程安排策略。同类日程按成功率由高到低、成功率相同时按等级由高到低挑选。
     """
+
+    # 各日程卡片在所在视图中的 roi 左缘（与「圣团巡礼_识别日程卡片N」一致，1280x720 基准）
+    CARD_LEFT = {1: 33, 2: 391, 3: 745, 4: 180, 5: 534, 6: 892}
+    RATE_NODE = "圣团巡礼_识别日程成功率"
+    LEVEL_NODE = "圣团巡礼_识别日程等级"
+    # 成功率与左上角等级缎带相对卡片 roi 左缘的区域 (dx, y, w, h)
+    RATE_BOX = (0, 440, 360, 72)
+    LEVEL_BOX = (2, 98, 52, 62)
+    # 灰色缎带上的「1」常被 OCR 读成这些字
+    LEVEL_ONE_TEXTS = {"1", "口", "I", "l", "|", "丨", "[", "]"}
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         """执行冒险日程决策动作。
@@ -422,30 +432,47 @@ class DecideAdventure(CustomAction):
             work_indexes = []  # 工作类日程索引列表
             rest_indexes = []  # 休息类日程索引列表
             special_rest_indexes = []  # 特别休息类日程索引列表
+            ranks: dict[int, tuple[int, int]] = {}  # 日程索引 -> (成功率, 等级)，读不到时为 -1 / 0
 
-            def collect_type_index(index: int):
-                """收集指定索引的日程卡片类型。
+            def collect_view(indexes: range):
+                """收集当前视图中各日程卡片的类型、成功率与等级。
 
                 Args:
-                    index: 日程卡片索引（1-6）。
+                    indexes: 当前视图中的日程卡片索引。
                 """
-                card_type = self._get_card_type(context, index)
-                type_name = type_text.get(card_type, card_type)
-                Prompter.log(f"日程 {index} 类型：{type_name}")
-                if card_type == "work":
-                    work_indexes.append(index)
-                elif card_type == "special_rest":
-                    special_rest_indexes.append(index)
-                else:
-                    rest_indexes.append(index)
+                cards = {}
+                for index in indexes:
+                    cards[index] = (self._get_card_type(context, index), *self._get_card_rank(context, index))
+                # 刚进入画面时第一张卡片可能还没就位，读不到成功率的卡片等同侧其他卡片读完后再读一次
+                for index in indexes:
+                    card_type, rate, level = cards[index]
+                    if rate is None:
+                        rate, retry_level = self._get_card_rank(context, index)
+                        cards[index] = (card_type, rate, level or retry_level)
+                for index in indexes:
+                    card_type, rate, level = cards[index]
+                    ranks[index] = (-1 if rate is None else rate, level)
+                    rate_text = "?" if rate is None else rate
+                    type_name = type_text.get(card_type, card_type)
+                    Prompter.log(f"日程 {index} 类型：{type_name}，成功率 {rate_text}%，等级 {level or '?'}")
+                    if card_type == "work":
+                        work_indexes.append(index)
+                    elif card_type == "special_rest":
+                        special_rest_indexes.append(index)
+                    else:
+                        rest_indexes.append(index)
 
             # 识别左侧日程卡片（索引 1-3）
-            for i in range(1, 4):
-                collect_type_index(i)
+            collect_view(range(1, 4))
             # 切换到右侧，识别右侧日程卡片（索引 4-6）
             self._switch(context, "right")
-            for i in range(4, 7):
-                collect_type_index(i)
+            collect_view(range(4, 7))
+
+            # 同类日程按成功率、等级由高到低排序，相同时保持原顺序
+            for indexes in (work_indexes, rest_indexes, special_rest_indexes):
+                indexes.sort(key=lambda idx: (-ranks[idx][0], -ranks[idx][1], idx))
+            if work_indexes:
+                Prompter.log(f"工作日程优先顺序：{'、'.join(map(str, work_indexes))}")
 
             # 根据压力值进行 3 轮决策
             for i in range(3):
@@ -530,6 +557,43 @@ class DecideAdventure(CustomAction):
             f"圣团巡礼_识别日程卡片{index}", {"expected": "特别休息"}
         )
         return "special_rest" if rh.hit else "rest"
+
+    def _get_card_rank(self, context: Context, index: int) -> tuple[int | None, int]:
+        """读取指定日程卡片的成功率与等级（卡片需在当前视图中）。
+
+        Args:
+            context: MAA 上下文对象。
+            index: 日程卡片索引（1-6）。
+
+        Returns:
+            tuple: (成功率百分比，读不到为 None；等级，读不到为 0)。
+        """
+        left = self.CARD_LEFT[index]
+        dx, y, w, h = self.RATE_BOX
+        rh = RecoHelper(context).recognize(self.RATE_NODE, {"roi": [left + dx, y, w, h]})
+        rate = self._parse_rate(rh.concat() if rh.hit else "")
+        dx, y, w, h = self.LEVEL_BOX
+        rh.recognize(self.LEVEL_NODE, {"roi": [left + dx, y, w, h]})
+        level = self._parse_level(rh.best_result.text if rh.hit else "")
+        return rate, level
+
+    @staticmethod
+    def _parse_rate(text: str) -> int | None:
+        """从 OCR 文本取出成功率（1~100），认不出时返回 None。"""
+        # 「100%」的「1」被左下角立绘挡住时只剩「00%」
+        values = [100 if v == "00" else int(v) for v in re.findall(r"(\d{1,3})\s*%", text or "")]
+        values = [v for v in values if 0 < v <= 100]
+        return max(values) if values else None
+
+    @classmethod
+    def _parse_level(cls, text: str) -> int:
+        """从等级缎带的 OCR 文本取出等级，认不出时返回 0。"""
+        text = (text or "").strip()
+        # 缎带右边的卡片白边常被读成多出来的「1」（「2」读成「21」），只取第一位
+        digits = re.search(r"\d", text)
+        if digits:
+            return int(digits.group())
+        return 1 if text in cls.LEVEL_ONE_TEXTS else 0
 
     def _select(self, context: Context, index=1):
         """选择指定索引的日程卡片。

@@ -2443,6 +2443,50 @@
             }
         }
     },
+    "圣团巡礼_识别日程成功率": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    33,
+                    440,
+                    360,
+                    72
+                ],
+                "expected": [
+                    "\\d+\\s*%"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10980,
+                "y": 3448
+            }
+        }
+    },
+    "圣团巡礼_识别日程等级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    35,
+                    98,
+                    52,
+                    62
+                ],
+                "expected": [
+                    ""
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10980,
+                "y": 3608
+            }
+        }
+    },
     "圣团巡礼_识别客人1": {
         "recognition": {
             "type": "OCR",
