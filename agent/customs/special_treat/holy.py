@@ -259,6 +259,9 @@ class FindAdventureAuto(CustomAction):
     NAME_NODE = "圣团巡礼_识别冒险角色名"
     PRESSURE_NODE = "圣团巡礼_识别申请压力"
     RESTING_NODE = "圣团巡礼_确保不在休息"
+    # 排序按钮上的箭头：⌃⌃ 为升序，⌄⌄ 为降序
+    SORT_ASC_NODE = "圣团巡礼_申请书升序"
+    SORT_DESC_NODE = "圣团巡礼_申请书降序"
     # 卡片头像相对「Lv.N」标签的偏移，以及完整可见卡片标签的 y 范围（1280x720 基准）
     LABEL_TO_CARD = (-53, -40)
     LABEL_TOP, LABEL_BOTTOM = 200, 560
@@ -333,13 +336,28 @@ class FindAdventureAuto(CustomAction):
     def _ensure_ascending(self, context: Context, tasker: Tasker):
         """若列表为生活等级降序，点排序按钮切换为升序。
 
-        狂热角色会排在最前面，因此按相邻卡片的升降次数判断，而不只比较首尾。
+        以排序按钮上的箭头判断；箭头认不出时，才按可见卡片等级的升降次数推断
+        （狂热角色会排在最前面，因此按相邻卡片的升降次数判断，而不只比较首尾）。
         """
-        levels = [level for _, _, level in self._labels(context)]
-        pairs = list(zip(levels, levels[1:]))
-        if sum(a > b for a, b in pairs) > sum(a < b for a, b in pairs):
+        descending = self._sort_descending(context)
+        if descending is None:
+            levels = [level for _, _, level in self._labels(context)]
+            pairs = list(zip(levels, levels[1:]))
+            descending = sum(a > b for a, b in pairs) > sum(a < b for a, b in pairs)
+        if descending:
             Prompter.log("申请书列表为降序，切换为生活等级升序")
             tasker.click(*self.SORT_BUTTON).wait(1)
+
+    def _sort_descending(self, context: Context) -> bool | None:
+        """读取排序按钮上的箭头：降序返回 True，升序返回 False，认不出返回 None。"""
+        rh = RecoHelper(context)
+        scores = {}
+        for descending, node in ((True, self.SORT_DESC_NODE), (False, self.SORT_ASC_NODE)):
+            if rh.recognize(node).hit:
+                scores[descending] = rh.best_result.score
+        if not scores:
+            return None
+        return max(scores, key=scores.get)
 
     def _read(self, context: Context) -> tuple[str, int | None, bool]:
         """读取左侧当前角色的名字、压力指数与是否休息中。"""
