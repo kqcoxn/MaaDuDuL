@@ -2377,6 +2377,116 @@
             }
         }
     },
+    "圣团巡礼_识别申请压力": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    150,
+                    530,
+                    260,
+                    50
+                ],
+                "expected": [
+                    "%"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10720,
+                "y": 3448
+            }
+        }
+    },
+    "圣团巡礼_识别冒险角色名": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    150,
+                    375,
+                    260,
+                    55
+                ],
+                "expected": [
+                    ""
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10720,
+                "y": 3608
+            }
+        }
+    },
+    "圣团巡礼_识别冒险等级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    810,
+                    150,
+                    468,
+                    440
+                ],
+                "expected": [
+                    "^L[vVyY][.,]?\\s*\\d+$"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10720,
+                "y": 3768
+            }
+        }
+    },
+    "圣团巡礼_识别日程成功率": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    33,
+                    440,
+                    360,
+                    72
+                ],
+                "expected": [
+                    "\\d+\\s*%"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10980,
+                "y": 3448
+            }
+        }
+    },
+    "圣团巡礼_识别日程等级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    35,
+                    98,
+                    52,
+                    62
+                ],
+                "expected": [
+                    ""
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10980,
+                "y": 3608
+            }
+        }
+    },
     "圣团巡礼_识别客人1": {
         "recognition": {
             "type": "OCR",
