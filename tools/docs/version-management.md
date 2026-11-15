@@ -57,7 +57,27 @@ Package Smoke 仅支持手动触发，日常提交和 PR 不执行打包 smoke�
 
 普通第三方 Node/Python 库依赖继续由 package.json、pyproject.toml 及各自锁文件管理，GitHub Actions 的 `uses:` 版本继续留在工作流中。这里统一的是项目、Maa 运行库及显式构建工具链版本，没有把所有依赖再复制一份进 manifest。
 
-Windows 内置 Python 固定为 3.13.17，Linux/macOS 固定为 3.13.18，使用 python-build-standalone release 20261026；它们的 minor 须与 recommendedPython 一致。Python 3.13.18 已进入仅源码发布阶段，没有官方 Windows 嵌入式包，因此不能直接把 Windows 下载版本同步为 3.13.18。Android 构建宿主 Python 和预编译内核 Python 分别维护，当前内核为 `3.13.15-maafw5.15.0`。
+Windows 内置 Python 固定为 3.13.17，Linux/macOS 固定为 3.13.18，使用 python-build-standalone release 20261026；它们的 minor 须与 recommendedPython 一致。Python 3.13.18 已进入仅源码发布阶段，没有官方 Windows 嵌入式包，因此不能直接把 Windows 下载版本同步为 3.13.18。Android 构建宿主 Python 和预编译内核 Python 分别维护，当前内核为 `3.13.15-maafw5.16.0`；APK 中的 MaaFramework binding/runtime 由 manifest 另行对齐到 5.16.1。
+
+## 2026-11-15 依赖维护
+
+- MaaFramework 与 Python binding：5.15.0 → [5.16.1](https://github.com/MaaXYZ/MaaFramework/releases/tag/v5.16.1)，同步 pyproject、uv.lock、requirements 及 Android requirements。Python 依赖锁定结果仅变更 maafw，六种桌面 wheel 和两种 Android 原生资产齐全。
+- maa-tools：1.3.0 → 1.3.1；由其精确依赖带入 maa-pipeline-manager 1.2.0 和 maa-locale 1.3.0。使用 `yarn install --ignore-scripts --non-interactive` 更新 Yarn 锁文件，未重新生成模板。
+- MaaFwApp：`c2449d8` → [`f29a0b0`](https://github.com/Aliothmoon/MaaFwApp/commit/f29a0b0d5e5ebdc845368f0e98e8104911765c1a)，仅修改取消运行后的 Tasker 停止等待；配方和构建脚本未变化。
+- Android 内核：`3.13.15-maafw5.15.0` → [`3.13.15-maafw5.16.0`](https://github.com/Aliothmoon/MaaAgentCoreAndroid/releases/tag/3.13.15-maafw5.16.0)，解释器仍为 3.13.15。MFAA、CMP、排序插件及 OCR 模型保持原版本。
+
+### 兼容性与适配结论
+
+核对范围为 [MaaFramework 5.15.0 → 5.16.1 的完整差异](https://github.com/MaaXYZ/MaaFramework/compare/v5.15.0...v5.16.1)，目标提交 `ea944bd7b75f649851dc4807295966b3676bc821`；官方文档与源码导航使用 MaaLLMWiki v0.1.39。
+
+- **Schema 已适配**：四份上游 Schema 全部回源到目标提交，URL 与 SHA-256 更新到 `tools/schema/schema-manifest.json`。其中 Interface 和 Interface Config 仅新增 iOS 控制器定义；Pipeline 和 Interface Import 内容及哈希不变，现有任务配置通过新 Schema 校验。
+- **Custom 无需改写**：Python 的 `custom_action.py`、`custom_recognition.py`、`context.py`、`agent/agent_server.py` 均未变化。绑定新增 iOS 控制器、枚举和发现接口，`Tasker.clear_cache()` 的说明随上游缓存修复更新；项目没有调用该方法，也没有依赖控制器动作事件的业务回调。
+- **流程无需迁移**：`jump_back` / `on_error` 的变化是文档澄清，相关流程处理未改动。识别轮次新增推理缓存、OCR override 清理旧 expected 等均在框架内部完成，现有 Custom 和 Pipeline 不需要增加开关或修改节点。
+- **PlayCover 配置可沿用**：上游新增应用启停支持。项目当前 PlayCover UUID 与基础资源 StartApp 的 package 均为 `com.bilibili.trickcalcn`；本次不引入新的 iOS 控制器或修改任务入口。
+- **Android binding 继续显式对齐**：核实两种 ABI 内核资产的官方 SHA-256、`agent-core.json`、Python/ABI、`bin/python3` 以及不含 `libMaa*.so` 的布局。内核原始 binding 是普通 `site-packages/maa`，上游 `build_agent_bundle.py` 随后将其收进 `pure.zip`，现有 `align_binding.py` 再整体替换为 5.16.1；[目标版本加载器](https://github.com/MaaXYZ/MaaFramework/blob/ea944bd7b75f649851dc4807295966b3676bc821/source/binding/Python/maa/library.py) 中 Android 平台适配标记未变，继续保留 Android → Linux 的局部映射。
+- **Android 原生库收集规则可沿用**：两种 5.16.1 Android zip 均已校验官方 SHA-256 并检查 ELF 依赖。新增 `libMaaIOSControlUnit.so` 依赖的 `libxdb_client.so` 与其一起位于 `bin/`，现有上游 `.so` 收集规则会同时纳入，不需要修改构建参数或硬编码库列表。
+
+验证结果：`yarn versions:sync`、`yarn run check`（版本一致性、格式与全部 Interface/Pipeline Schema）通过；Schema 内容与记录的 SHA-256 一致。没有运行 maa-tools 资源加载检查、设备任务或跨平台构建，因此不将静态核对视为运行验收。未安装 Python/MFAA 运行环境、未改动现有 `MFAAvalonia` 测试目录、未发布。
 
 ## 2026-11-05 依赖维护
 

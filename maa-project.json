@@ -35,7 +35,7 @@
     },
     "maafw": {
         "channel": "stable",
-        "version": "5.15.0"
+        "version": "5.16.1"
     },
     "network": {
         "mode": "auto"
@@ -44,7 +44,7 @@
         "displayName": "MaaDuDuL",
         "initialTemplate": "agent",
         "slug": "maa-dudul",
-        "version": "1.5.6",
+        "version": "1.5.7",
         "github": "https://github.com/kqcoxn/MaaDuDuL",
         "interfaceUnmanaged": true
     },
@@ -107,9 +107,9 @@
         },
         "android": {
             "appRepository": "Aliothmoon/MaaFwApp",
-            "appRef": "c2449d8030644386e1a9e3ba7cb21037c2bcdbdf",
+            "appRef": "f29a0b0d5e5ebdc845368f0e98e8104911765c1a",
             "agentCoreRepository": "Aliothmoon/MaaAgentCoreAndroid",
-            "agentCoreTag": "3.13.15-maafw5.15.0",
+            "agentCoreTag": "3.13.15-maafw5.16.0",
             "agentPython": "3.13.15",
             "ndk": "28.2.13676358",
             "buildPython": "3.13",
