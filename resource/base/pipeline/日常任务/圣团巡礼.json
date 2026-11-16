@@ -2443,6 +2443,56 @@
             }
         }
     },
+    "圣团巡礼_申请书升序": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1206,
+                    94,
+                    62,
+                    49
+                ],
+                "template": [
+                    "holy/up.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10720,
+                "y": 3928
+            }
+        }
+    },
+    "圣团巡礼_申请书降序": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1206,
+                    94,
+                    62,
+                    49
+                ],
+                "template": [
+                    "holy/down.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 10720,
+                "y": 4088
+            }
+        }
+    },
     "圣团巡礼_识别日程成功率": {
         "recognition": {
             "type": "OCR",
