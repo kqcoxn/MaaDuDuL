@@ -270,7 +270,7 @@
         "recognition": {
             "param": {
                 "expected": [
-                    "Lv",
+                    "^L[vVyY][.,]?\\s*\\d+$",
                     "等级",
                     "等[级級]"
                 ]
