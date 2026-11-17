@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "圣团巡礼",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1793978830495,
+            "lastSyncTime": 1794898386406,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
+            "filePath": "I:\\bkzbk\\github\\fix\\DDL\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\圣团巡礼.json",
             "savedViewport": {
-                "x": -7579,
-                "y": -3717,
-                "zoom": 1.06
+                "x": -2191,
+                "y": -370,
+                "zoom": 0.3
             },
             "filename": "圣团巡礼",
-            "version": "v2.1.1"
+            "version": "v2.1.3"
         }
     },
     "$__mpe_external_返回主界面_圣团巡礼": {
@@ -151,8 +151,8 @@
         "post_delay": 1200,
         "$__mpe_code": {
             "position": {
-                "x": 10707,
-                "y": 2801
+                "x": 10990,
+                "y": 2796
             }
         }
     },
@@ -272,8 +272,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9391,
-                "y": 2297
+                "x": 10444,
+                "y": 2804
             }
         }
     },
@@ -380,8 +380,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 10442,
-                "y": 2573
+                "x": 10725,
+                "y": 2568
             }
         }
     },
@@ -406,8 +406,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 10960,
-                "y": 2578
+                "x": 11243,
+                "y": 2573
             }
         }
     },
@@ -562,8 +562,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 10980,
-                "y": 3054
+                "x": 11010,
+                "y": 3114
             }
         }
     },
@@ -592,8 +592,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 10722,
-                "y": 3053
+                "x": 10752,
+                "y": 3113
             }
         }
     },
@@ -1793,6 +1793,56 @@
             }
         }
     },
+    "圣团巡礼_申请书升序": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1206,
+                    94,
+                    62,
+                    49
+                ],
+                "template": [
+                    "holy/up.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 11775,
+                "y": 3302
+            }
+        }
+    },
+    "圣团巡礼_申请书降序": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1206,
+                    94,
+                    62,
+                    49
+                ],
+                "template": [
+                    "holy/down.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 12028,
+                "y": 3104
+            }
+        }
+    },
     "圣团巡礼_申请冒险": {
         "recognition": {
             "type": "OCR",
@@ -1876,8 +1926,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 10710,
-                "y": 2575
+                "x": 10993,
+                "y": 2570
             }
         }
     },
@@ -2235,8 +2285,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 9685,
-                "y": 2194
+                "x": 10444,
+                "y": 2571
             }
         }
     },
@@ -2277,6 +2327,29 @@
             "position": {
                 "x": 8078,
                 "y": 2610
+            }
+        }
+    },
+    "圣团巡礼_识别冒险等级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    810,
+                    150,
+                    468,
+                    440
+                ],
+                "expected": [
+                    "^L[vVyY][.,]?\\s*\\d+$",
+                    "等级"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 11295,
+                "y": 3107
             }
         }
     },
@@ -2355,50 +2428,6 @@
             }
         }
     },
-    "圣团巡礼_识别压力指数": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    277,
-                    582,
-                    269,
-                    78
-                ],
-                "expected": [
-                    "%"
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 10720,
-                "y": 3288
-            }
-        }
-    },
-    "圣团巡礼_识别申请压力": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    150,
-                    530,
-                    260,
-                    50
-                ],
-                "expected": [
-                    "%"
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 10720,
-                "y": 3448
-            }
-        }
-    },
     "圣团巡礼_识别冒险角色名": {
         "recognition": {
             "type": "OCR",
@@ -2416,124 +2445,30 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 10720,
-                "y": 3608
+                "x": 11535,
+                "y": 3107
             }
         }
     },
-    "圣团巡礼_识别冒险等级": {
+    "圣团巡礼_识别压力指数": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    810,
-                    150,
-                    468,
-                    440
+                    277,
+                    582,
+                    269,
+                    78
                 ],
                 "expected": [
-                    "^L[vVyY][.,]?\\s*\\d+$"
+                    "%"
                 ]
             }
         },
         "$__mpe_code": {
             "position": {
-                "x": 10720,
-                "y": 3768
-            }
-        }
-    },
-    "圣团巡礼_申请书升序": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    1206,
-                    94,
-                    62,
-                    49
-                ],
-                "template": [
-                    "holy/up.png"
-                ],
-                "threshold": [
-                    0.8
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 10720,
-                "y": 3928
-            }
-        }
-    },
-    "圣团巡礼_申请书降序": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    1206,
-                    94,
-                    62,
-                    49
-                ],
-                "template": [
-                    "holy/down.png"
-                ],
-                "threshold": [
-                    0.8
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 10720,
-                "y": 4088
-            }
-        }
-    },
-    "圣团巡礼_识别日程成功率": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    33,
-                    440,
-                    360,
-                    72
-                ],
-                "expected": [
-                    "\\d+\\s*%"
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 10980,
-                "y": 3448
-            }
-        }
-    },
-    "圣团巡礼_识别日程等级": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    35,
-                    98,
-                    52,
-                    62
-                ],
-                "expected": [
-                    ""
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 10980,
-                "y": 3608
+                "x": 10750,
+                "y": 3348
             }
         }
     },
@@ -2642,8 +2577,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 9879,
-                "y": 3053
+                "x": 9909,
+                "y": 3113
             }
         }
     },
@@ -2663,8 +2598,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 10136,
-                "y": 3053
+                "x": 10166,
+                "y": 3113
             }
         }
     },
@@ -2684,8 +2619,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 10394,
-                "y": 3055
+                "x": 10424,
+                "y": 3115
             }
         }
     },
@@ -2705,8 +2640,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 9880,
-                "y": 3283
+                "x": 9910,
+                "y": 3343
             }
         }
     },
@@ -2726,8 +2661,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 10140,
-                "y": 3290
+                "x": 10170,
+                "y": 3350
             }
         }
     },
@@ -2747,8 +2682,74 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 10399,
-                "y": 3290
+                "x": 10429,
+                "y": 3350
+            }
+        }
+    },
+    "圣团巡礼_识别日程成功率": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    33,
+                    440,
+                    360,
+                    72
+                ],
+                "expected": [
+                    "\\d+\\s*%"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 11775,
+                "y": 3107
+            }
+        }
+    },
+    "圣团巡礼_识别日程等级": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    35,
+                    98,
+                    52,
+                    62
+                ],
+                "expected": [
+                    ""
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 11295,
+                "y": 3302
+            }
+        }
+    },
+    "圣团巡礼_识别申请压力": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    150,
+                    530,
+                    260,
+                    50
+                ],
+                "expected": [
+                    "%"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 11535,
+                "y": 3302
             }
         }
     },

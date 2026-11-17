@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "清红糖",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1793636106501,
+            "lastSyncTime": 1794895798972,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "I:\\bkzbk\\github\\fix\\DDL\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\清红糖.json",
             "savedViewport": {
-                "x": -1013,
-                "y": 187,
-                "zoom": 0.28
+                "x": -1182,
+                "y": 315,
+                "zoom": 0.29
             },
             "filename": "清红糖",
-            "version": "v2.1.0"
+            "version": "v2.1.3"
         }
     },
     "$__mpe_external_返回主界面_清红糖": {
@@ -56,6 +56,7 @@
                 "custom_action_param": "n=返回主界面"
             }
         },
+        "post_delay": 1500,
         "next": [
             "清红糖_心形结束"
         ],
@@ -64,8 +65,7 @@
                 "x": 8257,
                 "y": -310
             }
-        },
-        "post_delay": 1500
+        }
     },
     "清红糖_体力检查": {
         "action": {
@@ -86,8 +86,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5993,
-                "y": -298
+                "x": 5179,
+                "y": -301
             }
         }
     },
@@ -108,8 +108,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 7957,
-                "y": 1070
+                "x": 7616,
+                "y": -50
             }
         }
     },
@@ -128,8 +128,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5211,
-                "y": -302
+                "x": 4630,
+                "y": -301
             }
         }
     },
@@ -148,8 +148,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4950,
-                "y": -302
+                "x": 4356,
+                "y": -301
             }
         }
     },
@@ -196,8 +196,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4690,
-                "y": -302
+                "x": 4082,
+                "y": -301
             }
         }
     },
@@ -591,8 +591,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5410,
-                "y": 633
+                "x": 5728,
+                "y": -301
             }
         }
     },
@@ -605,8 +605,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5409,
-                "y": 987
+                "x": 5730,
+                "y": 54
             }
         }
     },
@@ -629,8 +629,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5143,
-                "y": 635
+                "x": 5454,
+                "y": -301
             }
         }
     },
@@ -647,8 +647,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5682,
-                "y": 631
+                "x": 6002,
+                "y": -301
             }
         }
     },
@@ -664,6 +664,7 @@
                 ]
             }
         },
+        "post_delay": 1500,
         "next": [
             "清红糖_娃娃怪破坏者"
         ],
@@ -672,8 +673,7 @@
                 "x": 6810,
                 "y": -306
             }
-        },
-        "post_delay": 1500
+        }
     },
     "清红糖_进入冒险2": {
         "action": {
@@ -687,6 +687,7 @@
                 ]
             }
         },
+        "post_delay": 1500,
         "next": [
             "清红糖_振兴之路"
         ],
@@ -695,8 +696,7 @@
                 "x": 6543,
                 "y": 241
             }
-        },
-        "post_delay": 1500
+        }
     },
     "清红糖_选择心形种族": {
         "recognition": {
@@ -731,28 +731,6 @@
             }
         }
     },
-    "清红糖_识别心形材料数量": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    300,
-                    180,
-                    680,
-                    400
-                ],
-                "expected": [
-                    "^\\d[\\d,.]*\\s*[KkMm]?$"
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 7340,
-                "y": -122
-            }
-        }
-    },
     "清红糖_速刷心形": {
         "action": {
             "type": "Custom",
@@ -770,6 +748,24 @@
             "position": {
                 "x": 7618,
                 "y": -306
+            }
+        }
+    },
+    "清红糖_预留设置": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "red_reserve",
+                "custom_action_param": "r=0"
+            }
+        },
+        "next": [
+            "清红糖_体力检查"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4905,
+                "y": -301
             }
         }
     },
@@ -801,21 +797,25 @@
             }
         }
     },
-    "清红糖_预留设置": {
-        "action": {
-            "type": "Custom",
+    "清红糖_识别心形材料数量": {
+        "recognition": {
+            "type": "OCR",
             "param": {
-                "custom_action": "red_reserve",
-                "custom_action_param": "r=0"
+                "roi": [
+                    300,
+                    180,
+                    680,
+                    400
+                ],
+                "expected": [
+                    "^\\d[\\d,.]*\\s*[KkMm]?$"
+                ]
             }
         },
-        "next": [
-            "清红糖_体力检查"
-        ],
         "$__mpe_code": {
             "position": {
-                "x": 5732,
-                "y": -255
+                "x": 7075,
+                "y": -50
             }
         }
     }

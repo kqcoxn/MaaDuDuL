@@ -3,16 +3,17 @@
         "$__mpe_code": {
             "prefix": "速战",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1787320982675,
+            "lastSyncTime": 1794899090404,
             "isModifiedExternally": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\assets\\resource\\base\\pipeline\\通用\\速战.json",
+            "isDeleted": false,
+            "filePath": "I:\\bkzbk\\github\\fix\\DDL\\MaaDuDuL\\resource\\base\\pipeline\\通用\\速战.json",
             "savedViewport": {
-                "x": -11848,
-                "y": -559,
-                "zoom": 1.5
+                "x": -4297,
+                "y": -392,
+                "zoom": 0.61
             },
             "filename": "速战",
-            "version": "v1.8.0"
+            "version": "v2.1.3"
         }
     },
     "速战_不购买": {
@@ -103,6 +104,7 @@
             "Node.Recognition.Starting": "> 准备速战"
         },
         "next": [
+            "速战_未通关",
             "速战_确保可战斗",
             "速战_无法速战",
             "速战_体力不足"
@@ -198,6 +200,28 @@
             "position": {
                 "x": 8739,
                 "y": 703
+            }
+        }
+    },
+    "速战_未通关": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    250,
+                    315,
+                    800,
+                    100
+                ],
+                "expected": [
+                    "通关记录"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 8469,
+                "y": 1433
             }
         }
     },

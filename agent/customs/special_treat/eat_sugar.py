@@ -398,6 +398,8 @@ class SelectHeartType(CustomAction):
 
     COUNT_NODE = "清红糖_识别心形材料数量"
     LEAST = {"最少", "最少持有", "持有量最少"}
+    # 最近一次选中的种族：速战不可用时用来点名（如「从没推过秘灵模式哦」）
+    last_type = ""
     # 数量标签在种族入口下方，离入口坐标超过这个距离就不认
     COUNT_MAX_DIST = 150
     COUNT_MIN_HEIGHT = 18
@@ -420,6 +422,7 @@ class SelectHeartType(CustomAction):
             levels = [t.translate(_HEART_TRADITIONAL) for t in args.split_list(["type", "t"])]
             if levels and all(t in self.LEAST for t in levels):
                 level = self._least(context)
+                SelectHeartType.last_type = level
                 Tasker(context).click(*HEART_TARGETS[level])
                 return True
             invalid = [t for t in levels if t not in HEART_TARGETS]
@@ -430,6 +433,7 @@ class SelectHeartType(CustomAction):
             level = levels[get_game_date().toordinal() % len(levels)]
             if len(levels) > 1:
                 Prompter.log(f"今日轮换种族：{level}")
+            SelectHeartType.last_type = level
             Tasker(context).click(*HEART_TARGETS[level])
 
             return True
@@ -799,6 +803,7 @@ STAMINA_FALLBACK_ROIS = ([590, 26, 130, 34], [700, 22, 160, 44])
 FIGHT_OVERRIDE = {
     "速战_打开速战面板": {
         "next": [
+            "速战_未通关",
             "速战_确保可战斗",
             "清红糖_入场券不足",
             "速战_无法速战",
@@ -1274,6 +1279,7 @@ FIGHT_DONE_NODES = ("速战_确认奖励", "速战_等级提升", "速战_跳过
 
 # 这些失败出口自己已经打过原因，收尾判定不再补一句，避免前端重复
 FIGHT_LOGGED_EXITS = (
+    "速战_未通关",
     "清红糖_入场券不足",
     "清红糖_饥饿提示",
     "速战_无法速战",
@@ -1348,6 +1354,14 @@ class CandyFight(CustomAction):
                 return False
             if not fight_finished(detail):
                 last_node = Tasker.get_last_node_name(detail)
+                if last_node == "速战_未通关":
+                    mode = SelectHeartType.last_type
+                    SelectHeartType.last_type = ""
+                    if mode:
+                        Prompter.log(f"从没推过{mode}模式哦，再练练吧")
+                    else:
+                        Prompter.log("还没通关过，速战用不了，本轮跳过")
+                    return False
                 if last_node not in FIGHT_LOGGED_EXITS:
                     Prompter.log(f"速战没打成，最后节点 {last_node}，本轮跳过")
                 return False

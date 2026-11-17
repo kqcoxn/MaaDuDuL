@@ -192,6 +192,11 @@
 					"option": [
 						"圣团巡礼-每日冒险-比较人数"
 					],
+					"pipeline_override": {
+						"圣团巡礼_设置冒险列表": {
+							"action": "DoNothing"
+						}
+					},
 					"label": "$自动选择"
 				}
 			]
