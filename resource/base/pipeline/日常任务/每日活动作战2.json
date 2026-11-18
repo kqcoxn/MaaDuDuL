@@ -509,6 +509,57 @@
             }
         }
     },
+    "每日活动作战2_检查关卡成就": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "check_activity_achievement"
+            }
+        },
+        "next": [
+            "每日活动作战2_检查当前进度"
+        ],
+        "on_error": [
+            "每日活动作战2_跳过作战"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6160,
+                "y": 508
+            }
+        }
+    },
+    "每日活动作战2_跳过作战": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1054,
+                    633,
+                    140,
+                    62
+                ],
+                "expected": [
+                    "全部领取"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "每日活动作战2_周期记录"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": "> 活动关卡成就已完成，领取奖励后结束"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 6160,
+                "y": 668
+            }
+        }
+    },
     "每日活动作战2_确定领取": {
         "recognition": {
             "type": "OCR",

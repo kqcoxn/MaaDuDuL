@@ -5,6 +5,7 @@
         "ajv": "8.20.0",
         "ajv-formats": "3.0.1",
         "create-maa-project": "3.7.4",
+        "glob": "14.0.6",
         "jsonc-parser": "3.3.1",
         "prettier": "3.9.10",
         "prettier-plugin-multiline-arrays": "4.1.11"
@@ -15,6 +16,7 @@
         "http-cache-semantics": "4.3.0",
         "hono": "4.13.17",
         "ip-address": "10.7.6",
+        "**/node-gyp/tinyglobby": "npm:glob@14.0.6",
         "undici": "6.29.1",
         "zod": "4.6.7"
     },

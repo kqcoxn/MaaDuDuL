@@ -50,6 +50,8 @@
     "购买红糖次数": "Red Candy Purchase Count",
     "活泼关卡": "Cheerful Stage",
     "检测是否达到20次，若未达到则使用剩余次数作为作战次数": "Check whether 20 runs have been reached; if not, use the remaining runs as the battle count.",
+    "次数成就完成后停止作战": "Stop after the clear-count achievement",
+    "「完成活动关卡」成就（如 200 次）完成后，不再进行每日作战，只领取奖励": "Once the \"Clear event stages\" achievement (e.g. 200 runs) is complete, skip the daily battles and only claim rewards.",
     "建议关闭此项，使用智能检测模式复查": "Recommended to disable this and rely on smart detection for follow-up checks.",
     "建议将需要邀请的角色收藏，以提高查找效率": "It is recommended to favorite the characters you want to invite to improve lookup efficiency.",
     "结束关卡": "End Stage",

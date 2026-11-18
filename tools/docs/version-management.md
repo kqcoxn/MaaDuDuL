@@ -59,6 +59,10 @@ Package Smoke 仅支持手动触发，日常提交和 PR 不执行打包 smoke�
 
 Windows 内置 Python 固定为 3.13.17，Linux/macOS 固定为 3.13.18，使用 python-build-standalone release 20261026；它们的 minor 须与 recommendedPython 一致。Python 3.13.18 已进入仅源码发布阶段，没有官方 Windows 嵌入式包，因此不能直接把 Windows 下载版本同步为 3.13.18。Android 构建宿主 Python 和预编译内核 Python 分别维护，当前内核为 `3.13.15-maafw5.16.0`；APK 中的 MaaFramework binding/runtime 由 manifest 另行对齐到 5.16.1。
 
+## node-gyp 的 glob 依赖
+
+在 [CVE-2026-112366](https://github.com/advisories/GHSA-fc5q-39xc-vjpf) 有正式修复版之前，仅将 `node-gyp` 使用的 `tinyglobby` 解析为 `glob`。当前 `node-gyp` 只用它在 Windows 上查找 `build/*.sln` 和 `build/*.mk`。Yarn Classic 按别名提交审计，所以同时在 `devDependencies` 中以真实包名声明同一个 `glob` 版本。更新时同步这两处。上游修复并进入 `node-gyp` 的依赖树后，可一并移除这两项。
+
 ## 2026-11-15 依赖维护
 
 - MaaFramework 与 Python binding：5.15.0 → [5.16.1](https://github.com/MaaXYZ/MaaFramework/releases/tag/v5.16.1)，同步 pyproject、uv.lock、requirements 及 Android requirements。Python 依赖锁定结果仅变更 maafw，六种桌面 wheel 和两种 Android 原生资产齐全。
