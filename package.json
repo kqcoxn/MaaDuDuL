@@ -55,7 +55,7 @@
         "format:py": "uv run --frozen ruff format .",
         "reset": "git reset --soft HEAD~1"
     },
-    "version": "1.5.7",
+    "version": "1.6.0",
     "type": "module",
     "prettier": {
         "plugins": [
