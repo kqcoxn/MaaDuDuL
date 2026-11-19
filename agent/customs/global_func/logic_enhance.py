@@ -63,9 +63,11 @@ class StableReco(CustomRecognition):
             is_list = isinstance(node_name, list)
             node_list = node_name if is_list else [node_name]
 
-            # 使用所有节点名称生成计数器键
-            counter_key = "stable_reco_" + (
-                "_".join(node_list) if is_list else node_name
+            # 计数器键要区分调用方与阈值：同一组节点可能被多处使用（如 m=2 的返回主界面、
+            # m=5 的启动游戏），共用同一个键会互相 count/reset，导致谁都凑不够阈值
+            caller = getattr(argv, "node_name", None) or ""
+            counter_key = "stable_reco_" + "_".join(
+                [str(max_count), caller, *node_list] if caller else [str(max_count), *node_list]
             )
             counter = CounterManager.get(counter_key)
 
