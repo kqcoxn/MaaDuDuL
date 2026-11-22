@@ -12,7 +12,7 @@ from typing import Dict
 import numpy as np
 import time
 
-from .zh_hant import localize_override
+from .i18n import localize_override
 
 
 class Tasker:

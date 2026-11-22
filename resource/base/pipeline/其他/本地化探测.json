@@ -1,0 +1,49 @@
+{
+    "本地化_语言探测": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    1280,
+                    720
+                ],
+                "expected": [
+                    "使徒",
+                    "活动弹窗",
+                    "编辑卡组",
+                    "圣团",
+                    "剧院",
+                    "活動視窗",
+                    "活動弹窗",
+                    "使者",
+                    "編輯陣容",
+                    "编制阵容",
+                    "教團",
+                    "劇場",
+                    "通行證",
+                    "Apostles",
+                    "Events",
+                    "Friends",
+                    "Quests",
+                    "Adventure",
+                    "Line-up",
+                    "Theater",
+                    "Recruit",
+                    "Premium",
+                    "Store"
+                ]
+            }
+        },
+        "action": {
+            "type": "DoNothing"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    }
+}

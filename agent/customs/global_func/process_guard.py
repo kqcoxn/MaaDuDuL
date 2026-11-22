@@ -10,6 +10,7 @@ from maa.context import Context
 
 from agent.customs.utils import Prompter
 from agent.customs.maahelper import RecoHelper, ParamAnalyzer, Tasker
+from agent.customs.maahelper import i18n
 
 
 # ====================  hooks  ====================
@@ -49,6 +50,9 @@ class OnTaskStart(CustomAction):
         """
         global hook_handler
         try:
+            # 任务开始核对区服：不一致时提示并停止任务链（不做热切换）
+            i18n.verify(context)
+
             # 解析参数
             args = ParamAnalyzer(argv)
             task_hooks = args.get(["hook", "h", "type", "t", "class", "cls", "c"], [])
