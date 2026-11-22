@@ -3,17 +3,25 @@
         "$__mpe_code": {
             "prefix": "返回主界面",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1793979084205,
+            "lastSyncTime": 1795387386153,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\通用\\回到主界面.json",
+            "filePath": "I:\\bkzbk\\github\\fix\\DDL\\MaaDuDuL\\resource\\base\\pipeline\\通用\\回到主界面.json",
             "savedViewport": {
-                "x": -3243,
-                "y": 108,
-                "zoom": 1.4
+                "x": -1113,
+                "y": 95,
+                "zoom": 0.65
             },
             "filename": "回到主界面",
-            "version": "v2.1.1"
+            "version": "v2.1.3"
+        }
+    },
+    "$__mpe_external_启动游戏_关闭面板_回到主界面": {
+        "$__mpe_code": {
+            "position": {
+                "x": 2975,
+                "y": 167
+            }
         }
     },
     "返回主界面_使徒": {
@@ -184,6 +192,7 @@
         }
     },
     "返回主界面_闲时捏脸": {
+        "max_hit": 1,
         "recognition": {
             "type": "Custom",
             "param": {
@@ -197,14 +206,6 @@
             "position": {
                 "x": 2712,
                 "y": 540
-            }
-        }
-    },
-    "$__mpe_external_启动游戏_关闭面板_回到主界面": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2975,
-                "y": 167
             }
         }
     }
