@@ -69,6 +69,8 @@ LOCALE_PACKAGES: dict[str, str] = {
 _announced = False
 _mismatch_logged = False
 _ambiguous_noted = False
+# 仅保留最近一次核对通过的根任务及资源，避免缓存随任务数量增长。
+_verified_task: tuple[int, str] | None = None
 
 
 def register_handler(locale: str, handler: LocaleHandler) -> None:
@@ -213,7 +215,7 @@ def detect_from_device(context: Any = None) -> str:
 
 
 def verify(context: Any = None) -> bool:
-    """任务开始时按包名核对所选资源与设备客户端的区服是否一致。
+    """任务开始时按包名核对区服，同一根任务及资源核对通过后复用结果。
 
     不一致时提示并停止任务链（队列随之退出），不做任何运行时热切换。
 
@@ -223,13 +225,25 @@ def verify(context: Any = None) -> bool:
     Returns:
         bool: 始终返回 True；不一致时内部已停止任务链。
     """
-    global _mismatch_logged
+    global _mismatch_logged, _verified_task
     selected = current_locale(context)
     selected_server = _server_of_package(LOCALE_PACKAGES.get(selected, ""))
     if not selected_server:
         return True
+
+    try:
+        task_id = context.get_task_job().job_id
+    except Exception:
+        task_id = None
+    task_key = (task_id, selected) if task_id else None
+    if task_key is not None and task_key == _verified_task:
+        return True
+
     detected = detect_from_device(context)
-    if not detected or detected == selected_server:
+    if not detected:
+        return True
+    if detected == selected_server:
+        _verified_task = task_key
         return True
 
     detected_label = "国服" if detected == "cn" else "国际服"
