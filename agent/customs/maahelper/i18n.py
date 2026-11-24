@@ -70,7 +70,9 @@ _announced = False
 _mismatch_logged = False
 _ambiguous_noted = False
 # 仅保留最近一次核对通过的根任务及资源，避免缓存随任务数量增长。
-_verified_task: tuple[int, str] | None = None
+# 已通过核对（任务 id, 资源）的集合：来回切资源也不重复探测，最多保留 64 条
+_verified_tasks: set[tuple[int, str]] = set()
+_VERIFIED_LIMIT = 64
 
 
 def register_handler(locale: str, handler: LocaleHandler) -> None:
@@ -225,7 +227,7 @@ def verify(context: Any = None) -> bool:
     Returns:
         bool: 始终返回 True；不一致时内部已停止任务链。
     """
-    global _mismatch_logged, _verified_task
+    global _mismatch_logged
     selected = current_locale(context)
     selected_server = _server_of_package(LOCALE_PACKAGES.get(selected, ""))
     if not selected_server:
@@ -236,23 +238,31 @@ def verify(context: Any = None) -> bool:
     except Exception:
         task_id = None
     task_key = (task_id, selected) if task_id else None
-    if task_key is not None and task_key == _verified_task:
+    if task_key is not None and task_key in _verified_tasks:
         return True
 
     detected = detect_from_device(context)
     if not detected:
         return True
     if detected == selected_server:
-        _verified_task = task_key
+        if task_key is not None:
+            if len(_verified_tasks) >= _VERIFIED_LIMIT:
+                _verified_tasks.clear()
+            _verified_tasks.add(task_key)
         return True
 
     detected_label = "国服" if detected == "cn" else "国际服"
     selected_label = LOCALE_LABELS.get(selected, selected)
     if not _mismatch_logged:
         _mismatch_logged = True
+        hint = (
+            "国服"
+            if detected == "cn"
+            else "国际服（繁中）或 国际服（EN）中与实际界面相符的那个"
+        )
         Prompter.log(
             f"设备上的客户端是「{detected_label}」，而当前资源是「{selected_label}」；"
-            f"已停止任务队列，请在 MFAA 的「资源」里切换到对应的「{detected_label}」资源后重新开始"
+            f"已停止任务队列，请在 MFAA 的「资源」里切换到「{hint}」后重新开始"
         )
     # 停止任务链：让 Maa 的任务进入「已放弃」状态，MFAA 才会中止后续任务（队列整体退出）。
     # 注意这里返回 True：若返回 False，MFAA 只会把本条任务记为「失败」并继续下一条。

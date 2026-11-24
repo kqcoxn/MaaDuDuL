@@ -101,7 +101,7 @@ class PickOpponent(CustomRecognition):
                             return RecoHelper.rt(target)
                 else:
                     Prompter.log("未识别到自身战斗力，请先设置防御与进攻卡组")
-                    Tasker(context).stop()
+                    Tasker(context).stop(wait=False)
                     return RecoHelper.NoResult
             elif strategy == "min_power":
                 # 最低战力
