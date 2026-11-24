@@ -126,9 +126,14 @@ class Tasker:
 
         return self.context.run_task(entry, pipeline_override)
 
-    def stop(self):
-        """停止当前任务。"""
-        self.tsk.post_stop().wait()
+    def stop(self, wait: bool = True):
+        """请求停止任务，默认等待停止完成。
+
+        在任务回调内调用时应传入 wait=False，让回调先返回再完成停止收尾。
+        """
+        job = self.tsk.post_stop()
+        if wait:
+            job.wait()
 
     def screenshot(self) -> np.ndarray:
         """执行截图操作。

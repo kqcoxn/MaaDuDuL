@@ -334,7 +334,7 @@ def verify(context: Any = None) -> bool:
     try:
         from .tasker import Tasker
 
-        Tasker(context).stop()
+        Tasker(context).stop(wait=False)
     except Exception as e:
         Prompter.error("停止任务队列", e)
     return True
