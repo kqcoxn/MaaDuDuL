@@ -78,6 +78,12 @@ LOCALE_PACKAGES: dict[str, str] = {
 _announced = False
 _mismatch_logged = False
 _ambiguous_noted = False
+# 设备探测结果（运行期包名不会变，进程内只探测一次；None 表示还没探测过）
+_device_server: str | None = None
+# 画面判定结果按任务缓存：{task_id: locale}
+_screen_by_task: dict[int, str] = {}
+# 已核对过的任务，避免同一任务里反复核对
+_verified_tasks: set[int] = set()
 
 
 def register_handler(locale: str, handler: LocaleHandler) -> None:
@@ -168,12 +174,35 @@ def announce(locale: str | None = None) -> str:
 # ====================  设备侧核对（只提示，不热切换）  ====================
 
 
+def _task_id(context: Any) -> int | None:
+    """尽量取到当前任务 id，用于「每任务只核对一次」的缓存键。"""
+    try:
+        return int(context.tasker.tsk.task_id)
+    except Exception:
+        return None
+
+
 def _mfaa_device() -> tuple[str, str] | None:
-    """从 MFAAvalonia 的实例配置里取 (adb 路径, 设备序列号)。"""
+    """取「当前在线」那台设备的 (adb 路径, 序列号)。
+
+    实例配置里可能存了多台设备，按文件名取第一份会读错设备（评审意见），
+    所以先用 Toolkit 列出在线设备，再与配置里的序列号精确匹配；
+    匹配不到唯一一台时返回 None（跳过核对，宁可不查也不误停）。
+    """
+    try:
+        from maa.toolkit import Toolkit
+
+        online = {str(getattr(device, "address", "")) for device in Toolkit.find_adb_devices()}
+    except Exception:
+        return None
+    if not online:
+        return None
+
     candidates = [
         Path.cwd() / "config" / "instances",
         Path.cwd().parent / "MFAAvalonia" / "config" / "instances",
     ]
+    matched: list[tuple[str, str]] = []
     for directory in candidates:
         if not directory.is_dir():
             continue
@@ -185,9 +214,10 @@ def _mfaa_device() -> tuple[str, str] | None:
             device = data.get("AdbDevice") or {}
             adb = str(device.get("AdbPath") or "").strip()
             serial = str(device.get("AdbSerial") or "").strip()
-            if adb and serial:
-                return adb, serial
-    return None
+            if adb and serial and serial in online:
+                matched.append((adb, serial))
+        break
+    return matched[0] if len(matched) == 1 else None
 
 
 def _adb_shell(adb: str, serial: str, command: str) -> str:
@@ -211,8 +241,26 @@ def _server_of_package(package: str) -> str:
     return "intl"
 
 
-def detect_from_device() -> str:
+def detect_from_device(refresh: bool = False) -> str:
     """判断设备上实际的客户端区服；判不出来返回空串。
+
+    结果在进程内缓存（运行期不会换客户端），避免每次核对都跑 adb。
+
+    Args:
+        refresh: 强制重新探测。
+
+    Returns:
+        str: `cn` / `intl` / 空串。
+    """
+    global _device_server
+    if _device_server is not None and not refresh:
+        return _device_server
+    _device_server = _detect_from_device_uncached()
+    return _device_server
+
+
+def _detect_from_device_uncached() -> str:
+    """实际执行一次设备探测。
 
     同一台设备可能同时装了国服与国际服，所以：
     装了多个版本时看**当前前台/正在运行**的那个；看不出运行状态则放弃判断，交给资源。
@@ -262,6 +310,17 @@ def detect_from_screen(context: Any) -> str:
     Returns:
         str: `cn` / `zh_hant` / 空串。
     """
+    task_id = _task_id(context)
+    if task_id is not None and task_id in _screen_by_task:
+        return _screen_by_task[task_id]
+    locale = _detect_from_screen_uncached(context)
+    if task_id is not None:
+        _screen_by_task[task_id] = locale
+    return locale
+
+
+def _detect_from_screen_uncached(context: Any) -> str:
+    """实际执行一次画面判定。"""
     try:
         from .tasker import Tasker
 
@@ -294,7 +353,7 @@ def detect_from_screen(context: Any) -> str:
     return "cn"
 
 
-def verify(context: Any = None) -> bool:
+def verify(context: Any = None, task_id: int | None = None) -> bool:
     """任务开始时核对「所选资源」与「设备实际客户端」是否一致。
 
     不一致时提示并停止任务链（队列随之退出），不做任何运行时热切换。
@@ -306,6 +365,11 @@ def verify(context: Any = None) -> bool:
         bool: 始终返回 True；不一致时内部已停止任务链。
     """
     global _mismatch_logged
+    task_id = task_id if task_id is not None else _task_id(context)
+    if task_id is not None:
+        if task_id in _verified_tasks:
+            return True
+        _verified_tasks.add(task_id)
     selected = current_locale(context)
     detected = detect_from_device()
     if not detected:
@@ -332,9 +396,8 @@ def verify(context: Any = None) -> bool:
     # 停止任务链：让 Maa 的任务进入「已放弃」状态，MFAA 才会中止后续任务（队列整体退出）。
     # 注意这里返回 True：若返回 False，MFAA 只会把本条任务记为「失败」并继续下一条。
     try:
-        from .tasker import Tasker
-
-        Tasker(context).stop()
+        # 只提交停止请求，不等待：在 on_task_start 回调里同步等待停止会卡住任务
+        context.tasker.post_stop()
     except Exception as e:
         Prompter.error("停止任务队列", e)
     return True
@@ -382,4 +445,5 @@ __all__ = [
     "localize_override",
     "register_handler",
     "verify",
+    "_task_id",
 ]

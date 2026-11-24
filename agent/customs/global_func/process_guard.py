@@ -51,7 +51,7 @@ class OnTaskStart(CustomAction):
         global hook_handler
         try:
             # 任务开始核对区服：不一致时提示并停止任务链（不做热切换）
-            i18n.verify(context)
+            i18n.verify(context, getattr(argv.task_detail, "task_id", None))
 
             # 解析参数
             args = ParamAnalyzer(argv)
@@ -97,6 +97,9 @@ class CheckStopping(CustomRecognition):
                 否则返回无结果状态
         """
         try:
+            # 有些任务不经过 on_task_start（如叶子互换、连续作战），这里兜一次；
+            # verify 内部按任务去重，重复调用不会重复探测
+            i18n.verify(context, getattr(argv.task_detail, "task_id", None))
             return RecoHelper.rt() if context.tasker.stopping else RecoHelper.NoResult
         except Exception as e:
             return Prompter.error("检测任务停止", e, reco_detail=True)
