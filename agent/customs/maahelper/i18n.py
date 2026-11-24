@@ -53,18 +53,11 @@ LOCALE_LABELS: dict[str, str] = {
     "en": "国际服 / 英文",
 }
 
-# 客户端包名 → 语言（国际服还要再看设备语言）
-PACKAGE_SERVERS: dict[str, str | None] = {
+# 客户端包名 → 区服
+PACKAGE_SERVERS: dict[str, str] = {
     "com.bilibili.trickcalcn": "cn",
-    "com.bilibili.trickcal": None,
+    "com.bilibili.trickcal": "intl",
 }
-# 主界面语言探测节点（resource/base/pipeline/其他/本地化探测.json）
-SCREEN_PROBE_NODE = "本地化_语言探测"
-# 主界面关键词：简中 / 繁中各取一组，用于区分国际服的繁中与英文
-TRAD_KEYWORDS = ("活動", "活動視窗", "活動弹窗", "使者", "編輯", "编制阵容", "教團", "劇場", "通行證", "陣容")
-SIMP_KEYWORDS = ("使徒", "活动弹窗", "编辑卡组", "圣团", "剧院")
-# 英文界面实测文本（国际服英文客户端主界面）：Apostles=使徒、Events=活动弹窗、Trickcal Pass=冒险通行证
-EN_KEYWORDS = ("Apostles", "Events", "Friends", "Quests", "Adventure", "Line-up", "Theater", "Recruit", "Premium", "Store")
 
 # 资源标识 → 该资源对应的客户端包名，用于和设备实际安装的客户端对比
 LOCALE_PACKAGES: dict[str, str] = {
@@ -180,10 +173,8 @@ def _device_shell(context: Any, command: str) -> str:
 
 
 def _server_of_package(package: str) -> str:
-    """把包名翻译成「区服」：国服返回 cn，国际服返回 intl（具体语言要看画面）。"""
-    if package == "com.bilibili.trickcalcn":
-        return "cn"
-    return "intl"
+    """把包名翻译成区服：国服返回 cn，国际服返回 intl，未知包名返回空串。"""
+    return PACKAGE_SERVERS.get(package, "")
 
 
 def detect_from_device(context: Any = None) -> str:
@@ -221,52 +212,8 @@ def detect_from_device(context: Any = None) -> str:
     return _server_of_package(installed[0])
 
 
-def detect_from_screen(context: Any) -> str:
-    """用主界面 OCR 判断当前客户端是简中还是繁中；判断不出来返回空串。
-
-    国际服只有一个包名（com.bilibili.trickcal），繁中/英文无法从系统层面区分，
-    所以这里用主界面上的固定文案再确认一次。
-
-    Args:
-        context: MaaFramework 的 Context 对象。
-
-    Returns:
-        str: `cn` / `zh_hant` / 空串。
-    """
-    try:
-        from .tasker import Tasker
-
-        image = Tasker(context).screenshot()
-        if image is None:
-            return ""
-        detail = context.run_recognition(SCREEN_PROBE_NODE, image)
-    except Exception:
-        return ""
-    if detail is None:
-        return ""
-    texts: list[str] = []
-    for result in getattr(detail, "all_results", None) or []:
-        text = getattr(result, "text", "") or ""
-        if text:
-            texts.append(text)
-    joined = " ".join(texts)
-    if not joined:
-        return ""
-    traditional = sum(1 for keyword in TRAD_KEYWORDS if keyword in joined)
-    simplified = sum(1 for keyword in SIMP_KEYWORDS if keyword in joined)
-    english = sum(1 for keyword in EN_KEYWORDS if keyword in joined)
-    best = max(traditional, simplified, english)
-    if best == 0:
-        return ""
-    if english == best:
-        return "en"
-    if traditional == best:
-        return "zh_hant"
-    return "cn"
-
-
 def verify(context: Any = None) -> bool:
-    """任务开始时核对「所选资源」与「设备实际客户端」是否一致。
+    """任务开始时按包名核对所选资源与设备客户端的区服是否一致。
 
     不一致时提示并停止任务链（队列随之退出），不做任何运行时热切换。
 
@@ -278,27 +225,20 @@ def verify(context: Any = None) -> bool:
     """
     global _mismatch_logged
     selected = current_locale(context)
-    detected = detect_from_device(context)
-    if not detected:
+    selected_server = _server_of_package(LOCALE_PACKAGES.get(selected, ""))
+    if not selected_server:
         return True
-    if detected == "intl":
-        # 国际服：包名只能确定“国际服”，具体语言再看主界面文案
-        screen = detect_from_screen(context)
-        if screen:
-            detected = screen
-        elif selected != "cn":
-            # 画面暂时判不出来，但资源也不是国服，先放行
-            return True
-    if detected == selected:
+    detected = detect_from_device(context)
+    if not detected or detected == selected_server:
         return True
 
-    detected_label = LOCALE_LABELS.get(detected, "国际服 / 未能确定语言" if detected == "intl" else detected)
+    detected_label = "国服" if detected == "cn" else "国际服"
     selected_label = LOCALE_LABELS.get(selected, selected)
     if not _mismatch_logged:
         _mismatch_logged = True
         Prompter.log(
             f"设备上的客户端是「{detected_label}」，而当前资源是「{selected_label}」；"
-            f"已停止任务队列，请在 MFAA 的「资源」里切换到「{detected_label}」后重新开始"
+            f"已停止任务队列，请在 MFAA 的「资源」里切换到对应的「{detected_label}」资源后重新开始"
         )
     # 停止任务链：让 Maa 的任务进入「已放弃」状态，MFAA 才会中止后续任务（队列整体退出）。
     # 注意这里返回 True：若返回 False，MFAA 只会把本条任务记为「失败」并继续下一条。
@@ -349,7 +289,6 @@ __all__ = [
     "current_locale",
     "describe",
     "detect_from_device",
-    "detect_from_screen",
     "localize_override",
     "register_handler",
     "verify",
