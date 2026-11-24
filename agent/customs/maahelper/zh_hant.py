@@ -7,7 +7,7 @@ OCR 也常把繁体字识别成简体（如「活動视窗」）。本模块把�
 - tools/gen_zh_hant.py：生成 resource/zh_hant/pipeline 覆盖层
 - Tasker.run / RecoHelper.recognize：运行时覆盖的 expected（礼包名、商品名、角色名、「第N课」等）
 
-只有加载了 zh_hant 覆盖层（存在 MARKER_NODE 节点）时才会转换，国服资源不受影响。
+本模块只提供繁中的词典与扩展规则，什么时候转换由 i18n 决定（依据 PI_RESOURCE 判定当前资源）。
 """
 
 import json
@@ -181,21 +181,6 @@ def fold(text: str) -> str:
     return folded
 
 
-def localize_override(context: Any, pipeline_override: dict[str, Any]) -> dict[str, Any]:
-    """加载了国际服繁中资源时，转换 pipeline_override 中所有 expected；否则原样返回。
-
-    Args:
-        context: MaaFramework 的 Context 对象。
-        pipeline_override: 形如 {节点名: {字段: 值}} 的覆盖配置。
-
-    Returns:
-        转换后的新字典，或原字典。
-    """
-    if not pipeline_override or not _zh_hant_loaded(context):
-        return pipeline_override
-    return {name: _convert(node) for name, node in pipeline_override.items()}
-
-
 def _convert(value: Any) -> Any:
     if isinstance(value, dict):
         return {k: expand_expected(v) if k == "expected" else _convert(v) for k, v in value.items()}
@@ -204,8 +189,35 @@ def _convert(value: Any) -> Any:
     return value
 
 
-def _zh_hant_loaded(context: Any) -> bool:
+class ZhHantHandler:
+    """繁中（zh_hant）语言处理器：把 expected 扩展为简繁皆可与国际服用词。"""
+
+    locale = "zh_hant"
+
+    def expand_override(self, pipeline_override: dict[str, Any]) -> dict[str, Any]:
+        """转换 pipeline_override 中所有 expected。
+
+        Args:
+            pipeline_override: 形如 {节点名: {字段: 值}} 的覆盖配置。
+
+        Returns:
+            转换后的新字典。
+        """
+        return {name: _convert(node) for name, node in pipeline_override.items()}
+
+
+def _register() -> None:
+    """把繁中处理器登记到 i18n 分发层。
+
+    tools/gen_zh_hant.py 会按文件单独加载本模块（避免拉起整个 agent.customs），
+    此时没有包上下文，跳过注册即可。
+    """
     try:
-        return bool(context.tasker.resource.get_node_data(MARKER_NODE))
-    except Exception:
-        return False
+        from .i18n import register_handler
+    except ImportError:
+        return
+    register_handler(ZhHantHandler.locale, ZhHantHandler())
+
+
+_register()
+

@@ -19,7 +19,17 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE_PIPELINE = ROOT / "resource" / "base" / "pipeline"
-OUT_PIPELINE = ROOT / "resource" / "zh_hant" / "pipeline"
+# 支持的语言覆盖层：locale → 生成到 resource/<locale>/pipeline，标识文件用 locale 命名
+SUPPORTED_LOCALES = {"zh_hant": "国际服繁中"}
+LOCALE = "zh_hant"
+
+
+def out_pipeline(locale: str = LOCALE) -> Path:
+    """返回某语言的覆盖层输出目录。"""
+    return ROOT / "resource" / locale / "pipeline"
+
+
+OUT_PIPELINE = out_pipeline()
 ZH_HANT_MODULE = ROOT / "agent" / "customs" / "maahelper" / "zh_hant.py"
 CHARS_FILE = ZH_HANT_MODULE.with_name("zh_hant_chars.json")
 
@@ -215,6 +225,15 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
 
 
 def main() -> int:
+    global LOCALE, OUT_PIPELINE
+
+    if "--locale" in sys.argv:
+        LOCALE = sys.argv[sys.argv.index("--locale") + 1]
+        if LOCALE not in SUPPORTED_LOCALES:
+            print(f"暂不支持的语言：{LOCALE}（可用：{', '.join(SUPPORTED_LOCALES)}）")
+            return 1
+        OUT_PIPELINE = out_pipeline(LOCALE)
+
     if "--rebuild-chars" in sys.argv:
         rebuild_chars()
 
@@ -230,7 +249,7 @@ def main() -> int:
             node_count += len(overrides)
 
     marker = {zh_hant.MARKER_NODE: {"recognition": {"type": "DirectHit"}, "action": {"type": "DoNothing"}}}
-    write_json(OUT_PIPELINE / "国际服繁中.json", marker)
+    write_json(OUT_PIPELINE / f"{SUPPORTED_LOCALES[LOCALE]}.json", marker)
     print(f"已生成 {node_count} 个节点覆盖到 {OUT_PIPELINE.relative_to(ROOT)}")
     return 0
 

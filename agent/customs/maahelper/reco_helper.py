@@ -12,7 +12,7 @@ import time
 import numpy as np
 
 from .tasker import Tasker
-from .zh_hant import localize_override
+from .i18n import localize_override
 
 
 class _MergedResult:
