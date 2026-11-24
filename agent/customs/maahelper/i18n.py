@@ -21,9 +21,7 @@ from __future__ import annotations
 
 import json
 import os
-import subprocess
 import time
-from pathlib import Path
 from typing import Any, Protocol
 
 from agent.customs.utils import Prompter
@@ -168,38 +166,15 @@ def announce(locale: str | None = None) -> str:
 # ====================  设备侧核对（只提示，不热切换）  ====================
 
 
-def _mfaa_device() -> tuple[str, str] | None:
-    """从 MFAAvalonia 的实例配置里取 (adb 路径, 设备序列号)。"""
-    candidates = [
-        Path.cwd() / "config" / "instances",
-        Path.cwd().parent / "MFAAvalonia" / "config" / "instances",
-    ]
-    for directory in candidates:
-        if not directory.is_dir():
-            continue
-        for file in sorted(directory.glob("*.json")):
-            try:
-                data = json.loads(file.read_text(encoding="utf-8"))
-            except Exception:
-                continue
-            device = data.get("AdbDevice") or {}
-            adb = str(device.get("AdbPath") or "").strip()
-            serial = str(device.get("AdbSerial") or "").strip()
-            if adb and serial:
-                return adb, serial
-    return None
-
-
-def _adb_shell(adb: str, serial: str, command: str) -> str:
-    """执行一次 adb shell，失败返回空串。"""
+def _device_shell(context: Any, command: str) -> str:
+    """通过当前任务绑定的控制器执行 Shell 命令，失败返回空串。"""
     try:
-        done = subprocess.run(
-            [adb, "-s", serial, "shell", command],
-            capture_output=True,
-            text=True,
-            timeout=8,
-        )
-        return (done.stdout or "").strip()
+        from .tasker import Tasker
+
+        job = Tasker(context).ctl.post_shell(command, timeout=8000).wait()
+        if not job.succeeded:
+            return ""
+        return (job.get() or "").strip()
     except Exception:
         return ""
 
@@ -211,17 +186,13 @@ def _server_of_package(package: str) -> str:
     return "intl"
 
 
-def detect_from_device() -> str:
-    """判断设备上实际的客户端区服；判不出来返回空串。
+def detect_from_device(context: Any = None) -> str:
+    """判断当前任务绑定设备的客户端区服；判不出来返回空串。
 
     同一台设备可能同时装了国服与国际服，所以：
     装了多个版本时看**当前前台/正在运行**的那个；看不出运行状态则放弃判断，交给资源。
     """
-    device = _mfaa_device()
-    if not device:
-        return ""
-    adb, serial = device
-    listing = _adb_shell(adb, serial, "pm list packages")
+    listing = _device_shell(context, "pm list packages")
     if not listing:
         return ""
     # pm list packages 每行形如 package:com.bilibili.trickcalcn，必须精确比较
@@ -235,7 +206,7 @@ def detect_from_device() -> str:
     if not installed:
         return ""
     if len(installed) > 1:
-        focus = _adb_shell(adb, serial, "dumpsys window | grep -E 'mCurrentFocus|mFocusedApp'")
+        focus = _device_shell(context, "dumpsys window | grep -E 'mCurrentFocus|mFocusedApp'")
         running = [name for name in installed if f"{name}/" in focus]
         if len(running) != 1:
             global _ambiguous_noted
@@ -300,14 +271,14 @@ def verify(context: Any = None) -> bool:
     不一致时提示并停止任务链（队列随之退出），不做任何运行时热切换。
 
     Args:
-        context: MaaFramework 的 Context 对象，用于兜底探测当前资源。
+        context: MaaFramework 的 Context 对象，用于探测当前设备及兜底判断资源。
 
     Returns:
         bool: 始终返回 True；不一致时内部已停止任务链。
     """
     global _mismatch_logged
     selected = current_locale(context)
-    detected = detect_from_device()
+    detected = detect_from_device(context)
     if not detected:
         return True
     if detected == "intl":
