@@ -50,7 +50,7 @@ class OnTaskStart(CustomAction):
         """
         global hook_handler
         try:
-            # 任务开始核对区服：不一致时提示并停止任务链（不做热切换）
+            # 任务开始核对区服，不一致时提示并请求停止当前 MaaFW 执行器。
             i18n.verify(context)
 
             # 解析参数

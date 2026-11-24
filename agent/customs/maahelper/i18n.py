@@ -69,8 +69,7 @@ LOCALE_PACKAGES: dict[str, str] = {
 _announced = False
 _mismatch_logged = False
 _ambiguous_noted = False
-# 仅保留最近一次核对通过的根任务及资源，避免缓存随任务数量增长。
-# 已通过核对（任务 id, 资源）的集合：来回切资源也不重复探测，最多保留 64 条
+# 按根任务及资源缓存已通过的核对结果。达到 64 条后清空，再记录新的通过结果。
 _verified_tasks: set[tuple[int, str]] = set()
 _VERIFIED_LIMIT = 64
 
@@ -219,13 +218,13 @@ def detect_from_device(context: Any = None) -> str:
 def verify(context: Any = None) -> bool:
     """任务开始时按包名核对区服，同一根任务及资源核对通过后复用结果。
 
-    不一致时提示并停止任务链（队列随之退出），不做任何运行时热切换。
+    不一致时提示并请求停止当前 MaaFW 执行器。前端根据自身设置处理后续任务队列。
 
     Args:
         context: MaaFramework 的 Context 对象，用于探测当前设备及兜底判断资源。
 
     Returns:
-        bool: 始终返回 True；不一致时内部已停止任务链。
+        bool: 始终返回 True。不一致时提交非阻塞停止请求。
     """
     global _mismatch_logged
     selected = current_locale(context)
@@ -261,17 +260,17 @@ def verify(context: Any = None) -> bool:
             else "国际服（繁中）或 国际服（EN）中与实际界面相符的那个"
         )
         Prompter.log(
-            f"设备上的客户端是「{detected_label}」，而当前资源是「{selected_label}」；"
-            f"已停止任务队列，请在 MFAA 的「资源」里切换到「{hint}」后重新开始"
+            f"设备上的客户端是「{detected_label}」，而当前资源是「{selected_label}」。"
+            f"正在请求停止当前任务。请先停止 MFAA 任务队列，再将「资源」切换到「{hint}」后重新开始"
         )
-    # 停止任务链：让 Maa 的任务进入「已放弃」状态，MFAA 才会中止后续任务（队列整体退出）。
-    # 注意这里返回 True：若返回 False，MFAA 只会把本条任务记为「失败」并继续下一条。
+    # 只提交 MaaFW 停止请求，让当前回调返回后完成停止收尾。
+    # MFAA 开启“出错后继续运行”时仍可能提交后续任务。
     try:
         from .tasker import Tasker
 
         Tasker(context).stop(wait=False)
     except Exception as e:
-        Prompter.error("停止任务队列", e)
+        Prompter.error("请求停止当前任务", e)
     return True
 
 
