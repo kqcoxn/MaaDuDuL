@@ -4,15 +4,24 @@
 包括稳定识别等功能，用于提高识别准确性和可靠性。
 """
 
+from collections import defaultdict
+from functools import lru_cache
+
 from maa.agent.agent_server import AgentServer
 from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 
-from agent.customs.utils import Prompter, CounterManager
+from agent.customs.utils import Prompter, Counter
 from agent.customs.maahelper import RecoHelper, ParamAnalyzer
 
 
 # ====================  自定义识别器  ====================
+
+
+@lru_cache(maxsize=128)
+def _task_counters(task_id: int):
+    """每个任务独立计数，限制已结束或取消的任务占用的缓存。"""
+    return defaultdict(Counter)
 
 
 @AgentServer.custom_recognition("stable_reco")
@@ -63,13 +72,8 @@ class StableReco(CustomRecognition):
             is_list = isinstance(node_name, list)
             node_list = node_name if is_list else [node_name]
 
-            # 计数器键要区分调用方与阈值：同一组节点可能被多处使用（如 m=2 的返回主界面、
-            # m=5 的启动游戏），共用同一个键会互相 count/reset，导致谁都凑不够阈值
-            caller = getattr(argv, "node_name", None) or ""
-            counter_key = "stable_reco_" + "_".join(
-                [str(max_count), caller, *node_list] if caller else [str(max_count), *node_list]
-            )
-            counter = CounterManager.get(counter_key)
+            counters = _task_counters(argv.task_detail.task_id)
+            counter = counters[(argv.node_name, max_count, tuple(node_list))]
 
             # 对列表中的每个节点进行识别
             all_recognized = True
@@ -89,6 +93,7 @@ class StableReco(CustomRecognition):
                     # 未达到阈值，继续等待
                     return RecoHelper.NoResult
                 # 达到阈值，返回识别结果
+                counter.reset()
                 return RecoHelper.rt(best_result)
             # 识别失败，重置计数器
             counter.reset()
