@@ -8,8 +8,38 @@
 			"description": "$Resource/descs/daily/start_game.md",
 			"group": [
 				"continuous"
+			],
+			"option": [
+				"启动游戏-主界面确认"
 			]
 		}
 	],
-	"option": {}
+	"option": {
+		"启动游戏-主界面确认": {
+			"type": "select",
+			"label": "$主界面识别",
+			"default_case": "快速",
+			"cases": [
+				{
+					"name": "快速",
+					"label": "$快速（默认）",
+					"description": "$连续 2 轮识别到主界面即可，进入更快"
+				},
+				{
+					"name": "稳定",
+					"label": "$稳定",
+					"description": "$连续 5 轮识别到主界面才算进入；电脑较卡、公告或签到容易延迟弹出时更稳，代价是更慢",
+					"pipeline_override": {
+						"启动游戏_连续识别主界面": {
+							"recognition": {
+								"param": {
+									"custom_recognition_param": "m=5&n=返回主界面_活动弹窗&n=返回主界面_使徒&n=返回主界面_冒险通行证"
+								}
+							}
+						}
+					}
+				}
+			]
+		}
+	}
 }

@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "启动游戏",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1793891425720,
+            "lastSyncTime": 1795387385304,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "D:\\_Projects\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
+            "filePath": "I:\\bkzbk\\github\\fix\\DDL\\MaaDuDuL\\resource\\base\\pipeline\\日常任务\\启动游戏.json",
             "savedViewport": {
-                "x": -1711,
-                "y": -293,
-                "zoom": 1.61
+                "x": 7,
+                "y": 203,
+                "zoom": 0.65
             },
             "filename": "启动游戏",
-            "version": "v2.1.1"
+            "version": "v2.1.3"
         }
     },
     "启动游戏_关闭公告": {
@@ -396,7 +396,7 @@
             "type": "Custom",
             "param": {
                 "custom_recognition": "stable_reco",
-                "custom_recognition_param": "m=5&n=返回主界面_活动弹窗&n=返回主界面_使徒&n=返回主界面_冒险通行证"
+                "custom_recognition_param": "m=2&n=返回主界面_活动弹窗&n=返回主界面_使徒&n=返回主界面_冒险通行证"
             }
         },
         "pre_delay": 0,
@@ -419,7 +419,7 @@
             "type": "Custom",
             "param": {
                 "custom_recognition": "stable_reco",
-                "custom_recognition_param": "m=3&n=启动游戏_识别开始界面"
+                "custom_recognition_param": "m=2&n=启动游戏_识别开始界面"
             }
         },
         "pre_delay": 0,
@@ -438,11 +438,12 @@
         }
     },
     "启动游戏_闲时捏脸": {
-        "max_hit": 50,
+        "max_hit": 1,
         "recognition": {
             "type": "Custom",
             "param": {
-                "custom_recognition": "pface"
+                "custom_recognition": "pface",
+                "custom_recognition_param": "check_once=f"
             }
         },
         "pre_delay": 0,
