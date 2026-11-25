@@ -1,4 +1,27 @@
 {
+    "启动游戏_载入过久重启": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "stable_reco",
+                "custom_recognition_param": "m=36&n=启动游戏_等待载入"
+            }
+        },
+        "action": {
+            "type": "StopApp",
+            "param": {
+                "package": "com.bilibili.trickcal"
+            }
+        },
+        "post_delay": 3000,
+        "max_hit": 2,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 载入太久，重启游戏"
+        },
+        "next": [
+            "启动游戏_启动游戏"
+        ]
+    },
     "启动游戏_等待载入": {
         "recognition": {
             "type": "OCR",
@@ -9,7 +32,7 @@
             }
         },
         "post_delay": 3000,
-        "max_hit": 100
+        "max_hit": 120
     },
     "启动游戏_启动游戏": {
         "action": {
@@ -20,6 +43,7 @@
         "next": [
             "启动游戏_连续识别主界面",
             "启动游戏_连续识别开始界面",
+            "启动游戏_载入过久重启",
             "[JumpBack]启动游戏_等待载入",
             "启动游戏_回到游戏",
             "启动游戏_关闭模拟器广告",
@@ -37,6 +61,7 @@
     "启动游戏_捏脸启动": {
         "next": [
             "启动游戏_连续识别主界面",
+            "启动游戏_载入过久重启",
             "[JumpBack]启动游戏_等待载入",
             "启动游戏_回到游戏",
             "启动游戏_关闭模拟器广告",
