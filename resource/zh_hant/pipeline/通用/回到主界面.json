@@ -74,8 +74,19 @@
             "[JumpBack]返回主界面_导航类返回",
             "[JumpBack]启动游戏_关闭面板",
             "[JumpBack]返回主界面_文字类返回",
+            "[JumpBack]返回主界面_剧情对话",
             "[JumpBack]返回主界面_闲时捏脸"
         ]
+    },
+    "返回主界面_剧情对话": {
+        "recognition": {
+            "param": {
+                "expected": [
+                    "自动",
+                    "自[动動]"
+                ]
+            }
+        }
     },
     "返回主界面_文字类返回": {
         "recognition": {

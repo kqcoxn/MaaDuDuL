@@ -167,7 +167,7 @@ class FindMaterialStage(CustomAction):
         if centers:
             for center in sorted(centers, key=lambda c: c[0], reverse=True):
                 stars = self._count_stars(shot, self._star_roi(center[0], scale), scale)
-                Prompter.log("让我看看…")
+                Prompter.log(f"让我看看…（{stars} 星）")
                 if stars >= need:
                     return center
             return None
