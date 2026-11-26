@@ -57,6 +57,11 @@ NODE_EXTRA: dict[str, list[str]] = {
     "农场视察_获取派遣奖励": ["先前跑腿结果"],
     # 装备材料「获取详情」关卡卡片上的按钮，国际服为「移動」
     "装备材料_识别前往": ["移动"],
+    # 游戏改版后的资源下载弹窗，国际服标题为「檔案下載」（「開始下載」按钮在原有点击位置）
+    "启动游戏_更新游戏": ["档案下载"],
+    # 活动大厅的「像素异世界」开场提示，国际服字序相反：「異世界像素載入完成。」
+    "每日活动作战_关闭梦境之地提示": ["异世界像素"],
+    "每日活动作战2_关闭梦境之地提示": ["异世界像素"],
 }
 
 # 国际服的两字按钮字距较宽，OCR 会拆成单字（「購」「買」），限定了 roi 的节点改认第一个字
@@ -83,6 +88,9 @@ NODE_FIELDS: dict[str, dict[str, Any]] = {
     "圣团巡礼_额外从房间返回": {"post_delay": 2500},
     # 冒险界面刚打开时点击「PVP」会被转场吞掉，任务卡在冒险界面；成功时点击都在打开约 2 秒后
     "巅峰对决_进入冒险": {"post_delay": 2000},
+    # 原流程点「开始下载」后只等「立刻出发」（最长 15 分钟）；国际服下载完直接进开场动画和开始界面，
+    # 主界面气泡「立刻出發！」又在 NODE_SKIP 里，所以点完下载就回到启动流程继续识别
+    "启动游戏_更新游戏": {"next": []},
 }
 
 # 国际服独有的画面，新增节点处理（expected 用简体书写）
@@ -142,19 +150,39 @@ EXTRA_NODES: dict[str, dict[str, Any]] = {
         "focus": {"Node.Recognition.Succeeded": "> 画面跳到了应用商店，重新回到游戏"},
         "next": ["启动游戏_启动游戏"],
     },
+    # 游戏改版后的资源下载画面，底部显示「…(15.7%) 6.7MB/42.5MB 5.5MB/s」；下载量大时会超过 60 秒，持续等待
+    "启动游戏_等待下载": {
+        "recognition": {"type": "OCR", "param": {"roi": [200, 660, 880, 60], "expected": ["MB/s"]}},
+        "post_delay": 3000,
+        "max_hit": 200,
+        "focus": {"Node.Recognition.Succeeded": "> 正在下载游戏资源"},
+    },
+    # 登录后的「艾利亞斯邊疆之界／新的事件座標出現了。」卡片动画会一直播放，要点一下才会关闭；
+    # 点卡片下方的文字（实测点在画面其他位置也能关闭，不会触发底下的按钮）。
+    # 卡片下方隐约可见主界面，排在「连续识别主界面」之前，避免卡片还在时就判定进入主界面
+    "启动游戏_关闭事件座标": {
+        "recognition": {"type": "OCR", "param": {"roi": [300, 560, 680, 80], "expected": ["新的事件座标出现"]}},
+        "action": {"type": "Click"},
+        "post_delay": 2000,
+        "max_hit": 5,
+        "focus": {"Node.Recognition.Succeeded": "> 关闭事件座标提示"},
+    },
 }
 
-# 把新增节点插入已有节点的 next：{节点: [(插在哪一项之后, 新增的 next 项)]}
-NEXT_INSERT: dict[str, list[tuple[str, str]]] = {
+# 把新增节点插入已有节点的 next：{节点: [(插在哪一项之后（None 为最前面）, 新增的 next 项)]}
+NEXT_INSERT: dict[str, list[tuple[str | None, str]]] = {
     "返回主界面_开始": [("返回主界面_检测主界面", "[JumpBack]返回主界面_跑腿结果")],
     # 广告和商店页面要排在「领取礼物」之前，同一张截图会先认到它们
     "启动游戏_启动游戏": [
+        (None, "[JumpBack]启动游戏_关闭事件座标"),
         ("启动游戏_连续识别开始界面", "启动游戏_载入过久重启"),
         ("启动游戏_载入过久重启", "[JumpBack]启动游戏_等待载入"),
-        ("[JumpBack]启动游戏_等待载入", "启动游戏_回到游戏"),
+        ("[JumpBack]启动游戏_等待载入", "[JumpBack]启动游戏_等待下载"),
+        ("[JumpBack]启动游戏_等待下载", "启动游戏_回到游戏"),
         ("启动游戏_回到游戏", "启动游戏_关闭模拟器广告"),
     ],
     "启动游戏_捏脸启动": [
+        (None, "[JumpBack]启动游戏_关闭事件座标"),
         ("启动游戏_连续识别主界面", "启动游戏_载入过久重启"),
         ("启动游戏_载入过久重启", "[JumpBack]启动游戏_等待载入"),
         ("[JumpBack]启动游戏_等待载入", "启动游戏_回到游戏"),
@@ -264,7 +292,7 @@ def build_overrides(zh_hant: Any, data: dict[str, Any]) -> dict[str, Any]:
         if name in NEXT_INSERT:
             next_list = list(node.get("next", []))
             for after, item in NEXT_INSERT[name]:
-                next_list.insert(next_list.index(after) + 1, item)
+                next_list.insert(0 if after is None else next_list.index(after) + 1, item)
                 extra_name = item.removeprefix("[JumpBack]")
                 overrides[extra_name] = localize_patterns(zh_hant, EXTRA_NODES[extra_name])
             override["next"] = next_list
