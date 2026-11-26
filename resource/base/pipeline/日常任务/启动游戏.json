@@ -100,8 +100,6 @@
         "next": [
             "启动游戏_连续识别主界面",
             "启动游戏_连续识别开始界面",
-            "启动游戏_回到游戏",
-            "启动游戏_关闭模拟器广告",
             "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_无可领取的奖励",
             "[JumpBack]启动游戏_领取礼物",
@@ -161,8 +159,6 @@
         },
         "next": [
             "启动游戏_连续识别主界面",
-            "启动游戏_回到游戏",
-            "启动游戏_关闭模拟器广告",
             "[JumpBack]启动游戏_检测公告界面",
             "[JumpBack]启动游戏_无可领取的奖励",
             "[JumpBack]启动游戏_领取礼物",
@@ -175,72 +171,6 @@
             "position": {
                 "x": 949,
                 "y": 49
-            }
-        }
-    },
-    "启动游戏_回到游戏": {
-        "max_hit": 3,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "expected": [
-                    "加入愿望清单",
-                    "超过\\d+万次"
-                ]
-            }
-        },
-        "focus": {
-            "Node.Recognition.Succeeded": "> 画面跳到了应用商店，重新回到游戏"
-        },
-        "next": [
-            "启动游戏_启动游戏"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 949,
-                "y": 209
-            }
-        }
-    },
-    "启动游戏_关闭模拟器广告": {
-        "max_hit": 5,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    640,
-                    0,
-                    640,
-                    360
-                ],
-                "expected": [
-                    "移除[广廣]告"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": true,
-                "target_offset": [
-                    95,
-                    6,
-                    -63,
-                    -11
-                ]
-            }
-        },
-        "post_delay": 2000,
-        "focus": {
-            "Node.Recognition.Succeeded": "> 关闭模拟器广告"
-        },
-        "next": [
-            "启动游戏_启动游戏"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 949,
-                "y": 369
             }
         }
     },

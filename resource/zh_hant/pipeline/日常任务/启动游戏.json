@@ -34,6 +34,61 @@
         "post_delay": 3000,
         "max_hit": 120
     },
+    "启动游戏_回到游戏": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "加入[愿願]望清[单單]",
+                    "超[过過]\\d+[万萬]次"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "> 画面跳到了应用商店，重新回到游戏"
+        },
+        "next": [
+            "启动游戏_启动游戏"
+        ]
+    },
+    "启动游戏_关闭模拟器广告": {
+        "enabled": false,
+        "max_hit": 5,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    640,
+                    0,
+                    640,
+                    360
+                ],
+                "expected": [
+                    "移除[广廣]告"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": true,
+                "target_offset": [
+                    95,
+                    6,
+                    -63,
+                    -11
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 关闭模拟器广告"
+        },
+        "next": [
+            "启动游戏_启动游戏"
+        ]
+    },
     "启动游戏_启动游戏": {
         "action": {
             "param": {
@@ -73,19 +128,6 @@
             "[JumpBack]启动游戏_关闭面板",
             "[JumpBack]启动游戏_闲时捏脸"
         ]
-    },
-    "启动游戏_回到游戏": {
-        "recognition": {
-            "param": {
-                "expected": [
-                    "加入愿望清单",
-                    "超过\\d+万次",
-                    "加入愿望清[单單]",
-                    "超[过過]\\d+[万萬]次",
-                    "加入願望清[单單]"
-                ]
-            }
-        }
     },
     "启动游戏_无可领取的奖励": {
         "recognition": {

@@ -286,5 +286,7 @@
     "连续 5 轮识别到主界面才算进入；电脑较卡、公告或签到容易延迟弹出时更稳，代价是更慢": "Enter after 5 consecutive main-screen detections; steadier on slow PCs with delayed popups, but slower",
     "主界面识别": "Main screen detection",
     "快速（默认）": "Fast (default)",
-    "稳定": "Stable"
+    "稳定": "Stable",
+    "关闭模拟器广告": "Close emulator ad",
+    "MuMu 国际版启动时可能弹出全屏广告，而且会盖在游戏画面上方。开启后会点右上角的 × 关闭广告；使用其他模拟器可以保持关闭": "MuMu Player (global) may show a full-screen ad on launch that stays on top of the game. When on, taps the × at the top right to close it; leave off for other emulators"
 }

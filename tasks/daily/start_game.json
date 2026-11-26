@@ -10,7 +10,8 @@
 				"continuous"
 			],
 			"option": [
-				"启动游戏-主界面确认"
+				"启动游戏-主界面确认",
+				"启动游戏-关闭模拟器广告"
 			]
 		}
 	],
@@ -38,6 +39,30 @@
 							}
 						}
 					}
+				}
+			]
+		},
+		"启动游戏-关闭模拟器广告": {
+			"type": "switch",
+			"label": "$关闭模拟器广告",
+			"description": "$MuMu 国际版启动时可能弹出全屏广告，而且会盖在游戏画面上方。开启后会点右上角的 × 关闭广告；使用其他模拟器可以保持关闭",
+			"resource": [
+				"zh_hant"
+			],
+			"default_case": "No",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"启动游戏_关闭模拟器广告": {
+							"enabled": true
+						}
+					},
+					"label": "$Yes"
+				},
+				{
+					"name": "No",
+					"label": "$No"
 				}
 			]
 		}
