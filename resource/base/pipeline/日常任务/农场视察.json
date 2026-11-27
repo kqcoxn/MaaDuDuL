@@ -303,11 +303,41 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "农场视察_进入跑腿地区"
+            "农场视察_进入跑腿地区",
+            "[JumpBack]农场视察_关闭奖励弹窗"
         ],
         "$__mpe_code": {
             "position": {
                 "x": 4289,
+                "y": 390
+            }
+        }
+    },
+    "农场视察_关闭奖励弹窗": {
+        "max_hit": 20,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "点击屏幕继续"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    645,
+                    617,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "$__mpe_code": {
+            "position": {
+                "x": 4589,
                 "y": 390
             }
         }
@@ -375,7 +405,8 @@
         "timeout": 2000,
         "next": [
             "农场视察_检测宠物萝卜",
-            "[JumpBack]农场视察_宠物详情处理"
+            "[JumpBack]农场视察_宠物详情处理",
+            "[JumpBack]农场视察_关闭奖励弹窗"
         ],
         "on_error": [
             "农场视察_获取萝卜结束"

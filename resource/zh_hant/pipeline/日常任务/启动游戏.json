@@ -1,10 +1,181 @@
 {
+    "启动游戏_关闭事件座标": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    300,
+                    560,
+                    680,
+                    80
+                ],
+                "expected": [
+                    "新的事件座[标標]出[现現]"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "max_hit": 5,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 关闭事件座标提示"
+        }
+    },
+    "启动游戏_载入过久重启": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "stable_reco",
+                "custom_recognition_param": "m=36&n=启动游戏_等待载入"
+            }
+        },
+        "action": {
+            "type": "StopApp",
+            "param": {
+                "package": "com.bilibili.trickcal"
+            }
+        },
+        "post_delay": 3000,
+        "max_hit": 2,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 载入太久，重启游戏"
+        },
+        "next": [
+            "启动游戏_启动游戏"
+        ]
+    },
+    "启动游戏_等待载入": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "正在[载載]入"
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "max_hit": 120
+    },
+    "启动游戏_等待下载": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    200,
+                    660,
+                    880,
+                    60
+                ],
+                "expected": [
+                    "MB/s"
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "max_hit": 200,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 正在下载游戏资源"
+        }
+    },
+    "启动游戏_回到游戏": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "加入[愿願]望清[单單]",
+                    "超[过過]\\d+[万萬]次"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "> 画面跳到了应用商店，重新回到游戏"
+        },
+        "next": [
+            "启动游戏_启动游戏"
+        ]
+    },
+    "启动游戏_关闭模拟器广告": {
+        "enabled": false,
+        "max_hit": 5,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    640,
+                    0,
+                    640,
+                    360
+                ],
+                "expected": [
+                    "移除[广廣]告"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": true,
+                "target_offset": [
+                    95,
+                    6,
+                    -63,
+                    -11
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "focus": {
+            "Node.Recognition.Succeeded": "> 关闭模拟器广告"
+        },
+        "next": [
+            "启动游戏_启动游戏"
+        ]
+    },
     "启动游戏_启动游戏": {
         "action": {
             "param": {
                 "package": "com.bilibili.trickcal"
             }
-        }
+        },
+        "next": [
+            "[JumpBack]启动游戏_关闭事件座标",
+            "启动游戏_连续识别主界面",
+            "启动游戏_连续识别开始界面",
+            "启动游戏_载入过久重启",
+            "[JumpBack]启动游戏_等待载入",
+            "[JumpBack]启动游戏_等待下载",
+            "启动游戏_回到游戏",
+            "启动游戏_关闭模拟器广告",
+            "[JumpBack]启动游戏_检测公告界面",
+            "[JumpBack]启动游戏_无可领取的奖励",
+            "[JumpBack]启动游戏_领取礼物",
+            "[JumpBack]启动游戏_点击屏幕继续",
+            "[JumpBack]启动游戏_跳过",
+            "[JumpBack]启动游戏_关闭面板",
+            "[JumpBack]启动游戏_更新游戏",
+            "[JumpBack]启动游戏_更新结束",
+            "[JumpBack]启动游戏_闲时捏脸"
+        ]
+    },
+    "启动游戏_捏脸启动": {
+        "next": [
+            "[JumpBack]启动游戏_关闭事件座标",
+            "启动游戏_连续识别主界面",
+            "启动游戏_载入过久重启",
+            "[JumpBack]启动游戏_等待载入",
+            "启动游戏_回到游戏",
+            "启动游戏_关闭模拟器广告",
+            "[JumpBack]启动游戏_检测公告界面",
+            "[JumpBack]启动游戏_无可领取的奖励",
+            "[JumpBack]启动游戏_领取礼物",
+            "[JumpBack]启动游戏_点击屏幕继续",
+            "[JumpBack]启动游戏_跳过",
+            "[JumpBack]启动游戏_关闭面板",
+            "[JumpBack]启动游戏_闲时捏脸"
+        ]
     },
     "启动游戏_无可领取的奖励": {
         "recognition": {
@@ -23,10 +194,12 @@
             "param": {
                 "expected": [
                     "资源下载",
-                    "[资資]源下[载載]"
+                    "[资資]源下[载載]",
+                    "[档檔]案下[载載]"
                 ]
             }
-        }
+        },
+        "next": []
     },
     "启动游戏_检测公告界面": {
         "recognition": {
