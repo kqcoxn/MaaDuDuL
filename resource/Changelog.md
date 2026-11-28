@@ -1,20 +1,21 @@
-# v1.6.1
+# v1.6.2
 
-> 2026.11.24
+> 2026.11.28
 
 ## 主要内容
 
+- **版本适配**
+    - 适配国际服 1.7.0 的「檔案下載」弹窗、下载进度、登录后的事件座标提示及「異世界像素」活动提示（@[ZerooNight](https://github.com/ZerooNight)）
 - **新增选项**
-    - 启动游戏新增「主界面识别」选项，默认「快速」模式（@[eci-ice](https://github.com/eci-ice)）
-- **功能优化**
-    - 优化主界面检测的等待时间（@[eci-ice](https://github.com/eci-ice)）
-    - 增加国服、国际服客户端与所选资源的包名核对，发现区服不匹配时提示并请求停止当前任务（@[eci-ice](https://github.com/eci-ice)）
+    - 国际服繁中「启动游戏」新增「关闭模拟器广告」开关，默认关闭，用于处理 MuMu 国际版覆盖在游戏上方的全屏广告（@[ZerooNight](https://github.com/ZerooNight)）
 - **问题修复**
-    - 修复连续识别计数在不同任务、节点间相互影响的问题（@[eci-ice](https://github.com/eci-ice)）
-    - 修复国服资源下反复查询繁中标识节点导致错误日志刷屏的问题（@[eci-ice](https://github.com/eci-ice)）
-    - 修复区服核对及巅峰对决识别回调请求停止时可能卡住的问题（@[eci-ice](https://github.com/eci-ice)）
+    - 修复圣团巡礼及返回主界面时可能卡在角色剧情或亲密度弹窗的问题（@[ZerooNight](https://github.com/ZerooNight)）
+    - 修复巅峰对决选择对手后点击未生效时任务超时的问题，增加等待及重选处理（@[ZerooNight](https://github.com/ZerooNight)）
+    - 修复农场视察奖励弹窗未及时关闭时无法继续获取宠物萝卜或派遣跑腿的问题（@[ZerooNight](https://github.com/ZerooNight)）
+    - 修复国际服繁中启动时跳转到 Google Play 商店、服务器设定载入过久导致任务失败的问题，增加回到游戏及有限重启处理（@[ZerooNight](https://github.com/ZerooNight)）
+    - 修复国际服繁中装备材料关卡「移動」按钮无法识别的问题，并在关卡选择日志中显示识别到的星数（@[ZerooNight](https://github.com/ZerooNight)）
 
-> 更多日志与累积更新请在公告相关板块中查看
+> 更多日志与累积更新请查看 [Github Release](https://github.com/kqcoxn/MaaDuDuL/releases)
 
 ## 操作提醒
 
